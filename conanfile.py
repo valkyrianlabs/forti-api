@@ -5,7 +5,7 @@ from conan.tools.files import copy
 
 class Pkg(ConanFile):
     name = "forti-api"
-    version = "0.2.0"
+    version = "0.2.1"
     author = "Cooper Larson | cooper.larson1@gmail.com"
     url = ""
     description = "FortiGate API interface"
