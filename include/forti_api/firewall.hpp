@@ -47,6 +47,28 @@ struct FirewallPoliciesResponse : public Response {
 
 enum ServiceProtocol { TCP, UDP, SCTP };
 
+struct ServiceCategory {
+    inline static std::string endpoint = "/cmdb/firewall.service/category";
+    std::string name, q_origin_key, comment, fabric_object;
+
+    explicit ServiceCategory(std::string name, std::string comment="") : name(std::move(name)), comment(std::move(comment)) {}
+
+    ServiceCategory() = default;
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(ServiceCategory, name, q_origin_key, comment, fabric_object);
+
+    void del() { FortiAPI::del(std::format("{}/{}", endpoint, name)); }
+
+    void add() { FortiAPI::post(endpoint, *this); }
+};
+
+struct ServiceCategoriesResponse : public Response {
+    std::vector<ServiceCategory> results;
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(ServiceCategoriesResponse, http_method, size, matched_count, next_idx,
+                                                revision, vdom, path, name, status, http_status, serial, version, build, results);
+};
+
 struct FirewallService {
     inline static std::string endpoint = "/cmdb/firewall.service/custom";
     std::string name, q_origin_key, uuid, proxy, category, protocol, helper, iprange, fqdn, tcp_portrange, udp_portrange,
@@ -122,6 +144,24 @@ struct FirewallService {
 
         update();
     }
+
+    void set_category(const std::string& category_name) {
+        auto categories = FortiAPI::get<ServiceCategoriesResponse>(ServiceCategory::endpoint).results;
+        for (const auto& cat : categories) {
+            if (cat.name == category_name) {
+                category = category_name;
+                update();
+                return;
+            }
+        }
+
+        throw std::runtime_error("Unable to locate category: " + category_name + ". Did you mean to create the category first?");
+    }
+
+    void set_comment(const std::string& new_comment) {
+        comment = new_comment;
+        update();
+    }
 };
 
 struct FirewallServicesResponse : public Response {
@@ -133,7 +173,7 @@ struct FirewallServicesResponse : public Response {
 
 namespace FortiGate {
 
-    class Policy {
+    class Policies {
         inline static std::string endpoint = "/cmdb/firewall/policy";
 
     public:
@@ -151,7 +191,7 @@ namespace FortiGate {
     };
 
 
-    class Service {
+    class Services {
     public:
         static std::vector<FirewallService> get() { return FortiAPI::get<FirewallServicesResponse>(FirewallService::endpoint).results; }
 
@@ -168,6 +208,26 @@ namespace FortiGate {
 
         static void add(const FirewallService& service, const std::string& vdom="root") {
             FortiAPI::post(std::format("{}?vdom={}", FirewallService::endpoint, vdom), service);
+        }
+
+        static std::vector<ServiceCategory> get_categories() {
+            return FortiAPI::get<ServiceCategoriesResponse>(ServiceCategory::endpoint).results;
+        }
+
+        static void add_category(ServiceCategory category) { category.add(); }
+
+        static void add_category(const std::string& name, const std::string& comment="") {
+            ServiceCategory{name, comment}.add();
+        }
+
+        static void delete_category(ServiceCategory category) { category.del(); }
+
+        static void delete_category(const std::string& name) {
+            for (auto category : get_categories()) {
+                if (category.name == name) category.del();
+                return;
+            }
+            throw std::runtime_error("Unable to locate category for deletion: " + name);
         }
     };
 
