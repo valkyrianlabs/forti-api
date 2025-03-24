@@ -88,6 +88,10 @@ namespace FortiGate {
             else if (results.size() > 1) throw std::runtime_error("Get of firewall schedule " + name + " returned multiple results");
             return results[0];
         }
+
+        static FirewallSchedule new_schedule(const std::string& name, const std::string& vdom="root") {
+            return FirewallSchedule(name, vdom);
+        }
     };
 
 }

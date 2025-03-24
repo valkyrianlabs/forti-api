@@ -1,0 +1,55 @@
+//
+// Created by Cooper Larson on 3/24/25.
+//
+
+#ifndef FORTI_API_COLORS_H
+#define FORTI_API_COLORS_H
+
+enum Color {
+    BLACK = 1,
+    NAVY_BLUE,
+    RED,
+    LIGHT_PINK,
+    CORAL_RED,
+    ORANGE,
+    YELLOW,
+    MUSTARD,
+
+    BROWN,
+    LIME_GREEN,
+    FOREST_GREEN,
+    DARK_GREEN,
+    CYAN,
+    MEDIUM_BLUE,
+    INDIGO,
+    PURPLE,
+
+    MAGENTA,
+    HOT_PINK,
+    DARK_RED,
+    GRAY,
+    LIGHT_ORANGE,
+    LIGHT_YELLOW,
+    LIGHT_BROWN,
+    LIGHT_BLUE,
+
+    PERIWINKLE,
+    LIGHT_PURPLE,
+    BRIGHT_PINK,
+    MAROON,
+    SLATE_GRAY,
+    TAN,
+    BEIGE,
+
+    SAND,
+    BABY_BLUE,
+    LAVENDER,
+    PEACH,
+    SOFT_BLUE,
+    SOFT_PURPLE,
+    LIGHTER_PURPLE,
+    LIGHTEST_PURPLE
+};
+
+
+#endif //FORTI_API_COLORS_H
