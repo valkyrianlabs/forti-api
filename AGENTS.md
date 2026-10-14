@@ -5,9 +5,13 @@ nlohmann/json, libcurl as the only system dependency, released with vl-release (
 `.claude/skills/vl-release/`).
 
 ```sh
-meson setup build -Dtests=enabled && meson compile -C build   # Linux (apt) or macOS (Homebrew)
+meson setup build -Dtests=enabled -Dlive_tests=true            # Linux (apt) or macOS (Homebrew)
+meson test -C build --suite unit                               # network-free; what CI runs
+set -a; . ./.env; set +a; meson test -C build --suite live -v  # the live FortiGate suite
 ./ci/run-ci bash -c '...'                                      # the CI container (ci/README.md)
 ```
+
+Agent context: `.claude/context/audit.md` and `.claude/context/buildout-plan.md`.
 
 ## The live FortiGate: the one rule
 
@@ -32,6 +36,12 @@ write:
    but only objects carrying the `forti-api-test-` prefix.
 4. **No live tests in CI.** CI compiles the live suite but never runs it. Only tests that need no
    network (mocked HTTP, serialization round-trips) may run in CI.
+
+These are enforced, not just documented: the live suite's client goes through
+`live::GuardTransport` (`tests/live/guard.hpp`), which refuses before sending any POST/PUT/DELETE
+outside `live::approved_collections` or without the prefix, and `live::ConfigAudit` fails the run if
+the device's config-change log shows a REST change to any non-test object. Adding a collection to
+the allowlist is a deliberate, reviewed change.
 
 Before writing anything new to the device, know exactly which objects the change touches. If an
 auth request fails repeatedly, stop: FortiOS locks the API out (HTTP 429) after a few failures.

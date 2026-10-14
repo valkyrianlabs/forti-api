@@ -183,12 +183,41 @@ Each phase lands as its own PR with CI green; live tests run on dev per AGENTS.m
    hand-written fixture. Verified against the device's config log (only `forti-api-test-*` touched).
 7. **1.0.0:** docs (README usage with `Client`), examples, header compile budget, `vlr cut 1.0.0`.
 
-## 5. Open decisions for the author
+## 5. Decisions and requirements (approved 2026-10-14)
 
-- **FortiOS versions:** 7.4.x only (the lab device), or snapshots for several versions? Recommended:
-  generate from 7.4.8, keep `schema/<version>/` so another version is a re-pull + diff.
-- **Option fields:** string + generated constants (recommended) vs `enum class`.
-- **Namespace:** `fortiapi::` (recommended; matches the package and pkg-config name) vs keeping
-  `FortiGate::`.
-- **Downstream:** confirm forti-hole and forti2ban are the only consumers to keep compiling through
-  the deprecation window.
+Decisions:
+1. Generate against FortiOS 7.4.8 first; keep versioned `schema/<version>/` snapshots for later.
+2. Option fields: `std::string` + generated constants.
+3. Namespace `fortiapi::`. Header-only, vendorable C++23 stays.
+4. **No legacy compatibility.** forti-hole is retired, forti2ban was never finished: remove old
+   abstractions outright (no shim, no deprecation window), break anything before 1.0.
+5. GUI recon account (`forti-api-recon`, password `FORTI_API_RECON_ADMIN_PASS` in `.env` on both
+   machines) is **deferred** until the schema crawler and bundle mining stop yielding coverage.
+   When used: GET-only interception for discovery traffic, authentication handled separately, an
+   explicit safe-route allowlist (GET is not assumed side-effect-free; unknown or mutating
+   operations rejected), HAR sanitized before persisting (auth headers, cookies, tokens, network
+   addresses, device identifiers).
+6. The author cuts 1.0.0 personally; phases land as PRs merged on green CI, no releases cut.
+
+Architectural requirements:
+1. **Field states:** generated fields distinguish *absent*, *populated* (from the device),
+   *modified* and *explicitly cleared*. Updates serialize only modified and cleared fields; nothing
+   unrelated is ever sent.
+2. **No automatic retry of configuration mutations** that may have partially succeeded. POST/PUT/
+   DELETE are retried only when the connection failed before the request was sent (resolve/connect
+   /TLS handshake); never after a response, a timeout or a send error. GETs retry on 429/502/503/504
+   and transport errors.
+3. **Live mutation tests touch only explicitly approved test resources**, with guaranteed cleanup
+   and independent verification: a guard transport rejects (before sending) any mutation outside the
+   allowlisted cmdb paths or without the `forti-api-test-` prefix, and each run is verified against
+   the device's config-change log.
+
+## 6. Deviations from the original draft
+
+- §2.1 / phase 1 / phase 3: no deprecated `FortiAPI` shim. Phase 1 replaces the transport and moves
+  the existing accessors onto `Client` directly; the old `FortiAPI`/`FortiAuth`, key rewriting and
+  `FortiGate::` names go away as soon as their replacement lands.
+- §2.2: `Field<T>` has four states (absent / populated / modified / cleared) instead of
+  presence-only; cleared fields serialize the schema's reset value.
+- §2.1 retries: mutations are not retried after anything may have reached the device
+  (requirement 2), replacing "idempotent 5xx retried".

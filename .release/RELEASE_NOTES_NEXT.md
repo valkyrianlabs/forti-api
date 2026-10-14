@@ -17,3 +17,16 @@ for users and operators; keep it representative of what actually ships.
   provides it.
 - `DNSFilter::add`, `update`, `del` and `ThreatFeed::add` return the FortiGate response, so callers
   can check `status`.
+
+## New transport: `fortiapi::Client`
+
+- Connect and request timeouts, one kept-alive connection per client (TLS sessions reused), and the
+  system trust store unless a CA bundle is configured; the client certificate is optional.
+- Object names are percent-encoded (`10.0.0.0/24` stays one path segment) and a `Query` builder covers
+  `vdom`, `filter`, `format`, `start`/`count`, `datasource`, `with_meta`, `skip` and `action`.
+- FortiOS errors become `ApiError` (HTTP status, FortiOS error code, CLI messages); no output on
+  stdout/stderr, and the debug hook never sees the API key.
+- Reads retry on throttling and gateway errors; configuration changes are never retried once they may
+  have reached the device.
+- `FORTIGATE_HOST` + `FORTIGATE_RESOLVE_IP` connect to a pinned address while verifying TLS for the
+  hostname.

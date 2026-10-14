@@ -1,6 +1,6 @@
-# Builds on Linux (the self-hosted VPS runner, inside ci/run-ci) and macOS (Homebrew), and rehearses
-# the Debian release with vl-release. The GoogleTest suite is compiled but not run: it needs a live
-# FortiGate (see .env.example).
+# Builds on Linux (the self-hosted VPS runner, inside ci/run-ci) and macOS (Homebrew), runs the
+# network-free unit tests, and rehearses the Debian release with vl-release. The live FortiGate suite
+# is compiled but never run here (AGENTS.md).
 #
 # Every Linux run step executes in the disposable CI container (ci/run-ci, rootless Podman,
 # ci/Containerfile): no host sudo, host packages or Docker. Pull requests from forks run on
@@ -33,10 +33,12 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - name: Build (warnings are errors)
+      # The live suite is compiled but never run here (AGENTS.md): only the network-free unit suite.
+      - name: Build (warnings are errors) and run the unit tests
         run: |
-          meson setup build/ci -Dtests=enabled -Dwerror=true
+          meson setup build/ci -Dtests=enabled -Dlive_tests=true -Dwerror=true
           meson compile -C build/ci
+          meson test -C build/ci --suite unit --print-errorlogs
 
   package:
     name: Release contract and Debian rehearsal
@@ -57,9 +59,12 @@ jobs:
           vlr status --github-output
 
       # A full local release in this ephemeral checkout; nothing is published.
+      # Between releases (staged docs, version not bumped yet) the rehearsal bumps the version in this
+      # ephemeral checkout only, so every PR still builds and validates the package.
       - name: Release rehearsal
-        if: steps.state.outputs.phase == 'pending' || steps.state.outputs.phase == 'prepared'
+        if: contains(fromJSON('["pending","prepared","unbumped"]'), steps.state.outputs.phase)
         run: |
+          if [ "${{ steps.state.outputs.phase }}" = unbumped ]; then vlr version bump minor; fi
           vlr prepare
           vlr build-deb
           vlr checksums
@@ -68,7 +73,7 @@ jobs:
       # Install the built .deb into a clean, stock Ubuntu 24.04 (container root, no host access) and
       # build a consumer against it.
       - name: Clean-install smoke test of the built package
-        if: steps.state.outputs.phase == 'pending' || steps.state.outputs.phase == 'prepared'
+        if: contains(fromJSON('["pending","prepared","unbumped"]'), steps.state.outputs.phase)
         shell: bash
         run: |
           # shellcheck disable=SC2016  # expanded inside the container
@@ -91,8 +96,9 @@ jobs:
 
       - name: Build and install
         run: |
-          meson setup build -Dtests=enabled -Dwerror=true --prefix "$RUNNER_TEMP/prefix"
+          meson setup build -Dtests=enabled -Dlive_tests=true -Dwerror=true --prefix "$RUNNER_TEMP/prefix"
           meson compile -C build
+          meson test -C build --suite unit --print-errorlogs
           meson install -C build
 
       - name: Build a consumer against the installed headers

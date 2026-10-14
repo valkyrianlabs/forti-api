@@ -1,2 +1,4 @@
 option('tests', type : 'feature', value : 'auto',
-       description : 'Build the GoogleTest suite (needs a live FortiGate to run)')
+       description : 'Build the network-free unit tests (GoogleTest)')
+option('live_tests', type : 'boolean', value : false,
+       description : 'Build the live FortiGate test suite (suite "live"; never run in CI)')

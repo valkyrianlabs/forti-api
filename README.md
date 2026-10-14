@@ -62,16 +62,21 @@ meson install -C build
 
 ### Tests
 
-The GoogleTest suite (built when gtest is found; `-Dtests=enabled|disabled` to force) runs
-against a **live FortiGate** and creates and deletes temporary DNS filter profiles and an
-external threat feed. Tests never touch existing config and always clean up after themselves (the
-rules are in [AGENTS.md](AGENTS.md)); CI compiles the suite but never runs it.
-`tools/gen-certs.sh <gateway IP>...` creates the CA, client and FortiGate admin certificates in
-`.certs/`; configure `.env` from `.env.example`, then:
+```bash
+meson setup build -Dtests=enabled            # network-free unit tests (GoogleTest)
+meson test -C build --suite unit
+```
+
+The live suite runs against a real FortiGate and is opt-in (`-Dlive_tests=true`, suite `live`).
+It only ever writes `forti-api-test-*` objects in an allowlist of collections (enforced in the
+transport before a request is sent), always cleans up, and checks the device's config-change log
+afterwards; the rules are in [AGENTS.md](AGENTS.md). CI compiles it but never runs it. Configure
+`.env` from `.env.example` (`tools/gen-certs.sh <gateway IP>...` creates test certificates), then:
 
 ```bash
+meson setup build -Dtests=enabled -Dlive_tests=true
 set -a; . ./.env; set +a
-meson test -C build -v
+meson test -C build --suite live -v
 ```
 
 ---
