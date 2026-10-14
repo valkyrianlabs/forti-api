@@ -125,6 +125,9 @@ singletons (`system::GlobalSettings`) offer `get` and `update`. Every call takes
 (naming the attribute that did not match). Reads retry on throttling; writes are never retried.
 
 The monitor API (status, statistics, actions) is available as `Monitor::get("system/status")`.
+Non-JSON replies come back as raw bytes with a size limit (64 MiB by default) or streamed to a sink:
+`Monitor::download("system/config/backup", Query().set("scope", "global"))` returns the configuration
+backup, a secret to store with owner-only permissions and never log ([docs/guides/downloads.md](docs/guides/downloads.md)).
 
 Helpers on top of the generated endpoints:
 

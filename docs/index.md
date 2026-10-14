@@ -33,6 +33,8 @@ firewall::Addresses::update(address);   // sends {"comment": "managed by forti-a
   cleared. An update sends only modified and cleared attributes.
 - **A careful transport**: timeouts, one kept-alive connection per client, URL-encoded object
   names, typed errors, reads retried on throttling and configuration changes never retried.
+- **Raw downloads**: non-JSON replies such as configuration backups, with a size limit and
+  optional streaming.
 - **Domain helpers**: DNS filter categories, push threat feeds, schedule days, service port
   ranges, API-user trusted hosts and live interface addresses.
 - **Header-only**: install the `libforti-api-dev` package or vendor the headers; libcurl is the
@@ -43,4 +45,5 @@ firewall::Addresses::update(address);   // sends {"comment": "managed by forti-a
 - [Installation](/getting-started/installation)
 - [Quick start](/getting-started/quick-start)
 - [Fields and updates](/guides/fields-and-updates)
+- [Downloads and configuration backups](/guides/downloads)
 - [Supported endpoints](/reference/endpoints)

@@ -17,6 +17,7 @@ or stderr.
 | `fortiapi::ApiError` | The device answered with an error (HTTP 400 or above, or an error envelope) | `http_status()`, `fortios_error()` (for example `-3`, entry not found), `body()` with the CLI messages, `not_found()` |
 | `fortiapi::TransportError` | No reply: DNS, connect, TLS, timeout | `code()` (libcurl code), `before_send()` |
 | `fortiapi::DecodeError` | A reply that does not match the expected shape | names the endpoint and attribute path |
+| `fortiapi::SizeLimitError` | A download exceeded `DownloadOptions::max_bytes` ([Downloads](/guides/downloads)) | `limit()`; never retried |
 
 ```cpp
 try {
@@ -49,4 +50,6 @@ clean up behind your back; check with `contains()` and delete it if that is what
 ## Tracing
 
 `Config::on_exchange` receives every request and reply (method, URL, bodies, status, timing). The
-API key travels in a header that is not part of the record.
+API key travels in a header that is not part of the record. For `Client::download`, the record of a
+successful reply has an empty response body, because downloads such as configuration backups are
+secrets.

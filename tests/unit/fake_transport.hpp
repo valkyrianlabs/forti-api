@@ -18,9 +18,20 @@ namespace fortiapi::testing {
 
         std::vector<HttpRequest> requests;
         std::deque<Step> script;
+        // 0: return bodies whole and ignore HttpRequest::max_body / on_body, like a transport written
+        // before downloads existed. Otherwise deliver bodies in chunks of this size through
+        // detail::BodyWriter, honoring both, like CurlTransport.
+        std::size_t chunk = 0;
+        // Bytes delivered to a sink before each scripted TransportError (a connection lost mid-body).
+        std::string partial;
 
         FakeTransport& reply(long status, std::string body) {
             script.emplace_back(HttpResponse{status, std::move(body)});
+            return *this;
+        }
+
+        FakeTransport& reply(HttpResponse response) {
+            script.emplace_back(std::move(response));
             return *this;
         }
 
@@ -36,8 +47,23 @@ namespace fortiapi::testing {
             if (script.empty()) throw std::logic_error("FakeTransport: no scripted response left");
             Step step = std::move(script.front());
             script.pop_front();
-            if (auto* error = std::get_if<TransportError>(&step)) throw *error;
-            return std::get<HttpResponse>(step);
+            if (auto* error = std::get_if<TransportError>(&step)) {
+                if (!partial.empty() && request.on_body) request.on_body(partial);
+                throw *error;
+            }
+            auto scripted = std::get<HttpResponse>(std::move(step));
+            if (chunk == 0) return scripted;
+
+            HttpResponse response{scripted.status, {}, scripted.headers};
+            detail::BodyWriter writer(request, response);
+            std::string_view body = scripted.body;
+            for (std::size_t at = 0; at < body.size(); at += chunk) {
+                if (writer.write(body.substr(at, chunk), scripted.status)) continue;
+                detail::wipe(response.body);
+                if (writer.error) std::rethrow_exception(writer.error);
+                throw SizeLimitError("FakeTransport: body over the limit", request.max_body);
+            }
+            return response;
         }
     };
 

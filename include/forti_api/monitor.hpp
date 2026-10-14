@@ -28,6 +28,13 @@ namespace fortiapi {
             return it != body.end() ? std::move(*it) : nlohmann::json();
         }
 
+        // A monitor reply as raw bytes, for endpoints that answer with a file instead of JSON (see
+        // Client::download): Monitor::download("system/config/backup", Query().set("scope", "global")).
+        static Download download(std::string_view relative, const Query& query = {}, DownloadOptions options = {},
+                                 Client& client = default_client()) {
+            return client.download(path(relative), query, std::move(options));
+        }
+
         // Monitor actions. Returns the full reply. Like every write, never retried.
         static nlohmann::json post(std::string_view relative, const nlohmann::json& body, const Query& query = {},
                                    Client& client = default_client()) {

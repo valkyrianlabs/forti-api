@@ -3,7 +3,8 @@
 //
 // Config (where and how to connect), Query (FortiOS query parameters), Error types, a Transport
 // seam (CurlTransport in production, a fake in unit tests) and Client, which turns a method + path
-// into a JSON result and FortiOS errors into exceptions. Nothing here writes to stdout/stderr.
+// into a JSON result (or, with download(), raw bytes) and FortiOS errors into exceptions. Nothing
+// here writes to stdout/stderr.
 //
 
 #ifndef FORTI_API_CLIENT_HPP
@@ -14,9 +15,12 @@
 
 #include <charconv>
 #include <chrono>
+#include <cstddef>
 #include <cstdlib>
+#include <exception>
 #include <format>
 #include <functional>
+#include <limits>
 #include <memory>
 #include <mutex>
 #include <optional>
@@ -184,6 +188,17 @@ namespace fortiapi {
         using Error::Error;
     };
 
+    // A response body exceeded the byte limit of the request (DownloadOptions::max_bytes). The transfer
+    // was aborted and what had arrived was discarded. Never retried.
+    class SizeLimitError : public Error {
+        std::size_t limit_;
+
+    public:
+        SizeLimitError(const std::string& what, std::size_t limit) : Error(what), limit_(limit) {}
+
+        [[nodiscard]] std::size_t limit() const { return limit_; }
+    };
+
     // One request/response pair, passed to Config::on_exchange. Credentials never appear here: the
     // API key travels in a header that is not part of the record.
     struct Exchange {
@@ -247,14 +262,107 @@ namespace fortiapi {
         std::string url;
         std::vector<std::string> headers;
         std::string body;
+        // Set by Client::download(); exchange() leaves both at their defaults (no limit, no sink).
+        std::size_t max_body = std::numeric_limits<std::size_t>::max();
+        std::function<void(std::string_view)> on_body{};
     };
 
     struct HttpResponse {
         long status = 0;
         std::string body;
+        std::vector<std::pair<std::string, std::string>> headers{};   // the final response's, as received
+
+        // The first header with this name (case-insensitive), or "" when absent.
+        [[nodiscard]] std::string header(std::string_view name) const {
+            auto same = [](std::string_view a, std::string_view b) {
+                if (a.size() != b.size()) return false;
+                for (std::size_t i = 0; i < a.size(); ++i) {
+                    auto lower = [](char c) { return c >= 'A' && c <= 'Z' ? static_cast<char>(c - 'A' + 'a') : c; };
+                    if (lower(a[i]) != lower(b[i])) return false;
+                }
+                return true;
+            };
+            for (const auto& [key, value]: headers) if (same(key, name)) return value;
+            return {};
+        }
     };
 
+    namespace detail {
+        // Overwrites a buffer that may hold sensitive bytes, then empties it. Best effort: copies made
+        // while the string grew are not reached.
+        inline void wipe(std::string& text) {
+            volatile char* data = text.data();
+            for (std::size_t i = 0; i < text.size(); ++i) data[i] = 0;
+            text.clear();
+        }
+
+        // Routes response body chunks for a transport: a 2xx body goes to request.on_body when set,
+        // anything else into response.body, and never more than request.max_body bytes in total.
+        // write() returns false when the transfer must stop: then `exceeded` or `error` (an exception
+        // thrown by on_body) says why.
+        class BodyWriter {
+            const HttpRequest& request_;
+            HttpResponse& response_;
+            std::size_t received_ = 0;
+
+        public:
+            bool exceeded = false;
+            std::exception_ptr error;
+
+            BodyWriter(const HttpRequest& request, HttpResponse& response) : request_(request), response_(response) {}
+
+            [[nodiscard]] std::size_t received() const { return received_; }
+
+            bool write(std::string_view chunk, long status) {
+                if (chunk.size() > request_.max_body - received_) {
+                    exceeded = true;
+                    return false;
+                }
+                received_ += chunk.size();
+                if (request_.on_body && status >= 200 && status < 300) {
+                    try {
+                        request_.on_body(chunk);
+                    } catch (...) {
+                        error = std::current_exception();
+                        return false;
+                    }
+                } else response_.body.append(chunk);
+                return true;
+            }
+        };
+
+        // Records one raw header line ("Name: value\r\n"). A status line ("HTTP/1.1 200 OK") starts
+        // a new response (an interim or proxy reply came first): earlier headers are dropped. Returns
+        // the status code of a status line, 0 otherwise.
+        inline long header_line(HttpResponse& response, std::string_view line) {
+            while (!line.empty() && (line.back() == '\r' || line.back() == '\n')) line.remove_suffix(1);
+            if (line.starts_with("HTTP/")) {
+                response.headers.clear();
+                auto space = line.find(' ');
+                long status = 0;
+                if (space == std::string_view::npos ||
+                    std::from_chars(line.data() + space + 1, line.data() + line.size(), status).ec != std::errc())
+                    return 0;
+                return status;
+            }
+            auto colon = line.find(':');
+            if (colon == std::string_view::npos || colon == 0) return 0;
+            auto value = line.substr(colon + 1);
+            while (!value.empty() && (value.front() == ' ' || value.front() == '\t')) value.remove_prefix(1);
+            while (!value.empty() && (value.back() == ' ' || value.back() == '\t')) value.remove_suffix(1);
+            response.headers.emplace_back(std::string(line.substr(0, colon)), std::string(value));
+            return 0;
+        }
+    }  // namespace detail
+
     // Sends one HTTP request. Throws TransportError when no response arrived.
+    //
+    // A transport used with Client::download() should also honor the request's download fields, as
+    // CurlTransport does (detail::BodyWriter implements both): stop reading once the body exceeds
+    // `max_body` and throw SizeLimitError, and pass the body of a 2xx response to `on_body` in chunks
+    // instead of storing it (other bodies still go into HttpResponse::body). It should fill
+    // HttpResponse::headers. A transport that ignores these fields still works: the client then
+    // enforces the limit and feeds the sink once the whole body has arrived in memory.
     class Transport {
     public:
         virtual ~Transport() = default;
@@ -282,8 +390,22 @@ namespace fortiapi {
         Slist resolve_;
         std::mutex mutex_;
 
+        // Per-transfer state for the libcurl callbacks.
+        struct Transfer {
+            HttpResponse& response;
+            detail::BodyWriter body;
+            long status = 0;   // from the latest status line, so the body callback knows a 2xx reply
+        };
+
         static size_t write(char* data, size_t size, size_t count, void* out) {
-            static_cast<std::string*>(out)->append(data, size * count);
+            auto* transfer = static_cast<Transfer*>(out);
+            return transfer->body.write(std::string_view(data, size * count), transfer->status) ? size * count : 0;
+        }
+
+        static size_t header(char* data, size_t size, size_t count, void* out) {
+            auto* transfer = static_cast<Transfer*>(out);
+            if (long status = detail::header_line(transfer->response, std::string_view(data, size * count)))
+                transfer->status = status;
             return size * count;
         }
 
@@ -310,6 +432,7 @@ namespace fortiapi {
             curl_easy_reset(curl);
 
             HttpResponse response;
+            Transfer transfer{response, detail::BodyWriter(request, response)};
             char error[CURL_ERROR_SIZE] = {};
             curl_slist* list = nullptr;
             for (const auto& header: request.headers) {
@@ -325,7 +448,9 @@ namespace fortiapi {
             curl_easy_setopt(curl, CURLOPT_URL, request.url.c_str());
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers.get());
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &CurlTransport::write);
-            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response.body);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &transfer);
+            curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, &CurlTransport::header);
+            curl_easy_setopt(curl, CURLOPT_HEADERDATA, &transfer);
             curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, error);
             curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
             curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
@@ -359,6 +484,12 @@ namespace fortiapi {
             }
 
             CURLcode code = curl_easy_perform(curl);
+            if (code != CURLE_OK) detail::wipe(response.body);   // a partial body is never returned
+            if (transfer.body.error) std::rethrow_exception(transfer.body.error);
+            if (transfer.body.exceeded)
+                throw SizeLimitError(std::format("{} {}: response body exceeds the limit of {} bytes",
+                                                 to_string(request.method), request.url, request.max_body),
+                                     request.max_body);
             if (code != CURLE_OK)
                 throw TransportError(std::format("{} {}: {}", to_string(request.method), request.url,
                                                  error[0] ? error : curl_easy_strerror(code)),
@@ -377,6 +508,26 @@ namespace fortiapi {
             if (http_status < 200 || http_status >= 300) return false;
             return !(body.is_object() && body.value("status", "") == "error");
         }
+    };
+
+    // Options for Client::download().
+    struct DownloadOptions {
+        // The most body bytes accepted, buffered or streamed. A larger body aborts the transfer with a
+        // SizeLimitError and nothing is returned.
+        std::size_t max_bytes = 64 * 1024 * 1024;
+        // When set, the body of a successful reply goes here in chunks and Download::body stays empty.
+        // After an exception the sink may have received part of the body: discard it.
+        std::function<void(std::string_view)> sink{};
+    };
+
+    // A raw reply: any bytes (text or binary), never decoded. A JSON error envelope with HTTP 2xx is
+    // returned as is; check content_type when the endpoint can answer either way.
+    struct Download {
+        long http_status = 0;
+        std::string content_type;          // "" when the device sent none
+        std::string content_disposition;   // e.g. attachment; filename="..."
+        std::string body;                  // empty when DownloadOptions::sink received it
+        std::size_t bytes = 0;             // body size, also when streamed to a sink
     };
 
     class Client {
@@ -400,6 +551,54 @@ namespace fortiapi {
             if (config_.retry_backoff.count() > 0) std::this_thread::sleep_for(config_.retry_backoff * (1u << attempt));
         }
 
+        [[nodiscard]] HttpRequest make_request(Method method, std::string_view api_path, const Query& query,
+                                               const nlohmann::json* body, std::string_view accept) const {
+            HttpRequest request;
+            request.method = method;
+            request.url = url(api_path, query);
+            request.headers = {std::format("Accept: {}", accept), "Authorization: Bearer " + config_.api_key};
+            if (body) {
+                request.headers.emplace_back("Content-Type: application/json");
+                request.body = body->dump();
+            }
+            return request;
+        }
+
+        // Sends with the retry policy (see exchange()) and reports each reply to on_exchange. The record
+        // carries the response body only when `trace_body` is true or the reply is not a 2xx. A GET whose
+        // body already reached a sink (`*streamed` > 0) is not retried: the sink cannot take it back.
+        HttpResponse send(const HttpRequest& request, bool trace_body, const std::size_t* streamed = nullptr) {
+            for (unsigned attempt = 0;; ++attempt) {
+                bool last = attempt >= config_.retries;
+                auto started = std::chrono::steady_clock::now();
+                HttpResponse response;
+                try {
+                    response = transport_->perform(request);
+                } catch (const TransportError& error) {
+                    bool fresh = !streamed || *streamed == 0;
+                    bool safe = (request.method == Method::Get && fresh) || error.before_send();
+                    if (last || !safe) throw;
+                    sleep_before(attempt);
+                    continue;
+                }
+
+                if (config_.on_exchange) {
+                    bool success = response.status >= 200 && response.status < 300;
+                    config_.on_exchange(Exchange{request.method, request.url, request.body, response.status,
+                                                 trace_body || !success ? response.body : std::string(),
+                                                 std::chrono::duration_cast<std::chrono::milliseconds>(
+                                                         std::chrono::steady_clock::now() - started),
+                                                 attempt});
+                }
+
+                if (request.method == Method::Get && retryable_status(response.status) && !last) {
+                    sleep_before(attempt);
+                    continue;
+                }
+                return response;
+            }
+        }
+
     public:
         explicit Client(Config config)
                 : config_(std::move(config)), transport_(std::make_shared<CurlTransport>(config_)) {}
@@ -416,51 +615,79 @@ namespace fortiapi {
         // connection failed before the request was sent, never once it may have reached the device.
         Result exchange(Method method, std::string_view api_path, const Query& query = {},
                         const nlohmann::json* body = nullptr) {
-            HttpRequest request;
-            request.method = method;
-            request.url = url(api_path, query);
-            request.headers = {"Accept: application/json", "Authorization: Bearer " + config_.api_key};
-            if (body) {
-                request.headers.emplace_back("Content-Type: application/json");
-                request.body = body->dump();
+            HttpResponse response = send(make_request(method, api_path, query, body, "application/json"), true);
+            Result result{response.status, nullptr};
+            if (!response.body.empty()) {
+                result.body = nlohmann::json::parse(response.body, nullptr, false);
+                if (result.body.is_discarded()) {
+                    if (response.status >= 200 && response.status < 300)
+                        throw DecodeError(std::format("{} {}: HTTP {} with a non-JSON body", to_string(method),
+                                                      api_path, response.status));
+                    result.body = {{"raw", response.body}};
+                }
             }
+            return result;
+        }
 
-            for (unsigned attempt = 0;; ++attempt) {
-                bool last = attempt >= config_.retries;
-                auto started = std::chrono::steady_clock::now();
-                HttpResponse response;
-                try {
-                    response = transport_->perform(request);
-                } catch (const TransportError& error) {
-                    bool safe = method == Method::Get || error.before_send();
-                    if (last || !safe) throw;
-                    sleep_before(attempt);
-                    continue;
-                }
+        // Sends a request and returns the reply body as raw bytes (file downloads such as a configuration
+        // backup), with the same transport, authentication, TLS, timeouts and retry policy as exchange().
+        // A transport error after part of the body reached the sink is not retried.
+        //
+        // HTTP outside 2xx throws ApiError (its body parsed when it is JSON, else {"raw": ...}); a body
+        // over options.max_bytes throws SizeLimitError. The on_exchange record of a 2xx reply never
+        // carries the body: downloads can be secrets.
+        Download download(Method method, std::string_view api_path, const Query& query, const nlohmann::json* body,
+                          DownloadOptions options = {}) {
+            HttpRequest request = make_request(method, api_path, query, body, "*/*");
+            Download result;
+            request.max_body = options.max_bytes;
+            if (options.sink)
+                request.on_body = [&](std::string_view chunk) {
+                    result.bytes += chunk.size();
+                    options.sink(chunk);
+                };
 
-                if (config_.on_exchange)
-                    config_.on_exchange(Exchange{method, request.url, request.body, response.status, response.body,
-                                                 std::chrono::duration_cast<std::chrono::milliseconds>(
-                                                         std::chrono::steady_clock::now() - started),
-                                                 attempt});
-
-                if (method == Method::Get && retryable_status(response.status) && !last) {
-                    sleep_before(attempt);
-                    continue;
-                }
-
-                Result result{response.status, nullptr};
+            auto too_large = [&] {
+                return SizeLimitError(std::format("{} {}: response body exceeds the limit of {} bytes",
+                                                  to_string(method), api_path, options.max_bytes),
+                                      options.max_bytes);
+            };
+            HttpResponse response;
+            try {
+                response = send(request, false, &result.bytes);
+            } catch (const SizeLimitError&) {
+                throw too_large();   // the same message whichever transport stopped the transfer
+            }
+            if (response.status < 200 || response.status >= 300) {
+                nlohmann::json error = nullptr;
                 if (!response.body.empty()) {
-                    result.body = nlohmann::json::parse(response.body, nullptr, false);
-                    if (result.body.is_discarded()) {
-                        if (response.status >= 200 && response.status < 300)
-                            throw DecodeError(std::format("{} {}: HTTP {} with a non-JSON body", to_string(method),
-                                                          api_path, response.status));
-                        result.body = {{"raw", response.body}};
-                    }
+                    error = nlohmann::json::parse(response.body, nullptr, false);
+                    if (error.is_discarded()) error = {{"raw", response.body}};
                 }
-                return result;
+                throw ApiError(method, std::string(api_path), response.status, std::move(error));
             }
+            // A transport that ignores max_body / on_body returned the whole body in memory.
+            if (response.body.size() > options.max_bytes) {
+                detail::wipe(response.body);
+                throw too_large();
+            }
+            if (options.sink && !response.body.empty()) {
+                result.bytes += response.body.size();
+                options.sink(response.body);
+                detail::wipe(response.body);
+            } else if (!options.sink) {
+                result.bytes = response.body.size();
+                result.body = std::move(response.body);
+            }
+            result.http_status = response.status;
+            result.content_type = response.header("Content-Type");
+            result.content_disposition = response.header("Content-Disposition");
+            return result;
+        }
+
+        // GET as raw bytes; see the overload above.
+        Download download(std::string_view api_path, const Query& query = {}, DownloadOptions options = {}) {
+            return download(Method::Get, api_path, query, nullptr, std::move(options));
         }
 
         // Like exchange(), but a FortiOS error becomes an ApiError. Returns the full envelope.
