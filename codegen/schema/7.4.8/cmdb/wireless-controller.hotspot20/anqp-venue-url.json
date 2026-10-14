@@ -1,0 +1,68 @@
+{
+ "name": "anqp-venue-url",
+ "category": "table",
+ "help": "Configure venue URL.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of venue url.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "value-list": {
+   "name": "value-list",
+   "category": "table",
+   "help": "URL list.",
+   "mkey": "index",
+   "mkey_type": "integer",
+   "children": {
+    "index": {
+     "name": "index",
+     "category": "unitary",
+     "type": "integer",
+     "help": "URL index.",
+     "min-value": 1,
+     "max-value": 10,
+     "default": 0,
+     "multiple_values": false
+    },
+    "number": {
+     "name": "number",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Venue number.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "value": {
+     "name": "value",
+     "category": "unitary",
+     "type": "string",
+     "help": "Venue URL value.",
+     "required": true,
+     "size": 254,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 291,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

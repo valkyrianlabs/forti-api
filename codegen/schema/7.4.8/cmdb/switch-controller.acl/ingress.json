@@ -1,0 +1,126 @@
+{
+ "name": "ingress",
+ "category": "table",
+ "help": "Configure ingress ACL policies to be applied on managed FortiSwitch ports.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ACL ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description for the ACL policy.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "action": {
+   "name": "action",
+   "category": "complex",
+   "help": "ACL actions.",
+   "children": {
+    "drop": {
+     "name": "drop",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable drop.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable drop."
+      },
+      {
+       "name": "disable",
+       "help": "Disable drop."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "count": {
+     "name": "count",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable count.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable count."
+      },
+      {
+       "name": "disable",
+       "help": "Disable count."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "classifier": {
+   "name": "classifier",
+   "category": "complex",
+   "help": "ACL classifiers.",
+   "children": {
+    "dst-ip-prefix": {
+     "name": "dst-ip-prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Destination IP address to be matched.",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "dst-mac": {
+     "name": "dst-mac",
+     "category": "unitary",
+     "type": "mac-address",
+     "help": "Destination MAC address to be matched.",
+     "default": "00:00:00:00:00:00",
+     "multiple_values": false
+    },
+    "src-ip-prefix": {
+     "name": "src-ip-prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Source IP address to be matched.",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "src-mac": {
+     "name": "src-mac",
+     "category": "unitary",
+     "type": "mac-address",
+     "help": "Source MAC address to be matched.",
+     "default": "00:00:00:00:00:00",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "VLAN ID to be matched.",
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "switch-controller.acl",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

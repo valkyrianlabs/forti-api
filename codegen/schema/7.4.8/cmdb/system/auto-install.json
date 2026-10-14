@@ -1,0 +1,65 @@
+{
+ "name": "auto-install",
+ "category": "complex",
+ "help": "Configure USB auto installation.",
+ "children": {
+  "auto-install-config": {
+   "name": "auto-install-config",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable auto install the config in USB disk.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable config."
+    },
+    {
+     "name": "disable",
+     "help": "Disable config."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-install-image": {
+   "name": "auto-install-image",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable auto install the image in USB disk.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable config."
+    },
+    {
+     "name": "disable",
+     "help": "Disable config."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-config-file": {
+   "name": "default-config-file",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default config file name in USB disk.",
+   "size": 127,
+   "default": "fgt_system.conf",
+   "multiple_values": false
+  },
+  "default-image-file": {
+   "name": "default-image-file",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default image file name in USB disk.",
+   "size": 127,
+   "default": "image.out",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 164,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

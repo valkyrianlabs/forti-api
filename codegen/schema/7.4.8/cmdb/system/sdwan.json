@@ -1,0 +1,2810 @@
+{
+ "name": "sdwan",
+ "category": "complex",
+ "help": "Configure redundant Internet connections with multiple outbound links and health-check profiles.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SD-WAN.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable SD-WAN."
+    },
+    {
+     "name": "enable",
+     "help": "Enable SD-WAN."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "load-balance-mode": {
+   "name": "load-balance-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Algorithm or mode to use for load balancing Internet traffic to SD-WAN members.",
+   "options": [
+    {
+     "name": "source-ip-based",
+     "help": "Source IP load balancing. All traffic from a source IP is sent to the same interface."
+    },
+    {
+     "name": "weight-based",
+     "help": "Weight-based load balancing. Interfaces with higher weights have higher priority and get more traffic."
+    },
+    {
+     "name": "usage-based",
+     "help": "Usage-based load balancing. All traffic is sent to the first interface on the list. When the bandwidth on that interface exceeds the spill-over limit new traffic is sent to the next interface."
+    },
+    {
+     "name": "source-dest-ip-based",
+     "help": "Source and destination IP load balancing. All traffic from a source IP to a destination IP is sent to the same interface."
+    },
+    {
+     "name": "measured-volume-based",
+     "help": "Volume-based load balancing. Traffic is load balanced based on traffic volume (in bytes). More traffic is sent to interfaces with higher volume ratios."
+    }
+   ],
+   "default": "source-ip-based",
+   "multiple_values": false
+  },
+  "speedtest-bypass-routing": {
+   "name": "speedtest-bypass-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bypass routing when speedtest on a SD-WAN member.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable SD-WAN."
+    },
+    {
+     "name": "enable",
+     "help": "Enable SD-WAN."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "duplication-max-num": {
+   "name": "duplication-max-num",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of interface members a packet is duplicated in the SD-WAN zone (2 - 4, default = 2; if set to 3, the original packet plus 2 more copies are created).",
+   "min-value": 2,
+   "max-value": 4,
+   "default": 2,
+   "multiple_values": false
+  },
+  "neighbor-hold-down": {
+   "name": "neighbor-hold-down",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable hold switching from the secondary neighbor to the primary neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable hold switching from the secondary neighbor to the primary neighbor."
+    },
+    {
+     "name": "disable",
+     "help": "Disable hold switching from the secondary neighbor to the primary neighbor."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "neighbor-hold-down-time": {
+   "name": "neighbor-hold-down-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Waiting period in seconds when switching from the secondary neighbor to the primary neighbor when hold-down is disabled. (0 - 10000000, default = 0).",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "app-perf-log-period": {
+   "name": "app-perf-log-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time interval in seconds that application performance logs are generated (0 - 3600, default = 0).",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 0,
+   "multiple_values": false
+  },
+  "neighbor-hold-boot-time": {
+   "name": "neighbor-hold-boot-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Waiting period in seconds when switching from the primary neighbor to the secondary neighbor from the neighbor start. (0 - 10000000, default = 0).",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "fail-detect": {
+   "name": "fail-detect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SD-WAN Internet connection status checking (failure detection).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable status checking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable status checking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fail-alert-interfaces": {
+   "name": "fail-alert-interfaces",
+   "category": "table",
+   "help": "Physical interfaces that will be alerted.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Physical interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "zone": {
+   "name": "zone",
+   "category": "table",
+   "help": "Configure SD-WAN zones.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Zone name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "advpn-select": {
+     "name": "advpn-select",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable selection of ADVPN based on SDWAN information.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable selection of ADVPN based on SDWAN information."
+      },
+      {
+       "name": "disable",
+       "help": "Disable selection of ADVPN based on SDWAN information."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "advpn-health-check": {
+     "name": "advpn-health-check",
+     "category": "unitary",
+     "type": "string",
+     "help": "Health check for ADVPN local overlay link quality.",
+     "datasource": [
+      "system.sdwan.health-check.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "service-sla-tie-break": {
+     "name": "service-sla-tie-break",
+     "category": "unitary",
+     "type": "option",
+     "help": "Method of selecting member if more than one meets the SLA.",
+     "options": [
+      {
+       "name": "cfg-order",
+       "help": "Members that meet the SLA are selected in the order they are configured."
+      },
+      {
+       "name": "fib-best-match",
+       "help": "Members that meet the SLA are selected that match the longest prefix in the routing table."
+      },
+      {
+       "name": "input-device",
+       "help": "Members that meet the SLA are selected by matching the input device."
+      }
+     ],
+     "default": "cfg-order",
+     "multiple_values": false
+    },
+    "minimum-sla-meet-members": {
+     "name": "minimum-sla-meet-members",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum number of members which meet SLA when the neighbor is preferred.",
+     "min-value": 1,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 1024,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "members": {
+   "name": "members",
+   "category": "table",
+   "help": "FortiGate interfaces added to the SD-WAN.",
+   "mkey": "seq-num",
+   "mkey_type": "integer",
+   "children": {
+    "seq-num": {
+     "name": "seq-num",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Sequence number(1-512).",
+     "min-value": 0,
+     "max-value": 512,
+     "default": 0,
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "zone": {
+     "name": "zone",
+     "category": "unitary",
+     "type": "string",
+     "help": "Zone name.",
+     "datasource": [
+      "system.sdwan.zone.name"
+     ],
+     "size": 35,
+     "default": "virtual-wan-link",
+     "multiple_values": false
+    },
+    "gateway": {
+     "name": "gateway",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "The default gateway for this interface. Usually the default gateway of the Internet service provider that this interface is connected to.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "preferred-source": {
+     "name": "preferred-source",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Preferred source of route for this member.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "source": {
+     "name": "source",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Source IP address used in the health-check packet to the server.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "gateway6": {
+     "name": "gateway6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 gateway.",
+     "default": "::",
+     "multiple_values": false
+    },
+    "source6": {
+     "name": "source6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Source IPv6 address used in the health-check packet to the server.",
+     "default": "::",
+     "multiple_values": false
+    },
+    "cost": {
+     "name": "cost",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Cost of this interface for services in SLA mode (0 - 4294967295, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "weight": {
+     "name": "weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Weight of this interface for weighted load balancing. (1 - 255) More traffic is directed to interfaces with higher weights.",
+     "min-value": 1,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Priority of the interface for IPv4 (1 - 65535, default = 1). Used for SD-WAN rules or priority rules.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 1,
+     "multiple_values": false
+    },
+    "priority6": {
+     "name": "priority6",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Priority of the interface for IPv6 (1 - 65535, default = 1024). Used for SD-WAN rules or priority rules.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 1024,
+     "multiple_values": false
+    },
+    "spillover-threshold": {
+     "name": "spillover-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Egress spillover threshold for this interface (0 - 16776000 kbit/s). When this traffic volume threshold is reached, new sessions spill over to other interfaces in the SD-WAN.",
+     "min-value": 0,
+     "max-value": 16776000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ingress-spillover-threshold": {
+     "name": "ingress-spillover-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ingress spillover threshold for this interface (0 - 16776000 kbit/s). When this traffic volume threshold is reached, new sessions spill over to other interfaces in the SD-WAN.",
+     "min-value": 0,
+     "max-value": 16776000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "volume-ratio": {
+     "name": "volume-ratio",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Measured volume ratio (this value / sum of all values = percentage of link volume, 1 - 255).",
+     "min-value": 1,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this interface in the SD-WAN.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable this interface in the SD-WAN."
+      },
+      {
+       "name": "enable",
+       "help": "Enable this interface in the SD-WAN."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "transport-group": {
+     "name": "transport-group",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Measured transport group (0 - 255).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comments.",
+     "size": 255,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 512,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "health-check": {
+   "name": "health-check",
+   "category": "table",
+   "help": "SD-WAN status checking or health checking. Identify a server on the Internet and determine how SD-WAN verifies that the FortiGate can communicate with it.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Status check or health check name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "probe-packets": {
+     "name": "probe-packets",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable transmission of probe packets.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable transmission of probe packets."
+      },
+      {
+       "name": "enable",
+       "help": "Enable transmission of probe packets."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "addr-mode": {
+     "name": "addr-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Address mode (IPv4 or IPv6).",
+     "options": [
+      {
+       "name": "ipv4",
+       "help": "IPv4 mode."
+      },
+      {
+       "name": "ipv6",
+       "help": "IPv6 mode."
+      }
+     ],
+     "default": "ipv4",
+     "multiple_values": false
+    },
+    "system-dns": {
+     "name": "system-dns",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable system DNS as the probe server.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable system DNS as the probe server."
+      },
+      {
+       "name": "enable",
+       "help": "Enable system DNS as the probe server."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "server": {
+     "name": "server",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP address or FQDN name of the server.",
+     "size": 79,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 2
+    },
+    "detect-mode": {
+     "name": "detect-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "The mode determining how to detect the server.",
+     "options": [
+      {
+       "name": "active",
+       "help": "The probes are sent actively."
+      },
+      {
+       "name": "passive",
+       "help": "The traffic measures health without probes."
+      },
+      {
+       "name": "prefer-passive",
+       "help": "The probes are sent in case of no new traffic."
+      },
+      {
+       "name": "remote",
+       "help": "Link health obtained from remote peers."
+      },
+      {
+       "name": "agent-based",
+       "help": "Traffic health is measured from the fabric connectors."
+      }
+     ],
+     "default": "active",
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "option",
+     "help": "Protocol used to determine if the FortiGate can communicate with the server.",
+     "options": [
+      {
+       "name": "ping",
+       "help": "Use PING to test the link with the server."
+      },
+      {
+       "name": "tcp-echo",
+       "help": "Use TCP echo to test the link with the server."
+      },
+      {
+       "name": "udp-echo",
+       "help": "Use UDP echo to test the link with the server."
+      },
+      {
+       "name": "http",
+       "help": "Use HTTP-GET to test the link with the server."
+      },
+      {
+       "name": "https",
+       "help": "Use HTTPS-GET to test the link with the server."
+      },
+      {
+       "name": "twamp",
+       "help": "Use TWAMP to test the link with the server."
+      },
+      {
+       "name": "dns",
+       "help": "Use DNS query to test the link with the server."
+      },
+      {
+       "name": "tcp-connect",
+       "help": "Use a full TCP connection to test the link with the server."
+      },
+      {
+       "name": "ftp",
+       "help": "Use FTP to test the link with the server."
+      }
+     ],
+     "default": "ping",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port number used to communicate with the server over the selected protocol (0 - 65535, default = 0, auto select. http, tcp-connect: 80, udp-echo, tcp-echo: 7, dns: 53, ftp: 21, twamp: 862).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "quality-measured-method": {
+     "name": "quality-measured-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Method to measure the quality of tcp-connect.",
+     "options": [
+      {
+       "name": "half-open",
+       "help": "Measure the round trip between syn and ack."
+      },
+      {
+       "name": "half-close",
+       "help": "Measure the round trip between fin and ack."
+      }
+     ],
+     "default": "half-open",
+     "multiple_values": false
+    },
+    "security-mode": {
+     "name": "security-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Twamp controller security mode.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Unauthenticated mode."
+      },
+      {
+       "name": "authentication",
+       "help": "Authenticated mode."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "user": {
+     "name": "user",
+     "category": "unitary",
+     "type": "string",
+     "help": "The user name to access probe server.",
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "password": {
+     "name": "password",
+     "category": "unitary",
+     "type": "password",
+     "help": "TWAMP controller password in authentication mode.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "packet-size": {
+     "name": "packet-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Packet size of a TWAMP test session. (124/158 - 1024)",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 124,
+     "multiple_values": false
+    },
+    "ha-priority": {
+     "name": "ha-priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "HA election priority (1 - 50).",
+     "min-value": 1,
+     "max-value": 50,
+     "default": 1,
+     "multiple_values": false
+    },
+    "ftp-mode": {
+     "name": "ftp-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "FTP mode.",
+     "options": [
+      {
+       "name": "passive",
+       "help": "The FTP health-check initiates and establishes the data connection."
+      },
+      {
+       "name": "port",
+       "help": "The FTP server initiates and establishes the data connection."
+      }
+     ],
+     "default": "passive",
+     "multiple_values": false
+    },
+    "ftp-file": {
+     "name": "ftp-file",
+     "category": "unitary",
+     "type": "string",
+     "help": "Full path and file name on the FTP server to download for FTP health-check to probe.",
+     "size": 254,
+     "default": "",
+     "multiple_values": false
+    },
+    "http-get": {
+     "name": "http-get",
+     "category": "unitary",
+     "type": "string",
+     "help": "URL used to communicate with the server if the protocol if the protocol is HTTP.",
+     "size": 1024,
+     "default": "/",
+     "multiple_values": false
+    },
+    "http-agent": {
+     "name": "http-agent",
+     "category": "unitary",
+     "type": "string",
+     "help": "String in the http-agent field in the HTTP header.",
+     "size": 1024,
+     "default": "Chrome/ Safari/",
+     "multiple_values": false
+    },
+    "http-match": {
+     "name": "http-match",
+     "category": "unitary",
+     "type": "string",
+     "help": "Response string expected from the server if the protocol is HTTP.",
+     "size": 1024,
+     "default": "",
+     "multiple_values": false
+    },
+    "dns-request-domain": {
+     "name": "dns-request-domain",
+     "category": "unitary",
+     "type": "string",
+     "help": "Fully qualified domain name to resolve for the DNS probe.",
+     "size": 255,
+     "default": "www.example.com",
+     "multiple_values": false
+    },
+    "dns-match-ip": {
+     "name": "dns-match-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Response IP expected from DNS server if the protocol is DNS.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "interval": {
+     "name": "interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Status check interval in milliseconds, or the time between attempting to connect to the server (20 - 3600*1000 msec, default = 500).",
+     "min-value": 20,
+     "max-value": 3600000,
+     "default": 500,
+     "multiple_values": false
+    },
+    "probe-timeout": {
+     "name": "probe-timeout",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time to wait before a probe packet is considered lost (20 - 3600*1000 msec, default = 500).",
+     "min-value": 20,
+     "max-value": 3600000,
+     "default": 500,
+     "multiple_values": false
+    },
+    "failtime": {
+     "name": "failtime",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of failures before server is considered lost (1 - 3600, default = 5).",
+     "min-value": 1,
+     "max-value": 3600,
+     "default": 5,
+     "multiple_values": false
+    },
+    "recoverytime": {
+     "name": "recoverytime",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of successful responses received before server is considered recovered (1 - 3600, default = 5).",
+     "min-value": 1,
+     "max-value": 3600,
+     "default": 5,
+     "multiple_values": false
+    },
+    "probe-count": {
+     "name": "probe-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of most recent probes that should be used to calculate latency and jitter (5 - 30, default = 30).",
+     "min-value": 5,
+     "max-value": 30,
+     "default": 30,
+     "multiple_values": false
+    },
+    "diffservcode": {
+     "name": "diffservcode",
+     "category": "unitary",
+     "type": "user",
+     "help": "Differentiated services code point (DSCP) in the IP header of the probe packet.",
+     "default": "",
+     "multiple_values": false
+    },
+    "update-cascade-interface": {
+     "name": "update-cascade-interface",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable update cascade interface.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable update cascade interface."
+      },
+      {
+       "name": "disable",
+       "help": "Disable update cascade interface."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "update-static-route": {
+     "name": "update-static-route",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable updating the static route.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable updating the static route."
+      },
+      {
+       "name": "disable",
+       "help": "Disable updating the static route."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "embed-measured-health": {
+     "name": "embed-measured-health",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable embedding measured health information.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable embed measured health."
+      },
+      {
+       "name": "disable",
+       "help": "Disable embed measured health."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "sla-id-redistribute": {
+     "name": "sla-id-redistribute",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Select the ID from the SLA sub-table. The selected SLA's priority value will be distributed into the routing table (0 - 32, default = 0).",
+     "min-value": 0,
+     "max-value": 32,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sla-fail-log-period": {
+     "name": "sla-fail-log-period",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time interval in seconds that SLA fail log messages will be generated (0 - 3600, default = 0).",
+     "min-value": 0,
+     "max-value": 3600,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sla-pass-log-period": {
+     "name": "sla-pass-log-period",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time interval in seconds that SLA pass log messages will be generated (0 - 3600, default = 0).",
+     "min-value": 0,
+     "max-value": 3600,
+     "default": 0,
+     "multiple_values": false
+    },
+    "threshold-warning-packetloss": {
+     "name": "threshold-warning-packetloss",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Warning threshold for packet loss (percentage, default = 0).",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 0,
+     "multiple_values": false
+    },
+    "threshold-alert-packetloss": {
+     "name": "threshold-alert-packetloss",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Alert threshold for packet loss (percentage, default = 0).",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 0,
+     "multiple_values": false
+    },
+    "threshold-warning-latency": {
+     "name": "threshold-warning-latency",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Warning threshold for latency (ms, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "threshold-alert-latency": {
+     "name": "threshold-alert-latency",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Alert threshold for latency (ms, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "threshold-warning-jitter": {
+     "name": "threshold-warning-jitter",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Warning threshold for jitter (ms, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "threshold-alert-jitter": {
+     "name": "threshold-alert-jitter",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Alert threshold for jitter (ms, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "vrf": {
+     "name": "vrf",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Virtual Routing Forwarding ID.",
+     "min-value": 0,
+     "max-value": 251,
+     "default": 0,
+     "multiple_values": false
+    },
+    "source": {
+     "name": "source",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Source IP address used in the health-check packet to the server.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "source6": {
+     "name": "source6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Source IPv6 address used in the health-check packet to server.",
+     "default": "::",
+     "multiple_values": false
+    },
+    "members": {
+     "name": "members",
+     "category": "table",
+     "help": "Member sequence number list.",
+     "member_table": true,
+     "mkey": "seq-num",
+     "mkey_type": "integer",
+     "children": {
+      "seq-num": {
+       "name": "seq-num",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Member sequence number.",
+       "required": true,
+       "datasource": [
+        "system.sdwan.members.seq-num"
+       ],
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "mos-codec": {
+     "name": "mos-codec",
+     "category": "unitary",
+     "type": "option",
+     "help": "Codec to use for MOS calculation (default = g711).",
+     "options": [
+      {
+       "name": "g711",
+       "help": "Calculate MOS based on the G.711 codec."
+      },
+      {
+       "name": "g722",
+       "help": "Calculate MOS based on the G.722 codec."
+      },
+      {
+       "name": "g729",
+       "help": "Calculate MOS based on the G.729 codec."
+      }
+     ],
+     "default": "g711",
+     "multiple_values": false
+    },
+    "class-id": {
+     "name": "class-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Traffic class ID.",
+     "datasource": [
+      "firewall.traffic-class.class-id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sla": {
+     "name": "sla",
+     "category": "table",
+     "help": "Service level agreement (SLA).",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "SLA ID.",
+       "required": true,
+       "min-value": 1,
+       "max-value": 32,
+       "default": 0,
+       "multiple_values": false
+      },
+      "link-cost-factor": {
+       "name": "link-cost-factor",
+       "category": "unitary",
+       "type": "option",
+       "help": "Criteria on which to base link selection.",
+       "options": [
+        {
+         "name": "latency",
+         "help": "Select link based on latency."
+        },
+        {
+         "name": "jitter",
+         "help": "Select link based on jitter."
+        },
+        {
+         "name": "packet-loss",
+         "help": "Select link based on packet loss."
+        },
+        {
+         "name": "mos",
+         "help": "Select link based on Mean Opinion Score (MOS)."
+        }
+       ],
+       "default": "latency jitter packet-loss",
+       "multiple_values": true
+      },
+      "latency-threshold": {
+       "name": "latency-threshold",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Latency for SLA to make decision in milliseconds. (0 - 10000000, default = 5).",
+       "min-value": 0,
+       "max-value": 10000000,
+       "default": 5,
+       "multiple_values": false
+      },
+      "jitter-threshold": {
+       "name": "jitter-threshold",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Jitter for SLA to make decision in milliseconds. (0 - 10000000, default = 5).",
+       "min-value": 0,
+       "max-value": 10000000,
+       "default": 5,
+       "multiple_values": false
+      },
+      "packetloss-threshold": {
+       "name": "packetloss-threshold",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Packet loss for SLA to make decision in percentage. (0 - 100, default = 0).",
+       "min-value": 0,
+       "max-value": 100,
+       "default": 0,
+       "multiple_values": false
+      },
+      "mos-threshold": {
+       "name": "mos-threshold",
+       "category": "unitary",
+       "type": "string",
+       "help": "Minimum Mean Opinion Score for SLA to be marked as pass. (1.0 - 5.0, default = 3.6).",
+       "size": 35,
+       "default": "3.6",
+       "multiple_values": false
+      },
+      "priority-in-sla": {
+       "name": "priority-in-sla",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Value to be distributed into routing table when in-sla (0 - 65535, default = 0).",
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 0,
+       "multiple_values": false
+      },
+      "priority-out-sla": {
+       "name": "priority-out-sla",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Value to be distributed into routing table when out-sla (0 - 65535, default = 0).",
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 4000,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "service": {
+   "name": "service",
+   "category": "table",
+   "help": "Create SD-WAN rules (also called services) to control how sessions are distributed to interfaces in the SD-WAN.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SD-WAN rule ID (1 - 4000).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "SD-WAN rule name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "addr-mode": {
+     "name": "addr-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Address mode (IPv4 or IPv6).",
+     "options": [
+      {
+       "name": "ipv4",
+       "help": "IPv4 mode."
+      },
+      {
+       "name": "ipv6",
+       "help": "IPv6 mode."
+      }
+     ],
+     "default": "ipv4",
+     "multiple_values": false
+    },
+    "load-balance": {
+     "name": "load-balance",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable load-balance.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable load-balance."
+      },
+      {
+       "name": "disable",
+       "help": "Disable load-balance."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "input-device": {
+     "name": "input-device",
+     "category": "table",
+     "help": "Source interface name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface name.",
+       "required": true,
+       "datasource": [
+        "system.interface.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "input-device-negate": {
+     "name": "input-device-negate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable negation of input device match.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable negation of input device match."
+      },
+      {
+       "name": "disable",
+       "help": "Disable negation of input device match."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "input-zone": {
+     "name": "input-zone",
+     "category": "table",
+     "help": "Source input-zone name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Zone.",
+       "datasource": [
+        "system.sdwan.zone.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Control how the SD-WAN rule sets the priority of interfaces in the SD-WAN.",
+     "options": [
+      {
+       "name": "auto",
+       "help": "Assign interfaces a priority based on quality."
+      },
+      {
+       "name": "manual",
+       "help": "Assign interfaces a priority manually."
+      },
+      {
+       "name": "priority",
+       "help": "Assign interfaces a priority based on the link-cost-factor quality of the interface."
+      },
+      {
+       "name": "sla",
+       "help": "Assign interfaces a priority based on selected SLA settings."
+      }
+     ],
+     "default": "manual",
+     "multiple_values": false
+    },
+    "zone-mode": {
+     "name": "zone-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable zone mode.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Traffic steered based on zone."
+      },
+      {
+       "name": "disable",
+       "help": "Traffic steered based on member."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "minimum-sla-meet-members": {
+     "name": "minimum-sla-meet-members",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum number of members which meet SLA.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "hash-mode": {
+     "name": "hash-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Hash algorithm for selected priority members for load balance mode.",
+     "options": [
+      {
+       "name": "round-robin",
+       "help": "All traffic are distributed to selected interfaces in equal portions and circular order."
+      },
+      {
+       "name": "source-ip-based",
+       "help": "All traffic from a source IP is sent to the same interface."
+      },
+      {
+       "name": "source-dest-ip-based",
+       "help": "All traffic from a source IP to a destination IP is sent to the same interface."
+      },
+      {
+       "name": "inbandwidth",
+       "help": "All traffic are distributed to a selected interface with most available bandwidth for incoming traffic."
+      },
+      {
+       "name": "outbandwidth",
+       "help": "All traffic are distributed to a selected interface with most available bandwidth for outgoing traffic."
+      },
+      {
+       "name": "bibandwidth",
+       "help": "All traffic are distributed to a selected interface with most available bandwidth for both incoming and outgoing traffic."
+      }
+     ],
+     "default": "round-robin",
+     "multiple_values": false
+    },
+    "shortcut-priority": {
+     "name": "shortcut-priority",
+     "category": "unitary",
+     "type": "option",
+     "help": "High priority of ADVPN shortcut for this service.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable a high priority of ADVPN shortcut for this service."
+      },
+      {
+       "name": "disable",
+       "help": "Disable a high priority of ADVPN shortcut for this service."
+      },
+      {
+       "name": "auto",
+       "help": "Auto enable a high priority of ADVPN shortcut for this service if ADVPN2.0 enabled."
+      }
+     ],
+     "default": "auto",
+     "multiple_values": false
+    },
+    "role": {
+     "name": "role",
+     "category": "unitary",
+     "type": "option",
+     "help": "Service role to work with neighbor.",
+     "options": [
+      {
+       "name": "standalone",
+       "help": "Standalone service."
+      },
+      {
+       "name": "primary",
+       "help": "Primary service for primary neighbor."
+      },
+      {
+       "name": "secondary",
+       "help": "Secondary service for secondary neighbor."
+      }
+     ],
+     "default": "standalone",
+     "multiple_values": false
+    },
+    "standalone-action": {
+     "name": "standalone-action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable service when selected neighbor role is standalone while service role is not standalone.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable service when selected neighbor role is standalone."
+      },
+      {
+       "name": "disable",
+       "help": "Disable service when selected neighbor role is standalone."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "quality-link": {
+     "name": "quality-link",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Quality grade.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "tos": {
+     "name": "tos",
+     "category": "unitary",
+     "type": "user",
+     "help": "Type of service bit pattern.",
+     "default": "",
+     "multiple_values": false
+    },
+    "tos-mask": {
+     "name": "tos-mask",
+     "category": "unitary",
+     "type": "user",
+     "help": "Type of service evaluated bits.",
+     "default": "",
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Protocol number.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-port": {
+     "name": "start-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Start destination port number.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 1,
+     "multiple_values": false
+    },
+    "end-port": {
+     "name": "end-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "End destination port number.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 65535,
+     "multiple_values": false
+    },
+    "start-src-port": {
+     "name": "start-src-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Start source port number.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 1,
+     "multiple_values": false
+    },
+    "end-src-port": {
+     "name": "end-src-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "End source port number.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 65535,
+     "multiple_values": false
+    },
+    "dst": {
+     "name": "dst",
+     "category": "table",
+     "help": "Destination address name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address or address group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dst-negate": {
+     "name": "dst-negate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable negation of destination address match.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable destination address negation."
+      },
+      {
+       "name": "disable",
+       "help": "Disable destination address negation."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "src": {
+     "name": "src",
+     "category": "table",
+     "help": "Source address name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address or address group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dst6": {
+     "name": "dst6",
+     "category": "table",
+     "help": "Destination address6 name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address6 or address6 group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "src6": {
+     "name": "src6",
+     "category": "table",
+     "help": "Source address6 name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address6 or address6 group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "src-negate": {
+     "name": "src-negate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable negation of source address match.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable source address negation."
+      },
+      {
+       "name": "disable",
+       "help": "Disable source address negation."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "users": {
+     "name": "users",
+     "category": "table",
+     "help": "User name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "User name.",
+       "required": true,
+       "datasource": [
+        "user.local.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "groups": {
+     "name": "groups",
+     "category": "table",
+     "help": "User groups.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Group name.",
+       "datasource": [
+        "user.group.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "internet-service": {
+     "name": "internet-service",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of Internet service for application-based load balancing.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable cloud service to support application-based load balancing."
+      },
+      {
+       "name": "disable",
+       "help": "Disable cloud service to support application-based load balancing."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "internet-service-custom": {
+     "name": "internet-service-custom",
+     "category": "table",
+     "help": "Custom Internet service name list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Custom Internet service name.",
+       "required": true,
+       "datasource": [
+        "firewall.internet-service-custom.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "internet-service-custom-group": {
+     "name": "internet-service-custom-group",
+     "category": "table",
+     "help": "Custom Internet Service group list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Custom Internet Service group name.",
+       "required": true,
+       "datasource": [
+        "firewall.internet-service-custom-group.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "internet-service-name": {
+     "name": "internet-service-name",
+     "category": "table",
+     "help": "Internet service name list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Internet service name.",
+       "required": true,
+       "datasource": [
+        "firewall.internet-service-name.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "internet-service-group": {
+     "name": "internet-service-group",
+     "category": "table",
+     "help": "Internet Service group list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Internet Service group name.",
+       "required": true,
+       "datasource": [
+        "firewall.internet-service-group.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "internet-service-app-ctrl": {
+     "name": "internet-service-app-ctrl",
+     "category": "table",
+     "help": "Application control based Internet Service ID list.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Application control based Internet Service ID.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "internet-service-app-ctrl-group": {
+     "name": "internet-service-app-ctrl-group",
+     "category": "table",
+     "help": "Application control based Internet Service group list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Application control based Internet Service group name.",
+       "required": true,
+       "datasource": [
+        "application.group.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "internet-service-app-ctrl-category": {
+     "name": "internet-service-app-ctrl-category",
+     "category": "table",
+     "help": "IDs of one or more application control categories.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Application control category ID.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "health-check": {
+     "name": "health-check",
+     "category": "table",
+     "help": "Health check list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Health check name.",
+       "required": true,
+       "datasource": [
+        "system.sdwan.health-check.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "link-cost-factor": {
+     "name": "link-cost-factor",
+     "category": "unitary",
+     "type": "option",
+     "help": "Link cost factor.",
+     "options": [
+      {
+       "name": "latency",
+       "help": "Select link based on latency."
+      },
+      {
+       "name": "jitter",
+       "help": "Select link based on jitter."
+      },
+      {
+       "name": "packet-loss",
+       "help": "Select link based on packet loss."
+      },
+      {
+       "name": "inbandwidth",
+       "help": "Select link based on available bandwidth of incoming traffic."
+      },
+      {
+       "name": "outbandwidth",
+       "help": "Select link based on available bandwidth of outgoing traffic."
+      },
+      {
+       "name": "bibandwidth",
+       "help": "Select link based on available bandwidth of bidirectional traffic."
+      },
+      {
+       "name": "custom-profile-1",
+       "help": "Select link based on customized profile."
+      }
+     ],
+     "default": "latency",
+     "multiple_values": false
+    },
+    "packet-loss-weight": {
+     "name": "packet-loss-weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Coefficient of packet-loss in the formula of custom-profile-1.",
+     "min-value": 0,
+     "max-value": 10000000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "latency-weight": {
+     "name": "latency-weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Coefficient of latency in the formula of custom-profile-1.",
+     "min-value": 0,
+     "max-value": 10000000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "jitter-weight": {
+     "name": "jitter-weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Coefficient of jitter in the formula of custom-profile-1.",
+     "min-value": 0,
+     "max-value": 10000000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "bandwidth-weight": {
+     "name": "bandwidth-weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Coefficient of reciprocal of available bidirectional bandwidth in the formula of custom-profile-1.",
+     "min-value": 0,
+     "max-value": 10000000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "link-cost-threshold": {
+     "name": "link-cost-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Percentage threshold change of link cost values that will result in policy route regeneration (0 - 10000000, default = 10).",
+     "min-value": 0,
+     "max-value": 10000000,
+     "default": 10,
+     "multiple_values": false
+    },
+    "hold-down-time": {
+     "name": "hold-down-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Waiting period in seconds when switching from the back-up member to the primary member (0 - 10000000, default = 0).",
+     "min-value": 0,
+     "max-value": 10000000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sla-stickiness": {
+     "name": "sla-stickiness",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SLA stickiness (default = disable).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Traffic remains in the original session path if the path is within the SLA."
+      },
+      {
+       "name": "disable",
+       "help": "Traffic switches to the best path regardless of the SLA."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "dscp-forward": {
+     "name": "dscp-forward",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable forward traffic DSCP tag.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable use of forward DSCP tag."
+      },
+      {
+       "name": "disable",
+       "help": "Disable use of forward DSCP tag."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "dscp-reverse": {
+     "name": "dscp-reverse",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable reverse traffic DSCP tag.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable use of reverse DSCP tag."
+      },
+      {
+       "name": "disable",
+       "help": "Disable use of reverse DSCP tag."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "dscp-forward-tag": {
+     "name": "dscp-forward-tag",
+     "category": "unitary",
+     "type": "user",
+     "help": "Forward traffic DSCP tag.",
+     "default": "",
+     "multiple_values": false
+    },
+    "dscp-reverse-tag": {
+     "name": "dscp-reverse-tag",
+     "category": "unitary",
+     "type": "user",
+     "help": "Reverse traffic DSCP tag.",
+     "default": "",
+     "multiple_values": false
+    },
+    "sla": {
+     "name": "sla",
+     "category": "table",
+     "help": "Service level agreement (SLA).",
+     "mkey": "health-check",
+     "mkey_type": "string",
+     "children": {
+      "health-check": {
+       "name": "health-check",
+       "category": "unitary",
+       "type": "string",
+       "help": "SD-WAN health-check.",
+       "required": true,
+       "datasource": [
+        "system.sdwan.health-check.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "SLA ID.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "priority-members": {
+     "name": "priority-members",
+     "category": "table",
+     "help": "Member sequence number list.",
+     "member_table": true,
+     "mkey": "seq-num",
+     "mkey_type": "integer",
+     "children": {
+      "seq-num": {
+       "name": "seq-num",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Member sequence number.",
+       "datasource": [
+        "system.sdwan.members.seq-num"
+       ],
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "priority-zone": {
+     "name": "priority-zone",
+     "category": "table",
+     "help": "Priority zone name list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Priority zone name.",
+       "datasource": [
+        "system.sdwan.zone.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SD-WAN service.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable SD-WAN service."
+      },
+      {
+       "name": "disable",
+       "help": "Disable SD-WAN service."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "gateway": {
+     "name": "gateway",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SD-WAN service gateway.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable SD-WAN service gateway."
+      },
+      {
+       "name": "disable",
+       "help": "Disable SD-WAN service gateway."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "default": {
+     "name": "default",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of SD-WAN as default service.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable use of SD-WAN as default service."
+      },
+      {
+       "name": "disable",
+       "help": "Disable use of SD-WAN as default service."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "sla-compare-method": {
+     "name": "sla-compare-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Method to compare SLA value for SLA mode.",
+     "options": [
+      {
+       "name": "order",
+       "help": "Compare SLA value based on the order of health-check."
+      },
+      {
+       "name": "number",
+       "help": "Compare SLA value based on the number of satisfied health-check.  Limits health-checks to only configured member interfaces."
+      }
+     ],
+     "default": "order",
+     "multiple_values": false
+    },
+    "tie-break": {
+     "name": "tie-break",
+     "category": "unitary",
+     "type": "option",
+     "help": "Method of selecting member if more than one meets the SLA.",
+     "options": [
+      {
+       "name": "zone",
+       "help": "Use the setting that is configured for the members' zone."
+      },
+      {
+       "name": "cfg-order",
+       "help": "Members that meet the SLA are selected in the order they are configured."
+      },
+      {
+       "name": "fib-best-match",
+       "help": "Members that meet the SLA are selected that match the longest prefix in the routing table."
+      },
+      {
+       "name": "input-device",
+       "help": "Members that meet the SLA are selected by matching the input device."
+      }
+     ],
+     "default": "zone",
+     "multiple_values": false
+    },
+    "use-shortcut-sla": {
+     "name": "use-shortcut-sla",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of ADVPN shortcut for quality comparison.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable use of ADVPN shortcut for quality comparison."
+      },
+      {
+       "name": "disable",
+       "help": "Disable use of ADVPN shortcut for quality comparison."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "passive-measurement": {
+     "name": "passive-measurement",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable passive measurement based on the service criteria.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable passive measurement of user traffic."
+      },
+      {
+       "name": "disable",
+       "help": "Disable passive measurement of user traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "agent-exclusive": {
+     "name": "agent-exclusive",
+     "category": "unitary",
+     "type": "option",
+     "help": "Set/unset the service as agent use exclusively.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Set the service as agent use exclusively."
+      },
+      {
+       "name": "disable",
+       "help": "Unset the service as agent use exclusively."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "shortcut": {
+     "name": "shortcut",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable shortcut for this service.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable use of ADVPN shortcut for this service."
+      },
+      {
+       "name": "disable",
+       "help": "Disable use of ADVPN shortcut for this service."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 4000,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "neighbor": {
+   "name": "neighbor",
+   "category": "table",
+   "help": "Create SD-WAN neighbor from BGP neighbor table to control route advertisements according to SLA status.",
+   "mkey": "ip",
+   "mkey_type": "string",
+   "children": {
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP/IPv6 address of neighbor or neighbor-group name.",
+     "required": true,
+     "datasource": [
+      "router.bgp.neighbor-group.name",
+      "router.bgp.neighbor.ip"
+     ],
+     "size": 45,
+     "default": "",
+     "multiple_values": false
+    },
+    "member": {
+     "name": "member",
+     "category": "table",
+     "help": "Member sequence number list.",
+     "member_table": true,
+     "mkey": "seq-num",
+     "mkey_type": "integer",
+     "children": {
+      "seq-num": {
+       "name": "seq-num",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Member sequence number.",
+       "datasource": [
+        "system.sdwan.members.seq-num"
+       ],
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "service-id": {
+     "name": "service-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SD-WAN service ID to work with the neighbor.",
+     "datasource": [
+      "system.sdwan.service.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "minimum-sla-meet-members": {
+     "name": "minimum-sla-meet-members",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum number of members which meet SLA when the neighbor is preferred.",
+     "min-value": 1,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    },
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "What metric to select the neighbor.",
+     "options": [
+      {
+       "name": "sla",
+       "help": "Select neighbor based on SLA link quality."
+      },
+      {
+       "name": "speedtest",
+       "help": "Select neighbor based on the speedtest status."
+      }
+     ],
+     "default": "sla",
+     "multiple_values": false
+    },
+    "role": {
+     "name": "role",
+     "category": "unitary",
+     "type": "option",
+     "help": "Role of neighbor.",
+     "options": [
+      {
+       "name": "standalone",
+       "help": "Standalone neighbor."
+      },
+      {
+       "name": "primary",
+       "help": "Primary neighbor."
+      },
+      {
+       "name": "secondary",
+       "help": "Secondary neighbor."
+      }
+     ],
+     "default": "standalone",
+     "multiple_values": false
+    },
+    "health-check": {
+     "name": "health-check",
+     "category": "unitary",
+     "type": "string",
+     "help": "SD-WAN health-check name.",
+     "datasource": [
+      "system.sdwan.health-check.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "sla-id": {
+     "name": "sla-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SLA ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "duplication": {
+   "name": "duplication",
+   "category": "table",
+   "help": "Create SD-WAN duplication rule.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Duplication rule ID (1 - 255).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "service-id": {
+     "name": "service-id",
+     "category": "table",
+     "help": "SD-WAN service rule ID list.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "SD-WAN service rule ID.",
+       "required": true,
+       "datasource": [
+        "system.sdwan.service.id"
+       ],
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "srcaddr": {
+     "name": "srcaddr",
+     "category": "table",
+     "help": "Source address or address group names.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address or address group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dstaddr": {
+     "name": "dstaddr",
+     "category": "table",
+     "help": "Destination address or address group names.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address or address group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "srcaddr6": {
+     "name": "srcaddr6",
+     "category": "table",
+     "help": "Source address6 or address6 group names.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address6 or address6 group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dstaddr6": {
+     "name": "dstaddr6",
+     "category": "table",
+     "help": "Destination address6 or address6 group names.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address6 or address6 group name.",
+       "required": true,
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "srcintf": {
+     "name": "srcintf",
+     "category": "table",
+     "help": "Incoming (ingress) interfaces or zones.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface, zone or SDWAN zone name.",
+       "required": true,
+       "datasource": [
+        "system.interface.name",
+        "system.zone.name",
+        "system.sdwan.zone.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dstintf": {
+     "name": "dstintf",
+     "category": "table",
+     "help": "Outgoing (egress) interfaces or zones.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface, zone or SDWAN zone name.",
+       "required": true,
+       "datasource": [
+        "system.interface.name",
+        "system.zone.name",
+        "system.sdwan.zone.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "service": {
+     "name": "service",
+     "category": "table",
+     "help": "Service and service group name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Service and service group name.",
+       "required": true,
+       "datasource": [
+        "firewall.service.custom.name",
+        "firewall.service.group.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "packet-duplication": {
+     "name": "packet-duplication",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure packet duplication method.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable packet duplication."
+      },
+      {
+       "name": "force",
+       "help": "Duplicate packets across all interface members of the SD-WAN zone."
+      },
+      {
+       "name": "on-demand",
+       "help": "Duplicate packets across all interface members of the SD-WAN zone based on the link quality."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "sla-match-service": {
+     "name": "sla-match-service",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable packet duplication matching health-check SLAs in service rule.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable packet duplication matching health-check SLAs in service rule (matching all SLAs of current defined service)."
+      },
+      {
+       "name": "disable",
+       "help": "Disable packet duplication matching health-check SLAs in service rule (matching all SLAs of all defined health-check)."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "packet-de-duplication": {
+     "name": "packet-de-duplication",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable discarding of packets that have been duplicated.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable discarding of packets that have been duplicated."
+      },
+      {
+       "name": "disable",
+       "help": "Disable discarding of packets that have been duplicated."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 492,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

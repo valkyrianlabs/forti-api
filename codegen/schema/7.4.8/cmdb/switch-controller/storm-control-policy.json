@@ -1,0 +1,120 @@
+{
+ "name": "storm-control-policy",
+ "category": "table",
+ "help": "Configure FortiSwitch storm control policy to be applied on managed-switch ports.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Storm control policy name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description of the storm control policy.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "storm-control-mode": {
+   "name": "storm-control-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set Storm control mode.",
+   "options": [
+    {
+     "name": "global",
+     "help": "Apply Global or switch level storm control configuration."
+    },
+    {
+     "name": "override",
+     "help": "Override global and switch level storm control to use port level configuration."
+    },
+    {
+     "name": "disabled",
+     "help": "Disable storm control on the port entirely overriding global and switch level storm control."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "rate": {
+   "name": "rate",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold rate in packets per second at which storm traffic is controlled in override mode (default=500, 0 to drop all).",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 500,
+   "multiple_values": false
+  },
+  "unknown-unicast": {
+   "name": "unknown-unicast",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable storm control to drop/allow unknown unicast traffic in override mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable storm control for unknown unicast traffic to drop packets which exceed configured rate limits."
+    },
+    {
+     "name": "disable",
+     "help": "Disable storm control for unknown unicast traffic to allow all packets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "unknown-multicast": {
+   "name": "unknown-multicast",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable storm control to drop/allow unknown multicast traffic in override mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable storm control for unknown multicast traffic to drop packets which exceed configured rate limits."
+    },
+    {
+     "name": "disable",
+     "help": "Disable storm control for unknown multicast traffic to allow all packets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "broadcast": {
+   "name": "broadcast",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable storm control to drop/allow broadcast traffic in override mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable storm control for broadcast traffic to drop packets which exceed configured rate limits."
+    },
+    {
+     "name": "disable",
+     "help": "Disable storm control for broadcast traffic to allow all packets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,139 @@
+{
+ "name": "multicast6",
+ "category": "complex",
+ "help": "Configure IPv6 multicast.",
+ "children": {
+  "multicast-routing": {
+   "name": "multicast-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 multicast routing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPv6 multicast routing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPv6 multicast routing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "multicast-pmtu": {
+   "name": "multicast-pmtu",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PMTU for IPv6 multicast.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable PMTU for IPv6 multicast."
+    },
+    {
+     "name": "disable",
+     "help": "Disable PMTU for IPv6 multicast."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "table",
+   "help": "Protocol Independent Multicast (PIM) interfaces.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "hello-interval": {
+     "name": "hello-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Interval between sending PIM hello messages in seconds (1 - 65535, default = 30).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 30,
+     "multiple_values": false
+    },
+    "hello-holdtime": {
+     "name": "hello-holdtime",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time before old neighbor information expires in seconds (1 - 65535, default = 105).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "pim-sm-global": {
+   "name": "pim-sm-global",
+   "category": "complex",
+   "help": "PIM sparse-mode global settings.",
+   "children": {
+    "register-rate-limit": {
+     "name": "register-rate-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Limit of packets/sec per source registered through this RP (0 means unlimited).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "rp-address": {
+     "name": "rp-address",
+     "category": "table",
+     "help": "Statically configured RP addresses.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "ID of the entry.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "ip6-address": {
+       "name": "ip6-address",
+       "category": "unitary",
+       "type": "ipv6-address",
+       "help": "RP router IPv6 address.",
+       "required": true,
+       "default": "::",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 256,
+     "max_table_size_global": 512,
+     "max_table_size_item": 0
+    }
+   }
+  }
+ },
+ "path": "router",
+ "q_type": 190,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,258 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure SSH filter profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SSH filter profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "block": {
+   "name": "block",
+   "category": "unitary",
+   "type": "option",
+   "help": "SSH blocking options.",
+   "options": [
+    {
+     "name": "x11",
+     "help": "X server forwarding."
+    },
+    {
+     "name": "shell",
+     "help": "SSH shell."
+    },
+    {
+     "name": "exec",
+     "help": "SSH execution."
+    },
+    {
+     "name": "port-forward",
+     "help": "Port forwarding."
+    },
+    {
+     "name": "tun-forward",
+     "help": "Tunnel forwarding."
+    },
+    {
+     "name": "sftp",
+     "help": "SFTP."
+    },
+    {
+     "name": "scp",
+     "help": "SCP."
+    },
+    {
+     "name": "unknown",
+     "help": "Unknown channel."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "log": {
+   "name": "log",
+   "category": "unitary",
+   "type": "option",
+   "help": "SSH logging options.",
+   "options": [
+    {
+     "name": "x11",
+     "help": "X server forwarding."
+    },
+    {
+     "name": "shell",
+     "help": "SSH shell."
+    },
+    {
+     "name": "exec",
+     "help": "SSH execution."
+    },
+    {
+     "name": "port-forward",
+     "help": "Port forwarding."
+    },
+    {
+     "name": "tun-forward",
+     "help": "Tunnel forwarding."
+    },
+    {
+     "name": "sftp",
+     "help": "SFTP."
+    },
+    {
+     "name": "scp",
+     "help": "SCP."
+    },
+    {
+     "name": "unknown",
+     "help": "Unknown channel."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "default-command-log": {
+   "name": "default-command-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging unmatched shell commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable log unmatched shell commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable log unmatched shell commands."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "shell-commands": {
+   "name": "shell-commands",
+   "category": "table",
+   "help": "SSH command filter.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Id.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Matching type.",
+     "options": [
+      {
+       "name": "simple",
+       "help": "Match single command."
+      },
+      {
+       "name": "regex",
+       "help": "Match command line using regular expression."
+      }
+     ],
+     "default": "simple",
+     "multiple_values": false
+    },
+    "pattern": {
+     "name": "pattern",
+     "category": "unitary",
+     "type": "string",
+     "help": "SSH shell command pattern.",
+     "required": true,
+     "size": 128,
+     "default": "",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action to take for SSH shell command matches.",
+     "options": [
+      {
+       "name": "block",
+       "help": "Block the SSH shell command."
+      },
+      {
+       "name": "allow",
+       "help": "Allow the SSH shell command."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "log": {
+     "name": "log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable logging."
+      },
+      {
+       "name": "disable",
+       "help": "Disable logging."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "alert": {
+     "name": "alert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable alert.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable alert."
+      },
+      {
+       "name": "disable",
+       "help": "Disable alert."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "severity": {
+     "name": "severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Log severity.",
+     "options": [
+      {
+       "name": "low",
+       "help": "Severity low."
+      },
+      {
+       "name": "medium",
+       "help": "Severity medium."
+      },
+      {
+       "name": "high",
+       "help": "Severity high."
+      },
+      {
+       "name": "critical",
+       "help": "Severity critical."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 256
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "ssh-filter",
+ "q_type": 403,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

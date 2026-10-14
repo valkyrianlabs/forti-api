@@ -1,0 +1,359 @@
+{
+ "name": "ipam",
+ "category": "complex",
+ "help": "Configure IP address management services.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IP address management services.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable integration with IP address management services."
+    },
+    {
+     "name": "disable",
+     "help": "Disable integration with IP address management services."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server-type": {
+   "name": "server-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure the type of IPAM server to use.",
+   "options": [
+    {
+     "name": "fabric-root",
+     "help": "Use the IPAM server running on the Security Fabric root."
+    }
+   ],
+   "default": "fabric-root",
+   "multiple_values": false
+  },
+  "automatic-conflict-resolution": {
+   "name": "automatic-conflict-resolution",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic conflict resolution.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable automatic conflict resolution."
+    },
+    {
+     "name": "enable",
+     "help": "Enable automatic conflict resolution."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "require-subnet-size-match": {
+   "name": "require-subnet-size-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable reassignment of subnets to make requested and actual sizes match.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable requiring subnet sizes to match."
+    },
+    {
+     "name": "enable",
+     "help": "Enable requiring subnet sizes to match."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "manage-lan-addresses": {
+   "name": "manage-lan-addresses",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable default management of LAN interface addresses.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable LAN interface address management by default."
+    },
+    {
+     "name": "enable",
+     "help": "Enable LAN interface address management by default."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "manage-lan-extension-addresses": {
+   "name": "manage-lan-extension-addresses",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable default management of FortiExtender LAN extension interface addresses.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable FortiExtender LAN extension interface address management by default."
+    },
+    {
+     "name": "enable",
+     "help": "Enable FortiExtender LAN extension interface address management by default."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "manage-ssid-addresses": {
+   "name": "manage-ssid-addresses",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable default management of FortiAP SSID addresses.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable FortiAP SSID address management by default."
+    },
+    {
+     "name": "enable",
+     "help": "Enable FortiAP SSID address management by default."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pools": {
+   "name": "pools",
+   "category": "table",
+   "help": "Configure IPAM pools.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPAM pool name.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description.",
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "subnet": {
+     "name": "subnet",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Configure IPAM pool subnet, Class A - Class B subnet.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "exclude": {
+     "name": "exclude",
+     "category": "table",
+     "help": "Configure pool exclude subnets.",
+     "mkey": "ID",
+     "mkey_type": "integer",
+     "children": {
+      "ID": {
+       "name": "ID",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Exclude ID.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "exclude-subnet": {
+       "name": "exclude-subnet",
+       "category": "unitary",
+       "type": "ipv4-classnet",
+       "help": "Configure subnet to exclude from the IPAM pool.",
+       "required": true,
+       "default": "0.0.0.0 0.0.0.0",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "rules": {
+   "name": "rules",
+   "category": "table",
+   "help": "Configure IPAM allocation rules.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPAM rule name.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description.",
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "device": {
+     "name": "device",
+     "category": "table",
+     "help": "Configure serial number or wildcard of FortiGate to match.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "FortiGate serial number or wildcard.",
+       "required": true,
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "interface": {
+     "name": "interface",
+     "category": "table",
+     "help": "Configure name or wildcard of interface to match.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface name or wildcard.",
+       "required": true,
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "role": {
+     "name": "role",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure role of interface to match.",
+     "options": [
+      {
+       "name": "any",
+       "help": "Match any interface role."
+      },
+      {
+       "name": "lan",
+       "help": "Match interface role lan."
+      },
+      {
+       "name": "wan",
+       "help": "Match interface role wan."
+      },
+      {
+       "name": "dmz",
+       "help": "Match interface role dmz."
+      },
+      {
+       "name": "undefined",
+       "help": "Match interface role undefined."
+      }
+     ],
+     "default": "any",
+     "multiple_values": false
+    },
+    "pool": {
+     "name": "pool",
+     "category": "table",
+     "help": "Configure name of IPAM pool to use.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "IPAM pool name.",
+       "required": true,
+       "datasource": [
+        "system.ipam.pools.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dhcp": {
+     "name": "dhcp",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable DHCP server for matching IPAM interfaces.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable DHCP server on matched IPAM interface."
+      },
+      {
+       "name": "disable",
+       "help": "Disable DHCP server on matched IPAM interface."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 558,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

@@ -1,0 +1,195 @@
+{
+ "name": "manualkey",
+ "category": "table",
+ "help": "Configure IPsec manual keys.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPsec tunnel name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the physical, aggregate, or VLAN interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "remote-gw": {
+   "name": "remote-gw",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Peer gateway.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "local-gw": {
+   "name": "local-gw",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Local gateway.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "authentication": {
+   "name": "authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication algorithm. Must be the same for both ends of the tunnel.",
+   "required": true,
+   "options": [
+    {
+     "name": "null",
+     "help": "Null."
+    },
+    {
+     "name": "md5",
+     "help": "MD5."
+    },
+    {
+     "name": "sha1",
+     "help": "SHA1."
+    },
+    {
+     "name": "sha256",
+     "help": "SHA256."
+    },
+    {
+     "name": "sha384",
+     "help": "SHA384."
+    },
+    {
+     "name": "sha512",
+     "help": "SHA512."
+    }
+   ],
+   "default": "null",
+   "multiple_values": false
+  },
+  "encryption": {
+   "name": "encryption",
+   "category": "unitary",
+   "type": "option",
+   "help": "Encryption algorithm. Must be the same for both ends of the tunnel.",
+   "required": true,
+   "options": [
+    {
+     "name": "null",
+     "help": "Null."
+    },
+    {
+     "name": "des",
+     "help": "DES."
+    },
+    {
+     "name": "3des",
+     "help": "3DES."
+    },
+    {
+     "name": "aes128",
+     "help": "AES128."
+    },
+    {
+     "name": "aes192",
+     "help": "AES192."
+    },
+    {
+     "name": "aes256",
+     "help": "AES256."
+    },
+    {
+     "name": "aria128",
+     "help": "ARIA128."
+    },
+    {
+     "name": "aria192",
+     "help": "ARIA192."
+    },
+    {
+     "name": "aria256",
+     "help": "ARIA256."
+    },
+    {
+     "name": "seed",
+     "help": "Seed."
+    }
+   ],
+   "default": "null",
+   "multiple_values": false
+  },
+  "authkey": {
+   "name": "authkey",
+   "category": "unitary",
+   "type": "user",
+   "help": "Hexadecimal authentication key in 16-digit (8-byte) segments separated by hyphens.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "enckey": {
+   "name": "enckey",
+   "category": "unitary",
+   "type": "user",
+   "help": "Hexadecimal encryption key in 16-digit (8-byte) segments separated by hyphens.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "localspi": {
+   "name": "localspi",
+   "category": "unitary",
+   "type": "user",
+   "help": "Local SPI, a hexadecimal 8-digit (4-byte) tag. Discerns between two traffic streams with different encryption rules.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "remotespi": {
+   "name": "remotespi",
+   "category": "unitary",
+   "type": "user",
+   "help": "Remote SPI, a hexadecimal 8-digit (4-byte) tag. Discerns between two traffic streams with different encryption rules.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "npu-offload": {
+   "name": "npu-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NPU offloading.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NPU offloading."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NPU offloading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 50,
+ "max_table_size_global": 50,
+ "max_table_size_item": 0,
+ "path": "vpn.ipsec",
+ "q_type": 64,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

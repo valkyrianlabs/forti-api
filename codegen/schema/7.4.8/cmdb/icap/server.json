@@ -1,0 +1,152 @@
+{
+ "name": "server",
+ "category": "table",
+ "help": "Configure ICAP servers.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "addr-type": {
+   "name": "addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address type of the remote ICAP server: IPv4, IPv6 or FQDN.",
+   "options": [
+    {
+     "name": "ip4",
+     "help": "Use an IPv4 address for the remote ICAP server."
+    },
+    {
+     "name": "ip6",
+     "help": "Use an IPv6 address for the remote ICAP server."
+    },
+    {
+     "name": "fqdn",
+     "help": "Use the FQDN for the forwarding proxy server."
+    }
+   ],
+   "default": "ip4",
+   "multiple_values": false
+  },
+  "ip-address": {
+   "name": "ip-address",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IPv4 address of the ICAP server.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ip6-address": {
+   "name": "ip6-address",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address of the ICAP server.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "fqdn": {
+   "name": "fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "ICAP remote server Fully Qualified Domain Name (FQDN).",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ICAP server port.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1344,
+   "multiple_values": false
+  },
+  "max-connections": {
+   "name": "max-connections",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of concurrent connections to ICAP server (unlimited = 0, default = 100). Must not be less than wad-worker-count.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 100,
+   "multiple_values": false
+  },
+  "secure": {
+   "name": "secure",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable secure connection to ICAP server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable connection to secure ICAP server."
+    },
+    {
+     "name": "enable",
+     "help": "Enable connection to secure ICAP server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-cert": {
+   "name": "ssl-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA certificate name.",
+   "datasource": [
+    "certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "healthcheck": {
+   "name": "healthcheck",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ICAP remote server health checking. Attempts to connect to the remote ICAP server to verify that the server is operating normally.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable health checking."
+    },
+    {
+     "name": "enable",
+     "help": "Enable health checking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "healthcheck-service": {
+   "name": "healthcheck-service",
+   "category": "unitary",
+   "type": "string",
+   "help": "ICAP Service name to use for health checks.",
+   "required": true,
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "icap",
+ "q_type": 460,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

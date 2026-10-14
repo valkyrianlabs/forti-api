@@ -1,0 +1,111 @@
+{
+ "name": "realm",
+ "category": "table",
+ "help": "Realm.",
+ "mkey": "url-path",
+ "mkey_type": "string",
+ "children": {
+  "url-path": {
+   "name": "url-path",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL path to access SSL-VPN login page.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "max-concurrent-user": {
+   "name": "max-concurrent-user",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum concurrent users (0 - 65535, 0 means unlimited).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "login-page": {
+   "name": "login-page",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Replacement HTML for SSL-VPN login page.",
+   "size": 32768,
+   "multiple_values": false
+  },
+  "virtual-host": {
+   "name": "virtual-host",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Virtual host name for realm.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "virtual-host-only": {
+   "name": "virtual-host-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable enforcement of virtual host method for SSL-VPN client access.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "virtual-host-server-cert": {
+   "name": "virtual-host-server-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the server certificate to used for this realm.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "radius-server": {
+   "name": "radius-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "RADIUS server associated with realm.",
+   "datasource": [
+    "user.radius.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "nas-ip": {
+   "name": "nas-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address used as a NAS-IP to communicate with the RADIUS server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "radius-port": {
+   "name": "radius-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "RADIUS service port number (0 - 65535, 0 means user.radius.radius-port).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "vpn.ssl.web",
+ "q_type": 154,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

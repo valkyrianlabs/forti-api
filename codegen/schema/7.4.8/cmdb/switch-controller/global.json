@@ -1,0 +1,481 @@
+{
+ "name": "global",
+ "category": "complex",
+ "help": "Configure FortiSwitch global settings.",
+ "children": {
+  "mac-aging-interval": {
+   "name": "mac-aging-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time after which an inactive MAC is aged out (10 - 1000000 sec, default = 300, 0 = disable).",
+   "min-value": 10,
+   "max-value": 1000000,
+   "default": 300,
+   "multiple_values": false
+  },
+  "https-image-push": {
+   "name": "https-image-push",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable image push to FortiSwitch using HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable image push to FortiSwitch using HTTPS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable image push to FortiSwitch using HTTPS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "vlan-all-mode": {
+   "name": "vlan-all-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "VLAN configuration mode, user-defined-vlans or all-possible-vlans.",
+   "options": [
+    {
+     "name": "all",
+     "help": "Include all possible VLANs (1-4093)."
+    },
+    {
+     "name": "defined",
+     "help": "Include user defined VLANs."
+    }
+   ],
+   "default": "defined",
+   "multiple_values": false
+  },
+  "vlan-optimization": {
+   "name": "vlan-optimization",
+   "category": "unitary",
+   "type": "option",
+   "help": "FortiLink VLAN optimization.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable VLAN optimization on FortiSwitch units for auto-generated trunks."
+    },
+    {
+     "name": "disable",
+     "help": "Disable VLAN optimization on FortiSwitch units for auto-generated trunks."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "vlan-identity": {
+   "name": "vlan-identity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Identity of the VLAN. Commonly used for RADIUS Tunnel-Private-Group-Id.",
+   "options": [
+    {
+     "name": "description",
+     "help": "Configure the VLAN description to that of the FortiOS interface description if available; otherwise use the interface name."
+    },
+    {
+     "name": "name",
+     "help": "Configure the VLAN description to that of the FortiOS interface name."
+    }
+   ],
+   "default": "name",
+   "multiple_values": false
+  },
+  "disable-discovery": {
+   "name": "disable-discovery",
+   "category": "table",
+   "help": "Prevent this FortiSwitch from discovering.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Managed device ID.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "mac-retention-period": {
+   "name": "mac-retention-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in hours after which an inactive MAC is removed from client DB (0 = aged out based on mac-aging-interval).",
+   "min-value": 0,
+   "max-value": 168,
+   "default": 24,
+   "multiple_values": false
+  },
+  "default-virtual-switch-vlan": {
+   "name": "default-virtual-switch-vlan",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default VLAN for ports when added to the virtual-switch.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "dhcp-server-access-list": {
+   "name": "dhcp-server-access-list",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DHCP snooping server access list.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DHCP server access list."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DHCP server access list."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dhcp-option82-format": {
+   "name": "dhcp-option82-format",
+   "category": "unitary",
+   "type": "option",
+   "help": "DHCP option-82 format string.",
+   "options": [
+    {
+     "name": "ascii",
+     "help": "Allow user to choose values for circuit-id and remote-id.\n\t  Format:  cid= [hostname,interface,mode,vlan,description] rid=[hostname,xx:xx:xx:xx:xx:xx,ip]\n"
+    },
+    {
+     "name": "legacy",
+     "help": "Generate predefine fixed format for circuit-id and remote.\n\tFormat: cid=hostname-[<vlan:16><mod:8><port:8>].32bit, rid= [mac(0..6)].48bit\n"
+    }
+   ],
+   "default": "ascii",
+   "multiple_values": false
+  },
+  "dhcp-option82-circuit-id": {
+   "name": "dhcp-option82-circuit-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "List the parameters to be included to inform about client identification.",
+   "options": [
+    {
+     "name": "intfname",
+     "help": "Interface name."
+    },
+    {
+     "name": "vlan",
+     "help": "VLAN name."
+    },
+    {
+     "name": "hostname",
+     "help": "Hostname."
+    },
+    {
+     "name": "mode",
+     "help": "Mode."
+    },
+    {
+     "name": "description",
+     "help": "Description."
+    }
+   ],
+   "default": "intfname vlan mode",
+   "multiple_values": true
+  },
+  "dhcp-option82-remote-id": {
+   "name": "dhcp-option82-remote-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "List the parameters to be included to inform about client identification.",
+   "options": [
+    {
+     "name": "mac",
+     "help": "MAC address."
+    },
+    {
+     "name": "hostname",
+     "help": "Hostname."
+    },
+    {
+     "name": "ip",
+     "help": "IP address."
+    }
+   ],
+   "default": "mac",
+   "multiple_values": true
+  },
+  "dhcp-snoop-client-req": {
+   "name": "dhcp-snoop-client-req",
+   "category": "unitary",
+   "type": "option",
+   "help": "Client DHCP packet broadcast mode.",
+   "options": [
+    {
+     "name": "drop-untrusted",
+     "help": "Broadcast packets on trusted ports in the VLAN."
+    },
+    {
+     "name": "forward-untrusted",
+     "help": "Broadcast packets on all ports in the VLAN."
+    }
+   ],
+   "default": "drop-untrusted",
+   "multiple_values": false
+  },
+  "dhcp-snoop-client-db-exp": {
+   "name": "dhcp-snoop-client-db-exp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Expiry time for DHCP snooping server database entries (300 - 259200 sec, default = 86400 sec).",
+   "min-value": 300,
+   "max-value": 259200,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "dhcp-snoop-db-per-port-learn-limit": {
+   "name": "dhcp-snoop-db-per-port-learn-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Per Interface dhcp-server entries learn limit (0 - 1024, default = 64).",
+   "min-value": 0,
+   "max-value": 2048,
+   "default": 64,
+   "multiple_values": false
+  },
+  "log-mac-limit-violations": {
+   "name": "log-mac-limit-violations",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logs for Learning Limit Violations.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Learn Limit Violation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Learn Limit Violation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mac-violation-timer": {
+   "name": "mac-violation-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Set timeout for Learning Limit Violations (0 = disabled).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "sn-dns-resolution": {
+   "name": "sn-dns-resolution",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DNS resolution of the FortiSwitch unit's IP address with switch name.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DNS resolution of the FortiSwitch unit's IP address with switch name."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DNS resolution of the FortiSwitch unit's IP address with switch name."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "mac-event-logging": {
+   "name": "mac-event-logging",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable MAC address event logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable MAC address event logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable MAC address event logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "bounce-quarantined-link": {
+   "name": "bounce-quarantined-link",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bouncing (administratively bring the link down, up) of a switch port where a quarantined device was seen last. Helps to re-initiate the DHCP process for a device.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable bouncing (administratively bring the link down, up) of a switch port where a quarantined device was seen last."
+    },
+    {
+     "name": "enable",
+     "help": "Enable bouncing (administratively bring the link down, up) of a switch port where a quarantined device was seen last."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "quarantine-mode": {
+   "name": "quarantine-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Quarantine mode.",
+   "options": [
+    {
+     "name": "by-vlan",
+     "help": "Quarantined device traffic is sent to FortiGate on a separate quarantine VLAN."
+    },
+    {
+     "name": "by-redirect",
+     "help": "Quarantined device traffic is redirected only to the FortiGate on the received VLAN."
+    }
+   ],
+   "default": "by-vlan",
+   "multiple_values": false
+  },
+  "update-user-device": {
+   "name": "update-user-device",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control which sources update the device user list.",
+   "options": [
+    {
+     "name": "mac-cache",
+     "help": "Update MAC address from switch-controller mac-cache."
+    },
+    {
+     "name": "lldp",
+     "help": "Update from FortiSwitch LLDP neighbor database."
+    },
+    {
+     "name": "dhcp-snooping",
+     "help": "Update from FortiSwitch DHCP snooping client and server databases."
+    },
+    {
+     "name": "l2-db",
+     "help": "Update from FortiSwitch Network-monitor Layer 2 tracking database."
+    },
+    {
+     "name": "l3-db",
+     "help": "Update from FortiSwitch Network-monitor Layer 3 tracking database."
+    }
+   ],
+   "default": "mac-cache lldp dhcp-snooping l2-db l3-db",
+   "multiple_values": true
+  },
+  "custom-command": {
+   "name": "custom-command",
+   "category": "table",
+   "help": "List of custom commands to be pushed to all FortiSwitches in the VDOM.",
+   "mkey": "command-entry",
+   "mkey_type": "string",
+   "children": {
+    "command-entry": {
+     "name": "command-entry",
+     "category": "unitary",
+     "type": "string",
+     "help": "List of FortiSwitch commands.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "command-name": {
+     "name": "command-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of custom command to push to all FortiSwitches in VDOM.",
+     "required": true,
+     "datasource": [
+      "switch-controller.custom-command.command-name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "fips-enforce": {
+   "name": "fips-enforce",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable enforcement of FIPS on managed FortiSwitch devices.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable enforcement of FIPS on managed FortiSwitch devices."
+    },
+    {
+     "name": "enable",
+     "help": "Enable enforcement of FIPS on managed FortiSwitch devices."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "firmware-provision-on-authorization": {
+   "name": "firmware-provision-on-authorization",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic provisioning of latest firmware on authorization.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable firmware provision on authorization."
+    },
+    {
+     "name": "disable",
+     "help": "Disable firmware provision on authorization."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "switch-on-deauth": {
+   "name": "switch-on-deauth",
+   "category": "unitary",
+   "type": "option",
+   "help": "No-operation/Factory-reset the managed FortiSwitch on deauthorization.",
+   "options": [
+    {
+     "name": "no-op",
+     "help": "No-operation on the managed FortiSwitch on deauthorization."
+    },
+    {
+     "name": "factory-reset",
+     "help": "Factory-reset the managed FortiSwitch on deauthorization."
+    }
+   ],
+   "default": "no-op",
+   "multiple_values": false
+  }
+ },
+ "path": "switch-controller",
+ "q_type": 330,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

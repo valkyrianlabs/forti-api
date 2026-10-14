@@ -1,0 +1,36 @@
+{
+ "name": "traffic-class",
+ "category": "table",
+ "help": "Configure names for shaping classes.",
+ "mkey": "class-id",
+ "mkey_type": "integer",
+ "children": {
+  "class-id": {
+   "name": "class-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Class ID to be named.",
+   "required": true,
+   "min-value": 2,
+   "max-value": 31,
+   "default": 0,
+   "multiple_values": false
+  },
+  "class-name": {
+   "name": "class-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Define the name for this class-id.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 203,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

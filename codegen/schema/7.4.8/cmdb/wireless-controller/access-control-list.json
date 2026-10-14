@@ -1,0 +1,224 @@
+{
+ "name": "access-control-list",
+ "category": "table",
+ "help": "Configure WiFi bridge access control list.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "AP access control list name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "layer3-ipv4-rules": {
+   "name": "layer3-ipv4-rules",
+   "category": "table",
+   "help": "AP ACL layer3 ipv4 rule list.",
+   "mkey": "rule-id",
+   "mkey_type": "integer",
+   "children": {
+    "rule-id": {
+     "name": "rule-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Rule ID (1 - 65535).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "srcaddr": {
+     "name": "srcaddr",
+     "category": "unitary",
+     "type": "user",
+     "help": "Source IP address (any | local-LAN | IPv4 address[/<network mask | mask length>], default = any).",
+     "default": "",
+     "multiple_values": false
+    },
+    "srcport": {
+     "name": "srcport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Source port (0 - 65535, default = 0, meaning any).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "dstaddr": {
+     "name": "dstaddr",
+     "category": "unitary",
+     "type": "user",
+     "help": "Destination IP address (any | local-LAN | IPv4 address[/<network mask | mask length>], default = any).",
+     "default": "",
+     "multiple_values": false
+    },
+    "dstport": {
+     "name": "dstport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Destination port (0 - 65535, default = 0, meaning any).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Protocol type as defined by IANA (0 - 255, default = 255, meaning any).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 255,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Policy action (allow | deny).",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allows traffic matching the policy."
+      },
+      {
+       "name": "deny",
+       "help": "Blocks traffic matching the policy."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 32
+  },
+  "layer3-ipv6-rules": {
+   "name": "layer3-ipv6-rules",
+   "category": "table",
+   "help": "AP ACL layer3 ipv6 rule list.",
+   "mkey": "rule-id",
+   "mkey_type": "integer",
+   "children": {
+    "rule-id": {
+     "name": "rule-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Rule ID (1 - 65535).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "srcaddr": {
+     "name": "srcaddr",
+     "category": "unitary",
+     "type": "user",
+     "help": "Source IPv6 address (any | local-LAN | IPv6 address[/prefix length]), default = any.",
+     "default": "",
+     "multiple_values": false
+    },
+    "srcport": {
+     "name": "srcport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Source port (0 - 65535, default = 0, meaning any).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "dstaddr": {
+     "name": "dstaddr",
+     "category": "unitary",
+     "type": "user",
+     "help": "Destination IPv6 address (any | local-LAN | IPv6 address[/prefix length]), default = any.",
+     "default": "",
+     "multiple_values": false
+    },
+    "dstport": {
+     "name": "dstport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Destination port (0 - 65535, default = 0, meaning any).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Protocol type as defined by IANA (0 - 255, default = 255, meaning any).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 255,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Policy action (allow | deny).",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allows traffic matching the policy."
+      },
+      {
+       "name": "deny",
+       "help": "Blocks traffic matching the policy."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 32
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 309,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

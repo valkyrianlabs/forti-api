@@ -1,0 +1,42 @@
+{
+ "name": "custom-command",
+ "category": "table",
+ "help": "Configure the FortiGate switch controller to send custom commands to managed FortiSwitch devices.",
+ "mkey": "command-name",
+ "mkey_type": "string",
+ "children": {
+  "command-name": {
+   "name": "command-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Command name called by the FortiGate switch controller in the execute command.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "command": {
+   "name": "command",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "String of commands to send to FortiSwitch devices (For example (%0a = return key): config switch trunk %0a edit myTrunk %0a set members port1 port2 %0a end %0a).",
+   "required": true,
+   "size": 4095,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

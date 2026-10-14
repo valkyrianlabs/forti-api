@@ -15,6 +15,73 @@ namespace fortiapi::firewall {
 
 // Configure IPv4 addresses.
 struct Address {
+    // Values of Type: Type of address.
+    struct Type {
+        static constexpr std::string_view ipmask = "ipmask";
+        static constexpr std::string_view iprange = "iprange";
+        static constexpr std::string_view fqdn = "fqdn";
+        static constexpr std::string_view geography = "geography";
+        static constexpr std::string_view wildcard = "wildcard";
+        static constexpr std::string_view dynamic = "dynamic";
+        static constexpr std::string_view interface_subnet = "interface-subnet";
+        static constexpr std::string_view mac = "mac";
+        static constexpr std::string_view route_tag = "route-tag";
+    };
+
+    // Values of SubType: Sub-type of address.
+    struct SubType {
+        static constexpr std::string_view sdn = "sdn";
+        static constexpr std::string_view clearpass_spt = "clearpass-spt";
+        static constexpr std::string_view fsso = "fsso";
+        static constexpr std::string_view ems_tag = "ems-tag";
+        static constexpr std::string_view fortivoice_tag = "fortivoice-tag";
+        static constexpr std::string_view fortinac_tag = "fortinac-tag";
+        static constexpr std::string_view fortipolicy_tag = "fortipolicy-tag";
+        static constexpr std::string_view swc_tag = "swc-tag";
+        static constexpr std::string_view device_identification = "device-identification";
+    };
+
+    // Values of ClearpassSpt: SPT (System Posture Token) value.
+    struct ClearpassSpt {
+        static constexpr std::string_view unknown = "unknown";
+        static constexpr std::string_view healthy = "healthy";
+        static constexpr std::string_view quarantine = "quarantine";
+        static constexpr std::string_view checkup = "checkup";
+        static constexpr std::string_view transient = "transient";
+        static constexpr std::string_view infected = "infected";
+    };
+
+    // Values of ObjType: Object type.
+    struct ObjType {
+        static constexpr std::string_view ip = "ip";
+        static constexpr std::string_view mac = "mac";
+    };
+
+    // Values of SdnAddrType: Type of addresses to collect.
+    struct SdnAddrType {
+        static constexpr std::string_view private_ = "private";
+        static constexpr std::string_view public_ = "public";
+        static constexpr std::string_view all = "all";
+    };
+
+    // Values of NodeIpOnly: Enable/disable collection of node addresses only in Kubernetes.
+    struct NodeIpOnly {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AllowRouting: Enable/disable use of this address in the static route configuration.
+    struct AllowRouting {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of FabricObject: Security Fabric global object setting.
+    struct FabricObject {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
     // Multiple MAC address ranges.
     struct MacaddrEntry {
         fortiapi::Field<std::string> macaddr;  // MAC address ranges <start>[-<end>] separated by space. Required.
@@ -148,59 +215,6 @@ struct AddressSpec {
 };
 
 using Addresses = fortiapi::Table<AddressSpec>;
-
-// Allowed values of option attributes.
-namespace address::type {
-    inline constexpr std::string_view ipmask = "ipmask";
-    inline constexpr std::string_view iprange = "iprange";
-    inline constexpr std::string_view fqdn = "fqdn";
-    inline constexpr std::string_view geography = "geography";
-    inline constexpr std::string_view wildcard = "wildcard";
-    inline constexpr std::string_view dynamic = "dynamic";
-    inline constexpr std::string_view interface_subnet = "interface-subnet";
-    inline constexpr std::string_view mac = "mac";
-    inline constexpr std::string_view route_tag = "route-tag";
-}
-namespace address::sub_type {
-    inline constexpr std::string_view sdn = "sdn";
-    inline constexpr std::string_view clearpass_spt = "clearpass-spt";
-    inline constexpr std::string_view fsso = "fsso";
-    inline constexpr std::string_view ems_tag = "ems-tag";
-    inline constexpr std::string_view fortivoice_tag = "fortivoice-tag";
-    inline constexpr std::string_view fortinac_tag = "fortinac-tag";
-    inline constexpr std::string_view fortipolicy_tag = "fortipolicy-tag";
-    inline constexpr std::string_view swc_tag = "swc-tag";
-    inline constexpr std::string_view device_identification = "device-identification";
-}
-namespace address::clearpass_spt {
-    inline constexpr std::string_view unknown = "unknown";
-    inline constexpr std::string_view healthy = "healthy";
-    inline constexpr std::string_view quarantine = "quarantine";
-    inline constexpr std::string_view checkup = "checkup";
-    inline constexpr std::string_view transient = "transient";
-    inline constexpr std::string_view infected = "infected";
-}
-namespace address::obj_type {
-    inline constexpr std::string_view ip = "ip";
-    inline constexpr std::string_view mac = "mac";
-}
-namespace address::sdn_addr_type {
-    inline constexpr std::string_view private_ = "private";
-    inline constexpr std::string_view public_ = "public";
-    inline constexpr std::string_view all = "all";
-}
-namespace address::node_ip_only {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace address::allow_routing {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace address::fabric_object {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
 
 }  // namespace fortiapi::firewall
 

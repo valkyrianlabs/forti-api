@@ -1,0 +1,296 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Configure authentication setting.",
+ "children": {
+  "active-auth-scheme": {
+   "name": "active-auth-scheme",
+   "category": "unitary",
+   "type": "string",
+   "help": "Active authentication method (scheme name).",
+   "datasource": [
+    "authentication.scheme.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sso-auth-scheme": {
+   "name": "sso-auth-scheme",
+   "category": "unitary",
+   "type": "string",
+   "help": "Single-Sign-On authentication method (scheme name).",
+   "datasource": [
+    "authentication.scheme.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "update-time": {
+   "name": "update-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of the last update.",
+   "default": "",
+   "multiple_values": false
+  },
+  "persistent-cookie": {
+   "name": "persistent-cookie",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable persistent cookie on web portal authentication (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable persistent cookie."
+    },
+    {
+     "name": "disable",
+     "help": "Disable persistent cookie."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ip-auth-cookie": {
+   "name": "ip-auth-cookie",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable persistent cookie on IP based web portal authentication (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable persistent cookie for IP-based authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable persistent cookie for IP-based authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cookie-max-age": {
+   "name": "cookie-max-age",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Persistent web portal cookie maximum age in minutes (30 - 10080 (1 week), default = 480 (8 hours)).",
+   "min-value": 30,
+   "max-value": 10080,
+   "default": 480,
+   "multiple_values": false
+  },
+  "cookie-refresh-div": {
+   "name": "cookie-refresh-div",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Refresh rate divider of persistent web portal cookie (default = 2). Refresh value = cookie-max-age/cookie-refresh-div.",
+   "min-value": 2,
+   "max-value": 4,
+   "default": 2,
+   "multiple_values": false
+  },
+  "captive-portal-type": {
+   "name": "captive-portal-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Captive portal type.",
+   "options": [
+    {
+     "name": "fqdn",
+     "help": "Use FQDN for captive portal."
+    },
+    {
+     "name": "ip",
+     "help": "Use an IP address for captive portal."
+    }
+   ],
+   "default": "fqdn",
+   "multiple_values": false
+  },
+  "captive-portal-ip": {
+   "name": "captive-portal-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Captive portal IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "captive-portal-ip6": {
+   "name": "captive-portal-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Captive portal IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "captive-portal": {
+   "name": "captive-portal",
+   "category": "unitary",
+   "type": "string",
+   "help": "Captive portal host name.",
+   "datasource": [
+    "firewall.address.name"
+   ],
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "captive-portal6": {
+   "name": "captive-portal6",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 captive portal host name.",
+   "datasource": [
+    "firewall.address6.name"
+   ],
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "cert-auth": {
+   "name": "cert-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redirecting certificate authentication to HTTPS portal.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cert-captive-portal": {
+   "name": "cert-captive-portal",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate captive portal host name.",
+   "datasource": [
+    "firewall.address.name"
+   ],
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "cert-captive-portal-ip": {
+   "name": "cert-captive-portal-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Certificate captive portal IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "cert-captive-portal-port": {
+   "name": "cert-captive-portal-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Certificate captive portal port number (1 - 65535, default = 7832).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 7832,
+   "multiple_values": false
+  },
+  "captive-portal-port": {
+   "name": "captive-portal-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Captive portal port number (1 - 65535, default = 7830).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 7830,
+   "multiple_values": false
+  },
+  "auth-https": {
+   "name": "auth-https",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redirecting HTTP user authentication to HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "captive-portal-ssl-port": {
+   "name": "captive-portal-ssl-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Captive portal SSL port number (1 - 65535, default = 7831).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 7831,
+   "multiple_values": false
+  },
+  "user-cert-ca": {
+   "name": "user-cert-ca",
+   "category": "table",
+   "help": "CA certificate used for client certificate verification.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "CA certificate list.",
+     "datasource": [
+      "vpn.certificate.ca.name",
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "dev-range": {
+   "name": "dev-range",
+   "category": "table",
+   "help": "Address range for the IP based device query.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "authentication",
+ "q_type": 509,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

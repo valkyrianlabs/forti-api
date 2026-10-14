@@ -27,7 +27,7 @@ auto policy = firewall::Policies::get(12);
 if (policy.comments)                          // has a value
     std::cout << *policy.comments << "\n";
 std::cout << policy.name.value_or("(unnamed)") << "\n";
-bool denies = policy.action == std::string(firewall::policy::action::deny);
+bool denies = policy.action == std::string(firewall::Policy::Action::deny);
 ```
 
 `value()` and `*field` throw `std::logic_error` when the field has no value; check with
@@ -88,8 +88,8 @@ Attributes the schema marks read-only are parsed but never sent, even if you ass
 
 ## Option constants
 
-Every option attribute has constants beside its type, for example
-`firewall::policy::action::accept` or `dnsfilter::profile::block_action::redirect`. They are
+Every option attribute has constants nested in its type, for example
+`firewall::Policy::Action::accept` or `dnsfilter::Profile::BlockAction::redirect`. They are
 `std::string_view`; assign them with `std::string(...)`.
 
 ## Serializing yourself

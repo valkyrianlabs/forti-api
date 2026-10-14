@@ -1,0 +1,171 @@
+{
+ "name": "apcfg-profile",
+ "category": "table",
+ "help": "Configure AP local configuration profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "AP local configuration profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ap-family": {
+   "name": "ap-family",
+   "category": "unitary",
+   "type": "option",
+   "help": "FortiAP family type (default = fap).",
+   "options": [
+    {
+     "name": "fap",
+     "help": "FortiAP Family."
+    },
+    {
+     "name": "fap-u",
+     "help": "FortiAP-U Family."
+    },
+    {
+     "name": "fap-c",
+     "help": "FortiAP-C Family."
+    }
+   ],
+   "default": "fap",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "ac-type": {
+   "name": "ac-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Validation controller type (default = default).",
+   "options": [
+    {
+     "name": "default",
+     "help": "This controller is the one and only controller that the AP could join after applying AP local configuration."
+    },
+    {
+     "name": "specify",
+     "help": "Specified controller is the one and only controller that the AP could join after applying AP local configuration."
+    },
+    {
+     "name": "apcfg",
+     "help": "Any controller defined by AP local configuration after applying AP local configuration."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "ac-timer": {
+   "name": "ac-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum waiting time for the AP to join the validation controller after applying AP local configuration (3 - 30 min, default = 10).",
+   "min-value": 3,
+   "max-value": 30,
+   "default": 10,
+   "multiple_values": false
+  },
+  "ac-ip": {
+   "name": "ac-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address of the validation controller that AP must be able to join after applying AP local configuration.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ac-port": {
+   "name": "ac-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the validation controller that AP must be able to join after applying AP local configuration (1024 - 49150, default = 5246).",
+   "min-value": 1024,
+   "max-value": 49150,
+   "default": 5246,
+   "multiple_values": false
+  },
+  "command-list": {
+   "name": "command-list",
+   "category": "table",
+   "help": "AP local configuration command list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Command ID.",
+     "min-value": 1,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "The command type (default = non-password).",
+     "options": [
+      {
+       "name": "non-password",
+       "help": "Non-password command."
+      },
+      {
+       "name": "password",
+       "help": "Password command."
+      }
+     ],
+     "default": "non-password",
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "AP local configuration command name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "value": {
+     "name": "value",
+     "category": "unitary",
+     "type": "string",
+     "help": "AP local configuration command value.",
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "passwd-value": {
+     "name": "passwd-value",
+     "category": "unitary",
+     "type": "password",
+     "help": "AP local configuration command password value.",
+     "size": 128,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 8
+  }
+ },
+ "max_table_size_vdom": 64,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 274,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

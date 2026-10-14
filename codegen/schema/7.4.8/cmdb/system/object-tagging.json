@@ -1,0 +1,141 @@
+{
+ "name": "object-tagging",
+ "category": "table",
+ "help": "Configure object tagging.",
+ "mkey": "category",
+ "mkey_type": "string",
+ "children": {
+  "category": {
+   "name": "category",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tag Category.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "address": {
+   "name": "address",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "mandatory",
+     "help": "Mandatory."
+    },
+    {
+     "name": "optional",
+     "help": "Optional."
+    }
+   ],
+   "default": "optional",
+   "multiple_values": false
+  },
+  "device": {
+   "name": "device",
+   "category": "unitary",
+   "type": "option",
+   "help": "Device.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "mandatory",
+     "help": "Mandatory."
+    },
+    {
+     "name": "optional",
+     "help": "Optional."
+    }
+   ],
+   "default": "optional",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "option",
+   "help": "Interface.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "mandatory",
+     "help": "Mandatory."
+    },
+    {
+     "name": "optional",
+     "help": "Optional."
+    }
+   ],
+   "default": "optional",
+   "multiple_values": false
+  },
+  "multiple": {
+   "name": "multiple",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow multiple tag selection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable multi-tagging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable multi-tagging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Color of icon on the GUI.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tags": {
+   "name": "tags",
+   "category": "table",
+   "help": "Tags.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tag name.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 256,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 457,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

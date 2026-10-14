@@ -1,0 +1,252 @@
+{
+ "name": "speed-test-schedule",
+ "category": "table",
+ "help": "Speed test schedule for each interface.",
+ "mkey": "interface",
+ "mkey_type": "string",
+ "children": {
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable scheduled speed test.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable scheduled speed test."
+    },
+    {
+     "name": "enable",
+     "help": "Enable scheduled speed test."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "diffserv": {
+   "name": "diffserv",
+   "category": "unitary",
+   "type": "user",
+   "help": "DSCP used for speed test.",
+   "default": "",
+   "multiple_values": false
+  },
+  "server-name": {
+   "name": "server-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Speed test server name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocol Auto(default), TCP or UDP used for speed test.",
+   "options": [
+    {
+     "name": "UDP",
+     "help": "Protocol UDP for speed test."
+    },
+    {
+     "name": "TCP",
+     "help": "Protocol TCP for speed test."
+    },
+    {
+     "name": "Auto",
+     "help": "Dynamically selects TCP or UDP based on the speed test setting"
+    }
+   ],
+   "default": "Auto",
+   "multiple_values": false
+  },
+  "schedules": {
+   "name": "schedules",
+   "category": "table",
+   "help": "Schedules for the interface.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of a firewall recurring schedule.",
+     "required": true,
+     "datasource": [
+      "firewall.schedule.recurring.name"
+     ],
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dynamic-server": {
+   "name": "dynamic-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dynamic server option.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable dynamic server."
+    },
+    {
+     "name": "enable",
+     "help": "Enable dynamic server.The speed test server will be found automatically."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ctrl-port": {
+   "name": "ctrl-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the controller to get access token.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 5200,
+   "multiple_values": false
+  },
+  "server-port": {
+   "name": "server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the server to run speed test.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 5201,
+   "multiple_values": false
+  },
+  "update-shaper": {
+   "name": "update-shaper",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set egress shaper based on the test result.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable updating egress shaper."
+    },
+    {
+     "name": "local",
+     "help": "Update local-side egress shaper."
+    },
+    {
+     "name": "remote",
+     "help": "Update remote-side egress shaper."
+    },
+    {
+     "name": "both",
+     "help": "Update both local-side and remote-side egress shaper."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "update-inbandwidth": {
+   "name": "update-inbandwidth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bypassing interface's inbound bandwidth setting.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Honor interface's inbandwidth shaping."
+    },
+    {
+     "name": "enable",
+     "help": "Ignore interface's inbandwidth shaping."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "update-outbandwidth": {
+   "name": "update-outbandwidth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bypassing interface's outbound bandwidth setting.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Honor interface's outbandwidth shaping."
+    },
+    {
+     "name": "enable",
+     "help": "Ignore updating interface's outbandwidth shaping."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "update-inbandwidth-maximum": {
+   "name": "update-inbandwidth-maximum",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum downloading bandwidth (kbps) to be used in a speed test.",
+   "min-value": 0,
+   "max-value": 16776000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "update-inbandwidth-minimum": {
+   "name": "update-inbandwidth-minimum",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum downloading bandwidth (kbps) to be considered effective.",
+   "min-value": 0,
+   "max-value": 16776000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "update-outbandwidth-maximum": {
+   "name": "update-outbandwidth-maximum",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum uploading bandwidth (kbps) to be used in a speed test.",
+   "min-value": 0,
+   "max-value": 16776000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "update-outbandwidth-minimum": {
+   "name": "update-outbandwidth-minimum",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum uploading bandwidth (kbps) to be considered effective.",
+   "min-value": 0,
+   "max-value": 16776000,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 396,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

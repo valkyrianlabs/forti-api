@@ -1,0 +1,185 @@
+{
+ "name": "group",
+ "category": "table",
+ "help": "Configure firewall application groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Application group name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Application group type.",
+   "options": [
+    {
+     "name": "application",
+     "help": "Application ID."
+    },
+    {
+     "name": "filter",
+     "help": "Application filter."
+    }
+   ],
+   "default": "application",
+   "multiple_values": false
+  },
+  "application": {
+   "name": "application",
+   "category": "table",
+   "help": "Application ID list.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Application IDs.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "category": {
+   "name": "category",
+   "category": "table",
+   "help": "Application category ID list.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Category IDs.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "risk": {
+   "name": "risk",
+   "category": "table",
+   "help": "Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical).",
+   "member_table": true,
+   "mkey": "level",
+   "mkey_type": "integer",
+   "children": {
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical).",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "protocols": {
+   "name": "protocols",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application protocol filter.",
+   "default": "all",
+   "multiple_values": true
+  },
+  "vendor": {
+   "name": "vendor",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application vendor filter.",
+   "default": "all",
+   "multiple_values": true
+  },
+  "technology": {
+   "name": "technology",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application technology filter.",
+   "default": "all",
+   "multiple_values": true
+  },
+  "behavior": {
+   "name": "behavior",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application behavior filter.",
+   "default": "all",
+   "multiple_values": true
+  },
+  "popularity": {
+   "name": "popularity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Application popularity filter (1 - 5, from least to most popular).",
+   "options": [
+    {
+     "name": "1",
+     "help": "Popularity level 1."
+    },
+    {
+     "name": "2",
+     "help": "Popularity level 2."
+    },
+    {
+     "name": "3",
+     "help": "Popularity level 3."
+    },
+    {
+     "name": "4",
+     "help": "Popularity level 4."
+    },
+    {
+     "name": "5",
+     "help": "Popularity level 5."
+    }
+   ],
+   "default": "1 2 3 4 5",
+   "multiple_values": true
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "application",
+ "q_type": 375,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,2121 @@
+{
+ "name": "profile-protocol-options",
+ "category": "table",
+ "help": "Configure protocol options.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the replacement message group to be used.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "oversize-log": {
+   "name": "oversize-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging for antivirus oversize file blocking.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging for antivirus oversize file blocking."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging for antivirus oversize file blocking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "switching-protocols-log": {
+   "name": "switching-protocols-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging for HTTP/HTTPS switching protocols.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging for HTTP/HTTPS switching protocols."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging for HTTP/HTTPS switching protocols."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http": {
+   "name": "http",
+   "category": "complex",
+   "help": "Configure HTTP protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 80).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the inspection of all ports for the protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "clientcomfort",
+       "help": "Prevent client timeout."
+      },
+      {
+       "name": "servercomfort",
+       "help": "Prevent server timeout."
+      },
+      {
+       "name": "oversize",
+       "help": "Block oversized file."
+      },
+      {
+       "name": "chunkedbypass",
+       "help": "Bypass chunked transfer encoded sites."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "comfort-interval": {
+     "name": "comfort-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Interval between successive transmissions of data for client comforting (seconds).",
+     "min-value": 1,
+     "max-value": 900,
+     "default": 10,
+     "multiple_values": false
+    },
+    "comfort-amount": {
+     "name": "comfort-amount",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of bytes to send in each transmission for client comforting (bytes).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 1,
+     "multiple_values": false
+    },
+    "range-block": {
+     "name": "range-block",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable blocking of partial downloads.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable range header blocking (allow partial file downloads)"
+      },
+      {
+       "name": "enable",
+       "help": "Enable range header blocking (treat all partial file downloads as full file download)"
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "strip-x-forwarded-for": {
+     "name": "strip-x-forwarded-for",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable stripping of HTTP X-Forwarded-For header.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable changing of HTTP X-Forwarded-For header."
+      },
+      {
+       "name": "enable",
+       "help": "Enable replacement of X-Forwarded-For value with 1.1.1.1."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "post-lang": {
+     "name": "post-lang",
+     "category": "unitary",
+     "type": "option",
+     "help": "ID codes for character sets to be used to convert to UTF-8 for banned words and DLP on HTTP posts (maximum of 5 character sets).",
+     "options": [
+      {
+       "name": "jisx0201",
+       "help": "Japanese Industrial Standard 0201."
+      },
+      {
+       "name": "jisx0208",
+       "help": "Japanese Industrial Standard 0208."
+      },
+      {
+       "name": "jisx0212",
+       "help": "Japanese Industrial Standard 0212."
+      },
+      {
+       "name": "gb2312",
+       "help": "Guojia Biaozhun 2312 (simplified Chinese)."
+      },
+      {
+       "name": "ksc5601-ex",
+       "help": "Wansung Korean standard 5601."
+      },
+      {
+       "name": "euc-jp",
+       "help": "Extended Unicode Japanese."
+      },
+      {
+       "name": "sjis",
+       "help": "Shift Japanese Industrial Standard."
+      },
+      {
+       "name": "iso2022-jp",
+       "help": "ISO 2022 Japanese."
+      },
+      {
+       "name": "iso2022-jp-1",
+       "help": "ISO 2022-1 Japanese."
+      },
+      {
+       "name": "iso2022-jp-2",
+       "help": "ISO 2022-2 Japanese."
+      },
+      {
+       "name": "euc-cn",
+       "help": "Extended Unicode Chinese."
+      },
+      {
+       "name": "ces-gbk",
+       "help": "Extended GB2312 (simplified Chinese)."
+      },
+      {
+       "name": "hz",
+       "help": "Hanzi simplified Chinese."
+      },
+      {
+       "name": "ces-big5",
+       "help": "Big-5 traditional Chinese."
+      },
+      {
+       "name": "euc-kr",
+       "help": "Extended Unicode Korean."
+      },
+      {
+       "name": "iso2022-jp-3",
+       "help": "ISO 2022-3 Japanese."
+      },
+      {
+       "name": "iso8859-1",
+       "help": "ISO 8859 Part 1 (Western European)."
+      },
+      {
+       "name": "tis620",
+       "help": "Thai Industrial Standard 620."
+      },
+      {
+       "name": "cp874",
+       "help": "Code Page 874 (Thai)."
+      },
+      {
+       "name": "cp1252",
+       "help": "Code Page 1252 (Western European Latin)."
+      },
+      {
+       "name": "cp1251",
+       "help": "Code Page 1251 (Cyrillic)."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "streaming-content-bypass": {
+     "name": "streaming-content-bypass",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable bypassing of streaming content from buffering.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable bypassing of streaming content from buffering"
+      },
+      {
+       "name": "disable",
+       "help": "Disable bypassing of streaming content from buffering"
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "switching-protocols": {
+     "name": "switching-protocols",
+     "category": "unitary",
+     "type": "option",
+     "help": "Bypass from scanning, or block a connection that attempts to switch protocol.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass connections when switching protocols."
+      },
+      {
+       "name": "block",
+       "help": "Block connections when switching protocols."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "unknown-http-version": {
+     "name": "unknown-http-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "How to handle HTTP sessions that do not comply with HTTP 0.9, 1.0, or 1.1.",
+     "options": [
+      {
+       "name": "reject",
+       "help": "Reject or tear down HTTP sessions that do not use HTTP 0.9, 1.0, or 1.1."
+      },
+      {
+       "name": "tunnel",
+       "help": "Pass HTTP traffic that does not use HTTP 0.9, 1.0, or 1.1 without applying HTTP protocol optimization, byte-caching, or web caching. TCP protocol optimization is applied."
+      },
+      {
+       "name": "best-effort",
+       "help": "Assume all HTTP sessions comply with HTTP 0.9, 1.0, or 1.1. If a session uses a different HTTP version, it may not parse correctly and the connection may be lost."
+      }
+     ],
+     "default": "reject",
+     "multiple_values": false
+    },
+    "tunnel-non-http": {
+     "name": "tunnel-non-http",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure how to process non-HTTP traffic when a profile configured for HTTP traffic accepts a non-HTTP session. Can occur if an application sends non-HTTP traffic using an HTTP destination port.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Pass non-HTTP sessions through the tunnel without applying protocol optimization, byte-caching, or web caching. TCP protocol optimization is applied."
+      },
+      {
+       "name": "disable",
+       "help": "Drop or tear down non-HTTP sessions accepted by the profile."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "h2c": {
+     "name": "h2c",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable h2c HTTP connection upgrade.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Allow h2c HTTP connection upgrades. h2c tunnels do not support content scan."
+      },
+      {
+       "name": "disable",
+       "help": "Do not allow h2c HTTP connection upgrades."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "unknown-content-encoding": {
+     "name": "unknown-content-encoding",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure the action the FortiGate unit will take on unknown content-encoding.",
+     "options": [
+      {
+       "name": "block",
+       "help": "Block HTTP session when unknown content-encoding is detected."
+      },
+      {
+       "name": "inspect",
+       "help": "Scan HTTP traffic as plain-text when unknown content-encoding is detected."
+      },
+      {
+       "name": "bypass",
+       "help": "Bypass scan when unknown content-encoding is detected."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "stream-based-uncompressed-limit": {
+     "name": "stream-based-uncompressed-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum stream-based uncompressed data size that will be scanned in megabytes. Stream-based uncompression used only under certain conditions (unlimited = 0, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "verify-dns-for-policy-matching": {
+     "name": "verify-dns-for-policy-matching",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable verification of DNS for policy matching.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "block-page-status-code": {
+     "name": "block-page-status-code",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Code number returned for blocked HTTP pages (non-FortiGuard only) (100 - 599, default = 403).",
+     "min-value": 100,
+     "max-value": 599,
+     "default": 403,
+     "multiple_values": false
+    },
+    "retry-count": {
+     "name": "retry-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of attempts to retry HTTP connection (0 - 100, default = 0).",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 0,
+     "multiple_values": false
+    },
+    "tcp-window-type": {
+     "name": "tcp-window-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "TCP window type to use for this protocol.",
+     "options": [
+      {
+       "name": "auto-tuning",
+       "help": "Allow system to auto-tune TCP window size (default)."
+      },
+      {
+       "name": "system",
+       "help": "Use system default TCP window size for this protocol."
+      },
+      {
+       "name": "static",
+       "help": "Manually specify TCP window size."
+      },
+      {
+       "name": "dynamic",
+       "help": "Vary TCP window size based on available memory and within limits of tcp-window-minimum and tcp-window-maximum."
+      }
+     ],
+     "default": "auto-tuning",
+     "multiple_values": false
+    },
+    "tcp-window-minimum": {
+     "name": "tcp-window-minimum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum dynamic TCP window size.",
+     "min-value": 65536,
+     "max-value": 1048576,
+     "default": 131072,
+     "multiple_values": false
+    },
+    "tcp-window-maximum": {
+     "name": "tcp-window-maximum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum dynamic TCP window size.",
+     "min-value": 1048576,
+     "max-value": 33554432,
+     "default": 8388608,
+     "multiple_values": false
+    },
+    "tcp-window-size": {
+     "name": "tcp-window-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Set TCP static window size.",
+     "min-value": 65536,
+     "max-value": 33554432,
+     "default": 262144,
+     "multiple_values": false
+    },
+    "ssl-offloaded": {
+     "name": "ssl-offloaded",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL decryption and encryption performed by an external device.",
+     "options": [
+      {
+       "name": "no",
+       "help": "SSL decryption and encryption performed by FortiGate when deep-inspection is enabled."
+      },
+      {
+       "name": "yes",
+       "help": "SSL decryption and encryption performed by an external device."
+      }
+     ],
+     "default": "no",
+     "multiple_values": false
+    },
+    "address-ip-rating": {
+     "name": "address-ip-rating",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable IP based URL rating.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "ftp": {
+   "name": "ftp",
+   "category": "complex",
+   "help": "Configure FTP protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 21).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the inspection of all ports for the protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "clientcomfort",
+       "help": "Prevent client timeout."
+      },
+      {
+       "name": "oversize",
+       "help": "Block oversized file."
+      },
+      {
+       "name": "splice",
+       "help": "Enable splice mode."
+      },
+      {
+       "name": "bypass-rest-command",
+       "help": "Bypass REST command."
+      },
+      {
+       "name": "bypass-mode-command",
+       "help": "Bypass MODE command."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "comfort-interval": {
+     "name": "comfort-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Interval between successive transmissions of data for client comforting (seconds).",
+     "min-value": 1,
+     "max-value": 900,
+     "default": 10,
+     "multiple_values": false
+    },
+    "comfort-amount": {
+     "name": "comfort-amount",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of bytes to send in each transmission for client comforting (bytes).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 1,
+     "multiple_values": false
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "stream-based-uncompressed-limit": {
+     "name": "stream-based-uncompressed-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum stream-based uncompressed data size that will be scanned in megabytes. Stream-based uncompression used only under certain conditions (unlimited = 0, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "tcp-window-type": {
+     "name": "tcp-window-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "TCP window type to use for this protocol.",
+     "options": [
+      {
+       "name": "auto-tuning",
+       "help": "Allow system to auto-tune TCP window size (default)."
+      },
+      {
+       "name": "system",
+       "help": "Use system default TCP window size for this protocol."
+      },
+      {
+       "name": "static",
+       "help": "Manually specify TCP window size."
+      },
+      {
+       "name": "dynamic",
+       "help": "Vary TCP window size based on available memory and within limits of tcp-window-minimum and tcp-window-maximum."
+      }
+     ],
+     "default": "auto-tuning",
+     "multiple_values": false
+    },
+    "tcp-window-minimum": {
+     "name": "tcp-window-minimum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum dynamic TCP window size.",
+     "min-value": 65536,
+     "max-value": 1048576,
+     "default": 131072,
+     "multiple_values": false
+    },
+    "tcp-window-maximum": {
+     "name": "tcp-window-maximum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum dynamic TCP window size.",
+     "min-value": 1048576,
+     "max-value": 33554432,
+     "default": 8388608,
+     "multiple_values": false
+    },
+    "tcp-window-size": {
+     "name": "tcp-window-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Set TCP static window size.",
+     "min-value": 65536,
+     "max-value": 33554432,
+     "default": 262144,
+     "multiple_values": false
+    },
+    "ssl-offloaded": {
+     "name": "ssl-offloaded",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL decryption and encryption performed by an external device.",
+     "options": [
+      {
+       "name": "no",
+       "help": "SSL decryption and encryption performed by FortiGate when deep-inspection is enabled."
+      },
+      {
+       "name": "yes",
+       "help": "SSL decryption and encryption performed by an external device."
+      }
+     ],
+     "default": "no",
+     "multiple_values": false
+    },
+    "explicit-ftp-tls": {
+     "name": "explicit-ftp-tls",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable FTP redirection for explicit FTPS.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "imap": {
+   "name": "imap",
+   "category": "complex",
+   "help": "Configure IMAP protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 143).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the inspection of all ports for the protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "fragmail",
+       "help": "Pass fragmented email."
+      },
+      {
+       "name": "oversize",
+       "help": "Block oversized email."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-offloaded": {
+     "name": "ssl-offloaded",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL decryption and encryption performed by an external device.",
+     "options": [
+      {
+       "name": "no",
+       "help": "SSL decryption and encryption performed by FortiGate when deep-inspection is enabled."
+      },
+      {
+       "name": "yes",
+       "help": "SSL decryption and encryption performed by an external device."
+      }
+     ],
+     "default": "no",
+     "multiple_values": false
+    }
+   }
+  },
+  "mapi": {
+   "name": "mapi",
+   "category": "complex",
+   "help": "Configure MAPI protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 135).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "fragmail",
+       "help": "Pass fragmented email."
+      },
+      {
+       "name": "oversize",
+       "help": "Block oversized email."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "pop3": {
+   "name": "pop3",
+   "category": "complex",
+   "help": "Configure POP3 protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 110).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the inspection of all ports for the protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "fragmail",
+       "help": "Pass fragmented email."
+      },
+      {
+       "name": "oversize",
+       "help": "Block oversized email."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-offloaded": {
+     "name": "ssl-offloaded",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL decryption and encryption performed by an external device.",
+     "options": [
+      {
+       "name": "no",
+       "help": "SSL decryption and encryption performed by FortiGate when deep-inspection is enabled."
+      },
+      {
+       "name": "yes",
+       "help": "SSL decryption and encryption performed by an external device."
+      }
+     ],
+     "default": "no",
+     "multiple_values": false
+    }
+   }
+  },
+  "smtp": {
+   "name": "smtp",
+   "category": "complex",
+   "help": "Configure SMTP protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 25).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the inspection of all ports for the protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "fragmail",
+       "help": "Pass fragmented email."
+      },
+      {
+       "name": "oversize",
+       "help": "Block oversized email."
+      },
+      {
+       "name": "splice",
+       "help": "Enable splice mode."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "server-busy": {
+     "name": "server-busy",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SMTP server busy when server not available.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "ssl-offloaded": {
+     "name": "ssl-offloaded",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL decryption and encryption performed by an external device.",
+     "options": [
+      {
+       "name": "no",
+       "help": "SSL decryption and encryption performed by FortiGate when deep-inspection is enabled."
+      },
+      {
+       "name": "yes",
+       "help": "SSL decryption and encryption performed by an external device."
+      }
+     ],
+     "default": "no",
+     "multiple_values": false
+    }
+   }
+  },
+  "nntp": {
+   "name": "nntp",
+   "category": "complex",
+   "help": "Configure NNTP protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 119).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the inspection of all ports for the protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "oversize",
+       "help": "Block oversized file."
+      },
+      {
+       "name": "splice",
+       "help": "Enable splice mode."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "ssh": {
+   "name": "ssh",
+   "category": "complex",
+   "help": "Configure SFTP and SCP protocol options.",
+   "children": {
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "oversize",
+       "help": "Block oversized file."
+      },
+      {
+       "name": "clientcomfort",
+       "help": "Prevent client timeout."
+      },
+      {
+       "name": "servercomfort",
+       "help": "Prevent server timeout."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "comfort-interval": {
+     "name": "comfort-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Interval between successive transmissions of data for client comforting (seconds).",
+     "min-value": 1,
+     "max-value": 900,
+     "default": 10,
+     "multiple_values": false
+    },
+    "comfort-amount": {
+     "name": "comfort-amount",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of bytes to send in each transmission for client comforting (bytes).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 1,
+     "multiple_values": false
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "stream-based-uncompressed-limit": {
+     "name": "stream-based-uncompressed-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum stream-based uncompressed data size that will be scanned in megabytes. Stream-based uncompression used only under certain conditions (unlimited = 0, default = 0).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "tcp-window-type": {
+     "name": "tcp-window-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "TCP window type to use for this protocol.",
+     "options": [
+      {
+       "name": "auto-tuning",
+       "help": "Allow system to auto-tune TCP window size (default)."
+      },
+      {
+       "name": "system",
+       "help": "Use system default TCP window size for this protocol."
+      },
+      {
+       "name": "static",
+       "help": "Manually specify TCP window size."
+      },
+      {
+       "name": "dynamic",
+       "help": "Vary TCP window size based on available memory and within limits of tcp-window-minimum and tcp-window-maximum."
+      }
+     ],
+     "default": "auto-tuning",
+     "multiple_values": false
+    },
+    "tcp-window-minimum": {
+     "name": "tcp-window-minimum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum dynamic TCP window size.",
+     "min-value": 65536,
+     "max-value": 1048576,
+     "default": 131072,
+     "multiple_values": false
+    },
+    "tcp-window-maximum": {
+     "name": "tcp-window-maximum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum dynamic TCP window size.",
+     "min-value": 1048576,
+     "max-value": 33554432,
+     "default": 8388608,
+     "multiple_values": false
+    },
+    "tcp-window-size": {
+     "name": "tcp-window-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Set TCP static window size.",
+     "min-value": 65536,
+     "max-value": 33554432,
+     "default": 262144,
+     "multiple_values": false
+    },
+    "ssl-offloaded": {
+     "name": "ssl-offloaded",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL decryption and encryption performed by an external device.",
+     "options": [
+      {
+       "name": "no",
+       "help": "SSL decryption and encryption performed by FortiGate when deep-inspection is enabled."
+      },
+      {
+       "name": "yes",
+       "help": "SSL decryption and encryption performed by an external device."
+      }
+     ],
+     "default": "no",
+     "multiple_values": false
+    }
+   }
+  },
+  "dns": {
+   "name": "dns",
+   "category": "complex",
+   "help": "Configure DNS protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 53).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "cifs": {
+   "name": "cifs",
+   "category": "complex",
+   "help": "Configure CIFS protocol options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to scan for content (1 - 65535, default = 445).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable the active status of scanning for this protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "One or more options that can be applied to the session.",
+     "options": [
+      {
+       "name": "oversize",
+       "help": "Block oversized file."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "oversize-limit": {
+     "name": "oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-oversize-limit": {
+     "name": "uncompressed-oversize-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum in-memory uncompressed file size that can be scanned (MB).",
+     "min-value": 1,
+     "max-value": 191,
+     "default": 10,
+     "multiple_values": false
+    },
+    "uncompressed-nest-limit": {
+     "name": "uncompressed-nest-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum nested levels of compression that can be uncompressed and scanned (2 - 100, default = 12).",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 12,
+     "multiple_values": false
+    },
+    "scan-bzip2": {
+     "name": "scan-bzip2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable scanning of BZip2 compressed files.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "tcp-window-type": {
+     "name": "tcp-window-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "TCP window type to use for this protocol.",
+     "options": [
+      {
+       "name": "auto-tuning",
+       "help": "Allow system to auto-tune TCP window size (default)."
+      },
+      {
+       "name": "system",
+       "help": "Use system default TCP window size for this protocol."
+      },
+      {
+       "name": "static",
+       "help": "Manually specify TCP window size."
+      },
+      {
+       "name": "dynamic",
+       "help": "Vary TCP window size based on available memory and within limits of tcp-window-minimum and tcp-window-maximum."
+      }
+     ],
+     "default": "auto-tuning",
+     "multiple_values": false
+    },
+    "tcp-window-minimum": {
+     "name": "tcp-window-minimum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum dynamic TCP window size.",
+     "min-value": 65536,
+     "max-value": 1048576,
+     "default": 131072,
+     "multiple_values": false
+    },
+    "tcp-window-maximum": {
+     "name": "tcp-window-maximum",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum dynamic TCP window size.",
+     "min-value": 1048576,
+     "max-value": 33554432,
+     "default": 8388608,
+     "multiple_values": false
+    },
+    "tcp-window-size": {
+     "name": "tcp-window-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Set TCP static window size.",
+     "min-value": 65536,
+     "max-value": 33554432,
+     "default": 262144,
+     "multiple_values": false
+    },
+    "server-credential-type": {
+     "name": "server-credential-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "CIFS server credential type.",
+     "required": true,
+     "options": [
+      {
+       "name": "none",
+       "help": "Credential derivation not set."
+      },
+      {
+       "name": "credential-replication",
+       "help": "Credential derived using Replication account on Domain Controller."
+      },
+      {
+       "name": "credential-keytab",
+       "help": "Credential derived using server keytab."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "domain-controller": {
+     "name": "domain-controller",
+     "category": "unitary",
+     "type": "string",
+     "help": "Domain for which to decrypt CIFS traffic.",
+     "required": true,
+     "datasource": [
+      "user.domain-controller.name",
+      "credential-store.domain-controller.server-name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "server-keytab": {
+     "name": "server-keytab",
+     "category": "table",
+     "type": "string",
+     "help": "Server keytab.",
+     "mkey": "principal",
+     "mkey_type": "string",
+     "children": {
+      "principal": {
+       "name": "principal",
+       "category": "unitary",
+       "type": "string",
+       "help": "Service principal. For example, host/cifsserver.example.com@example.com.",
+       "required": true,
+       "size": 511,
+       "default": "",
+       "multiple_values": false
+      },
+      "keytab": {
+       "name": "keytab",
+       "category": "unitary",
+       "type": "string",
+       "help": "Base64 encoded keytab file containing credential of the server.",
+       "required": true,
+       "size": 8191,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "size": 8836,
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "mail-signature": {
+   "name": "mail-signature",
+   "category": "complex",
+   "help": "Configure Mail signature.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable adding an email signature to SMTP email messages as they pass through the FortiGate.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable mail signature."
+      },
+      {
+       "name": "enable",
+       "help": "Enable mail signature."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "signature": {
+     "name": "signature",
+     "category": "unitary",
+     "type": "string",
+     "help": "Email signature to be added to outgoing email (if the signature contains spaces, enclose with quotation marks).",
+     "size": 1023,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "rpc-over-http": {
+   "name": "rpc-over-http",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable inspection of RPC over HTTP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable inspection of RPC over HTTP."
+    },
+    {
+     "name": "disable",
+     "help": "Disable inspection of RPC over HTTP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 439,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

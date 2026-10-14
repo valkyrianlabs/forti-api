@@ -1,0 +1,129 @@
+{
+ "name": "l2tp",
+ "category": "complex",
+ "help": "Configure L2TP.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGate as a L2TP gateway.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eip": {
+   "name": "eip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "End IP.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "sip": {
+   "name": "sip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Start IP.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "usrgrp": {
+   "name": "usrgrp",
+   "category": "unitary",
+   "type": "string",
+   "help": "User group.",
+   "required": true,
+   "datasource": [
+    "user.group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "enforce-ipsec": {
+   "name": "enforce-ipsec",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec enforcement.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable enforce-ipsec"
+    },
+    {
+     "name": "disable",
+     "help": "Disable enforce-ipsec"
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "lcp-echo-interval": {
+   "name": "lcp-echo-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds between PPPoE Link Control Protocol (LCP) echo requests.",
+   "min-value": 0,
+   "max-value": 32767,
+   "default": 5,
+   "multiple_values": false
+  },
+  "lcp-max-echo-fails": {
+   "name": "lcp-max-echo-fails",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of missed LCP echo messages before disconnect.",
+   "min-value": 0,
+   "max-value": 32767,
+   "default": 3,
+   "multiple_values": false
+  },
+  "hello-interval": {
+   "name": "hello-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "L2TP hello message interval in seconds (0 - 3600 sec, default = 60).",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 60,
+   "multiple_values": false
+  },
+  "compress": {
+   "name": "compress",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable data compression.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable compress"
+    },
+    {
+     "name": "disable",
+     "help": "Disable compress"
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "vpn",
+ "q_type": 67,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

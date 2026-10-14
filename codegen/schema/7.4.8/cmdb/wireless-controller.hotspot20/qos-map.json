@@ -1,0 +1,120 @@
+{
+ "name": "qos-map",
+ "category": "table",
+ "help": "Configure QoS map set.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "QOS-MAP name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dscp-except": {
+   "name": "dscp-except",
+   "category": "table",
+   "help": "Differentiated Services Code Point (DSCP) exceptions.",
+   "mkey": "index",
+   "mkey_type": "integer",
+   "children": {
+    "index": {
+     "name": "index",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP exception index.",
+     "min-value": 1,
+     "max-value": 21,
+     "default": 0,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP value.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 0,
+     "multiple_values": false
+    },
+    "up": {
+     "name": "up",
+     "category": "unitary",
+     "type": "integer",
+     "help": "User priority.",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dscp-range": {
+   "name": "dscp-range",
+   "category": "table",
+   "help": "Differentiated Services Code Point (DSCP) ranges.",
+   "mkey": "index",
+   "mkey_type": "integer",
+   "children": {
+    "index": {
+     "name": "index",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP range index.",
+     "min-value": 1,
+     "max-value": 8,
+     "default": 0,
+     "multiple_values": false
+    },
+    "up": {
+     "name": "up",
+     "category": "unitary",
+     "type": "integer",
+     "help": "User priority.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 7,
+     "default": 0,
+     "multiple_values": false
+    },
+    "low": {
+     "name": "low",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP low value.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 255,
+     "multiple_values": false
+    },
+    "high": {
+     "name": "high",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP high value.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 255,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 300,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

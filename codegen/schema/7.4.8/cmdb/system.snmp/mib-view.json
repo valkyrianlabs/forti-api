@@ -1,0 +1,46 @@
+{
+ "name": "mib-view",
+ "category": "table",
+ "help": "SNMP Access Control MIB View configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "MIB view name.",
+   "required": true,
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "include": {
+   "name": "include",
+   "category": "unitary",
+   "type": "string",
+   "help": "OID subtrees to be included in the view. Maximum 16 allowed.",
+   "size": 79,
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 16
+  },
+  "exclude": {
+   "name": "exclude",
+   "category": "unitary",
+   "type": "string",
+   "help": "OID subtrees to be excluded in the view. Maximum 64 allowed.",
+   "size": 79,
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 64
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "system.snmp",
+ "q_type": 562,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

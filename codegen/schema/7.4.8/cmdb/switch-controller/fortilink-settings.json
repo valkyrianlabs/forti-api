@@ -1,0 +1,186 @@
+{
+ "name": "fortilink-settings",
+ "category": "table",
+ "help": "Configure integrated FortiLink settings for FortiSwitch.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiLink settings name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "fortilink": {
+   "name": "fortilink",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiLink interface to which this fortilink-setting belongs.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "inactive-timer": {
+   "name": "inactive-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time interval(minutes) to be included in the inactive devices expiry calculation (mac age-out + inactive-time + periodic scan interval).",
+   "min-value": 1,
+   "max-value": 1440,
+   "default": 15,
+   "multiple_values": false
+  },
+  "link-down-flush": {
+   "name": "link-down-flush",
+   "category": "unitary",
+   "type": "option",
+   "help": "Clear NAC and dynamic devices on switch ports on link down event.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable clearing NAC and dynamic devices on a switch port when link down event happens."
+    },
+    {
+     "name": "enable",
+     "help": "Enable clearing NAC and dynamic devices on a switch port when link down event happens."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "access-vlan-mode": {
+   "name": "access-vlan-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Intra VLAN traffic behavior with loss of connection to the FortiGate.",
+   "options": [
+    {
+     "name": "legacy",
+     "help": "Backward compatible behavior."
+    },
+    {
+     "name": "fail-open",
+     "help": "When connection to FortiGate is lost, traffic on the VLAN may continue directly between end points."
+    },
+    {
+     "name": "fail-close",
+     "help": "When connection to FortiGate is lost, traffic between endpoints on the VLAN is blocked."
+    }
+   ],
+   "default": "legacy",
+   "multiple_values": false
+  },
+  "nac-ports": {
+   "name": "nac-ports",
+   "category": "complex",
+   "help": "NAC specific configuration.",
+   "children": {
+    "onboarding-vlan": {
+     "name": "onboarding-vlan",
+     "category": "unitary",
+     "type": "string",
+     "help": "Default NAC Onboarding VLAN when NAC devices are discovered.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "lan-segment": {
+     "name": "lan-segment",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable LAN segment feature on the FortiLink interface.",
+     "options": [
+      {
+       "name": "enabled",
+       "help": "Enable lan-segment on this interface."
+      },
+      {
+       "name": "disabled",
+       "help": "Disable lan-segment on this interface."
+      }
+     ],
+     "default": "disabled",
+     "multiple_values": false
+    },
+    "nac-lan-interface": {
+     "name": "nac-lan-interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Configure NAC LAN interface.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "nac-segment-vlans": {
+     "name": "nac-segment-vlans",
+     "category": "table",
+     "help": "Configure NAC segment VLANs.",
+     "required": true,
+     "member_table": true,
+     "mkey": "vlan-name",
+     "mkey_type": "string",
+     "children": {
+      "vlan-name": {
+       "name": "vlan-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "VLAN interface name.",
+       "required": true,
+       "datasource": [
+        "system.interface.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "parent-key": {
+     "name": "parent-key",
+     "category": "unitary",
+     "type": "string",
+     "help": "Parent key name.",
+     "readonly": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "member-change": {
+     "name": "member-change",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Member change flag.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "q_type": 332,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

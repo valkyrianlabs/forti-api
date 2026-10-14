@@ -1,0 +1,248 @@
+{
+ "name": "manualkey-interface",
+ "category": "table",
+ "help": "Configure IPsec manual keys.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPsec tunnel name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the physical, aggregate, or VLAN interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-version": {
+   "name": "ip-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "IP version to use for VPN interface.",
+   "options": [
+    {
+     "name": "4",
+     "help": "Use IPv4 addressing for gateways."
+    },
+    {
+     "name": "6",
+     "help": "Use IPv6 addressing for gateways."
+    }
+   ],
+   "default": "4",
+   "multiple_values": false
+  },
+  "addr-type": {
+   "name": "addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IP version to use for IP packets.",
+   "options": [
+    {
+     "name": "4",
+     "help": "Use IPv4 addressing for IP packets."
+    },
+    {
+     "name": "6",
+     "help": "Use IPv6 addressing for IP packets."
+    }
+   ],
+   "default": "4",
+   "multiple_values": false
+  },
+  "remote-gw": {
+   "name": "remote-gw",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address of the remote gateway's external interface.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "remote-gw6": {
+   "name": "remote-gw6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Remote IPv6 address of VPN gateway.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "local-gw": {
+   "name": "local-gw",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IPv4 address of the local gateway's external interface.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "local-gw6": {
+   "name": "local-gw6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Local IPv6 address of VPN gateway.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "auth-alg": {
+   "name": "auth-alg",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication algorithm. Must be the same for both ends of the tunnel.",
+   "required": true,
+   "options": [
+    {
+     "name": "null",
+     "help": "null"
+    },
+    {
+     "name": "md5",
+     "help": "md5"
+    },
+    {
+     "name": "sha1",
+     "help": "sha1"
+    },
+    {
+     "name": "sha256",
+     "help": "sha256"
+    },
+    {
+     "name": "sha384",
+     "help": "sha384"
+    },
+    {
+     "name": "sha512",
+     "help": "sha512"
+    }
+   ],
+   "default": "null",
+   "multiple_values": false
+  },
+  "enc-alg": {
+   "name": "enc-alg",
+   "category": "unitary",
+   "type": "option",
+   "help": "Encryption algorithm. Must be the same for both ends of the tunnel.",
+   "required": true,
+   "options": [
+    {
+     "name": "null",
+     "help": "null"
+    },
+    {
+     "name": "des",
+     "help": "des"
+    },
+    {
+     "name": "3des",
+     "help": "3des"
+    },
+    {
+     "name": "aes128",
+     "help": "aes128"
+    },
+    {
+     "name": "aes192",
+     "help": "aes192"
+    },
+    {
+     "name": "aes256",
+     "help": "aes256"
+    },
+    {
+     "name": "aria128",
+     "help": "aria128"
+    },
+    {
+     "name": "aria192",
+     "help": "aria192"
+    },
+    {
+     "name": "aria256",
+     "help": "aria256"
+    },
+    {
+     "name": "seed",
+     "help": "seed"
+    }
+   ],
+   "default": "null",
+   "multiple_values": false
+  },
+  "auth-key": {
+   "name": "auth-key",
+   "category": "unitary",
+   "type": "user",
+   "help": "Hexadecimal authentication key in 16-digit (8-byte) segments separated by hyphens.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "enc-key": {
+   "name": "enc-key",
+   "category": "unitary",
+   "type": "user",
+   "help": "Hexadecimal encryption key in 16-digit (8-byte) segments separated by hyphens.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "local-spi": {
+   "name": "local-spi",
+   "category": "unitary",
+   "type": "user",
+   "help": "Local SPI, a hexadecimal 8-digit (4-byte) tag. Discerns between two traffic streams with different encryption rules.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "remote-spi": {
+   "name": "remote-spi",
+   "category": "unitary",
+   "type": "user",
+   "help": "Remote SPI, a hexadecimal 8-digit (4-byte) tag. Discerns between two traffic streams with different encryption rules.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "npu-offload": {
+   "name": "npu-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable offloading IPsec VPN manual key sessions to NPUs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NPU offloading."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NPU offloading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "vpn.ipsec",
+ "q_type": 186,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

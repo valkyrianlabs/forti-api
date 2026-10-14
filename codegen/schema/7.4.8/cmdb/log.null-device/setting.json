@@ -1,0 +1,30 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Settings for null device logging.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable statistics collection for when no external logging destination, such as FortiAnalyzer, is present (data is not saved).",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable statistics collection for when no external logging destination, such as FortiAnalyzer, is present (data is not saved)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable statistics collection for when no external logging destination, such as FortiAnalyzer, is present (data is not saved)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "log.null-device",
+ "q_type": 85,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

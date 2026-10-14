@@ -1,0 +1,1205 @@
+{
+ "name": "server",
+ "category": "table",
+ "help": "Configure DHCP servers.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this DHCP configuration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not use this DHCP server configuration."
+    },
+    {
+     "name": "enable",
+     "help": "Use this DHCP server configuration."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "lease-time": {
+   "name": "lease-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Lease time in seconds, 0 means unlimited.",
+   "min-value": 300,
+   "max-value": 8640000,
+   "default": 604800,
+   "multiple_values": false
+  },
+  "mac-acl-default-action": {
+   "name": "mac-acl-default-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC access control default action (allow or block assigning IP settings).",
+   "options": [
+    {
+     "name": "assign",
+     "help": "Allow the DHCP server to assign IP settings to clients on the MAC access control list."
+    },
+    {
+     "name": "block",
+     "help": "Block the DHCP server from assigning IP settings to clients on the MAC access control list."
+    }
+   ],
+   "default": "assign",
+   "multiple_values": false
+  },
+  "forticlient-on-net-status": {
+   "name": "forticlient-on-net-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiClient-On-Net service for this DHCP server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable FortiClient On-Net Status."
+    },
+    {
+     "name": "enable",
+     "help": "Enable FortiClient On-Net Status."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dns-service": {
+   "name": "dns-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Options for assigning DNS servers to DHCP clients.",
+   "options": [
+    {
+     "name": "local",
+     "help": "IP address of the interface the DHCP server is added to becomes the client's DNS server IP address."
+    },
+    {
+     "name": "default",
+     "help": "Clients are assigned the FortiGate's configured DNS servers."
+    },
+    {
+     "name": "specify",
+     "help": "Specify up to 3 DNS servers in the DHCP server configuration."
+    }
+   ],
+   "default": "specify",
+   "multiple_values": false
+  },
+  "dns-server1": {
+   "name": "dns-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DNS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dns-server2": {
+   "name": "dns-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DNS server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dns-server3": {
+   "name": "dns-server3",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DNS server 3.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dns-server4": {
+   "name": "dns-server4",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DNS server 4.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wifi-ac-service": {
+   "name": "wifi-ac-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Options for assigning WiFi access controllers to DHCP clients.",
+   "options": [
+    {
+     "name": "specify",
+     "help": "Specify up to 3 WiFi Access Controllers in the DHCP server configuration."
+    },
+    {
+     "name": "local",
+     "help": "IP address of the interface the DHCP server is added to becomes the client's WiFi Access Controller IP address."
+    }
+   ],
+   "default": "specify",
+   "multiple_values": false
+  },
+  "wifi-ac1": {
+   "name": "wifi-ac1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WiFi Access Controller 1 IP address (DHCP option 138, RFC 5417).",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wifi-ac2": {
+   "name": "wifi-ac2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WiFi Access Controller 2 IP address (DHCP option 138, RFC 5417).",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wifi-ac3": {
+   "name": "wifi-ac3",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WiFi Access Controller 3 IP address (DHCP option 138, RFC 5417).",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ntp-service": {
+   "name": "ntp-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Options for assigning Network Time Protocol (NTP) servers to DHCP clients.",
+   "options": [
+    {
+     "name": "local",
+     "help": "IP address of the interface the DHCP server is added to becomes the client's NTP server IP address."
+    },
+    {
+     "name": "default",
+     "help": "Clients are assigned the FortiGate's configured NTP servers."
+    },
+    {
+     "name": "specify",
+     "help": "Specify up to 3 NTP servers in the DHCP server configuration."
+    }
+   ],
+   "default": "specify",
+   "multiple_values": false
+  },
+  "ntp-server1": {
+   "name": "ntp-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "NTP server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ntp-server2": {
+   "name": "ntp-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "NTP server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ntp-server3": {
+   "name": "ntp-server3",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "NTP server 3.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "domain": {
+   "name": "domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name suffix for the IP addresses that the DHCP server assigns to clients.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "wins-server1": {
+   "name": "wins-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WINS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wins-server2": {
+   "name": "wins-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WINS server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "default-gateway": {
+   "name": "default-gateway",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Default gateway IP address assigned by the DHCP server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "next-server": {
+   "name": "next-server",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address of a server (for example, a TFTP sever) that DHCP clients can download a boot file from.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "netmask": {
+   "name": "netmask",
+   "category": "unitary",
+   "type": "ipv4-netmask",
+   "help": "Netmask assigned by the DHCP server.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "DHCP server can assign IP configurations to clients connected to this interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-range": {
+   "name": "ip-range",
+   "category": "table",
+   "help": "DHCP IP range configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-ip": {
+     "name": "start-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Start of IP range.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "end-ip": {
+     "name": "end-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "End of IP range.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "vci-match": {
+     "name": "vci-match",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable vendor class identifier (VCI) matching. When enabled only DHCP requests with a matching VCI are served with this range.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable VCI matching."
+      },
+      {
+       "name": "enable",
+       "help": "Enable VCI matching."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vci-string": {
+     "name": "vci-string",
+     "category": "table",
+     "help": "One or more VCI strings in quotes separated by spaces.",
+     "member_table": true,
+     "mkey": "vci-string",
+     "mkey_type": "string",
+     "children": {
+      "vci-string": {
+       "name": "vci-string",
+       "category": "unitary",
+       "type": "string",
+       "help": "VCI strings.",
+       "required": true,
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "uci-match": {
+     "name": "uci-match",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable user class identifier (UCI) matching. When enabled only DHCP requests with a matching UCI are served with this range.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable UCI matching."
+      },
+      {
+       "name": "enable",
+       "help": "Enable UCI matching."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "uci-string": {
+     "name": "uci-string",
+     "category": "table",
+     "help": "One or more UCI strings in quotes separated by spaces.",
+     "member_table": true,
+     "mkey": "uci-string",
+     "mkey_type": "string",
+     "children": {
+      "uci-string": {
+       "name": "uci-string",
+       "category": "unitary",
+       "type": "string",
+       "help": "UCI strings.",
+       "required": true,
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "lease-time": {
+     "name": "lease-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Lease time in seconds, 0 means default lease time.",
+     "min-value": 300,
+     "max-value": 8640000,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 10
+  },
+  "timezone-option": {
+   "name": "timezone-option",
+   "category": "unitary",
+   "type": "option",
+   "help": "Options for the DHCP server to set the client's time zone.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not set the client's time zone."
+    },
+    {
+     "name": "default",
+     "help": "Clients are assigned the FortiGate's configured time zone."
+    },
+    {
+     "name": "specify",
+     "help": "Specify the time zone to be assigned to DHCP clients."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "timezone": {
+   "name": "timezone",
+   "category": "unitary",
+   "type": "string",
+   "help": "Select the time zone to be assigned to DHCP clients.",
+   "required": true,
+   "datasource": [
+    "system.timezone.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "tftp-server": {
+   "name": "tftp-server",
+   "category": "table",
+   "help": "One or more hostnames or IP addresses of the TFTP servers in quotes separated by spaces.",
+   "member_table": true,
+   "mkey": "tftp-server",
+   "mkey_type": "string",
+   "children": {
+    "tftp-server": {
+     "name": "tftp-server",
+     "category": "unitary",
+     "type": "string",
+     "help": "TFTP server.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "filename": {
+   "name": "filename",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the boot file on the TFTP server.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "options": {
+   "name": "options",
+   "category": "table",
+   "help": "DHCP options.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "code": {
+     "name": "code",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DHCP option code.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "DHCP option type.",
+     "options": [
+      {
+       "name": "hex",
+       "help": "DHCP option in hex."
+      },
+      {
+       "name": "string",
+       "help": "DHCP option in string."
+      },
+      {
+       "name": "ip",
+       "help": "DHCP option in IP."
+      },
+      {
+       "name": "fqdn",
+       "help": "DHCP option in domain search option format."
+      }
+     ],
+     "default": "hex",
+     "multiple_values": false
+    },
+    "value": {
+     "name": "value",
+     "category": "unitary",
+     "type": "string",
+     "help": "DHCP option value.",
+     "size": 312,
+     "default": "",
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "user",
+     "help": "DHCP option IPs.",
+     "default": "",
+     "multiple_values": true
+    },
+    "vci-match": {
+     "name": "vci-match",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable vendor class identifier (VCI) matching. When enabled only DHCP requests with a matching VCI are served with this option.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable VCI matching."
+      },
+      {
+       "name": "enable",
+       "help": "Enable VCI matching."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vci-string": {
+     "name": "vci-string",
+     "category": "table",
+     "help": "One or more VCI strings in quotes separated by spaces.",
+     "member_table": true,
+     "mkey": "vci-string",
+     "mkey_type": "string",
+     "children": {
+      "vci-string": {
+       "name": "vci-string",
+       "category": "unitary",
+       "type": "string",
+       "help": "VCI strings.",
+       "required": true,
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "uci-match": {
+     "name": "uci-match",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable user class identifier (UCI) matching. When enabled only DHCP requests with a matching UCI are served with this option.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable UCI matching."
+      },
+      {
+       "name": "enable",
+       "help": "Enable UCI matching."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "uci-string": {
+     "name": "uci-string",
+     "category": "table",
+     "help": "One or more UCI strings in quotes separated by spaces.",
+     "member_table": true,
+     "mkey": "uci-string",
+     "mkey_type": "string",
+     "children": {
+      "uci-string": {
+       "name": "uci-string",
+       "category": "unitary",
+       "type": "string",
+       "help": "UCI strings.",
+       "required": true,
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 30
+  },
+  "server-type": {
+   "name": "server-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "DHCP server can be a normal DHCP server or an IPsec DHCP server.",
+   "options": [
+    {
+     "name": "regular",
+     "help": "Regular DHCP service."
+    },
+    {
+     "name": "ipsec",
+     "help": "DHCP over IPsec service."
+    }
+   ],
+   "default": "regular",
+   "multiple_values": false
+  },
+  "ip-mode": {
+   "name": "ip-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method used to assign client IP.",
+   "options": [
+    {
+     "name": "range",
+     "help": "Use range defined by start-ip/end-ip to assign client IP."
+    },
+    {
+     "name": "usrgrp",
+     "help": "Use user-group defined method to assign client IP."
+    }
+   ],
+   "default": "range",
+   "multiple_values": false
+  },
+  "conflicted-ip-timeout": {
+   "name": "conflicted-ip-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds to wait after a conflicted IP address is removed from the DHCP range before it can be reused.",
+   "min-value": 60,
+   "max-value": 8640000,
+   "default": 1800,
+   "multiple_values": false
+  },
+  "ipsec-lease-hold": {
+   "name": "ipsec-lease-hold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DHCP over IPsec leases expire this many seconds after tunnel down (0 to disable forced-expiry).",
+   "min-value": 0,
+   "max-value": 8640000,
+   "default": 60,
+   "multiple_values": false
+  },
+  "auto-configuration": {
+   "name": "auto-configuration",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable auto configuration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable auto configuration."
+    },
+    {
+     "name": "enable",
+     "help": "Enable auto configuration."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dhcp-settings-from-fortiipam": {
+   "name": "dhcp-settings-from-fortiipam",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable populating of DHCP server settings from FortiIPAM.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable populating of DHCP server settings from FortiIPAM."
+    },
+    {
+     "name": "enable",
+     "help": "Enable populating of DHCP server settings from FortiIPAM."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-managed-status": {
+   "name": "auto-managed-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of this DHCP server once this interface has been assigned an IP address from FortiIPAM.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of this DHCP server once this interface has been assigned an IP address from FortiIPAM."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use of this DHCP server once this interface has been assigned an IP address from FortiIPAM."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ddns-update": {
+   "name": "ddns-update",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DDNS update for DHCP.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable DDNS update for DHCP."
+    },
+    {
+     "name": "enable",
+     "help": "Enable DDNS update for DHCP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ddns-update-override": {
+   "name": "ddns-update-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DDNS update override for DHCP.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable DDNS update override for DHCP."
+    },
+    {
+     "name": "enable",
+     "help": "Enable DDNS update override for DHCP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ddns-server-ip": {
+   "name": "ddns-server-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DDNS server IP.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ddns-zone": {
+   "name": "ddns-zone",
+   "category": "unitary",
+   "type": "string",
+   "help": "Zone of your domain name (ex. DDNS.com).",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "ddns-auth": {
+   "name": "ddns-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "DDNS authentication mode.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable DDNS authentication."
+    },
+    {
+     "name": "tsig",
+     "help": "TSIG based on RFC2845."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ddns-keyname": {
+   "name": "ddns-keyname",
+   "category": "unitary",
+   "type": "string",
+   "help": "DDNS update key name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "ddns-key": {
+   "name": "ddns-key",
+   "category": "unitary",
+   "type": "password_aes256",
+   "help": "DDNS update key (base 64 encoding).",
+   "multiple_values": false
+  },
+  "ddns-ttl": {
+   "name": "ddns-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TTL.",
+   "min-value": 60,
+   "max-value": 86400,
+   "default": 300,
+   "multiple_values": false
+  },
+  "vci-match": {
+   "name": "vci-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable vendor class identifier (VCI) matching. When enabled only DHCP requests with a matching VCI are served.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable VCI matching."
+    },
+    {
+     "name": "enable",
+     "help": "Enable VCI matching."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vci-string": {
+   "name": "vci-string",
+   "category": "table",
+   "help": "One or more VCI strings in quotes separated by spaces.",
+   "member_table": true,
+   "mkey": "vci-string",
+   "mkey_type": "string",
+   "children": {
+    "vci-string": {
+     "name": "vci-string",
+     "category": "unitary",
+     "type": "string",
+     "help": "VCI strings.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "exclude-range": {
+   "name": "exclude-range",
+   "category": "table",
+   "help": "Exclude one or more ranges of IP addresses from being assigned to clients.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-ip": {
+     "name": "start-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Start of IP range.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "end-ip": {
+     "name": "end-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "End of IP range.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "vci-match": {
+     "name": "vci-match",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable vendor class identifier (VCI) matching. When enabled only DHCP requests with a matching VCI are served with this range.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable VCI matching."
+      },
+      {
+       "name": "enable",
+       "help": "Enable VCI matching."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vci-string": {
+     "name": "vci-string",
+     "category": "table",
+     "help": "One or more VCI strings in quotes separated by spaces.",
+     "member_table": true,
+     "mkey": "vci-string",
+     "mkey_type": "string",
+     "children": {
+      "vci-string": {
+       "name": "vci-string",
+       "category": "unitary",
+       "type": "string",
+       "help": "VCI strings.",
+       "required": true,
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "uci-match": {
+     "name": "uci-match",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable user class identifier (UCI) matching. When enabled only DHCP requests with a matching UCI are served with this range.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable UCI matching."
+      },
+      {
+       "name": "enable",
+       "help": "Enable UCI matching."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "uci-string": {
+     "name": "uci-string",
+     "category": "table",
+     "help": "One or more UCI strings in quotes separated by spaces.",
+     "member_table": true,
+     "mkey": "uci-string",
+     "mkey_type": "string",
+     "children": {
+      "uci-string": {
+       "name": "uci-string",
+       "category": "unitary",
+       "type": "string",
+       "help": "UCI strings.",
+       "required": true,
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "lease-time": {
+     "name": "lease-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Lease time in seconds, 0 means default lease time.",
+     "min-value": 300,
+     "max-value": 8640000,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 4
+  },
+  "shared-subnet": {
+   "name": "shared-subnet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable shared subnet.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable shared subnet."
+    },
+    {
+     "name": "enable",
+     "help": "Enable shared subnet."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "relay-agent": {
+   "name": "relay-agent",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Relay agent IP.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "reserved-address": {
+   "name": "reserved-address",
+   "category": "table",
+   "help": "Options for the DHCP server to assign IP settings to specific MAC addresses.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "DHCP reserved-address type.",
+     "options": [
+      {
+       "name": "mac",
+       "help": "Match with MAC address."
+      },
+      {
+       "name": "option82",
+       "help": "Match with DHCP option 82."
+      }
+     ],
+     "default": "mac",
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IP address to be reserved for the MAC address.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "mac": {
+     "name": "mac",
+     "category": "unitary",
+     "type": "mac-address",
+     "help": "MAC address of the client that will get the reserved IP address.",
+     "required": true,
+     "default": "00:00:00:00:00:00",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Options for the DHCP server to configure the client with the reserved MAC address.",
+     "options": [
+      {
+       "name": "assign",
+       "help": "Configure the client with this MAC address like any other client."
+      },
+      {
+       "name": "block",
+       "help": "Block the DHCP server from assigning IP settings to the client with this MAC address."
+      },
+      {
+       "name": "reserved",
+       "help": "Assign the reserved IP address to the client with this MAC address."
+      }
+     ],
+     "default": "reserved",
+     "multiple_values": false
+    },
+    "circuit-id-type": {
+     "name": "circuit-id-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "DHCP option type.",
+     "options": [
+      {
+       "name": "hex",
+       "help": "DHCP option in hex."
+      },
+      {
+       "name": "string",
+       "help": "DHCP option in string."
+      }
+     ],
+     "default": "string",
+     "multiple_values": false
+    },
+    "circuit-id": {
+     "name": "circuit-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Option 82 circuit-ID of the client that will get the reserved IP address.",
+     "size": 312,
+     "default": "",
+     "multiple_values": false
+    },
+    "remote-id-type": {
+     "name": "remote-id-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "DHCP option type.",
+     "options": [
+      {
+       "name": "hex",
+       "help": "DHCP option in hex."
+      },
+      {
+       "name": "string",
+       "help": "DHCP option in string."
+      }
+     ],
+     "default": "string",
+     "multiple_values": false
+    },
+    "remote-id": {
+     "name": "remote-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Option 82 remote-ID of the client that will get the reserved IP address.",
+     "size": 312,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Description.",
+     "size": 255,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 512,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system.dhcp",
+ "q_type": 100,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

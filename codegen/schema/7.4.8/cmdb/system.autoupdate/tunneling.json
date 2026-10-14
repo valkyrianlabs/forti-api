@@ -1,0 +1,65 @@
+{
+ "name": "tunneling",
+ "category": "complex",
+ "help": "Configure web proxy tunneling for the FDN.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable web proxy tunneling.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "address": {
+   "name": "address",
+   "category": "unitary",
+   "type": "string",
+   "help": "Web proxy IP address or FQDN.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Web proxy port.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Web proxy username.",
+   "size": 49,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Web proxy password.",
+   "size": 128,
+   "multiple_values": false
+  }
+ },
+ "path": "system.autoupdate",
+ "q_type": 15,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

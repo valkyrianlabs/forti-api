@@ -1,0 +1,66 @@
+{
+ "name": "anqp-3gpp-cellular",
+ "category": "table",
+ "help": "Configure 3GPP public land mobile network (PLMN).",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "3GPP PLMN name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mcc-mnc-list": {
+   "name": "mcc-mnc-list",
+   "category": "table",
+   "help": "Mobile Country Code and Mobile Network Code configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 6,
+     "default": 0,
+     "multiple_values": false
+    },
+    "mcc": {
+     "name": "mcc",
+     "category": "unitary",
+     "type": "string",
+     "help": "Mobile country code.",
+     "size": 3,
+     "default": "",
+     "multiple_values": false
+    },
+    "mnc": {
+     "name": "mnc",
+     "category": "unitary",
+     "type": "string",
+     "help": "Mobile network code.",
+     "size": 3,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 295,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

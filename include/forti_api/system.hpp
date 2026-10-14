@@ -1,14 +1,11 @@
 //
-// System: the generated endpoints plus API-user trusted hosts and live interface addresses.
+// System: every generated system endpoint plus API-user trusted hosts and live interface addresses.
 //
 
 #ifndef FORTI_API_SYSTEM_HPP
 #define FORTI_API_SYSTEM_HPP
 
-#include "gen/system/api_user.hpp"
-#include "gen/system/external_resource.hpp"
-#include "gen/system/global.hpp"
-#include "gen/system/interface.hpp"
+#include "gen/system.hpp"
 #include "monitor.hpp"
 
 #include <algorithm>
@@ -59,17 +56,17 @@ namespace fortiapi::system {
         }
 
         inline std::pair<std::string_view, std::string> trusthost_of(std::string_view subnet) {
-            if (auto v4 = ipv4_subnet(subnet)) return {api_user::trusthost::type::ipv4_trusthost, *v4};
+            if (auto v4 = ipv4_subnet(subnet)) return {ApiUser::TrusthostEntry::Type::ipv4_trusthost, *v4};
             if (subnet.find(':') != std::string_view::npos) {
                 std::string v6(subnet);
                 if (v6.find('/') == std::string::npos) v6 += "/128";
-                return {api_user::trusthost::type::ipv6_trusthost, v6};
+                return {ApiUser::TrusthostEntry::Type::ipv6_trusthost, v6};
             }
             throw std::invalid_argument("fortiapi: not an IPv4 or IPv6 subnet: " + std::string(subnet));
         }
 
         inline bool matches(const ApiUser::TrusthostEntry& entry, std::string_view type, const std::string& value) {
-            if (type == api_user::trusthost::type::ipv4_trusthost) return entry.ipv4_trusthost == value;
+            if (type == ApiUser::TrusthostEntry::Type::ipv4_trusthost) return entry.ipv4_trusthost == value;
             return entry.ipv6_trusthost == value;
         }
     }  // namespace detail
@@ -89,7 +86,7 @@ namespace fortiapi::system {
         auto [type, value] = detail::trusthost_of(subnet);
         ApiUser::TrusthostEntry entry;
         entry.type = std::string(type);
-        if (type == api_user::trusthost::type::ipv4_trusthost) entry.ipv4_trusthost = value;
+        if (type == ApiUser::TrusthostEntry::Type::ipv4_trusthost) entry.ipv4_trusthost = value;
         else entry.ipv6_trusthost = value;
         user.trusthost.edit().push_back(std::move(entry));
     }

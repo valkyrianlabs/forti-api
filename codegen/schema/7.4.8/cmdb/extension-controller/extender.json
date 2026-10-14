@@ -1,0 +1,326 @@
+{
+ "name": "extender",
+ "category": "table",
+ "help": "Extender controller configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiExtender entry name.",
+   "required": true,
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiExtender serial number.",
+   "required": true,
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  },
+  "authorized": {
+   "name": "authorized",
+   "category": "unitary",
+   "type": "option",
+   "help": "FortiExtender Administration (enable or disable).",
+   "required": true,
+   "options": [
+    {
+     "name": "discovered",
+     "help": "Controller discovered this FortiExtender."
+    },
+    {
+     "name": "disable",
+     "help": "Controller is configured to not provide service to this FortiExtender."
+    },
+    {
+     "name": "enable",
+     "help": "Controller is configured to provide service to this FortiExtender."
+    }
+   ],
+   "default": "discovered",
+   "multiple_values": false
+  },
+  "ext-name": {
+   "name": "ext-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiExtender name.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "vdom": {
+   "name": "vdom",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VDOM.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 1,
+   "multiple_values": false
+  },
+  "device-id": {
+   "name": "device-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Device ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 1026,
+   "multiple_values": false
+  },
+  "extension-type": {
+   "name": "extension-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Extension type for this FortiExtender.",
+   "required": true,
+   "options": [
+    {
+     "name": "wan-extension",
+     "help": "FortiExtender wanext_cntextension."
+    },
+    {
+     "name": "lan-extension",
+     "help": "FortiExtender lan-extension."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "profile": {
+   "name": "profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiExtender profile configuration.",
+   "datasource": [
+    "extension-controller.extender-profile.name"
+   ],
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "override-allowaccess": {
+   "name": "override-allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the extender profile management access configuration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the extender profile management access configuration."
+    },
+    {
+     "name": "disable",
+     "help": "Use the extender profile management access configuration."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allowaccess": {
+   "name": "allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control management access to the managed extender. Separate entries with a space.",
+   "options": [
+    {
+     "name": "ping",
+     "help": "PING access."
+    },
+    {
+     "name": "telnet",
+     "help": "TELNET access."
+    },
+    {
+     "name": "http",
+     "help": "HTTP access."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS access."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH access."
+    },
+    {
+     "name": "snmp",
+     "help": "SNMP access."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "override-login-password-change": {
+   "name": "override-login-password-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the extender profile login-password (administrator password) setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile login-password (administrator password) setting."
+    },
+    {
+     "name": "disable",
+     "help": "Use the the WTP profile login-password (administrator password) setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "login-password-change": {
+   "name": "login-password-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Change or reset the administrator password of a managed extender (yes, default, or no, default = no).",
+   "options": [
+    {
+     "name": "yes",
+     "help": "Change the managed extender's administrator password. Use the login-password option to set the password."
+    },
+    {
+     "name": "default",
+     "help": "Keep the managed extender's administrator password set to the factory default."
+    },
+    {
+     "name": "no",
+     "help": "Do not change the managed extender's administrator password."
+    }
+   ],
+   "default": "no",
+   "multiple_values": false
+  },
+  "login-password": {
+   "name": "login-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Set the managed extender's administrator password.",
+   "required": true,
+   "size": 27,
+   "multiple_values": false
+  },
+  "override-enforce-bandwidth": {
+   "name": "override-enforce-bandwidth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the extender profile enforce-bandwidth setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable override of FortiExtender profile bandwidth setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable override of FortiExtender profile bandwidth setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "enforce-bandwidth": {
+   "name": "enforce-bandwidth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable enforcement of bandwidth on LAN extension interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable to enforce bandwidth limit on LAN extension interface."
+    },
+    {
+     "name": "disable",
+     "help": "Disable to enforce bandwidth limit on LAN extension interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "bandwidth-limit": {
+   "name": "bandwidth-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiExtender LAN extension bandwidth limit (Mbps).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 16776000,
+   "default": 1024,
+   "multiple_values": false
+  },
+  "wan-extension": {
+   "name": "wan-extension",
+   "category": "complex",
+   "help": "FortiExtender wan extension configuration.",
+   "children": {
+    "modem1-extension": {
+     "name": "modem1-extension",
+     "category": "unitary",
+     "type": "string",
+     "help": "FortiExtender interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "modem2-extension": {
+     "name": "modem2-extension",
+     "category": "unitary",
+     "type": "string",
+     "help": "FortiExtender interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "firmware-provision-latest": {
+   "name": "firmware-provision-latest",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable one-time automatic provisioning of the latest firmware version.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not automatically provision the latest available firmware."
+    },
+    {
+     "name": "once",
+     "help": "Automatically attempt a one-time upgrade to the latest available firmware version."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 18,
+ "max_table_size_global": 18,
+ "max_table_size_item": 0,
+ "path": "extension-controller",
+ "q_type": 240,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

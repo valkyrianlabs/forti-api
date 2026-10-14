@@ -1,0 +1,973 @@
+{
+ "name": "phase2",
+ "category": "table",
+ "help": "Configure VPN autokey tunnel.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPsec tunnel name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "phase1name": {
+   "name": "phase1name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Phase 1 determines the options required for phase 2.",
+   "required": true,
+   "datasource": [
+    "vpn.ipsec.phase1.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dhcp-ipsec": {
+   "name": "dhcp-ipsec",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DHCP-IPsec.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "use-natip": {
+   "name": "use-natip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to use the FortiGate public IP as the source selector when outbound NAT is used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Replace source selector with interface IP when using outbound NAT."
+    },
+    {
+     "name": "disable",
+     "help": "Do not modify source selector when using outbound NAT."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "selector-match": {
+   "name": "selector-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Match type to use when comparing selectors.",
+   "options": [
+    {
+     "name": "exact",
+     "help": "Match selectors exactly."
+    },
+    {
+     "name": "subset",
+     "help": "Match selectors by subset."
+    },
+    {
+     "name": "auto",
+     "help": "Use subset or exact match depending on selector address type."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "proposal": {
+   "name": "proposal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Phase2 proposal.",
+   "required": true,
+   "options": [
+    {
+     "name": "null-md5",
+     "help": "null-md5"
+    },
+    {
+     "name": "null-sha1",
+     "help": "null-sha1"
+    },
+    {
+     "name": "null-sha256",
+     "help": "null-sha256"
+    },
+    {
+     "name": "null-sha384",
+     "help": "null-sha384"
+    },
+    {
+     "name": "null-sha512",
+     "help": "null-sha512"
+    },
+    {
+     "name": "des-null",
+     "help": "des-null"
+    },
+    {
+     "name": "des-md5",
+     "help": "des-md5"
+    },
+    {
+     "name": "des-sha1",
+     "help": "des-sha1"
+    },
+    {
+     "name": "des-sha256",
+     "help": "des-sha256"
+    },
+    {
+     "name": "des-sha384",
+     "help": "des-sha384"
+    },
+    {
+     "name": "des-sha512",
+     "help": "des-sha512"
+    },
+    {
+     "name": "3des-null",
+     "help": "3des-null"
+    },
+    {
+     "name": "3des-md5",
+     "help": "3des-md5"
+    },
+    {
+     "name": "3des-sha1",
+     "help": "3des-sha1"
+    },
+    {
+     "name": "3des-sha256",
+     "help": "3des-sha256"
+    },
+    {
+     "name": "3des-sha384",
+     "help": "3des-sha384"
+    },
+    {
+     "name": "3des-sha512",
+     "help": "3des-sha512"
+    },
+    {
+     "name": "aes128-null",
+     "help": "aes128-null"
+    },
+    {
+     "name": "aes128-md5",
+     "help": "aes128-md5"
+    },
+    {
+     "name": "aes128-sha1",
+     "help": "aes128-sha1"
+    },
+    {
+     "name": "aes128-sha256",
+     "help": "aes128-sha256"
+    },
+    {
+     "name": "aes128-sha384",
+     "help": "aes128-sha384"
+    },
+    {
+     "name": "aes128-sha512",
+     "help": "aes128-sha512"
+    },
+    {
+     "name": "aes128gcm",
+     "help": "aes128gcm"
+    },
+    {
+     "name": "aes192-null",
+     "help": "aes192-null"
+    },
+    {
+     "name": "aes192-md5",
+     "help": "aes192-md5"
+    },
+    {
+     "name": "aes192-sha1",
+     "help": "aes192-sha1"
+    },
+    {
+     "name": "aes192-sha256",
+     "help": "aes192-sha256"
+    },
+    {
+     "name": "aes192-sha384",
+     "help": "aes192-sha384"
+    },
+    {
+     "name": "aes192-sha512",
+     "help": "aes192-sha512"
+    },
+    {
+     "name": "aes256-null",
+     "help": "aes256-null"
+    },
+    {
+     "name": "aes256-md5",
+     "help": "aes256-md5"
+    },
+    {
+     "name": "aes256-sha1",
+     "help": "aes256-sha1"
+    },
+    {
+     "name": "aes256-sha256",
+     "help": "aes256-sha256"
+    },
+    {
+     "name": "aes256-sha384",
+     "help": "aes256-sha384"
+    },
+    {
+     "name": "aes256-sha512",
+     "help": "aes256-sha512"
+    },
+    {
+     "name": "aes256gcm",
+     "help": "aes256gcm"
+    },
+    {
+     "name": "chacha20poly1305",
+     "help": "chacha20poly1305"
+    },
+    {
+     "name": "aria128-null",
+     "help": "aria128-null"
+    },
+    {
+     "name": "aria128-md5",
+     "help": "aria128-md5"
+    },
+    {
+     "name": "aria128-sha1",
+     "help": "aria128-sha1"
+    },
+    {
+     "name": "aria128-sha256",
+     "help": "aria128-sha256"
+    },
+    {
+     "name": "aria128-sha384",
+     "help": "aria128-sha384"
+    },
+    {
+     "name": "aria128-sha512",
+     "help": "aria128-sha512"
+    },
+    {
+     "name": "aria192-null",
+     "help": "aria192-null"
+    },
+    {
+     "name": "aria192-md5",
+     "help": "aria192-md5"
+    },
+    {
+     "name": "aria192-sha1",
+     "help": "aria192-sha1"
+    },
+    {
+     "name": "aria192-sha256",
+     "help": "aria192-sha256"
+    },
+    {
+     "name": "aria192-sha384",
+     "help": "aria192-sha384"
+    },
+    {
+     "name": "aria192-sha512",
+     "help": "aria192-sha512"
+    },
+    {
+     "name": "aria256-null",
+     "help": "aria256-null"
+    },
+    {
+     "name": "aria256-md5",
+     "help": "aria256-md5"
+    },
+    {
+     "name": "aria256-sha1",
+     "help": "aria256-sha1"
+    },
+    {
+     "name": "aria256-sha256",
+     "help": "aria256-sha256"
+    },
+    {
+     "name": "aria256-sha384",
+     "help": "aria256-sha384"
+    },
+    {
+     "name": "aria256-sha512",
+     "help": "aria256-sha512"
+    },
+    {
+     "name": "seed-null",
+     "help": "seed-null"
+    },
+    {
+     "name": "seed-md5",
+     "help": "seed-md5"
+    },
+    {
+     "name": "seed-sha1",
+     "help": "seed-sha1"
+    },
+    {
+     "name": "seed-sha256",
+     "help": "seed-sha256"
+    },
+    {
+     "name": "seed-sha384",
+     "help": "seed-sha384"
+    },
+    {
+     "name": "seed-sha512",
+     "help": "seed-sha512"
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 10
+  },
+  "pfs": {
+   "name": "pfs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PFS feature.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipv4-df": {
+   "name": "ipv4-df",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable setting and resetting of IPv4 'Don't Fragment' bit.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Set IPv4 DF the same as original packet."
+    },
+    {
+     "name": "disable",
+     "help": "Reset IPv4 DF."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dhgrp": {
+   "name": "dhgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Phase2 DH group.",
+   "options": [
+    {
+     "name": "1",
+     "help": "DH Group 1."
+    },
+    {
+     "name": "2",
+     "help": "DH Group 2."
+    },
+    {
+     "name": "5",
+     "help": "DH Group 5."
+    },
+    {
+     "name": "14",
+     "help": "DH Group 14."
+    },
+    {
+     "name": "15",
+     "help": "DH Group 15."
+    },
+    {
+     "name": "16",
+     "help": "DH Group 16."
+    },
+    {
+     "name": "17",
+     "help": "DH Group 17."
+    },
+    {
+     "name": "18",
+     "help": "DH Group 18."
+    },
+    {
+     "name": "19",
+     "help": "DH Group 19."
+    },
+    {
+     "name": "20",
+     "help": "DH Group 20."
+    },
+    {
+     "name": "21",
+     "help": "DH Group 21."
+    },
+    {
+     "name": "27",
+     "help": "DH Group 27."
+    },
+    {
+     "name": "28",
+     "help": "DH Group 28."
+    },
+    {
+     "name": "29",
+     "help": "DH Group 29."
+    },
+    {
+     "name": "30",
+     "help": "DH Group 30."
+    },
+    {
+     "name": "31",
+     "help": "DH Group 31."
+    },
+    {
+     "name": "32",
+     "help": "DH Group 32."
+    }
+   ],
+   "default": "14",
+   "multiple_values": true,
+   "max_num_values": 3
+  },
+  "replay": {
+   "name": "replay",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable replay detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "keepalive": {
+   "name": "keepalive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable keep alive.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-negotiate": {
+   "name": "auto-negotiate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec SA auto-negotiation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "add-route": {
+   "name": "add-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic route addition.",
+   "options": [
+    {
+     "name": "phase1",
+     "help": "Add route according to phase1 add-route setting."
+    },
+    {
+     "name": "enable",
+     "help": "Add route for remote proxy ID."
+    },
+    {
+     "name": "disable",
+     "help": "Do not add route for remote proxy ID."
+    }
+   ],
+   "default": "phase1",
+   "multiple_values": false
+  },
+  "inbound-dscp-copy": {
+   "name": "inbound-dscp-copy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable copying of the DSCP in the ESP header to the inner IP header.",
+   "options": [
+    {
+     "name": "phase1",
+     "help": "copy the DCSP in the ESP header to the inner IP Header according to the phase1 inbound_dscp_copy setting."
+    },
+    {
+     "name": "enable",
+     "help": "Enable copying of the DSCP in the ESP header to the inner IP header."
+    },
+    {
+     "name": "disable",
+     "help": "Disable copying of the DSCP in the ESP header to the inner IP header."
+    }
+   ],
+   "default": "phase1",
+   "multiple_values": false
+  },
+  "keylifeseconds": {
+   "name": "keylifeseconds",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Phase2 key life in time in seconds (120 - 172800).",
+   "min-value": 120,
+   "max-value": 172800,
+   "default": 43200,
+   "multiple_values": false
+  },
+  "keylifekbs": {
+   "name": "keylifekbs",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Phase2 key life in number of kilobytes of traffic (5120 - 4294967295).",
+   "min-value": 5120,
+   "max-value": 4294967295,
+   "default": 5120,
+   "multiple_values": false
+  },
+  "keylife-type": {
+   "name": "keylife-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Keylife type.",
+   "options": [
+    {
+     "name": "seconds",
+     "help": "Key life in seconds."
+    },
+    {
+     "name": "kbs",
+     "help": "Key life in kilobytes."
+    },
+    {
+     "name": "both",
+     "help": "Key life both."
+    }
+   ],
+   "default": "seconds",
+   "multiple_values": false
+  },
+  "single-source": {
+   "name": "single-source",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable single source IP restriction.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Only single source IP will be accepted."
+    },
+    {
+     "name": "disable",
+     "help": "Source IP range will be accepted."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-overlap": {
+   "name": "route-overlap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action for overlapping routes.",
+   "options": [
+    {
+     "name": "use-old",
+     "help": "Use the old route and do not add the new route."
+    },
+    {
+     "name": "use-new",
+     "help": "Delete the old route and add the new route."
+    },
+    {
+     "name": "allow",
+     "help": "Allow overlapping routes."
+    }
+   ],
+   "default": "use-new",
+   "multiple_values": false
+  },
+  "encapsulation": {
+   "name": "encapsulation",
+   "category": "unitary",
+   "type": "option",
+   "help": "ESP encapsulation mode.",
+   "options": [
+    {
+     "name": "tunnel-mode",
+     "help": "Use tunnel mode encapsulation."
+    },
+    {
+     "name": "transport-mode",
+     "help": "Use transport mode encapsulation."
+    }
+   ],
+   "default": "tunnel-mode",
+   "multiple_values": false
+  },
+  "l2tp": {
+   "name": "l2tp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable L2TP over IPsec.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable L2TP over IPsec."
+    },
+    {
+     "name": "disable",
+     "help": "Disable L2TP over IPsec."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "initiator-ts-narrow": {
+   "name": "initiator-ts-narrow",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable traffic selector narrowing for IKEv2 initiator.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "diffserv": {
+   "name": "diffserv",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable applying DSCP value to the IPsec tunnel outer IP header.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "diffservcode": {
+   "name": "diffservcode",
+   "category": "unitary",
+   "type": "user",
+   "help": "DSCP value to be applied to the IPsec tunnel outer IP header.",
+   "default": "",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Quick mode protocol selector (1 - 255 or 0 for all).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "src-name": {
+   "name": "src-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local proxy ID name.",
+   "required": true,
+   "datasource": [
+    "firewall.address.name",
+    "firewall.addrgrp.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "src-name6": {
+   "name": "src-name6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local proxy ID name.",
+   "required": true,
+   "datasource": [
+    "firewall.address6.name",
+    "firewall.addrgrp6.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "src-addr-type": {
+   "name": "src-addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Local proxy ID type.",
+   "options": [
+    {
+     "name": "subnet",
+     "help": "IPv4 subnet."
+    },
+    {
+     "name": "range",
+     "help": "IPv4 range."
+    },
+    {
+     "name": "ip",
+     "help": "IPv4 IP."
+    },
+    {
+     "name": "name",
+     "help": "IPv4 firewall address or group name."
+    }
+   ],
+   "default": "subnet",
+   "multiple_values": false
+  },
+  "src-start-ip": {
+   "name": "src-start-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Local proxy ID start.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "src-start-ip6": {
+   "name": "src-start-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Local proxy ID IPv6 start.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "src-end-ip": {
+   "name": "src-end-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Local proxy ID end.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "src-end-ip6": {
+   "name": "src-end-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Local proxy ID IPv6 end.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "src-subnet": {
+   "name": "src-subnet",
+   "category": "unitary",
+   "type": "ipv4-classnet-any",
+   "help": "Local proxy ID subnet.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "src-subnet6": {
+   "name": "src-subnet6",
+   "category": "unitary",
+   "type": "ipv6-prefix",
+   "help": "Local proxy ID IPv6 subnet.",
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "src-port": {
+   "name": "src-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Quick mode source port (1 - 65535 or 0 for all).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "dst-name": {
+   "name": "dst-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Remote proxy ID name.",
+   "required": true,
+   "datasource": [
+    "firewall.address.name",
+    "firewall.addrgrp.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "dst-name6": {
+   "name": "dst-name6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Remote proxy ID name.",
+   "required": true,
+   "datasource": [
+    "firewall.address6.name",
+    "firewall.addrgrp6.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "dst-addr-type": {
+   "name": "dst-addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Remote proxy ID type.",
+   "options": [
+    {
+     "name": "subnet",
+     "help": "IPv4 subnet."
+    },
+    {
+     "name": "range",
+     "help": "IPv4 range."
+    },
+    {
+     "name": "ip",
+     "help": "IPv4 IP."
+    },
+    {
+     "name": "name",
+     "help": "IPv4 firewall address or group name."
+    }
+   ],
+   "default": "subnet",
+   "multiple_values": false
+  },
+  "dst-start-ip": {
+   "name": "dst-start-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Remote proxy ID IPv4 start.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dst-start-ip6": {
+   "name": "dst-start-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Remote proxy ID IPv6 start.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "dst-end-ip": {
+   "name": "dst-end-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Remote proxy ID IPv4 end.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dst-end-ip6": {
+   "name": "dst-end-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Remote proxy ID IPv6 end.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "dst-subnet": {
+   "name": "dst-subnet",
+   "category": "unitary",
+   "type": "ipv4-classnet-any",
+   "help": "Remote proxy ID IPv4 subnet.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "dst-subnet6": {
+   "name": "dst-subnet6",
+   "category": "unitary",
+   "type": "ipv6-prefix",
+   "help": "Remote proxy ID IPv6 subnet.",
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "dst-port": {
+   "name": "dst-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Quick mode destination port (1 - 65535 or 0 for all).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 200,
+ "max_table_size_global": 200,
+ "max_table_size_item": 0,
+ "path": "vpn.ipsec",
+ "q_type": 63,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

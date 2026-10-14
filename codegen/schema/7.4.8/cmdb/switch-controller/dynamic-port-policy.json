@@ -1,0 +1,279 @@
+{
+ "name": "dynamic-port-policy",
+ "category": "table",
+ "help": "Configure Dynamic port policy to be applied on the managed FortiSwitch ports through DPP device.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dynamic port policy name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description for the Dynamic port policy.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "fortilink": {
+   "name": "fortilink",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiLink interface for which this Dynamic port policy belongs to.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "policy": {
+   "name": "policy",
+   "category": "table",
+   "help": "Port policies with matching criteria and actions.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Policy name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description for the policy.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable policy.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable policy."
+      },
+      {
+       "name": "disable",
+       "help": "Disable policy."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "option",
+     "help": "Category of Dynamic port policy.",
+     "options": [
+      {
+       "name": "device",
+       "help": "Device category."
+      },
+      {
+       "name": "interface-tag",
+       "help": "Interface Tag category."
+      }
+     ],
+     "default": "device",
+     "multiple_values": false
+    },
+    "match-type": {
+     "name": "match-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Match and retain the devices based on the type.",
+     "options": [
+      {
+       "name": "dynamic",
+       "help": "Matched devices will be removed on dynamic events like link-down,device-inactivity,switch-offline."
+      },
+      {
+       "name": "override",
+       "help": "Matched devices will be retained until the match-period."
+      }
+     ],
+     "default": "dynamic",
+     "multiple_values": false
+    },
+    "match-period": {
+     "name": "match-period",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of days the matched devices will be retained (0 - 120, 0 = always retain).",
+     "min-value": 0,
+     "max-value": 120,
+     "default": 0,
+     "multiple_values": false
+    },
+    "interface-tags": {
+     "name": "interface-tags",
+     "category": "table",
+     "help": "Match policy based on the FortiSwitch interface object tags.",
+     "member_table": true,
+     "mkey": "tag-name",
+     "mkey_type": "string",
+     "children": {
+      "tag-name": {
+       "name": "tag-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "FortiSwitch port tag name.",
+       "datasource": [
+        "switch-controller.switch-interface-tag.name"
+       ],
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "mac": {
+     "name": "mac",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match policy based on MAC address.",
+     "size": 17,
+     "default": "",
+     "multiple_values": false
+    },
+    "hw-vendor": {
+     "name": "hw-vendor",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match policy based on hardware vendor.",
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match policy based on type.",
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "family": {
+     "name": "family",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match policy based on family.",
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "host": {
+     "name": "host",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match policy based on host.",
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "lldp-profile": {
+     "name": "lldp-profile",
+     "category": "unitary",
+     "type": "string",
+     "help": "LLDP profile to be applied when using this policy.",
+     "datasource": [
+      "switch-controller.lldp-profile.name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "qos-policy": {
+     "name": "qos-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "QoS policy to be applied when using this policy.",
+     "datasource": [
+      "switch-controller.qos.qos-policy.name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "802-1x": {
+     "name": "802-1x",
+     "category": "unitary",
+     "type": "string",
+     "help": "802.1x security policy to be applied when using this policy.",
+     "datasource": [
+      "switch-controller.security-policy.802-1X.name",
+      "switch-controller.security-policy.captive-portal.name"
+     ],
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "vlan-policy": {
+     "name": "vlan-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN policy to be applied when using this policy.",
+     "datasource": [
+      "switch-controller.vlan-policy.name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "bounce-port-link": {
+     "name": "bounce-port-link",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable bouncing (administratively bring the link down, up) of a switch port where this policy is applied. Helps to clear and reassign VLAN from lldp-profile.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable bouncing (administratively bring the link down, up) of a switch port where this policy is applied."
+      },
+      {
+       "name": "enable",
+       "help": "Enable bouncing (administratively bring the link down, up) of a switch port where this policy is applied."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "q_type": 335,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

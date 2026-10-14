@@ -1,0 +1,812 @@
+{
+ "name": "fortiguard",
+ "category": "complex",
+ "help": "Configure FortiGuard services.",
+ "children": {
+  "fortiguard-anycast": {
+   "name": "fortiguard-anycast",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of FortiGuard's Anycast network.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of FortiGuard's Anycast network."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of FortiGuard's Anycast network."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fortiguard-anycast-source": {
+   "name": "fortiguard-anycast-source",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure which of Fortinet's servers to provide FortiGuard services in FortiGuard's anycast network. Default is Fortinet.",
+   "options": [
+    {
+     "name": "fortinet",
+     "help": "Use Fortinet's servers to provide FortiGuard services in FortiGuard's anycast network."
+    },
+    {
+     "name": "aws",
+     "help": "Use Fortinet's AWS servers to provide FortiGuard services in FortiGuard's anycast network."
+    },
+    {
+     "name": "debug",
+     "help": "Use Fortinet's internal test servers to provide FortiGuard services in FortiGuard's anycast network."
+    }
+   ],
+   "default": "fortinet",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocol used to communicate with the FortiGuard servers.",
+   "options": [
+    {
+     "name": "udp",
+     "help": "UDP for server communication (for use by FortiGuard or FortiManager)."
+    },
+    {
+     "name": "http",
+     "help": "HTTP for server communication (for use only by FortiManager)."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS for server communication (for use by FortiGuard or FortiManager)."
+    }
+   ],
+   "default": "https",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Port used to communicate with the FortiGuard servers.",
+   "options": [
+    {
+     "name": "8888",
+     "help": "port 8888 for server communication."
+    },
+    {
+     "name": "53",
+     "help": "port 53 for server communication."
+    },
+    {
+     "name": "80",
+     "help": "port 80 for server communication."
+    },
+    {
+     "name": "443",
+     "help": "port 443 for server communication."
+    }
+   ],
+   "default": "443",
+   "multiple_values": false
+  },
+  "load-balance-servers": {
+   "name": "load-balance-servers",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of servers to alternate between as first FortiGuard option.",
+   "min-value": 1,
+   "max-value": 266,
+   "default": 1,
+   "multiple_values": false
+  },
+  "auto-join-forticloud": {
+   "name": "auto-join-forticloud",
+   "category": "unitary",
+   "type": "option",
+   "help": "Automatically connect to and login to FortiCloud.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic connection and login to FortiCloud."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic connection and login to FortiCloud."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "update-server-location": {
+   "name": "update-server-location",
+   "category": "unitary",
+   "type": "option",
+   "help": "Location from which to receive FortiGuard updates.",
+   "options": [
+    {
+     "name": "automatic",
+     "help": "FortiGuard servers chosen based on closest proximity to FortiGate unit."
+    },
+    {
+     "name": "usa",
+     "help": "FortiGuard servers in United States."
+    },
+    {
+     "name": "eu",
+     "help": "FortiGuard servers in the European Union."
+    }
+   ],
+   "default": "automatic",
+   "multiple_values": false
+  },
+  "sandbox-region": {
+   "name": "sandbox-region",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiCloud Sandbox region.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "sandbox-inline-scan": {
+   "name": "sandbox-inline-scan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiCloud Sandbox inline-scan.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiCloud Sandbox inline scan."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiCloud Sandbox inline scan."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "update-ffdb": {
+   "name": "update-ffdb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Internet Service Database update.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Internet Service Database update."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Internet Service Database update."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "update-uwdb": {
+   "name": "update-uwdb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowlist update.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable allowlist update."
+    },
+    {
+     "name": "disable",
+     "help": "Disable allowlist update."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "update-dldb": {
+   "name": "update-dldb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DLP signature update.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DLP signature update."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DLP signature update."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "update-extdb": {
+   "name": "update-extdb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable external resource update.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable external resource update."
+    },
+    {
+     "name": "disable",
+     "help": "Disable external resource update."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "update-build-proxy": {
+   "name": "update-build-proxy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable proxy dictionary rebuild.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable proxy dictionary rebuild."
+    },
+    {
+     "name": "disable",
+     "help": "Disable proxy dictionary rebuild."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "persistent-connection": {
+   "name": "persistent-connection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of persistent connection to receive update notification from FortiGuard.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable persistent connection to receive update notification from FortiGuard."
+    },
+    {
+     "name": "disable",
+     "help": "Disable persistent connection to receive update notification from FortiGuard."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vdom": {
+   "name": "vdom",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGuard Service virtual domain name.",
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "auto-firmware-upgrade": {
+   "name": "auto-firmware-upgrade",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic patch-level firmware upgrade from FortiGuard. The FortiGate unit searches for new patches only in the same major and minor version.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic patch-level firmware upgrade to latest version from FortiGuard."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic patch-level firmware upgrade to latest version from FortiGuard."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "auto-firmware-upgrade-day": {
+   "name": "auto-firmware-upgrade-day",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed day(s) of the week to install an automatic patch-level firmware upgrade from FortiGuard (default is none). Disallow any day of the week to use auto-firmware-upgrade-delay instead, which waits for designated days before installing an automatic patch-level firmware upgrade.",
+   "options": [
+    {
+     "name": "sunday",
+     "help": "Sunday."
+    },
+    {
+     "name": "monday",
+     "help": "Monday."
+    },
+    {
+     "name": "tuesday",
+     "help": "Tuesday."
+    },
+    {
+     "name": "wednesday",
+     "help": "Wednesday."
+    },
+    {
+     "name": "thursday",
+     "help": "Thursday."
+    },
+    {
+     "name": "friday",
+     "help": "Friday."
+    },
+    {
+     "name": "saturday",
+     "help": "Saturday."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "auto-firmware-upgrade-delay": {
+   "name": "auto-firmware-upgrade-delay",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Delay of day(s) before installing an automatic patch-level firmware upgrade from FortiGuard (default = 3). Set it 0 to use auto-firmware-upgrade-day instead, which selects allowed day(s) of the week for installing an automatic patch-level firmware upgrade.",
+   "min-value": 0,
+   "max-value": 14,
+   "default": 3,
+   "multiple_values": false
+  },
+  "auto-firmware-upgrade-start-hour": {
+   "name": "auto-firmware-upgrade-start-hour",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Start time in the designated time window for automatic patch-level firmware upgrade from FortiGuard in 24 hour time (0 ~ 23, default = 2). The actual upgrade time is selected randomly within the time window.",
+   "min-value": 0,
+   "max-value": 23,
+   "default": 1,
+   "multiple_values": false
+  },
+  "auto-firmware-upgrade-end-hour": {
+   "name": "auto-firmware-upgrade-end-hour",
+   "category": "unitary",
+   "type": "integer",
+   "help": "End time in the designated time window for automatic patch-level firmware upgrade from FortiGuard in 24 hour time (0 ~ 23, default = 4). When the end time is smaller than the start time, the end time is interpreted as the next day. The actual upgrade time is selected randomly within the time window.",
+   "min-value": 0,
+   "max-value": 23,
+   "default": 4,
+   "multiple_values": false
+  },
+  "FDS-license-expiring-days": {
+   "name": "FDS-license-expiring-days",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold for number of days before FortiGuard license expiration to generate license expiring event log (1 - 100 days, default = 15).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 15,
+   "multiple_values": false
+  },
+  "antispam-force-off": {
+   "name": "antispam-force-off",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable turning off the FortiGuard antispam service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Turn off the FortiGuard antispam service."
+    },
+    {
+     "name": "disable",
+     "help": "Allow the FortiGuard antispam service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "antispam-cache": {
+   "name": "antispam-cache",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGuard antispam request caching. Uses a small amount of memory but improves performance.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard antispam request caching."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard antispam request caching."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "antispam-cache-ttl": {
+   "name": "antispam-cache-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time-to-live for antispam cache entries in seconds (300 - 86400). Lower times reduce the cache size. Higher times may improve performance since the cache will have more entries.",
+   "min-value": 300,
+   "max-value": 86400,
+   "default": 1800,
+   "multiple_values": false
+  },
+  "antispam-cache-mpermille": {
+   "name": "antispam-cache-mpermille",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum permille of FortiGate memory the antispam cache is allowed to use (1 - 150).",
+   "min-value": 1,
+   "max-value": 150,
+   "default": 1,
+   "multiple_values": false
+  },
+  "antispam-license": {
+   "name": "antispam-license",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval of time between license checks for the FortiGuard antispam contract.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 4294967295,
+   "multiple_values": false
+  },
+  "antispam-expiration": {
+   "name": "antispam-expiration",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Expiration date of the FortiGuard antispam contract.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "antispam-timeout": {
+   "name": "antispam-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Antispam query time out (1 - 30 sec, default = 7).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 30,
+   "default": 7,
+   "multiple_values": false
+  },
+  "outbreak-prevention-force-off": {
+   "name": "outbreak-prevention-force-off",
+   "category": "unitary",
+   "type": "option",
+   "help": "Turn off FortiGuard Virus Outbreak Prevention service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Turn off FortiGuard antivirus service."
+    },
+    {
+     "name": "disable",
+     "help": "Allow the FortiGuard antivirus service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "outbreak-prevention-cache": {
+   "name": "outbreak-prevention-cache",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGuard Virus Outbreak Prevention cache.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard antivirus caching."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard antivirus caching."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "outbreak-prevention-cache-ttl": {
+   "name": "outbreak-prevention-cache-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time-to-live for FortiGuard Virus Outbreak Prevention cache entries (300 - 86400 sec, default = 300).",
+   "min-value": 300,
+   "max-value": 86400,
+   "default": 300,
+   "multiple_values": false
+  },
+  "outbreak-prevention-cache-mpermille": {
+   "name": "outbreak-prevention-cache-mpermille",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum permille of memory FortiGuard Virus Outbreak Prevention cache can use (1 - 150 permille, default = 1).",
+   "min-value": 1,
+   "max-value": 150,
+   "default": 1,
+   "multiple_values": false
+  },
+  "outbreak-prevention-license": {
+   "name": "outbreak-prevention-license",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval of time between license checks for FortiGuard Virus Outbreak Prevention contract.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 4294967295,
+   "multiple_values": false
+  },
+  "outbreak-prevention-expiration": {
+   "name": "outbreak-prevention-expiration",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Expiration date of FortiGuard Virus Outbreak Prevention contract.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "outbreak-prevention-timeout": {
+   "name": "outbreak-prevention-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiGuard Virus Outbreak Prevention time out (1 - 30 sec, default = 7).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 30,
+   "default": 7,
+   "multiple_values": false
+  },
+  "webfilter-force-off": {
+   "name": "webfilter-force-off",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable turning off the FortiGuard web filtering service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Turn off the FortiGuard web filtering service."
+    },
+    {
+     "name": "disable",
+     "help": "Allow the FortiGuard web filtering service to operate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "webfilter-cache": {
+   "name": "webfilter-cache",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGuard web filter caching.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard web filter caching."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard web filter caching."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "webfilter-cache-ttl": {
+   "name": "webfilter-cache-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time-to-live for web filter cache entries in seconds (300 - 86400).",
+   "min-value": 300,
+   "max-value": 86400,
+   "default": 3600,
+   "multiple_values": false
+  },
+  "webfilter-license": {
+   "name": "webfilter-license",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval of time between license checks for the FortiGuard web filter contract.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 4294967295,
+   "multiple_values": false
+  },
+  "webfilter-expiration": {
+   "name": "webfilter-expiration",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Expiration date of the FortiGuard web filter contract.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "webfilter-timeout": {
+   "name": "webfilter-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Web filter query time out (1 - 30 sec, default = 15).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 30,
+   "default": 15,
+   "multiple_values": false
+  },
+  "sdns-server-ip": {
+   "name": "sdns-server-ip",
+   "category": "unitary",
+   "type": "user",
+   "help": "IP address of the FortiGuard DNS rating server.",
+   "default": "",
+   "multiple_values": true
+  },
+  "sdns-server-port": {
+   "name": "sdns-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to connect to on the FortiGuard DNS rating server.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 53,
+   "multiple_values": false
+  },
+  "anycast-sdns-server-ip": {
+   "name": "anycast-sdns-server-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address of the FortiGuard anycast DNS rating server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "anycast-sdns-server-port": {
+   "name": "anycast-sdns-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to connect to on the FortiGuard anycast DNS rating server.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 853,
+   "multiple_values": false
+  },
+  "sdns-options": {
+   "name": "sdns-options",
+   "category": "unitary",
+   "type": "option",
+   "help": "Customization options for the FortiGuard DNS service.",
+   "options": [
+    {
+     "name": "include-question-section",
+     "help": "Include DNS question section in the FortiGuard DNS setup message."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IPv4 address used to communicate with FortiGuard.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Source IPv6 address used to communicate with FortiGuard.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "proxy-server-ip": {
+   "name": "proxy-server-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hostname or IPv4 address of the proxy server.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "proxy-server-port": {
+   "name": "proxy-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port used to communicate with the proxy server.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "proxy-username": {
+   "name": "proxy-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Proxy user name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "proxy-password": {
+   "name": "proxy-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Proxy user password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "ddns-server-ip": {
+   "name": "ddns-server-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address of the FortiDDNS server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ddns-server-ip6": {
+   "name": "ddns-server-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address of the FortiDDNS server.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ddns-server-port": {
+   "name": "ddns-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port used to communicate with FortiDDNS servers.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 443,
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 199,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

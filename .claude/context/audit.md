@@ -119,3 +119,7 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
 - Found in phase 3: the push API (`monitor/system/external-resource/dynamic`) reports per-command
   errors under a top-level "success" (now `ApiError`); a new push feed needs ~6 s to load before it
   accepts pushes, and pushed entries appear ~6 s later (`feed_state()` exposes both).
+- **Phase 5 (breadth):** 487 cmdb endpoints generated and decoded live (360 tables, 127 singletons,
+  35,240 objects, 0 decode failures); 42+ typed monitor endpoints decoded live (2 need parameters or a
+  GUI session). Every public header compiles standalone (~540 headers). The umbrella header costs
+  ~3.6 s of parsing; area/group/single headers are documented as the faster path.

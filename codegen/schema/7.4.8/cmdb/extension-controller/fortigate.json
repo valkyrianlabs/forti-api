@@ -1,0 +1,110 @@
+{
+ "name": "fortigate",
+ "category": "table",
+ "help": "FortiGate controller configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate entry name.",
+   "required": true,
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate serial number.",
+   "required": true,
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  },
+  "authorized": {
+   "name": "authorized",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGate administration.",
+   "required": true,
+   "options": [
+    {
+     "name": "discovered",
+     "help": "Controller discovered this FortiGate."
+    },
+    {
+     "name": "disable",
+     "help": "Controller is configured to not provide service to this FortiGate."
+    },
+    {
+     "name": "enable",
+     "help": "Controller is configured to provide service to this FortiGate."
+    }
+   ],
+   "default": "discovered",
+   "multiple_values": false
+  },
+  "hostname": {
+   "name": "hostname",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate hostname.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "vdom": {
+   "name": "vdom",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VDOM.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "device-id": {
+   "name": "device-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Device ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 1026,
+   "multiple_values": false
+  },
+  "profile": {
+   "name": "profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate profile configuration.",
+   "datasource": [
+    "extension-controller.fortigate-profile.name"
+   ],
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "extension-controller",
+ "q_type": 236,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,4156 @@
+{
+ "name": "managed-switch",
+ "category": "table",
+ "help": "Configure FortiSwitch devices that are managed by this FortiGate.",
+ "mkey": "switch-id",
+ "mkey_type": "string",
+ "children": {
+  "switch-id": {
+   "name": "switch-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Managed-switch name.",
+   "required": true,
+   "size": 16,
+   "default": "",
+   "multiple_values": false
+  },
+  "sn": {
+   "name": "sn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Managed-switch serial number.",
+   "required": true,
+   "size": 16,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "switch-profile": {
+   "name": "switch-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiSwitch profile.",
+   "datasource": [
+    "switch-controller.switch-profile.name"
+   ],
+   "size": 35,
+   "default": "default",
+   "multiple_values": false
+  },
+  "access-profile": {
+   "name": "access-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiSwitch access profile.",
+   "datasource": [
+    "switch-controller.security-policy.local-access.name"
+   ],
+   "size": 31,
+   "default": "default",
+   "multiple_values": false
+  },
+  "purdue-level": {
+   "name": "purdue-level",
+   "category": "unitary",
+   "type": "option",
+   "help": "Purdue Level of this FortiSwitch.",
+   "options": [
+    {
+     "name": "1",
+     "help": "Level 1 - Basic Control"
+    },
+    {
+     "name": "1.5",
+     "help": "Level 1.5"
+    },
+    {
+     "name": "2",
+     "help": "Level 2 - Area Supervisory Control"
+    },
+    {
+     "name": "2.5",
+     "help": "Level 2.5"
+    },
+    {
+     "name": "3",
+     "help": "Level 3 - Operations & Control"
+    },
+    {
+     "name": "3.5",
+     "help": "Level 3.5"
+    },
+    {
+     "name": "4",
+     "help": "Level 4 - Business Planning & Logistics"
+    },
+    {
+     "name": "5",
+     "help": "Level 5 - Enterprise Network"
+    },
+    {
+     "name": "5.5",
+     "help": "Level 5.5"
+    }
+   ],
+   "default": "3",
+   "multiple_values": false
+  },
+  "fsw-wan1-peer": {
+   "name": "fsw-wan1-peer",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiSwitch WAN1 peer port.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "fsw-wan1-admin": {
+   "name": "fsw-wan1-admin",
+   "category": "unitary",
+   "type": "option",
+   "help": "FortiSwitch WAN1 admin status; enable to authorize the FortiSwitch as a managed switch.",
+   "options": [
+    {
+     "name": "discovered",
+     "help": "Link waiting to be authorized."
+    },
+    {
+     "name": "disable",
+     "help": "Link unauthorized."
+    },
+    {
+     "name": "enable",
+     "help": "Link authorized."
+    }
+   ],
+   "default": "discovered",
+   "multiple_values": false
+  },
+  "poe-pre-standard-detection": {
+   "name": "poe-pre-standard-detection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PoE pre-standard detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable PoE pre-standard detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable PoE pre-standard detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dhcp-server-access-list": {
+   "name": "dhcp-server-access-list",
+   "category": "unitary",
+   "type": "option",
+   "help": "DHCP snooping server access list.",
+   "options": [
+    {
+     "name": "global",
+     "help": "Use global setting for DHCP snooping server access list."
+    },
+    {
+     "name": "enable",
+     "help": "Override global setting and enable DHCP server access list."
+    },
+    {
+     "name": "disable",
+     "help": "Override global setting and disable DHCP server access list."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "poe-detection-type": {
+   "name": "poe-detection-type",
+   "category": "unitary",
+   "type": "integer",
+   "help": "PoE detection type for FortiSwitch.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "directly-connected": {
+   "name": "directly-connected",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Directly connected FortiSwitch.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 1,
+   "default": 0,
+   "multiple_values": false
+  },
+  "version": {
+   "name": "version",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiSwitch version.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "max-allowed-trunk-members": {
+   "name": "max-allowed-trunk-members",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiSwitch maximum allowed trunk members.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "pre-provisioned": {
+   "name": "pre-provisioned",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Pre-provisioned managed switch.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "l3-discovered": {
+   "name": "l3-discovered",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Layer 3 management discovered.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 1,
+   "default": 0,
+   "multiple_values": false
+  },
+  "mgmt-mode": {
+   "name": "mgmt-mode",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiLink management mode.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tunnel-discovered": {
+   "name": "tunnel-discovered",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SOCKS tunnel management discovered.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 1,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tdr-supported": {
+   "name": "tdr-supported",
+   "category": "unitary",
+   "type": "string",
+   "help": "TDR supported.",
+   "readonly": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "dynamic-capability": {
+   "name": "dynamic-capability",
+   "category": "unitary",
+   "type": "user",
+   "help": "List of features this FortiSwitch supports (not configurable) that is sent to the FortiGate device for subsequent configuration initiated by the FortiGate device.",
+   "default": "0x00000000000000000000000000000000",
+   "multiple_values": false
+  },
+  "switch-device-tag": {
+   "name": "switch-device-tag",
+   "category": "unitary",
+   "type": "string",
+   "help": "User definable label/tag.",
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "switch-dhcp_opt43_key": {
+   "name": "switch-dhcp_opt43_key",
+   "category": "unitary",
+   "type": "string",
+   "help": "DHCP option43 key.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "mclag-igmp-snooping-aware": {
+   "name": "mclag-igmp-snooping-aware",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable MCLAG IGMP-snooping awareness.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable MCLAG IGMP-snooping awareness."
+    },
+    {
+     "name": "disable",
+     "help": "Disable MCLAG IGMP-snooping awareness."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dynamically-discovered": {
+   "name": "dynamically-discovered",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Dynamically discovered FortiSwitch.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 1,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ptp-status": {
+   "name": "ptp-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PTP profile on this FortiSwitch.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable PTP profile."
+    },
+    {
+     "name": "enable",
+     "help": "Enable PTP profile."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ptp-profile": {
+   "name": "ptp-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "PTP profile configuration.",
+   "datasource": [
+    "switch-controller.ptp.profile.name"
+   ],
+   "size": 63,
+   "default": "default",
+   "multiple_values": false
+  },
+  "radius-nas-ip-override": {
+   "name": "radius-nas-ip-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use locally defined NAS-IP.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable radius-nas-ip-override."
+    },
+    {
+     "name": "enable",
+     "help": "Enable radius-nas-ip-override."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "radius-nas-ip": {
+   "name": "radius-nas-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "NAS-IP address.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "route-offload": {
+   "name": "route-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable route offload on this FortiSwitch.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable route offload."
+    },
+    {
+     "name": "enable",
+     "help": "Enable route offload."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-offload-mclag": {
+   "name": "route-offload-mclag",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable route offload MCLAG on this FortiSwitch.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable route offload MCLAG."
+    },
+    {
+     "name": "enable",
+     "help": "Enable route offload MCLAG."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-offload-router": {
+   "name": "route-offload-router",
+   "category": "table",
+   "help": "Configure route offload MCLAG IP address.",
+   "mkey": "vlan-name",
+   "mkey_type": "string",
+   "children": {
+    "vlan-name": {
+     "name": "vlan-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "router-ip": {
+     "name": "router-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Router IP address.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "vlan": {
+   "name": "vlan",
+   "category": "table",
+   "help": "Configure VLAN assignment priority.",
+   "mkey": "vlan-name",
+   "mkey_type": "string",
+   "children": {
+    "vlan-name": {
+     "name": "vlan-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "assignment-priority": {
+     "name": "assignment-priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1x Radius (Tunnel-Private-Group-Id) VLANID assign-by-name priority. A smaller value has a higher priority.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 255,
+     "default": 128,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Indication of switch type, physical or virtual.",
+   "options": [
+    {
+     "name": "virtual",
+     "help": "Switch is of type virtual."
+    },
+    {
+     "name": "physical",
+     "help": "Switch is of type physical."
+    }
+   ],
+   "default": "physical",
+   "multiple_values": false
+  },
+  "owner-vdom": {
+   "name": "owner-vdom",
+   "category": "unitary",
+   "type": "string",
+   "help": "VDOM which owner of port belongs to.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "flow-identity": {
+   "name": "flow-identity",
+   "category": "unitary",
+   "type": "user",
+   "help": "Flow-tracking netflow ipfix switch identity in hex format(00000000-FFFFFFFF default=0).",
+   "default": "00000000",
+   "multiple_values": false
+  },
+  "staged-image-version": {
+   "name": "staged-image-version",
+   "category": "unitary",
+   "type": "string",
+   "help": "Staged image version for FortiSwitch.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "delayed-restart-trigger": {
+   "name": "delayed-restart-trigger",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Delayed restart triggered for this FortiSwitch.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "firmware-provision": {
+   "name": "firmware-provision",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable provisioning of firmware to FortiSwitches on join connection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable firmware-provision."
+    },
+    {
+     "name": "disable",
+     "help": "Disable firmware-provision."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "firmware-provision-version": {
+   "name": "firmware-provision-version",
+   "category": "unitary",
+   "type": "string",
+   "help": "Firmware version to provision to this FortiSwitch on bootup (major.minor.build, i.e. 6.2.1234).",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "firmware-provision-latest": {
+   "name": "firmware-provision-latest",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable one-time automatic provisioning of the latest firmware version.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not automatically provision the latest available firmware."
+    },
+    {
+     "name": "once",
+     "help": "Automatically attempt a one-time upgrade to the latest available firmware version."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ports": {
+   "name": "ports",
+   "category": "table",
+   "help": "Managed-switch port list.",
+   "mkey": "port-name",
+   "mkey_type": "string",
+   "children": {
+    "port-name": {
+     "name": "port-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch port name.",
+     "required": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port-owner": {
+     "name": "port-owner",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch port name.",
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "switch-id": {
+     "name": "switch-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch id.",
+     "readonly": true,
+     "size": 16,
+     "default": "",
+     "multiple_values": false
+    },
+    "speed": {
+     "name": "speed",
+     "category": "unitary",
+     "type": "option",
+     "help": "Switch port speed; default and available settings depend on hardware.",
+     "options": [
+      {
+       "name": "10half",
+       "help": "10M half-duplex."
+      },
+      {
+       "name": "10full",
+       "help": "10M full-duplex."
+      },
+      {
+       "name": "100half",
+       "help": "100M half-duplex."
+      },
+      {
+       "name": "100full",
+       "help": "100M full-duplex."
+      },
+      {
+       "name": "1000full",
+       "help": "1G full-duplex"
+      },
+      {
+       "name": "10000full",
+       "help": "10G full-duplex"
+      },
+      {
+       "name": "auto",
+       "help": "Auto-negotiation."
+      },
+      {
+       "name": "1000auto",
+       "help": "Auto-negotiation (1G full-duplex only)."
+      },
+      {
+       "name": "1000full-fiber",
+       "help": "1G full-duplex (fiber SFPs only)"
+      },
+      {
+       "name": "40000full",
+       "help": "40G full-duplex"
+      },
+      {
+       "name": "auto-module",
+       "help": "Auto Module."
+      },
+      {
+       "name": "100FX-half",
+       "help": "100Mbps half-duplex.100Base-FX."
+      },
+      {
+       "name": "100FX-full",
+       "help": "100Mbps full-duplex.100Base-FX."
+      },
+      {
+       "name": "100000full",
+       "help": "100Gbps full-duplex."
+      },
+      {
+       "name": "2500auto",
+       "help": "Auto-Negotiation (2.5Gbps Only)."
+      },
+      {
+       "name": "2500full",
+       "help": "2.5Gbps full-duplex."
+      },
+      {
+       "name": "25000full",
+       "help": "25Gbps full-duplex."
+      },
+      {
+       "name": "50000full",
+       "help": "50Gbps full-duplex."
+      },
+      {
+       "name": "10000cr",
+       "help": "10Gbps copper interface."
+      },
+      {
+       "name": "10000sr",
+       "help": "10Gbps SFI interface."
+      },
+      {
+       "name": "100000sr4",
+       "help": "100Gbps SFI interface."
+      },
+      {
+       "name": "100000cr4",
+       "help": "100Gbps copper interface."
+      },
+      {
+       "name": "40000sr4",
+       "help": "40Gbps SFI interface."
+      },
+      {
+       "name": "40000cr4",
+       "help": "40Gbps copper interface."
+      },
+      {
+       "name": "40000auto",
+       "help": "Auto-Negotiation (40Gbps Only)."
+      },
+      {
+       "name": "25000cr",
+       "help": "25Gbps copper interface."
+      },
+      {
+       "name": "25000sr",
+       "help": "25Gbps SFI interface."
+      },
+      {
+       "name": "50000cr",
+       "help": "50Gbps copper interface."
+      },
+      {
+       "name": "50000sr",
+       "help": "50Gbps SFI interface."
+      },
+      {
+       "name": "5000auto",
+       "help": "5Gbps full-duplex."
+      }
+     ],
+     "default": "auto",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Switch port admin status: up or down.",
+     "options": [
+      {
+       "name": "up",
+       "help": "Set admin status up."
+      },
+      {
+       "name": "down",
+       "help": "Set admin status down."
+      }
+     ],
+     "default": "up",
+     "multiple_values": false
+    },
+    "poe-status": {
+     "name": "poe-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable PoE status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable PoE status."
+      },
+      {
+       "name": "disable",
+       "help": "Disable PoE status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ip-source-guard": {
+     "name": "ip-source-guard",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable IP source guard.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable IP source guard."
+      },
+      {
+       "name": "enable",
+       "help": "Enable IP source guard."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "ptp-status": {
+     "name": "ptp-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable PTP policy on this FortiSwitch port.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable PTP policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable PTP policy."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ptp-policy": {
+     "name": "ptp-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "PTP policy configuration.",
+     "datasource": [
+      "switch-controller.ptp.interface-policy.name"
+     ],
+     "size": 63,
+     "default": "default",
+     "multiple_values": false
+    },
+    "dsl-profile": {
+     "name": "dsl-profile",
+     "category": "unitary",
+     "type": "string",
+     "help": "DSL policy configuration.",
+     "datasource": [
+      "switch-controller.dsl.policy.name"
+     ],
+     "size": 63,
+     "default": "default",
+     "multiple_values": false
+    },
+    "aggregator-mode": {
+     "name": "aggregator-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LACP member select mode.",
+     "options": [
+      {
+       "name": "bandwidth",
+       "help": "Member selection based on largest total bandwidth of links of similar speed."
+      },
+      {
+       "name": "count",
+       "help": "Member selection based on largest count of similar link speed."
+      }
+     ],
+     "default": "bandwidth",
+     "multiple_values": false
+    },
+    "flapguard": {
+     "name": "flapguard",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable flap guard.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable FlapGuard for this port."
+      },
+      {
+       "name": "disable",
+       "help": "Disable FlapGuard for this port."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "flap-rate": {
+     "name": "flap-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of stage change events needed within flap-duration.",
+     "min-value": 1,
+     "max-value": 30,
+     "default": 5,
+     "multiple_values": false
+    },
+    "flap-duration": {
+     "name": "flap-duration",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Period over which flap events are calculated (seconds).",
+     "min-value": 5,
+     "max-value": 300,
+     "default": 30,
+     "multiple_values": false
+    },
+    "flap-timeout": {
+     "name": "flap-timeout",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Flap guard disabling protection (min).",
+     "min-value": 0,
+     "max-value": 120,
+     "default": 0,
+     "multiple_values": false
+    },
+    "rpvst-port": {
+     "name": "rpvst-port",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable inter-operability with rapid PVST on this interface.",
+     "options": [
+      {
+       "name": "disabled",
+       "help": "Disable inter-operability with rapid PVST on this interface."
+      },
+      {
+       "name": "enabled",
+       "help": "Enable inter-operability with rapid PVST on this interface."
+      }
+     ],
+     "default": "disabled",
+     "multiple_values": false
+    },
+    "poe-pre-standard-detection": {
+     "name": "poe-pre-standard-detection",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable PoE pre-standard detection.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable PoE pre-standard detection."
+      },
+      {
+       "name": "disable",
+       "help": "Disable PoE pre-standard detection."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "port-number": {
+     "name": "port-number",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port number.",
+     "readonly": true,
+     "min-value": 1,
+     "max-value": 64,
+     "default": 0,
+     "multiple_values": false
+    },
+    "port-prefix-type": {
+     "name": "port-prefix-type",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port prefix type.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "fortilink-port": {
+     "name": "fortilink-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "FortiLink uplink port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "poe-capable": {
+     "name": "poe-capable",
+     "category": "unitary",
+     "type": "integer",
+     "help": "PoE capable.",
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "pd-capable": {
+     "name": "pd-capable",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Powered device capable.",
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "stacking-port": {
+     "name": "stacking-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Stacking port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "p2p-port": {
+     "name": "p2p-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "General peer to peer tunnel port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "mclag-icl-port": {
+     "name": "mclag-icl-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "MCLAG-ICL port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "authenticated-port": {
+     "name": "authenticated-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Peer to Peer Authenticated port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "restricted-auth-port": {
+     "name": "restricted-auth-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Peer to Peer Restricted Authenticated port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "encrypted-port": {
+     "name": "encrypted-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Peer to Peer Encrypted port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "fiber-port": {
+     "name": "fiber-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Fiber-port.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "media-type": {
+     "name": "media-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Media type.",
+     "readonly": true,
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "poe-standard": {
+     "name": "poe-standard",
+     "category": "unitary",
+     "type": "string",
+     "help": "PoE standard supported.",
+     "readonly": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "poe-max-power": {
+     "name": "poe-max-power",
+     "category": "unitary",
+     "type": "string",
+     "help": "PoE maximum power.",
+     "readonly": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "poe-mode-bt-cabable": {
+     "name": "poe-mode-bt-cabable",
+     "category": "unitary",
+     "type": "integer",
+     "help": "PoE mode IEEE 802.3BT capable.",
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "poe-port-mode": {
+     "name": "poe-port-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure PoE port mode.",
+     "options": [
+      {
+       "name": "ieee802-3af",
+       "help": "IEEE802.3 AF."
+      },
+      {
+       "name": "ieee802-3at",
+       "help": "IEEE802.3 AT."
+      },
+      {
+       "name": "ieee802-3bt",
+       "help": "IEEE802.3 BT."
+      }
+     ],
+     "default": "ieee802-3at",
+     "multiple_values": false
+    },
+    "poe-port-priority": {
+     "name": "poe-port-priority",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure PoE port priority.",
+     "options": [
+      {
+       "name": "critical-priority",
+       "help": "Critical Priority."
+      },
+      {
+       "name": "high-priority",
+       "help": "High Priority."
+      },
+      {
+       "name": "low-priority",
+       "help": "Low Priority."
+      },
+      {
+       "name": "medium-priority",
+       "help": "Medium Priority."
+      }
+     ],
+     "default": "low-priority",
+     "multiple_values": false
+    },
+    "poe-port-power": {
+     "name": "poe-port-power",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure PoE port power.",
+     "options": [
+      {
+       "name": "normal",
+       "help": "Power not delivered during boot."
+      },
+      {
+       "name": "perpetual",
+       "help": "Power delivered during soft reboot."
+      },
+      {
+       "name": "perpetual-fast",
+       "help": "Early power delivered during cold boot."
+      }
+     ],
+     "default": "normal",
+     "multiple_values": false
+    },
+    "flags": {
+     "name": "flags",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port properties flags.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "isl-local-trunk-name": {
+     "name": "isl-local-trunk-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "ISL local trunk name.",
+     "readonly": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "isl-peer-port-name": {
+     "name": "isl-peer-port-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "ISL peer port name.",
+     "readonly": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "isl-peer-device-name": {
+     "name": "isl-peer-device-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "ISL peer device name.",
+     "readonly": true,
+     "size": 16,
+     "default": "",
+     "multiple_values": false
+    },
+    "isl-peer-device-sn": {
+     "name": "isl-peer-device-sn",
+     "category": "unitary",
+     "type": "string",
+     "help": "ISL peer device serial number.",
+     "readonly": true,
+     "size": 16,
+     "default": "",
+     "multiple_values": false
+    },
+    "fgt-peer-port-name": {
+     "name": "fgt-peer-port-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "FGT peer port name.",
+     "readonly": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "fgt-peer-device-name": {
+     "name": "fgt-peer-device-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "FGT peer device name.",
+     "readonly": true,
+     "size": 16,
+     "default": "",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "string",
+     "help": "Assign switch ports to a VLAN.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "allowed-vlans-all": {
+     "name": "allowed-vlans-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable all defined vlans on this port.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable all defined VLANs on this port."
+      },
+      {
+       "name": "disable",
+       "help": "Disable all defined VLANs on this port."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "allowed-vlans": {
+     "name": "allowed-vlans",
+     "category": "table",
+     "help": "Configure switch port tagged VLANs.",
+     "member_table": true,
+     "mkey": "vlan-name",
+     "mkey_type": "string",
+     "children": {
+      "vlan-name": {
+       "name": "vlan-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "VLAN name.",
+       "required": true,
+       "datasource": [
+        "system.interface.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "untagged-vlans": {
+     "name": "untagged-vlans",
+     "category": "table",
+     "help": "Configure switch port untagged VLANs.",
+     "member_table": true,
+     "mkey": "vlan-name",
+     "mkey_type": "string",
+     "children": {
+      "vlan-name": {
+       "name": "vlan-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "VLAN name.",
+       "required": true,
+       "datasource": [
+        "system.interface.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Interface type: physical or trunk port.",
+     "options": [
+      {
+       "name": "physical",
+       "help": "Physical port."
+      },
+      {
+       "name": "trunk",
+       "help": "Trunk port."
+      }
+     ],
+     "default": "physical",
+     "multiple_values": false
+    },
+    "access-mode": {
+     "name": "access-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Access mode of the port.",
+     "options": [
+      {
+       "name": "dynamic",
+       "help": "Dynamic mode."
+      },
+      {
+       "name": "nac",
+       "help": "NAC mode."
+      },
+      {
+       "name": "static",
+       "help": "Static mode."
+      }
+     ],
+     "default": "static",
+     "multiple_values": false
+    },
+    "matched-dpp-policy": {
+     "name": "matched-dpp-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "Matched child policy in the dynamic port policy.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "matched-dpp-intf-tags": {
+     "name": "matched-dpp-intf-tags",
+     "category": "unitary",
+     "type": "string",
+     "help": "Matched interface tags in the dynamic port policy.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "acl-group": {
+     "name": "acl-group",
+     "category": "table",
+     "help": "ACL groups on this port.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "ACL group name.",
+       "datasource": [
+        "switch-controller.acl.group.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "fortiswitch-acls": {
+     "name": "fortiswitch-acls",
+     "category": "table",
+     "help": "ACLs on this port.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "ACL ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dhcp-snooping": {
+     "name": "dhcp-snooping",
+     "category": "unitary",
+     "type": "option",
+     "help": "Trusted or untrusted DHCP-snooping interface.",
+     "options": [
+      {
+       "name": "untrusted",
+       "help": "Untrusted DHCP snooping interface."
+      },
+      {
+       "name": "trusted",
+       "help": "Trusted DHCP snooping interface."
+      }
+     ],
+     "default": "untrusted",
+     "multiple_values": false
+    },
+    "dhcp-snoop-option82-trust": {
+     "name": "dhcp-snoop-option82-trust",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable allowance of DHCP with option-82 on untrusted interface.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable allowance of DHCP with option-82 on untrusted interface."
+      },
+      {
+       "name": "disable",
+       "help": "Disable allowance of DHCP with option-82 on untrusted interface."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "dhcp-snoop-option82-override": {
+     "name": "dhcp-snoop-option82-override",
+     "category": "table",
+     "help": "Configure DHCP snooping option 82 override.",
+     "mkey": "vlan-name",
+     "mkey_type": "string",
+     "children": {
+      "vlan-name": {
+       "name": "vlan-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "DHCP snooping option 82 VLAN.",
+       "datasource": [
+        "system.interface.name"
+       ],
+       "size": 15,
+       "default": "",
+       "multiple_values": false
+      },
+      "circuit-id": {
+       "name": "circuit-id",
+       "category": "unitary",
+       "type": "string",
+       "help": "Circuit ID string.",
+       "size": 254,
+       "default": "",
+       "multiple_values": false
+      },
+      "remote-id": {
+       "name": "remote-id",
+       "category": "unitary",
+       "type": "string",
+       "help": "Remote ID string.",
+       "size": 254,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "arp-inspection-trust": {
+     "name": "arp-inspection-trust",
+     "category": "unitary",
+     "type": "option",
+     "help": "Trusted or untrusted dynamic ARP inspection.",
+     "options": [
+      {
+       "name": "untrusted",
+       "help": "Untrusted dynamic ARP inspection."
+      },
+      {
+       "name": "trusted",
+       "help": "Trusted dynamic ARP inspection."
+      }
+     ],
+     "default": "untrusted",
+     "multiple_values": false
+    },
+    "igmp-snooping-flood-reports": {
+     "name": "igmp-snooping-flood-reports",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable flooding of IGMP reports to this interface when igmp-snooping enabled.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable flooding of IGMP snooping reports to this interface."
+      },
+      {
+       "name": "disable",
+       "help": "Disable flooding of IGMP snooping reports to this interface."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "mcast-snooping-flood-traffic": {
+     "name": "mcast-snooping-flood-traffic",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable flooding of IGMP snooping traffic to this interface.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable flooding of IGMP snooping traffic to this interface."
+      },
+      {
+       "name": "disable",
+       "help": "Disable flooding of IGMP snooping traffic to this interface."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "stp-state": {
+     "name": "stp-state",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable Spanning Tree Protocol (STP) on this interface.",
+     "options": [
+      {
+       "name": "enabled",
+       "help": "Enable STP on this interface."
+      },
+      {
+       "name": "disabled",
+       "help": "Disable STP on this interface."
+      }
+     ],
+     "default": "enabled",
+     "multiple_values": false
+    },
+    "stp-root-guard": {
+     "name": "stp-root-guard",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable STP root guard on this interface.",
+     "options": [
+      {
+       "name": "enabled",
+       "help": "Enable STP root-guard on this interface."
+      },
+      {
+       "name": "disabled",
+       "help": "Disable STP root-guard on this interface."
+      }
+     ],
+     "default": "disabled",
+     "multiple_values": false
+    },
+    "stp-bpdu-guard": {
+     "name": "stp-bpdu-guard",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable STP BPDU guard on this interface.",
+     "options": [
+      {
+       "name": "enabled",
+       "help": "Enable STP BPDU guard on this interface."
+      },
+      {
+       "name": "disabled",
+       "help": "Disable STP BPDU guard on this interface."
+      }
+     ],
+     "default": "disabled",
+     "multiple_values": false
+    },
+    "stp-bpdu-guard-timeout": {
+     "name": "stp-bpdu-guard-timeout",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BPDU Guard disabling protection (0 - 120 min).",
+     "min-value": 0,
+     "max-value": 120,
+     "default": 5,
+     "multiple_values": false
+    },
+    "edge-port": {
+     "name": "edge-port",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this interface as an edge port, bridging connections between workstations and/or computers.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable this interface as an edge port."
+      },
+      {
+       "name": "disable",
+       "help": "Disable this interface as an edge port."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "discard-mode": {
+     "name": "discard-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure discard mode for port.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Discard disabled."
+      },
+      {
+       "name": "all-untagged",
+       "help": "Discard all frames that are untagged."
+      },
+      {
+       "name": "all-tagged",
+       "help": "Discard all frames that are tagged."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "packet-sampler": {
+     "name": "packet-sampler",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable packet sampling on this interface.",
+     "options": [
+      {
+       "name": "enabled",
+       "help": "Enable packet sampling on this interface."
+      },
+      {
+       "name": "disabled",
+       "help": "Disable packet sampling on this interface."
+      }
+     ],
+     "default": "disabled",
+     "multiple_values": false
+    },
+    "packet-sample-rate": {
+     "name": "packet-sample-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Packet sampling rate (0 - 99999 p/sec).",
+     "min-value": 0,
+     "max-value": 99999,
+     "default": 512,
+     "multiple_values": false
+    },
+    "sflow-counter-interval": {
+     "name": "sflow-counter-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "sFlow sampling counter polling interval in seconds (0 - 255).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sample-direction": {
+     "name": "sample-direction",
+     "category": "unitary",
+     "type": "option",
+     "help": "Packet sampling direction.",
+     "options": [
+      {
+       "name": "tx",
+       "help": "Monitor transmitted traffic."
+      },
+      {
+       "name": "rx",
+       "help": "Monitor received traffic."
+      },
+      {
+       "name": "both",
+       "help": "Monitor transmitted and received traffic."
+      }
+     ],
+     "default": "both",
+     "multiple_values": false
+    },
+    "fec-capable": {
+     "name": "fec-capable",
+     "category": "unitary",
+     "type": "integer",
+     "help": "FEC capable.",
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "fec-state": {
+     "name": "fec-state",
+     "category": "unitary",
+     "type": "option",
+     "help": "State of forward error correction.",
+     "options": [
+      {
+       "name": "disabled",
+       "help": "Disable forward error correction."
+      },
+      {
+       "name": "cl74",
+       "help": "Enable Clause 74 FC-FEC, which only applies to 25Gbps."
+      },
+      {
+       "name": "cl91",
+       "help": "Enable Clause 91 RS-FEC, which only applies to 100Gbps."
+      },
+      {
+       "name": "detect-by-module",
+       "help": "FEC supported by module."
+      }
+     ],
+     "default": "detect-by-module",
+     "multiple_values": false
+    },
+    "flow-control": {
+     "name": "flow-control",
+     "category": "unitary",
+     "type": "option",
+     "help": "Flow control direction.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable flow control."
+      },
+      {
+       "name": "tx",
+       "help": "Enable flow control for transmission pause control frames."
+      },
+      {
+       "name": "rx",
+       "help": "Enable flow control for receive pause control frames."
+      },
+      {
+       "name": "both",
+       "help": "Enable flow control for both transmission and receive pause control frames."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "pause-meter": {
+     "name": "pause-meter",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Configure ingress pause metering rate, in kbps (default = 0, disabled).",
+     "min-value": 128,
+     "max-value": 2147483647,
+     "default": 0,
+     "multiple_values": false
+    },
+    "pause-meter-resume": {
+     "name": "pause-meter-resume",
+     "category": "unitary",
+     "type": "option",
+     "help": "Resume threshold for resuming traffic on ingress port.",
+     "options": [
+      {
+       "name": "75%",
+       "help": "Back pressure state won't be cleared until bucket count falls below 75% of pause threshold."
+      },
+      {
+       "name": "50%",
+       "help": "Back pressure state won't be cleared until bucket count falls below 50% of pause threshold."
+      },
+      {
+       "name": "25%",
+       "help": "Back pressure state won't be cleared until bucket count falls below 25% of pause threshold."
+      }
+     ],
+     "default": "50%",
+     "multiple_values": false
+    },
+    "loop-guard": {
+     "name": "loop-guard",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable loop-guard on this interface, an STP optimization used to prevent network loops.",
+     "options": [
+      {
+       "name": "enabled",
+       "help": "Enable loop-guard on this interface."
+      },
+      {
+       "name": "disabled",
+       "help": "Disable loop-guard on this interface."
+      }
+     ],
+     "default": "disabled",
+     "multiple_values": false
+    },
+    "loop-guard-timeout": {
+     "name": "loop-guard-timeout",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Loop-guard timeout (0 - 120 min, default = 45).",
+     "min-value": 0,
+     "max-value": 120,
+     "default": 45,
+     "multiple_values": false
+    },
+    "port-policy": {
+     "name": "port-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch controller dynamic port policy from available options.",
+     "datasource": [
+      "switch-controller.dynamic-port-policy.name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "qos-policy": {
+     "name": "qos-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch controller QoS policy from available options.",
+     "datasource": [
+      "switch-controller.qos.qos-policy.name"
+     ],
+     "size": 63,
+     "default": "default",
+     "multiple_values": false
+    },
+    "storm-control-policy": {
+     "name": "storm-control-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch controller storm control policy from available options.",
+     "datasource": [
+      "switch-controller.storm-control-policy.name"
+     ],
+     "size": 63,
+     "default": "default",
+     "multiple_values": false
+    },
+    "port-security-policy": {
+     "name": "port-security-policy",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch controller authentication policy to apply to this managed switch from available options.",
+     "datasource": [
+      "switch-controller.security-policy.802-1X.name"
+     ],
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "export-to-pool": {
+     "name": "export-to-pool",
+     "category": "unitary",
+     "type": "string",
+     "help": "Switch controller export port to pool-list.",
+     "datasource": [
+      "switch-controller.virtual-port-pool.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "interface-tags": {
+     "name": "interface-tags",
+     "category": "table",
+     "help": "Tag(s) associated with the interface for various features including virtual port pool, dynamic port policy.",
+     "member_table": true,
+     "mkey": "tag-name",
+     "mkey_type": "string",
+     "children": {
+      "tag-name": {
+       "name": "tag-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "FortiSwitch port tag name when exported to a virtual port pool or matched to dynamic port policy.",
+       "datasource": [
+        "switch-controller.switch-interface-tag.name"
+       ],
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "learning-limit": {
+     "name": "learning-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Limit the number of dynamic MAC addresses on this Port (1 - 128, 0 = no limit, default).",
+     "min-value": 0,
+     "max-value": 128,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sticky-mac": {
+     "name": "sticky-mac",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable or disable sticky-mac on the interface.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable sticky mac on the interface."
+      },
+      {
+       "name": "disable",
+       "help": "Disable sticky mac on the interface."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "lldp-status": {
+     "name": "lldp-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "LLDP transmit and receive status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable LLDP TX and RX."
+      },
+      {
+       "name": "rx-only",
+       "help": "Enable LLDP as RX only."
+      },
+      {
+       "name": "tx-only",
+       "help": "Enable LLDP as TX only."
+      },
+      {
+       "name": "tx-rx",
+       "help": "Enable LLDP TX and RX."
+      }
+     ],
+     "default": "tx-rx",
+     "multiple_values": false
+    },
+    "lldp-profile": {
+     "name": "lldp-profile",
+     "category": "unitary",
+     "type": "string",
+     "help": "LLDP port TLV profile.",
+     "datasource": [
+      "switch-controller.lldp-profile.name"
+     ],
+     "size": 63,
+     "default": "default-auto-isl",
+     "multiple_values": false
+    },
+    "export-to": {
+     "name": "export-to",
+     "category": "unitary",
+     "type": "string",
+     "help": "Export managed-switch port to a tenant VDOM.",
+     "datasource": [
+      "system.vdom.name"
+     ],
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "mac-addr": {
+     "name": "mac-addr",
+     "category": "unitary",
+     "type": "mac-address",
+     "help": "Port/Trunk MAC.",
+     "default": "00:00:00:00:00:00",
+     "multiple_values": false
+    },
+    "allow-arp-monitor": {
+     "name": "allow-arp-monitor",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/Disable allow ARP monitor.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable allow ARP monitor."
+      },
+      {
+       "name": "enable",
+       "help": "Enable allow ARP monitor."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "port-selection-criteria": {
+     "name": "port-selection-criteria",
+     "category": "unitary",
+     "type": "option",
+     "help": "Algorithm for aggregate port selection.",
+     "options": [
+      {
+       "name": "src-mac",
+       "help": "Source MAC address."
+      },
+      {
+       "name": "dst-mac",
+       "help": "Destination MAC address."
+      },
+      {
+       "name": "src-dst-mac",
+       "help": "Source and destination MAC address."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP address."
+      },
+      {
+       "name": "dst-ip",
+       "help": "Destination IP address."
+      },
+      {
+       "name": "src-dst-ip",
+       "help": "Source and destination IP address."
+      }
+     ],
+     "default": "src-dst-ip",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description for port.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "lacp-speed": {
+     "name": "lacp-speed",
+     "category": "unitary",
+     "type": "option",
+     "help": "End Link Aggregation Control Protocol (LACP) messages every 30 seconds (slow) or every second (fast).",
+     "options": [
+      {
+       "name": "slow",
+       "help": "Send LACP message every 30 seconds."
+      },
+      {
+       "name": "fast",
+       "help": "Send LACP message every second."
+      }
+     ],
+     "default": "slow",
+     "multiple_values": false
+    },
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LACP mode: ignore and do not send control messages, or negotiate 802.3ad aggregation passively or actively.",
+     "options": [
+      {
+       "name": "static",
+       "help": "Static aggregation, do not send and ignore any control messages."
+      },
+      {
+       "name": "lacp-passive",
+       "help": "Passively use LACP to negotiate 802.3ad aggregation."
+      },
+      {
+       "name": "lacp-active",
+       "help": "Actively use LACP to negotiate 802.3ad aggregation."
+      }
+     ],
+     "default": "static",
+     "multiple_values": false
+    },
+    "bundle": {
+     "name": "bundle",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable Link Aggregation Group (LAG) bundling for non-FortiLink interfaces.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable bundling."
+      },
+      {
+       "name": "disable",
+       "help": "Disable bundling."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "member-withdrawal-behavior": {
+     "name": "member-withdrawal-behavior",
+     "category": "unitary",
+     "type": "option",
+     "help": "Port behavior after it withdraws because of loss of control packets.",
+     "options": [
+      {
+       "name": "forward",
+       "help": "Forward traffic."
+      },
+      {
+       "name": "block",
+       "help": "Block traffic."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "mclag": {
+     "name": "mclag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable multi-chassis link aggregation (MCLAG).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable MCLAG."
+      },
+      {
+       "name": "disable",
+       "help": "Disable MCLAG."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "min-bundle": {
+     "name": "min-bundle",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum size of LAG bundle (1 - 24, default = 1).",
+     "min-value": 1,
+     "max-value": 24,
+     "default": 1,
+     "multiple_values": false
+    },
+    "max-bundle": {
+     "name": "max-bundle",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum size of LAG bundle (1 - 24, default = 24).",
+     "min-value": 1,
+     "max-value": 24,
+     "default": 24,
+     "multiple_values": false
+    },
+    "members": {
+     "name": "members",
+     "category": "table",
+     "help": "Aggregated LAG bundle interfaces.",
+     "member_table": true,
+     "mkey": "member-name",
+     "mkey_type": "string",
+     "children": {
+      "member-name": {
+       "name": "member-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface name from available options.",
+       "required": true,
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "fallback-port": {
+     "name": "fallback-port",
+     "category": "unitary",
+     "type": "string",
+     "help": "LACP fallback port.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ip-source-guard": {
+   "name": "ip-source-guard",
+   "category": "table",
+   "help": "IP source guard.",
+   "mkey": "port",
+   "mkey_type": "string",
+   "children": {
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "string",
+     "help": "Ingress interface to which source guard is bound.",
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "binding-entry": {
+     "name": "binding-entry",
+     "category": "table",
+     "help": "IP and MAC address configuration.",
+     "required": true,
+     "mkey": "entry-name",
+     "mkey_type": "string",
+     "children": {
+      "entry-name": {
+       "name": "entry-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Configure binding pair.",
+       "required": true,
+       "size": 16,
+       "default": "",
+       "multiple_values": false
+      },
+      "ip": {
+       "name": "ip",
+       "category": "unitary",
+       "type": "ipv4-address-any",
+       "help": "Source IP for this rule.",
+       "required": true,
+       "default": "0.0.0.0",
+       "multiple_values": false
+      },
+      "mac": {
+       "name": "mac",
+       "category": "unitary",
+       "type": "mac-address",
+       "help": "MAC address for this rule.",
+       "required": true,
+       "default": "00:00:00:00:00:00",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "stp-settings": {
+   "name": "stp-settings",
+   "category": "complex",
+   "help": "Configuration method to edit Spanning Tree Protocol (STP) settings used to prevent bridge loops.",
+   "children": {
+    "local-override": {
+     "name": "local-override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to configure local STP settings that override global STP settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override global STP settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use global STP settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of local STP settings configuration.",
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "revision": {
+     "name": "revision",
+     "category": "unitary",
+     "type": "integer",
+     "help": "STP revision number (0 - 65535).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "hello-time": {
+     "name": "hello-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 - 10 sec, default = 2).",
+     "min-value": 1,
+     "max-value": 10,
+     "default": 2,
+     "multiple_values": false
+    },
+    "forward-time": {
+     "name": "forward-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Period of time a port is in listening and learning state (4 - 30 sec, default = 15).",
+     "min-value": 4,
+     "max-value": 30,
+     "default": 15,
+     "multiple_values": false
+    },
+    "max-age": {
+     "name": "max-age",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum time before a bridge port saves its configuration BPDU information (6 - 40 sec, default = 20).",
+     "min-value": 6,
+     "max-value": 40,
+     "default": 20,
+     "multiple_values": false
+    },
+    "max-hops": {
+     "name": "max-hops",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum number of hops between the root bridge and the furthest bridge (1- 40, default = 20).",
+     "min-value": 1,
+     "max-value": 40,
+     "default": 20,
+     "multiple_values": false
+    },
+    "pending-timer": {
+     "name": "pending-timer",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Pending time (1 - 15 sec, default = 4).",
+     "min-value": 1,
+     "max-value": 15,
+     "default": 4,
+     "multiple_values": false
+    }
+   }
+  },
+  "stp-instance": {
+   "name": "stp-instance",
+   "category": "table",
+   "help": "Configuration method to edit Spanning Tree Protocol (STP) instances.",
+   "mkey": "id",
+   "mkey_type": "string",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Instance ID.",
+     "size": 2,
+     "default": "",
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "option",
+     "help": "Priority.",
+     "options": [
+      {
+       "name": "0",
+       "help": "0."
+      },
+      {
+       "name": "4096",
+       "help": "4096."
+      },
+      {
+       "name": "8192",
+       "help": "8192."
+      },
+      {
+       "name": "12288",
+       "help": "12288."
+      },
+      {
+       "name": "16384",
+       "help": "16384."
+      },
+      {
+       "name": "20480",
+       "help": "20480."
+      },
+      {
+       "name": "24576",
+       "help": "24576."
+      },
+      {
+       "name": "28672",
+       "help": "28672."
+      },
+      {
+       "name": "32768",
+       "help": "32768."
+      },
+      {
+       "name": "36864",
+       "help": "36864."
+      },
+      {
+       "name": "40960",
+       "help": "40960."
+      },
+      {
+       "name": "45056",
+       "help": "45056."
+      },
+      {
+       "name": "49152",
+       "help": "49152."
+      },
+      {
+       "name": "53248",
+       "help": "53248."
+      },
+      {
+       "name": "57344",
+       "help": "57344."
+      },
+      {
+       "name": "61440",
+       "help": "61440."
+      }
+     ],
+     "default": "32768",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "override-snmp-sysinfo": {
+   "name": "override-snmp-sysinfo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the global SNMP system information.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Use the global SNMP system information."
+    },
+    {
+     "name": "enable",
+     "help": "Override the global SNMP system information."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "snmp-sysinfo": {
+   "name": "snmp-sysinfo",
+   "category": "complex",
+   "help": "Configuration method to edit Simple Network Management Protocol (SNMP) system info.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SNMP."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SNMP."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "engine-id": {
+     "name": "engine-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Local SNMP engine ID string (max 24 char).",
+     "size": 24,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "System description.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "contact-info": {
+     "name": "contact-info",
+     "category": "unitary",
+     "type": "string",
+     "help": "Contact information.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "location": {
+     "name": "location",
+     "category": "unitary",
+     "type": "string",
+     "help": "System location.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "override-snmp-trap-threshold": {
+   "name": "override-snmp-trap-threshold",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the global SNMP trap threshold values.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the global SNMP trap threshold values."
+    },
+    {
+     "name": "disable",
+     "help": "Use the global SNMP trap threshold values."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "snmp-trap-threshold": {
+   "name": "snmp-trap-threshold",
+   "category": "complex",
+   "help": "Configuration method to edit Simple Network Management Protocol (SNMP) trap threshold values.",
+   "children": {
+    "trap-high-cpu-threshold": {
+     "name": "trap-high-cpu-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "CPU usage when trap is sent.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 80,
+     "multiple_values": false
+    },
+    "trap-low-memory-threshold": {
+     "name": "trap-low-memory-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Memory usage when trap is sent.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 80,
+     "multiple_values": false
+    },
+    "trap-log-full-threshold": {
+     "name": "trap-log-full-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Log disk usage when trap is sent.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 90,
+     "multiple_values": false
+    }
+   }
+  },
+  "override-snmp-community": {
+   "name": "override-snmp-community",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the global SNMP communities.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the global SNMP communities."
+    },
+    {
+     "name": "disable",
+     "help": "Use the global SNMP communities."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "snmp-community": {
+   "name": "snmp-community",
+   "category": "table",
+   "help": "Configuration method to edit Simple Network Management Protocol (SNMP) communities.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMP community ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "SNMP community name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this SNMP community.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SNMP community."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SNMP community."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "hosts": {
+     "name": "hosts",
+     "category": "table",
+     "help": "Configure IPv4 SNMP managers (hosts).",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Host entry ID.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "ip": {
+       "name": "ip",
+       "category": "unitary",
+       "type": "user",
+       "help": "IPv4 address of the SNMP manager (host).",
+       "required": true,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "query-v1-status": {
+     "name": "query-v1-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v1 queries.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SNMP v1 queries."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SNMP v1 queries."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "query-v1-port": {
+     "name": "query-v1-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMP v1 query port (default = 161).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 161,
+     "multiple_values": false
+    },
+    "query-v2c-status": {
+     "name": "query-v2c-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v2c queries.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SNMP v2c queries."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SNMP v2c queries."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "query-v2c-port": {
+     "name": "query-v2c-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMP v2c query port (default = 161).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 161,
+     "multiple_values": false
+    },
+    "trap-v1-status": {
+     "name": "trap-v1-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v1 traps.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SNMP v1 traps."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SNMP v1 traps."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "trap-v1-lport": {
+     "name": "trap-v1-lport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMP v2c trap local port (default = 162).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 162,
+     "multiple_values": false
+    },
+    "trap-v1-rport": {
+     "name": "trap-v1-rport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMP v2c trap remote port (default = 162).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 162,
+     "multiple_values": false
+    },
+    "trap-v2c-status": {
+     "name": "trap-v2c-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v2c traps.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SNMP v2c traps."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SNMP v2c traps."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "trap-v2c-lport": {
+     "name": "trap-v2c-lport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMP v2c trap local port (default = 162).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 162,
+     "multiple_values": false
+    },
+    "trap-v2c-rport": {
+     "name": "trap-v2c-rport",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMP v2c trap remote port (default = 162).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 162,
+     "multiple_values": false
+    },
+    "events": {
+     "name": "events",
+     "category": "unitary",
+     "type": "option",
+     "help": "SNMP notifications (traps) to send.",
+     "options": [
+      {
+       "name": "cpu-high",
+       "help": "Send a trap when CPU usage too high."
+      },
+      {
+       "name": "mem-low",
+       "help": "Send a trap when available memory is low."
+      },
+      {
+       "name": "log-full",
+       "help": "Send a trap when log disk space becomes low."
+      },
+      {
+       "name": "intf-ip",
+       "help": "Send a trap when an interface IP address is changed."
+      },
+      {
+       "name": "ent-conf-change",
+       "help": "Send a trap when an entity MIB change occurs (RFC4133)."
+      }
+     ],
+     "default": "cpu-high mem-low log-full intf-ip ent-conf-change",
+     "multiple_values": true
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "override-snmp-user": {
+   "name": "override-snmp-user",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the global SNMP users.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the global SNMPv3 users."
+    },
+    {
+     "name": "disable",
+     "help": "Use the global SNMPv3 users."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "snmp-user": {
+   "name": "snmp-user",
+   "category": "table",
+   "help": "Configuration method to edit Simple Network Management Protocol (SNMP) users.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "SNMP user name.",
+     "size": 32,
+     "default": "",
+     "multiple_values": false
+    },
+    "queries": {
+     "name": "queries",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP queries for this user.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SNMP queries for this user."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SNMP queries for this user."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "query-port": {
+     "name": "query-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SNMPv3 query port (default = 161).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 161,
+     "multiple_values": false
+    },
+    "security-level": {
+     "name": "security-level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Security level for message authentication and encryption.",
+     "options": [
+      {
+       "name": "no-auth-no-priv",
+       "help": "Message with no authentication and no privacy (encryption)."
+      },
+      {
+       "name": "auth-no-priv",
+       "help": "Message with authentication but no privacy (encryption)."
+      },
+      {
+       "name": "auth-priv",
+       "help": "Message with authentication and privacy (encryption)."
+      }
+     ],
+     "default": "no-auth-no-priv",
+     "multiple_values": false
+    },
+    "auth-proto": {
+     "name": "auth-proto",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authentication protocol.",
+     "options": [
+      {
+       "name": "md5",
+       "help": "HMAC-MD5-96 authentication protocol."
+      },
+      {
+       "name": "sha1",
+       "help": "HMAC-SHA-1 authentication protocol."
+      },
+      {
+       "name": "sha224",
+       "help": "HMAC-SHA-224 authentication protocol."
+      },
+      {
+       "name": "sha256",
+       "help": "HMAC-SHA-256 authentication protocol."
+      },
+      {
+       "name": "sha384",
+       "help": "HMAC-SHA-384 authentication protocol."
+      },
+      {
+       "name": "sha512",
+       "help": "HMAC-SHA-512 authentication protocol."
+      }
+     ],
+     "default": "sha256",
+     "multiple_values": false
+    },
+    "auth-pwd": {
+     "name": "auth-pwd",
+     "category": "unitary",
+     "type": "password",
+     "help": "Password for authentication protocol.",
+     "required": true,
+     "size": 128,
+     "multiple_values": false
+    },
+    "priv-proto": {
+     "name": "priv-proto",
+     "category": "unitary",
+     "type": "option",
+     "help": "Privacy (encryption) protocol.",
+     "options": [
+      {
+       "name": "aes128",
+       "help": "CFB128-AES-128 symmetric encryption protocol."
+      },
+      {
+       "name": "aes192",
+       "help": "CFB128-AES-192 symmetric encryption protocol."
+      },
+      {
+       "name": "aes192c",
+       "help": "CFB128-AES-192-C symmetric encryption protocol."
+      },
+      {
+       "name": "aes256",
+       "help": "CFB128-AES-256 symmetric encryption protocol."
+      },
+      {
+       "name": "aes256c",
+       "help": "CFB128-AES-256-C symmetric encryption protocol."
+      },
+      {
+       "name": "des",
+       "help": "CBC-DES symmetric encryption protocol."
+      }
+     ],
+     "default": "aes128",
+     "multiple_values": false
+    },
+    "priv-pwd": {
+     "name": "priv-pwd",
+     "category": "unitary",
+     "type": "password",
+     "help": "Password for privacy (encryption) protocol.",
+     "required": true,
+     "size": 128,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "qos-drop-policy": {
+   "name": "qos-drop-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set QoS drop-policy.",
+   "options": [
+    {
+     "name": "taildrop",
+     "help": "Taildrop policy."
+    },
+    {
+     "name": "random-early-detection",
+     "help": "Random early detection drop policy."
+    }
+   ],
+   "default": "taildrop",
+   "multiple_values": false
+  },
+  "qos-red-probability": {
+   "name": "qos-red-probability",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Set QoS RED/WRED drop probability.",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 12,
+   "multiple_values": false
+  },
+  "switch-log": {
+   "name": "switch-log",
+   "category": "complex",
+   "help": "Configuration method to edit FortiSwitch logging settings (logs are transferred to and inserted into the FortiGate event log).",
+   "children": {
+    "local-override": {
+     "name": "local-override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to configure local logging settings that override global logging settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override global logging settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use global logging settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable adding FortiSwitch logs to the FortiGate event log.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Add FortiSwitch logs to the FortiGate event log."
+      },
+      {
+       "name": "disable",
+       "help": "Do not add FortiSwitch logs to the FortiGate event log."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "severity": {
+     "name": "severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Severity of FortiSwitch logs that are added to the FortiGate event log.",
+     "options": [
+      {
+       "name": "emergency",
+       "help": "Emergency level."
+      },
+      {
+       "name": "alert",
+       "help": "Alert level."
+      },
+      {
+       "name": "critical",
+       "help": "Critical level."
+      },
+      {
+       "name": "error",
+       "help": "Error level."
+      },
+      {
+       "name": "warning",
+       "help": "Warning level."
+      },
+      {
+       "name": "notification",
+       "help": "Notification level."
+      },
+      {
+       "name": "information",
+       "help": "Information level."
+      },
+      {
+       "name": "debug",
+       "help": "Debug level."
+      }
+     ],
+     "default": "notification",
+     "multiple_values": false
+    }
+   }
+  },
+  "remote-log": {
+   "name": "remote-log",
+   "category": "table",
+   "help": "Configure logging by FortiSwitch device to a remote syslog server.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Remote log name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging by FortiSwitch device to a remote syslog server.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable logging by FortiSwitch device to a remote syslog server."
+      },
+      {
+       "name": "disable",
+       "help": "Disable logging by FortiSwitch device to a remote syslog server."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "server": {
+     "name": "server",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv4 address of the remote syslog server.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Remote syslog server listening port.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 514,
+     "multiple_values": false
+    },
+    "severity": {
+     "name": "severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Severity of logs to be transferred to remote log server.",
+     "options": [
+      {
+       "name": "emergency",
+       "help": "Emergency level."
+      },
+      {
+       "name": "alert",
+       "help": "Alert level."
+      },
+      {
+       "name": "critical",
+       "help": "Critical level."
+      },
+      {
+       "name": "error",
+       "help": "Error level."
+      },
+      {
+       "name": "warning",
+       "help": "Warning level."
+      },
+      {
+       "name": "notification",
+       "help": "Notification level."
+      },
+      {
+       "name": "information",
+       "help": "Information level."
+      },
+      {
+       "name": "debug",
+       "help": "Debug level."
+      }
+     ],
+     "default": "information",
+     "multiple_values": false
+    },
+    "csv": {
+     "name": "csv",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable comma-separated value (CSV) strings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable comma-separated value (CSV) strings."
+      },
+      {
+       "name": "disable",
+       "help": "Disable comma-separated value (CSV) strings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "facility": {
+     "name": "facility",
+     "category": "unitary",
+     "type": "option",
+     "help": "Facility to log to remote syslog server.",
+     "options": [
+      {
+       "name": "kernel",
+       "help": "Kernel messages."
+      },
+      {
+       "name": "user",
+       "help": "Random user-level messages."
+      },
+      {
+       "name": "mail",
+       "help": "Mail system."
+      },
+      {
+       "name": "daemon",
+       "help": "System daemons."
+      },
+      {
+       "name": "auth",
+       "help": "Security/authorization messages."
+      },
+      {
+       "name": "syslog",
+       "help": "Messages generated internally by syslogd."
+      },
+      {
+       "name": "lpr",
+       "help": "Line printer subsystem."
+      },
+      {
+       "name": "news",
+       "help": "Network news subsystem."
+      },
+      {
+       "name": "uucp",
+       "help": "UUCP server messages."
+      },
+      {
+       "name": "cron",
+       "help": "Clock daemon."
+      },
+      {
+       "name": "authpriv",
+       "help": "Security/authorization messages (private)."
+      },
+      {
+       "name": "ftp",
+       "help": "FTP daemon."
+      },
+      {
+       "name": "ntp",
+       "help": "NTP daemon."
+      },
+      {
+       "name": "audit",
+       "help": "Log audit."
+      },
+      {
+       "name": "alert",
+       "help": "Log alert."
+      },
+      {
+       "name": "clock",
+       "help": "Clock daemon."
+      },
+      {
+       "name": "local0",
+       "help": "Reserved for local use."
+      },
+      {
+       "name": "local1",
+       "help": "Reserved for local use."
+      },
+      {
+       "name": "local2",
+       "help": "Reserved for local use."
+      },
+      {
+       "name": "local3",
+       "help": "Reserved for local use."
+      },
+      {
+       "name": "local4",
+       "help": "Reserved for local use."
+      },
+      {
+       "name": "local5",
+       "help": "Reserved for local use."
+      },
+      {
+       "name": "local6",
+       "help": "Reserved for local use."
+      },
+      {
+       "name": "local7",
+       "help": "Reserved for local use."
+      }
+     ],
+     "default": "local7",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "storm-control": {
+   "name": "storm-control",
+   "category": "complex",
+   "help": "Configuration method to edit FortiSwitch storm control for measuring traffic activity using data rates to prevent traffic disruption.",
+   "children": {
+    "local-override": {
+     "name": "local-override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override global FortiSwitch storm control settings for this FortiSwitch.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override global storm control settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use global storm control settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "rate": {
+     "name": "rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Rate in packets per second at which storm control drops excess traffic(0-10000000, default=500, drop-all=0).",
+     "min-value": 0,
+     "max-value": 10000000,
+     "default": 500,
+     "multiple_values": false
+    },
+    "unknown-unicast": {
+     "name": "unknown-unicast",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable storm control to drop unknown unicast traffic.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Drop unknown unicast traffic."
+      },
+      {
+       "name": "disable",
+       "help": "Allow unknown unicast traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "unknown-multicast": {
+     "name": "unknown-multicast",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable storm control to drop unknown multicast traffic.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Drop unknown multicast traffic."
+      },
+      {
+       "name": "disable",
+       "help": "Allow unknown multicast traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "broadcast": {
+     "name": "broadcast",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable storm control to drop broadcast traffic.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Drop broadcast traffic."
+      },
+      {
+       "name": "disable",
+       "help": "Allow broadcast traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "mirror": {
+   "name": "mirror",
+   "category": "table",
+   "help": "Configuration method to edit FortiSwitch packet mirror.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Mirror name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Active/inactive mirror configuration.",
+     "options": [
+      {
+       "name": "active",
+       "help": "Activate mirror configuration."
+      },
+      {
+       "name": "inactive",
+       "help": "Deactivate mirror configuration."
+      }
+     ],
+     "default": "inactive",
+     "multiple_values": false
+    },
+    "switching-packet": {
+     "name": "switching-packet",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable switching functionality when mirroring.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable switching functionality when mirroring."
+      },
+      {
+       "name": "disable",
+       "help": "Disable switching functionality when mirroring."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "dst": {
+     "name": "dst",
+     "category": "unitary",
+     "type": "string",
+     "help": "Destination port.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "src-ingress": {
+     "name": "src-ingress",
+     "category": "table",
+     "help": "Source ingress interfaces.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface name.",
+       "required": true,
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "src-egress": {
+     "name": "src-egress",
+     "category": "table",
+     "help": "Source egress interfaces.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface name.",
+       "required": true,
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "static-mac": {
+   "name": "static-mac",
+   "category": "table",
+   "help": "Configuration method to edit FortiSwitch Static and Sticky MAC.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Type.",
+     "options": [
+      {
+       "name": "static",
+       "help": "Static MAC."
+      },
+      {
+       "name": "sticky",
+       "help": "Sticky MAC."
+      }
+     ],
+     "default": "static",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "string",
+     "help": "Vlan.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "mac": {
+     "name": "mac",
+     "category": "unitary",
+     "type": "mac-address",
+     "help": "MAC address.",
+     "default": "00:00:00:00:00:00",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "custom-command": {
+   "name": "custom-command",
+   "category": "table",
+   "help": "Configuration method to edit FortiSwitch commands to be pushed to this FortiSwitch device upon rebooting the FortiGate switch controller or the FortiSwitch.",
+   "mkey": "command-entry",
+   "mkey_type": "string",
+   "children": {
+    "command-entry": {
+     "name": "command-entry",
+     "category": "unitary",
+     "type": "string",
+     "help": "List of FortiSwitch commands.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "command-name": {
+     "name": "command-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Names of commands to be pushed to this FortiSwitch device, as configured under config switch-controller custom-command.",
+     "required": true,
+     "datasource": [
+      "switch-controller.custom-command.command-name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dhcp-snooping-static-client": {
+   "name": "dhcp-snooping-static-client",
+   "category": "table",
+   "help": "Configure FortiSwitch DHCP snooping static clients.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Client name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Client static IP address.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "mac": {
+     "name": "mac",
+     "category": "unitary",
+     "type": "mac-address",
+     "help": "Client MAC address.",
+     "required": true,
+     "default": "00:00:00:00:00:00",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "igmp-snooping": {
+   "name": "igmp-snooping",
+   "category": "complex",
+   "help": "Configure FortiSwitch IGMP snooping global settings.",
+   "children": {
+    "local-override": {
+     "name": "local-override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable overriding the global IGMP snooping configuration.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the global IGMP snooping configuration."
+      },
+      {
+       "name": "disable",
+       "help": "Use the global IGMP snooping configuration."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "aging-time": {
+     "name": "aging-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum time to retain a multicast snooping entry for which no packets have been seen (15 - 3600 sec, default = 300).",
+     "min-value": 15,
+     "max-value": 3600,
+     "default": 300,
+     "multiple_values": false
+    },
+    "flood-unknown-multicast": {
+     "name": "flood-unknown-multicast",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable unknown multicast flooding.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable unknown multicast flooding."
+      },
+      {
+       "name": "disable",
+       "help": "Disable unknown multicast flooding."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vlans": {
+     "name": "vlans",
+     "category": "table",
+     "help": "Configure IGMP snooping VLAN.",
+     "mkey": "vlan-name",
+     "mkey_type": "string",
+     "children": {
+      "vlan-name": {
+       "name": "vlan-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "List of FortiSwitch VLANs.",
+       "datasource": [
+        "system.interface.name"
+       ],
+       "size": 15,
+       "default": "default",
+       "multiple_values": false
+      },
+      "proxy": {
+       "name": "proxy",
+       "category": "unitary",
+       "type": "option",
+       "help": "IGMP snooping proxy for the VLAN interface.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable IGMP snooping proxy on VLAN interface."
+        },
+        {
+         "name": "enable",
+         "help": "Enable IGMP snooping proxy on VLAN interface."
+        },
+        {
+         "name": "global",
+         "help": "Use global setting for IGMP snooping proxy on VLAN interface."
+        }
+       ],
+       "default": "global",
+       "multiple_values": false
+      },
+      "querier": {
+       "name": "querier",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable IGMP snooping querier for the VLAN interface.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable IGMP snooping querier on VLAN interface."
+        },
+        {
+         "name": "enable",
+         "help": "Enable IGMP snooping querier on VLAN interface."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "querier-addr": {
+       "name": "querier-addr",
+       "category": "unitary",
+       "type": "ipv4-address",
+       "help": "IGMP snooping querier address.",
+       "default": "0.0.0.0",
+       "multiple_values": false
+      },
+      "version": {
+       "name": "version",
+       "category": "unitary",
+       "type": "integer",
+       "help": "IGMP snooping querying version.",
+       "min-value": 2,
+       "max-value": 3,
+       "default": 2,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "802-1X-settings": {
+   "name": "802-1X-settings",
+   "category": "complex",
+   "help": "Configuration method to edit FortiSwitch 802.1X global settings.",
+   "children": {
+    "local-override": {
+     "name": "local-override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override global 802.1X settings on individual FortiSwitches.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override global 802.1X settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use global 802.1X settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "link-down-auth": {
+     "name": "link-down-auth",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authentication state to set if a link is down.",
+     "options": [
+      {
+       "name": "set-unauth",
+       "help": "Interface set to unauth when down. Reauthentication is needed."
+      },
+      {
+       "name": "no-action",
+       "help": "Interface reauthentication is not needed."
+      }
+     ],
+     "default": "set-unauth",
+     "multiple_values": false
+    },
+    "reauth-period": {
+     "name": "reauth-period",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Reauthentication time interval (1 - 1440 min, default = 60, 0 = disable).",
+     "min-value": 0,
+     "max-value": 1440,
+     "default": 60,
+     "multiple_values": false
+    },
+    "max-reauth-attempt": {
+     "name": "max-reauth-attempt",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum number of authentication attempts (0 - 15, default = 3).",
+     "min-value": 0,
+     "max-value": 15,
+     "default": 3,
+     "multiple_values": false
+    },
+    "tx-period": {
+     "name": "tx-period",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1X Tx period (seconds, default=30).",
+     "min-value": 12,
+     "max-value": 60,
+     "default": 30,
+     "multiple_values": false
+    },
+    "mab-reauth": {
+     "name": "mab-reauth",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable or disable MAB reauthentication settings.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable MAB re-authentication setttings."
+      },
+      {
+       "name": "enable",
+       "help": "Enable MAB re-authentication setttings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "mac-username-delimiter": {
+     "name": "mac-username-delimiter",
+     "category": "unitary",
+     "type": "option",
+     "help": "MAC authentication username delimiter (default = hyphen).",
+     "options": [
+      {
+       "name": "colon",
+       "help": "Use colon as delimiter for MAC auth username."
+      },
+      {
+       "name": "hyphen",
+       "help": "Use hyphen as delimiter for MAC auth username."
+      },
+      {
+       "name": "none",
+       "help": "No delimiter for MAC auth username."
+      },
+      {
+       "name": "single-hyphen",
+       "help": "Use single hyphen as delimiter for MAC auth username."
+      }
+     ],
+     "default": "hyphen",
+     "multiple_values": false
+    },
+    "mac-password-delimiter": {
+     "name": "mac-password-delimiter",
+     "category": "unitary",
+     "type": "option",
+     "help": "MAC authentication password delimiter (default = hyphen).",
+     "options": [
+      {
+       "name": "colon",
+       "help": "Use colon as delimiter for MAC auth password."
+      },
+      {
+       "name": "hyphen",
+       "help": "Use hyphen as delimiter for MAC auth password."
+      },
+      {
+       "name": "none",
+       "help": "No delimiter for MAC auth password."
+      },
+      {
+       "name": "single-hyphen",
+       "help": "Use single hyphen as delimiter for MAC auth password."
+      }
+     ],
+     "default": "hyphen",
+     "multiple_values": false
+    },
+    "mac-calling-station-delimiter": {
+     "name": "mac-calling-station-delimiter",
+     "category": "unitary",
+     "type": "option",
+     "help": "MAC calling station delimiter (default = hyphen).",
+     "options": [
+      {
+       "name": "colon",
+       "help": "Use colon as delimiter for calling station."
+      },
+      {
+       "name": "hyphen",
+       "help": "Use hyphen as delimiter for calling station."
+      },
+      {
+       "name": "none",
+       "help": "No delimiter for calling station."
+      },
+      {
+       "name": "single-hyphen",
+       "help": "Use single hyphen as delimiter for calling station."
+      }
+     ],
+     "default": "hyphen",
+     "multiple_values": false
+    },
+    "mac-called-station-delimiter": {
+     "name": "mac-called-station-delimiter",
+     "category": "unitary",
+     "type": "option",
+     "help": "MAC called station delimiter (default = hyphen).",
+     "options": [
+      {
+       "name": "colon",
+       "help": "Use colon as delimiter for called station."
+      },
+      {
+       "name": "hyphen",
+       "help": "Use hyphen as delimiter for called station."
+      },
+      {
+       "name": "none",
+       "help": "No delimiter for called station."
+      },
+      {
+       "name": "single-hyphen",
+       "help": "Use single hyphen as delimiter for called station."
+      }
+     ],
+     "default": "hyphen",
+     "multiple_values": false
+    },
+    "mac-case": {
+     "name": "mac-case",
+     "category": "unitary",
+     "type": "option",
+     "help": "MAC case (default = lowercase).",
+     "options": [
+      {
+       "name": "lowercase",
+       "help": "Use lowercase MAC."
+      },
+      {
+       "name": "uppercase",
+       "help": "Use uppercase MAC."
+      }
+     ],
+     "default": "lowercase",
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 24,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "q_type": 314,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

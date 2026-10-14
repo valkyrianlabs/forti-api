@@ -1,0 +1,142 @@
+{
+ "name": "bfd",
+ "category": "complex",
+ "help": "Configure BFD.",
+ "children": {
+  "neighbor": {
+   "name": "neighbor",
+   "category": "table",
+   "help": "Neighbor.",
+   "mkey": "ip",
+   "mkey_type": "ipv4-address",
+   "children": {
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IPv4 address of the BFD neighbor.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "multihop-template": {
+   "name": "multihop-template",
+   "category": "table",
+   "help": "BFD multi-hop template table.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "src": {
+     "name": "src",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Source prefix.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "dst": {
+     "name": "dst",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Destination prefix.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "bfd-desired-min-tx": {
+     "name": "bfd-desired-min-tx",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BFD desired minimal transmit interval (milliseconds).",
+     "min-value": 100,
+     "max-value": 30000,
+     "default": 250,
+     "multiple_values": false
+    },
+    "bfd-required-min-rx": {
+     "name": "bfd-required-min-rx",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BFD required minimal receive interval (milliseconds).",
+     "min-value": 100,
+     "max-value": 30000,
+     "default": 250,
+     "multiple_values": false
+    },
+    "bfd-detect-mult": {
+     "name": "bfd-detect-mult",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BFD detection multiplier.",
+     "min-value": 3,
+     "max-value": 50,
+     "default": 3,
+     "multiple_values": false
+    },
+    "auth-mode": {
+     "name": "auth-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authentication mode.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "md5",
+       "help": "Meticulous MD5 mode."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "md5-key": {
+     "name": "md5-key",
+     "category": "unitary",
+     "type": "password",
+     "help": "MD5 key of key ID 1.",
+     "size": 16,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "router",
+ "q_type": 393,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

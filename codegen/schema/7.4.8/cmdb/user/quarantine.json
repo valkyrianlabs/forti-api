@@ -1,0 +1,142 @@
+{
+ "name": "quarantine",
+ "category": "complex",
+ "help": "Configure quarantine support.",
+ "children": {
+  "quarantine": {
+   "name": "quarantine",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable quarantine.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable quarantine."
+    },
+    {
+     "name": "disable",
+     "help": "Disable quarantine."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "traffic-policy": {
+   "name": "traffic-policy",
+   "category": "unitary",
+   "type": "string",
+   "help": "Traffic policy for quarantined MACs.",
+   "datasource": [
+    "switch-controller.traffic-policy.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "firewall-groups": {
+   "name": "firewall-groups",
+   "category": "unitary",
+   "type": "string",
+   "help": "Firewall address group which includes all quarantine MAC address.",
+   "datasource": [
+    "firewall.addrgrp.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "targets": {
+   "name": "targets",
+   "category": "table",
+   "help": "Quarantine entry to hold multiple MACs.",
+   "mkey": "entry",
+   "mkey_type": "string",
+   "children": {
+    "entry": {
+     "name": "entry",
+     "category": "unitary",
+     "type": "string",
+     "help": "Quarantine entry name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description for the quarantine entry.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "macs": {
+     "name": "macs",
+     "category": "table",
+     "help": "Quarantine MACs.",
+     "mkey": "mac",
+     "mkey_type": "mac-address",
+     "children": {
+      "mac": {
+       "name": "mac",
+       "category": "unitary",
+       "type": "mac-address",
+       "help": "Quarantine MAC.",
+       "required": true,
+       "default": "00:00:00:00:00:00",
+       "multiple_values": false
+      },
+      "description": {
+       "name": "description",
+       "category": "unitary",
+       "type": "string",
+       "help": "Description for the quarantine MAC.",
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      },
+      "drop": {
+       "name": "drop",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable dropping of quarantined device traffic.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Sends quarantined device traffic to FortiGate."
+        },
+        {
+         "name": "enable",
+         "help": "Blocks quarantined device traffic to FortiGate."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "parent": {
+       "name": "parent",
+       "category": "unitary",
+       "type": "string",
+       "help": "Parent entry name.",
+       "readonly": true,
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 4000,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "user",
+ "q_type": 128,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

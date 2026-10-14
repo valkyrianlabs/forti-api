@@ -1,0 +1,168 @@
+{
+ "name": "external-identity-provider",
+ "category": "table",
+ "help": "Configure external identity provider.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "External identity provider name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "External identity provider type.",
+   "required": true,
+   "options": [
+    {
+     "name": "ms-graph",
+     "help": "Microsoft Graph server."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "version": {
+   "name": "version",
+   "category": "unitary",
+   "type": "option",
+   "help": "External identity API version.",
+   "options": [
+    {
+     "name": "v1.0",
+     "help": "MS Graph REST API v1.0."
+    },
+    {
+     "name": "beta",
+     "help": "MS Graph REST API beta (debug build only)."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "url": {
+   "name": "url",
+   "category": "unitary",
+   "type": "string",
+   "help": "External identity provider URL (e.g. \"https://example.com:8080/api/v1\").",
+   "readonly": true,
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "user-attr-name": {
+   "name": "user-attr-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "User attribute name in authentication query.",
+   "size": 63,
+   "default": "userPrincipalName",
+   "multiple_values": false
+  },
+  "group-attr-name": {
+   "name": "group-attr-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Group attribute name in authentication query.",
+   "size": 63,
+   "default": "id",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "External identity provider service port number (0 to use default).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Use this IPv4/v6 address to connect to the external identity provider.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-identity-check": {
+   "name": "server-identity-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable server's identity check against its certificate and subject alternative name(s).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not check server's identity against its certificate and subject alternative name(s)."
+    },
+    {
+     "name": "enable",
+     "help": "Check server's identity against its certificate and subject alternative name(s)."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Connection timeout value in seconds (default=5).",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 5,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 27,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

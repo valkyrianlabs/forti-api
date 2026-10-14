@@ -1,0 +1,331 @@
+{
+ "name": "wccp",
+ "category": "table",
+ "help": "Configure WCCP.",
+ "mkey": "service-id",
+ "mkey_type": "string",
+ "children": {
+  "service-id": {
+   "name": "service-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Service ID.",
+   "size": 3,
+   "default": "",
+   "multiple_values": false
+  },
+  "router-id": {
+   "name": "router-id",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address known to all cache engines. If all cache engines connect to the same FortiGate interface, use the default 0.0.0.0.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "cache-id": {
+   "name": "cache-id",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address known to all routers. If the addresses are the same, use the default 0.0.0.0.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "group-address": {
+   "name": "group-address",
+   "category": "unitary",
+   "type": "ipv4-address-multicast",
+   "help": "IP multicast address used by the cache routers. For the FortiGate to ignore multicast WCCP traffic, use the default 0.0.0.0.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "server-list": {
+   "name": "server-list",
+   "category": "unitary",
+   "type": "user",
+   "help": "IP addresses and netmasks for up to four cache servers.",
+   "default": "",
+   "multiple_values": true
+  },
+  "router-list": {
+   "name": "router-list",
+   "category": "unitary",
+   "type": "user",
+   "help": "IP addresses of one or more WCCP routers.",
+   "default": "",
+   "multiple_values": true
+  },
+  "ports-defined": {
+   "name": "ports-defined",
+   "category": "unitary",
+   "type": "option",
+   "help": "Match method.",
+   "options": [
+    {
+     "name": "source",
+     "help": "Source port match."
+    },
+    {
+     "name": "destination",
+     "help": "Destination port match."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "server-type": {
+   "name": "server-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Cache server type.",
+   "options": [
+    {
+     "name": "forward",
+     "help": "Forward server."
+    },
+    {
+     "name": "proxy",
+     "help": "Proxy server."
+    }
+   ],
+   "default": "forward",
+   "multiple_values": false
+  },
+  "ports": {
+   "name": "ports",
+   "category": "unitary",
+   "type": "user",
+   "help": "Service ports.",
+   "default": "",
+   "multiple_values": true
+  },
+  "authentication": {
+   "name": "authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable MD5 authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable MD5 authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable MD5 authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for MD5 authentication.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "forward-method": {
+   "name": "forward-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method used to forward traffic to the cache servers.",
+   "options": [
+    {
+     "name": "GRE",
+     "help": "GRE encapsulation."
+    },
+    {
+     "name": "L2",
+     "help": "L2 rewrite."
+    },
+    {
+     "name": "any",
+     "help": "GRE or L2."
+    }
+   ],
+   "default": "GRE",
+   "multiple_values": false
+  },
+  "cache-engine-method": {
+   "name": "cache-engine-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method used to forward traffic to the routers or to return to the cache engine.",
+   "options": [
+    {
+     "name": "GRE",
+     "help": "GRE encapsulation."
+    },
+    {
+     "name": "L2",
+     "help": "L2 rewrite."
+    }
+   ],
+   "default": "GRE",
+   "multiple_values": false
+  },
+  "service-type": {
+   "name": "service-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "WCCP service type used by the cache server for logical interception and redirection of traffic.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "auto"
+    },
+    {
+     "name": "standard",
+     "help": "Standard service."
+    },
+    {
+     "name": "dynamic",
+     "help": "Dynamic service."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "primary-hash": {
+   "name": "primary-hash",
+   "category": "unitary",
+   "type": "option",
+   "help": "Hash method.",
+   "options": [
+    {
+     "name": "src-ip",
+     "help": "Source IP hash."
+    },
+    {
+     "name": "dst-ip",
+     "help": "Destination IP hash."
+    },
+    {
+     "name": "src-port",
+     "help": "Source port hash."
+    },
+    {
+     "name": "dst-port",
+     "help": "Destination port hash."
+    }
+   ],
+   "default": "dst-ip",
+   "multiple_values": true
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Service priority.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Service protocol.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "assignment-weight": {
+   "name": "assignment-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Assignment of hash weight/ratio for the WCCP cache engine.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "assignment-bucket-format": {
+   "name": "assignment-bucket-format",
+   "category": "unitary",
+   "type": "option",
+   "help": "Assignment bucket format for the WCCP cache engine.",
+   "options": [
+    {
+     "name": "wccp-v2",
+     "help": "WCCP-v2 bucket format."
+    },
+    {
+     "name": "cisco-implementation",
+     "help": "Cisco bucket format."
+    }
+   ],
+   "default": "cisco-implementation",
+   "multiple_values": false
+  },
+  "return-method": {
+   "name": "return-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method used to decline a redirected packet and return it to the FortiGate unit.",
+   "options": [
+    {
+     "name": "GRE",
+     "help": "GRE encapsulation."
+    },
+    {
+     "name": "L2",
+     "help": "L2 rewrite."
+    },
+    {
+     "name": "any",
+     "help": "GRE or L2."
+    }
+   ],
+   "default": "GRE",
+   "multiple_values": false
+  },
+  "assignment-method": {
+   "name": "assignment-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Hash key assignment preference.",
+   "options": [
+    {
+     "name": "HASH",
+     "help": "HASH assignment method."
+    },
+    {
+     "name": "MASK",
+     "help": "MASK assignment method."
+    },
+    {
+     "name": "any",
+     "help": "HASH or MASK."
+    }
+   ],
+   "default": "HASH",
+   "multiple_values": false
+  },
+  "assignment-srcaddr-mask": {
+   "name": "assignment-srcaddr-mask",
+   "category": "unitary",
+   "type": "ipv4-netmask-any",
+   "help": "Assignment source address mask.",
+   "default": "0.0.23.65",
+   "multiple_values": false
+  },
+  "assignment-dstaddr-mask": {
+   "name": "assignment-dstaddr-mask",
+   "category": "unitary",
+   "type": "ipv4-netmask-any",
+   "help": "Assignment destination address mask.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 260,
+ "access_group": "secfabgrp",
+ "object_range": "vdom"
+}

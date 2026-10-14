@@ -1,0 +1,336 @@
+{
+ "name": "global",
+ "category": "complex",
+ "help": "Configure IPS global parameter.",
+ "children": {
+  "fail-open": {
+   "name": "fail-open",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to allow traffic if the IPS buffer is full. Default is disable and IPS traffic is blocked when the IPS buffer is full.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPS fail open."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPS fail open."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "database": {
+   "name": "database",
+   "category": "unitary",
+   "type": "option",
+   "help": "Regular or extended IPS database. Regular protects against the latest common and in-the-wild attacks. Extended includes protection from legacy attacks.",
+   "options": [
+    {
+     "name": "regular",
+     "help": "IPS regular database package."
+    },
+    {
+     "name": "extended",
+     "help": "IPS extended database package."
+    }
+   ],
+   "default": "regular",
+   "multiple_values": false
+  },
+  "traffic-submit": {
+   "name": "traffic-submit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable submitting attack data found by this FortiGate to FortiGuard.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable traffic submit."
+    },
+    {
+     "name": "disable",
+     "help": "Disable traffic submit."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "anomaly-mode": {
+   "name": "anomaly-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Global blocking mode for rate-based anomalies.",
+   "options": [
+    {
+     "name": "periodical",
+     "help": "After an anomaly is detected, allow the number of packets per second according to the anomaly configuration."
+    },
+    {
+     "name": "continuous",
+     "help": "Block packets once an anomaly is detected. Overrides individual anomaly settings."
+    }
+   ],
+   "default": "continuous",
+   "multiple_values": false
+  },
+  "session-limit-mode": {
+   "name": "session-limit-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method of counting concurrent sessions used by session limit anomalies. Choose between greater accuracy (accurate) or improved performance (heuristics).",
+   "options": [
+    {
+     "name": "accurate",
+     "help": "Accurately count concurrent sessions, demands more resources."
+    },
+    {
+     "name": "heuristic",
+     "help": "Use heuristics to estimate the number of concurrent sessions. Acceptable in most cases."
+    }
+   ],
+   "default": "heuristic",
+   "multiple_values": false
+  },
+  "socket-size": {
+   "name": "socket-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IPS socket buffer size. Max and default value depend on available memory. Can be changed to tune performance.",
+   "min-value": 0,
+   "max-value": 128,
+   "default": 64,
+   "multiple_values": false
+  },
+  "engine-count": {
+   "name": "engine-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of IPS engines running. If set to the default value of 0, FortiOS sets the number to optimize performance depending on the number of CPU cores.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "sync-session-ttl": {
+   "name": "sync-session-ttl",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of kernel session TTL for IPS sessions.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of kernel session TTL for IPS sessions."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of kernel session TTL for IPS sessions."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "np-accel-mode": {
+   "name": "np-accel-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Acceleration mode for IPS processing by NPx processors.",
+   "options": [
+    {
+     "name": "none",
+     "help": "NPx acceleration disabled."
+    },
+    {
+     "name": "basic",
+     "help": "NPx acceleration enabled."
+    }
+   ],
+   "default": "basic",
+   "multiple_values": false
+  },
+  "ips-reserve-cpu": {
+   "name": "ips-reserve-cpu",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPS daemon's use of CPUs other than CPU 0.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable IPS daemon's use of CPUs other than CPU 0 (all daemons run on all CPUs)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable IPS daemon's use of CPUs other than CPU 0."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cp-accel-mode": {
+   "name": "cp-accel-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPS Pattern matching acceleration/offloading to CPx processors.",
+   "options": [
+    {
+     "name": "none",
+     "help": "CPx acceleration/offloading disabled."
+    },
+    {
+     "name": "basic",
+     "help": "Offload basic pattern matching to CPx processors."
+    },
+    {
+     "name": "advanced",
+     "help": "Offload more types of pattern matching resulting in higher throughput than basic mode. Requires two CP8s or one CP9."
+    }
+   ],
+   "default": "advanced",
+   "multiple_values": false
+  },
+  "deep-app-insp-timeout": {
+   "name": "deep-app-insp-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout for Deep application inspection (1 - 2147483647 sec., 0 = use recommended setting).",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 0,
+   "multiple_values": false
+  },
+  "deep-app-insp-db-limit": {
+   "name": "deep-app-insp-db-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Limit on number of entries in deep application inspection database (1 - 2147483647, use recommended setting = 0).",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 0,
+   "multiple_values": false
+  },
+  "exclude-signatures": {
+   "name": "exclude-signatures",
+   "category": "unitary",
+   "type": "option",
+   "help": "Excluded signatures.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No signatures excluded."
+    },
+    {
+     "name": "ot",
+     "help": "Exclude ot signatures."
+    }
+   ],
+   "default": "ot",
+   "multiple_values": false
+  },
+  "packet-log-queue-depth": {
+   "name": "packet-log-queue-depth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Packet/pcap log queue depth per IPS engine.",
+   "min-value": 128,
+   "max-value": 4096,
+   "default": 128,
+   "multiple_values": false
+  },
+  "ngfw-max-scan-range": {
+   "name": "ngfw-max-scan-range",
+   "category": "unitary",
+   "type": "integer",
+   "help": "NGFW policy-mode app detection threshold.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 4096,
+   "multiple_values": false
+  },
+  "av-mem-limit": {
+   "name": "av-mem-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum percentage of system memory allowed for use on AV scanning (10 - 50, default = zero). To disable set to zero. When disabled, there is no limit on the AV memory usage.",
+   "min-value": 10,
+   "max-value": 50,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tls-active-probe": {
+   "name": "tls-active-probe",
+   "category": "complex",
+   "help": "TLS active probe configuration.",
+   "children": {
+    "interface-select-method": {
+     "name": "interface-select-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Specify how to select outgoing interface to reach server.",
+     "options": [
+      {
+       "name": "auto",
+       "help": "Set outgoing interface automatically."
+      },
+      {
+       "name": "sdwan",
+       "help": "Set outgoing interface by SD-WAN or policy routing rules."
+      },
+      {
+       "name": "specify",
+       "help": "Set outgoing interface manually."
+      }
+     ],
+     "default": "auto",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Specify outgoing interface to reach server.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "vdom": {
+     "name": "vdom",
+     "category": "unitary",
+     "type": "string",
+     "help": "Virtual domain name for TLS active probe.",
+     "required": true,
+     "datasource": [
+      "system.vdom.name"
+     ],
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "source-ip": {
+     "name": "source-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Source IP address used for TLS active probe.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "source-ip6": {
+     "name": "source-ip6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Source IPv6 address used for TLS active probe.",
+     "default": "::",
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "path": "ips",
+ "q_type": 149,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

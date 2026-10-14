@@ -1,0 +1,1473 @@
+{
+ "name": "settings",
+ "category": "complex",
+ "help": "Configure SSL-VPN.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSL-VPN."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSL-VPN."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "reqclientcert": {
+   "name": "reqclientcert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to require client certificates for all SSL-VPN users.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "user-peer": {
+   "name": "user-peer",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of user peer.",
+   "datasource": [
+    "user.peer.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssl-max-proto-ver": {
+   "name": "ssl-max-proto-ver",
+   "category": "unitary",
+   "type": "option",
+   "help": "SSL maximum protocol version.",
+   "options": [
+    {
+     "name": "tls1-0",
+     "help": "TLS version 1.0."
+    },
+    {
+     "name": "tls1-1",
+     "help": "TLS version 1.1."
+    },
+    {
+     "name": "tls1-2",
+     "help": "TLS version 1.2."
+    },
+    {
+     "name": "tls1-3",
+     "help": "TLS version 1.3."
+    }
+   ],
+   "default": "tls1-3",
+   "multiple_values": false
+  },
+  "ssl-min-proto-ver": {
+   "name": "ssl-min-proto-ver",
+   "category": "unitary",
+   "type": "option",
+   "help": "SSL minimum protocol version.",
+   "options": [
+    {
+     "name": "tls1-0",
+     "help": "TLS version 1.0."
+    },
+    {
+     "name": "tls1-1",
+     "help": "TLS version 1.1."
+    },
+    {
+     "name": "tls1-2",
+     "help": "TLS version 1.2."
+    },
+    {
+     "name": "tls1-3",
+     "help": "TLS version 1.3."
+    }
+   ],
+   "default": "tls1-2",
+   "multiple_values": false
+  },
+  "banned-cipher": {
+   "name": "banned-cipher",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more cipher technologies that cannot be used in SSL-VPN negotiations. Only applies to TLS 1.2 and below.",
+   "options": [
+    {
+     "name": "RSA",
+     "help": "Ban the use of cipher suites using RSA key."
+    },
+    {
+     "name": "DHE",
+     "help": "Ban the use of cipher suites using authenticated ephemeral DH key agreement."
+    },
+    {
+     "name": "ECDHE",
+     "help": "Ban the use of cipher suites using authenticated ephemeral ECDH key agreement."
+    },
+    {
+     "name": "DSS",
+     "help": "Ban the use of cipher suites using DSS authentication."
+    },
+    {
+     "name": "ECDSA",
+     "help": "Ban the use of cipher suites using ECDSA authentication."
+    },
+    {
+     "name": "AES",
+     "help": "Ban the use of cipher suites using either 128 or 256 bit AES."
+    },
+    {
+     "name": "AESGCM",
+     "help": "Ban the use of cipher suites AES in Galois Counter Mode (GCM)."
+    },
+    {
+     "name": "CAMELLIA",
+     "help": "Ban the use of cipher suites using either 128 or 256 bit CAMELLIA."
+    },
+    {
+     "name": "3DES",
+     "help": "Ban the use of cipher suites using triple DES"
+    },
+    {
+     "name": "SHA1",
+     "help": "Ban the use of cipher suites using HMAC-SHA1."
+    },
+    {
+     "name": "SHA256",
+     "help": "Ban the use of cipher suites using HMAC-SHA256."
+    },
+    {
+     "name": "SHA384",
+     "help": "Ban the use of cipher suites using HMAC-SHA384."
+    },
+    {
+     "name": "STATIC",
+     "help": "Ban the use of cipher suites using static keys."
+    },
+    {
+     "name": "CHACHA20",
+     "help": "Ban the use of cipher suites using ChaCha20."
+    },
+    {
+     "name": "ARIA",
+     "help": "Ban the use of cipher suites using ARIA."
+    },
+    {
+     "name": "AESCCM",
+     "help": "Ban the use of cipher suites using AESCCM."
+    }
+   ],
+   "default": "SHA1 SHA256 SHA384",
+   "multiple_values": true
+  },
+  "ciphersuite": {
+   "name": "ciphersuite",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more TLS 1.3 ciphersuites to enable. Does not affect ciphers in TLS 1.2 and below. At least one must be enabled. To disable all, set ssl-max-proto-ver to tls1-2 or below.",
+   "options": [
+    {
+     "name": "TLS-AES-128-GCM-SHA256",
+     "help": "Enable TLS-AES-128-GCM-SHA256 in TLS 1.3."
+    },
+    {
+     "name": "TLS-AES-256-GCM-SHA384",
+     "help": "Enable TLS-AES-256-GCM-SHA384 in TLS 1.3."
+    },
+    {
+     "name": "TLS-CHACHA20-POLY1305-SHA256",
+     "help": "Enable TLS-CHACHA20-POLY1305-SHA256 in TLS 1.3."
+    },
+    {
+     "name": "TLS-AES-128-CCM-SHA256",
+     "help": "Enable TLS-AES-128-CCM-SHA256 in TLS 1.3."
+    },
+    {
+     "name": "TLS-AES-128-CCM-8-SHA256",
+     "help": "Enable TLS-AES-128-CCM-8-SHA256 in TLS 1.3."
+    }
+   ],
+   "default": "TLS-AES-128-GCM-SHA256 TLS-AES-256-GCM-SHA384 TLS-CHACHA20-POLY1305-SHA256",
+   "multiple_values": true
+  },
+  "ssl-insert-empty-fragment": {
+   "name": "ssl-insert-empty-fragment",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable insertion of empty fragment.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "https-redirect": {
+   "name": "https-redirect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redirect of port 80 to SSL-VPN port.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "x-content-type-options": {
+   "name": "x-content-type-options",
+   "category": "unitary",
+   "type": "option",
+   "help": "Add HTTP X-Content-Type-Options header.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-client-renegotiation": {
+   "name": "ssl-client-renegotiation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to allow client renegotiation by the server if the tunnel goes down.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Abort any SSL connection that attempts to renegotiate."
+    },
+    {
+     "name": "enable",
+     "help": "Allow a SSL client to renegotiate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "force-two-factor-auth": {
+   "name": "force-two-factor-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable only PKI users with two-factor authentication for SSL-VPNs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "unsafe-legacy-renegotiation": {
+   "name": "unsafe-legacy-renegotiation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable unsafe legacy re-negotiation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "servercert": {
+   "name": "servercert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the server certificate to be used for SSL-VPNs.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "algorithm": {
+   "name": "algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Force the SSL-VPN security level. High allows only high. Medium allows medium and high. Low allows any.",
+   "options": [
+    {
+     "name": "high",
+     "help": "High algorithms."
+    },
+    {
+     "name": "medium",
+     "help": "High and medium algorithms."
+    },
+    {
+     "name": "default",
+     "help": "default",
+     "missing_help": true
+    },
+    {
+     "name": "low",
+     "help": "All algorithms."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "idle-timeout": {
+   "name": "idle-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSL-VPN disconnects if idle for specified time in seconds.",
+   "min-value": 0,
+   "max-value": 259200,
+   "default": 300,
+   "multiple_values": false
+  },
+  "auth-timeout": {
+   "name": "auth-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSL-VPN authentication timeout (1 - 259200 sec (3 days), 0 for no timeout).",
+   "min-value": 0,
+   "max-value": 259200,
+   "default": 28800,
+   "multiple_values": false
+  },
+  "login-attempt-limit": {
+   "name": "login-attempt-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSL-VPN maximum login attempt times before block (0 - 10, default = 2, 0 = no limit).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 2,
+   "multiple_values": false
+  },
+  "login-block-time": {
+   "name": "login-block-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time for which a user is blocked from logging in after too many failed login attempts (0 - 86400 sec, default = 60).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 60,
+   "multiple_values": false
+  },
+  "login-timeout": {
+   "name": "login-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSLVPN maximum login timeout (10 - 180 sec, default = 30).",
+   "min-value": 10,
+   "max-value": 180,
+   "default": 30,
+   "multiple_values": false
+  },
+  "dtls-hello-timeout": {
+   "name": "dtls-hello-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSLVPN maximum DTLS hello timeout (10 - 60 sec, default = 10).",
+   "min-value": 10,
+   "max-value": 60,
+   "default": 10,
+   "multiple_values": false
+  },
+  "dtls-heartbeat-idle-timeout": {
+   "name": "dtls-heartbeat-idle-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Idle timeout before DTLS heartbeat is sent.",
+   "min-value": 3,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "dtls-heartbeat-interval": {
+   "name": "dtls-heartbeat-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval between DTLS heartbeat.",
+   "min-value": 3,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "dtls-heartbeat-fail-count": {
+   "name": "dtls-heartbeat-fail-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of missing heartbeats before the connection is considered dropped.",
+   "min-value": 3,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "tunnel-ip-pools": {
+   "name": "tunnel-ip-pools",
+   "category": "table",
+   "help": "Names of the IPv4 IP Pool firewall objects that define the IP addresses reserved for remote clients.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "tunnel-ipv6-pools": {
+   "name": "tunnel-ipv6-pools",
+   "category": "table",
+   "help": "Names of the IPv6 IP Pool firewall objects that define the IP addresses reserved for remote clients.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "dns-suffix": {
+   "name": "dns-suffix",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "DNS suffix used for SSL-VPN clients.",
+   "size": 253,
+   "multiple_values": false
+  },
+  "dns-server1": {
+   "name": "dns-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DNS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dns-server2": {
+   "name": "dns-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DNS server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wins-server1": {
+   "name": "wins-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WINS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wins-server2": {
+   "name": "wins-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WINS server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv6-dns-server1": {
+   "name": "ipv6-dns-server1",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 DNS server 1.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-dns-server2": {
+   "name": "ipv6-dns-server2",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 DNS server 2.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-wins-server1": {
+   "name": "ipv6-wins-server1",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 WINS server 1.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-wins-server2": {
+   "name": "ipv6-wins-server2",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 WINS server 2.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "url-obscuration": {
+   "name": "url-obscuration",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to obscure the host name of the URL of the web browser display.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-compression": {
+   "name": "http-compression",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to allow HTTP compression over SSL-VPN tunnels.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-only-cookie": {
+   "name": "http-only-cookie",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN support for HttpOnly cookies.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "deflate-compression-level": {
+   "name": "deflate-compression-level",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Compression level (0~9).",
+   "min-value": 0,
+   "max-value": 9,
+   "default": 6,
+   "multiple_values": false
+  },
+  "deflate-min-data-size": {
+   "name": "deflate-min-data-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum amount of data that triggers compression (200 - 65535 bytes).",
+   "min-value": 200,
+   "max-value": 65535,
+   "default": 300,
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSL-VPN access port (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 10443,
+   "multiple_values": false
+  },
+  "port-precedence": {
+   "name": "port-precedence",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable, Enable means that if SSL-VPN connections are allowed on an interface admin GUI connections are blocked on that interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "auto-tunnel-static-route": {
+   "name": "auto-tunnel-static-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to auto-create static routes for the SSL-VPN tunnel IP addresses.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "header-x-forwarded-for": {
+   "name": "header-x-forwarded-for",
+   "category": "unitary",
+   "type": "option",
+   "help": "Forward the same, add, or remove HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "add",
+   "multiple_values": false
+  },
+  "source-interface": {
+   "name": "source-interface",
+   "category": "table",
+   "help": "SSL-VPN source interface of incoming traffic.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "source-address": {
+   "name": "source-address",
+   "category": "table",
+   "help": "Source address of incoming traffic.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "source-address-negate": {
+   "name": "source-address-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negated source address match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "source-address6": {
+   "name": "source-address6",
+   "category": "table",
+   "help": "IPv6 source address of incoming traffic.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv6 address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "source-address6-negate": {
+   "name": "source-address6-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negated source IPv6 address match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-portal": {
+   "name": "default-portal",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default SSL-VPN portal.",
+   "datasource": [
+    "vpn.ssl.web.portal.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "authentication-rule": {
+   "name": "authentication-rule",
+   "category": "table",
+   "help": "Authentication rule for SSL-VPN.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID (0 - 4294967295).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "source-interface": {
+     "name": "source-interface",
+     "category": "table",
+     "help": "SSL-VPN source interface of incoming traffic.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Interface name.",
+       "required": true,
+       "datasource": [
+        "system.interface.name",
+        "system.zone.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "source-address": {
+     "name": "source-address",
+     "category": "table",
+     "help": "Source address of incoming traffic.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name",
+        "system.external-resource.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "source-address-negate": {
+     "name": "source-address-negate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable negated source address match.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "source-address6": {
+     "name": "source-address6",
+     "category": "table",
+     "help": "IPv6 source address of incoming traffic.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "IPv6 address name.",
+       "required": true,
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name",
+        "system.external-resource.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "source-address6-negate": {
+     "name": "source-address6-negate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable negated source IPv6 address match.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "users": {
+     "name": "users",
+     "category": "table",
+     "help": "User name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "User name.",
+       "required": true,
+       "datasource": [
+        "user.local.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "groups": {
+     "name": "groups",
+     "category": "table",
+     "help": "User groups.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Group name.",
+       "required": true,
+       "datasource": [
+        "user.group.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "portal": {
+     "name": "portal",
+     "category": "unitary",
+     "type": "string",
+     "help": "SSL-VPN portal.",
+     "datasource": [
+      "vpn.ssl.web.portal.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "realm": {
+     "name": "realm",
+     "category": "unitary",
+     "type": "string",
+     "help": "SSL-VPN realm.",
+     "datasource": [
+      "vpn.ssl.web.realm.url-path"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "client-cert": {
+     "name": "client-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SSL-VPN client certificate restrictive.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "user-peer": {
+     "name": "user-peer",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of user peer.",
+     "datasource": [
+      "user.peer.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "cipher": {
+     "name": "cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL-VPN cipher strength.",
+     "options": [
+      {
+       "name": "any",
+       "help": "Any cipher strength."
+      },
+      {
+       "name": "high",
+       "help": "High cipher strength (>= 168 bits)."
+      },
+      {
+       "name": "medium",
+       "help": "Medium cipher strength (>= 128 bits)."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "auth": {
+     "name": "auth",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL-VPN authentication method restriction.",
+     "options": [
+      {
+       "name": "any",
+       "help": "Any"
+      },
+      {
+       "name": "local",
+       "help": "Local"
+      },
+      {
+       "name": "radius",
+       "help": "RADIUS"
+      },
+      {
+       "name": "tacacs+",
+       "help": "TACACS+"
+      },
+      {
+       "name": "ldap",
+       "help": "LDAP"
+      },
+      {
+       "name": "peer",
+       "help": "PEER"
+      }
+     ],
+     "default": "any",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 5000,
+   "max_table_size_global": 5000,
+   "max_table_size_item": 0
+  },
+  "browser-language-detection": {
+   "name": "browser-language-detection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the configured system language based on the preferred language of the browser.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dtls-tunnel": {
+   "name": "dtls-tunnel",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DTLS to prevent eavesdropping, tampering, or message forgery.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dtls-max-proto-ver": {
+   "name": "dtls-max-proto-ver",
+   "category": "unitary",
+   "type": "option",
+   "help": "DTLS maximum protocol version.",
+   "options": [
+    {
+     "name": "dtls1-0",
+     "help": "DTLS version 1.0."
+    },
+    {
+     "name": "dtls1-2",
+     "help": "DTLS version 1.2."
+    }
+   ],
+   "default": "dtls1-2",
+   "multiple_values": false
+  },
+  "dtls-min-proto-ver": {
+   "name": "dtls-min-proto-ver",
+   "category": "unitary",
+   "type": "option",
+   "help": "DTLS minimum protocol version.",
+   "options": [
+    {
+     "name": "dtls1-0",
+     "help": "DTLS version 1.0."
+    },
+    {
+     "name": "dtls1-2",
+     "help": "DTLS version 1.2."
+    }
+   ],
+   "default": "dtls1-0",
+   "multiple_values": false
+  },
+  "check-referer": {
+   "name": "check-referer",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of referer field in HTTP request header.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification of referer field in HTTP request header."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification of referer field in HTTP request header."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-request-header-timeout": {
+   "name": "http-request-header-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSL-VPN session is disconnected if an HTTP request header is not received within this time (1 - 60 sec, default = 20).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 20,
+   "multiple_values": false
+  },
+  "http-request-body-timeout": {
+   "name": "http-request-body-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SSL-VPN session is disconnected if an HTTP request body is not received within this time (1 - 60 sec, default = 20).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 30,
+   "multiple_values": false
+  },
+  "auth-session-check-source-ip": {
+   "name": "auth-session-check-source-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable checking of source IP for authentication session.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable checking of source IP for authentication session."
+    },
+    {
+     "name": "disable",
+     "help": "Disable checking of source IP for authentication session."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "tunnel-connect-without-reauth": {
+   "name": "tunnel-connect-without-reauth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable tunnel connection without re-authorization if previous connection dropped.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable tunnel connection without re-authorization."
+    },
+    {
+     "name": "disable",
+     "help": "Disable tunnel connection without re-authorization."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "tunnel-user-session-timeout": {
+   "name": "tunnel-user-session-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds after which user sessions are cleaned up after tunnel connection is dropped (1 - 86400, default = 30).",
+   "min-value": 1,
+   "max-value": 86400,
+   "default": 30,
+   "multiple_values": false
+  },
+  "hsts-include-subdomains": {
+   "name": "hsts-include-subdomains",
+   "category": "unitary",
+   "type": "option",
+   "help": "Add HSTS includeSubDomains response header.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "transform-backward-slashes": {
+   "name": "transform-backward-slashes",
+   "category": "unitary",
+   "type": "option",
+   "help": "Transform backward slashes to forward slashes in URLs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "encode-2f-sequence": {
+   "name": "encode-2f-sequence",
+   "category": "unitary",
+   "type": "option",
+   "help": "Encode \\2F sequence to forward slash in URLs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "encrypt-and-store-password": {
+   "name": "encrypt-and-store-password",
+   "category": "unitary",
+   "type": "option",
+   "help": "Encrypt and store user passwords for SSL-VPN web sessions.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "client-sigalgs": {
+   "name": "client-sigalgs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set signature algorithms related to client authentication. Affects TLS version <= 1.2 only.",
+   "options": [
+    {
+     "name": "no-rsa-pss",
+     "help": "Disable RSA-PSS signature algorithms for client authentication."
+    },
+    {
+     "name": "all",
+     "help": "Enable all supported signature algorithms for client authentication."
+    }
+   ],
+   "default": "all",
+   "multiple_values": false
+  },
+  "dual-stack-mode": {
+   "name": "dual-stack-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Tunnel mode: enable parallel IPv4 and IPv6 tunnel. Web mode: support IPv4 and IPv6 bookmarks in the portal.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "tunnel-addr-assigned-method": {
+   "name": "tunnel-addr-assigned-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method used for assigning address for tunnel.",
+   "options": [
+    {
+     "name": "first-available",
+     "help": "Assign the first available address from the pools."
+    },
+    {
+     "name": "round-robin",
+     "help": "Assign the available address from the pool with a round robin fashion."
+    }
+   ],
+   "default": "first-available",
+   "multiple_values": false
+  },
+  "saml-redirect-port": {
+   "name": "saml-redirect-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SAML local redirect port in the machine running FortiClient (0 - 65535). 0 is to disable redirection on FGT side.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 8020,
+   "multiple_values": false
+  },
+  "ztna-trusted-client": {
+   "name": "ztna-trusted-client",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of device certificate for SSLVPN ZTNA session.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification of device certificate for SSLVPN ZTNA session."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification of device certificate for SSLVPN ZTNA session."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server-hostname": {
+   "name": "server-hostname",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server hostname for HTTPS. When set, will be used for SSL VPN web proxy host header for any redirection.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "vpn.ssl",
+ "q_type": 150,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

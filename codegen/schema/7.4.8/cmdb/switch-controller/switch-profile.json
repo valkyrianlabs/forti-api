@@ -1,0 +1,105 @@
+{
+ "name": "switch-profile",
+ "category": "table",
+ "help": "Configure FortiSwitch switch profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiSwitch Profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "login-passwd-override": {
+   "name": "login-passwd-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the admin administrator password for a managed FortiSwitch with the FortiGate admin administrator account password.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override a managed FortiSwitch's admin administrator password."
+    },
+    {
+     "name": "disable",
+     "help": "Use the managed FortiSwitch admin administrator account password."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "login-passwd": {
+   "name": "login-passwd",
+   "category": "unitary",
+   "type": "password",
+   "help": "Login password of managed FortiSwitch.",
+   "size": 64,
+   "multiple_values": false
+  },
+  "login": {
+   "name": "login",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiSwitch serial console.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiSwitch serial console."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiSwitch serial console."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "revision-backup-on-logout": {
+   "name": "revision-backup-on-logout",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic revision backup upon logout from FortiSwitch.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic revision backup upon logout from FortiSwitch."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic revision backup upon logout from FortiSwitch."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "revision-backup-on-upgrade": {
+   "name": "revision-backup-on-upgrade",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic revision backup upon FortiSwitch image upgrade.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic revision backup upon FortiSwitch image upgrade."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic revision backup upon FortiSwitch image upgrade."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "q_type": 323,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

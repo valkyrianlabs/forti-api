@@ -1,0 +1,311 @@
+{
+ "name": "dns",
+ "category": "complex",
+ "help": "Configure DNS.",
+ "children": {
+  "primary": {
+   "name": "primary",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Primary DNS server IP address.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "secondary": {
+   "name": "secondary",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Secondary DNS server IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "DNS transport protocols.",
+   "options": [
+    {
+     "name": "cleartext",
+     "help": "DNS over UDP/53, DNS over TCP/53."
+    },
+    {
+     "name": "dot",
+     "help": "DNS over TLS/853."
+    },
+    {
+     "name": "doh",
+     "help": "DNS over HTTPS/443."
+    }
+   ],
+   "default": "cleartext",
+   "multiple_values": true
+  },
+  "ssl-certificate": {
+   "name": "ssl-certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of local certificate for SSL connections.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_Factory",
+   "multiple_values": false
+  },
+  "server-hostname": {
+   "name": "server-hostname",
+   "category": "table",
+   "help": "DNS server host name list.",
+   "member_table": true,
+   "mkey": "hostname",
+   "mkey_type": "string",
+   "children": {
+    "hostname": {
+     "name": "hostname",
+     "category": "unitary",
+     "type": "string",
+     "help": "DNS server host name list separated by space (maximum 4 domains).",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 4
+  },
+  "domain": {
+   "name": "domain",
+   "category": "table",
+   "help": "Search suffix list for hostname lookup.",
+   "member_table": true,
+   "mkey": "domain",
+   "mkey_type": "string",
+   "children": {
+    "domain": {
+     "name": "domain",
+     "category": "unitary",
+     "type": "string",
+     "help": "DNS search domain list separated by space (maximum 8 domains).",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "ip6-primary": {
+   "name": "ip6-primary",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Primary DNS server IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ip6-secondary": {
+   "name": "ip6-secondary",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Secondary DNS server IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DNS query timeout interval in seconds (1 - 10).",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 5,
+   "multiple_values": false
+  },
+  "retry": {
+   "name": "retry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of times to retry (0 - 5).",
+   "min-value": 0,
+   "max-value": 5,
+   "default": 2,
+   "multiple_values": false
+  },
+  "dns-cache-limit": {
+   "name": "dns-cache-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of records in the DNS cache.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 5000,
+   "multiple_values": false
+  },
+  "dns-cache-ttl": {
+   "name": "dns-cache-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Duration in seconds that the DNS cache retains information.",
+   "min-value": 60,
+   "max-value": 86400,
+   "default": 1800,
+   "multiple_values": false
+  },
+  "cache-notfound-responses": {
+   "name": "cache-notfound-responses",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable response from the DNS server when a record is not in cache.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable cache NOTFOUND responses from DNS server."
+    },
+    {
+     "name": "enable",
+     "help": "Enable cache NOTFOUND responses from DNS server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address used by the DNS server as its source IP.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-select-method": {
+   "name": "server-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how configured servers are prioritized.",
+   "options": [
+    {
+     "name": "least-rtt",
+     "help": "Select servers based on least round trip time."
+    },
+    {
+     "name": "failover",
+     "help": "Select servers based on the order they are configured."
+    }
+   ],
+   "default": "least-rtt",
+   "multiple_values": false
+  },
+  "alt-primary": {
+   "name": "alt-primary",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Alternate primary DNS server. This is not used as a failover DNS server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "alt-secondary": {
+   "name": "alt-secondary",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Alternate secondary DNS server. This is not used as a failover DNS server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "log": {
+   "name": "log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Local DNS log setting.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "error",
+     "help": "Enable local DNS error log."
+    },
+    {
+     "name": "all",
+     "help": "Enable local DNS log."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fqdn-cache-ttl": {
+   "name": "fqdn-cache-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FQDN cache time to live in seconds (0 - 86400, default = 0).",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "fqdn-max-refresh": {
+   "name": "fqdn-max-refresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FQDN cache maximum refresh time in seconds (3600 - 86400, default = 3600).",
+   "min-value": 3600,
+   "max-value": 86400,
+   "default": 3600,
+   "multiple_values": false
+  },
+  "fqdn-min-refresh": {
+   "name": "fqdn-min-refresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FQDN cache minimum refresh time in seconds (10 - 3600, default = 60).",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 60,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 4,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

@@ -1,0 +1,126 @@
+{
+ "name": "extcommunity-list",
+ "category": "table",
+ "help": "Configure extended community lists.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Extended community list name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Extended community list type (standard or expanded).",
+   "required": true,
+   "options": [
+    {
+     "name": "standard",
+     "help": "Standard extended community list type."
+    },
+    {
+     "name": "expanded",
+     "help": "Expanded extended community list type."
+    }
+   ],
+   "default": "standard",
+   "multiple_values": false
+  },
+  "rule": {
+   "name": "rule",
+   "category": "table",
+   "help": "Extended community list rule.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Permit or deny route-based operations, based on the route's EXTENDED COMMUNITY attribute.",
+     "required": true,
+     "options": [
+      {
+       "name": "deny",
+       "help": "Deny route-based operations."
+      },
+      {
+       "name": "permit",
+       "help": "Permit or allow route-based operations."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    },
+    "regexp": {
+     "name": "regexp",
+     "category": "unitary",
+     "type": "string",
+     "help": "Ordered list of EXTENDED COMMUNITY attributes as a regular expression.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Type of extended community.",
+     "required": true,
+     "options": [
+      {
+       "name": "rt",
+       "help": "Route Target."
+      },
+      {
+       "name": "soo",
+       "help": "Site of Origin."
+      }
+     ],
+     "default": "rt",
+     "multiple_values": false
+    },
+    "match": {
+     "name": "match",
+     "category": "unitary",
+     "type": "string",
+     "help": "Extended community specifications for matching a reserved extended community.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "router",
+ "q_type": 136,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,168 @@
+{
+ "name": "internet-service",
+ "category": "table",
+ "help": "Show Internet Service application.",
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Internet Service ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Internet Service name.",
+   "readonly": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "icon-id": {
+   "name": "icon-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Icon ID of Internet Service.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "direction": {
+   "name": "direction",
+   "category": "unitary",
+   "type": "option",
+   "help": "How this service may be used in a firewall policy (source, destination or both).",
+   "readonly": true,
+   "options": [
+    {
+     "name": "src",
+     "help": "As source in the firewall policy."
+    },
+    {
+     "name": "dst",
+     "help": "As destination in the firewall policy."
+    },
+    {
+     "name": "both",
+     "help": "Both directions in the firewall policy."
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "database": {
+   "name": "database",
+   "category": "unitary",
+   "type": "option",
+   "help": "Database name this Internet Service belongs to.",
+   "readonly": true,
+   "options": [
+    {
+     "name": "isdb",
+     "help": "Internet Service Database."
+    },
+    {
+     "name": "irdb",
+     "help": "Internet RRR Database."
+    }
+   ],
+   "default": "isdb",
+   "multiple_values": false
+  },
+  "ip-range-number": {
+   "name": "ip-range-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of IPv4 ranges.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "extra-ip-range-number": {
+   "name": "extra-ip-range-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Extra number of IPv4 ranges.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ip-number": {
+   "name": "ip-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Total number of IPv4 addresses.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ip6-range-number": {
+   "name": "ip6-range-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of IPv6 ranges.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "extra-ip6-range-number": {
+   "name": "extra-ip6-range-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Extra number of IPv6 ranges.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "singularity": {
+   "name": "singularity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Singular level of the Internet Service.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "obsolete": {
+   "name": "obsolete",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Indicates whether the Internet Service can be used.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 346,
+ "access_group": "fwgrp",
+ "object_range": "global"
+}

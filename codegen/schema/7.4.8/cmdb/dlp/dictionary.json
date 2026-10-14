@@ -1,0 +1,187 @@
+{
+ "name": "dictionary",
+ "category": "table",
+ "help": "Configure dictionaries used by DLP blocking.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table containing the dictionary.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "match-type": {
+   "name": "match-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Logical relation between entries (default = match-any).",
+   "required": true,
+   "options": [
+    {
+     "name": "match-all",
+     "help": "Match all entries."
+    },
+    {
+     "name": "match-any",
+     "help": "Match any entries."
+    }
+   ],
+   "default": "match-any",
+   "multiple_values": false
+  },
+  "match-around": {
+   "name": "match-around",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable match-around support.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable match-around support."
+    },
+    {
+     "name": "disable",
+     "help": "Disable match-around support."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "DLP dictionary entries.",
+   "required": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Pattern type to match.",
+     "required": true,
+     "datasource": [
+      "dlp.data-type.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "pattern": {
+     "name": "pattern",
+     "category": "unitary",
+     "type": "string",
+     "help": "Pattern to match.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "ignore-case": {
+     "name": "ignore-case",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable ignore case.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable ignore case."
+      },
+      {
+       "name": "disable",
+       "help": "Disable ignore case."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "repeat": {
+     "name": "repeat",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable repeat match.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable repeat match."
+      },
+      {
+       "name": "disable",
+       "help": "Disable repeat match."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this pattern.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable this pattern."
+      },
+      {
+       "name": "disable",
+       "help": "Disable this pattern."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Optional comments.",
+     "size": 255,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 2048,
+ "max_table_size_global": 2048,
+ "max_table_size_item": 0,
+ "path": "dlp",
+ "q_type": 249,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

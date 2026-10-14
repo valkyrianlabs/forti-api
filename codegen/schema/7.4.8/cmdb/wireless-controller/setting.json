@@ -1,0 +1,1062 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "VDOM wireless controller configuration.",
+ "children": {
+  "account-id": {
+   "name": "account-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiCloud customer account ID.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "country": {
+   "name": "country",
+   "category": "unitary",
+   "type": "option",
+   "help": "Country or region in which the FortiGate is located. The country determines the 802.11 bands and channels that are available.",
+   "options": [
+    {
+     "name": "--",
+     "help": "NO_COUNTRY_SET"
+    },
+    {
+     "name": "AF",
+     "help": "AFGHANISTAN"
+    },
+    {
+     "name": "AL",
+     "help": "ALBANIA"
+    },
+    {
+     "name": "DZ",
+     "help": "ALGERIA"
+    },
+    {
+     "name": "AS",
+     "help": "AMERICAN SAMOA"
+    },
+    {
+     "name": "AO",
+     "help": "ANGOLA"
+    },
+    {
+     "name": "AR",
+     "help": "ARGENTINA"
+    },
+    {
+     "name": "AM",
+     "help": "ARMENIA"
+    },
+    {
+     "name": "AU",
+     "help": "AUSTRALIA"
+    },
+    {
+     "name": "AT",
+     "help": "AUSTRIA"
+    },
+    {
+     "name": "AZ",
+     "help": "AZERBAIJAN"
+    },
+    {
+     "name": "BS",
+     "help": "BAHAMAS"
+    },
+    {
+     "name": "BH",
+     "help": "BAHRAIN"
+    },
+    {
+     "name": "BD",
+     "help": "BANGLADESH"
+    },
+    {
+     "name": "BB",
+     "help": "BARBADOS"
+    },
+    {
+     "name": "BY",
+     "help": "BELARUS"
+    },
+    {
+     "name": "BE",
+     "help": "BELGIUM"
+    },
+    {
+     "name": "BZ",
+     "help": "BELIZE"
+    },
+    {
+     "name": "BJ",
+     "help": "BENIN"
+    },
+    {
+     "name": "BM",
+     "help": "BERMUDA"
+    },
+    {
+     "name": "BT",
+     "help": "BHUTAN"
+    },
+    {
+     "name": "BO",
+     "help": "BOLIVIA"
+    },
+    {
+     "name": "BA",
+     "help": "BOSNIA AND HERZEGOVINA"
+    },
+    {
+     "name": "BW",
+     "help": "BOTSWANA"
+    },
+    {
+     "name": "BR",
+     "help": "BRAZIL"
+    },
+    {
+     "name": "BN",
+     "help": "BRUNEI DARUSSALAM"
+    },
+    {
+     "name": "BG",
+     "help": "BULGARIA"
+    },
+    {
+     "name": "BF",
+     "help": "BURKINA-FASO"
+    },
+    {
+     "name": "KH",
+     "help": "CAMBODIA"
+    },
+    {
+     "name": "CM",
+     "help": "CAMEROON"
+    },
+    {
+     "name": "KY",
+     "help": "CAYMAN ISLANDS"
+    },
+    {
+     "name": "CF",
+     "help": "CENTRAL AFRICA REPUBLIC"
+    },
+    {
+     "name": "TD",
+     "help": "CHAD  "
+    },
+    {
+     "name": "CL",
+     "help": "CHILE"
+    },
+    {
+     "name": "CN",
+     "help": "CHINA"
+    },
+    {
+     "name": "CX",
+     "help": "CHRISTMAS ISLAND"
+    },
+    {
+     "name": "CO",
+     "help": "COLOMBIA"
+    },
+    {
+     "name": "CG",
+     "help": "CONGO REPUBLIC"
+    },
+    {
+     "name": "CD",
+     "help": "DEMOCRATIC REPUBLIC OF CONGO"
+    },
+    {
+     "name": "CR",
+     "help": "COSTA RICA"
+    },
+    {
+     "name": "HR",
+     "help": "CROATIA"
+    },
+    {
+     "name": "CY",
+     "help": "CYPRUS"
+    },
+    {
+     "name": "CZ",
+     "help": "CZECH REPUBLIC"
+    },
+    {
+     "name": "DK",
+     "help": "DENMARK"
+    },
+    {
+     "name": "DJ",
+     "help": "DJIBOUTI"
+    },
+    {
+     "name": "DM",
+     "help": "DOMINICA"
+    },
+    {
+     "name": "DO",
+     "help": "DOMINICAN REPUBLIC"
+    },
+    {
+     "name": "EC",
+     "help": "ECUADOR"
+    },
+    {
+     "name": "EG",
+     "help": "EGYPT"
+    },
+    {
+     "name": "SV",
+     "help": "EL SALVADOR"
+    },
+    {
+     "name": "ET",
+     "help": "ETHIOPIA"
+    },
+    {
+     "name": "EE",
+     "help": "ESTONIA"
+    },
+    {
+     "name": "GF",
+     "help": "FRENCH GUIANA"
+    },
+    {
+     "name": "PF",
+     "help": "FRENCH POLYNESIA"
+    },
+    {
+     "name": "FO",
+     "help": "FAEROE ISLANDS"
+    },
+    {
+     "name": "FJ",
+     "help": "FIJI"
+    },
+    {
+     "name": "FI",
+     "help": "FINLAND"
+    },
+    {
+     "name": "FR",
+     "help": "FRANCE"
+    },
+    {
+     "name": "GA",
+     "help": "GABON"
+    },
+    {
+     "name": "GE",
+     "help": "GEORGIA"
+    },
+    {
+     "name": "GM",
+     "help": "GAMBIA"
+    },
+    {
+     "name": "DE",
+     "help": "GERMANY"
+    },
+    {
+     "name": "GH",
+     "help": "GHANA"
+    },
+    {
+     "name": "GI",
+     "help": "GIBRALTAR"
+    },
+    {
+     "name": "GR",
+     "help": "GREECE"
+    },
+    {
+     "name": "GL",
+     "help": "GREENLAND"
+    },
+    {
+     "name": "GD",
+     "help": "GRENADA"
+    },
+    {
+     "name": "GP",
+     "help": "GUADELOUPE"
+    },
+    {
+     "name": "GU",
+     "help": "GUAM"
+    },
+    {
+     "name": "GT",
+     "help": "GUATEMALA"
+    },
+    {
+     "name": "GY",
+     "help": "GUYANA"
+    },
+    {
+     "name": "HT",
+     "help": "HAITI"
+    },
+    {
+     "name": "HN",
+     "help": "HONDURAS"
+    },
+    {
+     "name": "HK",
+     "help": "HONG KONG"
+    },
+    {
+     "name": "HU",
+     "help": "HUNGARY"
+    },
+    {
+     "name": "IS",
+     "help": "ICELAND"
+    },
+    {
+     "name": "IN",
+     "help": "INDIA"
+    },
+    {
+     "name": "ID",
+     "help": "INDONESIA"
+    },
+    {
+     "name": "IQ",
+     "help": "IRAQ"
+    },
+    {
+     "name": "IE",
+     "help": "IRELAND"
+    },
+    {
+     "name": "IM",
+     "help": "ISLE OF MAN"
+    },
+    {
+     "name": "IL",
+     "help": "ISRAEL"
+    },
+    {
+     "name": "IT",
+     "help": "ITALY"
+    },
+    {
+     "name": "CI",
+     "help": "COTE_D_IVOIRE"
+    },
+    {
+     "name": "JM",
+     "help": "JAMAICA"
+    },
+    {
+     "name": "JO",
+     "help": "JORDAN"
+    },
+    {
+     "name": "KZ",
+     "help": "KAZAKHSTAN"
+    },
+    {
+     "name": "KE",
+     "help": "KENYA"
+    },
+    {
+     "name": "KR",
+     "help": "KOREA REPUBLIC"
+    },
+    {
+     "name": "KW",
+     "help": "KUWAIT"
+    },
+    {
+     "name": "LA",
+     "help": "LAOS"
+    },
+    {
+     "name": "LV",
+     "help": "LATVIA"
+    },
+    {
+     "name": "LB",
+     "help": "LEBANON"
+    },
+    {
+     "name": "LS",
+     "help": "LESOTHO"
+    },
+    {
+     "name": "LR",
+     "help": "LIBERIA"
+    },
+    {
+     "name": "LY",
+     "help": "LIBYA"
+    },
+    {
+     "name": "LI",
+     "help": "LIECHTENSTEIN"
+    },
+    {
+     "name": "LT",
+     "help": "LITHUANIA"
+    },
+    {
+     "name": "LU",
+     "help": "LUXEMBOURG"
+    },
+    {
+     "name": "MO",
+     "help": "MACAU SAR"
+    },
+    {
+     "name": "MK",
+     "help": "MACEDONIA, FYRO"
+    },
+    {
+     "name": "MG",
+     "help": "MADAGASCAR"
+    },
+    {
+     "name": "MW",
+     "help": "MALAWI"
+    },
+    {
+     "name": "MY",
+     "help": "MALAYSIA"
+    },
+    {
+     "name": "MV",
+     "help": "MALDIVES"
+    },
+    {
+     "name": "ML",
+     "help": "MALI"
+    },
+    {
+     "name": "MT",
+     "help": "MALTA"
+    },
+    {
+     "name": "MH",
+     "help": "MARSHALL ISLANDS"
+    },
+    {
+     "name": "MQ",
+     "help": "MARTINIQUE"
+    },
+    {
+     "name": "MR",
+     "help": "MAURITANIA"
+    },
+    {
+     "name": "MU",
+     "help": "MAURITIUS"
+    },
+    {
+     "name": "YT",
+     "help": "MAYOTTE"
+    },
+    {
+     "name": "MX",
+     "help": "MEXICO"
+    },
+    {
+     "name": "FM",
+     "help": "MICRONESIA"
+    },
+    {
+     "name": "MD",
+     "help": "REPUBLIC OF MOLDOVA"
+    },
+    {
+     "name": "MC",
+     "help": "MONACO"
+    },
+    {
+     "name": "MN",
+     "help": "MONGOLIA"
+    },
+    {
+     "name": "MA",
+     "help": "MOROCCO"
+    },
+    {
+     "name": "MZ",
+     "help": "MOZAMBIQUE"
+    },
+    {
+     "name": "MM",
+     "help": "MYANMAR"
+    },
+    {
+     "name": "NA",
+     "help": "NAMIBIA"
+    },
+    {
+     "name": "NP",
+     "help": "NEPAL"
+    },
+    {
+     "name": "NL",
+     "help": "NETHERLANDS"
+    },
+    {
+     "name": "AN",
+     "help": "NETHERLANDS ANTILLES"
+    },
+    {
+     "name": "AW",
+     "help": "ARUBA"
+    },
+    {
+     "name": "NZ",
+     "help": "NEW ZEALAND"
+    },
+    {
+     "name": "NI",
+     "help": "NICARAGUA"
+    },
+    {
+     "name": "NE",
+     "help": "NIGER"
+    },
+    {
+     "name": "NG",
+     "help": "NIGERIA"
+    },
+    {
+     "name": "NO",
+     "help": "NORWAY"
+    },
+    {
+     "name": "MP",
+     "help": "NORTHERN MARIANA ISLANDS"
+    },
+    {
+     "name": "OM",
+     "help": "OMAN"
+    },
+    {
+     "name": "PK",
+     "help": "PAKISTAN"
+    },
+    {
+     "name": "PW",
+     "help": "PALAU"
+    },
+    {
+     "name": "PA",
+     "help": "PANAMA"
+    },
+    {
+     "name": "PG",
+     "help": "PAPUA NEW GUINEA"
+    },
+    {
+     "name": "PY",
+     "help": "PARAGUAY"
+    },
+    {
+     "name": "PE",
+     "help": "PERU"
+    },
+    {
+     "name": "PH",
+     "help": "PHILIPPINES"
+    },
+    {
+     "name": "PL",
+     "help": "POLAND"
+    },
+    {
+     "name": "PT",
+     "help": "PORTUGAL"
+    },
+    {
+     "name": "PR",
+     "help": "PUERTO RICO"
+    },
+    {
+     "name": "QA",
+     "help": "QATAR"
+    },
+    {
+     "name": "RE",
+     "help": "REUNION"
+    },
+    {
+     "name": "RO",
+     "help": "ROMANIA"
+    },
+    {
+     "name": "RU",
+     "help": "RUSSIA"
+    },
+    {
+     "name": "RW",
+     "help": "RWANDA"
+    },
+    {
+     "name": "BL",
+     "help": "SAINT BARTHELEMY"
+    },
+    {
+     "name": "KN",
+     "help": "SAINT KITTS AND NEVIS"
+    },
+    {
+     "name": "LC",
+     "help": "SAINT LUCIA"
+    },
+    {
+     "name": "MF",
+     "help": "SAINT MARTIN"
+    },
+    {
+     "name": "PM",
+     "help": "SAINT PIERRE AND MIQUELON"
+    },
+    {
+     "name": "VC",
+     "help": "SAINT VINCENT AND GRENADIENS"
+    },
+    {
+     "name": "SA",
+     "help": "SAUDI ARABIA"
+    },
+    {
+     "name": "SN",
+     "help": "SENEGAL"
+    },
+    {
+     "name": "RS",
+     "help": "REPUBLIC OF SERBIA"
+    },
+    {
+     "name": "ME",
+     "help": "MONTENEGRO"
+    },
+    {
+     "name": "SL",
+     "help": "SIERRA LEONE"
+    },
+    {
+     "name": "SG",
+     "help": "SINGAPORE"
+    },
+    {
+     "name": "SK",
+     "help": "SLOVAKIA"
+    },
+    {
+     "name": "SI",
+     "help": "SLOVENIA"
+    },
+    {
+     "name": "SO",
+     "help": "SOMALIA"
+    },
+    {
+     "name": "ZA",
+     "help": "SOUTH AFRICA"
+    },
+    {
+     "name": "ES",
+     "help": "SPAIN"
+    },
+    {
+     "name": "LK",
+     "help": "SRI LANKA"
+    },
+    {
+     "name": "SR",
+     "help": "SURINAME"
+    },
+    {
+     "name": "SZ",
+     "help": "SWAZILAND"
+    },
+    {
+     "name": "SE",
+     "help": "SWEDEN"
+    },
+    {
+     "name": "CH",
+     "help": "SWITZERLAND"
+    },
+    {
+     "name": "TW",
+     "help": "TAIWAN"
+    },
+    {
+     "name": "TZ",
+     "help": "TANZANIA"
+    },
+    {
+     "name": "TH",
+     "help": "THAILAND"
+    },
+    {
+     "name": "TL",
+     "help": "TIMOR-LESTE"
+    },
+    {
+     "name": "TG",
+     "help": "TOGO"
+    },
+    {
+     "name": "TT",
+     "help": "TRINIDAD AND TOBAGO"
+    },
+    {
+     "name": "TN",
+     "help": "TUNISIA"
+    },
+    {
+     "name": "TR",
+     "help": "TURKEY"
+    },
+    {
+     "name": "TM",
+     "help": "TURKMENISTAN"
+    },
+    {
+     "name": "AE",
+     "help": "UNITED ARAB EMIRATES"
+    },
+    {
+     "name": "TC",
+     "help": "TURKS AND CAICOS"
+    },
+    {
+     "name": "UG",
+     "help": "UGANDA"
+    },
+    {
+     "name": "UA",
+     "help": "UKRAINE"
+    },
+    {
+     "name": "GB",
+     "help": "UNITED KINGDOM"
+    },
+    {
+     "name": "US",
+     "help": "UNITED STATES2"
+    },
+    {
+     "name": "PS",
+     "help": "UNITED STATES (PUBLIC SAFETY)"
+    },
+    {
+     "name": "UY",
+     "help": "URUGUAY"
+    },
+    {
+     "name": "UZ",
+     "help": "UZBEKISTAN"
+    },
+    {
+     "name": "VU",
+     "help": "VANUATU"
+    },
+    {
+     "name": "VE",
+     "help": "VENEZUELA"
+    },
+    {
+     "name": "VN",
+     "help": "VIET NAM"
+    },
+    {
+     "name": "VI",
+     "help": "VIRGIN ISLANDS"
+    },
+    {
+     "name": "WF",
+     "help": "WALLIS AND FUTUNA"
+    },
+    {
+     "name": "YE",
+     "help": "YEMEN"
+    },
+    {
+     "name": "ZM",
+     "help": "ZAMBIA"
+    },
+    {
+     "name": "ZW",
+     "help": "ZIMBABWE"
+    },
+    {
+     "name": "JP",
+     "help": "JAPAN14"
+    },
+    {
+     "name": "CA",
+     "help": "CANADA2"
+    }
+   ],
+   "default": "US",
+   "multiple_values": false
+  },
+  "duplicate-ssid": {
+   "name": "duplicate-ssid",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing Virtual Access Points (VAPs) to use the same SSID name in the same VDOM.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow VAPs to use the same SSID name in the same VDOM."
+    },
+    {
+     "name": "disable",
+     "help": "Do not allow VAPs to use the same SSID name in the same VDOM."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fapc-compatibility": {
+   "name": "fapc-compatibility",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FAP-C series compatibility.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FAP-C series compatibility."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FAP-C series compatibility."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "wfa-compatibility": {
+   "name": "wfa-compatibility",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WFA compatibility.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Wi-Fi Alliance Certification compatibility."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Wi-Fi Alliance Certification compatibility."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "phishing-ssid-detect": {
+   "name": "phishing-ssid-detect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable phishing SSID detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable phishing SSID detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable phishing SSID detection."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fake-ssid-action": {
+   "name": "fake-ssid-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Actions taken for detected fake SSID.",
+   "options": [
+    {
+     "name": "log",
+     "help": "Write logs for detected fake SSID."
+    },
+    {
+     "name": "suppress",
+     "help": "Suppress detected fake SSID."
+    }
+   ],
+   "default": "log",
+   "multiple_values": true
+  },
+  "offending-ssid": {
+   "name": "offending-ssid",
+   "category": "table",
+   "help": "Configure offending SSID.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ssid-pattern": {
+     "name": "ssid-pattern",
+     "category": "unitary",
+     "type": "string",
+     "help": "Define offending SSID pattern (case insensitive). For example, word, word*, *word, wo*rd.",
+     "required": true,
+     "size": 33,
+     "default": "",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Actions taken for detected offending SSID.",
+     "options": [
+      {
+       "name": "log",
+       "help": "Generate logs for detected offending SSID."
+      },
+      {
+       "name": "suppress",
+       "help": "Suppress detected offending SSID."
+      }
+     ],
+     "default": "log",
+     "multiple_values": true
+    }
+   },
+   "max_table_size_vdom": 128,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "device-weight": {
+   "name": "device-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Upper limit of confidence of device for identification (0 - 255, default = 1, 0 = disable).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "device-holdoff": {
+   "name": "device-holdoff",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Lower limit of creation time of device for identification in minutes (0 - 60, default = 5).",
+   "min-value": 0,
+   "max-value": 60,
+   "default": 5,
+   "multiple_values": false
+  },
+  "device-idle": {
+   "name": "device-idle",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Upper limit of idle time of device for identification in minutes (0 - 14400, default = 1440).",
+   "min-value": 0,
+   "max-value": 14400,
+   "default": 1440,
+   "multiple_values": false
+  },
+  "firmware-provision-on-authorization": {
+   "name": "firmware-provision-on-authorization",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic provisioning of latest firmware on authorization.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable firmware provision on authorization."
+    },
+    {
+     "name": "disable",
+     "help": "Disable firmware provision on authorization."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rolling-wtp-upgrade": {
+   "name": "rolling-wtp-upgrade",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable rolling WTP upgrade (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable rolling WTP upgrade."
+    },
+    {
+     "name": "disable",
+     "help": "Disable rolling WTP upgrade."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "darrp-optimize": {
+   "name": "darrp-optimize",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time for running Distributed Automatic Radio Resource Provisioning (DARRP) optimizations (0 - 86400 sec, default = 86400, 0 = disable).",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "darrp-optimize-schedules": {
+   "name": "darrp-optimize-schedules",
+   "category": "table",
+   "help": "Firewall schedules for DARRP running time. DARRP will run periodically based on darrp-optimize within the schedules. Separate multiple schedule names with a space.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Schedule name.",
+     "required": true,
+     "datasource": [
+      "firewall.schedule.group.name",
+      "firewall.schedule.recurring.name",
+      "firewall.schedule.onetime.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 16
+  }
+ },
+ "path": "wireless-controller",
+ "q_type": 273,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,353 @@
+{
+ "name": "server",
+ "category": "table",
+ "help": "Configure DHCPv6 servers.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this DHCPv6 configuration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Enable this DHCPv6 server configuration."
+    },
+    {
+     "name": "enable",
+     "help": "Disable this DHCPv6 server configuration."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "rapid-commit": {
+   "name": "rapid-commit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allow/disallow rapid commit.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not allow rapid commit."
+    },
+    {
+     "name": "enable",
+     "help": "Allow rapid commit."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "lease-time": {
+   "name": "lease-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Lease time in seconds, 0 means unlimited.",
+   "min-value": 300,
+   "max-value": 8640000,
+   "default": 604800,
+   "multiple_values": false
+  },
+  "dns-service": {
+   "name": "dns-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Options for assigning DNS servers to DHCPv6 clients.",
+   "options": [
+    {
+     "name": "delegated",
+     "help": "Delegated DNS settings."
+    },
+    {
+     "name": "default",
+     "help": "Clients are assigned the FortiGate's configured DNS servers."
+    },
+    {
+     "name": "specify",
+     "help": "Specify up to 3 DNS servers in the DHCPv6 server configuration."
+    }
+   ],
+   "default": "specify",
+   "multiple_values": false
+  },
+  "dns-search-list": {
+   "name": "dns-search-list",
+   "category": "unitary",
+   "type": "option",
+   "help": "DNS search list options.",
+   "options": [
+    {
+     "name": "delegated",
+     "help": "Delegated the DNS search list."
+    },
+    {
+     "name": "specify",
+     "help": "Specify the DNS search list."
+    }
+   ],
+   "default": "specify",
+   "multiple_values": false
+  },
+  "dns-server1": {
+   "name": "dns-server1",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "DNS server 1.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "dns-server2": {
+   "name": "dns-server2",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "DNS server 2.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "dns-server3": {
+   "name": "dns-server3",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "DNS server 3.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "dns-server4": {
+   "name": "dns-server4",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "DNS server 4.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "domain": {
+   "name": "domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name suffix for the IP addresses that the DHCP server assigns to clients.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "subnet": {
+   "name": "subnet",
+   "category": "unitary",
+   "type": "ipv6-prefix",
+   "help": "Subnet or subnet-id if the IP mode is delegated.",
+   "required": true,
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "DHCP server can assign IP configurations to clients connected to this interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "option1": {
+   "name": "option1",
+   "category": "unitary",
+   "type": "user",
+   "help": "Option 1.",
+   "default": "",
+   "multiple_values": false
+  },
+  "option2": {
+   "name": "option2",
+   "category": "unitary",
+   "type": "user",
+   "help": "Option 2.",
+   "default": "",
+   "multiple_values": false
+  },
+  "option3": {
+   "name": "option3",
+   "category": "unitary",
+   "type": "user",
+   "help": "Option 3.",
+   "default": "",
+   "multiple_values": false
+  },
+  "upstream-interface": {
+   "name": "upstream-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name from where delegated information is provided.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "delegated-prefix-iaid": {
+   "name": "delegated-prefix-iaid",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IAID of obtained delegated-prefix from the upstream interface.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ip-mode": {
+   "name": "ip-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method used to assign client IP.",
+   "options": [
+    {
+     "name": "range",
+     "help": "Use range defined by start IP/end IP to assign client IP."
+    },
+    {
+     "name": "delegated",
+     "help": "Use delegated prefix method to assign client IP."
+    }
+   ],
+   "default": "range",
+   "multiple_values": false
+  },
+  "prefix-mode": {
+   "name": "prefix-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Assigning a prefix from a DHCPv6 client or RA.",
+   "options": [
+    {
+     "name": "dhcp6",
+     "help": "Use delegated prefix from a DHCPv6 client."
+    },
+    {
+     "name": "ra",
+     "help": "Use prefix from RA."
+    }
+   ],
+   "default": "dhcp6",
+   "multiple_values": false
+  },
+  "prefix-range": {
+   "name": "prefix-range",
+   "category": "table",
+   "help": "DHCP prefix configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-prefix": {
+     "name": "start-prefix",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Start of prefix range.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    },
+    "end-prefix": {
+     "name": "end-prefix",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "End of prefix range.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    },
+    "prefix-length": {
+     "name": "prefix-length",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Prefix length.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 128,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ip-range": {
+   "name": "ip-range",
+   "category": "table",
+   "help": "DHCP IP range configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-ip": {
+     "name": "start-ip",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Start of IP range.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    },
+    "end-ip": {
+     "name": "end-ip",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "End of IP range.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system.dhcp6",
+ "q_type": 455,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

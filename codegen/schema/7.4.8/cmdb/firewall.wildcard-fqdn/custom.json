@@ -1,0 +1,60 @@
+{
+ "name": "custom",
+ "category": "table",
+ "help": "Config global/VDOM Wildcard FQDN address.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "wildcard-fqdn": {
+   "name": "wildcard-fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Wildcard FQDN.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "GUI icon color.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 5000,
+ "max_table_size_global": 5000,
+ "max_table_size_item": 0,
+ "path": "firewall.wildcard-fqdn",
+ "q_type": 53,
+ "access_group": "fwgrp",
+ "object_range": "global-vdom"
+}

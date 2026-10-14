@@ -1,0 +1,585 @@
+{
+ "name": "automation-action",
+ "category": "table",
+ "help": "Action for automation stitches.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Description.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "action-type": {
+   "name": "action-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action type.",
+   "options": [
+    {
+     "name": "email",
+     "help": "Send notification email."
+    },
+    {
+     "name": "fortiexplorer-notification",
+     "help": "Send push notification to FortiExplorer."
+    },
+    {
+     "name": "alert",
+     "help": "Generate FortiOS dashboard alert."
+    },
+    {
+     "name": "disable-ssid",
+     "help": "Disable interface."
+    },
+    {
+     "name": "system-actions",
+     "help": "Perform immediate system operations on this FortiGate unit."
+    },
+    {
+     "name": "quarantine",
+     "help": "Quarantine host."
+    },
+    {
+     "name": "quarantine-forticlient",
+     "help": "Quarantine FortiClient by EMS."
+    },
+    {
+     "name": "quarantine-nsx",
+     "help": "Quarantine NSX instance."
+    },
+    {
+     "name": "quarantine-fortinac",
+     "help": "Quarantine host by FortiNAC."
+    },
+    {
+     "name": "ban-ip",
+     "help": "Ban IP address."
+    },
+    {
+     "name": "aws-lambda",
+     "help": "Send log data to integrated AWS service."
+    },
+    {
+     "name": "azure-function",
+     "help": "Send log data to an Azure function."
+    },
+    {
+     "name": "google-cloud-function",
+     "help": "Send log data to a Google Cloud function."
+    },
+    {
+     "name": "alicloud-function",
+     "help": "Send log data to an AliCloud function."
+    },
+    {
+     "name": "webhook",
+     "help": "Send an HTTP request."
+    },
+    {
+     "name": "cli-script",
+     "help": "Run CLI script."
+    },
+    {
+     "name": "slack-notification",
+     "help": "Send a notification message to a Slack incoming webhook."
+    },
+    {
+     "name": "microsoft-teams-notification",
+     "help": "Send a notification message to a Microsoft Teams incoming webhook."
+    }
+   ],
+   "default": "alert",
+   "multiple_values": false
+  },
+  "system-action": {
+   "name": "system-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "System action type.",
+   "required": true,
+   "options": [
+    {
+     "name": "reboot",
+     "help": "Reboot this FortiGate unit."
+    },
+    {
+     "name": "shutdown",
+     "help": "Shutdown this FortiGate unit."
+    },
+    {
+     "name": "backup-config",
+     "help": "Backup current configuration to the disk revisions."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "tls-certificate": {
+   "name": "tls-certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "Custom TLS certificate for API request.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "forticare-email": {
+   "name": "forticare-email",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of your FortiCare email address as the email-to address.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of your FortiCare email address as the email-to address."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of your FortiCare email address as the email-to address."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "email-to": {
+   "name": "email-to",
+   "category": "table",
+   "help": "Email addresses.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Email address.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "email-from": {
+   "name": "email-from",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Email sender name.",
+   "size": 127,
+   "multiple_values": false
+  },
+  "email-subject": {
+   "name": "email-subject",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Email subject.",
+   "size": 511,
+   "multiple_values": false
+  },
+  "minimum-interval": {
+   "name": "minimum-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Limit execution to no more than once in this interval (in seconds).",
+   "min-value": 0,
+   "max-value": 2592000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "aws-api-key": {
+   "name": "aws-api-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "AWS API Gateway API key.",
+   "required": true,
+   "size": 123,
+   "multiple_values": false
+  },
+  "azure-function-authorization": {
+   "name": "azure-function-authorization",
+   "category": "unitary",
+   "type": "option",
+   "help": "Azure function authorization level.",
+   "required": true,
+   "options": [
+    {
+     "name": "anonymous",
+     "help": "Anonymous authorization level (No authorization required)."
+    },
+    {
+     "name": "function",
+     "help": "Function authorization level (Function or Host Key required)."
+    },
+    {
+     "name": "admin",
+     "help": "Admin authorization level (Master Host Key required)."
+    }
+   ],
+   "default": "anonymous",
+   "multiple_values": false
+  },
+  "azure-api-key": {
+   "name": "azure-api-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Azure function API key.",
+   "size": 123,
+   "multiple_values": false
+  },
+  "alicloud-function-authorization": {
+   "name": "alicloud-function-authorization",
+   "category": "unitary",
+   "type": "option",
+   "help": "AliCloud function authorization type.",
+   "required": true,
+   "options": [
+    {
+     "name": "anonymous",
+     "help": "Anonymous authorization (No authorization required)."
+    },
+    {
+     "name": "function",
+     "help": "Function authorization (Authorization required)."
+    }
+   ],
+   "default": "anonymous",
+   "multiple_values": false
+  },
+  "alicloud-access-key-id": {
+   "name": "alicloud-access-key-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "AliCloud AccessKey ID.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "alicloud-access-key-secret": {
+   "name": "alicloud-access-key-secret",
+   "category": "unitary",
+   "type": "password",
+   "help": "AliCloud AccessKey secret.",
+   "required": true,
+   "size": 59,
+   "multiple_values": false
+  },
+  "message-type": {
+   "name": "message-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Message type.",
+   "required": true,
+   "options": [
+    {
+     "name": "text",
+     "help": "Plaintext."
+    },
+    {
+     "name": "json",
+     "help": "Custom JSON."
+    }
+   ],
+   "default": "text",
+   "multiple_values": false
+  },
+  "message": {
+   "name": "message",
+   "category": "unitary",
+   "type": "string",
+   "help": "Message content.",
+   "required": true,
+   "size": 4095,
+   "default": "%%log%%",
+   "multiple_values": false
+  },
+  "replacement-message": {
+   "name": "replacement-message",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable replacement message.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable replacement message."
+    },
+    {
+     "name": "disable",
+     "help": "Disable replacement message."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Request protocol.",
+   "required": true,
+   "options": [
+    {
+     "name": "http",
+     "help": "HTTP."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS."
+    }
+   ],
+   "default": "http",
+   "multiple_values": false
+  },
+  "method": {
+   "name": "method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Request method (POST, PUT, GET, PATCH or DELETE).",
+   "required": true,
+   "options": [
+    {
+     "name": "post",
+     "help": "POST."
+    },
+    {
+     "name": "put",
+     "help": "PUT."
+    },
+    {
+     "name": "get",
+     "help": "GET."
+    },
+    {
+     "name": "patch",
+     "help": "PATCH."
+    },
+    {
+     "name": "delete",
+     "help": "DELETE."
+    }
+   ],
+   "default": "post",
+   "multiple_values": false
+  },
+  "uri": {
+   "name": "uri",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Request API URI.",
+   "required": true,
+   "size": 1023,
+   "multiple_values": false
+  },
+  "http-body": {
+   "name": "http-body",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Request body (if necessary). Should be serialized json string.",
+   "size": 4095,
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Protocol port.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "http-headers": {
+   "name": "http-headers",
+   "category": "table",
+   "help": "Request headers.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "key": {
+     "name": "key",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Request header key.",
+     "required": true,
+     "size": 1023,
+     "multiple_values": false
+    },
+    "value": {
+     "name": "value",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Request header value.",
+     "required": true,
+     "size": 4095,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "verify-host-cert": {
+   "name": "verify-host-cert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of the remote host certificate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification of the remote host certificate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification of the remote host certificate."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "script": {
+   "name": "script",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "CLI script.",
+   "required": true,
+   "size": 1023,
+   "multiple_values": false
+  },
+  "output-size": {
+   "name": "output-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of megabytes to limit script output to (1 - 1024, default = 10).",
+   "min-value": 1,
+   "max-value": 1024,
+   "default": 10,
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum running time for this script in seconds (0 = no timeout).",
+   "min-value": 0,
+   "max-value": 300,
+   "default": 0,
+   "multiple_values": false
+  },
+  "execute-security-fabric": {
+   "name": "execute-security-fabric",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable execution of CLI script on all or only one FortiGate unit in the Security Fabric.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "CLI script executes on all FortiGate units in the Security Fabric."
+    },
+    {
+     "name": "disable",
+     "help": "CLI script executes only on the FortiGate unit that the stitch is triggered."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "accprofile": {
+   "name": "accprofile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access profile for CLI script action to access FortiGate features.",
+   "datasource": [
+    "system.accprofile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "security-tag": {
+   "name": "security-tag",
+   "category": "unitary",
+   "type": "string",
+   "help": "NSX security tag.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "sdn-connector": {
+   "name": "sdn-connector",
+   "category": "table",
+   "help": "NSX SDN connector names.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "SDN connector name.",
+     "datasource": [
+      "system.sdn-connector.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 522,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

@@ -1,0 +1,138 @@
+{
+ "name": "syslog-profile",
+ "category": "table",
+ "help": "Configure Wireless Termination Points (WTP) system log server profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WTP system log server profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "server-status": {
+   "name": "server-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiAP units to send log messages to a syslog server (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable syslog server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable syslog server."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "server-addr-type": {
+   "name": "server-addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Syslog server address type (default = ip).",
+   "options": [
+    {
+     "name": "fqdn",
+     "help": "Fully Qualified Domain Name address."
+    },
+    {
+     "name": "ip",
+     "help": "IPv4 address."
+    }
+   ],
+   "default": "ip",
+   "multiple_values": false
+  },
+  "server-fqdn": {
+   "name": "server-fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "FQDN of syslog server that FortiAP units send log messages to.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-ip": {
+   "name": "server-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address of syslog server that FortiAP units send log messages to.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "server-port": {
+   "name": "server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number of syslog server that FortiAP units send log messages to (default = 514).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 514,
+   "multiple_values": false
+  },
+  "log-level": {
+   "name": "log-level",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest level of log messages that FortiAP units send to this server (default = information).",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Level 0"
+    },
+    {
+     "name": "alert",
+     "help": "Level 1"
+    },
+    {
+     "name": "critical",
+     "help": "Level 2"
+    },
+    {
+     "name": "error",
+     "help": "Level 3"
+    },
+    {
+     "name": "warning",
+     "help": "Level 4"
+    },
+    {
+     "name": "notification",
+     "help": "Level 5"
+    },
+    {
+     "name": "information",
+     "help": "Level 6"
+    },
+    {
+     "name": "debugging",
+     "help": "Level 7"
+    }
+   ],
+   "default": "information",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 128,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 287,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,56 @@
+{
+ "name": "h2qp-terms-and-conditions",
+ "category": "table",
+ "help": "Configure terms and conditions.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Terms and Conditions ID.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filename": {
+   "name": "filename",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filename.",
+   "required": true,
+   "size": 254,
+   "default": "",
+   "multiple_values": false
+  },
+  "timestamp": {
+   "name": "timestamp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timestamp.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "url": {
+   "name": "url",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL.",
+   "required": true,
+   "size": 253,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 305,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

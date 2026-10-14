@@ -1,0 +1,540 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "VPN certificate setting.",
+ "children": {
+  "ocsp-status": {
+   "name": "ocsp-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable receiving certificates using the OCSP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "OCSP is performed if CRL is not checked."
+    },
+    {
+     "name": "mandatory",
+     "help": "If cert is not revoked by CRL, OCSP is performed."
+    },
+    {
+     "name": "disable",
+     "help": "OCSP is not performed."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ocsp-option": {
+   "name": "ocsp-option",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify whether the OCSP URL is from certificate or configured OCSP server.",
+   "options": [
+    {
+     "name": "certificate",
+     "help": "Use URL from certificate."
+    },
+    {
+     "name": "server",
+     "help": "Use URL from configured OCSP server."
+    }
+   ],
+   "default": "server",
+   "multiple_values": false
+  },
+  "proxy": {
+   "name": "proxy",
+   "category": "unitary",
+   "type": "string",
+   "help": "Proxy server FQDN or IP for OCSP/CA queries during certificate verification.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "proxy-port": {
+   "name": "proxy-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Proxy server port (1 - 65535, default = 8080).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8080,
+   "multiple_values": false
+  },
+  "proxy-username": {
+   "name": "proxy-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Proxy server user name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "proxy-password": {
+   "name": "proxy-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Proxy server password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source IP address for dynamic AIA and OCSP queries.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ocsp-default-server": {
+   "name": "ocsp-default-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default OCSP server.",
+   "datasource": [
+    "vpn.certificate.ocsp-server.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "check-ca-cert": {
+   "name": "check-ca-cert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of the user certificate and pass authentication if any CA in the chain is trusted (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification of the user certificate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification of the user certificate."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "check-ca-chain": {
+   "name": "check-ca-chain",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of the entire certificate chain and pass authentication only if the chain is complete and all of the CAs in the chain are trusted (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification of the entire certificate chain."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification of the entire certificate chain."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "subject-match": {
+   "name": "subject-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "When searching for a matching certificate, control how to do RDN value matching with certificate subject name (default = substring).",
+   "options": [
+    {
+     "name": "substring",
+     "help": "Find a match if the name being searched for is a part or the same as a certificate subject RDN."
+    },
+    {
+     "name": "value",
+     "help": "Find a match if the name being searched for is same as a certificate subject RDN."
+    }
+   ],
+   "default": "substring",
+   "multiple_values": false
+  },
+  "subject-set": {
+   "name": "subject-set",
+   "category": "unitary",
+   "type": "option",
+   "help": "When searching for a matching certificate, control how to do RDN set matching with certificate subject name (default = subset).",
+   "options": [
+    {
+     "name": "subset",
+     "help": "Find a match if the name being searched for is a subset of a certificate subject."
+    },
+    {
+     "name": "superset",
+     "help": "Find a match if the name being searched for is a superset of a certificate subject."
+    }
+   ],
+   "default": "subset",
+   "multiple_values": false
+  },
+  "cn-match": {
+   "name": "cn-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "When searching for a matching certificate, control how to do CN value matching with certificate subject name (default = substring).",
+   "options": [
+    {
+     "name": "substring",
+     "help": "Find a match if the name being searched for is a part or the same as a certificate CN."
+    },
+    {
+     "name": "value",
+     "help": "Find a match if the name being searched for is same as a certificate CN."
+    }
+   ],
+   "default": "substring",
+   "multiple_values": false
+  },
+  "cn-allow-multi": {
+   "name": "cn-allow-multi",
+   "category": "unitary",
+   "type": "option",
+   "help": "When searching for a matching certificate, allow multiple CN fields in certificate subject name (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Does not allow multiple CN entries in certificate matching."
+    },
+    {
+     "name": "enable",
+     "help": "Allow multiple CN entries in certificate matching."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "crl-verification": {
+   "name": "crl-verification",
+   "category": "complex",
+   "help": "CRL verification options.",
+   "children": {
+    "expiry": {
+     "name": "expiry",
+     "category": "unitary",
+     "type": "option",
+     "help": "CRL verification option when CRL is expired (default = ignore).",
+     "options": [
+      {
+       "name": "ignore",
+       "help": "Certificate status will be verified even if CRL is expired."
+      },
+      {
+       "name": "revoke",
+       "help": "Certificate will be revoked if CRL is expired."
+      }
+     ],
+     "default": "ignore",
+     "multiple_values": false
+    },
+    "leaf-crl-absence": {
+     "name": "leaf-crl-absence",
+     "category": "unitary",
+     "type": "option",
+     "help": "CRL verification option when leaf CRL is absent (default = ignore).",
+     "options": [
+      {
+       "name": "ignore",
+       "help": "CRL verification against leaf certificate is ignored if CRL is absent."
+      },
+      {
+       "name": "revoke",
+       "help": "Certificate will be revoked if CRL of leaf certificate is absent."
+      }
+     ],
+     "default": "ignore",
+     "multiple_values": false
+    },
+    "chain-crl-absence": {
+     "name": "chain-crl-absence",
+     "category": "unitary",
+     "type": "option",
+     "help": "CRL verification option when CRL of any certificate in chain is absent (default = ignore).",
+     "options": [
+      {
+       "name": "ignore",
+       "help": "CRL verification is ignored if CRL of any certificate in chain is absent."
+      },
+      {
+       "name": "revoke",
+       "help": "Certificate will be revoked if CRL of any certificate in chain is absent."
+      }
+     ],
+     "default": "ignore",
+     "multiple_values": false
+    }
+   }
+  },
+  "strict-ocsp-check": {
+   "name": "strict-ocsp-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable strict mode OCSP checking.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable strict mode OCSP checking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable strict mode OCSP checking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "cmp-save-extra-certs": {
+   "name": "cmp-save-extra-certs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable saving extra certificates in CMP mode (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable saving extra certificates in CMP mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable saving extra certificates in CMP mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cmp-key-usage-checking": {
+   "name": "cmp-key-usage-checking",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable server certificate key usage checking in CMP mode (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable server certificate key usage checking in CMP mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable server certificate key usage checking in CMP mode."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "cert-expire-warning": {
+   "name": "cert-expire-warning",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of days before a certificate expires to send a warning. Set to 0 to disable sending of the warning (0 - 100, default = 14).",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 14,
+   "multiple_values": false
+  },
+  "certname-rsa1024": {
+   "name": "certname-rsa1024",
+   "category": "unitary",
+   "type": "string",
+   "help": "1024 bit RSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_RSA1024",
+   "multiple_values": false
+  },
+  "certname-rsa2048": {
+   "name": "certname-rsa2048",
+   "category": "unitary",
+   "type": "string",
+   "help": "2048 bit RSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_RSA2048",
+   "multiple_values": false
+  },
+  "certname-rsa4096": {
+   "name": "certname-rsa4096",
+   "category": "unitary",
+   "type": "string",
+   "help": "4096 bit RSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_RSA4096",
+   "multiple_values": false
+  },
+  "certname-dsa1024": {
+   "name": "certname-dsa1024",
+   "category": "unitary",
+   "type": "string",
+   "help": "1024 bit DSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_DSA1024",
+   "multiple_values": false
+  },
+  "certname-dsa2048": {
+   "name": "certname-dsa2048",
+   "category": "unitary",
+   "type": "string",
+   "help": "2048 bit DSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_DSA2048",
+   "multiple_values": false
+  },
+  "certname-ecdsa256": {
+   "name": "certname-ecdsa256",
+   "category": "unitary",
+   "type": "string",
+   "help": "256 bit ECDSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_ECDSA256",
+   "multiple_values": false
+  },
+  "certname-ecdsa384": {
+   "name": "certname-ecdsa384",
+   "category": "unitary",
+   "type": "string",
+   "help": "384 bit ECDSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_ECDSA384",
+   "multiple_values": false
+  },
+  "certname-ecdsa521": {
+   "name": "certname-ecdsa521",
+   "category": "unitary",
+   "type": "string",
+   "help": "521 bit ECDSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_ECDSA521",
+   "multiple_values": false
+  },
+  "certname-ed25519": {
+   "name": "certname-ed25519",
+   "category": "unitary",
+   "type": "string",
+   "help": "253 bit EdDSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_ED25519",
+   "multiple_values": false
+  },
+  "certname-ed448": {
+   "name": "certname-ed448",
+   "category": "unitary",
+   "type": "string",
+   "help": "456 bit EdDSA key certificate for re-signing server certificates for SSL inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_SSL_ED448",
+   "multiple_values": false
+  }
+ },
+ "path": "vpn.certificate",
+ "q_type": 218,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

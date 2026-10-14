@@ -1,0 +1,457 @@
+{
+ "name": "proxy-address",
+ "category": "table",
+ "help": "Configure web proxy address.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Proxy address type.",
+   "options": [
+    {
+     "name": "host-regex",
+     "help": "Host regular expression."
+    },
+    {
+     "name": "url",
+     "help": "HTTP URL."
+    },
+    {
+     "name": "category",
+     "help": "FortiGuard URL catgegory."
+    },
+    {
+     "name": "method",
+     "help": "HTTP request method."
+    },
+    {
+     "name": "ua",
+     "help": "HTTP request user agent."
+    },
+    {
+     "name": "header",
+     "help": "HTTP request header."
+    },
+    {
+     "name": "src-advanced",
+     "help": "HTTP advanced source criteria."
+    },
+    {
+     "name": "dst-advanced",
+     "help": "HTTP advanced destination criteria."
+    },
+    {
+     "name": "saas",
+     "help": "SaaS application."
+    }
+   ],
+   "default": "url",
+   "multiple_values": false
+  },
+  "host": {
+   "name": "host",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address object for the host.",
+   "required": true,
+   "datasource": [
+    "firewall.address.name",
+    "firewall.addrgrp.name",
+    "firewall.proxy-address.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "host-regex": {
+   "name": "host-regex",
+   "category": "unitary",
+   "type": "string",
+   "help": "Host name as a regular expression.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "path": {
+   "name": "path",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL path as a regular expression.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "query": {
+   "name": "query",
+   "category": "unitary",
+   "type": "string",
+   "help": "Match the query part of the URL as a regular expression.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "referrer": {
+   "name": "referrer",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of referrer field in the HTTP header to match the address.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "category": {
+   "name": "category",
+   "category": "table",
+   "help": "FortiGuard category ID.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "FortiGuard category ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "method": {
+   "name": "method",
+   "category": "unitary",
+   "type": "option",
+   "help": "HTTP request methods to be used.",
+   "options": [
+    {
+     "name": "get",
+     "help": "GET method."
+    },
+    {
+     "name": "post",
+     "help": "POST method."
+    },
+    {
+     "name": "put",
+     "help": "PUT method."
+    },
+    {
+     "name": "head",
+     "help": "HEAD method."
+    },
+    {
+     "name": "connect",
+     "help": "CONNECT method."
+    },
+    {
+     "name": "trace",
+     "help": "TRACE method."
+    },
+    {
+     "name": "options",
+     "help": "OPTIONS method."
+    },
+    {
+     "name": "delete",
+     "help": "DELETE method."
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 8
+  },
+  "ua": {
+   "name": "ua",
+   "category": "unitary",
+   "type": "option",
+   "help": "Names of browsers to be used as user agent.",
+   "options": [
+    {
+     "name": "chrome",
+     "help": "Google Chrome."
+    },
+    {
+     "name": "ms",
+     "help": "Microsoft Internet Explorer or EDGE."
+    },
+    {
+     "name": "firefox",
+     "help": "Mozilla Firefox."
+    },
+    {
+     "name": "safari",
+     "help": "Apple Safari."
+    },
+    {
+     "name": "ie",
+     "help": "Microsoft Internet Explorer."
+    },
+    {
+     "name": "edge",
+     "help": "Microsoft Edge."
+    },
+    {
+     "name": "other",
+     "help": "Other browsers."
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 7
+  },
+  "ua-min-ver": {
+   "name": "ua-min-ver",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum version of the user agent specified in dotted notation. For example, use 90.0.1 with the ua field set to \"chrome\" to require Google Chrome's minimum version must be 90.0.1.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ua-max-ver": {
+   "name": "ua-max-ver",
+   "category": "unitary",
+   "type": "string",
+   "help": "Maximum version of the user agent specified in dotted notation. For example, use 120 with the ua field set to \"chrome\" to require Google Chrome's maximum version must be 120.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "header-name": {
+   "name": "header-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of HTTP header.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "header": {
+   "name": "header",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTP header name as a regular expression.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "case-sensitivity": {
+   "name": "case-sensitivity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to make the pattern case sensitive.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Case insensitive in pattern."
+    },
+    {
+     "name": "enable",
+     "help": "Case sensitive in pattern."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "header-group": {
+   "name": "header-group",
+   "category": "table",
+   "help": "HTTP header group.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "header-name": {
+     "name": "header-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "HTTP header.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "string",
+     "help": "HTTP header regular expression.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "case-sensitivity": {
+     "name": "case-sensitivity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Case sensitivity in pattern.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Case insensitive in pattern."
+      },
+      {
+       "name": "enable",
+       "help": "Case sensitive in pattern."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value to determine the color of the icon in the GUI (1 - 32, default = 0, which sets value to 1).",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tagging": {
+   "name": "tagging",
+   "category": "table",
+   "help": "Config object tagging.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tagging entry name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tag category.",
+     "datasource": [
+      "system.object-tagging.category"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "tags": {
+     "name": "tags",
+     "category": "table",
+     "help": "Tags.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Tag name.",
+       "datasource": [
+        "system.object-tagging.tags.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "application": {
+   "name": "application",
+   "category": "table",
+   "help": "SaaS application.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "SaaS application name.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 1024,
+ "max_table_size_global": 1024,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 505,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

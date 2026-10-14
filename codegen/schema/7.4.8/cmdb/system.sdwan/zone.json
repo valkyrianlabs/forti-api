@@ -1,0 +1,87 @@
+{
+ "name": "zone",
+ "category": "table",
+ "help": "Configure SD-WAN zones.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Zone name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "advpn-select": {
+   "name": "advpn-select",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable selection of ADVPN based on SDWAN information.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable selection of ADVPN based on SDWAN information."
+    },
+    {
+     "name": "disable",
+     "help": "Disable selection of ADVPN based on SDWAN information."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "advpn-health-check": {
+   "name": "advpn-health-check",
+   "category": "unitary",
+   "type": "string",
+   "help": "Health check for ADVPN local overlay link quality.",
+   "datasource": [
+    "system.sdwan.health-check.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "service-sla-tie-break": {
+   "name": "service-sla-tie-break",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method of selecting member if more than one meets the SLA.",
+   "options": [
+    {
+     "name": "cfg-order",
+     "help": "Members that meet the SLA are selected in the order they are configured."
+    },
+    {
+     "name": "fib-best-match",
+     "help": "Members that meet the SLA are selected that match the longest prefix in the routing table."
+    },
+    {
+     "name": "input-device",
+     "help": "Members that meet the SLA are selected by matching the input device."
+    }
+   ],
+   "default": "cfg-order",
+   "multiple_values": false
+  },
+  "minimum-sla-meet-members": {
+   "name": "minimum-sla-meet-members",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum number of members which meet SLA when the neighbor is preferred.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 1024,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system.sdwan",
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

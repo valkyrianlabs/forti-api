@@ -15,6 +15,12 @@ namespace fortiapi::firewall {
 
 // Configure service categories.
 struct ServiceCategory {
+    // Values of FabricObject: Security Fabric global object setting.
+    struct FabricObject {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
     fortiapi::Field<std::string> name;  // Service category name.
     fortiapi::Field<std::string> comment;  // Comment.
     fortiapi::Field<std::string> fabric_object;  // Security Fabric global object setting.
@@ -34,12 +40,6 @@ struct ServiceCategorySpec {
 };
 
 using ServiceCategories = fortiapi::Table<ServiceCategorySpec>;
-
-// Allowed values of option attributes.
-namespace service_category::fabric_object {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
 
 }  // namespace fortiapi::firewall
 

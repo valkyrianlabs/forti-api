@@ -1,0 +1,97 @@
+{
+ "name": "fortitoken",
+ "category": "table",
+ "help": "Configure FortiToken.",
+ "mkey": "serial-number",
+ "mkey_type": "string",
+ "children": {
+  "serial-number": {
+   "name": "serial-number",
+   "category": "unitary",
+   "type": "string",
+   "help": "Serial number.",
+   "size": 16,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Status.",
+   "options": [
+    {
+     "name": "active",
+     "help": "Activate FortiToken."
+    },
+    {
+     "name": "lock",
+     "help": "Lock FortiToken."
+    }
+   ],
+   "default": "active",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "license": {
+   "name": "license",
+   "category": "unitary",
+   "type": "string",
+   "help": "Mobile token license.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "activation-code": {
+   "name": "activation-code",
+   "category": "unitary",
+   "type": "string",
+   "help": "Mobile token user activation-code.",
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "activation-expire": {
+   "name": "activation-expire",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Mobile token user activation-code expire time.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "reg-id": {
+   "name": "reg-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Device Reg ID.",
+   "size": 256,
+   "default": "",
+   "multiple_values": false
+  },
+  "os-ver": {
+   "name": "os-ver",
+   "category": "unitary",
+   "type": "string",
+   "help": "Device Mobile Version.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 500,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 458,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

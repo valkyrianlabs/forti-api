@@ -1,0 +1,389 @@
+{
+ "name": "dot1p-map",
+ "category": "table",
+ "help": "Configure FortiSwitch QoS 802.1p.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dot1p map name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description of the 802.1p name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "egress-pri-tagging": {
+   "name": "egress-pri-tagging",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable egress priority-tag frame.",
+   "required": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable egress priority tagging."
+    },
+    {
+     "name": "enable",
+     "help": "Enable egress priority tagging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "priority-0": {
+   "name": "priority-0",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  },
+  "priority-1": {
+   "name": "priority-1",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  },
+  "priority-2": {
+   "name": "priority-2",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  },
+  "priority-3": {
+   "name": "priority-3",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  },
+  "priority-4": {
+   "name": "priority-4",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  },
+  "priority-5": {
+   "name": "priority-5",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  },
+  "priority-6": {
+   "name": "priority-6",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  },
+  "priority-7": {
+   "name": "priority-7",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue mapped to dot1p priority number.",
+   "options": [
+    {
+     "name": "queue-0",
+     "help": "COS queue 0 (lowest priority)."
+    },
+    {
+     "name": "queue-1",
+     "help": "COS queue 1."
+    },
+    {
+     "name": "queue-2",
+     "help": "COS queue 2."
+    },
+    {
+     "name": "queue-3",
+     "help": "COS queue 3."
+    },
+    {
+     "name": "queue-4",
+     "help": "COS queue 4."
+    },
+    {
+     "name": "queue-5",
+     "help": "COS queue 5."
+    },
+    {
+     "name": "queue-6",
+     "help": "COS queue 6."
+    },
+    {
+     "name": "queue-7",
+     "help": "COS queue 7 (highest priority)."
+    }
+   ],
+   "default": "queue-0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller.qos",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

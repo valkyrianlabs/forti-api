@@ -1,0 +1,2305 @@
+{
+ "name": "wtp",
+ "category": "table",
+ "help": "Configure Wireless Termination Points (WTPs), that is, FortiAPs or APs to be managed by FortiGate.",
+ "mkey": "wtp-id",
+ "mkey_type": "string",
+ "children": {
+  "wtp-id": {
+   "name": "wtp-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "WTP ID.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "index": {
+   "name": "index",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Index (0 - 4294967295).",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "admin": {
+   "name": "admin",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure how the FortiGate operating as a wireless controller discovers and manages this WTP, AP or FortiAP.",
+   "options": [
+    {
+     "name": "discovered",
+     "help": "FortiGate wireless controller discovers the WTP, AP, or FortiAP though discovery or join request messages."
+    },
+    {
+     "name": "disable",
+     "help": "FortiGate wireless controller is configured to not provide service to this WTP."
+    },
+    {
+     "name": "enable",
+     "help": "FortiGate wireless controller is configured to provide service to this WTP."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WTP, AP or FortiAP configuration name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "location": {
+   "name": "location",
+   "category": "unitary",
+   "type": "string",
+   "help": "Field for describing the physical location of the WTP, AP or FortiAP.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "region": {
+   "name": "region",
+   "category": "unitary",
+   "type": "string",
+   "help": "Region name WTP is associated with.",
+   "datasource": [
+    "wireless-controller.region.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "region-x": {
+   "name": "region-x",
+   "category": "unitary",
+   "type": "string",
+   "help": "Relative horizontal region coordinate (between 0 and 1).",
+   "size": 15,
+   "default": "0",
+   "multiple_values": false
+  },
+  "region-y": {
+   "name": "region-y",
+   "category": "unitary",
+   "type": "string",
+   "help": "Relative vertical region coordinate (between 0 and 1).",
+   "size": 15,
+   "default": "0",
+   "multiple_values": false
+  },
+  "firmware-provision": {
+   "name": "firmware-provision",
+   "category": "unitary",
+   "type": "string",
+   "help": "Firmware version to provision to this FortiAP on bootup (major.minor.build, i.e. 6.2.1234).",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "firmware-provision-latest": {
+   "name": "firmware-provision-latest",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable one-time automatic provisioning of the latest firmware version.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not automatically provision the latest available firmware."
+    },
+    {
+     "name": "once",
+     "help": "Automatically attempt a one-time upgrade to the latest available firmware version."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "wtp-profile": {
+   "name": "wtp-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "WTP profile name to apply to this WTP, AP or FortiAP.",
+   "required": true,
+   "datasource": [
+    "wireless-controller.wtp-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "apcfg-profile": {
+   "name": "apcfg-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "AP local configuration profile name.",
+   "datasource": [
+    "wireless-controller.apcfg-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "bonjour-profile": {
+   "name": "bonjour-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Bonjour profile name.",
+   "datasource": [
+    "wireless-controller.bonjour-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ble-major-id": {
+   "name": "ble-major-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Override BLE Major ID.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ble-minor-id": {
+   "name": "ble-minor-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Override BLE Minor ID.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "override-led-state": {
+   "name": "override-led-state",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the profile LED state setting for this FortiAP. You must enable this option to use the led-state command to turn off the FortiAP's LEDs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile LED state."
+    },
+    {
+     "name": "disable",
+     "help": "Use the WTP profile LED state."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "led-state": {
+   "name": "led-state",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to allow the FortiAPs LEDs to light. Disable to keep the LEDs off. You may want to keep the LEDs off so they are not distracting in low light areas etc.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow the LEDs on this FortiAP to light."
+    },
+    {
+     "name": "disable",
+     "help": "Keep the LEDs on this FortiAP off."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "override-wan-port-mode": {
+   "name": "override-wan-port-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the wan-port-mode in the WTP profile.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile wan-port-mode."
+    },
+    {
+     "name": "disable",
+     "help": "Use the wan-port-mode in the WTP profile."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "wan-port-mode": {
+   "name": "wan-port-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using the FortiAP WAN port as a LAN port.",
+   "options": [
+    {
+     "name": "wan-lan",
+     "help": "Use the FortiAP WAN port as a LAN port."
+    },
+    {
+     "name": "wan-only",
+     "help": "Do not use the WAN port as a LAN port."
+    }
+   ],
+   "default": "wan-only",
+   "multiple_values": false
+  },
+  "override-ip-fragment": {
+   "name": "override-ip-fragment",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the WTP profile IP fragment prevention setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile IP fragment prevention setting."
+    },
+    {
+     "name": "disable",
+     "help": "Use the WTP profile IP fragment prevention setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ip-fragment-preventing": {
+   "name": "ip-fragment-preventing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method(s) by which IP fragmentation is prevented for control and data packets through CAPWAP tunnel (default = tcp-mss-adjust).",
+   "options": [
+    {
+     "name": "tcp-mss-adjust",
+     "help": "TCP maximum segment size adjustment."
+    },
+    {
+     "name": "icmp-unreachable",
+     "help": "Drop packet and send ICMP Destination Unreachable"
+    }
+   ],
+   "default": "tcp-mss-adjust",
+   "multiple_values": true
+  },
+  "tun-mtu-uplink": {
+   "name": "tun-mtu-uplink",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The maximum transmission unit (MTU) of uplink CAPWAP tunnel (576 - 1500 bytes or 0; 0 means the local MTU of FortiAP; default = 0).",
+   "min-value": 576,
+   "max-value": 1500,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tun-mtu-downlink": {
+   "name": "tun-mtu-downlink",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The MTU of downlink CAPWAP tunnel (576 - 1500 bytes or 0; 0 means the local MTU of FortiAP; default = 0).",
+   "min-value": 576,
+   "max-value": 1500,
+   "default": 0,
+   "multiple_values": false
+  },
+  "override-split-tunnel": {
+   "name": "override-split-tunnel",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the WTP profile split tunneling setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile split tunneling setting."
+    },
+    {
+     "name": "disable",
+     "help": "Use the WTP profile split tunneling setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "split-tunneling-acl-path": {
+   "name": "split-tunneling-acl-path",
+   "category": "unitary",
+   "type": "option",
+   "help": "Split tunneling ACL path is local/tunnel.",
+   "options": [
+    {
+     "name": "tunnel",
+     "help": "Split tunneling ACL list traffic will be tunnel."
+    },
+    {
+     "name": "local",
+     "help": "Split tunneling ACL list traffic will be local NATed."
+    }
+   ],
+   "default": "local",
+   "multiple_values": false
+  },
+  "split-tunneling-acl-local-ap-subnet": {
+   "name": "split-tunneling-acl-local-ap-subnet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatically adding local subnetwork of FortiAP to split-tunneling ACL (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatically adding local subnetwork of FortiAP to split-tunneling ACL."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatically adding local subnetwork of FortiAP to split-tunneling ACL."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "split-tunneling-acl": {
+   "name": "split-tunneling-acl",
+   "category": "table",
+   "help": "Split tunneling ACL filter list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "dest-ip": {
+     "name": "dest-ip",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Destination IP and mask for the split-tunneling subnet.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 16
+  },
+  "override-lan": {
+   "name": "override-lan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the WTP profile LAN port setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile LAN port setting."
+    },
+    {
+     "name": "disable",
+     "help": "Use the WTP profile LAN port setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "lan": {
+   "name": "lan",
+   "category": "complex",
+   "help": "WTP LAN port mapping.",
+   "children": {
+    "port-mode": {
+     "name": "port-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port-ssid": {
+     "name": "port-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port1-mode": {
+     "name": "port1-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 1 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port1-ssid": {
+     "name": "port1-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 1 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port2-mode": {
+     "name": "port2-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 2 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port2-ssid": {
+     "name": "port2-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 2 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port3-mode": {
+     "name": "port3-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 3 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port3-ssid": {
+     "name": "port3-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 3 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port4-mode": {
+     "name": "port4-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 4 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port4-ssid": {
+     "name": "port4-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 4 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port5-mode": {
+     "name": "port5-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 5 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port5-ssid": {
+     "name": "port5-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 5 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port6-mode": {
+     "name": "port6-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 6 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port6-ssid": {
+     "name": "port6-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 6 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port7-mode": {
+     "name": "port7-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 7 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port7-ssid": {
+     "name": "port7-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 7 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port8-mode": {
+     "name": "port8-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN port 8 mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP LAN port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP LAN port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port8-ssid": {
+     "name": "port8-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge LAN port 8 to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "port-esl-mode": {
+     "name": "port-esl-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "ESL port mode.",
+     "options": [
+      {
+       "name": "offline",
+       "help": "Offline."
+      },
+      {
+       "name": "nat-to-wan",
+       "help": "NAT WTP ESL port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-wan",
+       "help": "Bridge WTP ESL port to WTP WAN port."
+      },
+      {
+       "name": "bridge-to-ssid",
+       "help": "Bridge WTP ESL port to SSID."
+      }
+     ],
+     "default": "offline",
+     "multiple_values": false
+    },
+    "port-esl-ssid": {
+     "name": "port-esl-ssid",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bridge ESL port to SSID.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "override-allowaccess": {
+   "name": "override-allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the WTP profile management access configuration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile management access configuration."
+    },
+    {
+     "name": "disable",
+     "help": "Use the WTP profile management access configuration."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allowaccess": {
+   "name": "allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control management access to the managed WTP, FortiAP, or AP. Separate entries with a space.",
+   "options": [
+    {
+     "name": "https",
+     "help": "HTTPS access."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH access."
+    },
+    {
+     "name": "snmp",
+     "help": "SNMP access."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "override-login-passwd-change": {
+   "name": "override-login-passwd-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the WTP profile login-password (administrator password) setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override the WTP profile login-password (administrator password) setting."
+    },
+    {
+     "name": "disable",
+     "help": "Use the the WTP profile login-password (administrator password) setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "login-passwd-change": {
+   "name": "login-passwd-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Change or reset the administrator password of a managed WTP, FortiAP or AP (yes, default, or no, default = no).",
+   "options": [
+    {
+     "name": "yes",
+     "help": "Change the managed WTP, FortiAP or AP's administrator password. Use the login-password option to set the password."
+    },
+    {
+     "name": "default",
+     "help": "Keep the managed WTP, FortiAP or AP's administrator password set to the factory default."
+    },
+    {
+     "name": "no",
+     "help": "Do not change the managed WTP, FortiAP or AP's administrator password."
+    }
+   ],
+   "default": "no",
+   "multiple_values": false
+  },
+  "login-passwd": {
+   "name": "login-passwd",
+   "category": "unitary",
+   "type": "password",
+   "help": "Set the managed WTP, FortiAP, or AP's administrator password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "radio-1": {
+   "name": "radio-1",
+   "category": "complex",
+   "help": "Configuration options for radio 1.",
+   "children": {
+    "override-band": {
+     "name": "override-band",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile band setting.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile band setting."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile band setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "band": {
+     "name": "band",
+     "category": "unitary",
+     "type": "option",
+     "help": "WiFi band that Radio 1 operates on.",
+     "options": [
+      {
+       "name": "802.11a",
+       "help": "802.11a."
+      },
+      {
+       "name": "802.11b",
+       "help": "802.11b."
+      },
+      {
+       "name": "802.11g",
+       "help": "802.11g."
+      },
+      {
+       "name": "802.11n-2G",
+       "help": "802.11n (WiFi 4) at 2.4GHz."
+      },
+      {
+       "name": "802.11n-5G",
+       "help": "802.11n (WiFi 4) at 5GHz."
+      },
+      {
+       "name": "802.11ac-2G",
+       "help": "802.11ac (WiFi 5) at 2.4GHz."
+      },
+      {
+       "name": "802.11ac-5G",
+       "help": "802.11ac (WiFi 5) at 5GHz."
+      },
+      {
+       "name": "802.11ax-2G",
+       "help": "802.11ax (WiFi 6) at 2.4GHz."
+      },
+      {
+       "name": "802.11ax-5G",
+       "help": "802.11ax (WiFi 6) at 5GHz."
+      },
+      {
+       "name": "802.11ax-6G",
+       "help": "802.11ax (WiFi 6) at 6GHz."
+      },
+      {
+       "name": "802.11be-2G",
+       "help": "802.11be (WiFi 7) at 2.4GHz."
+      },
+      {
+       "name": "802.11be-5G",
+       "help": "802.11be (WiFi 7) at 5GHz."
+      },
+      {
+       "name": "802.11be-6G",
+       "help": "802.11be (WiFi 7) at 6GHz."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "override-txpower": {
+     "name": "override-txpower",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile power level configuration.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile power level configuration."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile power level configuration."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-level": {
+     "name": "auto-power-level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable automatic transmit power adjustment."
+      },
+      {
+       "name": "disable",
+       "help": "Disable automatic transmit power adjustment."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-high": {
+     "name": "auto-power-high",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The upper bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 17,
+     "multiple_values": false
+    },
+    "auto-power-low": {
+     "name": "auto-power-low",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The lower bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 10,
+     "multiple_values": false
+    },
+    "auto-power-target": {
+     "name": "auto-power-target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Target of automatic transmit power adjustment in dBm (-95 to -20, default = -70).",
+     "size": 7,
+     "default": "-70",
+     "multiple_values": false
+    },
+    "power-mode": {
+     "name": "power-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Set radio effective isotropic radiated power (EIRP) in dBm or by a percentage of the maximum EIRP (default = percentage). This power takes into account both radio transmit power and antenna gain. Higher power level settings may be constrained by local regulatory requirements and AP capabilities.",
+     "options": [
+      {
+       "name": "dBm",
+       "help": "Set radio EIRP power in dBm."
+      },
+      {
+       "name": "percentage",
+       "help": "Set radio EIRP power by percentage."
+      }
+     ],
+     "default": "percentage",
+     "multiple_values": false
+    },
+    "power-level": {
+     "name": "power-level",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power level as a percentage of the maximum EIRP power (0 - 100, default = 100).",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 100,
+     "multiple_values": false
+    },
+    "power-value": {
+     "name": "power-value",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power in dBm (1 - 33, default = 27).",
+     "min-value": 1,
+     "max-value": 33,
+     "default": 27,
+     "multiple_values": false
+    },
+    "override-vaps": {
+     "name": "override-vaps",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile Virtual Access Point (VAP) settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile VAP settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile VAP settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vap-all": {
+     "name": "vap-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure method for assigning SSIDs to this FortiAP (default = automatically assign tunnel SSIDs).",
+     "options": [
+      {
+       "name": "tunnel",
+       "help": "Automatically select tunnel SSIDs."
+      },
+      {
+       "name": "bridge",
+       "help": "Automatically select local-bridging SSIDs."
+      },
+      {
+       "name": "manual",
+       "help": "Manually select SSIDs."
+      }
+     ],
+     "default": "tunnel",
+     "multiple_values": false
+    },
+    "vaps": {
+     "name": "vaps",
+     "category": "table",
+     "help": "Manually selected list of Virtual Access Points (VAPs).",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Virtual Access Point (VAP) name.",
+       "required": true,
+       "datasource": [
+        "wireless-controller.vap-group.name",
+        "system.interface.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "override-channel": {
+     "name": "override-channel",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile channel settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile channel settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile channel settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "channel": {
+     "name": "channel",
+     "category": "table",
+     "help": "Selected list of wireless radio channels.",
+     "member_table": true,
+     "mkey": "chan",
+     "mkey_type": "string",
+     "children": {
+      "chan": {
+       "name": "chan",
+       "category": "unitary",
+       "type": "string",
+       "help": "Channel number.",
+       "required": true,
+       "size": 3,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "drma-manual-mode": {
+     "name": "drma-manual-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Radio mode to be used for DRMA manual mode (default = ncf).",
+     "options": [
+      {
+       "name": "ap",
+       "help": "Set the radio to AP mode."
+      },
+      {
+       "name": "monitor",
+       "help": "Set the radio to monitor mode"
+      },
+      {
+       "name": "ncf",
+       "help": "Select and set the radio mode based on NCF score."
+      },
+      {
+       "name": "ncf-peek",
+       "help": "Select the radio mode based on NCF score, but do not apply."
+      }
+     ],
+     "default": "ncf",
+     "multiple_values": false
+    }
+   }
+  },
+  "radio-2": {
+   "name": "radio-2",
+   "category": "complex",
+   "help": "Configuration options for radio 2.",
+   "children": {
+    "override-band": {
+     "name": "override-band",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile band setting.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile band setting."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile band setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "band": {
+     "name": "band",
+     "category": "unitary",
+     "type": "option",
+     "help": "WiFi band that Radio 2 operates on.",
+     "options": [
+      {
+       "name": "802.11a",
+       "help": "802.11a."
+      },
+      {
+       "name": "802.11b",
+       "help": "802.11b."
+      },
+      {
+       "name": "802.11g",
+       "help": "802.11g."
+      },
+      {
+       "name": "802.11n-2G",
+       "help": "802.11n (WiFi 4) at 2.4GHz."
+      },
+      {
+       "name": "802.11n-5G",
+       "help": "802.11n (WiFi 4) at 5GHz."
+      },
+      {
+       "name": "802.11ac-2G",
+       "help": "802.11ac (WiFi 5) at 2.4GHz."
+      },
+      {
+       "name": "802.11ac-5G",
+       "help": "802.11ac (WiFi 5) at 5GHz."
+      },
+      {
+       "name": "802.11ax-2G",
+       "help": "802.11ax (WiFi 6) at 2.4GHz."
+      },
+      {
+       "name": "802.11ax-5G",
+       "help": "802.11ax (WiFi 6) at 5GHz."
+      },
+      {
+       "name": "802.11ax-6G",
+       "help": "802.11ax (WiFi 6) at 6GHz."
+      },
+      {
+       "name": "802.11be-2G",
+       "help": "802.11be (WiFi 7) at 2.4GHz."
+      },
+      {
+       "name": "802.11be-5G",
+       "help": "802.11be (WiFi 7) at 5GHz."
+      },
+      {
+       "name": "802.11be-6G",
+       "help": "802.11be (WiFi 7) at 6GHz."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "override-txpower": {
+     "name": "override-txpower",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile power level configuration.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile power level configuration."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile power level configuration."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-level": {
+     "name": "auto-power-level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable automatic transmit power adjustment."
+      },
+      {
+       "name": "disable",
+       "help": "Disable automatic transmit power adjustment."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-high": {
+     "name": "auto-power-high",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The upper bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 17,
+     "multiple_values": false
+    },
+    "auto-power-low": {
+     "name": "auto-power-low",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The lower bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 10,
+     "multiple_values": false
+    },
+    "auto-power-target": {
+     "name": "auto-power-target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Target of automatic transmit power adjustment in dBm (-95 to -20, default = -70).",
+     "size": 7,
+     "default": "-70",
+     "multiple_values": false
+    },
+    "power-mode": {
+     "name": "power-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Set radio effective isotropic radiated power (EIRP) in dBm or by a percentage of the maximum EIRP (default = percentage). This power takes into account both radio transmit power and antenna gain. Higher power level settings may be constrained by local regulatory requirements and AP capabilities.",
+     "options": [
+      {
+       "name": "dBm",
+       "help": "Set radio EIRP power in dBm."
+      },
+      {
+       "name": "percentage",
+       "help": "Set radio EIRP power by percentage."
+      }
+     ],
+     "default": "percentage",
+     "multiple_values": false
+    },
+    "power-level": {
+     "name": "power-level",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power level as a percentage of the maximum EIRP power (0 - 100, default = 100).",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 100,
+     "multiple_values": false
+    },
+    "power-value": {
+     "name": "power-value",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power in dBm (1 - 33, default = 27).",
+     "min-value": 1,
+     "max-value": 33,
+     "default": 27,
+     "multiple_values": false
+    },
+    "override-vaps": {
+     "name": "override-vaps",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile Virtual Access Point (VAP) settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile VAP settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile VAP settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vap-all": {
+     "name": "vap-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure method for assigning SSIDs to this FortiAP (default = automatically assign tunnel SSIDs).",
+     "options": [
+      {
+       "name": "tunnel",
+       "help": "Automatically select tunnel SSIDs."
+      },
+      {
+       "name": "bridge",
+       "help": "Automatically select local-bridging SSIDs."
+      },
+      {
+       "name": "manual",
+       "help": "Manually select SSIDs."
+      }
+     ],
+     "default": "tunnel",
+     "multiple_values": false
+    },
+    "vaps": {
+     "name": "vaps",
+     "category": "table",
+     "help": "Manually selected list of Virtual Access Points (VAPs).",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Virtual Access Point (VAP) name.",
+       "required": true,
+       "datasource": [
+        "wireless-controller.vap-group.name",
+        "system.interface.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "override-channel": {
+     "name": "override-channel",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile channel settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile channel settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile channel settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "channel": {
+     "name": "channel",
+     "category": "table",
+     "help": "Selected list of wireless radio channels.",
+     "member_table": true,
+     "mkey": "chan",
+     "mkey_type": "string",
+     "children": {
+      "chan": {
+       "name": "chan",
+       "category": "unitary",
+       "type": "string",
+       "help": "Channel number.",
+       "required": true,
+       "size": 3,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "drma-manual-mode": {
+     "name": "drma-manual-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Radio mode to be used for DRMA manual mode (default = ncf).",
+     "options": [
+      {
+       "name": "ap",
+       "help": "Set the radio to AP mode."
+      },
+      {
+       "name": "monitor",
+       "help": "Set the radio to monitor mode"
+      },
+      {
+       "name": "ncf",
+       "help": "Select and set the radio mode based on NCF score."
+      },
+      {
+       "name": "ncf-peek",
+       "help": "Select the radio mode based on NCF score, but do not apply."
+      }
+     ],
+     "default": "ncf",
+     "multiple_values": false
+    }
+   }
+  },
+  "radio-3": {
+   "name": "radio-3",
+   "category": "complex",
+   "help": "Configuration options for radio 3.",
+   "children": {
+    "override-band": {
+     "name": "override-band",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile band setting.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile band setting."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile band setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "band": {
+     "name": "band",
+     "category": "unitary",
+     "type": "option",
+     "help": "WiFi band that Radio 3 operates on.",
+     "options": [
+      {
+       "name": "802.11a",
+       "help": "802.11a."
+      },
+      {
+       "name": "802.11b",
+       "help": "802.11b."
+      },
+      {
+       "name": "802.11g",
+       "help": "802.11g."
+      },
+      {
+       "name": "802.11n-2G",
+       "help": "802.11n (WiFi 4) at 2.4GHz."
+      },
+      {
+       "name": "802.11n-5G",
+       "help": "802.11n (WiFi 4) at 5GHz."
+      },
+      {
+       "name": "802.11ac-2G",
+       "help": "802.11ac (WiFi 5) at 2.4GHz."
+      },
+      {
+       "name": "802.11ac-5G",
+       "help": "802.11ac (WiFi 5) at 5GHz."
+      },
+      {
+       "name": "802.11ax-2G",
+       "help": "802.11ax (WiFi 6) at 2.4GHz."
+      },
+      {
+       "name": "802.11ax-5G",
+       "help": "802.11ax (WiFi 6) at 5GHz."
+      },
+      {
+       "name": "802.11ax-6G",
+       "help": "802.11ax (WiFi 6) at 6GHz."
+      },
+      {
+       "name": "802.11be-2G",
+       "help": "802.11be (WiFi 7) at 2.4GHz."
+      },
+      {
+       "name": "802.11be-5G",
+       "help": "802.11be (WiFi 7) at 5GHz."
+      },
+      {
+       "name": "802.11be-6G",
+       "help": "802.11be (WiFi 7) at 6GHz."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "override-txpower": {
+     "name": "override-txpower",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile power level configuration.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile power level configuration."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile power level configuration."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-level": {
+     "name": "auto-power-level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable automatic transmit power adjustment."
+      },
+      {
+       "name": "disable",
+       "help": "Disable automatic transmit power adjustment."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-high": {
+     "name": "auto-power-high",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The upper bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 17,
+     "multiple_values": false
+    },
+    "auto-power-low": {
+     "name": "auto-power-low",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The lower bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 10,
+     "multiple_values": false
+    },
+    "auto-power-target": {
+     "name": "auto-power-target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Target of automatic transmit power adjustment in dBm (-95 to -20, default = -70).",
+     "size": 7,
+     "default": "-70",
+     "multiple_values": false
+    },
+    "power-mode": {
+     "name": "power-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Set radio effective isotropic radiated power (EIRP) in dBm or by a percentage of the maximum EIRP (default = percentage). This power takes into account both radio transmit power and antenna gain. Higher power level settings may be constrained by local regulatory requirements and AP capabilities.",
+     "options": [
+      {
+       "name": "dBm",
+       "help": "Set radio EIRP power in dBm."
+      },
+      {
+       "name": "percentage",
+       "help": "Set radio EIRP power by percentage."
+      }
+     ],
+     "default": "percentage",
+     "multiple_values": false
+    },
+    "power-level": {
+     "name": "power-level",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power level as a percentage of the maximum EIRP power (0 - 100, default = 100).",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 100,
+     "multiple_values": false
+    },
+    "power-value": {
+     "name": "power-value",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power in dBm (1 - 33, default = 27).",
+     "min-value": 1,
+     "max-value": 33,
+     "default": 27,
+     "multiple_values": false
+    },
+    "override-vaps": {
+     "name": "override-vaps",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile Virtual Access Point (VAP) settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile VAP settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile VAP settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vap-all": {
+     "name": "vap-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure method for assigning SSIDs to this FortiAP (default = automatically assign tunnel SSIDs).",
+     "options": [
+      {
+       "name": "tunnel",
+       "help": "Automatically select tunnel SSIDs."
+      },
+      {
+       "name": "bridge",
+       "help": "Automatically select local-bridging SSIDs."
+      },
+      {
+       "name": "manual",
+       "help": "Manually select SSIDs."
+      }
+     ],
+     "default": "tunnel",
+     "multiple_values": false
+    },
+    "vaps": {
+     "name": "vaps",
+     "category": "table",
+     "help": "Manually selected list of Virtual Access Points (VAPs).",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Virtual Access Point (VAP) name.",
+       "required": true,
+       "datasource": [
+        "wireless-controller.vap-group.name",
+        "system.interface.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "override-channel": {
+     "name": "override-channel",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile channel settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile channel settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile channel settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "channel": {
+     "name": "channel",
+     "category": "table",
+     "help": "Selected list of wireless radio channels.",
+     "member_table": true,
+     "mkey": "chan",
+     "mkey_type": "string",
+     "children": {
+      "chan": {
+       "name": "chan",
+       "category": "unitary",
+       "type": "string",
+       "help": "Channel number.",
+       "required": true,
+       "size": 3,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "drma-manual-mode": {
+     "name": "drma-manual-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Radio mode to be used for DRMA manual mode (default = ncf).",
+     "options": [
+      {
+       "name": "ap",
+       "help": "Set the radio to AP mode."
+      },
+      {
+       "name": "monitor",
+       "help": "Set the radio to monitor mode"
+      },
+      {
+       "name": "ncf",
+       "help": "Select and set the radio mode based on NCF score."
+      },
+      {
+       "name": "ncf-peek",
+       "help": "Select the radio mode based on NCF score, but do not apply."
+      }
+     ],
+     "default": "ncf",
+     "multiple_values": false
+    }
+   }
+  },
+  "radio-4": {
+   "name": "radio-4",
+   "category": "complex",
+   "help": "Configuration options for radio 4.",
+   "children": {
+    "override-band": {
+     "name": "override-band",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile band setting.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile band setting."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile band setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "band": {
+     "name": "band",
+     "category": "unitary",
+     "type": "option",
+     "help": "WiFi band that Radio 4 operates on.",
+     "options": [
+      {
+       "name": "802.11a",
+       "help": "802.11a."
+      },
+      {
+       "name": "802.11b",
+       "help": "802.11b."
+      },
+      {
+       "name": "802.11g",
+       "help": "802.11g."
+      },
+      {
+       "name": "802.11n-2G",
+       "help": "802.11n (WiFi 4) at 2.4GHz."
+      },
+      {
+       "name": "802.11n-5G",
+       "help": "802.11n (WiFi 4) at 5GHz."
+      },
+      {
+       "name": "802.11ac-2G",
+       "help": "802.11ac (WiFi 5) at 2.4GHz."
+      },
+      {
+       "name": "802.11ac-5G",
+       "help": "802.11ac (WiFi 5) at 5GHz."
+      },
+      {
+       "name": "802.11ax-2G",
+       "help": "802.11ax (WiFi 6) at 2.4GHz."
+      },
+      {
+       "name": "802.11ax-5G",
+       "help": "802.11ax (WiFi 6) at 5GHz."
+      },
+      {
+       "name": "802.11ax-6G",
+       "help": "802.11ax (WiFi 6) at 6GHz."
+      },
+      {
+       "name": "802.11be-2G",
+       "help": "802.11be (WiFi 7) at 2.4GHz."
+      },
+      {
+       "name": "802.11be-5G",
+       "help": "802.11be (WiFi 7) at 5GHz."
+      },
+      {
+       "name": "802.11be-6G",
+       "help": "802.11be (WiFi 7) at 6GHz."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "override-txpower": {
+     "name": "override-txpower",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override the WTP profile power level configuration.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override the WTP profile power level configuration."
+      },
+      {
+       "name": "disable",
+       "help": "Use the WTP profile power level configuration."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-level": {
+     "name": "auto-power-level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable automatic transmit power adjustment."
+      },
+      {
+       "name": "disable",
+       "help": "Disable automatic transmit power adjustment."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auto-power-high": {
+     "name": "auto-power-high",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The upper bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 17,
+     "multiple_values": false
+    },
+    "auto-power-low": {
+     "name": "auto-power-low",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The lower bound of automatic transmit power adjustment in dBm (the actual range of transmit power depends on the AP platform type).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 10,
+     "multiple_values": false
+    },
+    "auto-power-target": {
+     "name": "auto-power-target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Target of automatic transmit power adjustment in dBm (-95 to -20, default = -70).",
+     "size": 7,
+     "default": "-70",
+     "multiple_values": false
+    },
+    "power-mode": {
+     "name": "power-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Set radio effective isotropic radiated power (EIRP) in dBm or by a percentage of the maximum EIRP (default = percentage). This power takes into account both radio transmit power and antenna gain. Higher power level settings may be constrained by local regulatory requirements and AP capabilities.",
+     "options": [
+      {
+       "name": "dBm",
+       "help": "Set radio EIRP power in dBm."
+      },
+      {
+       "name": "percentage",
+       "help": "Set radio EIRP power by percentage."
+      }
+     ],
+     "default": "percentage",
+     "multiple_values": false
+    },
+    "power-level": {
+     "name": "power-level",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power level as a percentage of the maximum EIRP power (0 - 100, default = 100).",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 100,
+     "multiple_values": false
+    },
+    "power-value": {
+     "name": "power-value",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Radio EIRP power in dBm (1 - 33, default = 27).",
+     "min-value": 1,
+     "max-value": 33,
+     "default": 27,
+     "multiple_values": false
+    },
+    "override-vaps": {
+     "name": "override-vaps",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile Virtual Access Point (VAP) settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile VAP settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile VAP settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vap-all": {
+     "name": "vap-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure method for assigning SSIDs to this FortiAP (default = automatically assign tunnel SSIDs).",
+     "options": [
+      {
+       "name": "tunnel",
+       "help": "Automatically select tunnel SSIDs."
+      },
+      {
+       "name": "bridge",
+       "help": "Automatically select local-bridging SSIDs."
+      },
+      {
+       "name": "manual",
+       "help": "Manually select SSIDs."
+      }
+     ],
+     "default": "tunnel",
+     "multiple_values": false
+    },
+    "vaps": {
+     "name": "vaps",
+     "category": "table",
+     "help": "Manually selected list of Virtual Access Points (VAPs).",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Virtual Access Point (VAP) name.",
+       "required": true,
+       "datasource": [
+        "wireless-controller.vap-group.name",
+        "system.interface.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "override-channel": {
+     "name": "override-channel",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to override WTP profile channel settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Override WTP profile channel settings."
+      },
+      {
+       "name": "disable",
+       "help": "Use WTP profile channel settings."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "channel": {
+     "name": "channel",
+     "category": "table",
+     "help": "Selected list of wireless radio channels.",
+     "member_table": true,
+     "mkey": "chan",
+     "mkey_type": "string",
+     "children": {
+      "chan": {
+       "name": "chan",
+       "category": "unitary",
+       "type": "string",
+       "help": "Channel number.",
+       "required": true,
+       "size": 3,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "drma-manual-mode": {
+     "name": "drma-manual-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Radio mode to be used for DRMA manual mode (default = ncf).",
+     "options": [
+      {
+       "name": "ap",
+       "help": "Set the radio to AP mode."
+      },
+      {
+       "name": "monitor",
+       "help": "Set the radio to monitor mode"
+      },
+      {
+       "name": "ncf",
+       "help": "Select and set the radio mode based on NCF score."
+      },
+      {
+       "name": "ncf-peek",
+       "help": "Select the radio mode based on NCF score, but do not apply."
+      }
+     ],
+     "default": "ncf",
+     "multiple_values": false
+    }
+   }
+  },
+  "image-download": {
+   "name": "image-download",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WTP image download.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WTP image download at join time."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WTP image download at join time."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "mesh-bridge-enable": {
+   "name": "mesh-bridge-enable",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable mesh Ethernet bridge when WTP is configured as a mesh branch/leaf AP.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Use mesh Ethernet bridge local setting on the WTP."
+    },
+    {
+     "name": "enable",
+     "help": "Turn on mesh Ethernet bridge on the WTP."
+    },
+    {
+     "name": "disable",
+     "help": "Turn off mesh Ethernet bridge on the WTP."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "purdue-level": {
+   "name": "purdue-level",
+   "category": "unitary",
+   "type": "option",
+   "help": "Purdue Level of this WTP.",
+   "options": [
+    {
+     "name": "1",
+     "help": "Level 1 - Basic Control"
+    },
+    {
+     "name": "1.5",
+     "help": "Level 1.5"
+    },
+    {
+     "name": "2",
+     "help": "Level 2 - Area Supervisory Control"
+    },
+    {
+     "name": "2.5",
+     "help": "Level 2.5"
+    },
+    {
+     "name": "3",
+     "help": "Level 3 - Operations & Control"
+    },
+    {
+     "name": "3.5",
+     "help": "Level 3.5"
+    },
+    {
+     "name": "4",
+     "help": "Level 4 - Business Planning & Logistics"
+    },
+    {
+     "name": "5",
+     "help": "Level 5 - Enterprise Network"
+    },
+    {
+     "name": "5.5",
+     "help": "Level 5.5"
+    }
+   ],
+   "default": "3",
+   "multiple_values": false
+  },
+  "coordinate-latitude": {
+   "name": "coordinate-latitude",
+   "category": "unitary",
+   "type": "string",
+   "help": "WTP latitude coordinate.",
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  },
+  "coordinate-longitude": {
+   "name": "coordinate-longitude",
+   "category": "unitary",
+   "type": "string",
+   "help": "WTP longitude coordinate.",
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 64,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 279,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

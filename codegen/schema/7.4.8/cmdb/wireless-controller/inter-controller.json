@@ -1,0 +1,155 @@
+{
+ "name": "inter-controller",
+ "category": "complex",
+ "help": "Configure inter wireless controller operation.",
+ "children": {
+  "inter-controller-mode": {
+   "name": "inter-controller-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure inter-controller mode (disable, l2-roaming, 1+1, default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable inter-controller mode."
+    },
+    {
+     "name": "l2-roaming",
+     "help": "Enable layer 2 roaming support between inter-controllers."
+    },
+    {
+     "name": "1+1",
+     "help": "Enable 1+1 fast failover mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "l3-roaming": {
+   "name": "l3-roaming",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable layer 3 roaming (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable layer 3 roaming."
+    },
+    {
+     "name": "disable",
+     "help": "Disable layer 3 roaming."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "inter-controller-key": {
+   "name": "inter-controller-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Secret key for inter-controller communications.",
+   "size": 127,
+   "multiple_values": false
+  },
+  "inter-controller-pri": {
+   "name": "inter-controller-pri",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure inter-controller's priority (primary or secondary, default = primary).",
+   "options": [
+    {
+     "name": "primary",
+     "help": "Primary fast failover mode."
+    },
+    {
+     "name": "secondary",
+     "help": "Secondary fast failover mode."
+    }
+   ],
+   "default": "primary",
+   "multiple_values": false
+  },
+  "fast-failover-max": {
+   "name": "fast-failover-max",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of retransmissions for fast failover HA messages between peer wireless controllers (3 - 64, default = 10).",
+   "min-value": 3,
+   "max-value": 64,
+   "default": 10,
+   "multiple_values": false
+  },
+  "fast-failover-wait": {
+   "name": "fast-failover-wait",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum wait time before an AP transitions from secondary controller to primary controller (10 - 86400 sec, default = 10).",
+   "min-value": 10,
+   "max-value": 86400,
+   "default": 10,
+   "multiple_values": false
+  },
+  "inter-controller-peer": {
+   "name": "inter-controller-peer",
+   "category": "table",
+   "help": "Fast failover peer wireless controller list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "peer-ip": {
+     "name": "peer-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Peer wireless controller's IP address.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "peer-port": {
+     "name": "peer-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port used by the wireless controller's for inter-controller communications (1024 - 49150, default = 5246).",
+     "min-value": 1024,
+     "max-value": 49150,
+     "default": 5246,
+     "multiple_values": false
+    },
+    "peer-priority": {
+     "name": "peer-priority",
+     "category": "unitary",
+     "type": "option",
+     "help": "Peer wireless controller's priority (primary or secondary, default = primary).",
+     "options": [
+      {
+       "name": "primary",
+       "help": "Primary fast failover mode."
+      },
+      {
+       "name": "secondary",
+       "help": "Secondary fast failover mode."
+      }
+     ],
+     "default": "primary",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 16,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "wireless-controller",
+ "q_type": 269,
+ "access_group": "wifi",
+ "object_range": "global"
+}

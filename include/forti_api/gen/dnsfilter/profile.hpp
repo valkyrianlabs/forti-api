@@ -15,6 +15,56 @@ namespace fortiapi::dnsfilter {
 
 // Configure DNS domain filter profile.
 struct Profile {
+    // Values of LogAllDomain: Enable/disable logging of all domains visited (detailed DNS logging).
+    struct LogAllDomain {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SdnsFtgdErrLog: Enable/disable FortiGuard SDNS rating error logging.
+    struct SdnsFtgdErrLog {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SdnsDomainLog: Enable/disable domain filtering and botnet domain logging.
+    struct SdnsDomainLog {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of BlockAction: Action to take for blocked domains.
+    struct BlockAction {
+        static constexpr std::string_view block = "block";
+        static constexpr std::string_view redirect = "redirect";
+        static constexpr std::string_view block_sevrfail = "block-sevrfail";
+    };
+
+    // Values of BlockBotnet: Enable/disable blocking botnet C&C DNS lookups.
+    struct BlockBotnet {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SafeSearch: Enable/disable Google, Bing, YouTube, Qwant, DuckDuckGo safe search.
+    struct SafeSearch {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of YoutubeRestrict: Set safe search for YouTube restriction level.
+    struct YoutubeRestrict {
+        static constexpr std::string_view strict = "strict";
+        static constexpr std::string_view moderate = "moderate";
+        static constexpr std::string_view none = "none";
+    };
+
+    // Values of StripEch: Enable/disable removal of the encrypted client hello service parameter from supporting DNS RRs.
+    struct StripEch {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
     // Domain filter settings.
     struct DomainFilter {
         fortiapi::Field<std::uint32_t> domain_filter_table;  // DNS domain filter table ID. References: dnsfilter.domain-filter.id.
@@ -27,8 +77,26 @@ struct Profile {
 
     // FortiGuard DNS Filter settings.
     struct FtgdDns {
+        // Values of Options: FortiGuard DNS filter options.
+        struct Options {
+            static constexpr std::string_view error_allow = "error-allow";
+            static constexpr std::string_view ftgd_disable = "ftgd-disable";
+        };
+
         // FortiGuard DNS domain filters.
         struct FiltersEntry {
+            // Values of Action: Action to take for DNS requests matching the category.
+            struct Action {
+                static constexpr std::string_view block = "block";
+                static constexpr std::string_view monitor = "monitor";
+            };
+
+            // Values of Log: Enable/disable DNS filter logging for this DNS profile.
+            struct Log {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
             fortiapi::Field<std::uint32_t> id;  // ID number.
             fortiapi::Field<std::uint32_t> category;  // Category number.
             fortiapi::Field<std::string> action;  // Action to take for DNS requests matching the category.
@@ -55,6 +123,18 @@ struct Profile {
 
     // DNS translation settings.
     struct DnsTranslationEntry {
+        // Values of AddrType: DNS translation type (IPv4 or IPv6).
+        struct AddrType {
+            static constexpr std::string_view ipv4 = "ipv4";
+            static constexpr std::string_view ipv6 = "ipv6";
+        };
+
+        // Values of Status: Enable/disable this DNS translation entry.
+        struct Status {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
         fortiapi::Field<std::uint32_t> id;  // ID.
         fortiapi::Field<std::string> addr_type;  // DNS translation type (IPv4 or IPv6). Required.
         fortiapi::Field<std::string> src;  // IPv4 address or subnet on the internal network to compare with the resolved address in DNS query replies. If the resolved address matches, the resolved address is substituted with dst.
@@ -126,62 +206,6 @@ struct ProfileSpec {
 };
 
 using Profiles = fortiapi::Table<ProfileSpec>;
-
-// Allowed values of option attributes.
-namespace profile::log_all_domain {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace profile::sdns_ftgd_err_log {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace profile::sdns_domain_log {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace profile::block_action {
-    inline constexpr std::string_view block = "block";
-    inline constexpr std::string_view redirect = "redirect";
-    inline constexpr std::string_view block_sevrfail = "block-sevrfail";
-}
-namespace profile::block_botnet {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace profile::safe_search {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace profile::youtube_restrict {
-    inline constexpr std::string_view strict = "strict";
-    inline constexpr std::string_view moderate = "moderate";
-    inline constexpr std::string_view none = "none";
-}
-namespace profile::strip_ech {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace profile::ftgd_dns::options {
-    inline constexpr std::string_view error_allow = "error-allow";
-    inline constexpr std::string_view ftgd_disable = "ftgd-disable";
-}
-namespace profile::ftgd_dns::filters::action {
-    inline constexpr std::string_view block = "block";
-    inline constexpr std::string_view monitor = "monitor";
-}
-namespace profile::ftgd_dns::filters::log {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace profile::dns_translation::addr_type {
-    inline constexpr std::string_view ipv4 = "ipv4";
-    inline constexpr std::string_view ipv6 = "ipv6";
-}
-namespace profile::dns_translation::status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
 
 }  // namespace fortiapi::dnsfilter
 

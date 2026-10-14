@@ -1,0 +1,151 @@
+{
+ "name": "vne-tunnel",
+ "category": "complex",
+ "help": "Configure virtual network enabler tunnel.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VNE tunnel.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable VNE tunnel."
+    },
+    {
+     "name": "disable",
+     "help": "Disable VNE tunnel."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssl-certificate": {
+   "name": "ssl-certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of local certificate for SSL connections.",
+   "required": true,
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_Factory",
+   "multiple_values": false
+  },
+  "bmr-hostname": {
+   "name": "bmr-hostname",
+   "category": "unitary",
+   "type": "password",
+   "help": "BMR hostname.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "auto-asic-offload": {
+   "name": "auto-asic-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable tunnel ASIC offloading.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable auto ASIC offloading."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ASIC offloading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipv4-address": {
+   "name": "ipv4-address",
+   "category": "unitary",
+   "type": "ipv4-classnet-host",
+   "help": "Tunnel IPv4 address and netmask.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "br": {
+   "name": "br",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 address or FQDN of the border relay.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "update-url": {
+   "name": "update-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL of provisioning server.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "VNE tunnel mode.",
+   "required": true,
+   "options": [
+    {
+     "name": "map-e",
+     "help": "Map-e mode."
+    },
+    {
+     "name": "fixed-ip",
+     "help": "Fixed-ip mode."
+    },
+    {
+     "name": "ds-lite",
+     "help": "DS-Lite mode."
+    }
+   ],
+   "default": "map-e",
+   "multiple_values": false
+  },
+  "http-username": {
+   "name": "http-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTP authentication user name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "http-password": {
+   "name": "http-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "HTTP authentication password.",
+   "size": 128,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 551,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

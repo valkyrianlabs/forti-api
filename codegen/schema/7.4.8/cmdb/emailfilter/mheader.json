@@ -1,0 +1,145 @@
+{
+ "name": "mheader",
+ "category": "table",
+ "help": "Configure AntiSpam MIME header.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "Spam filter mime header content.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable status.",
+     "required": true,
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable status."
+      },
+      {
+       "name": "disable",
+       "help": "Disable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Mime header entry ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "fieldname": {
+     "name": "fieldname",
+     "category": "unitary",
+     "type": "string",
+     "help": "Pattern for header field name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "fieldbody": {
+     "name": "fieldbody",
+     "category": "unitary",
+     "type": "string",
+     "help": "Pattern for the header field body.",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "pattern-type": {
+     "name": "pattern-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Wildcard pattern or regular expression.",
+     "required": true,
+     "options": [
+      {
+       "name": "wildcard",
+       "help": "Wildcard pattern."
+      },
+      {
+       "name": "regexp",
+       "help": "Perl regular expression."
+      }
+     ],
+     "default": "wildcard",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Mark spam or good.",
+     "required": true,
+     "options": [
+      {
+       "name": "spam",
+       "help": "Mark as spam email."
+      },
+      {
+       "name": "clear",
+       "help": "Mark as good email."
+      }
+     ],
+     "default": "spam",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 20000,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "emailfilter",
+ "q_type": 98,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

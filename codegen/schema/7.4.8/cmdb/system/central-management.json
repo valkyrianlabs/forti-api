@@ -1,0 +1,424 @@
+{
+ "name": "central-management",
+ "category": "complex",
+ "help": "Configure central management.",
+ "children": {
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Central management mode.",
+   "options": [
+    {
+     "name": "normal",
+     "help": "Manage and configure this FortiGate from FortiManager."
+    },
+    {
+     "name": "backup",
+     "help": "Manage and configure this FortiGate locally and back up its configuration to FortiManager."
+    }
+   ],
+   "default": "normal",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Central management type.",
+   "options": [
+    {
+     "name": "fortimanager",
+     "help": "FortiManager."
+    },
+    {
+     "name": "fortiguard",
+     "help": "Central management of this FortiGate using FortiCloud."
+    },
+    {
+     "name": "none",
+     "help": "No central management."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "fortigate-cloud-sso-default-profile": {
+   "name": "fortigate-cloud-sso-default-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Override access profile.",
+   "datasource": [
+    "system.accprofile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "schedule-config-restore": {
+   "name": "schedule-config-restore",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the central management server to restore the configuration of this FortiGate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable scheduled configuration restore."
+    },
+    {
+     "name": "disable",
+     "help": "Disable scheduled configuration restore."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "schedule-script-restore": {
+   "name": "schedule-script-restore",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the central management server to restore the scripts stored on this FortiGate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable scheduled script restore."
+    },
+    {
+     "name": "disable",
+     "help": "Disable scheduled script restore."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "allow-push-configuration": {
+   "name": "allow-push-configuration",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the central management server to push configuration changes to this FortiGate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable push configuration."
+    },
+    {
+     "name": "disable",
+     "help": "Disable push configuration."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "allow-push-firmware": {
+   "name": "allow-push-firmware",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the central management server to push firmware updates to this FortiGate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable push firmware."
+    },
+    {
+     "name": "disable",
+     "help": "Disable push firmware."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "allow-remote-firmware-upgrade": {
+   "name": "allow-remote-firmware-upgrade",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable remotely upgrading the firmware on this FortiGate from the central management server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable remote firmware upgrade."
+    },
+    {
+     "name": "disable",
+     "help": "Disable remote firmware upgrade."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "allow-monitor": {
+   "name": "allow-monitor",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the central management server to remotely monitor this FortiGate unit.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable remote monitoring of device."
+    },
+    {
+     "name": "disable",
+     "help": "Disable remote monitoring of device."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "serial-number": {
+   "name": "serial-number",
+   "category": "unitary",
+   "type": "user",
+   "help": "Serial number.",
+   "default": "",
+   "multiple_values": false
+  },
+  "fmg": {
+   "name": "fmg",
+   "category": "unitary",
+   "type": "user",
+   "help": "IP address or FQDN of the FortiManager.",
+   "default": "",
+   "multiple_values": false
+  },
+  "fmg-source-ip": {
+   "name": "fmg-source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 source address that this FortiGate uses when communicating with FortiManager.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "fmg-source-ip6": {
+   "name": "fmg-source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 source address that this FortiGate uses when communicating with FortiManager.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "local-cert": {
+   "name": "local-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate to be used by FGFM protocol.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ca-cert": {
+   "name": "ca-cert",
+   "category": "unitary",
+   "type": "user",
+   "help": "CA certificate to be used by FGFM protocol.",
+   "default": "",
+   "multiple_values": false
+  },
+  "vdom": {
+   "name": "vdom",
+   "category": "unitary",
+   "type": "string",
+   "help": "Virtual domain (VDOM) name to use when communicating with FortiManager.",
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "root",
+   "multiple_values": false
+  },
+  "server-list": {
+   "name": "server-list",
+   "category": "table",
+   "help": "Additional severs that the FortiGate can use for updates (for AV, IPS, updates) and ratings (for web filter and antispam ratings) servers.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "server-type": {
+     "name": "server-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "FortiGuard service type.",
+     "required": true,
+     "options": [
+      {
+       "name": "update",
+       "help": "AV, IPS, and AV-query update server."
+      },
+      {
+       "name": "rating",
+       "help": "Web filter and anti-spam rating server."
+      },
+      {
+       "name": "vpatch-query",
+       "help": "Virtual patch query server."
+      },
+      {
+       "name": "iot-collect",
+       "help": "IoT device collection server."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "addr-type": {
+     "name": "addr-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Indicate whether the FortiGate communicates with the override server using an IPv4 address, an IPv6 address or a FQDN.",
+     "options": [
+      {
+       "name": "ipv4",
+       "help": "IPv4 address."
+      },
+      {
+       "name": "ipv6",
+       "help": "IPv6 address."
+      },
+      {
+       "name": "fqdn",
+       "help": "FQDN."
+      }
+     ],
+     "default": "ipv4",
+     "multiple_values": false
+    },
+    "server-address": {
+     "name": "server-address",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IPv4 address of override server.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "server-address6": {
+     "name": "server-address6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 address of override server.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    },
+    "fqdn": {
+     "name": "fqdn",
+     "category": "unitary",
+     "type": "string",
+     "help": "FQDN address of override server.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 100
+  },
+  "fmg-update-port": {
+   "name": "fmg-update-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Port used to communicate with FortiManager that is acting as a FortiGuard update server.",
+   "options": [
+    {
+     "name": "8890",
+     "help": "Use port 8890 to communicate with FortiManager that is acting as a FortiGuard update server."
+    },
+    {
+     "name": "443",
+     "help": "Use port 443 to communicate with FortiManager that is acting as a FortiGuard update server."
+    }
+   ],
+   "default": "8890",
+   "multiple_values": false
+  },
+  "include-default-servers": {
+   "name": "include-default-servers",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable inclusion of public FortiGuard servers in the override server list.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable inclusion of public FortiGuard servers in the override server list."
+    },
+    {
+     "name": "disable",
+     "help": "Disable inclusion of public FortiGuard servers in the override server list."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "enc-algorithm": {
+   "name": "enc-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Encryption strength for communications between the FortiGate and central management.",
+   "options": [
+    {
+     "name": "default",
+     "help": "High strength algorithms and medium-strength 128-bit key length algorithms."
+    },
+    {
+     "name": "high",
+     "help": "128-bit and larger key length algorithms."
+    },
+    {
+     "name": "low",
+     "help": "64-bit or 56-bit key length algorithms without export restrictions."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 263,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

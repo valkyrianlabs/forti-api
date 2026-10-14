@@ -1,0 +1,579 @@
+{
+ "name": "ripng",
+ "category": "complex",
+ "help": "Configure RIPng.",
+ "children": {
+  "default-information-originate": {
+   "name": "default-information-originate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable generation of default route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-metric": {
+   "name": "default-metric",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default metric.",
+   "min-value": 1,
+   "max-value": 16,
+   "default": 1,
+   "multiple_values": false
+  },
+  "max-out-metric": {
+   "name": "max-out-metric",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum metric allowed to output(0 means 'not set').",
+   "min-value": 0,
+   "max-value": 15,
+   "default": 0,
+   "multiple_values": false
+  },
+  "distance": {
+   "name": "distance",
+   "category": "table",
+   "help": "Distance.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Distance ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "distance": {
+     "name": "distance",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Distance (1 - 255).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix6": {
+     "name": "prefix6",
+     "category": "unitary",
+     "type": "ipv6-prefix",
+     "help": "Distance prefix6.",
+     "default": "::/0",
+     "multiple_values": false
+    },
+    "access-list6": {
+     "name": "access-list6",
+     "category": "unitary",
+     "type": "string",
+     "help": "Access list for route destination.",
+     "datasource": [
+      "router.access-list6.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "distribute-list": {
+   "name": "distribute-list",
+   "category": "table",
+   "help": "Distribute list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Distribute list ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "direction": {
+     "name": "direction",
+     "category": "unitary",
+     "type": "option",
+     "help": "Distribute list direction.",
+     "required": true,
+     "options": [
+      {
+       "name": "in",
+       "help": "Filter incoming packets."
+      },
+      {
+       "name": "out",
+       "help": "Filter outgoing packets."
+      }
+     ],
+     "default": "out",
+     "multiple_values": false
+    },
+    "listname": {
+     "name": "listname",
+     "category": "unitary",
+     "type": "string",
+     "help": "Distribute access/prefix list name.",
+     "required": true,
+     "datasource": [
+      "router.access-list6.name",
+      "router.prefix-list6.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Distribute list interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "neighbor": {
+   "name": "neighbor",
+   "category": "table",
+   "help": "Neighbor.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Neighbor entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip6": {
+     "name": "ip6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 link-local address.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "network": {
+   "name": "network",
+   "category": "table",
+   "help": "Network.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Network entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv6-prefix",
+     "help": "Network IPv6 link-local prefix.",
+     "default": "::/0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "aggregate-address": {
+   "name": "aggregate-address",
+   "category": "table",
+   "help": "Aggregate address.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Aggregate address entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix6": {
+     "name": "prefix6",
+     "category": "unitary",
+     "type": "ipv6-prefix",
+     "help": "Aggregate address prefix.",
+     "default": "::/0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "offset-list": {
+   "name": "offset-list",
+   "category": "table",
+   "help": "Offset list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Offset-list ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "direction": {
+     "name": "direction",
+     "category": "unitary",
+     "type": "option",
+     "help": "Offset list direction.",
+     "required": true,
+     "options": [
+      {
+       "name": "in",
+       "help": "Filter incoming packets."
+      },
+      {
+       "name": "out",
+       "help": "Filter outgoing packets."
+      }
+     ],
+     "default": "out",
+     "multiple_values": false
+    },
+    "access-list6": {
+     "name": "access-list6",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv6 access list name.",
+     "required": true,
+     "datasource": [
+      "router.access-list6.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "offset": {
+     "name": "offset",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Offset.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 16,
+     "default": 0,
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "passive-interface": {
+   "name": "passive-interface",
+   "category": "table",
+   "help": "Passive interface configuration.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Passive interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "redistribute": {
+   "name": "redistribute",
+   "category": "table",
+   "help": "Redistribute configuration.",
+   "readonly": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Redistribute name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "metric": {
+     "name": "metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Redistribute metric setting.",
+     "min-value": 1,
+     "max-value": 16,
+     "default": 0,
+     "multiple_values": false
+    },
+    "routemap": {
+     "name": "routemap",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route map name.",
+     "datasource": [
+      "router.route-map.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "update-timer": {
+   "name": "update-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Update timer.",
+   "min-value": 5,
+   "max-value": 2147483647,
+   "default": 30,
+   "multiple_values": false
+  },
+  "timeout-timer": {
+   "name": "timeout-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout timer.",
+   "min-value": 5,
+   "max-value": 2147483647,
+   "default": 180,
+   "multiple_values": false
+  },
+  "garbage-timer": {
+   "name": "garbage-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Garbage timer.",
+   "min-value": 5,
+   "max-value": 2147483647,
+   "default": 120,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "table",
+   "help": "RIPng interface configuration.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "split-horizon-status": {
+     "name": "split-horizon-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable split horizon.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "split-horizon": {
+     "name": "split-horizon",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable split horizon.",
+     "options": [
+      {
+       "name": "poisoned",
+       "help": "Poisoned."
+      },
+      {
+       "name": "regular",
+       "help": "Regular."
+      }
+     ],
+     "default": "poisoned",
+     "multiple_values": false
+    },
+    "flags": {
+     "name": "flags",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Flags.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 8,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "router",
+ "q_type": 391,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

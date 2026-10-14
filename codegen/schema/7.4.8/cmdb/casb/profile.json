@@ -1,0 +1,362 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure CASB profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "CASB profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "saas-application": {
+   "name": "saas-application",
+   "category": "table",
+   "help": "CASB profile SaaS application.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "CASB profile SaaS application name.",
+     "required": true,
+     "datasource": [
+      "casb.saas-application.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable setting.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "safe-search": {
+     "name": "safe-search",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable safe search.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "safe-search-control": {
+     "name": "safe-search-control",
+     "category": "table",
+     "help": "CASB profile safe search control.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Safe search control name.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "tenant-control": {
+     "name": "tenant-control",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable tenant control.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tenant-control-tenants": {
+     "name": "tenant-control-tenants",
+     "category": "table",
+     "help": "CASB profile tenant control tenants.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Tenant control tenants name.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "domain-control": {
+     "name": "domain-control",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable domain control.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "domain-control-domains": {
+     "name": "domain-control-domains",
+     "category": "table",
+     "help": "CASB profile domain control domains.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Domain control domain name.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "log": {
+     "name": "log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable log settings.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable log setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable log setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "access-rule": {
+     "name": "access-rule",
+     "category": "table",
+     "help": "CASB profile access rule.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "CASB access rule activity name.",
+       "required": true,
+       "datasource": [
+        "casb.user-activity.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB access rule action.",
+       "options": [
+        {
+         "name": "monitor",
+         "help": "Log when log is enabled."
+        },
+        {
+         "name": "bypass",
+         "help": "Apply bypass options."
+        },
+        {
+         "name": "block",
+         "help": "Block the request."
+        }
+       ],
+       "default": "monitor",
+       "multiple_values": false
+      },
+      "bypass": {
+       "name": "bypass",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB bypass options.",
+       "options": [
+        {
+         "name": "av",
+         "help": "Exempt from AV scanning."
+        },
+        {
+         "name": "dlp",
+         "help": "Exempt from data loss prevention (DLP)."
+        },
+        {
+         "name": "web-filter",
+         "help": "Exempt from web filter."
+        },
+        {
+         "name": "file-filter",
+         "help": "Exempt from file filter."
+        },
+        {
+         "name": "video-filter",
+         "help": "Exempt from video filter."
+        }
+       ],
+       "default": "",
+       "multiple_values": true
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "custom-control": {
+     "name": "custom-control",
+     "category": "table",
+     "help": "CASB profile custom control.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "CASB custom control user activity name.",
+       "datasource": [
+        "casb.user-activity.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "option": {
+       "name": "option",
+       "category": "table",
+       "help": "CASB custom control option.",
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "CASB custom control option name.",
+         "required": true,
+         "size": 79,
+         "default": "",
+         "multiple_values": false
+        },
+        "user-input": {
+         "name": "user-input",
+         "category": "table",
+         "help": "CASB custom control user input.",
+         "member_table": true,
+         "mkey": "value",
+         "mkey_type": "string",
+         "children": {
+          "value": {
+           "name": "value",
+           "category": "unitary",
+           "type": "string",
+           "help": "user input value.",
+           "size": 79,
+           "default": "",
+           "multiple_values": false
+          }
+         },
+         "max_table_size_vdom": 0,
+         "max_table_size_global": 0,
+         "max_table_size_item": 0
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "casb",
+ "q_type": 52,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

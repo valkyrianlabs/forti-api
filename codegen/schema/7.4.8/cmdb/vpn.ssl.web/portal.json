@@ -1,0 +1,2310 @@
+{
+ "name": "portal",
+ "category": "table",
+ "help": "Portal.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Portal name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "tunnel-mode": {
+   "name": "tunnel-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 SSL-VPN tunnel mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ip-mode": {
+   "name": "ip-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method by which users of this SSL-VPN tunnel obtain IP addresses.",
+   "options": [
+    {
+     "name": "range",
+     "help": "Use the IP addresses available for all SSL-VPN users as defined by the SSL settings command."
+    },
+    {
+     "name": "user-group",
+     "help": "Use the IP addresses associated with individual users or user groups (usually from external auth servers)."
+    },
+    {
+     "name": "dhcp",
+     "help": "Use IP addresses obtained from external DHCP server."
+    },
+    {
+     "name": "no-ip",
+     "help": "Do not assign IP address."
+    }
+   ],
+   "default": "range",
+   "multiple_values": false
+  },
+  "dhcp-ip-overlap": {
+   "name": "dhcp-ip-overlap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure overlapping DHCP IP allocation assignment.",
+   "options": [
+    {
+     "name": "use-new",
+     "help": "Assign DHCP lease to new client and remove old client lease."
+    },
+    {
+     "name": "use-old",
+     "help": "Preserve previous client IP allocation and disconnect new client."
+    }
+   ],
+   "default": "use-new",
+   "multiple_values": false
+  },
+  "auto-connect": {
+   "name": "auto-connect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic connect by client when system is up.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "keep-alive": {
+   "name": "keep-alive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic reconnect for FortiClient connections.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "save-password": {
+   "name": "save-password",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiClient saving the user's password.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ip-pools": {
+   "name": "ip-pools",
+   "category": "table",
+   "help": "IPv4 firewall source address objects reserved for SSL-VPN tunnel mode clients.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "exclusive-routing": {
+   "name": "exclusive-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable all traffic go through tunnel only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "service-restriction": {
+   "name": "service-restriction",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable tunnel service restriction.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "split-tunneling": {
+   "name": "split-tunneling",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 split tunneling.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "split-tunneling-routing-negate": {
+   "name": "split-tunneling-routing-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to negate split tunneling routing address.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "split-tunneling-routing-address": {
+   "name": "split-tunneling-routing-address",
+   "category": "table",
+   "help": "IPv4 SSL-VPN tunnel mode firewall address objects that override firewall policy destination addresses to control split-tunneling access.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dns-server1": {
+   "name": "dns-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 DNS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dns-server2": {
+   "name": "dns-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 DNS server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dns-suffix": {
+   "name": "dns-suffix",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "DNS suffix.",
+   "size": 253,
+   "multiple_values": false
+  },
+  "wins-server1": {
+   "name": "wins-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 WINS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wins-server2": {
+   "name": "wins-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 WINS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dhcp-ra-giaddr": {
+   "name": "dhcp-ra-giaddr",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Relay agent gateway IP address to use in the giaddr field of DHCP requests.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv6-tunnel-mode": {
+   "name": "ipv6-tunnel-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 SSL-VPN tunnel mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv6-pools": {
+   "name": "ipv6-pools",
+   "category": "table",
+   "help": "IPv6 firewall source address objects reserved for SSL-VPN tunnel mode clients.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ipv6-exclusive-routing": {
+   "name": "ipv6-exclusive-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable all IPv6 traffic go through tunnel only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv6-service-restriction": {
+   "name": "ipv6-service-restriction",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 tunnel service restriction.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv6-split-tunneling": {
+   "name": "ipv6-split-tunneling",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 split tunneling.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipv6-split-tunneling-routing-negate": {
+   "name": "ipv6-split-tunneling-routing-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to negate IPv6 split tunneling routing address.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv6-split-tunneling-routing-address": {
+   "name": "ipv6-split-tunneling-routing-address",
+   "category": "table",
+   "help": "IPv6 SSL-VPN tunnel mode firewall address objects that override firewall policy destination addresses to control split-tunneling access.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ipv6-dns-server1": {
+   "name": "ipv6-dns-server1",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 DNS server 1.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-dns-server2": {
+   "name": "ipv6-dns-server2",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 DNS server 2.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-wins-server1": {
+   "name": "ipv6-wins-server1",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 WINS server 1.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-wins-server2": {
+   "name": "ipv6-wins-server2",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 WINS server 2.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "dhcp6-ra-linkaddr": {
+   "name": "dhcp6-ra-linkaddr",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Relay agent IPv6 link address to use in DHCP6 requests.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "client-src-range": {
+   "name": "client-src-range",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow client to add source range for the tunnel traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "web-mode": {
+   "name": "web-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN web mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "landing-page-mode": {
+   "name": "landing-page-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN landing page mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "display-bookmark": {
+   "name": "display-bookmark",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to display the web portal bookmark widget.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "user-bookmark": {
+   "name": "user-bookmark",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to allow web portal users to create their own bookmarks.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "allow-user-access": {
+   "name": "allow-user-access",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow user access to SSL-VPN applications.",
+   "options": [
+    {
+     "name": "web",
+     "help": "HTTP/HTTPS access."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP access."
+    },
+    {
+     "name": "smb",
+     "help": "SMB/CIFS access."
+    },
+    {
+     "name": "sftp",
+     "help": "SFTP access."
+    },
+    {
+     "name": "telnet",
+     "help": "TELNET access."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH access."
+    },
+    {
+     "name": "vnc",
+     "help": "VNC access."
+    },
+    {
+     "name": "rdp",
+     "help": "RDP access."
+    },
+    {
+     "name": "ping",
+     "help": "PING access."
+    }
+   ],
+   "default": "web ftp smb sftp telnet ssh vnc rdp ping",
+   "multiple_values": true
+  },
+  "default-protocol": {
+   "name": "default-protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Application type that is set by default.",
+   "options": [
+    {
+     "name": "web",
+     "help": "HTTP/HTTPS."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "telnet",
+     "help": "Telnet."
+    },
+    {
+     "name": "smb",
+     "help": "SMB/CIFS."
+    },
+    {
+     "name": "vnc",
+     "help": "VNC."
+    },
+    {
+     "name": "rdp",
+     "help": "RDP."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH."
+    },
+    {
+     "name": "sftp",
+     "help": "SFTP."
+    }
+   ],
+   "default": "web",
+   "multiple_values": false
+  },
+  "user-group-bookmark": {
+   "name": "user-group-bookmark",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to allow web portal users to create bookmarks for all users in the same user group.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "bookmark-group": {
+   "name": "bookmark-group",
+   "category": "table",
+   "help": "Portal bookmark group.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bookmark group name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "bookmarks": {
+     "name": "bookmarks",
+     "category": "table",
+     "help": "Bookmark table.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Bookmark name.",
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "apptype": {
+       "name": "apptype",
+       "category": "unitary",
+       "type": "option",
+       "help": "Application type.",
+       "required": true,
+       "options": [
+        {
+         "name": "ftp",
+         "help": "FTP."
+        },
+        {
+         "name": "rdp",
+         "help": "RDP."
+        },
+        {
+         "name": "sftp",
+         "help": "SFTP."
+        },
+        {
+         "name": "smb",
+         "help": "SMB/CIFS."
+        },
+        {
+         "name": "ssh",
+         "help": "SSH."
+        },
+        {
+         "name": "telnet",
+         "help": "Telnet."
+        },
+        {
+         "name": "vnc",
+         "help": "VNC."
+        },
+        {
+         "name": "web",
+         "help": "HTTP/HTTPS."
+        }
+       ],
+       "default": "web",
+       "multiple_values": false
+      },
+      "url": {
+       "name": "url",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "URL parameter.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "host": {
+       "name": "host",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Host name/IP parameter.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "folder": {
+       "name": "folder",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Network shared file folder parameter.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "domain": {
+       "name": "domain",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Login domain.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "additional-params": {
+       "name": "additional-params",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Additional parameters.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "description": {
+       "name": "description",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Description.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "keyboard-layout": {
+       "name": "keyboard-layout",
+       "category": "unitary",
+       "type": "option",
+       "help": "Keyboard layout.",
+       "options": [
+        {
+         "name": "ar-101",
+         "help": "Arabic (101)."
+        },
+        {
+         "name": "ar-102",
+         "help": "Arabic (102)."
+        },
+        {
+         "name": "ar-102-azerty",
+         "help": "Arabic (102) AZERTY."
+        },
+        {
+         "name": "can-mul",
+         "help": "Canadian Multilingual Standard."
+        },
+        {
+         "name": "cz",
+         "help": "Czech."
+        },
+        {
+         "name": "cz-qwerty",
+         "help": "Czech (QWERTY)."
+        },
+        {
+         "name": "cz-pr",
+         "help": "Czech Programmers."
+        },
+        {
+         "name": "da",
+         "help": "Danish."
+        },
+        {
+         "name": "nl",
+         "help": "Dutch."
+        },
+        {
+         "name": "de",
+         "help": "German."
+        },
+        {
+         "name": "de-ch",
+         "help": "German, Switzerland."
+        },
+        {
+         "name": "de-ibm",
+         "help": "German (IBM)."
+        },
+        {
+         "name": "en-uk",
+         "help": "English, United Kingdom."
+        },
+        {
+         "name": "en-uk-ext",
+         "help": "English, United Kingdom Extended."
+        },
+        {
+         "name": "en-us",
+         "help": "English, United States."
+        },
+        {
+         "name": "en-us-dvorak",
+         "help": "English, United States-Dvorak."
+        },
+        {
+         "name": "es",
+         "help": "Spanish."
+        },
+        {
+         "name": "es-var",
+         "help": "Spanish Variation."
+        },
+        {
+         "name": "fi",
+         "help": "Finnish."
+        },
+        {
+         "name": "fi-sami",
+         "help": "Finnish with Sami."
+        },
+        {
+         "name": "fr",
+         "help": "French."
+        },
+        {
+         "name": "fr-apple",
+         "help": "French, Apple."
+        },
+        {
+         "name": "fr-ca",
+         "help": "French, Canada."
+        },
+        {
+         "name": "fr-ch",
+         "help": "French, Switzerland."
+        },
+        {
+         "name": "fr-be",
+         "help": "French, Belgium."
+        },
+        {
+         "name": "hr",
+         "help": "Croatian."
+        },
+        {
+         "name": "hu",
+         "help": "Hungarian."
+        },
+        {
+         "name": "hu-101",
+         "help": "Hungarian 101-Key."
+        },
+        {
+         "name": "it",
+         "help": "Italian."
+        },
+        {
+         "name": "it-142",
+         "help": "Italian (142)."
+        },
+        {
+         "name": "ja",
+         "help": "Japanese."
+        },
+        {
+         "name": "ja-106",
+         "help": "Japanese 106/109 key."
+        },
+        {
+         "name": "ko",
+         "help": "Korean."
+        },
+        {
+         "name": "la-am",
+         "help": "Latin American."
+        },
+        {
+         "name": "lt",
+         "help": "Lithuanian."
+        },
+        {
+         "name": "lt-ibm",
+         "help": "Lithuanian IBM."
+        },
+        {
+         "name": "lt-std",
+         "help": "Lithuanian Standard."
+        },
+        {
+         "name": "lav-std",
+         "help": "Latvian (Standard)."
+        },
+        {
+         "name": "lav-leg",
+         "help": "Latvian (Legacy)."
+        },
+        {
+         "name": "mk",
+         "help": "Macedonian (FYROM)."
+        },
+        {
+         "name": "mk-std",
+         "help": "Macedonia (FYROM) - Standard."
+        },
+        {
+         "name": "no",
+         "help": "Norwegian."
+        },
+        {
+         "name": "no-sami",
+         "help": "Norwegian with Sami."
+        },
+        {
+         "name": "pol-214",
+         "help": "Polish (214)."
+        },
+        {
+         "name": "pol-pr",
+         "help": "Polish (Programmers)."
+        },
+        {
+         "name": "pt",
+         "help": "Portuguese."
+        },
+        {
+         "name": "pt-br",
+         "help": "Portuguese (Brazilian ABNT)."
+        },
+        {
+         "name": "pt-br-abnt2",
+         "help": "Portuguese (Brazilian ABNT2)."
+        },
+        {
+         "name": "ru",
+         "help": "Russian."
+        },
+        {
+         "name": "ru-mne",
+         "help": "Russian - Mnemonic."
+        },
+        {
+         "name": "ru-t",
+         "help": "Russian (Typewriter)."
+        },
+        {
+         "name": "sl",
+         "help": "Slovenian."
+        },
+        {
+         "name": "sv",
+         "help": "Swedish."
+        },
+        {
+         "name": "sv-sami",
+         "help": "Swedish with Sami."
+        },
+        {
+         "name": "tuk",
+         "help": "Turkmen."
+        },
+        {
+         "name": "tur-f",
+         "help": "Turkish F."
+        },
+        {
+         "name": "tur-q",
+         "help": "Turkish Q."
+        },
+        {
+         "name": "zh-sym-sg-us",
+         "help": "Chinese (Simplified, Singapore) - US keyboard."
+        },
+        {
+         "name": "zh-sym-us",
+         "help": "Chinese (Simplified) - US Keyboard."
+        },
+        {
+         "name": "zh-tr-hk",
+         "help": "Chinese (Traditional, Hong Kong S.A.R.)."
+        },
+        {
+         "name": "zh-tr-mo",
+         "help": "Chinese (Traditional Macao S.A.R.) - US Keyboard."
+        },
+        {
+         "name": "zh-tr-us",
+         "help": "Chinese (Traditional) - US keyboard."
+        }
+       ],
+       "default": "en-us",
+       "multiple_values": false
+      },
+      "security": {
+       "name": "security",
+       "category": "unitary",
+       "type": "option",
+       "help": "Security mode for RDP connection (default = any).",
+       "options": [
+        {
+         "name": "any",
+         "help": "Allow the server to choose the type of security."
+        },
+        {
+         "name": "rdp",
+         "help": "Standard RDP encryption."
+        },
+        {
+         "name": "nla",
+         "help": "Network Level Authentication."
+        },
+        {
+         "name": "tls",
+         "help": "TLS encryption."
+        }
+       ],
+       "default": "any",
+       "multiple_values": false
+      },
+      "send-preconnection-id": {
+       "name": "send-preconnection-id",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable sending of preconnection ID.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable sending of preconnection ID."
+        },
+        {
+         "name": "disable",
+         "help": "Disable sending of preconnection ID."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "preconnection-id": {
+       "name": "preconnection-id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "The numeric ID of the RDP source (0-4294967295).",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "preconnection-blob": {
+       "name": "preconnection-blob",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "An arbitrary string which identifies the RDP source.",
+       "size": 511,
+       "multiple_values": false
+      },
+      "load-balancing-info": {
+       "name": "load-balancing-info",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "The load balancing information or cookie which should be provided to the connection broker.",
+       "size": 511,
+       "multiple_values": false
+      },
+      "restricted-admin": {
+       "name": "restricted-admin",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable restricted admin mode for RDP.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable restricted admin mode for RDP."
+        },
+        {
+         "name": "disable",
+         "help": "Disable restricted admin mode for RDP."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "port": {
+       "name": "port",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Remote port.",
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 0,
+       "multiple_values": false
+      },
+      "logon-user": {
+       "name": "logon-user",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Logon user.",
+       "size": 35,
+       "multiple_values": false
+      },
+      "logon-password": {
+       "name": "logon-password",
+       "category": "unitary",
+       "type": "password",
+       "help": "Logon password.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "color-depth": {
+       "name": "color-depth",
+       "category": "unitary",
+       "type": "option",
+       "help": "Color depth per pixel.",
+       "options": [
+        {
+         "name": "32",
+         "help": "32bits per pixel."
+        },
+        {
+         "name": "16",
+         "help": "16bits per pixel."
+        },
+        {
+         "name": "8",
+         "help": "8bits per pixel."
+        }
+       ],
+       "default": "16",
+       "multiple_values": false
+      },
+      "sso": {
+       "name": "sso",
+       "category": "unitary",
+       "type": "option",
+       "help": "Single sign-on.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable SSO."
+        },
+        {
+         "name": "static",
+         "help": "Static SSO."
+        },
+        {
+         "name": "auto",
+         "help": "Auto SSO."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "form-data": {
+       "name": "form-data",
+       "category": "table",
+       "help": "Form data.",
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "Name.",
+         "size": 35,
+         "default": "",
+         "multiple_values": false
+        },
+        "value": {
+         "name": "value",
+         "category": "unitary",
+         "type": "var-string",
+         "help": "Value.",
+         "size": 63,
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      },
+      "sso-credential": {
+       "name": "sso-credential",
+       "category": "unitary",
+       "type": "option",
+       "help": "Single sign-on credentials.",
+       "options": [
+        {
+         "name": "sslvpn-login",
+         "help": "SSL-VPN login."
+        },
+        {
+         "name": "alternative",
+         "help": "Alternative."
+        }
+       ],
+       "default": "sslvpn-login",
+       "multiple_values": false
+      },
+      "sso-username": {
+       "name": "sso-username",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "SSO user name.",
+       "size": 35,
+       "multiple_values": false
+      },
+      "sso-password": {
+       "name": "sso-password",
+       "category": "unitary",
+       "type": "password",
+       "help": "SSO password.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "sso-credential-sent-once": {
+       "name": "sso-credential-sent-once",
+       "category": "unitary",
+       "type": "option",
+       "help": "Single sign-on credentials are only sent once to remote server.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Single sign-on credentials are only sent once to remote server."
+        },
+        {
+         "name": "disable",
+         "help": "Single sign-on credentials are sent to remote server for every HTTP request."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "width": {
+       "name": "width",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Screen width (range from 0 - 65535, default = 0).",
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 0,
+       "multiple_values": false
+      },
+      "height": {
+       "name": "height",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Screen height (range from 0 - 65535, default = 0).",
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 0,
+       "multiple_values": false
+      },
+      "vnc-keyboard-layout": {
+       "name": "vnc-keyboard-layout",
+       "category": "unitary",
+       "type": "option",
+       "help": "Keyboard layout.",
+       "options": [
+        {
+         "name": "default",
+         "help": "Default."
+        },
+        {
+         "name": "da",
+         "help": "Danish."
+        },
+        {
+         "name": "nl",
+         "help": "Dutch."
+        },
+        {
+         "name": "en-uk",
+         "help": "English, United Kingdom."
+        },
+        {
+         "name": "en-uk-ext",
+         "help": "English, United Kingdom Extended."
+        },
+        {
+         "name": "fi",
+         "help": "Finnish."
+        },
+        {
+         "name": "fr",
+         "help": "French."
+        },
+        {
+         "name": "fr-be",
+         "help": "French, Belgium."
+        },
+        {
+         "name": "fr-ca-mul",
+         "help": "French, Canadian Multilingual Std."
+        },
+        {
+         "name": "de",
+         "help": "German."
+        },
+        {
+         "name": "de-ch",
+         "help": "German, Switzerland."
+        },
+        {
+         "name": "it",
+         "help": "Italian."
+        },
+        {
+         "name": "it-142",
+         "help": "Italian (142)."
+        },
+        {
+         "name": "pt",
+         "help": "Portuguese."
+        },
+        {
+         "name": "pt-br-abnt2",
+         "help": "Portuguese (Brazilian ABNT2)."
+        },
+        {
+         "name": "no",
+         "help": "Norwegian."
+        },
+        {
+         "name": "gd",
+         "help": "Scottish Gaelic."
+        },
+        {
+         "name": "es",
+         "help": "Spanish."
+        },
+        {
+         "name": "sv",
+         "help": "Swedish."
+        },
+        {
+         "name": "us-intl",
+         "help": "United States-International."
+        }
+       ],
+       "default": "default",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 256
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "display-connection-tools": {
+   "name": "display-connection-tools",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to display the web portal connection tools widget.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "display-history": {
+   "name": "display-history",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to display the web portal user login history widget.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "focus-bookmark": {
+   "name": "focus-bookmark",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to prioritize the placement of the bookmark section over the quick-connection section in the SSL-VPN application.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "display-status": {
+   "name": "display-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to display the web portal status widget.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "rewrite-ip-uri-ui": {
+   "name": "rewrite-ip-uri-ui",
+   "category": "unitary",
+   "type": "option",
+   "help": "Rewrite contents for URI contains IP and /ui/ (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable contents rewrite for URI contains \"IP-address/ui/\"."
+    },
+    {
+     "name": "disable",
+     "help": "Disable contents rewrite for URI contains \"IP-address/ui/\"."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "heading": {
+   "name": "heading",
+   "category": "unitary",
+   "type": "string",
+   "help": "Web portal heading message.",
+   "size": 31,
+   "default": "SSL-VPN Portal",
+   "multiple_values": false
+  },
+  "redir-url": {
+   "name": "redir-url",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Client login redirect URL.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "theme": {
+   "name": "theme",
+   "category": "unitary",
+   "type": "option",
+   "help": "Web portal color scheme.",
+   "options": [
+    {
+     "name": "jade",
+     "help": "Jade theme."
+    },
+    {
+     "name": "neutrino",
+     "help": "Neutrino theme."
+    },
+    {
+     "name": "mariner",
+     "help": "Mariner theme."
+    },
+    {
+     "name": "graphite",
+     "help": "Graphite theme."
+    },
+    {
+     "name": "melongene",
+     "help": "Melongene theme."
+    },
+    {
+     "name": "jet-stream",
+     "help": "Jet Stream theme."
+    },
+    {
+     "name": "security-fabric",
+     "help": "Security Fabric theme."
+    },
+    {
+     "name": "dark-matter",
+     "help": "Dark Matter theme."
+    },
+    {
+     "name": "onyx",
+     "help": "Onyx theme."
+    },
+    {
+     "name": "eclipse",
+     "help": "Eclipse theme."
+    }
+   ],
+   "default": "security-fabric",
+   "multiple_values": false
+  },
+  "custom-lang": {
+   "name": "custom-lang",
+   "category": "unitary",
+   "type": "string",
+   "help": "Change the web portal display language. Overrides config system global set language. You can use config system custom-language and execute system custom-language to add custom language files.",
+   "datasource": [
+    "system.custom-language.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "smb-ntlmv1-auth": {
+   "name": "smb-ntlmv1-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable support of NTLMv1 for Samba authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "smbv1": {
+   "name": "smbv1",
+   "category": "unitary",
+   "type": "option",
+   "help": "SMB version 1.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "enable",
+     "missing_help": true
+    },
+    {
+     "name": "disable",
+     "help": "disable",
+     "missing_help": true
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "smb-min-version": {
+   "name": "smb-min-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "SMB minimum client protocol version.",
+   "options": [
+    {
+     "name": "smbv1",
+     "help": "SMB version 1."
+    },
+    {
+     "name": "smbv2",
+     "help": "SMB version 2."
+    },
+    {
+     "name": "smbv3",
+     "help": "SMB version 3."
+    }
+   ],
+   "default": "smbv2",
+   "multiple_values": false
+  },
+  "smb-max-version": {
+   "name": "smb-max-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "SMB maximum client protocol version.",
+   "options": [
+    {
+     "name": "smbv1",
+     "help": "SMB version 1."
+    },
+    {
+     "name": "smbv2",
+     "help": "SMB version 2."
+    },
+    {
+     "name": "smbv3",
+     "help": "SMB version 3."
+    }
+   ],
+   "default": "smbv3",
+   "multiple_values": false
+  },
+  "use-sdwan": {
+   "name": "use-sdwan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use SD-WAN rules to get output interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "prefer-ipv6-dns": {
+   "name": "prefer-ipv6-dns",
+   "category": "unitary",
+   "type": "option",
+   "help": "Prefer to query IPv6 DNS server first if enabled.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "clipboard": {
+   "name": "clipboard",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to support RDP/VPC clipboard functionality.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable support of RDP/VNC clipboard."
+    },
+    {
+     "name": "disable",
+     "help": "Disable support of RDP/VNC clipboard."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "default-window-width": {
+   "name": "default-window-width",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Screen width (range from 0 - 65535, default = 1024).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1024,
+   "multiple_values": false
+  },
+  "default-window-height": {
+   "name": "default-window-height",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Screen height (range from 0 - 65535, default = 768).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 768,
+   "multiple_values": false
+  },
+  "host-check": {
+   "name": "host-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of host checking performed on endpoints.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No host checking."
+    },
+    {
+     "name": "av",
+     "help": "AntiVirus software recognized by the Windows Security Center."
+    },
+    {
+     "name": "fw",
+     "help": "Firewall software recognized by the Windows Security Center."
+    },
+    {
+     "name": "av-fw",
+     "help": "AntiVirus and firewall software recognized by the Windows Security Center."
+    },
+    {
+     "name": "custom",
+     "help": "Custom."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "host-check-interval": {
+   "name": "host-check-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Periodic host check interval. Value of 0 means disabled and host checking only happens when the endpoint connects.",
+   "min-value": 120,
+   "max-value": 259200,
+   "default": 0,
+   "multiple_values": false
+  },
+  "host-check-policy": {
+   "name": "host-check-policy",
+   "category": "table",
+   "help": "One or more policies to require the endpoint to have specific security software.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Host check software list name.",
+     "datasource": [
+      "vpn.ssl.web.host-check-software.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "limit-user-logins": {
+   "name": "limit-user-logins",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to limit each user to one SSL-VPN session at a time.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mac-addr-check": {
+   "name": "mac-addr-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable MAC address host checking.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mac-addr-action": {
+   "name": "mac-addr-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Client MAC address action.",
+   "options": [
+    {
+     "name": "allow",
+     "help": "Allow connection when client MAC address is matched."
+    },
+    {
+     "name": "deny",
+     "help": "Deny connection when client MAC address is matched."
+    }
+   ],
+   "default": "allow",
+   "multiple_values": false
+  },
+  "mac-addr-check-rule": {
+   "name": "mac-addr-check-rule",
+   "category": "table",
+   "help": "Client MAC address check rule.",
+   "required": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Client MAC address check rule name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "mac-addr-mask": {
+     "name": "mac-addr-mask",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Client MAC address mask.",
+     "min-value": 1,
+     "max-value": 48,
+     "default": 48,
+     "multiple_values": false
+    },
+    "mac-addr-list": {
+     "name": "mac-addr-list",
+     "category": "table",
+     "help": "Client MAC address list.",
+     "required": true,
+     "member_table": true,
+     "mkey": "addr",
+     "mkey_type": "mac-address",
+     "children": {
+      "addr": {
+       "name": "addr",
+       "category": "unitary",
+       "type": "mac-address",
+       "help": "Client MAC address.",
+       "default": "00:00:00:00:00:00",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "os-check": {
+   "name": "os-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to let the FortiGate decide action based on client OS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "os-check-list": {
+   "name": "os-check-list",
+   "category": "table",
+   "help": "SSL-VPN OS checks.",
+   "readonly": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "minor-version": {
+     "name": "minor-version",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minor version number.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "OS check options.",
+     "options": [
+      {
+       "name": "deny",
+       "help": "Deny all OS versions."
+      },
+      {
+       "name": "allow",
+       "help": "Allow any OS version."
+      },
+      {
+       "name": "check-up-to-date",
+       "help": "Verify OS is up-to-date."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "tolerance": {
+     "name": "tolerance",
+     "category": "unitary",
+     "type": "integer",
+     "help": "OS patch level tolerance.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "latest-patch-level": {
+     "name": "latest-patch-level",
+     "category": "unitary",
+     "type": "user",
+     "help": "Latest OS patch level.",
+     "default": "0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "forticlient-download": {
+   "name": "forticlient-download",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable download option for FortiClient.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "forticlient-download-method": {
+   "name": "forticlient-download-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "FortiClient download method.",
+   "options": [
+    {
+     "name": "direct",
+     "help": "Download via direct link."
+    },
+    {
+     "name": "ssl-vpn",
+     "help": "Download via SSL-VPN."
+    }
+   ],
+   "default": "direct",
+   "multiple_values": false
+  },
+  "customize-forticlient-download-url": {
+   "name": "customize-forticlient-download-url",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable support of customized download URL for FortiClient.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "windows-forticlient-download-url": {
+   "name": "windows-forticlient-download-url",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Download URL for Windows FortiClient.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "macos-forticlient-download-url": {
+   "name": "macos-forticlient-download-url",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Download URL for Mac FortiClient.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "skip-check-for-unsupported-os": {
+   "name": "skip-check-for-unsupported-os",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to skip host check if client OS does not support it.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "skip-check-for-browser": {
+   "name": "skip-check-for-browser",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to skip host check for browser support.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "hide-sso-credential": {
+   "name": "hide-sso-credential",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to prevent SSO credential being sent to client.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "split-dns": {
+   "name": "split-dns",
+   "category": "table",
+   "help": "Split DNS for SSL-VPN.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967294,
+     "default": 0,
+     "multiple_values": false
+    },
+    "domains": {
+     "name": "domains",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Split DNS domains used for SSL-VPN clients separated by comma.",
+     "size": 1024,
+     "multiple_values": false
+    },
+    "dns-server1": {
+     "name": "dns-server1",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "DNS server 1.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "dns-server2": {
+     "name": "dns-server2",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "DNS server 2.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "ipv6-dns-server1": {
+     "name": "ipv6-dns-server1",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 DNS server 1.",
+     "default": "::",
+     "multiple_values": false
+    },
+    "ipv6-dns-server2": {
+     "name": "ipv6-dns-server2",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 DNS server 2.",
+     "default": "::",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "landing-page": {
+   "name": "landing-page",
+   "category": "complex",
+   "help": "Landing page options.",
+   "children": {
+    "url": {
+     "name": "url",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Landing page URL.",
+     "required": true,
+     "size": 511,
+     "multiple_values": false
+    },
+    "sso": {
+     "name": "sso",
+     "category": "unitary",
+     "type": "option",
+     "help": "Single sign-on.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SSO."
+      },
+      {
+       "name": "static",
+       "help": "Static SSO."
+      },
+      {
+       "name": "auto",
+       "help": "Auto SSO."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "form-data": {
+     "name": "form-data",
+     "category": "table",
+     "help": "Form data.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Name.",
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "value": {
+       "name": "value",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Value.",
+       "size": 63,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "sso-credential": {
+     "name": "sso-credential",
+     "category": "unitary",
+     "type": "option",
+     "help": "Single sign-on credentials.",
+     "options": [
+      {
+       "name": "sslvpn-login",
+       "help": "SSL-VPN login."
+      },
+      {
+       "name": "alternative",
+       "help": "Alternative."
+      }
+     ],
+     "default": "sslvpn-login",
+     "multiple_values": false
+    },
+    "sso-username": {
+     "name": "sso-username",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "SSO user name.",
+     "size": 35,
+     "multiple_values": false
+    },
+    "sso-password": {
+     "name": "sso-password",
+     "category": "unitary",
+     "type": "password",
+     "help": "SSO password.",
+     "size": 128,
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "vpn.ssl.web",
+ "q_type": 155,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

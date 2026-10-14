@@ -1,0 +1,33 @@
+{
+ "name": "global",
+ "category": "complex",
+ "help": "Global firewall settings.",
+ "children": {
+  "banned-ip-persistency": {
+   "name": "banned-ip-persistency",
+   "category": "unitary",
+   "type": "option",
+   "help": "Persistency of banned IPs across power cycling.",
+   "options": [
+    {
+     "name": "disabled",
+     "help": "No entries are kept across power cycling."
+    },
+    {
+     "name": "permanent-only",
+     "help": "Only permanent IP bans are kept across power cycling."
+    },
+    {
+     "name": "all",
+     "help": "All IP bans are kept across power cycling."
+    }
+   ],
+   "default": "disabled",
+   "multiple_values": false
+  }
+ },
+ "path": "firewall",
+ "q_type": 450,
+ "access_group": "fwgrp",
+ "object_range": "global"
+}

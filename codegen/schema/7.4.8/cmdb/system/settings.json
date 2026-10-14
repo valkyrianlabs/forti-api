@@ -1,0 +1,2289 @@
+{
+ "name": "settings",
+ "category": "complex",
+ "help": "Configure VDOM settings.",
+ "children": {
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "VDOM comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "vdom-type": {
+   "name": "vdom-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Vdom type (traffic, lan-extension or admin).",
+   "required": true,
+   "options": [
+    {
+     "name": "traffic",
+     "help": "Change to traffic VDOM"
+    },
+    {
+     "name": "lan-extension",
+     "help": "Change to lan-extension VDOM"
+    },
+    {
+     "name": "admin",
+     "help": "Change to admin VDOM"
+    }
+   ],
+   "default": "traffic",
+   "multiple_values": false
+  },
+  "lan-extension-controller-addr": {
+   "name": "lan-extension-controller-addr",
+   "category": "unitary",
+   "type": "string",
+   "help": "Controller IP address or FQDN to connect.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "opmode": {
+   "name": "opmode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Firewall operation mode (NAT or Transparent).",
+   "required": true,
+   "options": [
+    {
+     "name": "nat",
+     "help": "Change to NAT mode."
+    },
+    {
+     "name": "transparent",
+     "help": "Change to transparent mode."
+    }
+   ],
+   "default": "nat",
+   "multiple_values": false
+  },
+  "ngfw-mode": {
+   "name": "ngfw-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Next Generation Firewall (NGFW) mode.",
+   "options": [
+    {
+     "name": "profile-based",
+     "help": "Application and web-filtering are configured using profiles applied to policy entries."
+    },
+    {
+     "name": "policy-based",
+     "help": "Application and web-filtering are configured as policy match conditions."
+    }
+   ],
+   "default": "profile-based",
+   "multiple_values": false
+  },
+  "http-external-dest": {
+   "name": "http-external-dest",
+   "category": "unitary",
+   "type": "option",
+   "help": "Offload HTTP traffic to FortiWeb or FortiCache.",
+   "options": [
+    {
+     "name": "fortiweb",
+     "help": "Offload HTTP traffic to FortiWeb for Web Application Firewall inspection."
+    },
+    {
+     "name": "forticache",
+     "help": "Offload HTTP traffic to FortiCache for external web caching and WAN optimization."
+    }
+   ],
+   "default": "fortiweb",
+   "multiple_values": false
+  },
+  "firewall-session-dirty": {
+   "name": "firewall-session-dirty",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select how to manage sessions affected by firewall policy configuration changes.",
+   "options": [
+    {
+     "name": "check-all",
+     "help": "All sessions affected by a firewall policy change are flushed from the session table. When new packets are received they are re-evaluated by stateful inspection and re-added to the session table."
+    },
+    {
+     "name": "check-new",
+     "help": "Established sessions for changed firewall policies continue without being affected by the policy configuration change. New sessions are evaluated according to the new firewall policy configuration."
+    },
+    {
+     "name": "check-policy-option",
+     "help": "Sessions are managed individually depending on the firewall policy. Some sessions may restart. Some may continue."
+    }
+   ],
+   "default": "check-all",
+   "multiple_values": false
+  },
+  "manageip": {
+   "name": "manageip",
+   "category": "unitary",
+   "type": "user",
+   "help": "Transparent mode IPv4 management IP address and netmask.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "gateway": {
+   "name": "gateway",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Transparent mode IPv4 default gateway IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-classnet-host",
+   "help": "IP address and netmask.",
+   "required": true,
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "manageip6": {
+   "name": "manageip6",
+   "category": "unitary",
+   "type": "ipv6-prefix",
+   "help": "Transparent mode IPv6 management IP address and netmask.",
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "gateway6": {
+   "name": "gateway6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Transparent mode IPv6 default gateway IP address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ip6": {
+   "name": "ip6",
+   "category": "unitary",
+   "type": "ipv6-prefix",
+   "help": "IPv6 address prefix for NAT mode.",
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "device": {
+   "name": "device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface to use for management access for NAT mode.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "bfd": {
+   "name": "bfd",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Bi-directional Forwarding Detection (BFD) on all interfaces.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Bi-directional Forwarding Detection (BFD) on all interfaces."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Bi-directional Forwarding Detection (BFD) on all interfaces."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "bfd-desired-min-tx": {
+   "name": "bfd-desired-min-tx",
+   "category": "unitary",
+   "type": "integer",
+   "help": "BFD desired minimal transmit interval (1 - 100000 ms, default = 250).",
+   "min-value": 1,
+   "max-value": 100000,
+   "default": 250,
+   "multiple_values": false
+  },
+  "bfd-required-min-rx": {
+   "name": "bfd-required-min-rx",
+   "category": "unitary",
+   "type": "integer",
+   "help": "BFD required minimal receive interval (1 - 100000 ms, default = 250).",
+   "min-value": 1,
+   "max-value": 100000,
+   "default": 250,
+   "multiple_values": false
+  },
+  "bfd-detect-mult": {
+   "name": "bfd-detect-mult",
+   "category": "unitary",
+   "type": "integer",
+   "help": "BFD detection multiplier (1 - 50, default = 3).",
+   "min-value": 1,
+   "max-value": 50,
+   "default": 3,
+   "multiple_values": false
+  },
+  "bfd-dont-enforce-src-port": {
+   "name": "bfd-dont-enforce-src-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to not enforce verifying the source port of BFD Packets.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verifying the source port of BFD Packets."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verifying the source port of BFD Packets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "utf8-spam-tagging": {
+   "name": "utf8-spam-tagging",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable converting antispam tags to UTF-8 for better non-ASCII character support.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Convert antispam tags to UTF-8."
+    },
+    {
+     "name": "disable",
+     "help": "Do not convert antispam tags."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "wccp-cache-engine": {
+   "name": "wccp-cache-engine",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WCCP cache engine.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WCCP cache engine."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WCCP cache engine."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vpn-stats-log": {
+   "name": "vpn-stats-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable periodic VPN log statistics for one or more types of VPN. Separate names with a space.",
+   "options": [
+    {
+     "name": "ipsec",
+     "help": "IPsec."
+    },
+    {
+     "name": "pptp",
+     "help": "PPTP."
+    },
+    {
+     "name": "l2tp",
+     "help": "L2TP."
+    },
+    {
+     "name": "ssl",
+     "help": "SSL."
+    }
+   ],
+   "default": "ipsec pptp l2tp ssl",
+   "multiple_values": true
+  },
+  "vpn-stats-period": {
+   "name": "vpn-stats-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period to send VPN log statistics (0 or 60 - 86400 sec).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 600,
+   "multiple_values": false
+  },
+  "v4-ecmp-mode": {
+   "name": "v4-ecmp-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv4 Equal-cost multi-path (ECMP) routing and load balancing mode.",
+   "options": [
+    {
+     "name": "source-ip-based",
+     "help": "Select next hop based on source IP."
+    },
+    {
+     "name": "weight-based",
+     "help": "Select next hop based on weight."
+    },
+    {
+     "name": "usage-based",
+     "help": "Select next hop based on usage."
+    },
+    {
+     "name": "source-dest-ip-based",
+     "help": "Select next hop based on both source and destination IPs."
+    }
+   ],
+   "default": "source-ip-based",
+   "multiple_values": false
+  },
+  "mac-ttl": {
+   "name": "mac-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Duration of MAC addresses in Transparent mode (300 - 8640000 sec, default = 300).",
+   "min-value": 300,
+   "max-value": 8640000,
+   "default": 300,
+   "multiple_values": false
+  },
+  "fw-session-hairpin": {
+   "name": "fw-session-hairpin",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable checking for a matching policy each time hairpin traffic goes through the FortiGate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Perform a policy check every time."
+    },
+    {
+     "name": "disable",
+     "help": "Perform a policy check only the first time the session is received."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "prp-trailer-action": {
+   "name": "prp-trailer-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable action to take on PRP trailer.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Try to keep PRP trailer."
+    },
+    {
+     "name": "disable",
+     "help": "Trim PRP trailer."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "snat-hairpin-traffic": {
+   "name": "snat-hairpin-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable source NAT (SNAT) for hairpin traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SNAT for hairpin traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SNAT for hairpin traffic."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dhcp-proxy": {
+   "name": "dhcp-proxy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the DHCP Proxy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the DHCP proxy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the DHCP proxy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dhcp-proxy-interface-select-method": {
+   "name": "dhcp-proxy-interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "dhcp-proxy-interface": {
+   "name": "dhcp-proxy-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "dhcp-server-ip": {
+   "name": "dhcp-server-ip",
+   "category": "unitary",
+   "type": "user",
+   "help": "DHCP Server IPv4 address.",
+   "default": "",
+   "multiple_values": true
+  },
+  "dhcp6-server-ip": {
+   "name": "dhcp6-server-ip",
+   "category": "unitary",
+   "type": "user",
+   "help": "DHCPv6 server IPv6 address.",
+   "default": "",
+   "multiple_values": true
+  },
+  "central-nat": {
+   "name": "central-nat",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable central NAT.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable central NAT."
+    },
+    {
+     "name": "disable",
+     "help": "Disable central NAT."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-default-policy-columns": {
+   "name": "gui-default-policy-columns",
+   "category": "table",
+   "help": "Default columns to display for policy lists on GUI.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Select column name.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "lldp-reception": {
+   "name": "lldp-reception",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Link Layer Discovery Protocol (LLDP) reception for this VDOM or apply global settings to this VDOM.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable LLDP reception for this VDOM."
+    },
+    {
+     "name": "disable",
+     "help": "Disable LLDP reception for this VDOM."
+    },
+    {
+     "name": "global",
+     "help": "Use the global LLDP reception configuration for this VDOM."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "lldp-transmission": {
+   "name": "lldp-transmission",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Link Layer Discovery Protocol (LLDP) transmission for this VDOM or apply global settings to this VDOM.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable LLDP transmission for this VDOM."
+    },
+    {
+     "name": "disable",
+     "help": "Disable LLDP transmission for this VDOM."
+    },
+    {
+     "name": "global",
+     "help": "Use the global LLDP transmission configuration for this VDOM."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "link-down-access": {
+   "name": "link-down-access",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable link down access traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow link down access traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Block link down access traffic."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "nat46-generate-ipv6-fragment-header": {
+   "name": "nat46-generate-ipv6-fragment-header",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAT46 IPv6 fragment header generation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NAT46 IPv6 fragment header generation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NAT46 IPv6 fragment header generation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nat46-force-ipv4-packet-forwarding": {
+   "name": "nat46-force-ipv4-packet-forwarding",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable mandatory IPv4 packet forwarding in NAT46.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable mandatory IPv4 packet forwarding when IPv4 DF is set to 1."
+    },
+    {
+     "name": "disable",
+     "help": "Disable mandatory IPv4 packet forwarding when IPv4 DF is set to 1."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nat64-force-ipv6-packet-forwarding": {
+   "name": "nat64-force-ipv6-packet-forwarding",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable mandatory IPv6 packet forwarding in NAT64.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable mandatory IPv6 packet forwarding"
+    },
+    {
+     "name": "disable",
+     "help": "Disable mandatory IPv6 packet forwarding"
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "detect-unknown-esp": {
+   "name": "detect-unknown-esp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable detection of unknown ESP packets (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable detection of unknown ESP packets and drop the ESP packet if it's unknown."
+    },
+    {
+     "name": "disable",
+     "help": "Disable detection of unknown ESP packets."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "auxiliary-session": {
+   "name": "auxiliary-session",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable auxiliary session.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable auxiliary session for this VDOM."
+    },
+    {
+     "name": "disable",
+     "help": "Disable auxiliary session for this VDOM."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "asymroute": {
+   "name": "asymroute",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 asymmetric routing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPv4 asymmetric routing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPv4 asymmetric routing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "asymroute-icmp": {
+   "name": "asymroute-icmp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ICMP asymmetric routing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable ICMP asymmetric routing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ICMP asymmetric routing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "tcp-session-without-syn": {
+   "name": "tcp-session-without-syn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing TCP session without SYN flags.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow TCP session without SYN flags."
+    },
+    {
+     "name": "disable",
+     "help": "Do not allow TCP session without SYN flags."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ses-denied-traffic": {
+   "name": "ses-denied-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable including denied session in the session table.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Include denied sessions in the session table."
+    },
+    {
+     "name": "disable",
+     "help": "Do not add denied sessions to the session table."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ses-denied-multicast-traffic": {
+   "name": "ses-denied-multicast-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable including denied multicast session in the session table.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Include denied multicast sessions in the session table."
+    },
+    {
+     "name": "disable",
+     "help": "Do not add denied multicast sessions to the session table."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "strict-src-check": {
+   "name": "strict-src-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable strict source verification.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable strict source verification."
+    },
+    {
+     "name": "disable",
+     "help": "Disable strict source verification."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allow-linkdown-path": {
+   "name": "allow-linkdown-path",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable link down path.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow link down path."
+    },
+    {
+     "name": "disable",
+     "help": "Do not allow link down path."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "asymroute6": {
+   "name": "asymroute6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable asymmetric IPv6 routing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable asymmetric IPv6 routing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable asymmetric IPv6 routing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "asymroute6-icmp": {
+   "name": "asymroute6-icmp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable asymmetric ICMPv6 routing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable asymmetric ICMPv6 routing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable asymmetric ICMPv6 routing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sctp-session-without-init": {
+   "name": "sctp-session-without-init",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SCTP session creation without SCTP INIT.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SCTP session creation without SCTP INIT."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SCTP session creation without SCTP INIT."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sip-expectation": {
+   "name": "sip-expectation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the SIP kernel session helper to create an expectation for port 5060.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow SIP session helper to create an expectation for port 5060."
+    },
+    {
+     "name": "disable",
+     "help": "Prevent SIP session helper from creating an expectation for port 5060."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sip-nat-trace": {
+   "name": "sip-nat-trace",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable recording the original SIP source IP address when NAT is used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Record the original SIP source IP address when NAT is used."
+    },
+    {
+     "name": "disable",
+     "help": "Do not record the original SIP source IP address when NAT is used."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "h323-direct-model": {
+   "name": "h323-direct-model",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable H323 direct model.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable H323 direct model."
+    },
+    {
+     "name": "enable",
+     "help": "Enable H323 direct model."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this VDOM.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this VDOM."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this VDOM."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "sip-tcp-port": {
+   "name": "sip-tcp-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TCP port the SIP proxy monitors for SIP traffic (0 - 65535, default = 5060).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 5060,
+   "multiple_values": true,
+   "max_num_values": 2
+  },
+  "sip-udp-port": {
+   "name": "sip-udp-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "UDP port the SIP proxy monitors for SIP traffic (0 - 65535, default = 5060).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 5060,
+   "multiple_values": true,
+   "max_num_values": 2
+  },
+  "sip-ssl-port": {
+   "name": "sip-ssl-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TCP port the SIP proxy monitors for SIP SSL/TLS traffic (0 - 65535, default = 5061).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 5061,
+   "multiple_values": false
+  },
+  "sccp-port": {
+   "name": "sccp-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TCP port the SCCP proxy monitors for SCCP traffic (0 - 65535, default = 2000).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 2000,
+   "multiple_values": false
+  },
+  "multicast-forward": {
+   "name": "multicast-forward",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable multicast forwarding.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable multicast forwarding."
+    },
+    {
+     "name": "disable",
+     "help": "Disable multicast forwarding."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "multicast-ttl-notchange": {
+   "name": "multicast-ttl-notchange",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable preventing the FortiGate from changing the TTL for forwarded multicast packets.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "The multicast TTL is not changed."
+    },
+    {
+     "name": "disable",
+     "help": "The multicast TTL may be changed."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "multicast-skip-policy": {
+   "name": "multicast-skip-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing multicast traffic through the FortiGate without a policy check.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allowing multicast traffic through the FortiGate without creating a multicast firewall policy."
+    },
+    {
+     "name": "disable",
+     "help": "Require a multicast policy to allow multicast traffic to pass through the FortiGate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allow-subnet-overlap": {
+   "name": "allow-subnet-overlap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing interface subnets to use overlapping IP addresses.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable overlapping subnets."
+    },
+    {
+     "name": "disable",
+     "help": "Disable overlapping subnets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "deny-tcp-with-icmp": {
+   "name": "deny-tcp-with-icmp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable denying TCP by sending an ICMP communication prohibited packet.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Deny TCP with ICMP."
+    },
+    {
+     "name": "disable",
+     "help": "Disable denying TCP with ICMP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ecmp-max-paths": {
+   "name": "ecmp-max-paths",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of Equal Cost Multi-Path (ECMP) next-hops. Set to 1 to disable ECMP routing (1 - 255, default = 255).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 255,
+   "multiple_values": false
+  },
+  "discovered-device-timeout": {
+   "name": "discovered-device-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout for discovered devices (1 - 365 days, default = 28).",
+   "min-value": 1,
+   "max-value": 365,
+   "default": 28,
+   "multiple_values": false
+  },
+  "email-portal-check-dns": {
+   "name": "email-portal-check-dns",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using DNS to validate email addresses collected by a captive portal.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable email address checking with DNS."
+    },
+    {
+     "name": "enable",
+     "help": "Enable email address checking with DNS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "default-voip-alg-mode": {
+   "name": "default-voip-alg-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure how the FortiGate handles VoIP traffic when a policy that accepts the traffic doesn't include a VoIP profile.",
+   "options": [
+    {
+     "name": "proxy-based",
+     "help": "Use a default proxy-based VoIP ALG."
+    },
+    {
+     "name": "kernel-helper-based",
+     "help": "Use the SIP session helper."
+    }
+   ],
+   "default": "proxy-based",
+   "multiple_values": false
+  },
+  "gui-proxy-inspection": {
+   "name": "gui-proxy-inspection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the proxy features on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the proxy features on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the proxy features on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-icap": {
+   "name": "gui-icap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ICAP on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable ICAP on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ICAP on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-implicit-policy": {
+   "name": "gui-implicit-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable implicit firewall policies on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable implicit firewall policies on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable implicit firewall policies on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-dns-database": {
+   "name": "gui-dns-database",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DNS database settings on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DNS database settings on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DNS database settings on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-load-balance": {
+   "name": "gui-load-balance",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable server load balancing on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable server load balancing on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable server load balancing on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-multicast-policy": {
+   "name": "gui-multicast-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable multicast firewall policies on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable multicast firewall policies on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable multicast firewall policies on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-dos-policy": {
+   "name": "gui-dos-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DoS policies on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DoS policies on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DoS policies on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-object-colors": {
+   "name": "gui-object-colors",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable object colors on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable object colors on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable object colors on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-route-tag-address-creation": {
+   "name": "gui-route-tag-address-creation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable route-tag addresses on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable route-tag addresses on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable route-tag addresses on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-voip-profile": {
+   "name": "gui-voip-profile",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VoIP profiles on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable VoIP profiles on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable VoIP profiles on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-ap-profile": {
+   "name": "gui-ap-profile",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiAP profiles on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiAP profiles on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiAP profiles on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-security-profile-group": {
+   "name": "gui-security-profile-group",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Security Profile Groups on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Security Profile Groups on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Security Profile Groups on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-local-in-policy": {
+   "name": "gui-local-in-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Local-In policies on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Local-In policies on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Local-In policies on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-explicit-proxy": {
+   "name": "gui-explicit-proxy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the explicit proxy on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the explicit proxy on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the explicit proxy on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-dynamic-routing": {
+   "name": "gui-dynamic-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dynamic routing on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dynamic routing on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dynamic routing on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-sslvpn-personal-bookmarks": {
+   "name": "gui-sslvpn-personal-bookmarks",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN personal bookmark management on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSL-VPN personal bookmark management on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSL-VPN personal bookmark management on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-sslvpn-realms": {
+   "name": "gui-sslvpn-realms",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN realms on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSL-VPN realms on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSL-VPN realms on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-policy-based-ipsec": {
+   "name": "gui-policy-based-ipsec",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable policy-based IPsec VPN on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable policy-based IPsec VPN on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable policy-based IPsec VPN on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-threat-weight": {
+   "name": "gui-threat-weight",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable threat weight on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable threat weight on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable threat weight on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-spamfilter": {
+   "name": "gui-spamfilter",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Antispam on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Antispam on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Antispam on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-file-filter": {
+   "name": "gui-file-filter",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable File-filter on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable File-filter on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable File-filter on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-application-control": {
+   "name": "gui-application-control",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable application control on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable application control on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable application control on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-ips": {
+   "name": "gui-ips",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPS on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPS on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPS on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-dhcp-advanced": {
+   "name": "gui-dhcp-advanced",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advanced DHCP options on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable advanced DHCP options on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable advanced DHCP options on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-vpn": {
+   "name": "gui-vpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec VPN settings pages on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPsec VPN settings pages on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPsec VPN settings pages on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-sslvpn": {
+   "name": "gui-sslvpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN settings pages on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSL-VPN settings pages on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSL-VPN settings pages on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-wireless-controller": {
+   "name": "gui-wireless-controller",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the wireless controller on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the wireless controller on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the wireless controller on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-advanced-wireless-features": {
+   "name": "gui-advanced-wireless-features",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advanced wireless features in GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable advanced wireless features in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable advanced wireless features in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-switch-controller": {
+   "name": "gui-switch-controller",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the switch controller on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the switch controller on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the switch controller on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-fortiap-split-tunneling": {
+   "name": "gui-fortiap-split-tunneling",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiAP split tunneling on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiAP split tunneling on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiAP split tunneling on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-webfilter-advanced": {
+   "name": "gui-webfilter-advanced",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advanced web filtering on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable advanced web filtering on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable advanced web filtering on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-traffic-shaping": {
+   "name": "gui-traffic-shaping",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable traffic shaping on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable traffic shaping on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable traffic shaping on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-wan-load-balancing": {
+   "name": "gui-wan-load-balancing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SD-WAN on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SD-WAN on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SD-WAN on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-antivirus": {
+   "name": "gui-antivirus",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AntiVirus on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AntiVirus on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AntiVirus on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-webfilter": {
+   "name": "gui-webfilter",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Web filtering on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Web filtering on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Web filtering on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-videofilter": {
+   "name": "gui-videofilter",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Video filtering on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Video filtering on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Video filtering on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-dnsfilter": {
+   "name": "gui-dnsfilter",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DNS Filtering on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DNS Filtering on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DNS Filtering on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-waf-profile": {
+   "name": "gui-waf-profile",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Web Application Firewall on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Web Application Firewall on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Web Application Firewall on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-dlp-profile": {
+   "name": "gui-dlp-profile",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Data Loss Prevention on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Data Loss Prevention on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Data Loss Prevention on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-virtual-patch-profile": {
+   "name": "gui-virtual-patch-profile",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Virtual Patching on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Virtual Patching on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Virtual Patching on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-casb": {
+   "name": "gui-casb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Inline-CASB on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Inline-CASB on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Inline-CASB on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-fortiextender-controller": {
+   "name": "gui-fortiextender-controller",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiExtender on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiExtender on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiExtender on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-advanced-policy": {
+   "name": "gui-advanced-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advanced policy configuration on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable advanced policy configuration on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable advanced policy configuration on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-allow-unnamed-policy": {
+   "name": "gui-allow-unnamed-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the requirement for policy naming on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the requirement for policy naming on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the requirement for policy naming on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-email-collection": {
+   "name": "gui-email-collection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable email collection on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable email collection on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable email collection on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-multiple-interface-policy": {
+   "name": "gui-multiple-interface-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding multiple interfaces to a policy on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable adding multiple interfaces to a policy on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable adding multiple interfaces to a policy on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-policy-disclaimer": {
+   "name": "gui-policy-disclaimer",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable policy disclaimer on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable policy disclaimer on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable policy disclaimer on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-ztna": {
+   "name": "gui-ztna",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Zero Trust Network Access features on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Zero Trust Network Access features on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Zero Trust Network Access features on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-ot": {
+   "name": "gui-ot",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Operational technology features on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Operational technology features on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Operational technology features on the GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-dynamic-device-os-id": {
+   "name": "gui-dynamic-device-os-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Create dynamic addresses to manage known devices.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Create dynamic addresses to manage known devices."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Create dynamic addresses to manage known devices."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "location-id": {
+   "name": "location-id",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Local location ID in the form of an IPv4 address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ike-session-resume": {
+   "name": "ike-session-resume",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKEv2 session resumption (RFC 5723).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IKEv2 session resumption (RFC 5723)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IKEv2 session resumption (RFC 5723)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ike-quick-crash-detect": {
+   "name": "ike-quick-crash-detect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKE quick crash detection (RFC 6290).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IKE quick crash detection (RFC 6290)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IKE quick crash detection (RFC 6290)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ike-dn-format": {
+   "name": "ike-dn-format",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure IKE ASN.1 Distinguished Name format conventions.",
+   "options": [
+    {
+     "name": "with-space",
+     "help": "Format IKE ASN.1 Distinguished Names with spaces between attribute names and values."
+    },
+    {
+     "name": "no-space",
+     "help": "Format IKE ASN.1 Distinguished Names without spaces between attribute names and values."
+    }
+   ],
+   "default": "with-space",
+   "multiple_values": false
+  },
+  "ike-port": {
+   "name": "ike-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "UDP port for IKE/IPsec traffic (default 500).",
+   "min-value": 1024,
+   "max-value": 65535,
+   "default": 500,
+   "multiple_values": false
+  },
+  "ike-tcp-port": {
+   "name": "ike-tcp-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TCP port for IKE/IPsec traffic (default 4500).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 4500,
+   "multiple_values": false
+  },
+  "ike-policy-route": {
+   "name": "ike-policy-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKE Policy Based Routing (PBR).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IKE Policy Based Routing (PBR)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IKE Policy Based Routing (PBR)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "block-land-attack": {
+   "name": "block-land-attack",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable blocking of land attacks.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not block land attack."
+    },
+    {
+     "name": "enable",
+     "help": "Block land attack."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-app-port-as-service": {
+   "name": "default-app-port-as-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable policy service enforcement based on application default ports.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "application-bandwidth-tracking": {
+   "name": "application-bandwidth-tracking",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable application bandwidth tracking.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable application bandwidth tracking."
+    },
+    {
+     "name": "enable",
+     "help": "Enable application bandwidth tracking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fqdn-session-check": {
+   "name": "fqdn-session-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dirty session check caused by FQDN updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dirty session check caused by FQDN updates."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dirty session check caused by FQDN updates."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ext-resource-session-check": {
+   "name": "ext-resource-session-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dirty session check caused by external resource updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dirty session check caused by external resource updates."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dirty session check caused by external resource updates."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dyn-addr-session-check": {
+   "name": "dyn-addr-session-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dirty session check caused by dynamic address updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dirty session check caused by dynamic address updates."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dirty session check caused by dynamic address updates."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-policy-expiry-days": {
+   "name": "default-policy-expiry-days",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default policy expiry in days (0 - 365 days, default = 30).",
+   "min-value": 0,
+   "max-value": 365,
+   "default": 30,
+   "multiple_values": false
+  },
+  "gui-enforce-change-summary": {
+   "name": "gui-enforce-change-summary",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enforce change summaries for select tables in the GUI.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "No change summary requirement."
+    },
+    {
+     "name": "require",
+     "help": "Change summary required."
+    },
+    {
+     "name": "optional",
+     "help": "Change summary optional."
+    }
+   ],
+   "default": "require",
+   "multiple_values": false
+  },
+  "internet-service-database-cache": {
+   "name": "internet-service-database-cache",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Internet Service database caching.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Internet Service database caching."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Internet Service database caching."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-app-ctrl-size": {
+   "name": "internet-service-app-ctrl-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of tuple entries (protocol, port, IP address, application ID) stored by the FortiGate unit (0 - 4294967295, default = 32768). A smaller value limits the FortiGate unit from learning about internet applications.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 32768,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 141,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

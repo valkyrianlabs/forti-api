@@ -1,0 +1,2684 @@
+{
+ "name": "access-proxy6",
+ "category": "table",
+ "help": "Configure IPv6 access proxy.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access Proxy name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "vip": {
+   "name": "vip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Virtual IP name.",
+   "required": true,
+   "datasource": [
+    "firewall.vip6.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "client-cert": {
+   "name": "client-cert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to request client certificate.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable client certificate request."
+    },
+    {
+     "name": "enable",
+     "help": "Enable client certificate request."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "user-agent-detect": {
+   "name": "user-agent-detect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to detect device type by HTTP user-agent if no client certificate provided.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable to detect unknown device by HTTP user-agent if no client certificate provided."
+    },
+    {
+     "name": "enable",
+     "help": "Enable to detect unknown device by HTTP user-agent if no client certificate provided."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "auth-portal": {
+   "name": "auth-portal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authentication portal.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable authentication portal."
+    },
+    {
+     "name": "enable",
+     "help": "Enable authentication portal."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-virtual-host": {
+   "name": "auth-virtual-host",
+   "category": "unitary",
+   "type": "string",
+   "help": "Virtual host for authentication portal.",
+   "datasource": [
+    "firewall.access-proxy-virtual-host.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "empty-cert-action": {
+   "name": "empty-cert-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action of an empty client certificate.",
+   "options": [
+    {
+     "name": "accept",
+     "help": "Accept the SSL handshake if the client certificate is empty."
+    },
+    {
+     "name": "block",
+     "help": "Block the SSL handshake if the client certificate is empty."
+    },
+    {
+     "name": "accept-unmanageable",
+     "help": "Accept the SSL handshake only if the end-point is unmanageable."
+    }
+   ],
+   "default": "block",
+   "multiple_values": false
+  },
+  "log-blocked-traffic": {
+   "name": "log-blocked-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of blocked traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Log all traffic denied by this access proxy."
+    },
+    {
+     "name": "disable",
+     "help": "Do not log all traffic denied by this access proxy."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "add-vhost-domain-to-dnsdb": {
+   "name": "add-vhost-domain-to-dnsdb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding vhost/domain to dnsdb for ztna dox tunnel.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "add dns entry for all vhosts used by access proxy."
+    },
+    {
+     "name": "disable",
+     "help": "Do not add dns entry for all vhosts used by access proxy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "svr-pool-multiplex": {
+   "name": "svr-pool-multiplex",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable server pool multiplexing. Share connected server in HTTP, HTTPS, and web-portal api-gateway.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable server pool multiplexing.  Share connected server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable server pool multiplexing.  Do not share connected server."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "svr-pool-ttl": {
+   "name": "svr-pool-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time-to-live in the server pool for idle connections to servers.",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 15,
+   "multiple_values": false
+  },
+  "svr-pool-server-max-request": {
+   "name": "svr-pool-server-max-request",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of requests that servers in server pool handle before disconnecting (default = unlimited).",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 0,
+   "multiple_values": false
+  },
+  "svr-pool-server-max-concurrent-request": {
+   "name": "svr-pool-server-max-concurrent-request",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of concurrent requests that servers in server pool could handle (default = unlimited).",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 0,
+   "multiple_values": false
+  },
+  "decrypted-traffic-mirror": {
+   "name": "decrypted-traffic-mirror",
+   "category": "unitary",
+   "type": "string",
+   "help": "Decrypted traffic mirror.",
+   "datasource": [
+    "firewall.decrypted-traffic-mirror.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "api-gateway": {
+   "name": "api-gateway",
+   "category": "table",
+   "help": "Set IPv4 API Gateway.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "API Gateway ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "url-map": {
+     "name": "url-map",
+     "category": "unitary",
+     "type": "string",
+     "help": "URL pattern to match.",
+     "required": true,
+     "size": 511,
+     "default": "/",
+     "multiple_values": false
+    },
+    "service": {
+     "name": "service",
+     "category": "unitary",
+     "type": "option",
+     "help": "Service.",
+     "required": true,
+     "options": [
+      {
+       "name": "http",
+       "help": "HTTP."
+      },
+      {
+       "name": "https",
+       "help": "HTTPS."
+      },
+      {
+       "name": "tcp-forwarding",
+       "help": "TCP-FORWARDING."
+      },
+      {
+       "name": "samlsp",
+       "help": "SAML-SP."
+      },
+      {
+       "name": "web-portal",
+       "help": "VPN-SSL-WEB-PORTAL."
+      },
+      {
+       "name": "saas",
+       "help": "SAAS."
+      }
+     ],
+     "default": "https",
+     "multiple_values": false
+    },
+    "ldb-method": {
+     "name": "ldb-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Method used to distribute sessions to real servers.",
+     "options": [
+      {
+       "name": "static",
+       "help": "Distribute to server based on source IP."
+      },
+      {
+       "name": "round-robin",
+       "help": "Distribute to server based round robin order."
+      },
+      {
+       "name": "weighted",
+       "help": "Distribute to server based on weight."
+      },
+      {
+       "name": "first-alive",
+       "help": "Distribute to the first server that is alive."
+      },
+      {
+       "name": "http-host",
+       "help": "Distribute to server based on host field in HTTP header."
+      }
+     ],
+     "default": "static",
+     "multiple_values": false
+    },
+    "virtual-host": {
+     "name": "virtual-host",
+     "category": "unitary",
+     "type": "string",
+     "help": "Virtual host.",
+     "datasource": [
+      "firewall.access-proxy-virtual-host.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "url-map-type": {
+     "name": "url-map-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Type of url-map.",
+     "required": true,
+     "options": [
+      {
+       "name": "sub-string",
+       "help": "Match the pattern if a string contains the sub-string."
+      },
+      {
+       "name": "wildcard",
+       "help": "Match the pattern with wildcards."
+      },
+      {
+       "name": "regex",
+       "help": "Match the pattern with a regular expression."
+      }
+     ],
+     "default": "sub-string",
+     "multiple_values": false
+    },
+    "h2-support": {
+     "name": "h2-support",
+     "category": "unitary",
+     "type": "option",
+     "help": "HTTP2 support, default=Enable.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable HTTP2 support."
+      },
+      {
+       "name": "disable",
+       "help": "Disable HTTP2 support."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "h3-support": {
+     "name": "h3-support",
+     "category": "unitary",
+     "type": "option",
+     "help": "HTTP3/QUIC support, default=Disable.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable HTTP3/QUIC support."
+      },
+      {
+       "name": "disable",
+       "help": "Disable HTTP3/QUIC support."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "quic": {
+     "name": "quic",
+     "category": "complex",
+     "help": "QUIC setting.",
+     "children": {
+      "max-idle-timeout": {
+       "name": "max-idle-timeout",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum idle timeout milliseconds (1 - 60000, default = 30000).",
+       "min-value": 1,
+       "max-value": 60000,
+       "default": 30000,
+       "multiple_values": false
+      },
+      "max-udp-payload-size": {
+       "name": "max-udp-payload-size",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum UDP payload size in bytes (1200 - 1500, default = 1500).",
+       "min-value": 1200,
+       "max-value": 1500,
+       "default": 1500,
+       "multiple_values": false
+      },
+      "active-connection-id-limit": {
+       "name": "active-connection-id-limit",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Active connection ID limit (1 - 8, default = 2).",
+       "min-value": 1,
+       "max-value": 8,
+       "default": 2,
+       "multiple_values": false
+      },
+      "ack-delay-exponent": {
+       "name": "ack-delay-exponent",
+       "category": "unitary",
+       "type": "integer",
+       "help": "ACK delay exponent (1 - 20, default = 3).",
+       "min-value": 1,
+       "max-value": 20,
+       "default": 3,
+       "multiple_values": false
+      },
+      "max-ack-delay": {
+       "name": "max-ack-delay",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum ACK delay in milliseconds (1 - 16383, default = 25).",
+       "min-value": 1,
+       "max-value": 16383,
+       "default": 25,
+       "multiple_values": false
+      },
+      "max-datagram-frame-size": {
+       "name": "max-datagram-frame-size",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum datagram frame size in bytes (1 - 1500, default = 1500).",
+       "min-value": 1,
+       "max-value": 1500,
+       "default": 1500,
+       "multiple_values": false
+      },
+      "active-migration": {
+       "name": "active-migration",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable active migration (default = disable).",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable active migration."
+        },
+        {
+         "name": "disable",
+         "help": "Disable active migration."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "grease-quic-bit": {
+       "name": "grease-quic-bit",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable grease QUIC bit (default = enable).",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable grease QUIC bit."
+        },
+        {
+         "name": "disable",
+         "help": "Disable grease QUIC bit."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      }
+     }
+    },
+    "realservers": {
+     "name": "realservers",
+     "category": "table",
+     "help": "Select the real servers that this Access Proxy will distribute traffic to.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Real server ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "addr-type": {
+       "name": "addr-type",
+       "category": "unitary",
+       "type": "option",
+       "help": "Type of address.",
+       "required": true,
+       "options": [
+        {
+         "name": "ip",
+         "help": "Standard IPv4 address."
+        },
+        {
+         "name": "fqdn",
+         "help": "Non-wildcard FQDN address object."
+        }
+       ],
+       "default": "ip",
+       "multiple_values": false
+      },
+      "address": {
+       "name": "address",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address or address group of the real server.",
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "ip": {
+       "name": "ip",
+       "category": "unitary",
+       "type": "ipv4-address-any",
+       "help": "IP address of the real server.",
+       "required": true,
+       "default": "0.0.0.0",
+       "multiple_values": false
+      },
+      "domain": {
+       "name": "domain",
+       "category": "unitary",
+       "type": "string",
+       "help": "Wildcard domain name of the real server.",
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      },
+      "port": {
+       "name": "port",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Port for communicating with the real server.",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 443,
+       "multiple_values": false
+      },
+      "mappedport": {
+       "name": "mappedport",
+       "category": "unitary",
+       "type": "user",
+       "help": "Port for communicating with the real server.",
+       "default": "",
+       "multiple_values": false
+      },
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Set the status of the real server to active so that it can accept traffic, or on standby or disabled so no traffic is sent.",
+       "options": [
+        {
+         "name": "active",
+         "help": "Server status active."
+        },
+        {
+         "name": "standby",
+         "help": "Server status standby."
+        },
+        {
+         "name": "disable",
+         "help": "Server status disable."
+        }
+       ],
+       "default": "active",
+       "multiple_values": false
+      },
+      "type": {
+       "name": "type",
+       "category": "unitary",
+       "type": "option",
+       "help": "TCP forwarding server type.",
+       "options": [
+        {
+         "name": "tcp-forwarding",
+         "help": "TCP forwarding."
+        },
+        {
+         "name": "ssh",
+         "help": "SSH."
+        }
+       ],
+       "default": "tcp-forwarding",
+       "multiple_values": false
+      },
+      "external-auth": {
+       "name": "external-auth",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable use of external browser as user-agent for SAML user authentication.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable use of external browser as user-agent for SAML user authentication."
+        },
+        {
+         "name": "disable",
+         "help": "Disable use of external browser as user-agent for SAML user authentication."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "tunnel-encryption": {
+       "name": "tunnel-encryption",
+       "category": "unitary",
+       "type": "option",
+       "help": "Tunnel encryption.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable tcp forwarding tunnel encryption."
+        },
+        {
+         "name": "disable",
+         "help": "Disable tcp forwarding tunnel encryption."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "weight": {
+       "name": "weight",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Weight of the real server. If weighted load balancing is enabled, the server with the highest weight gets more connections.",
+       "min-value": 1,
+       "max-value": 255,
+       "default": 1,
+       "multiple_values": false
+      },
+      "http-host": {
+       "name": "http-host",
+       "category": "unitary",
+       "type": "string",
+       "help": "HTTP server domain name in HTTP header.",
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      },
+      "health-check": {
+       "name": "health-check",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable to check the responsiveness of the real server before forwarding traffic.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable per server health check."
+        },
+        {
+         "name": "enable",
+         "help": "Enable per server health check."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "health-check-proto": {
+       "name": "health-check-proto",
+       "category": "unitary",
+       "type": "option",
+       "help": "Protocol of the health check monitor to use when polling to determine server's connectivity status.",
+       "options": [
+        {
+         "name": "ping",
+         "help": "Use PING to test the link with the server."
+        },
+        {
+         "name": "http",
+         "help": "Use HTTP-GET to test the link with the server."
+        },
+        {
+         "name": "tcp-connect",
+         "help": "Use a full TCP connection to test the link with the server."
+        }
+       ],
+       "default": "ping",
+       "multiple_values": false
+      },
+      "holddown-interval": {
+       "name": "holddown-interval",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable holddown timer. Server will be considered active and reachable once the holddown period has expired (30 seconds).",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable per server holddown."
+        },
+        {
+         "name": "disable",
+         "help": "Disable per server holddown."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "translate-host": {
+       "name": "translate-host",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable translation of hostname/IP from virtual server to real server.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable virtual hostname/IP translation."
+        },
+        {
+         "name": "disable",
+         "help": "Disable virtual hostname/IP translation."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "ssh-client-cert": {
+       "name": "ssh-client-cert",
+       "category": "unitary",
+       "type": "string",
+       "help": "Set access-proxy SSH client certificate profile.",
+       "datasource": [
+        "firewall.access-proxy-ssh-client-cert.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "ssh-host-key-validation": {
+       "name": "ssh-host-key-validation",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable SSH real server host key validation.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable SSH real server host key validation."
+        },
+        {
+         "name": "enable",
+         "help": "Enable SSH real server host key validation."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "ssh-host-key": {
+       "name": "ssh-host-key",
+       "category": "table",
+       "help": "One or more server host key.",
+       "member_table": true,
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "Server host key name.",
+         "datasource": [
+          "firewall.ssh.host-key.name"
+         ],
+         "size": 79,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "application": {
+     "name": "application",
+     "category": "table",
+     "help": "SaaS application controlled by this Access Proxy.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "SaaS application name.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "persistence": {
+     "name": "persistence",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure how to make sure that clients connect to the same server every time they make a request that is part of the same session.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "http-cookie",
+       "help": "HTTP cookie."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "http-cookie-domain-from-host": {
+     "name": "http-cookie-domain-from-host",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of HTTP cookie domain from host field in HTTP.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable use of HTTP cookie domain from host field in HTTP (use http-cooke-domain setting)."
+      },
+      {
+       "name": "enable",
+       "help": "Enable use of HTTP cookie domain from host field in HTTP."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "http-cookie-domain": {
+     "name": "http-cookie-domain",
+     "category": "unitary",
+     "type": "string",
+     "help": "Domain that HTTP cookie persistence should apply to.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "http-cookie-path": {
+     "name": "http-cookie-path",
+     "category": "unitary",
+     "type": "string",
+     "help": "Limit HTTP cookie persistence to the specified path.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "http-cookie-generation": {
+     "name": "http-cookie-generation",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Generation of HTTP cookie to be accepted. Changing invalidates all existing cookies.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "http-cookie-age": {
+     "name": "http-cookie-age",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time in minutes that client web browsers should keep a cookie. Default is 60 minutes. 0 = no time limit.",
+     "min-value": 0,
+     "max-value": 525600,
+     "default": 60,
+     "multiple_values": false
+    },
+    "http-cookie-share": {
+     "name": "http-cookie-share",
+     "category": "unitary",
+     "type": "option",
+     "help": "Control sharing of cookies across API Gateway. Use of same-ip means a cookie from one virtual server can be used by another. Disable stops cookie sharing.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Only allow HTTP cookie to match this API Gateway."
+      },
+      {
+       "name": "same-ip",
+       "help": "Allow HTTP cookie to match any API Gateway with same IP."
+      }
+     ],
+     "default": "same-ip",
+     "multiple_values": false
+    },
+    "https-cookie-secure": {
+     "name": "https-cookie-secure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable verification that inserted HTTPS cookies are secure.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Do not mark cookie as secure, allow sharing between an HTTP and HTTPS connection."
+      },
+      {
+       "name": "enable",
+       "help": "Mark inserted cookie as secure, cookie can only be used for HTTPS a connection."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "saml-server": {
+     "name": "saml-server",
+     "category": "unitary",
+     "type": "string",
+     "help": "SAML service provider configuration for VIP authentication.",
+     "datasource": [
+      "user.saml.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "saml-redirect": {
+     "name": "saml-redirect",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SAML redirection after successful authentication.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Do not support redirection after successful SAML authentication."
+      },
+      {
+       "name": "enable",
+       "help": "Support redirection after successful SAML authentication."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-dh-bits": {
+     "name": "ssl-dh-bits",
+     "category": "unitary",
+     "type": "option",
+     "help": "Number of bits to use in the Diffie-Hellman exchange for RSA encryption of SSL sessions.",
+     "options": [
+      {
+       "name": "768",
+       "help": "768-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "1024",
+       "help": "1024-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "1536",
+       "help": "1536-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "2048",
+       "help": "2048-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "3072",
+       "help": "3072-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "4096",
+       "help": "4096-bit Diffie-Hellman prime."
+      }
+     ],
+     "default": "2048",
+     "multiple_values": false
+    },
+    "ssl-algorithm": {
+     "name": "ssl-algorithm",
+     "category": "unitary",
+     "type": "option",
+     "help": "Permitted encryption algorithms for the server side of SSL full mode sessions according to encryption strength.",
+     "options": [
+      {
+       "name": "high",
+       "help": "High encryption. Allow only AES and ChaCha."
+      },
+      {
+       "name": "medium",
+       "help": "Medium encryption. Allow AES, ChaCha, 3DES, and RC4."
+      },
+      {
+       "name": "low",
+       "help": "Low encryption. Allow AES, ChaCha, 3DES, RC4, and DES."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "ssl-cipher-suites": {
+     "name": "ssl-cipher-suites",
+     "category": "table",
+     "help": "SSL/TLS cipher suites to offer to a server, ordered by priority.",
+     "mkey": "priority",
+     "mkey_type": "integer",
+     "children": {
+      "priority": {
+       "name": "priority",
+       "category": "unitary",
+       "type": "integer",
+       "help": "SSL/TLS cipher suites priority.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "cipher": {
+       "name": "cipher",
+       "category": "unitary",
+       "type": "option",
+       "help": "Cipher suite name.",
+       "required": true,
+       "options": [
+        {
+         "name": "TLS-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-256-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-RSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA",
+         "help": "Cipher suite TLS-DSS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-SEED-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-SEED-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-SEED-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-SEED-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-RSA-WITH-SEED-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-SEED-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-RSA-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC_SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC_SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-RC4-128-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-RC4-128-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-RC4-128-MD5",
+         "help": "Cipher suite TLS-RSA-WITH-RC4-128-MD5."
+        },
+        {
+         "name": "TLS-RSA-WITH-RC4-128-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-RC4-128-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-DES-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-DES-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-DES-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-DES-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-DES-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-DES-CBC-SHA."
+        }
+       ],
+       "default": "",
+       "multiple_values": false
+      },
+      "versions": {
+       "name": "versions",
+       "category": "unitary",
+       "type": "option",
+       "help": "SSL/TLS versions that the cipher suite can be used with.",
+       "options": [
+        {
+         "name": "tls-1.0",
+         "help": "TLS 1.0."
+        },
+        {
+         "name": "tls-1.1",
+         "help": "TLS 1.1."
+        },
+        {
+         "name": "tls-1.2",
+         "help": "TLS 1.2."
+        },
+        {
+         "name": "tls-1.3",
+         "help": "TLS 1.3."
+        }
+       ],
+       "default": "tls-1.0 tls-1.1 tls-1.2 tls-1.3",
+       "multiple_values": true
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "ssl-min-version": {
+     "name": "ssl-min-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Lowest SSL/TLS version acceptable from a server.",
+     "options": [
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.1",
+     "multiple_values": false
+    },
+    "ssl-max-version": {
+     "name": "ssl-max-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Highest SSL/TLS version acceptable from a server.",
+     "options": [
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.3",
+     "multiple_values": false
+    },
+    "ssl-renegotiation": {
+     "name": "ssl-renegotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable secure renegotiation to comply with RFC 5746.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable secure renegotiation."
+      },
+      {
+       "name": "disable",
+       "help": "Disable secure renegotiation."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-vpn-web-portal": {
+     "name": "ssl-vpn-web-portal",
+     "category": "unitary",
+     "type": "string",
+     "help": "SSL-VPN web portal.",
+     "datasource": [
+      "vpn.ssl.web.portal.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "api-gateway6": {
+   "name": "api-gateway6",
+   "category": "table",
+   "help": "Set IPv6 API Gateway.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "API Gateway ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "url-map": {
+     "name": "url-map",
+     "category": "unitary",
+     "type": "string",
+     "help": "URL pattern to match.",
+     "required": true,
+     "size": 511,
+     "default": "/",
+     "multiple_values": false
+    },
+    "service": {
+     "name": "service",
+     "category": "unitary",
+     "type": "option",
+     "help": "Service.",
+     "required": true,
+     "options": [
+      {
+       "name": "http",
+       "help": "HTTP."
+      },
+      {
+       "name": "https",
+       "help": "HTTPS."
+      },
+      {
+       "name": "tcp-forwarding",
+       "help": "TCP-FORWARDING."
+      },
+      {
+       "name": "samlsp",
+       "help": "SAML-SP."
+      },
+      {
+       "name": "web-portal",
+       "help": "VPN-SSL-WEB-PORTAL."
+      },
+      {
+       "name": "saas",
+       "help": "SAAS."
+      }
+     ],
+     "default": "https",
+     "multiple_values": false
+    },
+    "ldb-method": {
+     "name": "ldb-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Method used to distribute sessions to real servers.",
+     "options": [
+      {
+       "name": "static",
+       "help": "Distribute to server based on source IP."
+      },
+      {
+       "name": "round-robin",
+       "help": "Distribute to server based round robin order."
+      },
+      {
+       "name": "weighted",
+       "help": "Distribute to server based on weight."
+      },
+      {
+       "name": "first-alive",
+       "help": "Distribute to the first server that is alive."
+      },
+      {
+       "name": "http-host",
+       "help": "Distribute to server based on host field in HTTP header."
+      }
+     ],
+     "default": "static",
+     "multiple_values": false
+    },
+    "virtual-host": {
+     "name": "virtual-host",
+     "category": "unitary",
+     "type": "string",
+     "help": "Virtual host.",
+     "datasource": [
+      "firewall.access-proxy-virtual-host.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "url-map-type": {
+     "name": "url-map-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Type of url-map.",
+     "required": true,
+     "options": [
+      {
+       "name": "sub-string",
+       "help": "Match the pattern if a string contains the sub-string."
+      },
+      {
+       "name": "wildcard",
+       "help": "Match the pattern with wildcards."
+      },
+      {
+       "name": "regex",
+       "help": "Match the pattern with a regular expression."
+      }
+     ],
+     "default": "sub-string",
+     "multiple_values": false
+    },
+    "h2-support": {
+     "name": "h2-support",
+     "category": "unitary",
+     "type": "option",
+     "help": "HTTP2 support, default=Enable.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable HTTP2 support."
+      },
+      {
+       "name": "disable",
+       "help": "Disable HTTP2 support."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "h3-support": {
+     "name": "h3-support",
+     "category": "unitary",
+     "type": "option",
+     "help": "HTTP3/QUIC support, default=Disable.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable HTTP3/QUIC support."
+      },
+      {
+       "name": "disable",
+       "help": "Disable HTTP3/QUIC support."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "quic": {
+     "name": "quic",
+     "category": "complex",
+     "help": "QUIC setting.",
+     "children": {
+      "max-idle-timeout": {
+       "name": "max-idle-timeout",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum idle timeout milliseconds (1 - 60000, default = 30000).",
+       "min-value": 1,
+       "max-value": 60000,
+       "default": 30000,
+       "multiple_values": false
+      },
+      "max-udp-payload-size": {
+       "name": "max-udp-payload-size",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum UDP payload size in bytes (1200 - 1500, default = 1500).",
+       "min-value": 1200,
+       "max-value": 1500,
+       "default": 1500,
+       "multiple_values": false
+      },
+      "active-connection-id-limit": {
+       "name": "active-connection-id-limit",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Active connection ID limit (1 - 8, default = 2).",
+       "min-value": 1,
+       "max-value": 8,
+       "default": 2,
+       "multiple_values": false
+      },
+      "ack-delay-exponent": {
+       "name": "ack-delay-exponent",
+       "category": "unitary",
+       "type": "integer",
+       "help": "ACK delay exponent (1 - 20, default = 3).",
+       "min-value": 1,
+       "max-value": 20,
+       "default": 3,
+       "multiple_values": false
+      },
+      "max-ack-delay": {
+       "name": "max-ack-delay",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum ACK delay in milliseconds (1 - 16383, default = 25).",
+       "min-value": 1,
+       "max-value": 16383,
+       "default": 25,
+       "multiple_values": false
+      },
+      "max-datagram-frame-size": {
+       "name": "max-datagram-frame-size",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum datagram frame size in bytes (1 - 1500, default = 1500).",
+       "min-value": 1,
+       "max-value": 1500,
+       "default": 1500,
+       "multiple_values": false
+      },
+      "active-migration": {
+       "name": "active-migration",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable active migration (default = disable).",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable active migration."
+        },
+        {
+         "name": "disable",
+         "help": "Disable active migration."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "grease-quic-bit": {
+       "name": "grease-quic-bit",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable grease QUIC bit (default = enable).",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable grease QUIC bit."
+        },
+        {
+         "name": "disable",
+         "help": "Disable grease QUIC bit."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      }
+     }
+    },
+    "realservers": {
+     "name": "realservers",
+     "category": "table",
+     "help": "Select the real servers that this Access Proxy will distribute traffic to.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Real server ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "addr-type": {
+       "name": "addr-type",
+       "category": "unitary",
+       "type": "option",
+       "help": "Type of address.",
+       "required": true,
+       "options": [
+        {
+         "name": "ip",
+         "help": "Standard IPv4 address."
+        },
+        {
+         "name": "fqdn",
+         "help": "Non-wildcard FQDN address object."
+        }
+       ],
+       "default": "ip",
+       "multiple_values": false
+      },
+      "address": {
+       "name": "address",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address or address group of the real server.",
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "ip": {
+       "name": "ip",
+       "category": "unitary",
+       "type": "ipv6-address",
+       "help": "IPv6 address of the real server.",
+       "required": true,
+       "default": "::",
+       "multiple_values": false
+      },
+      "domain": {
+       "name": "domain",
+       "category": "unitary",
+       "type": "string",
+       "help": "Wildcard domain name of the real server.",
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      },
+      "port": {
+       "name": "port",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Port for communicating with the real server.",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 443,
+       "multiple_values": false
+      },
+      "mappedport": {
+       "name": "mappedport",
+       "category": "unitary",
+       "type": "user",
+       "help": "Port for communicating with the real server.",
+       "default": "",
+       "multiple_values": false
+      },
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Set the status of the real server to active so that it can accept traffic, or on standby or disabled so no traffic is sent.",
+       "options": [
+        {
+         "name": "active",
+         "help": "Server status active."
+        },
+        {
+         "name": "standby",
+         "help": "Server status standby."
+        },
+        {
+         "name": "disable",
+         "help": "Server status disable."
+        }
+       ],
+       "default": "active",
+       "multiple_values": false
+      },
+      "type": {
+       "name": "type",
+       "category": "unitary",
+       "type": "option",
+       "help": "TCP forwarding server type.",
+       "options": [
+        {
+         "name": "tcp-forwarding",
+         "help": "TCP forwarding."
+        },
+        {
+         "name": "ssh",
+         "help": "SSH."
+        }
+       ],
+       "default": "tcp-forwarding",
+       "multiple_values": false
+      },
+      "external-auth": {
+       "name": "external-auth",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable use of external browser as user-agent for SAML user authentication.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable use of external browser as user-agent for SAML user authentication."
+        },
+        {
+         "name": "disable",
+         "help": "Disable use of external browser as user-agent for SAML user authentication."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "tunnel-encryption": {
+       "name": "tunnel-encryption",
+       "category": "unitary",
+       "type": "option",
+       "help": "Tunnel encryption.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable tcp forwarding tunnel encryption."
+        },
+        {
+         "name": "disable",
+         "help": "Disable tcp forwarding tunnel encryption."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "weight": {
+       "name": "weight",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Weight of the real server. If weighted load balancing is enabled, the server with the highest weight gets more connections.",
+       "min-value": 1,
+       "max-value": 255,
+       "default": 1,
+       "multiple_values": false
+      },
+      "http-host": {
+       "name": "http-host",
+       "category": "unitary",
+       "type": "string",
+       "help": "HTTP server domain name in HTTP header.",
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      },
+      "health-check": {
+       "name": "health-check",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable to check the responsiveness of the real server before forwarding traffic.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable per server health check."
+        },
+        {
+         "name": "enable",
+         "help": "Enable per server health check."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "health-check-proto": {
+       "name": "health-check-proto",
+       "category": "unitary",
+       "type": "option",
+       "help": "Protocol of the health check monitor to use when polling to determine server's connectivity status.",
+       "options": [
+        {
+         "name": "ping",
+         "help": "Use PING to test the link with the server."
+        },
+        {
+         "name": "http",
+         "help": "Use HTTP-GET to test the link with the server."
+        },
+        {
+         "name": "tcp-connect",
+         "help": "Use a full TCP connection to test the link with the server."
+        }
+       ],
+       "default": "ping",
+       "multiple_values": false
+      },
+      "holddown-interval": {
+       "name": "holddown-interval",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable holddown timer. Server will be considered active and reachable once the holddown period has expired (30 seconds).",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable per server holddown."
+        },
+        {
+         "name": "disable",
+         "help": "Disable per server holddown."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "translate-host": {
+       "name": "translate-host",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable translation of hostname/IP from virtual server to real server.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable virtual hostname/IP translation."
+        },
+        {
+         "name": "disable",
+         "help": "Disable virtual hostname/IP translation."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "ssh-client-cert": {
+       "name": "ssh-client-cert",
+       "category": "unitary",
+       "type": "string",
+       "help": "Set access-proxy SSH client certificate profile.",
+       "datasource": [
+        "firewall.access-proxy-ssh-client-cert.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "ssh-host-key-validation": {
+       "name": "ssh-host-key-validation",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable SSH real server host key validation.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable SSH real server host key validation."
+        },
+        {
+         "name": "enable",
+         "help": "Enable SSH real server host key validation."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "ssh-host-key": {
+       "name": "ssh-host-key",
+       "category": "table",
+       "help": "One or more server host key.",
+       "member_table": true,
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "Server host key name.",
+         "datasource": [
+          "firewall.ssh.host-key.name"
+         ],
+         "size": 79,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "application": {
+     "name": "application",
+     "category": "table",
+     "help": "SaaS application controlled by this Access Proxy.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "SaaS application name.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "persistence": {
+     "name": "persistence",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure how to make sure that clients connect to the same server every time they make a request that is part of the same session.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "http-cookie",
+       "help": "HTTP cookie."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "http-cookie-domain-from-host": {
+     "name": "http-cookie-domain-from-host",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of HTTP cookie domain from host field in HTTP.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable use of HTTP cookie domain from host field in HTTP (use http-cooke-domain setting)."
+      },
+      {
+       "name": "enable",
+       "help": "Enable use of HTTP cookie domain from host field in HTTP."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "http-cookie-domain": {
+     "name": "http-cookie-domain",
+     "category": "unitary",
+     "type": "string",
+     "help": "Domain that HTTP cookie persistence should apply to.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "http-cookie-path": {
+     "name": "http-cookie-path",
+     "category": "unitary",
+     "type": "string",
+     "help": "Limit HTTP cookie persistence to the specified path.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "http-cookie-generation": {
+     "name": "http-cookie-generation",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Generation of HTTP cookie to be accepted. Changing invalidates all existing cookies.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "http-cookie-age": {
+     "name": "http-cookie-age",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time in minutes that client web browsers should keep a cookie. Default is 60 minutes. 0 = no time limit.",
+     "min-value": 0,
+     "max-value": 525600,
+     "default": 60,
+     "multiple_values": false
+    },
+    "http-cookie-share": {
+     "name": "http-cookie-share",
+     "category": "unitary",
+     "type": "option",
+     "help": "Control sharing of cookies across API Gateway. Use of same-ip means a cookie from one virtual server can be used by another. Disable stops cookie sharing.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Only allow HTTP cookie to match this API Gateway."
+      },
+      {
+       "name": "same-ip",
+       "help": "Allow HTTP cookie to match any API Gateway with same IP."
+      }
+     ],
+     "default": "same-ip",
+     "multiple_values": false
+    },
+    "https-cookie-secure": {
+     "name": "https-cookie-secure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable verification that inserted HTTPS cookies are secure.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Do not mark cookie as secure, allow sharing between an HTTP and HTTPS connection."
+      },
+      {
+       "name": "enable",
+       "help": "Mark inserted cookie as secure, cookie can only be used for HTTPS a connection."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "saml-server": {
+     "name": "saml-server",
+     "category": "unitary",
+     "type": "string",
+     "help": "SAML service provider configuration for VIP authentication.",
+     "datasource": [
+      "user.saml.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "saml-redirect": {
+     "name": "saml-redirect",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SAML redirection after successful authentication.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Do not support redirection after successful SAML authentication."
+      },
+      {
+       "name": "enable",
+       "help": "Support redirection after successful SAML authentication."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-dh-bits": {
+     "name": "ssl-dh-bits",
+     "category": "unitary",
+     "type": "option",
+     "help": "Number of bits to use in the Diffie-Hellman exchange for RSA encryption of SSL sessions.",
+     "options": [
+      {
+       "name": "768",
+       "help": "768-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "1024",
+       "help": "1024-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "1536",
+       "help": "1536-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "2048",
+       "help": "2048-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "3072",
+       "help": "3072-bit Diffie-Hellman prime."
+      },
+      {
+       "name": "4096",
+       "help": "4096-bit Diffie-Hellman prime."
+      }
+     ],
+     "default": "2048",
+     "multiple_values": false
+    },
+    "ssl-algorithm": {
+     "name": "ssl-algorithm",
+     "category": "unitary",
+     "type": "option",
+     "help": "Permitted encryption algorithms for the server side of SSL full mode sessions according to encryption strength.",
+     "options": [
+      {
+       "name": "high",
+       "help": "High encryption. Allow only AES and ChaCha."
+      },
+      {
+       "name": "medium",
+       "help": "Medium encryption. Allow AES, ChaCha, 3DES, and RC4."
+      },
+      {
+       "name": "low",
+       "help": "Low encryption. Allow AES, ChaCha, 3DES, RC4, and DES."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "ssl-cipher-suites": {
+     "name": "ssl-cipher-suites",
+     "category": "table",
+     "help": "SSL/TLS cipher suites to offer to a server, ordered by priority.",
+     "mkey": "priority",
+     "mkey_type": "integer",
+     "children": {
+      "priority": {
+       "name": "priority",
+       "category": "unitary",
+       "type": "integer",
+       "help": "SSL/TLS cipher suites priority.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "cipher": {
+       "name": "cipher",
+       "category": "unitary",
+       "type": "option",
+       "help": "Cipher suite name.",
+       "required": true,
+       "options": [
+        {
+         "name": "TLS-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-128-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-256-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-128-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-128-GCM-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-AES-128-GCM-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-256-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-AES-256-GCM-SHA384",
+         "help": "Cipher suite TLS-RSA-WITH-AES-256-GCM-SHA384."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA",
+         "help": "Cipher suite TLS-DSS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-SEED-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-SEED-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-SEED-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-SEED-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-RSA-WITH-SEED-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-SEED-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-RSA-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-RSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-RSA-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC_SHA256."
+        },
+        {
+         "name": "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384",
+         "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC_SHA384."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-RC4-128-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-RC4-128-SHA."
+        },
+        {
+         "name": "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-3DES-EDE-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-3DES-EDE-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-RC4-128-MD5",
+         "help": "Cipher suite TLS-RSA-WITH-RC4-128-MD5."
+        },
+        {
+         "name": "TLS-RSA-WITH-RC4-128-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-RC4-128-SHA."
+        },
+        {
+         "name": "TLS-DHE-RSA-WITH-DES-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-RSA-WITH-DES-CBC-SHA."
+        },
+        {
+         "name": "TLS-DHE-DSS-WITH-DES-CBC-SHA",
+         "help": "Cipher suite TLS-DHE-DSS-WITH-DES-CBC-SHA."
+        },
+        {
+         "name": "TLS-RSA-WITH-DES-CBC-SHA",
+         "help": "Cipher suite TLS-RSA-WITH-DES-CBC-SHA."
+        }
+       ],
+       "default": "",
+       "multiple_values": false
+      },
+      "versions": {
+       "name": "versions",
+       "category": "unitary",
+       "type": "option",
+       "help": "SSL/TLS versions that the cipher suite can be used with.",
+       "options": [
+        {
+         "name": "tls-1.0",
+         "help": "TLS 1.0."
+        },
+        {
+         "name": "tls-1.1",
+         "help": "TLS 1.1."
+        },
+        {
+         "name": "tls-1.2",
+         "help": "TLS 1.2."
+        },
+        {
+         "name": "tls-1.3",
+         "help": "TLS 1.3."
+        }
+       ],
+       "default": "tls-1.0 tls-1.1 tls-1.2 tls-1.3",
+       "multiple_values": true
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "ssl-min-version": {
+     "name": "ssl-min-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Lowest SSL/TLS version acceptable from a server.",
+     "options": [
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.1",
+     "multiple_values": false
+    },
+    "ssl-max-version": {
+     "name": "ssl-max-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Highest SSL/TLS version acceptable from a server.",
+     "options": [
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.3",
+     "multiple_values": false
+    },
+    "ssl-renegotiation": {
+     "name": "ssl-renegotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable secure renegotiation to comply with RFC 5746.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable secure renegotiation."
+      },
+      {
+       "name": "disable",
+       "help": "Disable secure renegotiation."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-vpn-web-portal": {
+     "name": "ssl-vpn-web-portal",
+     "category": "unitary",
+     "type": "string",
+     "help": "SSL-VPN web portal.",
+     "datasource": [
+      "vpn.ssl.web.portal.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 46,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

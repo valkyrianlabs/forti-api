@@ -1,0 +1,35 @@
+{
+ "name": "sms-server",
+ "category": "table",
+ "help": "Configure SMS server for sending SMS messages to support user authentication.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of SMS server.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mail-server": {
+   "name": "mail-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Email-to-SMS server domain name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 459,
+ "access_group": "authgrp",
+ "object_range": "global"
+}

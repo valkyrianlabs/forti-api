@@ -1,0 +1,360 @@
+{
+ "name": "rule",
+ "category": "table",
+ "help": "Configure Authentication Rules.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication rule name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this authentication rule.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this authentication rule."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this authentication rule."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication is required for the selected protocol (default = HTTP).",
+   "options": [
+    {
+     "name": "http",
+     "help": "HTTP traffic is matched and authentication is required."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP traffic is matched and authentication is required."
+    },
+    {
+     "name": "socks",
+     "help": "SOCKS traffic is matched and authentication is required."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH traffic is matched and authentication is required."
+    }
+   ],
+   "default": "http",
+   "multiple_values": false
+  },
+  "srcintf": {
+   "name": "srcintf",
+   "category": "table",
+   "help": "Incoming (ingress) interface.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name",
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr": {
+   "name": "srcaddr",
+   "category": "table",
+   "help": "Authentication is required for the selected IPv4 source address.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "firewall.proxy-address.name",
+      "firewall.proxy-addrgrp.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr": {
+   "name": "dstaddr",
+   "category": "table",
+   "help": "Select an IPv4 destination address from available options. Required for web proxy authentication.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "firewall.proxy-address.name",
+      "firewall.proxy-addrgrp.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr6": {
+   "name": "srcaddr6",
+   "category": "table",
+   "help": "Authentication is required for the selected IPv6 source address.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr6": {
+   "name": "dstaddr6",
+   "category": "table",
+   "help": "Select an IPv6 destination address from available options. Required for web proxy authentication.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ip-based": {
+   "name": "ip-based",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IP-based authentication. When enabled, previously authenticated users from the same IP address will be exempted.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IP-based authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IP-based authentication."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "active-auth-method": {
+   "name": "active-auth-method",
+   "category": "unitary",
+   "type": "string",
+   "help": "Select an active authentication method.",
+   "datasource": [
+    "authentication.scheme.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sso-auth-method": {
+   "name": "sso-auth-method",
+   "category": "unitary",
+   "type": "string",
+   "help": "Select a single-sign on (SSO) authentication method.",
+   "datasource": [
+    "authentication.scheme.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "web-auth-cookie": {
+   "name": "web-auth-cookie",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Web authentication cookies (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Web authentication cookie."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Web authentication cookie."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cors-stateful": {
+   "name": "cors-stateful",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowance of CORS access (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable allowance of CORS access"
+    },
+    {
+     "name": "disable",
+     "help": "Disable allowance of CORS access"
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cors-depth": {
+   "name": "cors-depth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Depth to allow CORS access (default = 3).",
+   "min-value": 1,
+   "max-value": 8,
+   "default": 3,
+   "multiple_values": false
+  },
+  "cert-auth-cookie": {
+   "name": "cert-auth-cookie",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to use device certificate as authentication cookie (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable device certificate as authentication cookie."
+    },
+    {
+     "name": "disable",
+     "help": "Disable device certificate as authentication cookie."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "transaction-based": {
+   "name": "transaction-based",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable transaction based authentication (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable transaction based authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable transaction based authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "web-portal": {
+   "name": "web-portal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable web portal for proxy transparent policy (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable web-portal."
+    },
+    {
+     "name": "disable",
+     "help": "Disable web-portal."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 1023,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "authentication",
+ "q_type": 508,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

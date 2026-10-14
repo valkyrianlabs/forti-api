@@ -1,0 +1,107 @@
+{
+ "name": "wag-profile",
+ "category": "table",
+ "help": "Configure wireless access gateway (WAG) profiles used for tunnels on AP.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tunnel profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "tunnel-type": {
+   "name": "tunnel-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Tunnel type.",
+   "options": [
+    {
+     "name": "l2tpv3",
+     "help": "L2TPV3 Ethernet Pseudowire."
+    },
+    {
+     "name": "gre",
+     "help": "GRE Ethernet tunnel."
+    }
+   ],
+   "default": "l2tpv3",
+   "multiple_values": false
+  },
+  "wag-ip": {
+   "name": "wag-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP Address of the wireless access gateway.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "wag-port": {
+   "name": "wag-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "UDP port of the wireless access gateway.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1701,
+   "multiple_values": false
+  },
+  "ping-interval": {
+   "name": "ping-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval between two tunnel monitoring echo packets (1 - 65535 sec, default = 1).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "ping-number": {
+   "name": "ping-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of the tunnel monitoring echo packets (1 - 65535, default = 5).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 5,
+   "multiple_values": false
+  },
+  "return-packet-timeout": {
+   "name": "return-packet-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Window of time for the return packets from the tunnel's remote end (1 - 65535 sec, default = 160).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 160,
+   "multiple_values": false
+  },
+  "dhcp-ip-addr": {
+   "name": "dhcp-ip-addr",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address of the monitoring DHCP request packet sent through the tunnel.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 308,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,87 @@
+{
+ "name": "ippool6",
+ "category": "table",
+ "help": "Configure IPv6 IP pools.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 IP pool name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "startip": {
+   "name": "startip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "First IPv6 address (inclusive) in the range for the address pool (format = xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx, default = ::).",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "endip": {
+   "name": "endip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Final IPv6 address (inclusive) in the range for the address pool (format = xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx, default = ::).",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "nat46": {
+   "name": "nat46",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAT46.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable NAT46."
+    },
+    {
+     "name": "enable",
+     "help": "Enable NAT46."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "add-nat46-route": {
+   "name": "add-nat46-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding NAT46 route.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable adding NAT46 route."
+    },
+    {
+     "name": "enable",
+     "help": "Enable adding NAT46 route."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 42,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

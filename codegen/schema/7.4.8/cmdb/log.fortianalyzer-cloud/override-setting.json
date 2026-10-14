@@ -1,0 +1,29 @@
+{
+ "name": "override-setting",
+ "category": "complex",
+ "help": "Override FortiAnalyzer Cloud settings.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging to FortiAnalyzer.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging to FortiAnalyzer."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging to FortiAnalyzer."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "log.fortianalyzer-cloud",
+ "q_type": 429,
+ "access_group": "secfabgrp",
+ "object_range": "vdom"
+}

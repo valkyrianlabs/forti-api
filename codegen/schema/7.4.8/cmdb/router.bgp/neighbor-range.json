@@ -1,0 +1,57 @@
+{
+ "name": "neighbor-range",
+ "category": "table",
+ "help": "BGP neighbor range table.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Neighbor range ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "prefix": {
+   "name": "prefix",
+   "category": "unitary",
+   "type": "ipv4-classnet",
+   "help": "Neighbor range prefix.",
+   "required": true,
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "max-neighbor-num": {
+   "name": "max-neighbor-num",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of neighbors.",
+   "min-value": 1,
+   "max-value": 1000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "neighbor-group": {
+   "name": "neighbor-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Neighbor group name.",
+   "required": true,
+   "datasource": [
+    "router.bgp.neighbor-group.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "router.bgp",
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

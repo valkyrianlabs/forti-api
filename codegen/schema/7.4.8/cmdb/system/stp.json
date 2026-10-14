@@ -1,0 +1,135 @@
+{
+ "name": "stp",
+ "category": "complex",
+ "help": "Configure Spanning Tree Protocol (STP).",
+ "children": {
+  "switch-priority": {
+   "name": "switch-priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "STP switch priority; the lower the number the higher the priority (select from 0, 4096, 8192, 12288, 16384, 20480, 24576, 28672, 32768, 36864, 40960, 45056, 49152, 53248, and 57344).",
+   "options": [
+    {
+     "name": "0",
+     "help": "0"
+    },
+    {
+     "name": "4096",
+     "help": "4096"
+    },
+    {
+     "name": "8192",
+     "help": "8192"
+    },
+    {
+     "name": "12288",
+     "help": "12288"
+    },
+    {
+     "name": "16384",
+     "help": "16384"
+    },
+    {
+     "name": "20480",
+     "help": "20480"
+    },
+    {
+     "name": "24576",
+     "help": "24576"
+    },
+    {
+     "name": "28672",
+     "help": "28672"
+    },
+    {
+     "name": "32768",
+     "help": "32768"
+    },
+    {
+     "name": "36864",
+     "help": "36864"
+    },
+    {
+     "name": "40960",
+     "help": "40960"
+    },
+    {
+     "name": "45056",
+     "help": "45056"
+    },
+    {
+     "name": "49152",
+     "help": "49152"
+    },
+    {
+     "name": "53248",
+     "help": "53248"
+    },
+    {
+     "name": "57344",
+     "help": "57344"
+    }
+   ],
+   "default": "32768",
+   "multiple_values": false
+  },
+  "hello-time": {
+   "name": "hello-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Hello time (1 - 10 sec, default = 2).",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 2,
+   "multiple_values": false
+  },
+  "forward-delay": {
+   "name": "forward-delay",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Forward delay (4 - 30 sec, default = 15).",
+   "min-value": 4,
+   "max-value": 30,
+   "default": 15,
+   "multiple_values": false
+  },
+  "max-age": {
+   "name": "max-age",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum packet age (6 - 40 sec, default = 20).",
+   "min-value": 6,
+   "max-value": 40,
+   "default": 20,
+   "multiple_values": false
+  },
+  "max-hops": {
+   "name": "max-hops",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of hops (1 - 40, default = 20).",
+   "min-value": 1,
+   "max-value": 40,
+   "default": 20,
+   "multiple_values": false
+  },
+  "list": {
+   "name": "list",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "Display STP status.",
+   "children": {
+    "<bridge-name>": {
+     "name": "<bridge-name>",
+     "category": "info-read-only",
+     "type": "value",
+     "help": "Bridge name."
+    }
+   }
+  }
+ },
+ "path": "system",
+ "q_type": 482,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

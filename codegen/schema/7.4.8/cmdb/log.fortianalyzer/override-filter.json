@@ -1,0 +1,344 @@
+{
+ "name": "override-filter",
+ "category": "complex",
+ "help": "Override filters for FortiAnalyzer.",
+ "children": {
+  "severity": {
+   "name": "severity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "information",
+   "multiple_values": false
+  },
+  "forward-traffic": {
+   "name": "forward-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forward traffic logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable forward traffic logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable forward traffic logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "local-traffic": {
+   "name": "local-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local in or out traffic logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local in or out traffic logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local in or out traffic logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "multicast-traffic": {
+   "name": "multicast-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable multicast traffic logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable multicast traffic logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable multicast traffic logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "sniffer-traffic": {
+   "name": "sniffer-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sniffer traffic logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sniffer traffic logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sniffer traffic logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ztna-traffic": {
+   "name": "ztna-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ztna traffic logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable ztna traffic logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ztna traffic logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "anomaly": {
+   "name": "anomaly",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable anomaly logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable anomaly logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable anomaly logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "voip": {
+   "name": "voip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VoIP logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable VoIP logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable VoIP logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dlp-archive": {
+   "name": "dlp-archive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DLP archive logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DLP archive logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DLP archive logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "forti-switch": {
+   "name": "forti-switch",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Forti-Switch logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Forti-Switch logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Forti-Switch logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "free-style": {
+   "name": "free-style",
+   "category": "table",
+   "help": "Free style filters.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "option",
+     "help": "Log category.",
+     "required": true,
+     "options": [
+      {
+       "name": "traffic",
+       "help": "Traffic log."
+      },
+      {
+       "name": "event",
+       "help": "Event log."
+      },
+      {
+       "name": "virus",
+       "help": "Antivirus log."
+      },
+      {
+       "name": "webfilter",
+       "help": "Web filter log."
+      },
+      {
+       "name": "attack",
+       "help": "Attack log."
+      },
+      {
+       "name": "spam",
+       "help": "Antispam log."
+      },
+      {
+       "name": "anomaly",
+       "help": "Anomaly log."
+      },
+      {
+       "name": "voip",
+       "help": "VoIP log."
+      },
+      {
+       "name": "dlp",
+       "help": "DLP log."
+      },
+      {
+       "name": "app-ctrl",
+       "help": "Application control log."
+      },
+      {
+       "name": "waf",
+       "help": "Web application firewall log."
+      },
+      {
+       "name": "dns",
+       "help": "DNS detail log."
+      },
+      {
+       "name": "ssh",
+       "help": "SSH log."
+      },
+      {
+       "name": "ssl",
+       "help": "SSL log."
+      },
+      {
+       "name": "file-filter",
+       "help": "File filter log."
+      },
+      {
+       "name": "icap",
+       "help": "ICAP log."
+      },
+      {
+       "name": "virtual-patch",
+       "help": "Virtual patch log."
+      }
+     ],
+     "default": "traffic",
+     "multiple_values": false
+    },
+    "filter": {
+     "name": "filter",
+     "category": "unitary",
+     "type": "string",
+     "help": "Free style filter string.",
+     "required": true,
+     "size": 1023,
+     "default": "",
+     "multiple_values": false
+    },
+    "filter-type": {
+     "name": "filter-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Include/exclude logs that match the filter.",
+     "options": [
+      {
+       "name": "include",
+       "help": "Include logs that match the filter."
+      },
+      {
+       "name": "exclude",
+       "help": "Exclude logs that match the filter."
+      }
+     ],
+     "default": "include",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "log.fortianalyzer",
+ "q_type": 414,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

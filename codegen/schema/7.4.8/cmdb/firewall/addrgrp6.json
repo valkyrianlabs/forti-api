@@ -1,0 +1,201 @@
+{
+ "name": "addrgrp6",
+ "category": "table",
+ "help": "Configure IPv6 address groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 address group name.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value to determine the color of the icon in the GUI (1 - 32, default = 0, which sets the value to 1).",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "member": {
+   "name": "member",
+   "category": "table",
+   "help": "Address objects contained within the group.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address6/addrgrp6 name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "exclude": {
+   "name": "exclude",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable address6 exclusion.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable address6 exclusion."
+    },
+    {
+     "name": "disable",
+     "help": "Disable address6 exclusion."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "exclude-member": {
+   "name": "exclude-member",
+   "category": "table",
+   "help": "Address6 exclusion member.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address6 name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "tagging": {
+   "name": "tagging",
+   "category": "table",
+   "help": "Config object tagging.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tagging entry name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tag category.",
+     "datasource": [
+      "system.object-tagging.category"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "tags": {
+     "name": "tags",
+     "category": "table",
+     "help": "Tags.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Tag name.",
+       "datasource": [
+        "system.object-tagging.tags.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 2500,
+ "max_table_size_global": 2500,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 206,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

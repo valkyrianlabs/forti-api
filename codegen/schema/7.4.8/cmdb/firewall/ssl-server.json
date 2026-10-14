@@ -1,0 +1,275 @@
+{
+ "name": "ssl-server",
+ "category": "table",
+ "help": "Configure SSL servers.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IPv4 address of the SSL server.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Server service port (1 - 65535, default = 443).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 443,
+   "multiple_values": false
+  },
+  "ssl-mode": {
+   "name": "ssl-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "SSL/TLS mode for encryption and decryption of traffic.",
+   "options": [
+    {
+     "name": "half",
+     "help": "Client to FortiGate SSL."
+    },
+    {
+     "name": "full",
+     "help": "Client to FortiGate and FortiGate to Server SSL."
+    }
+   ],
+   "default": "full",
+   "multiple_values": false
+  },
+  "add-header-x-forwarded-proto": {
+   "name": "add-header-x-forwarded-proto",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding an X-Forwarded-Proto header to forwarded requests.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Add X-Forwarded-Proto header."
+    },
+    {
+     "name": "disable",
+     "help": "Do not add X-Forwarded-Proto header."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "mapped-port": {
+   "name": "mapped-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Mapped server service port (1 - 65535, default = 80).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 80,
+   "multiple_values": false
+  },
+  "ssl-cert": {
+   "name": "ssl-cert",
+   "category": "table",
+   "help": "List of certificate names to use for SSL connections to this server. (default = \"Fortinet_SSL\").",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate list.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "Fortinet_SSL",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ssl-dh-bits": {
+   "name": "ssl-dh-bits",
+   "category": "unitary",
+   "type": "option",
+   "help": "Bit-size of Diffie-Hellman (DH) prime used in DHE-RSA negotiation (default = 2048).",
+   "options": [
+    {
+     "name": "768",
+     "help": "768-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1024",
+     "help": "1024-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1536",
+     "help": "1536-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "2048",
+     "help": "2048-bit Diffie-Hellman prime."
+    }
+   ],
+   "default": "2048",
+   "multiple_values": false
+  },
+  "ssl-algorithm": {
+   "name": "ssl-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Relative strength of encryption algorithms accepted in negotiation.",
+   "options": [
+    {
+     "name": "high",
+     "help": "High encryption. Allow only AES and ChaCha"
+    },
+    {
+     "name": "medium",
+     "help": "Medium encryption. Allow AES, ChaCha, 3DES, and RC4."
+    },
+    {
+     "name": "low",
+     "help": "Low encryption. Allow AES, ChaCha, 3DES, RC4, and DES."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "ssl-client-renegotiation": {
+   "name": "ssl-client-renegotiation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow or block client renegotiation by server.",
+   "options": [
+    {
+     "name": "allow",
+     "help": "Allow a SSL client to renegotiate."
+    },
+    {
+     "name": "deny",
+     "help": "Abort any SSL connection that attempts to renegotiate."
+    },
+    {
+     "name": "secure",
+     "help": "Reject any SSL connection that does not offer a RFC 5746 Secure Renegotiation Indication."
+    }
+   ],
+   "default": "allow",
+   "multiple_values": false
+  },
+  "ssl-min-version": {
+   "name": "ssl-min-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest SSL/TLS version to negotiate.",
+   "options": [
+    {
+     "name": "tls-1.0",
+     "help": "TLS 1.0."
+    },
+    {
+     "name": "tls-1.1",
+     "help": "TLS 1.1."
+    },
+    {
+     "name": "tls-1.2",
+     "help": "TLS 1.2."
+    },
+    {
+     "name": "tls-1.3",
+     "help": "TLS 1.3."
+    }
+   ],
+   "default": "tls-1.1",
+   "multiple_values": false
+  },
+  "ssl-max-version": {
+   "name": "ssl-max-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Highest SSL/TLS version to negotiate.",
+   "options": [
+    {
+     "name": "tls-1.0",
+     "help": "TLS 1.0."
+    },
+    {
+     "name": "tls-1.1",
+     "help": "TLS 1.1."
+    },
+    {
+     "name": "tls-1.2",
+     "help": "TLS 1.2."
+    },
+    {
+     "name": "tls-1.3",
+     "help": "TLS 1.3."
+    }
+   ],
+   "default": "tls-1.3",
+   "multiple_values": false
+  },
+  "ssl-send-empty-frags": {
+   "name": "ssl-send-empty-frags",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending empty fragments to avoid attack on CBC IV.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Send empty fragments."
+    },
+    {
+     "name": "disable",
+     "help": "Do not send empty fragments."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "url-rewrite": {
+   "name": "url-rewrite",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable rewriting the URL.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 55,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

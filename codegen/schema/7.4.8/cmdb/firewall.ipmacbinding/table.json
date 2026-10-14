@@ -1,0 +1,70 @@
+{
+ "name": "table",
+ "category": "table",
+ "help": "Configure IP to MAC address pairs in the IP/MAC binding table.",
+ "mkey": "seq-num",
+ "mkey_type": "integer",
+ "children": {
+  "seq-num": {
+   "name": "seq-num",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Entry number.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address portion of the pair (format: xxx.xxx.xxx.xxx).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "mac": {
+   "name": "mac",
+   "category": "unitary",
+   "type": "mac-address",
+   "help": "MAC address portion of the pair (format = xx:xx:xx:xx:xx:xx in hexadecimal).",
+   "default": "00:00:00:00:00:00",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the pair (optional, default = no name).",
+   "size": 35,
+   "default": "noname",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this IP-mac binding pair.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this IP-mac binding pair."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this IP-mac binding pair."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall.ipmacbinding",
+ "q_type": 57,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

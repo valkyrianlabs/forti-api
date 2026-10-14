@@ -1,0 +1,36 @@
+{
+ "name": "internet-service-reputation",
+ "category": "table",
+ "help": "Show Internet Service reputation.",
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Internet Service Reputation ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 361,
+ "access_group": "fwgrp",
+ "object_range": "global"
+}

@@ -1,0 +1,211 @@
+{
+ "name": "bword",
+ "category": "table",
+ "help": "Configure AntiSpam banned word list.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "Spam filter banned word.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable status.",
+     "required": true,
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable status."
+      },
+      {
+       "name": "disable",
+       "help": "Disable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Banned word entry ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "pattern": {
+     "name": "pattern",
+     "category": "unitary",
+     "type": "string",
+     "help": "Pattern for the banned word.",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "pattern-type": {
+     "name": "pattern-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Wildcard pattern or regular expression.",
+     "required": true,
+     "options": [
+      {
+       "name": "wildcard",
+       "help": "Wildcard pattern."
+      },
+      {
+       "name": "regexp",
+       "help": "Perl regular expression."
+      }
+     ],
+     "default": "wildcard",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Mark spam or good.",
+     "required": true,
+     "options": [
+      {
+       "name": "spam",
+       "help": "Mark as spam email."
+      },
+      {
+       "name": "clear",
+       "help": "Mark as good email."
+      }
+     ],
+     "default": "spam",
+     "multiple_values": false
+    },
+    "where": {
+     "name": "where",
+     "category": "unitary",
+     "type": "option",
+     "help": "Component of the email to be scanned.",
+     "required": true,
+     "options": [
+      {
+       "name": "subject",
+       "help": "Banned word in email subject."
+      },
+      {
+       "name": "body",
+       "help": "Banned word in email body."
+      },
+      {
+       "name": "all",
+       "help": "Banned word in both subject and body."
+      }
+     ],
+     "default": "all",
+     "multiple_values": false
+    },
+    "language": {
+     "name": "language",
+     "category": "unitary",
+     "type": "option",
+     "help": "Language for the banned word.",
+     "required": true,
+     "options": [
+      {
+       "name": "western",
+       "help": "Western."
+      },
+      {
+       "name": "simch",
+       "help": "Simplified Chinese."
+      },
+      {
+       "name": "trach",
+       "help": "Traditional Chinese."
+      },
+      {
+       "name": "japanese",
+       "help": "Japanese."
+      },
+      {
+       "name": "korean",
+       "help": "Korean."
+      },
+      {
+       "name": "french",
+       "help": "French."
+      },
+      {
+       "name": "thai",
+       "help": "Thai."
+      },
+      {
+       "name": "spanish",
+       "help": "Spanish."
+      }
+     ],
+     "default": "western",
+     "multiple_values": false
+    },
+    "score": {
+     "name": "score",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Score value.",
+     "min-value": 1,
+     "max-value": 99999,
+     "default": 10,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 20000,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "emailfilter",
+ "q_type": 99,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

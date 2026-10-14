@@ -1,0 +1,27 @@
+{
+ "name": "rule-settings",
+ "category": "table",
+ "help": "Configure IPS rule setting.",
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Rule ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "ips",
+ "q_type": 267,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,483 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Settings for local disk logging.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local disk logging.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Log to local disk."
+    },
+    {
+     "name": "disable",
+     "help": "Do not log to local disk."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ips-archive": {
+   "name": "ips-archive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPS packet archiving to the local disk.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPS packet archiving."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPS packet archiving."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "max-log-file-size": {
+   "name": "max-log-file-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum log file size before rolling (1 - 100 Mbytes).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 20,
+   "multiple_values": false
+  },
+  "max-policy-packet-capture-size": {
+   "name": "max-policy-packet-capture-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum size of policy sniffer in MB (0 means unlimited).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 100,
+   "multiple_values": false
+  },
+  "roll-schedule": {
+   "name": "roll-schedule",
+   "category": "unitary",
+   "type": "option",
+   "help": "Frequency to check log file for rolling.",
+   "options": [
+    {
+     "name": "daily",
+     "help": "Check the log file once a day."
+    },
+    {
+     "name": "weekly",
+     "help": "Check the log file once a week."
+    }
+   ],
+   "default": "daily",
+   "multiple_values": false
+  },
+  "roll-day": {
+   "name": "roll-day",
+   "category": "unitary",
+   "type": "option",
+   "help": "Day of week on which to roll log file.",
+   "options": [
+    {
+     "name": "sunday",
+     "help": "Sunday"
+    },
+    {
+     "name": "monday",
+     "help": "Monday"
+    },
+    {
+     "name": "tuesday",
+     "help": "Tuesday"
+    },
+    {
+     "name": "wednesday",
+     "help": "Wednesday"
+    },
+    {
+     "name": "thursday",
+     "help": "Thursday"
+    },
+    {
+     "name": "friday",
+     "help": "Friday"
+    },
+    {
+     "name": "saturday",
+     "help": "Saturday"
+    }
+   ],
+   "default": "sunday",
+   "multiple_values": true
+  },
+  "roll-time": {
+   "name": "roll-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of day to roll the log file (hh:mm).",
+   "default": "",
+   "multiple_values": false
+  },
+  "diskfull": {
+   "name": "diskfull",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take when disk is full. The system can overwrite the oldest log messages or stop logging when the disk is full (default = overwrite).",
+   "options": [
+    {
+     "name": "overwrite",
+     "help": "Overwrite the oldest logs when the log disk is full."
+    },
+    {
+     "name": "nolog",
+     "help": "Stop logging when the log disk is full."
+    }
+   ],
+   "default": "overwrite",
+   "multiple_values": false
+  },
+  "log-quota": {
+   "name": "log-quota",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Disk log quota (MB).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "dlp-archive-quota": {
+   "name": "dlp-archive-quota",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DLP archive quota (MB).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maximum-log-age": {
+   "name": "maximum-log-age",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Delete log files older than (days).",
+   "min-value": 0,
+   "max-value": 3650,
+   "default": 7,
+   "multiple_values": false
+  },
+  "upload": {
+   "name": "upload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable uploading log files when they are rolled.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable uploading log files when they are rolled."
+    },
+    {
+     "name": "disable",
+     "help": "Disable uploading log files when they are rolled."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "upload-destination": {
+   "name": "upload-destination",
+   "category": "unitary",
+   "type": "option",
+   "help": "The type of server to upload log files to. Only FTP is currently supported.",
+   "options": [
+    {
+     "name": "ftp-server",
+     "help": "Upload rolled log files to an FTP server."
+    }
+   ],
+   "default": "ftp-server",
+   "multiple_values": false
+  },
+  "uploadip": {
+   "name": "uploadip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address of the FTP server to upload log files to.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "uploadport": {
+   "name": "uploadport",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TCP port to use for communicating with the FTP server (default = 21).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 21,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address to use for uploading disk log files.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "uploaduser": {
+   "name": "uploaduser",
+   "category": "unitary",
+   "type": "string",
+   "help": "Username required to log into the FTP server to upload disk log files.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "uploadpass": {
+   "name": "uploadpass",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password required to log into the FTP server to upload disk log files.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "uploaddir": {
+   "name": "uploaddir",
+   "category": "unitary",
+   "type": "string",
+   "help": "The remote directory on the FTP server to upload log files to.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "uploadtype": {
+   "name": "uploadtype",
+   "category": "unitary",
+   "type": "option",
+   "help": "Types of log files to upload. Separate multiple entries with a space.",
+   "options": [
+    {
+     "name": "traffic",
+     "help": "Upload traffic log."
+    },
+    {
+     "name": "event",
+     "help": "Upload event log."
+    },
+    {
+     "name": "virus",
+     "help": "Upload anti-virus log."
+    },
+    {
+     "name": "webfilter",
+     "help": "Upload web filter log."
+    },
+    {
+     "name": "IPS",
+     "help": "Upload IPS log."
+    },
+    {
+     "name": "emailfilter",
+     "help": "Upload spam filter log."
+    },
+    {
+     "name": "dlp-archive",
+     "help": "Upload DLP archive."
+    },
+    {
+     "name": "anomaly",
+     "help": "Upload anomaly log."
+    },
+    {
+     "name": "voip",
+     "help": "Upload VoIP log."
+    },
+    {
+     "name": "dlp",
+     "help": "Upload DLP log."
+    },
+    {
+     "name": "app-ctrl",
+     "help": "Upload application control log."
+    },
+    {
+     "name": "waf",
+     "help": "Upload web application firewall log."
+    },
+    {
+     "name": "dns",
+     "help": "Upload DNS log."
+    },
+    {
+     "name": "ssh",
+     "help": "Upload SSH log."
+    },
+    {
+     "name": "ssl",
+     "help": "Upload SSL log."
+    },
+    {
+     "name": "file-filter",
+     "help": "Upload file-filter log."
+    },
+    {
+     "name": "icap",
+     "help": "Upload ICAP log."
+    },
+    {
+     "name": "virtual-patch",
+     "help": "Upload virtual-patch log."
+    }
+   ],
+   "default": "traffic event virus webfilter IPS emailfilter dlp-archive anomaly voip dlp app-ctrl waf dns ssh ssl",
+   "multiple_values": true
+  },
+  "uploadsched": {
+   "name": "uploadsched",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the schedule for uploading log files to the FTP server (default = disable = upload when rolling).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Upload when rolling."
+    },
+    {
+     "name": "enable",
+     "help": "Scheduled upload."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "uploadtime": {
+   "name": "uploadtime",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of day at which log files are uploaded if uploadsched is enabled (hh:mm or hh).",
+   "default": "",
+   "multiple_values": false
+  },
+  "upload-delete-files": {
+   "name": "upload-delete-files",
+   "category": "unitary",
+   "type": "option",
+   "help": "Delete log files after uploading (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Delete log files after uploading."
+    },
+    {
+     "name": "disable",
+     "help": "Do not delete log files after uploading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "upload-ssl-conn": {
+   "name": "upload-ssl-conn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable encrypted FTPS communication to upload log files.",
+   "options": [
+    {
+     "name": "default",
+     "help": "FTPS with high and medium encryption algorithms."
+    },
+    {
+     "name": "high",
+     "help": "FTPS with high encryption algorithms."
+    },
+    {
+     "name": "low",
+     "help": "FTPS with low encryption algorithms."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FTPS communication."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "full-first-warning-threshold": {
+   "name": "full-first-warning-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log full first warning threshold as a percent (1 - 98, default = 75).",
+   "min-value": 1,
+   "max-value": 98,
+   "default": 75,
+   "multiple_values": false
+  },
+  "full-second-warning-threshold": {
+   "name": "full-second-warning-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log full second warning threshold as a percent (2 - 99, default = 90).",
+   "min-value": 2,
+   "max-value": 99,
+   "default": 90,
+   "multiple_values": false
+  },
+  "full-final-warning-threshold": {
+   "name": "full-final-warning-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log full final warning threshold as a percent (3 - 100, default = 95).",
+   "min-value": 3,
+   "max-value": 100,
+   "default": 95,
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "log.disk",
+ "q_type": 77,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

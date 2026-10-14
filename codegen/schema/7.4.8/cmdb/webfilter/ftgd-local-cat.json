@@ -1,0 +1,54 @@
+{
+ "name": "ftgd-local-cat",
+ "category": "table",
+ "help": "Configure FortiGuard Web Filter local categories.",
+ "mkey": "desc",
+ "mkey_type": "string",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the local category.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the local category."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the local category."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Local category ID.",
+   "min-value": 140,
+   "max-value": 191,
+   "default": 0,
+   "multiple_values": false
+  },
+  "desc": {
+   "name": "desc",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local category description.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 52,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "webfilter",
+ "q_type": 139,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

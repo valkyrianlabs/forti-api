@@ -1,0 +1,22 @@
+{
+ "name": "options",
+ "category": "complex",
+ "help": "Configure AntiSpam options.",
+ "children": {
+  "dns-timeout": {
+   "name": "dns-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DNS query time out (1 - 30 sec).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 30,
+   "default": 7,
+   "multiple_values": false
+  }
+ },
+ "path": "emailfilter",
+ "q_type": 163,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

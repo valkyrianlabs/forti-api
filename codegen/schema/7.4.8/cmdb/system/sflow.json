@@ -1,0 +1,96 @@
+{
+ "name": "sflow",
+ "category": "complex",
+ "help": "Configure sFlow.",
+ "children": {
+  "collectors": {
+   "name": "collectors",
+   "category": "table",
+   "help": "sFlow collectors.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "collector-ip": {
+     "name": "collector-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IP addresses of the sFlow collectors that sFlow agents added to interfaces in this VDOM send sFlow datagrams to.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "collector-port": {
+     "name": "collector-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "UDP port number used for sending sFlow datagrams (configure only if required by your sFlow collector or your network configuration) (0 - 65535, default = 6343).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 6343,
+     "multiple_values": false
+    },
+    "source-ip": {
+     "name": "source-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Source IP address for sFlow agent.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "interface-select-method": {
+     "name": "interface-select-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Specify how to select outgoing interface to reach server.",
+     "options": [
+      {
+       "name": "auto",
+       "help": "Set outgoing interface automatically."
+      },
+      {
+       "name": "sdwan",
+       "help": "Set outgoing interface by SD-WAN or policy routing rules."
+      },
+      {
+       "name": "specify",
+       "help": "Set outgoing interface manually."
+      }
+     ],
+     "default": "auto",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Specify outgoing interface to reach server.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 3,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 432,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

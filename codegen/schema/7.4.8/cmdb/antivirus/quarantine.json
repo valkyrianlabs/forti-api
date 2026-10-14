@@ -1,0 +1,345 @@
+{
+ "name": "quarantine",
+ "category": "complex",
+ "help": "Configure quarantine options.",
+ "children": {
+  "agelimit": {
+   "name": "agelimit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Age limit for quarantined files (0 - 479 hours, 0 means forever).",
+   "min-value": 0,
+   "max-value": 479,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maxfilesize": {
+   "name": "maxfilesize",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum file size to quarantine (0 - 500 Mbytes, 0 means unlimited).",
+   "min-value": 0,
+   "max-value": 500,
+   "default": 0,
+   "multiple_values": false
+  },
+  "quarantine-quota": {
+   "name": "quarantine-quota",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The amount of disk space to reserve for quarantining files (0 - 4294967295 Mbytes, depends on disk space).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "drop-infected": {
+   "name": "drop-infected",
+   "category": "unitary",
+   "type": "option",
+   "help": "Do not quarantine infected files found in sessions using the selected protocols. Dropped files are deleted instead of being quarantined.",
+   "options": [
+    {
+     "name": "imap",
+     "help": "IMAP."
+    },
+    {
+     "name": "smtp",
+     "help": "SMTP."
+    },
+    {
+     "name": "pop3",
+     "help": "POP3."
+    },
+    {
+     "name": "http",
+     "help": "HTTP."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "nntp",
+     "help": "NNTP."
+    },
+    {
+     "name": "imaps",
+     "help": "IMAPS."
+    },
+    {
+     "name": "smtps",
+     "help": "SMTPS."
+    },
+    {
+     "name": "pop3s",
+     "help": "POP3S."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS."
+    },
+    {
+     "name": "ftps",
+     "help": "FTPS."
+    },
+    {
+     "name": "mapi",
+     "help": "MAPI."
+    },
+    {
+     "name": "cifs",
+     "help": "CIFS."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "store-infected": {
+   "name": "store-infected",
+   "category": "unitary",
+   "type": "option",
+   "help": "Quarantine infected files found in sessions using the selected protocols.",
+   "options": [
+    {
+     "name": "imap",
+     "help": "IMAP."
+    },
+    {
+     "name": "smtp",
+     "help": "SMTP."
+    },
+    {
+     "name": "pop3",
+     "help": "POP3."
+    },
+    {
+     "name": "http",
+     "help": "HTTP."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "nntp",
+     "help": "NNTP."
+    },
+    {
+     "name": "imaps",
+     "help": "IMAPS."
+    },
+    {
+     "name": "smtps",
+     "help": "SMTPS."
+    },
+    {
+     "name": "pop3s",
+     "help": "POP3S."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS."
+    },
+    {
+     "name": "ftps",
+     "help": "FTPS."
+    },
+    {
+     "name": "mapi",
+     "help": "MAPI."
+    },
+    {
+     "name": "cifs",
+     "help": "CIFS."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH."
+    }
+   ],
+   "default": "imap smtp pop3 http ftp nntp imaps smtps pop3s https ftps mapi cifs ssh",
+   "multiple_values": true
+  },
+  "drop-machine-learning": {
+   "name": "drop-machine-learning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Do not quarantine files detected by machine learning found in sessions using the selected protocols. Dropped files are deleted instead of being quarantined.",
+   "options": [
+    {
+     "name": "imap",
+     "help": "IMAP."
+    },
+    {
+     "name": "smtp",
+     "help": "SMTP."
+    },
+    {
+     "name": "pop3",
+     "help": "POP3."
+    },
+    {
+     "name": "http",
+     "help": "HTTP."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "nntp",
+     "help": "NNTP."
+    },
+    {
+     "name": "imaps",
+     "help": "IMAPS."
+    },
+    {
+     "name": "smtps",
+     "help": "SMTPS."
+    },
+    {
+     "name": "pop3s",
+     "help": "POP3S."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS."
+    },
+    {
+     "name": "ftps",
+     "help": "FTPS."
+    },
+    {
+     "name": "mapi",
+     "help": "MAPI."
+    },
+    {
+     "name": "cifs",
+     "help": "CIFS."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "store-machine-learning": {
+   "name": "store-machine-learning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Quarantine files detected by machine learning found in sessions using the selected protocols.",
+   "options": [
+    {
+     "name": "imap",
+     "help": "IMAP."
+    },
+    {
+     "name": "smtp",
+     "help": "SMTP."
+    },
+    {
+     "name": "pop3",
+     "help": "POP3."
+    },
+    {
+     "name": "http",
+     "help": "HTTP."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "nntp",
+     "help": "NNTP."
+    },
+    {
+     "name": "imaps",
+     "help": "IMAPS."
+    },
+    {
+     "name": "smtps",
+     "help": "SMTPS."
+    },
+    {
+     "name": "pop3s",
+     "help": "POP3S."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS."
+    },
+    {
+     "name": "ftps",
+     "help": "FTPS."
+    },
+    {
+     "name": "mapi",
+     "help": "MAPI."
+    },
+    {
+     "name": "cifs",
+     "help": "CIFS."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH."
+    }
+   ],
+   "default": "imap smtp pop3 http ftp nntp imaps smtps pop3s https ftps mapi cifs ssh",
+   "multiple_values": true
+  },
+  "lowspace": {
+   "name": "lowspace",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select the method for handling additional files when running low on disk space.",
+   "options": [
+    {
+     "name": "drop-new",
+     "help": "Drop (delete) the most recently quarantined files."
+    },
+    {
+     "name": "ovrw-old",
+     "help": "Overwrite the oldest quarantined files. That is, the files that are closest to being deleted from the quarantine."
+    }
+   ],
+   "default": "ovrw-old",
+   "multiple_values": false
+  },
+  "destination": {
+   "name": "destination",
+   "category": "unitary",
+   "type": "option",
+   "help": "Choose whether to quarantine files to the FortiGate disk or to FortiAnalyzer or to delete them instead of quarantining them.",
+   "options": [
+    {
+     "name": "NULL",
+     "help": "Files that would be quarantined are deleted."
+    },
+    {
+     "name": "disk",
+     "help": "Quarantine files to the FortiGate hard disk."
+    },
+    {
+     "name": "FortiAnalyzer",
+     "help": "FortiAnalyzer"
+    }
+   ],
+   "default": "NULL",
+   "multiple_values": false
+  }
+ },
+ "path": "antivirus",
+ "q_type": 88,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,685 @@
+{
+ "name": "route-map",
+ "category": "table",
+ "help": "Configure route maps.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "string",
+   "help": "Optional comments.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "rule": {
+   "name": "rule",
+   "category": "table",
+   "help": "Rule.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Rule ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action.",
+     "options": [
+      {
+       "name": "permit",
+       "help": "Permit."
+      },
+      {
+       "name": "deny",
+       "help": "Deny."
+      }
+     ],
+     "default": "permit",
+     "multiple_values": false
+    },
+    "match-as-path": {
+     "name": "match-as-path",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match BGP AS path list.",
+     "datasource": [
+      "router.aspath-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-community": {
+     "name": "match-community",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match BGP community list.",
+     "datasource": [
+      "router.community-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-extcommunity": {
+     "name": "match-extcommunity",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match BGP extended community list.",
+     "datasource": [
+      "router.extcommunity-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-community-exact": {
+     "name": "match-community-exact",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable exact matching of communities.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable exact matching of communities."
+      },
+      {
+       "name": "disable",
+       "help": "Disable exact matching of communities."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "match-extcommunity-exact": {
+     "name": "match-extcommunity-exact",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable exact matching of extended communities.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable exact matching of extended communities."
+      },
+      {
+       "name": "disable",
+       "help": "Disable exact matching of extended communities."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "match-origin": {
+     "name": "match-origin",
+     "category": "unitary",
+     "type": "option",
+     "help": "Match BGP origin code.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "egp",
+       "help": "Remote EGP."
+      },
+      {
+       "name": "igp",
+       "help": "Local IGP."
+      },
+      {
+       "name": "incomplete",
+       "help": "Unknown heritage."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "match-interface": {
+     "name": "match-interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match interface configuration.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-ip-address": {
+     "name": "match-ip-address",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match IP address permitted by access-list or prefix-list.",
+     "datasource": [
+      "router.access-list.name",
+      "router.prefix-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-ip6-address": {
+     "name": "match-ip6-address",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match IPv6 address permitted by access-list6 or prefix-list6.",
+     "datasource": [
+      "router.access-list6.name",
+      "router.prefix-list6.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-ip-nexthop": {
+     "name": "match-ip-nexthop",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match next hop IP address passed by access-list or prefix-list.",
+     "datasource": [
+      "router.access-list.name",
+      "router.prefix-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-ip6-nexthop": {
+     "name": "match-ip6-nexthop",
+     "category": "unitary",
+     "type": "string",
+     "help": "Match next hop IPv6 address passed by access-list6 or prefix-list6.",
+     "datasource": [
+      "router.access-list6.name",
+      "router.prefix-list6.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-metric": {
+     "name": "match-metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Match metric for redistribute routes.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-route-type": {
+     "name": "match-route-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Match route type.",
+     "options": [
+      {
+       "name": "external-type1",
+       "help": "External type 1."
+      },
+      {
+       "name": "external-type2",
+       "help": "External type 2."
+      },
+      {
+       "name": "none",
+       "help": "No type specified."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    },
+    "match-tag": {
+     "name": "match-tag",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Match tag.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "match-vrf": {
+     "name": "match-vrf",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Match VRF ID.",
+     "min-value": 0,
+     "max-value": 251,
+     "default": "",
+     "multiple_values": false
+    },
+    "set-aggregator-as": {
+     "name": "set-aggregator-as",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BGP aggregator AS.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "set-aggregator-ip": {
+     "name": "set-aggregator-ip",
+     "category": "unitary",
+     "type": "ipv4-address-any",
+     "help": "BGP aggregator IP.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "set-aspath-action": {
+     "name": "set-aspath-action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Specify preferred action of set-aspath.",
+     "options": [
+      {
+       "name": "prepend",
+       "help": "Prepend."
+      },
+      {
+       "name": "replace",
+       "help": "Replace."
+      }
+     ],
+     "default": "prepend",
+     "multiple_values": false
+    },
+    "set-aspath": {
+     "name": "set-aspath",
+     "category": "table",
+     "help": "Prepend BGP AS path attribute.",
+     "member_table": true,
+     "mkey": "as",
+     "mkey_type": "string",
+     "children": {
+      "as": {
+       "name": "as",
+       "category": "unitary",
+       "type": "string",
+       "help": "AS number (0 - 4294967295). Use quotes for repeating numbers, For example, \"1 1 2\".",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 255
+    },
+    "set-atomic-aggregate": {
+     "name": "set-atomic-aggregate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable BGP atomic aggregate attribute.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable BGP atomic aggregate attribute."
+      },
+      {
+       "name": "disable",
+       "help": "Disable BGP atomic aggregate attribute."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "set-community-delete": {
+     "name": "set-community-delete",
+     "category": "unitary",
+     "type": "string",
+     "help": "Delete communities matching community list.",
+     "datasource": [
+      "router.community-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "set-community": {
+     "name": "set-community",
+     "category": "table",
+     "help": "BGP community attribute.",
+     "member_table": true,
+     "mkey": "community",
+     "mkey_type": "string",
+     "children": {
+      "community": {
+       "name": "community",
+       "category": "unitary",
+       "type": "string",
+       "help": "Attribute: AA|AA:NN|internet|local-AS|no-advertise|no-export.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "set-community-additive": {
+     "name": "set-community-additive",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable adding set-community to existing community.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable adding set-community to existing community."
+      },
+      {
+       "name": "disable",
+       "help": "Disable adding set-community to existing community."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "set-dampening-reachability-half-life": {
+     "name": "set-dampening-reachability-half-life",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Reachability half-life time for the penalty (1 - 45 min, 0 = unset).",
+     "min-value": 0,
+     "max-value": 45,
+     "default": 0,
+     "multiple_values": false
+    },
+    "set-dampening-reuse": {
+     "name": "set-dampening-reuse",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Value to start reusing a route (1 - 20000, 0 = unset).",
+     "min-value": 0,
+     "max-value": 20000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "set-dampening-suppress": {
+     "name": "set-dampening-suppress",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Value to start suppressing a route (1 - 20000, 0 = unset).",
+     "min-value": 0,
+     "max-value": 20000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "set-dampening-max-suppress": {
+     "name": "set-dampening-max-suppress",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum duration to suppress a route (1 - 255 min, 0 = unset).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "set-dampening-unreachability-half-life": {
+     "name": "set-dampening-unreachability-half-life",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Unreachability Half-life time for the penalty (1 - 45 min, 0 = unset).",
+     "min-value": 0,
+     "max-value": 45,
+     "default": 0,
+     "multiple_values": false
+    },
+    "set-extcommunity-rt": {
+     "name": "set-extcommunity-rt",
+     "category": "table",
+     "help": "Route Target extended community.",
+     "member_table": true,
+     "mkey": "community",
+     "mkey_type": "string",
+     "children": {
+      "community": {
+       "name": "community",
+       "category": "unitary",
+       "type": "string",
+       "help": "AA:NN.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "set-extcommunity-soo": {
+     "name": "set-extcommunity-soo",
+     "category": "table",
+     "help": "Site-of-Origin extended community.",
+     "member_table": true,
+     "mkey": "community",
+     "mkey_type": "string",
+     "children": {
+      "community": {
+       "name": "community",
+       "category": "unitary",
+       "type": "string",
+       "help": "Community (format = AA:NN).",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "set-ip-nexthop": {
+     "name": "set-ip-nexthop",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IP address of next hop.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-ip-prefsrc": {
+     "name": "set-ip-prefsrc",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IP address of preferred source.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-vpnv4-nexthop": {
+     "name": "set-vpnv4-nexthop",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IP address of VPNv4 next-hop.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-ip6-nexthop": {
+     "name": "set-ip6-nexthop",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 global address of next hop.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-ip6-nexthop-local": {
+     "name": "set-ip6-nexthop-local",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 local address of next hop.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-vpnv6-nexthop": {
+     "name": "set-vpnv6-nexthop",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 global address of VPNv6 next-hop.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-vpnv6-nexthop-local": {
+     "name": "set-vpnv6-nexthop-local",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 link-local address of VPNv6 next-hop.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-local-preference": {
+     "name": "set-local-preference",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BGP local preference path attribute.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "set-metric": {
+     "name": "set-metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Metric value.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "set-metric-type": {
+     "name": "set-metric-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Metric type.",
+     "options": [
+      {
+       "name": "external-type1",
+       "help": "External type 1."
+      },
+      {
+       "name": "external-type2",
+       "help": "External type 2."
+      },
+      {
+       "name": "none",
+       "help": "No type specified."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    },
+    "set-originator-id": {
+     "name": "set-originator-id",
+     "category": "unitary",
+     "type": "ipv4-address-any",
+     "help": "BGP originator ID attribute.",
+     "default": "",
+     "multiple_values": false
+    },
+    "set-origin": {
+     "name": "set-origin",
+     "category": "unitary",
+     "type": "option",
+     "help": "BGP origin code.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "egp",
+       "help": "Remote EGP."
+      },
+      {
+       "name": "igp",
+       "help": "Local IGP."
+      },
+      {
+       "name": "incomplete",
+       "help": "Unknown heritage."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "set-tag": {
+     "name": "set-tag",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Tag value.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "set-weight": {
+     "name": "set-weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BGP weight for routing table.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "set-route-tag": {
+     "name": "set-route-tag",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Route tag for routing table.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "set-priority": {
+     "name": "set-priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Priority for routing table.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 256
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "router",
+ "q_type": 106,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

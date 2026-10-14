@@ -1,0 +1,181 @@
+{
+ "name": "content",
+ "category": "table",
+ "help": "Configure Web filter banned word table.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "Configure banned word entries.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Banned word.",
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "pattern-type": {
+     "name": "pattern-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Banned word pattern type: wildcard pattern or Perl regular expression.",
+     "required": true,
+     "options": [
+      {
+       "name": "wildcard",
+       "help": "Wildcard pattern."
+      },
+      {
+       "name": "regexp",
+       "help": "Perl regular expression."
+      }
+     ],
+     "default": "wildcard",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable banned word.",
+     "required": true,
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "lang": {
+     "name": "lang",
+     "category": "unitary",
+     "type": "option",
+     "help": "Language of banned word.",
+     "required": true,
+     "options": [
+      {
+       "name": "western",
+       "help": "Western."
+      },
+      {
+       "name": "simch",
+       "help": "Simplified Chinese."
+      },
+      {
+       "name": "trach",
+       "help": "Traditional Chinese."
+      },
+      {
+       "name": "japanese",
+       "help": "Japanese."
+      },
+      {
+       "name": "korean",
+       "help": "Korean."
+      },
+      {
+       "name": "french",
+       "help": "French."
+      },
+      {
+       "name": "thai",
+       "help": "Thai."
+      },
+      {
+       "name": "spanish",
+       "help": "Spanish."
+      },
+      {
+       "name": "cyrillic",
+       "help": "Cyrillic."
+      }
+     ],
+     "default": "western",
+     "multiple_values": false
+    },
+    "score": {
+     "name": "score",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Score, to be applied every time the word appears on a web page (0 - 4294967295, default = 10).",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 10,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Block or exempt word when a match is found.",
+     "required": true,
+     "options": [
+      {
+       "name": "block",
+       "help": "Block matches."
+      },
+      {
+       "name": "exempt",
+       "help": "Exempt matches."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 20000,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "webfilter",
+ "q_type": 90,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

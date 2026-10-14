@@ -1,0 +1,385 @@
+{
+ "name": "policy6",
+ "category": "table",
+ "help": "Configure IPv6 routing policies.",
+ "mkey": "seq-num",
+ "mkey_type": "integer",
+ "children": {
+  "seq-num": {
+   "name": "seq-num",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Sequence number(1-65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "input-device": {
+   "name": "input-device",
+   "category": "table",
+   "help": "Incoming interface name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "input-device-negate": {
+   "name": "input-device-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negation of input device match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negation of input device match."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negation of input device match."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "src": {
+   "name": "src",
+   "category": "table",
+   "help": "Source IPv6 prefix.",
+   "member_table": true,
+   "mkey": "addr6",
+   "mkey_type": "string",
+   "children": {
+    "addr6": {
+     "name": "addr6",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv6 address prefix.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr": {
+   "name": "srcaddr",
+   "category": "table",
+   "help": "Source address name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address/group name.",
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "src-negate": {
+   "name": "src-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negating source address match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable source address negation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable source address negation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dst": {
+   "name": "dst",
+   "category": "table",
+   "help": "Destination IPv6 prefix.",
+   "member_table": true,
+   "mkey": "addr6",
+   "mkey_type": "string",
+   "children": {
+    "addr6": {
+     "name": "addr6",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv6 address prefix.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr": {
+   "name": "dstaddr",
+   "category": "table",
+   "help": "Destination address name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address/group name.",
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dst-negate": {
+   "name": "dst-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negating destination address match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable destination address negation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable destination address negation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "action": {
+   "name": "action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action of the policy route.",
+   "options": [
+    {
+     "name": "deny",
+     "help": "Do not search policy route table."
+    },
+    {
+     "name": "permit",
+     "help": "Use this policy route for forwarding."
+    }
+   ],
+   "default": "permit",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Protocol number (0 - 255).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "start-port": {
+   "name": "start-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Start destination port number (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "end-port": {
+   "name": "end-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "End destination port number (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 65535,
+   "multiple_values": false
+  },
+  "start-source-port": {
+   "name": "start-source-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Start source port number (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "end-source-port": {
+   "name": "end-source-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "End source port number (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 65535,
+   "multiple_values": false
+  },
+  "gateway": {
+   "name": "gateway",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address of the gateway.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "output-device": {
+   "name": "output-device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Outgoing interface name.",
+   "datasource": [
+    "system.interface.name",
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "tos": {
+   "name": "tos",
+   "category": "unitary",
+   "type": "user",
+   "help": "Type of service bit pattern.",
+   "default": "",
+   "multiple_values": false
+  },
+  "tos-mask": {
+   "name": "tos-mask",
+   "category": "unitary",
+   "type": "user",
+   "help": "Type of service evaluated bits.",
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this policy route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this policy route."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this policy route."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "internet-service-id": {
+   "name": "internet-service-id",
+   "category": "table",
+   "help": "Destination Internet Service ID.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Destination Internet Service ID.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-custom": {
+   "name": "internet-service-custom",
+   "category": "table",
+   "help": "Custom Destination Internet Service name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Destination Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 250,
+ "max_table_size_global": 250,
+ "max_table_size_item": 0,
+ "path": "router",
+ "q_type": 19,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

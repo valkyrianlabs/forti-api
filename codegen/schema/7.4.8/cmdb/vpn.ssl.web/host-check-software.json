@@ -1,0 +1,182 @@
+{
+ "name": "host-check-software",
+ "category": "table",
+ "help": "SSL-VPN host check software.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "os-type": {
+   "name": "os-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "OS type.",
+   "options": [
+    {
+     "name": "windows",
+     "help": "Microsoft Windows operating system."
+    },
+    {
+     "name": "macos",
+     "help": "Apple MacOS operating system."
+    }
+   ],
+   "default": "windows",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type.",
+   "options": [
+    {
+     "name": "av",
+     "help": "AntiVirus."
+    },
+    {
+     "name": "fw",
+     "help": "Firewall."
+    }
+   ],
+   "default": "av",
+   "multiple_values": false
+  },
+  "version": {
+   "name": "version",
+   "category": "unitary",
+   "type": "string",
+   "help": "Version.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "guid": {
+   "name": "guid",
+   "category": "unitary",
+   "type": "user",
+   "help": "Globally unique ID.",
+   "default": "",
+   "multiple_values": false
+  },
+  "check-item-list": {
+   "name": "check-item-list",
+   "category": "table",
+   "help": "Check item list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID (0 - 4294967295).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action.",
+     "options": [
+      {
+       "name": "require",
+       "help": "Require."
+      },
+      {
+       "name": "deny",
+       "help": "Deny."
+      }
+     ],
+     "default": "require",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Type.",
+     "options": [
+      {
+       "name": "file",
+       "help": "File."
+      },
+      {
+       "name": "registry",
+       "help": "Registry."
+      },
+      {
+       "name": "process",
+       "help": "Process."
+      }
+     ],
+     "default": "file",
+     "multiple_values": false
+    },
+    "target": {
+     "name": "target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Target.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "version": {
+     "name": "version",
+     "category": "unitary",
+     "type": "string",
+     "help": "Version.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "md5s": {
+     "name": "md5s",
+     "category": "table",
+     "help": "MD5 checksum.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "string",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "string",
+       "help": "Hex string of MD5 checksum.",
+       "required": true,
+       "size": 32,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "vpn.ssl.web",
+ "q_type": 153,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

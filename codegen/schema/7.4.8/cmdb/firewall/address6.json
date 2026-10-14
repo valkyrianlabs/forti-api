@@ -1,0 +1,444 @@
+{
+ "name": "address6",
+ "category": "table",
+ "help": "Configure IPv6 firewall addresses.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of IPv6 address object (default = ipprefix).",
+   "options": [
+    {
+     "name": "ipprefix",
+     "help": "Uses the IP prefix to define a range of IPv6 addresses."
+    },
+    {
+     "name": "iprange",
+     "help": "Range of IPv6 addresses between two specified addresses (inclusive)."
+    },
+    {
+     "name": "fqdn",
+     "help": "Fully qualified domain name."
+    },
+    {
+     "name": "geography",
+     "help": "IPv6 addresses from a specified country."
+    },
+    {
+     "name": "dynamic",
+     "help": "Dynamic address object for SDN."
+    },
+    {
+     "name": "template",
+     "help": "Template."
+    },
+    {
+     "name": "mac",
+     "help": "Range of MAC addresses."
+    },
+    {
+     "name": "route-tag",
+     "help": "route-tag addresses."
+    }
+   ],
+   "default": "ipprefix",
+   "multiple_values": false
+  },
+  "route-tag": {
+   "name": "route-tag",
+   "category": "unitary",
+   "type": "integer",
+   "help": "route-tag address.",
+   "min-value": 1,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "macaddr": {
+   "name": "macaddr",
+   "category": "table",
+   "help": "Multiple MAC address ranges.",
+   "member_table": true,
+   "mkey": "macaddr",
+   "mkey_type": "string",
+   "children": {
+    "macaddr": {
+     "name": "macaddr",
+     "category": "unitary",
+     "type": "string",
+     "help": "MAC address ranges <start>[-<end>] separated by space.",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "sdn": {
+   "name": "sdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN.",
+   "datasource": [
+    "system.sdn-connector.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip6": {
+   "name": "ip6",
+   "category": "unitary",
+   "type": "ipv6-network",
+   "help": "IPv6 address prefix (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx).",
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "start-ip": {
+   "name": "start-ip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "First IP address (inclusive) in the range for the address (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).",
+   "default": "::",
+   "multiple_values": false
+  },
+  "end-ip": {
+   "name": "end-ip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Final IP address (inclusive) in the range for the address (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).",
+   "default": "::",
+   "multiple_values": false
+  },
+  "fqdn": {
+   "name": "fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fully qualified domain name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "country": {
+   "name": "country",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 addresses associated to a specific country.",
+   "size": 2,
+   "default": "",
+   "multiple_values": false
+  },
+  "cache-ttl": {
+   "name": "cache-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimal TTL of individual IPv6 addresses in FQDN cache.",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value to determine the color of the icon in the GUI (range 1 to 32, default = 0, which sets the value to 1).",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "obj-id": {
+   "name": "obj-id",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Object ID for NSX.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "list": {
+   "name": "list",
+   "category": "table",
+   "help": "IP address list.",
+   "mkey": "ip",
+   "mkey_type": "string",
+   "children": {
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP.",
+     "required": true,
+     "size": 89,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "tagging": {
+   "name": "tagging",
+   "category": "table",
+   "help": "Config object tagging.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tagging entry name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tag category.",
+     "datasource": [
+      "system.object-tagging.category"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "tags": {
+     "name": "tags",
+     "category": "table",
+     "help": "Tags.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Tag name.",
+       "datasource": [
+        "system.object-tagging.tags.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "template": {
+   "name": "template",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 address template.",
+   "required": true,
+   "datasource": [
+    "firewall.address6-template.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "subnet-segment": {
+   "name": "subnet-segment",
+   "category": "table",
+   "help": "IPv6 subnet segments.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Subnet segment type.",
+     "required": true,
+     "options": [
+      {
+       "name": "any",
+       "help": "Wildcard."
+      },
+      {
+       "name": "specific",
+       "help": "Specific subnet segment address."
+      }
+     ],
+     "default": "any",
+     "multiple_values": false
+    },
+    "value": {
+     "name": "value",
+     "category": "unitary",
+     "type": "string",
+     "help": "Subnet segment value.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "host-type": {
+   "name": "host-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Host type.",
+   "options": [
+    {
+     "name": "any",
+     "help": "Wildcard."
+    },
+    {
+     "name": "specific",
+     "help": "Specific host address."
+    }
+   ],
+   "default": "any",
+   "multiple_values": false
+  },
+  "host": {
+   "name": "host",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Host Address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "tenant": {
+   "name": "tenant",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tenant.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "epg-name": {
+   "name": "epg-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Endpoint group name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "sdn-tag": {
+   "name": "sdn-tag",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN Tag.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter": {
+   "name": "filter",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Match criteria filter.",
+   "required": true,
+   "size": 2047,
+   "multiple_values": false
+  },
+  "sdn-addr-type": {
+   "name": "sdn-addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of addresses to collect.",
+   "options": [
+    {
+     "name": "private",
+     "help": "Collect private addresses only."
+    },
+    {
+     "name": "public",
+     "help": "Collect public addresses only."
+    },
+    {
+     "name": "all",
+     "help": "Collect both public and private addresses."
+    }
+   ],
+   "default": "private",
+   "multiple_values": false
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 5000,
+ "max_table_size_global": 5000,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 205,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

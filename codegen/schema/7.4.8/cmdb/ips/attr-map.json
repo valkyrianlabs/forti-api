@@ -1,0 +1,61 @@
+{
+ "name": "attr-map",
+ "category": "table",
+ "help": "Configure ips attr-map",
+ "hidden": true,
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "readonly": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "children": {
+   "name": "children",
+   "category": "table",
+   "help": "Child attributes.",
+   "mkey": "map-id",
+   "mkey_type": "integer",
+   "children": {
+    "map-id": {
+     "name": "map-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Child attribute map ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "ips",
+ "q_type": 244,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

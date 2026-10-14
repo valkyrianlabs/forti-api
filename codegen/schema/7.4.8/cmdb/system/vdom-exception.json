@@ -1,0 +1,176 @@
+{
+ "name": "vdom-exception",
+ "category": "table",
+ "help": "Global configuration objects that can be configured independently across different ha peers for all VDOMs or for the defined VDOM scope.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Index (1 - 4096).",
+   "min-value": 1,
+   "max-value": 4096,
+   "default": 0,
+   "multiple_values": false
+  },
+  "object": {
+   "name": "object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Name of the configuration object that can be configured independently for all VDOMs.",
+   "required": true,
+   "options": [
+    {
+     "name": "log.fortianalyzer.setting",
+     "help": "log.fortianalyzer.setting"
+    },
+    {
+     "name": "log.fortianalyzer.override-setting",
+     "help": "log.fortianalyzer.override-setting"
+    },
+    {
+     "name": "log.fortianalyzer2.setting",
+     "help": "log.fortianalyzer2.setting"
+    },
+    {
+     "name": "log.fortianalyzer2.override-setting",
+     "help": "log.fortianalyzer2.override-setting"
+    },
+    {
+     "name": "log.fortianalyzer3.setting",
+     "help": "log.fortianalyzer3.setting"
+    },
+    {
+     "name": "log.fortianalyzer3.override-setting",
+     "help": "log.fortianalyzer3.override-setting"
+    },
+    {
+     "name": "log.fortianalyzer-cloud.setting",
+     "help": "log.fortianalyzer-cloud.setting"
+    },
+    {
+     "name": "log.fortianalyzer-cloud.override-setting",
+     "help": "log.fortianalyzer-cloud.override-setting"
+    },
+    {
+     "name": "log.syslogd.setting",
+     "help": "log.syslogd.setting"
+    },
+    {
+     "name": "log.syslogd.override-setting",
+     "help": "log.syslogd.override-setting"
+    },
+    {
+     "name": "log.syslogd2.setting",
+     "help": "log.syslogd2.setting"
+    },
+    {
+     "name": "log.syslogd2.override-setting",
+     "help": "log.syslogd2.override-setting"
+    },
+    {
+     "name": "log.syslogd3.setting",
+     "help": "log.syslogd3.setting"
+    },
+    {
+     "name": "log.syslogd3.override-setting",
+     "help": "log.syslogd3.override-setting"
+    },
+    {
+     "name": "log.syslogd4.setting",
+     "help": "log.syslogd4.setting"
+    },
+    {
+     "name": "log.syslogd4.override-setting",
+     "help": "log.syslogd4.override-setting"
+    },
+    {
+     "name": "system.gre-tunnel",
+     "help": "system.gre-tunnel"
+    },
+    {
+     "name": "system.central-management",
+     "help": "system.central-management"
+    },
+    {
+     "name": "system.csf",
+     "help": "system.csf"
+    },
+    {
+     "name": "user.radius",
+     "help": "user.radius"
+    },
+    {
+     "name": "log.syslogd.setting",
+     "help": "log.syslogd.setting"
+    },
+    {
+     "name": "log.syslogd.override-setting",
+     "help": "log.syslogd.override-setting"
+    },
+    {
+     "name": "firewall.address",
+     "help": "firewall.address"
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "scope": {
+   "name": "scope",
+   "category": "unitary",
+   "type": "option",
+   "help": "Determine whether the configuration object can be configured separately for all VDOMs or if some VDOMs share the same configuration.",
+   "options": [
+    {
+     "name": "all",
+     "help": "Object configuration independent for all VDOMs."
+    },
+    {
+     "name": "inclusive",
+     "help": "Object configuration independent for the listed VDOMs. Other VDOMs use the global configuration."
+    },
+    {
+     "name": "exclusive",
+     "help": "Use the global object configuration for the listed VDOMs. Other VDOMs can be configured independently."
+    }
+   ],
+   "default": "all",
+   "multiple_values": false
+  },
+  "vdom": {
+   "name": "vdom",
+   "category": "table",
+   "help": "Names of the VDOMs.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "VDOM name.",
+     "datasource": [
+      "system.vdom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 530,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

@@ -1,0 +1,2324 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure VoIP profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "feature-set": {
+   "name": "feature-set",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPS or voipd (SIP-ALG) inspection feature set.",
+   "options": [
+    {
+     "name": "ips",
+     "help": "IPS Engine feature set for ips-voip-filter."
+    },
+    {
+     "name": "voipd",
+     "help": "SIP ALG feature set for voip-profile."
+    }
+   ],
+   "default": "voipd",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "sip": {
+   "name": "sip",
+   "category": "complex",
+   "help": "SIP.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SIP.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "rtp": {
+     "name": "rtp",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable create pinholes for RTP traffic to traverse firewall.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "nat-port-range": {
+     "name": "nat-port-range",
+     "category": "unitary",
+     "type": "user",
+     "help": "RTP NAT port range.",
+     "default": "5117-65533",
+     "multiple_values": false
+    },
+    "open-register-pinhole": {
+     "name": "open-register-pinhole",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable open pinhole for REGISTER Contact port.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "open-contact-pinhole": {
+     "name": "open-contact-pinhole",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable open pinhole for non-REGISTER Contact port.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "strict-register": {
+     "name": "strict-register",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable only allow the registrar to connect.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "register-rate": {
+     "name": "register-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "REGISTER request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "register-rate-track": {
+     "name": "register-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "invite-rate": {
+     "name": "invite-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "INVITE request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "invite-rate-track": {
+     "name": "invite-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "max-dialogs": {
+     "name": "max-dialogs",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum number of concurrent calls/dialogs (per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "max-line-length": {
+     "name": "max-line-length",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum SIP header line length (78-4096).",
+     "min-value": 78,
+     "max-value": 4096,
+     "default": 998,
+     "multiple_values": false
+    },
+    "block-long-lines": {
+     "name": "block-long-lines",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block requests with headers exceeding max-line-length.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "block-unknown": {
+     "name": "block-unknown",
+     "category": "unitary",
+     "type": "option",
+     "help": "Block unrecognized SIP requests (enabled by default).",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "call-keepalive": {
+     "name": "call-keepalive",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Continue tracking calls with no RTP for this many minutes.",
+     "min-value": 0,
+     "max-value": 10080,
+     "default": 0,
+     "multiple_values": false
+    },
+    "block-ack": {
+     "name": "block-ack",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block ACK requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-bye": {
+     "name": "block-bye",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block BYE requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-cancel": {
+     "name": "block-cancel",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block CANCEL requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-info": {
+     "name": "block-info",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block INFO requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-invite": {
+     "name": "block-invite",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block INVITE requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-message": {
+     "name": "block-message",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block MESSAGE requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-notify": {
+     "name": "block-notify",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block NOTIFY requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-options": {
+     "name": "block-options",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block OPTIONS requests and no OPTIONS as notifying message for redundancy either.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-prack": {
+     "name": "block-prack",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block prack requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-publish": {
+     "name": "block-publish",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block PUBLISH requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-refer": {
+     "name": "block-refer",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block REFER requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-register": {
+     "name": "block-register",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block REGISTER requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-subscribe": {
+     "name": "block-subscribe",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block SUBSCRIBE requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "block-update": {
+     "name": "block-update",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block UPDATE requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "register-contact-trace": {
+     "name": "register-contact-trace",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable trace original IP/port within the contact header of REGISTER requests.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "open-via-pinhole": {
+     "name": "open-via-pinhole",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable open pinhole for Via port.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "open-record-route-pinhole": {
+     "name": "open-record-route-pinhole",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable open pinhole for Record-Route port.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "rfc2543-branch": {
+     "name": "rfc2543-branch",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable support via branch compliant with RFC 2543.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "log-violations": {
+     "name": "log-violations",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of SIP violations.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "log-call-summary": {
+     "name": "log-call-summary",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of SIP call summary.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "nat-trace": {
+     "name": "nat-trace",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable preservation of original IP in SDP i line.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "subscribe-rate": {
+     "name": "subscribe-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SUBSCRIBE request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "subscribe-rate-track": {
+     "name": "subscribe-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "message-rate": {
+     "name": "message-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "MESSAGE request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "message-rate-track": {
+     "name": "message-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "notify-rate": {
+     "name": "notify-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "NOTIFY request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "notify-rate-track": {
+     "name": "notify-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "refer-rate": {
+     "name": "refer-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "REFER request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "refer-rate-track": {
+     "name": "refer-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "update-rate": {
+     "name": "update-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "UPDATE request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "update-rate-track": {
+     "name": "update-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "options-rate": {
+     "name": "options-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "OPTIONS request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "options-rate-track": {
+     "name": "options-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "ack-rate": {
+     "name": "ack-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ACK request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ack-rate-track": {
+     "name": "ack-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "prack-rate": {
+     "name": "prack-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "PRACK request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prack-rate-track": {
+     "name": "prack-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "info-rate": {
+     "name": "info-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "INFO request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "info-rate-track": {
+     "name": "info-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "publish-rate": {
+     "name": "publish-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "PUBLISH request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "publish-rate-track": {
+     "name": "publish-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "bye-rate": {
+     "name": "bye-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BYE request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "bye-rate-track": {
+     "name": "bye-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "cancel-rate": {
+     "name": "cancel-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "CANCEL request rate limit (per second, per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "cancel-rate-track": {
+     "name": "cancel-rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "preserve-override": {
+     "name": "preserve-override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Override i line to preserve original IPs (default: append).",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "no-sdp-fixup": {
+     "name": "no-sdp-fixup",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable no SDP fix-up.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "contact-fixup": {
+     "name": "contact-fixup",
+     "category": "unitary",
+     "type": "option",
+     "help": "Fixup contact anyway even if contact's IP:port doesn't match session's IP:port.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "max-idle-dialogs": {
+     "name": "max-idle-dialogs",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum number established but idle dialogs to retain (per policy).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "block-geo-red-options": {
+     "name": "block-geo-red-options",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block OPTIONS requests, but OPTIONS requests still notify for redundancy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "hosted-nat-traversal": {
+     "name": "hosted-nat-traversal",
+     "category": "unitary",
+     "type": "option",
+     "help": "Hosted NAT Traversal (HNT).",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "hnt-restrict-source-ip": {
+     "name": "hnt-restrict-source-ip",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable restrict RTP source IP to be the same as SIP source IP when HNT is enabled.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "call-id-regex": {
+     "name": "call-id-regex",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Validate PCRE regular expression for Call-Id header value.",
+     "size": 511,
+     "multiple_values": false
+    },
+    "content-type-regex": {
+     "name": "content-type-regex",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Validate PCRE regular expression for Content-Type header value.",
+     "size": 511,
+     "multiple_values": false
+    },
+    "max-body-length": {
+     "name": "max-body-length",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum SIP message body length (0 meaning no limit).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "unknown-header": {
+     "name": "unknown-header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for unknown SIP header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-request-line": {
+     "name": "malformed-request-line",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed request line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-via": {
+     "name": "malformed-header-via",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed VIA header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-from": {
+     "name": "malformed-header-from",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed From header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-to": {
+     "name": "malformed-header-to",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed To header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-call-id": {
+     "name": "malformed-header-call-id",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Call-ID header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-cseq": {
+     "name": "malformed-header-cseq",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed CSeq header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-rack": {
+     "name": "malformed-header-rack",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed RAck header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-rseq": {
+     "name": "malformed-header-rseq",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed RSeq header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-contact": {
+     "name": "malformed-header-contact",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Contact header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-record-route": {
+     "name": "malformed-header-record-route",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Record-Route header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-route": {
+     "name": "malformed-header-route",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Route header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-expires": {
+     "name": "malformed-header-expires",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Expires header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-content-type": {
+     "name": "malformed-header-content-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Content-Type header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-content-length": {
+     "name": "malformed-header-content-length",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Content-Length header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-max-forwards": {
+     "name": "malformed-header-max-forwards",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Max-Forwards header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-allow": {
+     "name": "malformed-header-allow",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed Allow header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-p-asserted-identity": {
+     "name": "malformed-header-p-asserted-identity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed P-Asserted-Identity header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-no-require": {
+     "name": "malformed-header-no-require",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SIP messages without Require header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-no-proxy-require": {
+     "name": "malformed-header-no-proxy-require",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SIP messages without Proxy-Require header.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-v": {
+     "name": "malformed-header-sdp-v",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP v line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-o": {
+     "name": "malformed-header-sdp-o",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP o line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-s": {
+     "name": "malformed-header-sdp-s",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP s line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-i": {
+     "name": "malformed-header-sdp-i",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP i line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-c": {
+     "name": "malformed-header-sdp-c",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP c line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-b": {
+     "name": "malformed-header-sdp-b",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP b line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-z": {
+     "name": "malformed-header-sdp-z",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP z line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-k": {
+     "name": "malformed-header-sdp-k",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP k line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-a": {
+     "name": "malformed-header-sdp-a",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP a line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-t": {
+     "name": "malformed-header-sdp-t",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP t line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-r": {
+     "name": "malformed-header-sdp-r",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP r line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "malformed-header-sdp-m": {
+     "name": "malformed-header-sdp-m",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for malformed SDP m line.",
+     "options": [
+      {
+       "name": "discard",
+       "help": "Discard malformed messages."
+      },
+      {
+       "name": "pass",
+       "help": "Bypass malformed messages."
+      },
+      {
+       "name": "respond",
+       "help": "Respond with error code."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "provisional-invite-expiry-time": {
+     "name": "provisional-invite-expiry-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Expiry time (10-3600, in seconds) for provisional INVITE.",
+     "min-value": 10,
+     "max-value": 3600,
+     "default": 210,
+     "multiple_values": false
+    },
+    "ips-rtp": {
+     "name": "ips-rtp",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable allow IPS on RTP.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-mode": {
+     "name": "ssl-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL/TLS mode for encryption & decryption of traffic.",
+     "options": [
+      {
+       "name": "off",
+       "help": "No SSL."
+      },
+      {
+       "name": "full",
+       "help": "Client to FortiGate and FortiGate to Server SSL."
+      }
+     ],
+     "default": "off",
+     "multiple_values": false
+    },
+    "ssl-send-empty-frags": {
+     "name": "ssl-send-empty-frags",
+     "category": "unitary",
+     "type": "option",
+     "help": "Send empty fragments to avoid attack on CBC IV (SSL 3.0 & TLS 1.0 only).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Send empty fragments."
+      },
+      {
+       "name": "disable",
+       "help": "Do not send empty fragments."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "ssl-client-renegotiation": {
+     "name": "ssl-client-renegotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Allow/block client renegotiation by server.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow a SSL client to renegotiate."
+      },
+      {
+       "name": "deny",
+       "help": "Abort any SSL connection that attempts to renegotiate."
+      },
+      {
+       "name": "secure",
+       "help": "Reject any SSL connection that does not offer a RFC 5746 Secure Renegotiation Indication."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "ssl-algorithm": {
+     "name": "ssl-algorithm",
+     "category": "unitary",
+     "type": "option",
+     "help": "Relative strength of encryption algorithms accepted in negotiation.",
+     "options": [
+      {
+       "name": "high",
+       "help": "High encryption. Allow only AES and ChaCha."
+      },
+      {
+       "name": "medium",
+       "help": "Medium encryption. Allow AES, ChaCha, 3DES, and RC4."
+      },
+      {
+       "name": "low",
+       "help": "Low encryption. Allow AES, ChaCha, 3DES, RC4, and DES."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "ssl-pfs": {
+     "name": "ssl-pfs",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL Perfect Forward Secrecy.",
+     "options": [
+      {
+       "name": "require",
+       "help": "PFS mandatory."
+      },
+      {
+       "name": "deny",
+       "help": "PFS rejected."
+      },
+      {
+       "name": "allow",
+       "help": "PFS allowed."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "ssl-min-version": {
+     "name": "ssl-min-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Lowest SSL/TLS version to negotiate.",
+     "options": [
+      {
+       "name": "ssl-3.0",
+       "help": "SSL 3.0."
+      },
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.1",
+     "multiple_values": false
+    },
+    "ssl-max-version": {
+     "name": "ssl-max-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Highest SSL/TLS version to negotiate.",
+     "options": [
+      {
+       "name": "ssl-3.0",
+       "help": "SSL 3.0."
+      },
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.3",
+     "multiple_values": false
+    },
+    "ssl-client-certificate": {
+     "name": "ssl-client-certificate",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of Certificate to offer to server if requested.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "ssl-server-certificate": {
+     "name": "ssl-server-certificate",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of Certificate return to the client in every SSL connection.",
+     "required": true,
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "ssl-auth-client": {
+     "name": "ssl-auth-client",
+     "category": "unitary",
+     "type": "string",
+     "help": "Require a client certificate and authenticate it with the peer/peergrp.",
+     "datasource": [
+      "user.peer.name",
+      "user.peergrp.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "ssl-auth-server": {
+     "name": "ssl-auth-server",
+     "category": "unitary",
+     "type": "string",
+     "help": "Authenticate the server's certificate with the peer/peergrp.",
+     "datasource": [
+      "user.peer.name",
+      "user.peergrp.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "sccp": {
+   "name": "sccp",
+   "category": "complex",
+   "help": "SCCP.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SCCP.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "block-mcast": {
+     "name": "block-mcast",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable block multicast RTP connections.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "verify-header": {
+     "name": "verify-header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable verify SCCP header content.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "log-call-summary": {
+     "name": "log-call-summary",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable log summary of SCCP calls.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "log-violations": {
+     "name": "log-violations",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of SCCP violations.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "max-calls": {
+     "name": "max-calls",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum calls per minute per SCCP client (max 65535).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "msrp": {
+   "name": "msrp",
+   "category": "complex",
+   "help": "MSRP.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable MSRP.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "log-violations": {
+     "name": "log-violations",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of MSRP violations.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "max-msg-size": {
+     "name": "max-msg-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum allowable MSRP message size (1-65535).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "max-msg-size-action": {
+     "name": "max-msg-size-action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for violation of max-msg-size.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Pass or allow matching traffic."
+      },
+      {
+       "name": "block",
+       "help": "Block or drop matching traffic."
+      },
+      {
+       "name": "reset",
+       "help": "Reset sessions for matching traffic."
+      },
+      {
+       "name": "monitor",
+       "help": "Pass and log matching traffic."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "voip",
+ "q_type": 445,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

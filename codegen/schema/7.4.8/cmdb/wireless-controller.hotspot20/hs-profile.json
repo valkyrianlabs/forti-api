@@ -1,0 +1,817 @@
+{
+ "name": "hs-profile",
+ "category": "table",
+ "help": "Configure hotspot profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hotspot profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "release": {
+   "name": "release",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Hotspot 2.0 Release number (1, 2, 3, default = 2).",
+   "min-value": 1,
+   "max-value": 3,
+   "default": 2,
+   "multiple_values": false
+  },
+  "access-network-type": {
+   "name": "access-network-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Access network type.",
+   "options": [
+    {
+     "name": "private-network",
+     "help": "Private network."
+    },
+    {
+     "name": "private-network-with-guest-access",
+     "help": "Private network with guest access."
+    },
+    {
+     "name": "chargeable-public-network",
+     "help": "Chargeable public network."
+    },
+    {
+     "name": "free-public-network",
+     "help": "Free public network."
+    },
+    {
+     "name": "personal-device-network",
+     "help": "Personal devices network."
+    },
+    {
+     "name": "emergency-services-only-network",
+     "help": "Emergency services only network."
+    },
+    {
+     "name": "test-or-experimental",
+     "help": "Test or experimental."
+    },
+    {
+     "name": "wildcard",
+     "help": "Wildcard."
+    }
+   ],
+   "default": "private-network",
+   "multiple_values": false
+  },
+  "access-network-internet": {
+   "name": "access-network-internet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable connectivity to the Internet.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable connectivity to the Internet."
+    },
+    {
+     "name": "disable",
+     "help": "Disable connectivity to the Internet."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "access-network-asra": {
+   "name": "access-network-asra",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable additional step required for access (ASRA).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable additional step required for access (ASRA)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable additional step required for access (ASRA)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "access-network-esr": {
+   "name": "access-network-esr",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable emergency services reachable (ESR).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable emergency services reachable (ESR)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable emergency services reachable (ESR)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "access-network-uesa": {
+   "name": "access-network-uesa",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable unauthenticated emergency service accessible (UESA).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable unauthenticated emergency service accessible (UESA)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable unauthenticated emergency service accessible (UESA)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "venue-group": {
+   "name": "venue-group",
+   "category": "unitary",
+   "type": "option",
+   "help": "Venue group.",
+   "options": [
+    {
+     "name": "unspecified",
+     "help": "Unspecified."
+    },
+    {
+     "name": "assembly",
+     "help": "Assembly."
+    },
+    {
+     "name": "business",
+     "help": "Business."
+    },
+    {
+     "name": "educational",
+     "help": "Educational."
+    },
+    {
+     "name": "factory",
+     "help": "Factory and industrial."
+    },
+    {
+     "name": "institutional",
+     "help": "Institutional."
+    },
+    {
+     "name": "mercantile",
+     "help": "Mercantile."
+    },
+    {
+     "name": "residential",
+     "help": "Residential."
+    },
+    {
+     "name": "storage",
+     "help": "Storage."
+    },
+    {
+     "name": "utility",
+     "help": "Utility and miscellaneous."
+    },
+    {
+     "name": "vehicular",
+     "help": "Vehicular."
+    },
+    {
+     "name": "outdoor",
+     "help": "Outdoor."
+    }
+   ],
+   "default": "unspecified",
+   "multiple_values": false
+  },
+  "venue-type": {
+   "name": "venue-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Venue type.",
+   "options": [
+    {
+     "name": "unspecified",
+     "help": "Unspecified."
+    },
+    {
+     "name": "arena",
+     "help": "Arena."
+    },
+    {
+     "name": "stadium",
+     "help": "Stadium."
+    },
+    {
+     "name": "passenger-terminal",
+     "help": "Passenger terminal."
+    },
+    {
+     "name": "amphitheater",
+     "help": "Amphitheater."
+    },
+    {
+     "name": "amusement-park",
+     "help": "Amusement park."
+    },
+    {
+     "name": "place-of-worship",
+     "help": "Place of worship."
+    },
+    {
+     "name": "convention-center",
+     "help": "Convention center."
+    },
+    {
+     "name": "library",
+     "help": "Library."
+    },
+    {
+     "name": "museum",
+     "help": "Museum."
+    },
+    {
+     "name": "restaurant",
+     "help": "Restaurant."
+    },
+    {
+     "name": "theater",
+     "help": "Theater."
+    },
+    {
+     "name": "bar",
+     "help": "Bar."
+    },
+    {
+     "name": "coffee-shop",
+     "help": "Coffee shop."
+    },
+    {
+     "name": "zoo-or-aquarium",
+     "help": "Zoo or aquarium."
+    },
+    {
+     "name": "emergency-center",
+     "help": "Emergency coordination center."
+    },
+    {
+     "name": "doctor-office",
+     "help": "Doctor or dentist office."
+    },
+    {
+     "name": "bank",
+     "help": "Bank."
+    },
+    {
+     "name": "fire-station",
+     "help": "Fire station."
+    },
+    {
+     "name": "police-station",
+     "help": "Police station."
+    },
+    {
+     "name": "post-office",
+     "help": "Post office."
+    },
+    {
+     "name": "professional-office",
+     "help": "Professional office."
+    },
+    {
+     "name": "research-facility",
+     "help": "Research and development facility."
+    },
+    {
+     "name": "attorney-office",
+     "help": "Attorney office."
+    },
+    {
+     "name": "primary-school",
+     "help": "Primary school."
+    },
+    {
+     "name": "secondary-school",
+     "help": "Secondary school."
+    },
+    {
+     "name": "university-or-college",
+     "help": "University or college."
+    },
+    {
+     "name": "factory",
+     "help": "Factory."
+    },
+    {
+     "name": "hospital",
+     "help": "Hospital."
+    },
+    {
+     "name": "long-term-care-facility",
+     "help": "Long term care facility."
+    },
+    {
+     "name": "rehab-center",
+     "help": "Alcohol and drug rehabilitation center."
+    },
+    {
+     "name": "group-home",
+     "help": "Group home."
+    },
+    {
+     "name": "prison-or-jail",
+     "help": "Prison or jail."
+    },
+    {
+     "name": "retail-store",
+     "help": "Retail store."
+    },
+    {
+     "name": "grocery-market",
+     "help": "Grocery market."
+    },
+    {
+     "name": "auto-service-station",
+     "help": "Auto service station."
+    },
+    {
+     "name": "shopping-mall",
+     "help": "Shopping mall."
+    },
+    {
+     "name": "gas-station",
+     "help": "Gas station."
+    },
+    {
+     "name": "private",
+     "help": "Private residence."
+    },
+    {
+     "name": "hotel-or-motel",
+     "help": "Hotel or motel."
+    },
+    {
+     "name": "dormitory",
+     "help": "Dormitory."
+    },
+    {
+     "name": "boarding-house",
+     "help": "Boarding house."
+    },
+    {
+     "name": "automobile",
+     "help": "Automobile or truck."
+    },
+    {
+     "name": "airplane",
+     "help": "Airplane."
+    },
+    {
+     "name": "bus",
+     "help": "Bus."
+    },
+    {
+     "name": "ferry",
+     "help": "Ferry."
+    },
+    {
+     "name": "ship-or-boat",
+     "help": "Ship or boat."
+    },
+    {
+     "name": "train",
+     "help": "Train."
+    },
+    {
+     "name": "motor-bike",
+     "help": "Motor bike."
+    },
+    {
+     "name": "muni-mesh-network",
+     "help": "Muni mesh network."
+    },
+    {
+     "name": "city-park",
+     "help": "City park."
+    },
+    {
+     "name": "rest-area",
+     "help": "Rest area."
+    },
+    {
+     "name": "traffic-control",
+     "help": "Traffic control."
+    },
+    {
+     "name": "bus-stop",
+     "help": "Bus stop."
+    },
+    {
+     "name": "kiosk",
+     "help": "Kiosk."
+    }
+   ],
+   "default": "unspecified",
+   "multiple_values": false
+  },
+  "hessid": {
+   "name": "hessid",
+   "category": "unitary",
+   "type": "mac-address",
+   "help": "Homogeneous extended service set identifier (HESSID).",
+   "default": "00:00:00:00:00:00",
+   "multiple_values": false
+  },
+  "proxy-arp": {
+   "name": "proxy-arp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Proxy ARP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Proxy ARP."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Proxy ARP."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "l2tif": {
+   "name": "l2tif",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Layer 2 traffic inspection and filtering.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Layer 2 traffic inspection and filtering."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Layer 2 traffic inspection and filtering."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pame-bi": {
+   "name": "pame-bi",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Pre-Association Message Exchange BSSID Independent (PAME-BI).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Pre-Association Message Exchange BSSID Independent (PAME-BI)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Pre-Association Message Exchange BSSID Independent (PAME-BI)."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "anqp-domain-id": {
+   "name": "anqp-domain-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ANQP Domain ID (0-65535).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "domain-name": {
+   "name": "domain-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "osu-ssid": {
+   "name": "osu-ssid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Online sign up (OSU) SSID.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "gas-comeback-delay": {
+   "name": "gas-comeback-delay",
+   "category": "unitary",
+   "type": "integer",
+   "help": "GAS comeback delay (0 or 100 - 10000 milliseconds, default = 500).",
+   "min-value": 100,
+   "max-value": 10000,
+   "default": 500,
+   "multiple_values": false
+  },
+  "gas-fragmentation-limit": {
+   "name": "gas-fragmentation-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "GAS fragmentation limit (512 - 4096, default = 1024).",
+   "min-value": 512,
+   "max-value": 4096,
+   "default": 1024,
+   "multiple_values": false
+  },
+  "dgaf": {
+   "name": "dgaf",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable downstream group-addressed forwarding (DGAF).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable downstream group-addressed forwarding (DGAF)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable downstream group-addressed forwarding (DGAF)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "deauth-request-timeout": {
+   "name": "deauth-request-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Deauthentication request timeout (in seconds).",
+   "min-value": 30,
+   "max-value": 120,
+   "default": 60,
+   "multiple_values": false
+  },
+  "wnm-sleep-mode": {
+   "name": "wnm-sleep-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable wireless network management (WNM) sleep mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable wireless network management (WNM) sleep mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable wireless network management (WNM) sleep mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "bss-transition": {
+   "name": "bss-transition",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable basic service set (BSS) transition Support.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable basic service set (BSS) transition support."
+    },
+    {
+     "name": "disable",
+     "help": "Disable basic service set (BSS) transition support."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "venue-name": {
+   "name": "venue-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Venue name.",
+   "datasource": [
+    "wireless-controller.hotspot20.anqp-venue-name.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "venue-url": {
+   "name": "venue-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "Venue name.",
+   "datasource": [
+    "wireless-controller.hotspot20.anqp-venue-url.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "roaming-consortium": {
+   "name": "roaming-consortium",
+   "category": "unitary",
+   "type": "string",
+   "help": "Roaming consortium list name.",
+   "datasource": [
+    "wireless-controller.hotspot20.anqp-roaming-consortium.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "nai-realm": {
+   "name": "nai-realm",
+   "category": "unitary",
+   "type": "string",
+   "help": "NAI realm list name.",
+   "datasource": [
+    "wireless-controller.hotspot20.anqp-nai-realm.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "oper-friendly-name": {
+   "name": "oper-friendly-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Operator friendly name.",
+   "datasource": [
+    "wireless-controller.hotspot20.h2qp-operator-name.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "oper-icon": {
+   "name": "oper-icon",
+   "category": "unitary",
+   "type": "string",
+   "help": "Operator icon.",
+   "datasource": [
+    "wireless-controller.hotspot20.icon.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "advice-of-charge": {
+   "name": "advice-of-charge",
+   "category": "unitary",
+   "type": "string",
+   "help": "Advice of charge.",
+   "datasource": [
+    "wireless-controller.hotspot20.h2qp-advice-of-charge.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "osu-provider-nai": {
+   "name": "osu-provider-nai",
+   "category": "unitary",
+   "type": "string",
+   "help": "OSU Provider NAI.",
+   "datasource": [
+    "wireless-controller.hotspot20.h2qp-osu-provider-nai.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "terms-and-conditions": {
+   "name": "terms-and-conditions",
+   "category": "unitary",
+   "type": "string",
+   "help": "Terms and conditions.",
+   "datasource": [
+    "wireless-controller.hotspot20.h2qp-terms-and-conditions.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "osu-provider": {
+   "name": "osu-provider",
+   "category": "table",
+   "help": "Manually selected list of OSU provider(s).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "OSU provider name.",
+     "required": true,
+     "datasource": [
+      "wireless-controller.hotspot20.h2qp-osu-provider.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "wan-metrics": {
+   "name": "wan-metrics",
+   "category": "unitary",
+   "type": "string",
+   "help": "WAN metric name.",
+   "datasource": [
+    "wireless-controller.hotspot20.h2qp-wan-metric.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "network-auth": {
+   "name": "network-auth",
+   "category": "unitary",
+   "type": "string",
+   "help": "Network authentication name.",
+   "datasource": [
+    "wireless-controller.hotspot20.anqp-network-auth-type.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "3gpp-plmn": {
+   "name": "3gpp-plmn",
+   "category": "unitary",
+   "type": "string",
+   "help": "3GPP PLMN name.",
+   "datasource": [
+    "wireless-controller.hotspot20.anqp-3gpp-cellular.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "conn-cap": {
+   "name": "conn-cap",
+   "category": "unitary",
+   "type": "string",
+   "help": "Connection capability name.",
+   "datasource": [
+    "wireless-controller.hotspot20.h2qp-conn-capability.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "qos-map": {
+   "name": "qos-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "QoS MAP set ID.",
+   "datasource": [
+    "wireless-controller.hotspot20.qos-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-addr-type": {
+   "name": "ip-addr-type",
+   "category": "unitary",
+   "type": "string",
+   "help": "IP address type name.",
+   "datasource": [
+    "wireless-controller.hotspot20.anqp-ip-address-type.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 289,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

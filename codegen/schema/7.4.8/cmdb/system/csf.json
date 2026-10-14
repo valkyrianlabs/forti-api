@@ -1,0 +1,543 @@
+{
+ "name": "csf",
+ "category": "complex",
+ "help": "Add this FortiGate to a Security Fabric or set up a new Security Fabric on this FortiGate.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Security Fabric.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Security Fabric."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Security Fabric."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "uid": {
+   "name": "uid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Unique ID of the current CSF node",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "upstream": {
+   "name": "upstream",
+   "category": "unitary",
+   "type": "string",
+   "help": "IP/FQDN of the FortiGate upstream from this FortiGate in the Security Fabric.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address for communication with the upstream FortiGate.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "upstream-interface-select-method": {
+   "name": "upstream-interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "upstream-interface": {
+   "name": "upstream-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "upstream-port": {
+   "name": "upstream-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The port number to use to communicate with the FortiGate upstream from this FortiGate in the Security Fabric (default = 8013).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8013,
+   "multiple_values": false
+  },
+  "group-name": {
+   "name": "group-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Security Fabric group name. All FortiGates in a Security Fabric must have the same group name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "group-password": {
+   "name": "group-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Security Fabric group password. For legacy authentication, fabric members must have the same group password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "accept-auth-by-cert": {
+   "name": "accept-auth-by-cert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept connections with unknown certificates and ask admin for approval.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not accept SSL connections with unknown certificates."
+    },
+    {
+     "name": "enable",
+     "help": "Accept SSL connections without automatic certificate verification."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "log-unification": {
+   "name": "log-unification",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable broadcast of discovery messages for log unification.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable broadcast of discovery messages for log unification."
+    },
+    {
+     "name": "enable",
+     "help": "Enable broadcast of discovery messages for log unification."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "authorization-request-type": {
+   "name": "authorization-request-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authorization request type.",
+   "options": [
+    {
+     "name": "serial",
+     "help": "Request verification by serial number."
+    },
+    {
+     "name": "certificate",
+     "help": "Request verification by certificate."
+    }
+   ],
+   "default": "serial",
+   "multiple_values": false
+  },
+  "certificate": {
+   "name": "certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "fabric-workers": {
+   "name": "fabric-workers",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of worker processes for Security Fabric daemon.",
+   "min-value": 1,
+   "max-value": 4,
+   "default": 2,
+   "multiple_values": false
+  },
+  "downstream-access": {
+   "name": "downstream-access",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable downstream device access to this device's configuration and data.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable downstream device access to this device's configuration and data."
+    },
+    {
+     "name": "disable",
+     "help": "Disable downstream device access to this device's configuration and data."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "legacy-authentication": {
+   "name": "legacy-authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable legacy authentication.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not accept legacy authentication requests."
+    },
+    {
+     "name": "enable",
+     "help": "Accept legacy authentication requests."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "downstream-accprofile": {
+   "name": "downstream-accprofile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default access profile for requests from downstream devices.",
+   "required": true,
+   "datasource": [
+    "system.accprofile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "configuration-sync": {
+   "name": "configuration-sync",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configuration sync mode.",
+   "required": true,
+   "options": [
+    {
+     "name": "default",
+     "help": "Synchronize configuration for IPAM, FortiAnalyzer, FortiSandbox, and Central Management to root node."
+    },
+    {
+     "name": "local",
+     "help": "Do not synchronize configuration with root node."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "fabric-object-unification": {
+   "name": "fabric-object-unification",
+   "category": "unitary",
+   "type": "option",
+   "help": "Fabric CMDB Object Unification.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Global CMDB objects will be synchronized in Security Fabric."
+    },
+    {
+     "name": "local",
+     "help": "Global CMDB objects will not be synchronized to and from this device."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "saml-configuration-sync": {
+   "name": "saml-configuration-sync",
+   "category": "unitary",
+   "type": "option",
+   "help": "SAML setting configuration synchronization.",
+   "options": [
+    {
+     "name": "default",
+     "help": "SAML setting for fabric members is created by fabric root."
+    },
+    {
+     "name": "local",
+     "help": "Do not apply SAML configuration generated by root."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "trusted-list": {
+   "name": "trusted-list",
+   "category": "table",
+   "help": "Pre-authorized and blocked security fabric nodes.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "authorization-type": {
+     "name": "authorization-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authorization type.",
+     "options": [
+      {
+       "name": "serial",
+       "help": "Verify downstream by serial number."
+      },
+      {
+       "name": "certificate",
+       "help": "Verify downstream by certificate."
+      }
+     ],
+     "default": "serial",
+     "multiple_values": false
+    },
+    "serial": {
+     "name": "serial",
+     "category": "unitary",
+     "type": "string",
+     "help": "Serial.",
+     "size": 19,
+     "default": "",
+     "multiple_values": false
+    },
+    "certificate": {
+     "name": "certificate",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Certificate.",
+     "size": 32767,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Security fabric authorization action.",
+     "options": [
+      {
+       "name": "accept",
+       "help": "Accept authorization request."
+      },
+      {
+       "name": "deny",
+       "help": "Deny authorization request."
+      }
+     ],
+     "default": "accept",
+     "multiple_values": false
+    },
+    "ha-members": {
+     "name": "ha-members",
+     "category": "unitary",
+     "type": "string",
+     "help": "HA members.",
+     "size": 19,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 4
+    },
+    "downstream-authorization": {
+     "name": "downstream-authorization",
+     "category": "unitary",
+     "type": "option",
+     "help": "Trust authorizations by this node's administrator.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable downstream authorization."
+      },
+      {
+       "name": "disable",
+       "help": "Disable downstream authorization."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "index": {
+     "name": "index",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Index of the downstream in tree.",
+     "min-value": 1,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "fabric-connector": {
+   "name": "fabric-connector",
+   "category": "table",
+   "help": "Fabric connector configuration.",
+   "mkey": "serial",
+   "mkey_type": "string",
+   "children": {
+    "serial": {
+     "name": "serial",
+     "category": "unitary",
+     "type": "string",
+     "help": "Serial.",
+     "size": 19,
+     "default": "",
+     "multiple_values": false
+    },
+    "accprofile": {
+     "name": "accprofile",
+     "category": "unitary",
+     "type": "string",
+     "help": "Override access profile.",
+     "datasource": [
+      "system.accprofile.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "configuration-write-access": {
+     "name": "configuration-write-access",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable downstream device write access to configuration.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable downstream device write access to configuration."
+      },
+      {
+       "name": "disable",
+       "help": "Disable downstream device write access to configuration."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vdom": {
+     "name": "vdom",
+     "category": "table",
+     "help": "Virtual domains that the connector has access to. If none are set, the connector will only have access to the VDOM that it joins the Security Fabric through.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Virtual domain name.",
+       "required": true,
+       "datasource": [
+        "system.vdom.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "forticloud-account-enforcement": {
+   "name": "forticloud-account-enforcement",
+   "category": "unitary",
+   "type": "option",
+   "help": "Fabric FortiCloud account unification.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiCloud account ID matching for Security Fabric."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiCloud accound ID matching for Security Fabric."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "file-mgmt": {
+   "name": "file-mgmt",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Security Fabric daemon file management.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable daemon file management."
+    },
+    {
+     "name": "disable",
+     "help": "Disable daemon file management."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "file-quota": {
+   "name": "file-quota",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum amount of memory that can be used by the daemon files (in bytes).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "file-quota-warning": {
+   "name": "file-quota-warning",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Warn when the set percentage of quota has been used.",
+   "min-value": 1,
+   "max-value": 99,
+   "default": 90,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 514,
+ "access_group": "secfabgrp",
+ "object_range": "global"
+}

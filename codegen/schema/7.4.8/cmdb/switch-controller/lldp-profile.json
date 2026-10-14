@@ -1,0 +1,418 @@
+{
+ "name": "lldp-profile",
+ "category": "table",
+ "help": "Configure FortiSwitch LLDP profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "med-tlvs": {
+   "name": "med-tlvs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Transmitted LLDP-MED TLVs (type-length-value descriptions).",
+   "options": [
+    {
+     "name": "inventory-management",
+     "help": "Inventory management TLVs."
+    },
+    {
+     "name": "network-policy",
+     "help": "Network policy TLVs."
+    },
+    {
+     "name": "power-management",
+     "help": "Power manangement TLVs."
+    },
+    {
+     "name": "location-identification",
+     "help": "Location identificaion TLVs."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "802.1-tlvs": {
+   "name": "802.1-tlvs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Transmitted IEEE 802.1 TLVs.",
+   "options": [
+    {
+     "name": "port-vlan-id",
+     "help": "Port native VLAN TLV."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "802.3-tlvs": {
+   "name": "802.3-tlvs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Transmitted IEEE 802.3 TLVs.",
+   "options": [
+    {
+     "name": "max-frame-size",
+     "help": "Maximum frame size TLV."
+    },
+    {
+     "name": "power-negotiation",
+     "help": "PoE+ classification TLV."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "auto-isl": {
+   "name": "auto-isl",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable auto inter-switch LAG.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable automatic MCLAG inter chassis link."
+    },
+    {
+     "name": "enable",
+     "help": "Enable automatic MCLAG inter chassis link."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "auto-isl-hello-timer": {
+   "name": "auto-isl-hello-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Auto inter-switch LAG hello timer duration (1 - 30 sec, default = 3).",
+   "min-value": 1,
+   "max-value": 30,
+   "default": 3,
+   "multiple_values": false
+  },
+  "auto-isl-receive-timeout": {
+   "name": "auto-isl-receive-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Auto inter-switch LAG timeout if no response is received (3 - 90 sec, default = 9).",
+   "min-value": 0,
+   "max-value": 90,
+   "default": 60,
+   "multiple_values": false
+  },
+  "auto-isl-port-group": {
+   "name": "auto-isl-port-group",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Auto inter-switch LAG port group ID (0 - 9).",
+   "min-value": 0,
+   "max-value": 9,
+   "default": 0,
+   "multiple_values": false
+  },
+  "auto-mclag-icl": {
+   "name": "auto-mclag-icl",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable MCLAG inter chassis link.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable auto inter-switch-LAG."
+    },
+    {
+     "name": "enable",
+     "help": "Enable auto inter-switch-LAG."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-isl-auth": {
+   "name": "auto-isl-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Auto inter-switch LAG authentication mode.",
+   "options": [
+    {
+     "name": "legacy",
+     "help": "No auto inter-switch-LAG authentication."
+    },
+    {
+     "name": "strict",
+     "help": "Strict auto inter-switch-LAG authentication."
+    },
+    {
+     "name": "relax",
+     "help": "Relax auto inter-switch-LAG authentication."
+    }
+   ],
+   "default": "legacy",
+   "multiple_values": false
+  },
+  "auto-isl-auth-user": {
+   "name": "auto-isl-auth-user",
+   "category": "unitary",
+   "type": "string",
+   "help": "Auto inter-switch LAG authentication user certificate.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "auto-isl-auth-identity": {
+   "name": "auto-isl-auth-identity",
+   "category": "unitary",
+   "type": "string",
+   "help": "Auto inter-switch LAG authentication identity.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "auto-isl-auth-reauth": {
+   "name": "auto-isl-auth-reauth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Auto inter-switch LAG authentication reauth period in seconds(10 - 3600, default = 3600).",
+   "min-value": 180,
+   "max-value": 3600,
+   "default": 3600,
+   "multiple_values": false
+  },
+  "auto-isl-auth-encrypt": {
+   "name": "auto-isl-auth-encrypt",
+   "category": "unitary",
+   "type": "option",
+   "help": "Auto inter-switch LAG encryption mode.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No auto inter-switch-LAG encryption."
+    },
+    {
+     "name": "mixed",
+     "help": "Mixed auto inter-switch-LAG encryption."
+    },
+    {
+     "name": "must",
+     "help": "Must auto inter-switch-LAG encryption."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "auto-isl-auth-macsec-profile": {
+   "name": "auto-isl-auth-macsec-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Auto inter-switch LAG macsec profile for encryption.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "med-network-policy": {
+   "name": "med-network-policy",
+   "category": "table",
+   "help": "Configuration method to edit Media Endpoint Discovery (MED) network policy type-length-value (TLV) categories.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Policy type name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable or disable this TLV.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Do not transmit this network policy TLV."
+      },
+      {
+       "name": "enable",
+       "help": "Transmit this TLV if a VLAN has been addded to the port."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "vlan-intf": {
+     "name": "vlan-intf",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN interface to advertise; if configured on port.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "assign-vlan": {
+     "name": "assign-vlan",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable VLAN assignment when this profile is applied on managed FortiSwitch port.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable VLAN assignment when this profile is applied on port."
+      },
+      {
+       "name": "enable",
+       "help": "Enable VLAN assignment when this profile is applied on port."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Advertised Layer 2 priority (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 0,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Advertised Differentiated Services Code Point (DSCP) value, a packet header value indicating the level of service requested for traffic, such as high priority or best effort delivery.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "med-location-service": {
+   "name": "med-location-service",
+   "category": "table",
+   "help": "Configuration method to edit Media Endpoint Discovery (MED) location service type-length-value (TLV) categories.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location service type name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable or disable this TLV.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Do not transmit this location service TLV."
+      },
+      {
+       "name": "enable",
+       "help": "Transmit this location service TLV."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "sys-location-id": {
+     "name": "sys-location-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location service ID.",
+     "datasource": [
+      "switch-controller.location.name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "custom-tlvs": {
+   "name": "custom-tlvs",
+   "category": "table",
+   "help": "Configuration method to edit custom TLV entries.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "TLV name (not sent).",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "oui": {
+     "name": "oui",
+     "category": "unitary",
+     "type": "user",
+     "help": "Organizationally unique identifier (OUI), a 3-byte hexadecimal number, for this TLV.",
+     "required": true,
+     "default": "000000",
+     "multiple_values": false
+    },
+    "subtype": {
+     "name": "subtype",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Organizationally defined subtype (0 - 255).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "information-string": {
+     "name": "information-string",
+     "category": "unitary",
+     "type": "user",
+     "help": "Organizationally defined information string (0 - 507 hexadecimal bytes).",
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "q_type": 318,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

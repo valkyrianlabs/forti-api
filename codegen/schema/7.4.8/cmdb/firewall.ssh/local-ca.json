@@ -1,0 +1,69 @@
+{
+ "name": "local-ca",
+ "category": "table",
+ "help": "SSH proxy local CA.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SSH proxy local CA name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for SSH private key.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "private-key": {
+   "name": "private-key",
+   "category": "unitary",
+   "type": "user",
+   "help": "SSH proxy private key, encrypted with a password.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "public-key": {
+   "name": "public-key",
+   "category": "unitary",
+   "type": "user",
+   "help": "SSH proxy public key.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "source": {
+   "name": "source",
+   "category": "unitary",
+   "type": "option",
+   "help": "SSH proxy local CA source type.",
+   "options": [
+    {
+     "name": "built-in",
+     "help": "Built-in SSH proxy local keys."
+    },
+    {
+     "name": "user",
+     "help": "User imported SSH proxy local keys."
+    }
+   ],
+   "default": "user",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 100,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall.ssh",
+ "q_type": 176,
+ "access_group": "fwgrp",
+ "object_range": "global-vdom"
+}

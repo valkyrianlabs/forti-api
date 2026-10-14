@@ -1,0 +1,124 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Global PTP profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select PTP mode.",
+   "options": [
+    {
+     "name": "transparent-e2e",
+     "help": "End-to-end transparent clock."
+    },
+    {
+     "name": "transparent-p2p",
+     "help": "Peer-to-peer transparent clock."
+    }
+   ],
+   "default": "transparent-e2e",
+   "multiple_values": false
+  },
+  "ptp-profile": {
+   "name": "ptp-profile",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure PTP power profile.",
+   "options": [
+    {
+     "name": "C37.238-2017",
+     "help": "C37.238-2017 power profile."
+    }
+   ],
+   "default": "C37.238-2017",
+   "multiple_values": false
+  },
+  "transport": {
+   "name": "transport",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure PTP transport mode.",
+   "options": [
+    {
+     "name": "l2-mcast",
+     "help": "L2 multicast."
+    }
+   ],
+   "default": "l2-mcast",
+   "multiple_values": false
+  },
+  "domain": {
+   "name": "domain",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Configure PTP domain value (0 - 255, default = 254).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 254,
+   "multiple_values": false
+  },
+  "pdelay-req-interval": {
+   "name": "pdelay-req-interval",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure PTP peer delay request interval.",
+   "options": [
+    {
+     "name": "1sec",
+     "help": "1 sec."
+    },
+    {
+     "name": "2sec",
+     "help": "2 sec."
+    },
+    {
+     "name": "4sec",
+     "help": "4 sec."
+    },
+    {
+     "name": "8sec",
+     "help": "8 sec."
+    },
+    {
+     "name": "16sec",
+     "help": "16 sec."
+    },
+    {
+     "name": "32sec",
+     "help": "32 sec."
+    }
+   ],
+   "default": "1sec",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "switch-controller.ptp",
+ "access_group": "secfabgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,417 @@
+{
+ "name": "fabric-vpn",
+ "category": "complex",
+ "help": "Setup for self orchestrated fabric auto discovery VPN.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Fabric VPN.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Fabric VPN."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Fabric VPN."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sync-mode": {
+   "name": "sync-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Setting synchronised by fabric or manual.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable fabric led configuration synchronisation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable fabric led configuration synchronisation."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "branch-name": {
+   "name": "branch-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Branch name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "policy-rule": {
+   "name": "policy-rule",
+   "category": "unitary",
+   "type": "option",
+   "help": "Policy creation rule.",
+   "options": [
+    {
+     "name": "health-check",
+     "help": "Create health check policy automatically."
+    },
+    {
+     "name": "manual",
+     "help": "All policies will be created manually."
+    },
+    {
+     "name": "auto",
+     "help": "Automatically create allow policies."
+    }
+   ],
+   "default": "health-check",
+   "multiple_values": false
+  },
+  "vpn-role": {
+   "name": "vpn-role",
+   "category": "unitary",
+   "type": "option",
+   "help": "Fabric VPN role.",
+   "required": true,
+   "options": [
+    {
+     "name": "hub",
+     "help": "VPN hub."
+    },
+    {
+     "name": "spoke",
+     "help": "VPN spoke."
+    }
+   ],
+   "default": "hub",
+   "multiple_values": false
+  },
+  "overlays": {
+   "name": "overlays",
+   "category": "table",
+   "help": "Local overlay interfaces table.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Overlay name.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "overlay-tunnel-block": {
+     "name": "overlay-tunnel-block",
+     "category": "unitary",
+     "type": "ipv4-classnet-host",
+     "help": "IPv4 address and subnet mask for the overlay tunnel , syntax: X.X.X.X/24.",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "remote-gw": {
+     "name": "remote-gw",
+     "category": "unitary",
+     "type": "ipv4-address-any",
+     "help": "IP address of the hub gateway (Set by hub).",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Underlying interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "bgp-neighbor": {
+     "name": "bgp-neighbor",
+     "category": "unitary",
+     "type": "string",
+     "help": "Underlying BGP neighbor entry.",
+     "datasource": [
+      "router.bgp.neighbor.ip"
+     ],
+     "size": 45,
+     "default": "",
+     "multiple_values": false
+    },
+    "overlay-policy": {
+     "name": "overlay-policy",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The overlay policy to allow ADVPN thru traffic.",
+     "datasource": [
+      "firewall.policy.policyid"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "bgp-network": {
+     "name": "bgp-network",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Underlying BGP network.",
+     "datasource": [
+      "router.bgp.network.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "route-policy": {
+     "name": "route-policy",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Underlying router policy.",
+     "datasource": [
+      "router.policy.seq-num"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "bgp-neighbor-group": {
+     "name": "bgp-neighbor-group",
+     "category": "unitary",
+     "type": "string",
+     "help": "Underlying BGP neighbor group entry.",
+     "datasource": [
+      "router.bgp.neighbor-group.name"
+     ],
+     "size": 45,
+     "default": "",
+     "multiple_values": false
+    },
+    "bgp-neighbor-range": {
+     "name": "bgp-neighbor-range",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Underlying BGP neighbor range entry.",
+     "datasource": [
+      "router.bgp.neighbor-range.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ipsec-phase1": {
+     "name": "ipsec-phase1",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec interface.",
+     "datasource": [
+      "vpn.ipsec.phase1-interface.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "sdwan-member": {
+     "name": "sdwan-member",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Reference to SD-WAN member entry.",
+     "datasource": [
+      "system.sdwan.members.seq-num"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "advertised-subnets": {
+   "name": "advertised-subnets",
+   "category": "table",
+   "help": "Local advertised subnets.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967294,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Network prefix.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "access": {
+     "name": "access",
+     "category": "unitary",
+     "type": "option",
+     "help": "Access policy direction.",
+     "required": true,
+     "options": [
+      {
+       "name": "inbound",
+       "help": "Allow inbound traffic to subnet."
+      },
+      {
+       "name": "bidirectional",
+       "help": "Allow inbound and outbound traffic to subnet."
+      }
+     ],
+     "default": "inbound",
+     "multiple_values": false
+    },
+    "bgp-network": {
+     "name": "bgp-network",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Underlying BGP network.",
+     "datasource": [
+      "router.bgp.network.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "firewall-address": {
+     "name": "firewall-address",
+     "category": "unitary",
+     "type": "string",
+     "help": "Underlying firewall address.",
+     "datasource": [
+      "firewall.address.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "policies": {
+     "name": "policies",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Underlying policies.",
+     "datasource": [
+      "firewall.policy.policyid"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 16
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "loopback-address-block": {
+   "name": "loopback-address-block",
+   "category": "unitary",
+   "type": "ipv4-classnet-host",
+   "help": "IPv4 address and subnet mask for hub's loopback address, syntax: X.X.X.X/24.",
+   "required": true,
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "loopback-interface": {
+   "name": "loopback-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Loopback interface.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "loopback-advertised-subnet": {
+   "name": "loopback-advertised-subnet",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Loopback advertised subnet reference.",
+   "datasource": [
+    "system.fabric-vpn.advertised-subnets.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "psksecret": {
+   "name": "psksecret",
+   "category": "unitary",
+   "type": "password-3",
+   "help": "Pre-shared secret for ADVPN.",
+   "required": true,
+   "multiple_values": false
+  },
+  "bgp-as": {
+   "name": "bgp-as",
+   "category": "unitary",
+   "type": "integer",
+   "help": "BGP Router AS number, valid from 1 to 4294967295.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "sdwan-zone": {
+   "name": "sdwan-zone",
+   "category": "unitary",
+   "type": "string",
+   "help": "Reference to created SD-WAN zone.",
+   "datasource": [
+    "system.sdwan.zone.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "health-checks": {
+   "name": "health-checks",
+   "category": "unitary",
+   "type": "string",
+   "help": "Underlying health checks.",
+   "datasource": [
+    "system.sdwan.health-check.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 512
+  }
+ },
+ "path": "system",
+ "q_type": 517,
+ "access_group": "secfabgrp",
+ "object_range": "global"
+}

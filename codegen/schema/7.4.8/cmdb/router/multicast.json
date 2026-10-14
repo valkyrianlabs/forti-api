@@ -1,0 +1,868 @@
+{
+ "name": "multicast",
+ "category": "complex",
+ "help": "Configure router multicast.",
+ "children": {
+  "route-threshold": {
+   "name": "route-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Generate warnings when the number of multicast routes exceeds this number, must not be greater than route-limit.",
+   "min-value": 1,
+   "max-value": 2147483647,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-limit": {
+   "name": "route-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of multicast routes.",
+   "min-value": 1,
+   "max-value": 2147483647,
+   "default": 2147483647,
+   "multiple_values": false
+  },
+  "multicast-routing": {
+   "name": "multicast-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IP multicast routing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IP multicast routing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IP multicast routing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pim-sm-global": {
+   "name": "pim-sm-global",
+   "category": "complex",
+   "help": "PIM sparse-mode global settings.",
+   "children": {
+    "message-interval": {
+     "name": "message-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Period of time between sending periodic PIM join/prune messages in seconds (1 - 65535, default = 60).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 60,
+     "multiple_values": false
+    },
+    "join-prune-holdtime": {
+     "name": "join-prune-holdtime",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Join/prune holdtime (1 - 65535, default = 210).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 210,
+     "multiple_values": false
+    },
+    "accept-register-list": {
+     "name": "accept-register-list",
+     "category": "unitary",
+     "type": "string",
+     "help": "Sources allowed to register packets with this Rendezvous Point (RP).",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "accept-source-list": {
+     "name": "accept-source-list",
+     "category": "unitary",
+     "type": "string",
+     "help": "Sources allowed to send multicast traffic.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "bsr-candidate": {
+     "name": "bsr-candidate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable allowing this router to become a bootstrap router (BSR).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Allow this router to function as a BSR."
+      },
+      {
+       "name": "disable",
+       "help": "Do not allow this router to function as a BSR."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "bsr-interface": {
+     "name": "bsr-interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface to advertise as candidate BSR.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "bsr-priority": {
+     "name": "bsr-priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BSR priority (0 - 255, default = 0).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "bsr-hash": {
+     "name": "bsr-hash",
+     "category": "unitary",
+     "type": "integer",
+     "help": "BSR hash length (0 - 32, default = 10).",
+     "min-value": 0,
+     "max-value": 32,
+     "default": 10,
+     "multiple_values": false
+    },
+    "bsr-allow-quick-refresh": {
+     "name": "bsr-allow-quick-refresh",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable accept BSR quick refresh packets from neighbors.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Allow quick refresh packets."
+      },
+      {
+       "name": "disable",
+       "help": "Do not allow quick refresh packets."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "cisco-register-checksum": {
+     "name": "cisco-register-checksum",
+     "category": "unitary",
+     "type": "option",
+     "help": "Checksum entire register packet(for old Cisco IOS compatibility).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "register checksum entire packet."
+      },
+      {
+       "name": "disable",
+       "help": "Do not register checksum entire packet."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "cisco-register-checksum-group": {
+     "name": "cisco-register-checksum-group",
+     "category": "unitary",
+     "type": "string",
+     "help": "Cisco register checksum only these groups.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "cisco-crp-prefix": {
+     "name": "cisco-crp-prefix",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable making candidate RP compatible with old Cisco IOS.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Do not allow sending group prefix of zero."
+      },
+      {
+       "name": "disable",
+       "help": "Allow sending group prefix of zero."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "cisco-ignore-rp-set-priority": {
+     "name": "cisco-ignore-rp-set-priority",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use only hash for RP selection (compatibility with old Cisco IOS).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Ignore RP-SET priority value."
+      },
+      {
+       "name": "disable",
+       "help": "Do not ignore RP-SET priority value."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "register-rp-reachability": {
+     "name": "register-rp-reachability",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable check RP is reachable before registering packets.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check target RP is unicast reachable before registering."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check RP unicast reachability."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "register-source": {
+     "name": "register-source",
+     "category": "unitary",
+     "type": "option",
+     "help": "Override source address in register packets.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Use source address of RPF interface."
+      },
+      {
+       "name": "interface",
+       "help": "Use primary IP of an interface."
+      },
+      {
+       "name": "ip-address",
+       "help": "Use a local IP address."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "register-source-interface": {
+     "name": "register-source-interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Override with primary interface address.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "register-source-ip": {
+     "name": "register-source-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Override with local IP address.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "register-supression": {
+     "name": "register-supression",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Period of time to honor register-stop message (1 - 65535 sec, default = 60).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 60,
+     "multiple_values": false
+    },
+    "null-register-retries": {
+     "name": "null-register-retries",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum retries of null register (1 - 20, default = 1).",
+     "min-value": 1,
+     "max-value": 20,
+     "default": 1,
+     "multiple_values": false
+    },
+    "rp-register-keepalive": {
+     "name": "rp-register-keepalive",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Timeout for RP receiving data on (S,G) tree (1 - 65535 sec, default = 185).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 185,
+     "multiple_values": false
+    },
+    "spt-threshold": {
+     "name": "spt-threshold",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable switching to source specific trees.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Switch to Source tree when available."
+      },
+      {
+       "name": "disable",
+       "help": "Do not switch to Source tree when available."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "spt-threshold-group": {
+     "name": "spt-threshold-group",
+     "category": "unitary",
+     "type": "string",
+     "help": "Groups allowed to switch to source tree.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "ssm": {
+     "name": "ssm",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable source specific multicast.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Allow source specific multicast."
+      },
+      {
+       "name": "disable",
+       "help": "Do not allow source specific multicast."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "ssm-range": {
+     "name": "ssm-range",
+     "category": "unitary",
+     "type": "string",
+     "help": "Groups allowed to source specific multicast.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "register-rate-limit": {
+     "name": "register-rate-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Limit of packets/sec per source registered through this RP (0 - 65535, default = 0 which means unlimited).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "pim-use-sdwan": {
+     "name": "pim-use-sdwan",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of SDWAN when checking RPF neighbor and sending of REG packet.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable use of SDWAN when checking RPF neighbor and sending of REG packet."
+      },
+      {
+       "name": "disable",
+       "help": "Disable use of SDWAN when checking RPF neighbor and sending of REG packet."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "rp-address": {
+     "name": "rp-address",
+     "category": "table",
+     "help": "Statically configure RP addresses.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "ip-address": {
+       "name": "ip-address",
+       "category": "unitary",
+       "type": "ipv4-address",
+       "help": "RP router address.",
+       "required": true,
+       "default": "0.0.0.0",
+       "multiple_values": false
+      },
+      "group": {
+       "name": "group",
+       "category": "unitary",
+       "type": "string",
+       "help": "Groups to use this RP.",
+       "datasource": [
+        "router.access-list.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 64,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "interface": {
+   "name": "interface",
+   "category": "table",
+   "help": "PIM interfaces.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "ttl-threshold": {
+     "name": "ttl-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum TTL of multicast packets that will be forwarded (applied only to new multicast routes) (1 - 255, default = 1).",
+     "min-value": 1,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    },
+    "pim-mode": {
+     "name": "pim-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "PIM operation mode.",
+     "options": [
+      {
+       "name": "sparse-mode",
+       "help": "sparse-mode"
+      },
+      {
+       "name": "dense-mode",
+       "help": "dense-mode"
+      }
+     ],
+     "default": "sparse-mode",
+     "multiple_values": false
+    },
+    "passive": {
+     "name": "passive",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable listening to IGMP but not participating in PIM.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Listen only."
+      },
+      {
+       "name": "disable",
+       "help": "Participate in PIM."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "bfd": {
+     "name": "bfd",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable Protocol Independent Multicast (PIM) Bidirectional Forwarding Detection (BFD).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable Protocol Independent Multicast (PIM) Bidirectional Forwarding Detection (BFD)."
+      },
+      {
+       "name": "disable",
+       "help": "Disable Protocol Independent Multicast (PIM) Bidirectional Forwarding Detection (BFD)."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "neighbour-filter": {
+     "name": "neighbour-filter",
+     "category": "unitary",
+     "type": "string",
+     "help": "Routers acknowledged as neighbor routers.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "hello-interval": {
+     "name": "hello-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Interval between sending PIM hello messages (0 - 65535 sec, default = 30).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 30,
+     "multiple_values": false
+    },
+    "hello-holdtime": {
+     "name": "hello-holdtime",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time before old neighbor information expires (0 - 65535 sec, default = 105).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 105,
+     "multiple_values": false
+    },
+    "cisco-exclude-genid": {
+     "name": "cisco-exclude-genid",
+     "category": "unitary",
+     "type": "option",
+     "help": "Exclude GenID from hello packets (compatibility with old Cisco IOS).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Do not send GenID."
+      },
+      {
+       "name": "disable",
+       "help": "Send GenID according to standard."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "dr-priority": {
+     "name": "dr-priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DR election priority.",
+     "min-value": 1,
+     "max-value": 4294967295,
+     "default": 1,
+     "multiple_values": false
+    },
+    "propagation-delay": {
+     "name": "propagation-delay",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Delay flooding packets on this interface (100 - 5000 msec, default = 500).",
+     "min-value": 100,
+     "max-value": 5000,
+     "default": 500,
+     "multiple_values": false
+    },
+    "state-refresh-interval": {
+     "name": "state-refresh-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Interval between sending state-refresh packets (1 - 100 sec, default = 60).",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 60,
+     "multiple_values": false
+    },
+    "rp-candidate": {
+     "name": "rp-candidate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable compete to become RP in elections.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Compete for RP elections."
+      },
+      {
+       "name": "disable",
+       "help": "Do not compete for RP elections."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "rp-candidate-group": {
+     "name": "rp-candidate-group",
+     "category": "unitary",
+     "type": "string",
+     "help": "Multicast groups managed by this RP.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "rp-candidate-priority": {
+     "name": "rp-candidate-priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Router's priority as RP.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 192,
+     "multiple_values": false
+    },
+    "rp-candidate-interval": {
+     "name": "rp-candidate-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "RP candidate advertisement interval (1 - 16383 sec, default = 60).",
+     "min-value": 1,
+     "max-value": 16383,
+     "default": 60,
+     "multiple_values": false
+    },
+    "multicast-flow": {
+     "name": "multicast-flow",
+     "category": "unitary",
+     "type": "string",
+     "help": "Acceptable source for multicast group.",
+     "datasource": [
+      "router.multicast-flow.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "static-group": {
+     "name": "static-group",
+     "category": "unitary",
+     "type": "string",
+     "help": "Statically set multicast groups to forward out.",
+     "datasource": [
+      "router.multicast-flow.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "rpf-nbr-fail-back": {
+     "name": "rpf-nbr-fail-back",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable fail back for RPF neighbor query.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable fail back for RPF neighbor query."
+      },
+      {
+       "name": "disable",
+       "help": "Disable fail back for RPF neighbor query."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "rpf-nbr-fail-back-filter": {
+     "name": "rpf-nbr-fail-back-filter",
+     "category": "unitary",
+     "type": "string",
+     "help": "Filter for fail back RPF neighbors.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "join-group": {
+     "name": "join-group",
+     "category": "table",
+     "help": "Join multicast groups.",
+     "mkey": "address",
+     "mkey_type": "ipv4-address-any",
+     "children": {
+      "address": {
+       "name": "address",
+       "category": "unitary",
+       "type": "ipv4-address-any",
+       "help": "Multicast group IP address.",
+       "default": "0.0.0.0",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "igmp": {
+     "name": "igmp",
+     "category": "complex",
+     "help": "IGMP configuration options.",
+     "children": {
+      "access-group": {
+       "name": "access-group",
+       "category": "unitary",
+       "type": "string",
+       "help": "Groups IGMP hosts are allowed to join.",
+       "datasource": [
+        "router.access-list.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "version": {
+       "name": "version",
+       "category": "unitary",
+       "type": "option",
+       "help": "Maximum version of IGMP to support.",
+       "options": [
+        {
+         "name": "3",
+         "help": "Version 3 and lower."
+        },
+        {
+         "name": "2",
+         "help": "Version 2 and lower."
+        },
+        {
+         "name": "1",
+         "help": "Version 1."
+        }
+       ],
+       "default": "3",
+       "multiple_values": false
+      },
+      "immediate-leave-group": {
+       "name": "immediate-leave-group",
+       "category": "unitary",
+       "type": "string",
+       "help": "Groups to drop membership for immediately after receiving IGMPv2 leave.",
+       "datasource": [
+        "router.access-list.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "last-member-query-interval": {
+       "name": "last-member-query-interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Timeout between IGMPv2 leave and removing group (1 - 65535 msec, default = 1000).",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 1000,
+       "multiple_values": false
+      },
+      "last-member-query-count": {
+       "name": "last-member-query-count",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Number of group specific queries before removing group (2 - 7, default = 2).",
+       "min-value": 2,
+       "max-value": 7,
+       "default": 2,
+       "multiple_values": false
+      },
+      "query-max-response-time": {
+       "name": "query-max-response-time",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum time to wait for a IGMP query response (1 - 25 sec, default = 10).",
+       "min-value": 1,
+       "max-value": 25,
+       "default": 10,
+       "multiple_values": false
+      },
+      "query-interval": {
+       "name": "query-interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Interval between queries to IGMP hosts (1 - 65535 sec, default = 125).",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 125,
+       "multiple_values": false
+      },
+      "query-timeout": {
+       "name": "query-timeout",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Timeout between queries before becoming querying unit for network (60 - 900, default = 255).",
+       "min-value": 60,
+       "max-value": 900,
+       "default": 255,
+       "multiple_values": false
+      },
+      "router-alert-check": {
+       "name": "router-alert-check",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable require IGMP packets contain router alert option.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Require Router Alert option in IGMP packets."
+        },
+        {
+         "name": "disable",
+         "help": "don't require Router Alert option in IGMP packets"
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      }
+     }
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "router",
+ "q_type": 188,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,214 @@
+{
+ "name": "kmip-server",
+ "category": "table",
+ "help": "KMIP server entry configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "KMIP server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-list": {
+   "name": "server-list",
+   "category": "table",
+   "help": "KMIP server list.",
+   "required": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable KMIP server.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable server."
+      },
+      {
+       "name": "disable",
+       "help": "Disable server."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "server": {
+     "name": "server",
+     "category": "unitary",
+     "type": "string",
+     "help": "KMIP server FQDN or IP address.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "KMIP server port.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 5696,
+     "multiple_values": false
+    },
+    "cert": {
+     "name": "cert",
+     "category": "unitary",
+     "type": "string",
+     "help": "Client certificate to use for connectivity to the KMIP server.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 5
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name to use for connectivity to the KMIP server.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password to use for connectivity to the KMIP server.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "server-identity-check": {
+   "name": "server-identity-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable KMIP server identity check (verify server FQDN/IP address against the server certificate).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable server identity check."
+    },
+    {
+     "name": "disable",
+     "help": "Disable server identity check."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate IP address to be used for communication with the KMIP server.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "vpn",
+ "q_type": 219,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

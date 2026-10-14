@@ -1,0 +1,171 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "SSL proxy settings.",
+ "children": {
+  "proxy-connect-timeout": {
+   "name": "proxy-connect-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time limit to make an internal connection to the appropriate proxy process (1 - 60 sec, default = 30).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 60,
+   "default": 30,
+   "multiple_values": false
+  },
+  "ssl-dh-bits": {
+   "name": "ssl-dh-bits",
+   "category": "unitary",
+   "type": "option",
+   "help": "Bit-size of Diffie-Hellman (DH) prime used in DHE-RSA negotiation (default = 2048).",
+   "required": true,
+   "options": [
+    {
+     "name": "768",
+     "help": "768-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1024",
+     "help": "1024-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1536",
+     "help": "1536-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "2048",
+     "help": "2048-bit Diffie-Hellman prime."
+    }
+   ],
+   "default": "2048",
+   "multiple_values": false
+  },
+  "ssl-send-empty-frags": {
+   "name": "ssl-send-empty-frags",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending empty fragments to avoid attack on CBC IV (for SSL 3.0 and TLS 1.0 only).",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Send empty fragments."
+    },
+    {
+     "name": "disable",
+     "help": "Do not send empty fragments."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "no-matching-cipher-action": {
+   "name": "no-matching-cipher-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Bypass or drop the connection when no matching cipher is found.",
+   "required": true,
+   "options": [
+    {
+     "name": "bypass",
+     "help": "Bypass connection."
+    },
+    {
+     "name": "drop",
+     "help": "Drop connection."
+    }
+   ],
+   "default": "bypass",
+   "multiple_values": false
+  },
+  "cert-cache-capacity": {
+   "name": "cert-cache-capacity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum capacity of the host certificate cache (0 - 500, default = 200).",
+   "required": true,
+   "min-value": 0,
+   "max-value": 500,
+   "default": 200,
+   "multiple_values": false
+  },
+  "cert-cache-timeout": {
+   "name": "cert-cache-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time limit to keep certificate cache (1 - 120 min, default = 10).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 120,
+   "default": 10,
+   "multiple_values": false
+  },
+  "session-cache-capacity": {
+   "name": "session-cache-capacity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Capacity of the SSL session cache (--Obsolete--) (1 - 1000, default = 500).",
+   "required": true,
+   "min-value": 0,
+   "max-value": 1000,
+   "default": 500,
+   "multiple_values": false
+  },
+  "session-cache-timeout": {
+   "name": "session-cache-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time limit to keep SSL session state (1 - 60 min, default = 20).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 60,
+   "default": 20,
+   "multiple_values": false
+  },
+  "kxp-queue-threshold": {
+   "name": "kxp-queue-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum length of the CP KXP queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default = 16).",
+   "required": true,
+   "min-value": 0,
+   "max-value": 512,
+   "default": 16,
+   "multiple_values": false
+  },
+  "ssl-queue-threshold": {
+   "name": "ssl-queue-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum length of the CP SSL queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default = 32).",
+   "required": true,
+   "min-value": 0,
+   "max-value": 512,
+   "default": 32,
+   "multiple_values": false
+  },
+  "abbreviate-handshake": {
+   "name": "abbreviate-handshake",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of SSL abbreviated handshake.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of SSL abbreviated handshake."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of SSL abbreviated handshake."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "firewall.ssl",
+ "q_type": 400,
+ "access_group": "fwgrp",
+ "object_range": "global"
+}

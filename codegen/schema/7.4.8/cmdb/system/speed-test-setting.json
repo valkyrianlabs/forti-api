@@ -1,0 +1,31 @@
+{
+ "name": "speed-test-setting",
+ "category": "complex",
+ "help": "Configure speed test setting.",
+ "children": {
+  "latency-threshold": {
+   "name": "latency-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Speed test latency threshold in milliseconds (0 - 2000, default = 60) for the Auto mode. If the latency exceeds this threshold, the speed test will use the UDP protocol; otherwise, it will use the TCP protocol.",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 60,
+   "multiple_values": false
+  },
+  "multiple-tcp-stream": {
+   "name": "multiple-tcp-stream",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of parallel client streams (1 - 64, default = 4) for the TCP protocol to run during the speed test.",
+   "min-value": 1,
+   "max-value": 64,
+   "default": 4,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 397,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

@@ -1,0 +1,259 @@
+{
+ "name": "wtp-group",
+ "category": "table",
+ "help": "Configure WTP groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WTP group name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "platform-type": {
+   "name": "platform-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "FortiAP models to define the WTP group platform type.",
+   "options": [
+    {
+     "name": "AP-11N",
+     "help": "Default 11n AP."
+    },
+    {
+     "name": "C24JE",
+     "help": "FAPC24JE."
+    },
+    {
+     "name": "421E",
+     "help": "FAP421E."
+    },
+    {
+     "name": "423E",
+     "help": "FAP423E."
+    },
+    {
+     "name": "221E",
+     "help": "FAP221E."
+    },
+    {
+     "name": "222E",
+     "help": "FAP222E."
+    },
+    {
+     "name": "223E",
+     "help": "FAP223E."
+    },
+    {
+     "name": "224E",
+     "help": "FAP224E."
+    },
+    {
+     "name": "231E",
+     "help": "FAP231E."
+    },
+    {
+     "name": "321E",
+     "help": "FAP321E."
+    },
+    {
+     "name": "431F",
+     "help": "FAP431F."
+    },
+    {
+     "name": "431FL",
+     "help": "FAP431FL."
+    },
+    {
+     "name": "432F",
+     "help": "FAP432F."
+    },
+    {
+     "name": "432FR",
+     "help": "FAP432FR."
+    },
+    {
+     "name": "433F",
+     "help": "FAP433F."
+    },
+    {
+     "name": "433FL",
+     "help": "FAP433FL."
+    },
+    {
+     "name": "231F",
+     "help": "FAP231F."
+    },
+    {
+     "name": "231FL",
+     "help": "FAP231FL."
+    },
+    {
+     "name": "234F",
+     "help": "FAP234F."
+    },
+    {
+     "name": "23JF",
+     "help": "FAP23JF."
+    },
+    {
+     "name": "831F",
+     "help": "FAP831F."
+    },
+    {
+     "name": "231G",
+     "help": "FAP231G."
+    },
+    {
+     "name": "233G",
+     "help": "FAP233G."
+    },
+    {
+     "name": "234G",
+     "help": "FAP234G."
+    },
+    {
+     "name": "431G",
+     "help": "FAP431G."
+    },
+    {
+     "name": "432G",
+     "help": "FAP432G."
+    },
+    {
+     "name": "433G",
+     "help": "FAP433G."
+    },
+    {
+     "name": "231K",
+     "help": "FAP231K."
+    },
+    {
+     "name": "23JK",
+     "help": "FAP23JK."
+    },
+    {
+     "name": "241K",
+     "help": "FAP241K."
+    },
+    {
+     "name": "243K",
+     "help": "FAP243K."
+    },
+    {
+     "name": "441K",
+     "help": "FAP441K."
+    },
+    {
+     "name": "443K",
+     "help": "FAP443K."
+    },
+    {
+     "name": "U421E",
+     "help": "FAPU421EV."
+    },
+    {
+     "name": "U422EV",
+     "help": "FAPU422EV."
+    },
+    {
+     "name": "U423E",
+     "help": "FAPU423EV."
+    },
+    {
+     "name": "U221EV",
+     "help": "FAPU221EV."
+    },
+    {
+     "name": "U223EV",
+     "help": "FAPU223EV."
+    },
+    {
+     "name": "U24JEV",
+     "help": "FAPU24JEV."
+    },
+    {
+     "name": "U321EV",
+     "help": "FAPU321EV."
+    },
+    {
+     "name": "U323EV",
+     "help": "FAPU323EV."
+    },
+    {
+     "name": "U431F",
+     "help": "FAPU431F."
+    },
+    {
+     "name": "U433F",
+     "help": "FAPU433F."
+    },
+    {
+     "name": "U231F",
+     "help": "FAPU231F."
+    },
+    {
+     "name": "U234F",
+     "help": "FAPU234F."
+    },
+    {
+     "name": "U432F",
+     "help": "FAPU432F."
+    },
+    {
+     "name": "U231G",
+     "help": "FAPU231G."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "ble-major-id": {
+   "name": "ble-major-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Override BLE Major ID.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "wtps": {
+   "name": "wtps",
+   "category": "table",
+   "help": "WTP list.",
+   "member_table": true,
+   "mkey": "wtp-id",
+   "mkey_type": "string",
+   "children": {
+    "wtp-id": {
+     "name": "wtp-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "WTP ID.",
+     "required": true,
+     "datasource": [
+      "wireless-controller.wtp.wtp-id"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 4,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 278,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

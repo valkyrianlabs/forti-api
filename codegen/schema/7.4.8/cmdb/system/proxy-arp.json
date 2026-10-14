@@ -1,0 +1,57 @@
+{
+ "name": "proxy-arp",
+ "category": "table",
+ "help": "Configure proxy-ARP.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Unique integer ID of the entry.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface acting proxy-ARP.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address or start IP to be proxied.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "end-ip": {
+   "name": "end-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "End IP of IP range to be proxied.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 211,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

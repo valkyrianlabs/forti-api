@@ -1,0 +1,93 @@
+{
+ "name": "advertised-subnets",
+ "category": "table",
+ "help": "Local advertised subnets.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "min-value": 0,
+   "max-value": 4294967294,
+   "default": 0,
+   "multiple_values": false
+  },
+  "prefix": {
+   "name": "prefix",
+   "category": "unitary",
+   "type": "ipv4-classnet",
+   "help": "Network prefix.",
+   "required": true,
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "access": {
+   "name": "access",
+   "category": "unitary",
+   "type": "option",
+   "help": "Access policy direction.",
+   "required": true,
+   "options": [
+    {
+     "name": "inbound",
+     "help": "Allow inbound traffic to subnet."
+    },
+    {
+     "name": "bidirectional",
+     "help": "Allow inbound and outbound traffic to subnet."
+    }
+   ],
+   "default": "inbound",
+   "multiple_values": false
+  },
+  "bgp-network": {
+   "name": "bgp-network",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Underlying BGP network.",
+   "datasource": [
+    "router.bgp.network.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "firewall-address": {
+   "name": "firewall-address",
+   "category": "unitary",
+   "type": "string",
+   "help": "Underlying firewall address.",
+   "datasource": [
+    "firewall.address.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "policies": {
+   "name": "policies",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Underlying policies.",
+   "datasource": [
+    "firewall.policy.policyid"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 16
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system.fabric-vpn",
+ "q_type": 518,
+ "access_group": "secfabgrp",
+ "object_range": "global"
+}

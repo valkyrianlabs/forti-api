@@ -1,0 +1,342 @@
+{
+ "name": "dns-database",
+ "category": "table",
+ "help": "Configure DNS databases.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Zone name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this DNS zone.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "domain": {
+   "name": "domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "allow-transfer": {
+   "name": "allow-transfer",
+   "category": "unitary",
+   "type": "user",
+   "help": "DNS zone transfer IP address list.",
+   "default": "",
+   "multiple_values": true
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Zone type (primary to manage entries directly, secondary to import entries from other zones).",
+   "required": true,
+   "options": [
+    {
+     "name": "primary",
+     "help": "Primary DNS zone, to manage entries directly."
+    },
+    {
+     "name": "secondary",
+     "help": "Secondary DNS zone, to import entries from other DNS zones."
+    }
+   ],
+   "default": "primary",
+   "multiple_values": false
+  },
+  "view": {
+   "name": "view",
+   "category": "unitary",
+   "type": "option",
+   "help": "Zone view (public to serve public clients, shadow to serve internal clients).",
+   "required": true,
+   "options": [
+    {
+     "name": "shadow",
+     "help": "Shadow DNS zone to serve internal clients."
+    },
+    {
+     "name": "public",
+     "help": "Public DNS zone to serve public clients."
+    },
+    {
+     "name": "shadow-ztna",
+     "help": "implicit DNS zone for ztna dox tunnel."
+    },
+    {
+     "name": "proxy",
+     "help": "Shadow DNS zone for internal proxy."
+    }
+   ],
+   "default": "shadow",
+   "multiple_values": false
+  },
+  "ip-primary": {
+   "name": "ip-primary",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IP address of primary DNS server. Entries in this primary DNS server and imported into the DNS zone.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "primary-name": {
+   "name": "primary-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name of the default DNS server for this zone.",
+   "size": 255,
+   "default": "dns",
+   "multiple_values": false
+  },
+  "contact": {
+   "name": "contact",
+   "category": "unitary",
+   "type": "string",
+   "help": "Email address of the administrator for this zone. You can specify only the username, such as admin or the full email address, such as admin@test.com When using only a username, the domain of the email will be this zone.",
+   "size": 255,
+   "default": "host",
+   "multiple_values": false
+  },
+  "ttl": {
+   "name": "ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default time-to-live value for the entries of this DNS zone (0 - 2147483647 sec, default = 86400).",
+   "required": true,
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "authoritative": {
+   "name": "authoritative",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authoritative zone.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable authoritative zone."
+    },
+    {
+     "name": "disable",
+     "help": "Disable authoritative zone."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "forwarder": {
+   "name": "forwarder",
+   "category": "unitary",
+   "type": "user",
+   "help": "DNS zone forwarder IP address list.",
+   "default": "",
+   "multiple_values": true
+  },
+  "forwarder6": {
+   "name": "forwarder6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Forwarder IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP for forwarding to DNS server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 source IP address for forwarding to DNS server.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "rr-max": {
+   "name": "rr-max",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of resource records (10 - 65536, 0 means infinite).",
+   "min-value": 10,
+   "max-value": 65536,
+   "default": 16384,
+   "multiple_values": false
+  },
+  "dns-entry": {
+   "name": "dns-entry",
+   "category": "table",
+   "help": "DNS entry.",
+   "required": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DNS entry ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable resource record status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable resource record status."
+      },
+      {
+       "name": "disable",
+       "help": "Disable resource record status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Resource record type.",
+     "required": true,
+     "options": [
+      {
+       "name": "A",
+       "help": "Host type."
+      },
+      {
+       "name": "NS",
+       "help": "Name server type."
+      },
+      {
+       "name": "CNAME",
+       "help": "Canonical name type."
+      },
+      {
+       "name": "MX",
+       "help": "Mail exchange type."
+      },
+      {
+       "name": "AAAA",
+       "help": "IPv6 host type."
+      },
+      {
+       "name": "PTR",
+       "help": "Pointer type."
+      },
+      {
+       "name": "PTR_V6",
+       "help": "IPv6 pointer type."
+      }
+     ],
+     "default": "A",
+     "multiple_values": false
+    },
+    "ttl": {
+     "name": "ttl",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time-to-live for this entry (0 to 2147483647 sec, default = 0).",
+     "min-value": 0,
+     "max-value": 2147483647,
+     "default": 0,
+     "multiple_values": false
+    },
+    "preference": {
+     "name": "preference",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DNS entry preference (0 - 65535, highest preference = 0, default = 10).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 10,
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address-any",
+     "help": "IPv4 address of the host.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "ipv6": {
+     "name": "ipv6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 address of the host.",
+     "default": "::",
+     "multiple_values": false
+    },
+    "hostname": {
+     "name": "hostname",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of the host.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "canonical-name": {
+     "name": "canonical-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Canonical name of the host.",
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 4096,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 410,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

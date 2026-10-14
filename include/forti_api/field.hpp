@@ -21,6 +21,7 @@
 
 #include <charconv>
 #include <cstdint>
+#include <map>
 #include <optional>
 #include <stdexcept>
 #include <string>
@@ -132,6 +133,12 @@ namespace fortiapi {
         struct is_vector<std::vector<T>> : std::true_type {};
 
         template<typename T>
+        struct is_string_map : std::false_type {};
+
+        template<typename T>
+        struct is_string_map<std::map<std::string, T>> : std::true_type {};
+
+        template<typename T>
         nlohmann::json to_json_value(const T& value, Write mode);
 
         template<typename T>
@@ -224,6 +231,10 @@ namespace fortiapi {
                 nlohmann::json out = nlohmann::json::array();
                 for (const auto& item: value) out.push_back(to_json_value(item, Write::create));
                 return out;
+            } else if constexpr (is_string_map<T>::value) {
+                nlohmann::json out = nlohmann::json::object();
+                for (const auto& [key, item]: value) out[key] = to_json_value(item, Write::create);
+                return out;
             } else return nlohmann::json(value);
         }
 
@@ -242,6 +253,18 @@ namespace fortiapi {
                         out.push_back(from_json_value<typename T::value_type>(json[i]));
                     } catch (const DecodeFailure& failure) {
                         throw DecodeFailure("[" + std::to_string(i) + "]" + (failure.where.starts_with('[') ? "" : ".") +
+                                            failure.where, failure.why);
+                    }
+                }
+                return out;
+            } else if constexpr (is_string_map<T>::value) {
+                T out;
+                if (!json.is_object()) throw nlohmann::json::type_error::create(302, "expected an object", &json);
+                for (auto it = json.begin(); it != json.end(); ++it) {
+                    try {
+                        out.emplace(it.key(), from_json_value<typename T::mapped_type>(it.value()));
+                    } catch (const DecodeFailure& failure) {
+                        throw DecodeFailure("[" + it.key() + "]" + (failure.where.starts_with('[') ? "" : ".") +
                                             failure.where, failure.why);
                     }
                 }
@@ -268,8 +291,9 @@ namespace fortiapi {
     template<detail::Visitable T>
     nlohmann::json to_json(const T& object, Write mode) { return detail::write_object(object, mode); }
 
-    // Builds a generated object from a device reply; every attribute present becomes populated.
-    template<detail::Visitable T>
+    // Builds a generated object (or a vector / string map of them) from a device reply; every
+    // attribute present becomes populated.
+    template<typename T>
     T from_json(const nlohmann::json& json) { return detail::from_json_value<T>(json); }
 
     // True when an update would send something.

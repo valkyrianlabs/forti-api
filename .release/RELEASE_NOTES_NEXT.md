@@ -47,7 +47,7 @@ firewall::Addresses::update(address);   // sends {"comment": "managed"} and noth
 
 Fields know whether they are absent, read from the device, modified or cleared: an update sends only
 what you changed (`clear()` resets an attribute to its default), reads never mark anything changed,
-and option attributes come with constants (`firewall::policy::action::deny`). Generated so far:
+and option attributes come with constants (`firewall::Policy::Action::deny`). Generated so far:
 firewall policy, address, VIP, service, service category, recurring schedule, DNS filter profile,
 external resource, API user, interface and global settings.
 
@@ -76,3 +76,16 @@ external resource, API user, interface and global settings.
 Fixed on the way: schedule days are written as FortiOS day names (were ordinals), IPv6 trusted hosts
 get the IPv6 type, CIDR trusted hosts are accepted, and rejected threat-feed pushes raise an error
 instead of passing silently.
+
+## Every configuration endpoint, and typed monitor reads
+
+- All 487 configuration (cmdb) endpoints FortiOS 7.4.8 reports on a FortiGate-60F are generated: firewall,
+  system, router, VPN, user, log, security profiles, switch and wireless controllers and more. Each
+  decodes every object on a live device without loss (35,000+ objects verified).
+- Read-only monitor endpoints the web GUI uses are generated with typed results from recorded
+  response shapes (`fortiapi::monitor::system::Time::get()`); others remain available through
+  `fortiapi::Monitor`.
+- Option constants now live in their type: `firewall::Policy::Action::deny` (was
+  `firewall::policy::action::deny`).
+- Group headers (`forti_api/gen/router.hpp`) and `fortiapi::gen::for_each_endpoint` /
+  `for_each_monitor` for introspection.

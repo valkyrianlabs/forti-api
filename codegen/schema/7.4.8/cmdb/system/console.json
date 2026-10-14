@@ -1,0 +1,65 @@
+{
+ "name": "console",
+ "category": "complex",
+ "help": "Configure console.",
+ "children": {
+  "output": {
+   "name": "output",
+   "category": "unitary",
+   "type": "option",
+   "help": "Console output mode.",
+   "options": [
+    {
+     "name": "standard",
+     "help": "Standard output."
+    },
+    {
+     "name": "more",
+     "help": "More page output."
+    }
+   ],
+   "default": "more",
+   "multiple_values": false
+  },
+  "login": {
+   "name": "login",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable serial console and FortiExplorer.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Console login enable."
+    },
+    {
+     "name": "disable",
+     "help": "Console login disable."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fortiexplorer": {
+   "name": "fortiexplorer",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable access for FortiExplorer.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiExplorer access."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiExplorer access."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 130,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

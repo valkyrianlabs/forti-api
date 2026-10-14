@@ -1,0 +1,120 @@
+{
+ "name": "speed-test-server",
+ "category": "table",
+ "help": "Configure speed test server list.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Speed test server name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "timestamp": {
+   "name": "timestamp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Speed test server timestamp.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "host": {
+   "name": "host",
+   "category": "table",
+   "help": "Hosts of the server.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Server host ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Server host IPv4 address.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Server host port number to communicate with client.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 5204,
+     "multiple_values": false
+    },
+    "user": {
+     "name": "user",
+     "category": "unitary",
+     "type": "string",
+     "help": "Speed test host user name.",
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "password": {
+     "name": "password",
+     "category": "unitary",
+     "type": "password",
+     "help": "Speed test host password.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "longitude": {
+     "name": "longitude",
+     "category": "unitary",
+     "type": "string",
+     "help": "Speed test host longitude.",
+     "size": 7,
+     "default": "",
+     "multiple_values": false
+    },
+    "latitude": {
+     "name": "latitude",
+     "category": "unitary",
+     "type": "string",
+     "help": "Speed test host latitude.",
+     "size": 7,
+     "default": "",
+     "multiple_values": false
+    },
+    "distance": {
+     "name": "distance",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Speed test host distance.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 395,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

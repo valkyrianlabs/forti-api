@@ -1,10 +1,14 @@
 # Which FortiOS endpoints forti-api generates (tools/fortios/fortios.py gen).
 #
-# Each [[cmdb]] path gets include/forti_api/gen/<path>.hpp with a struct, a Spec and a Table (or
+# Each path gets include/forti_api/gen/<path>.hpp with a struct, a Spec and a Table (or
 # Singleton) alias. Defaults: namespace from the path ("firewall.service/custom" -> firewall::service),
 # type = CamelCase of the last segment, alias = plural of the type (tables) or <Type>Settings
 # (singletons). Override with namespace / type / alias.
 fortios_version = "7.4.8"
+
+# Generate every path in codegen/catalog/<version>/cmdb.json (fortios.py crawl --snapshots); the
+# [[cmdb]] entries below only choose names where the defaults do not read well.
+generate_all = true
 
 [[cmdb]]
 path = "dnsfilter/profile"

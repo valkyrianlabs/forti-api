@@ -1,0 +1,184 @@
+{
+ "name": "queue-policy",
+ "category": "table",
+ "help": "Configure FortiSwitch QoS egress queue policy.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "QoS policy name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "schedule": {
+   "name": "schedule",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue scheduling.",
+   "required": true,
+   "options": [
+    {
+     "name": "strict",
+     "help": "Strict scheduling (queue7: highest priority, queue0: lowest priority)."
+    },
+    {
+     "name": "round-robin",
+     "help": "Round robin scheduling."
+    },
+    {
+     "name": "weighted",
+     "help": "Weighted round robin scheduling."
+    }
+   ],
+   "default": "round-robin",
+   "multiple_values": false
+  },
+  "rate-by": {
+   "name": "rate-by",
+   "category": "unitary",
+   "type": "option",
+   "help": "COS queue rate by kbps or percent.",
+   "required": true,
+   "options": [
+    {
+     "name": "kbps",
+     "help": "Rate by kbps."
+    },
+    {
+     "name": "percent",
+     "help": "Rate by percent."
+    }
+   ],
+   "default": "kbps",
+   "multiple_values": false
+  },
+  "cos-queue": {
+   "name": "cos-queue",
+   "category": "table",
+   "help": "COS queue configuration.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Cos queue ID.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description of the COS queue.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "min-rate": {
+     "name": "min-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum rate (0 - 4294967295 kbps, 0 to disable).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "max-rate": {
+     "name": "max-rate",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum rate (0 - 4294967295 kbps, 0 to disable).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "min-rate-percent": {
+     "name": "min-rate-percent",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Minimum rate (% of link speed).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "max-rate-percent": {
+     "name": "max-rate-percent",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum rate (% of link speed).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "drop-policy": {
+     "name": "drop-policy",
+     "category": "unitary",
+     "type": "option",
+     "help": "COS queue drop policy.",
+     "options": [
+      {
+       "name": "taildrop",
+       "help": "Taildrop policy."
+      },
+      {
+       "name": "weighted-random-early-detection",
+       "help": "Weighted random early detection drop policy."
+      }
+     ],
+     "default": "taildrop",
+     "multiple_values": false
+    },
+    "ecn": {
+     "name": "ecn",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable ECN packet marking to drop eligible packets.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable ECN packet marking to drop eligible packets."
+      },
+      {
+       "name": "enable",
+       "help": "Enable ECN packet marking to drop eligible packets."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "weight": {
+     "name": "weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Weight of weighted round robin scheduling.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 1,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller.qos",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

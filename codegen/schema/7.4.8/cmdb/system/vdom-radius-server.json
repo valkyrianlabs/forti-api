@@ -1,0 +1,59 @@
+{
+ "name": "vdom-radius-server",
+ "category": "table",
+ "help": "Configure a RADIUS server to use as a RADIUS Single Sign On (RSSO) server for this VDOM.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the VDOM that you are adding the RADIUS server to.",
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the RSSO RADIUS server for this VDOM.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the RSSO RADIUS server for this VDOM."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the RSSO RADIUS server for this VDOM."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "radius-server-vdom": {
+   "name": "radius-server-vdom",
+   "category": "unitary",
+   "type": "string",
+   "help": "Use this option to select another VDOM containing a VDOM RSSO RADIUS server to use for the current VDOM.",
+   "required": true,
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 379,
+ "access_group": "authgrp",
+ "object_range": "global"
+}

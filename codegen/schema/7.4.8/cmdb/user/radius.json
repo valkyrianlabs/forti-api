@@ -1,0 +1,1378 @@
+{
+ "name": "radius",
+ "category": "table",
+ "help": "Configure RADIUS server entries.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "RADIUS server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Primary RADIUS server CN domain name or IP address.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "secret": {
+   "name": "secret",
+   "category": "unitary",
+   "type": "password",
+   "help": "Pre-shared secret key used to access the primary RADIUS server.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "secondary-server": {
+   "name": "secondary-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Secondary RADIUS CN domain name or IP address.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "secondary-secret": {
+   "name": "secondary-secret",
+   "category": "unitary",
+   "type": "password",
+   "help": "Secret key to access the secondary server.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "tertiary-server": {
+   "name": "tertiary-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tertiary RADIUS CN domain name or IP address.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "tertiary-secret": {
+   "name": "tertiary-secret",
+   "category": "unitary",
+   "type": "password",
+   "help": "Secret key to access the tertiary server.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds to retry connecting server.",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 5,
+   "multiple_values": false
+  },
+  "status-ttl": {
+   "name": "status-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time for which server reachability is cached so that when a server is unreachable, it will not be retried for at least this period of time (0 = cache disabled, default = 300).",
+   "min-value": 0,
+   "max-value": 600,
+   "default": 300,
+   "multiple_values": false
+  },
+  "all-usergroup": {
+   "name": "all-usergroup",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatically including this RADIUS server in all user groups.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not automatically include this server in a user group."
+    },
+    {
+     "name": "enable",
+     "help": "Include this RADIUS server in every user group."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "use-management-vdom": {
+   "name": "use-management-vdom",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using management VDOM to send requests.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Send requests using the management VDOM."
+    },
+    {
+     "name": "disable",
+     "help": "Send requests using the current VDOM."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "switch-controller-nas-ip-dynamic": {
+   "name": "switch-controller-nas-ip-dynamic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/Disable switch-controller nas-ip dynamic to dynamically set nas-ip.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dynamic NAS-IP setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dynamic NAS-IP setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nas-ip": {
+   "name": "nas-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address used to communicate with the RADIUS server and used as NAS-IP-Address and Called-Station-ID attributes.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "nas-id-type": {
+   "name": "nas-id-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "NAS identifier type configuration (default = legacy).",
+   "options": [
+    {
+     "name": "legacy",
+     "help": "NAS-ID value is the value previously used by each daemon."
+    },
+    {
+     "name": "custom",
+     "help": "NAS-ID value is customized."
+    },
+    {
+     "name": "hostname",
+     "help": "NAS-ID value is hostname or HA group name if applicable."
+    }
+   ],
+   "default": "legacy",
+   "multiple_values": false
+  },
+  "call-station-id-type": {
+   "name": "call-station-id-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Calling & Called station identifier type configuration (default = legacy), this option is not available for 802.1x authentication. ",
+   "options": [
+    {
+     "name": "legacy",
+     "help": "Calling & Called station identifier is the value previously used by each daemon."
+    },
+    {
+     "name": "IP",
+     "help": "Calling & Called station identifier is the value of IP address. "
+    },
+    {
+     "name": "MAC",
+     "help": "Calling & Called station identifier is the value of MAC address. "
+    }
+   ],
+   "default": "legacy",
+   "multiple_values": false
+  },
+  "nas-id": {
+   "name": "nas-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Custom NAS identifier.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "acct-interim-interval": {
+   "name": "acct-interim-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds between each accounting interim update message.",
+   "min-value": 60,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "radius-coa": {
+   "name": "radius-coa",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to allow a mechanism to change the attributes of an authentication, authorization, and accounting session after it is authenticated.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable RADIUS CoA."
+    },
+    {
+     "name": "disable",
+     "help": "Disable RADIUS CoA."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "radius-port": {
+   "name": "radius-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "RADIUS service port number.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "h3c-compatibility": {
+   "name": "h3c-compatibility",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable compatibility with the H3C, a mechanism that performs security checking for authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable H3C compatibility."
+    },
+    {
+     "name": "disable",
+     "help": "Disable H3C compatibility."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-type": {
+   "name": "auth-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication methods/protocols permitted for this RADIUS server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Use PAP, MSCHAP_v2, and CHAP (in that order)."
+    },
+    {
+     "name": "ms_chap_v2",
+     "help": "Microsoft Challenge Handshake Authentication Protocol version 2."
+    },
+    {
+     "name": "ms_chap",
+     "help": "Microsoft Challenge Handshake Authentication Protocol."
+    },
+    {
+     "name": "chap",
+     "help": "Challenge Handshake Authentication Protocol."
+    },
+    {
+     "name": "pap",
+     "help": "Password Authentication Protocol."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source IP address for communications to the RADIUS server.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "username-case-sensitive": {
+   "name": "username-case-sensitive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable case sensitive user names.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable username case-sensitive."
+    },
+    {
+     "name": "disable",
+     "help": "Disable username case-sensitive."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "group-override-attr-type": {
+   "name": "group-override-attr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "RADIUS attribute type to override user group information.",
+   "options": [
+    {
+     "name": "filter-Id",
+     "help": "Filter-Id"
+    },
+    {
+     "name": "class",
+     "help": "Class"
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "class": {
+   "name": "class",
+   "category": "table",
+   "help": "Class attribute name(s).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Class name.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "password-renewal": {
+   "name": "password-renewal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable password renewal.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable password renewal."
+    },
+    {
+     "name": "disable",
+     "help": "Disable password renewal."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "require-message-authenticator": {
+   "name": "require-message-authenticator",
+   "category": "unitary",
+   "type": "option",
+   "help": "Require message authenticator in authentication response.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Make the validation of message authenticator mandatory in authentication response."
+    },
+    {
+     "name": "disable",
+     "help": "Make the validation of message authenticator optional in authentication response."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "password-encoding": {
+   "name": "password-encoding",
+   "category": "unitary",
+   "type": "option",
+   "help": "Password encoding.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Use original password encoding."
+    },
+    {
+     "name": "ISO-8859-1",
+     "help": "Use ISO-8859-1 password encoding."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "mac-username-delimiter": {
+   "name": "mac-username-delimiter",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC authentication username delimiter (default = hyphen).",
+   "options": [
+    {
+     "name": "hyphen",
+     "help": "Use hyphen as delimiter for MAC authentication username."
+    },
+    {
+     "name": "single-hyphen",
+     "help": "Use single hyphen as delimiter for MAC authentication username."
+    },
+    {
+     "name": "colon",
+     "help": "Use colon as delimiter for MAC authentication username."
+    },
+    {
+     "name": "none",
+     "help": "No delimiter for MAC authentication username."
+    }
+   ],
+   "default": "hyphen",
+   "multiple_values": false
+  },
+  "mac-password-delimiter": {
+   "name": "mac-password-delimiter",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC authentication password delimiter (default = hyphen).",
+   "options": [
+    {
+     "name": "hyphen",
+     "help": "Use hyphen as delimiter for MAC authentication password."
+    },
+    {
+     "name": "single-hyphen",
+     "help": "Use single hyphen as delimiter for MAC authentication password."
+    },
+    {
+     "name": "colon",
+     "help": "Use colon as delimiter for MAC authentication password."
+    },
+    {
+     "name": "none",
+     "help": "No delimiter for MAC authentication password."
+    }
+   ],
+   "default": "hyphen",
+   "multiple_values": false
+  },
+  "mac-case": {
+   "name": "mac-case",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC authentication case (default = lowercase).",
+   "options": [
+    {
+     "name": "uppercase",
+     "help": "Use uppercase MAC."
+    },
+    {
+     "name": "lowercase",
+     "help": "Use lowercase MAC."
+    }
+   ],
+   "default": "lowercase",
+   "multiple_values": false
+  },
+  "acct-all-servers": {
+   "name": "acct-all-servers",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending of accounting messages to all configured servers (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Send accounting messages to all configured servers."
+    },
+    {
+     "name": "disable",
+     "help": "Send accounting message only to servers that are confirmed to be reachable."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "switch-controller-acct-fast-framedip-detect": {
+   "name": "switch-controller-acct-fast-framedip-detect",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Switch controller accounting message Framed-IP detection from DHCP snooping (seconds, default=2).",
+   "min-value": 2,
+   "max-value": 600,
+   "default": 2,
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "switch-controller-service-type": {
+   "name": "switch-controller-service-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "RADIUS service type.",
+   "options": [
+    {
+     "name": "login",
+     "help": "User should be connected to a host."
+    },
+    {
+     "name": "framed",
+     "help": "User use Framed Protocol."
+    },
+    {
+     "name": "callback-login",
+     "help": "User disconnected and called back."
+    },
+    {
+     "name": "callback-framed",
+     "help": "User disconnected and called back, then a Framed Protocol."
+    },
+    {
+     "name": "outbound",
+     "help": "User granted access to outgoing devices."
+    },
+    {
+     "name": "administrative",
+     "help": "User granted access to the administrative unsigned interface."
+    },
+    {
+     "name": "nas-prompt",
+     "help": "User provided a command prompt on the NAS."
+    },
+    {
+     "name": "authenticate-only",
+     "help": "Authentication requested, and no auth info needs to be returned."
+    },
+    {
+     "name": "callback-nas-prompt",
+     "help": "User disconnected and called back, then provided a command prompt."
+    },
+    {
+     "name": "call-check",
+     "help": "Used by the NAS in an Access-Request packet, Access-Accept to answer the call."
+    },
+    {
+     "name": "callback-administrative",
+     "help": "User disconnected and called back, granted access to the admin unsigned interface."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "transport-protocol": {
+   "name": "transport-protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Transport protocol to be used (default = udp).",
+   "options": [
+    {
+     "name": "udp",
+     "help": "UDP."
+    },
+    {
+     "name": "tcp",
+     "help": "TCP."
+    },
+    {
+     "name": "tls",
+     "help": "TLS over TCP."
+    }
+   ],
+   "default": "udp",
+   "multiple_values": false
+  },
+  "tls-min-proto-version": {
+   "name": "tls-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "ca-cert": {
+   "name": "ca-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA of server to trust under TLS.",
+   "datasource": [
+    "vpn.certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "client-cert": {
+   "name": "client-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Client certificate to use under TLS.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-identity-check": {
+   "name": "server-identity-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable RADIUS server identity check (verify server domain name/IP address against the server certificate).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable server identity check."
+    },
+    {
+     "name": "disable",
+     "help": "Disable server identity check."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "account-key-processing": {
+   "name": "account-key-processing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Account key processing operation. The FortiGate will keep either the whole domain or strip the domain from the subject identity.",
+   "options": [
+    {
+     "name": "same",
+     "help": "Same as subject identity field."
+    },
+    {
+     "name": "strip",
+     "help": "Strip domain string from subject identity field."
+    }
+   ],
+   "default": "same",
+   "multiple_values": false
+  },
+  "account-key-cert-field": {
+   "name": "account-key-cert-field",
+   "category": "unitary",
+   "type": "option",
+   "help": "Define subject identity field in certificate for user access right checking.",
+   "options": [
+    {
+     "name": "othername",
+     "help": "Other name in SAN."
+    },
+    {
+     "name": "rfc822name",
+     "help": "RFC822 email address in SAN."
+    },
+    {
+     "name": "dnsname",
+     "help": "DNS name in SAN."
+    },
+    {
+     "name": "cn",
+     "help": "CN in subject."
+    }
+   ],
+   "default": "othername",
+   "multiple_values": false
+  },
+  "rsso": {
+   "name": "rsso",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable RADIUS based single sign on feature.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable RADIUS based single sign on feature."
+    },
+    {
+     "name": "disable",
+     "help": "Disable RADIUS based single sign on feature."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rsso-radius-server-port": {
+   "name": "rsso-radius-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "UDP port to listen on for RADIUS Start and Stop records.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1813,
+   "multiple_values": false
+  },
+  "rsso-radius-response": {
+   "name": "rsso-radius-response",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending RADIUS response packets after receiving Start and Stop records.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sending RADIUS response packets."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sending RADIUS response packets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rsso-validate-request-secret": {
+   "name": "rsso-validate-request-secret",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable validating the RADIUS request shared secret in the Start or End record.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable validating RADIUS request shared secret."
+    },
+    {
+     "name": "disable",
+     "help": "Disable validating RADIUS request shared secret."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rsso-secret": {
+   "name": "rsso-secret",
+   "category": "unitary",
+   "type": "password",
+   "help": "RADIUS secret used by the RADIUS accounting server.",
+   "required": true,
+   "size": 31,
+   "multiple_values": false
+  },
+  "rsso-endpoint-attribute": {
+   "name": "rsso-endpoint-attribute",
+   "category": "unitary",
+   "type": "option",
+   "help": "RADIUS attributes used to extract the user end point identifier from the RADIUS Start record.",
+   "required": true,
+   "options": [
+    {
+     "name": "User-Name",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "NAS-IP-Address",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IP-Address",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IP-Netmask",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Filter-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-IP-Host",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Reply-Message",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Callback-Number",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Callback-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-Route",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IPX-Network",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Class",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Called-Station-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Calling-Station-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "NAS-Identifier",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Proxy-State",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Service",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Node",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Group",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-AppleTalk-Zone",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Acct-Session-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Acct-Multi-Session-Id",
+     "help": "Use this attribute."
+    }
+   ],
+   "default": "Calling-Station-Id",
+   "multiple_values": false
+  },
+  "rsso-endpoint-block-attribute": {
+   "name": "rsso-endpoint-block-attribute",
+   "category": "unitary",
+   "type": "option",
+   "help": "RADIUS attributes used to block a user.",
+   "required": true,
+   "options": [
+    {
+     "name": "User-Name",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "NAS-IP-Address",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IP-Address",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IP-Netmask",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Filter-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-IP-Host",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Reply-Message",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Callback-Number",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Callback-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-Route",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IPX-Network",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Class",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Called-Station-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Calling-Station-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "NAS-Identifier",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Proxy-State",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Service",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Node",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Group",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-AppleTalk-Zone",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Acct-Session-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Acct-Multi-Session-Id",
+     "help": "Use this attribute."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "sso-attribute": {
+   "name": "sso-attribute",
+   "category": "unitary",
+   "type": "option",
+   "help": "RADIUS attribute that contains the profile group name to be extracted from the RADIUS Start record.",
+   "required": true,
+   "options": [
+    {
+     "name": "User-Name",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "NAS-IP-Address",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IP-Address",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IP-Netmask",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Filter-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-IP-Host",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Reply-Message",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Callback-Number",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Callback-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-Route",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-IPX-Network",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Class",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Called-Station-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Calling-Station-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "NAS-Identifier",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Proxy-State",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Service",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Node",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Login-LAT-Group",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Framed-AppleTalk-Zone",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Acct-Session-Id",
+     "help": "Use this attribute."
+    },
+    {
+     "name": "Acct-Multi-Session-Id",
+     "help": "Use this attribute."
+    }
+   ],
+   "default": "Class",
+   "multiple_values": false
+  },
+  "sso-attribute-key": {
+   "name": "sso-attribute-key",
+   "category": "unitary",
+   "type": "string",
+   "help": "Key prefix for SSO group value in the SSO attribute.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sso-attribute-value-override": {
+   "name": "sso-attribute-value-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable override old attribute value with new value for the same endpoint.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable override old attribute value with new value for the same endpoint."
+    },
+    {
+     "name": "disable",
+     "help": "Disable override old attribute value with new value for the same endpoint."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "rsso-context-timeout": {
+   "name": "rsso-context-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds before the logged out user is removed from the \"user context list\" of logged on users.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 28800,
+   "multiple_values": false
+  },
+  "rsso-log-period": {
+   "name": "rsso-log-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time interval in seconds that group event log messages will be generated for dynamic profile events.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "rsso-log-flags": {
+   "name": "rsso-log-flags",
+   "category": "unitary",
+   "type": "option",
+   "help": "Events to log.",
+   "options": [
+    {
+     "name": "protocol-error",
+     "help": "Enable this log type."
+    },
+    {
+     "name": "profile-missing",
+     "help": "Enable this log type."
+    },
+    {
+     "name": "accounting-stop-missed",
+     "help": "Enable this log type."
+    },
+    {
+     "name": "accounting-event",
+     "help": "Enable this log type."
+    },
+    {
+     "name": "endpoint-block",
+     "help": "Enable this log type."
+    },
+    {
+     "name": "radiusd-other",
+     "help": "Enable this log type."
+    },
+    {
+     "name": "none",
+     "help": "Disable all logging."
+    }
+   ],
+   "default": "protocol-error profile-missing accounting-stop-missed accounting-event endpoint-block radiusd-other",
+   "multiple_values": true
+  },
+  "rsso-flush-ip-session": {
+   "name": "rsso-flush-ip-session",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable flushing user IP sessions on RADIUS accounting Stop messages.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable flush user IP sessions on RADIUS accounting stop."
+    },
+    {
+     "name": "disable",
+     "help": "Disable flush user IP sessions on RADIUS accounting stop."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rsso-ep-one-ip-only": {
+   "name": "rsso-ep-one-ip-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the replacement of old IP addresses with new ones for the same endpoint on RADIUS accounting Start messages.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable replacement of old IP address with new IP address for the same endpoint on RADIUS accounting start."
+    },
+    {
+     "name": "disable",
+     "help": "Disable replacement of old IP address with new IP address for the same endpoint on RADIUS accounting start."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "delimiter": {
+   "name": "delimiter",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure delimiter to be used for separating profile group names in the SSO attribute (default = plus character \"+\").",
+   "options": [
+    {
+     "name": "plus",
+     "help": "Plus character \"+\"."
+    },
+    {
+     "name": "comma",
+     "help": "Comma character \",\"."
+    }
+   ],
+   "default": "plus",
+   "multiple_values": false
+  },
+  "accounting-server": {
+   "name": "accounting-server",
+   "category": "table",
+   "help": "Additional accounting servers.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID (0 - 4294967295).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Log to remote syslog server."
+      },
+      {
+       "name": "disable",
+       "help": "Do not log to remote syslog server."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "server": {
+     "name": "server",
+     "category": "unitary",
+     "type": "string",
+     "help": "Server CN domain name or IP address.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "secret": {
+     "name": "secret",
+     "category": "unitary",
+     "type": "password",
+     "help": "Secret key.",
+     "required": true,
+     "size": 128,
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "RADIUS accounting port number.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "source-ip": {
+     "name": "source-ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "Source IP address for communications to the RADIUS server.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "interface-select-method": {
+     "name": "interface-select-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Specify how to select outgoing interface to reach server.",
+     "options": [
+      {
+       "name": "auto",
+       "help": "Set outgoing interface automatically."
+      },
+      {
+       "name": "sdwan",
+       "help": "Set outgoing interface by SD-WAN or policy routing rules."
+      },
+      {
+       "name": "specify",
+       "help": "Set outgoing interface manually."
+      }
+     ],
+     "default": "auto",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Specify outgoing interface to reach server.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 4
+  }
+ },
+ "max_table_size_vdom": 30,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 28,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

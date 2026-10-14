@@ -1,0 +1,401 @@
+{
+ "name": "central-snat-map",
+ "category": "table",
+ "help": "Configure IPv4 and IPv6 central SNAT policies.",
+ "mkey": "policyid",
+ "mkey_type": "integer",
+ "children": {
+  "policyid": {
+   "name": "policyid",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Policy ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the active status of this policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this policy."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv4/IPv6 source NAT.",
+   "options": [
+    {
+     "name": "ipv4",
+     "help": "Perform IPv4 source NAT."
+    },
+    {
+     "name": "ipv6",
+     "help": "Perform IPv6 source NAT."
+    }
+   ],
+   "default": "ipv4",
+   "multiple_values": false
+  },
+  "srcintf": {
+   "name": "srcintf",
+   "category": "table",
+   "help": "Source interface name from available interfaces.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstintf": {
+   "name": "dstintf",
+   "category": "table",
+   "help": "Destination interface name from available interfaces.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "orig-addr": {
+   "name": "orig-addr",
+   "category": "table",
+   "help": "IPv4 Original address.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "orig-addr6": {
+   "name": "orig-addr6",
+   "category": "table",
+   "help": "IPv6 Original address.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dst-addr": {
+   "name": "dst-addr",
+   "category": "table",
+   "help": "IPv4 Destination address.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dst-addr6": {
+   "name": "dst-addr6",
+   "category": "table",
+   "help": "IPv6 Destination address.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value for the protocol type (0 - 255).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "orig-port": {
+   "name": "orig-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Original TCP port (1 to 65535, 0 means any port).",
+   "default": "",
+   "multiple_values": false
+  },
+  "nat": {
+   "name": "nat",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable source NAT.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable source NAT."
+    },
+    {
+     "name": "enable",
+     "help": "Enable source NAT."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "nat46": {
+   "name": "nat46",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAT46.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NAT46."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NAT46."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nat64": {
+   "name": "nat64",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAT64.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NAT64."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NAT64."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nat-ippool": {
+   "name": "nat-ippool",
+   "category": "table",
+   "help": "Name of the IP pools to be used to translate addresses from available IP Pools.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP pool name.",
+     "required": true,
+     "datasource": [
+      "firewall.ippool.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "nat-ippool6": {
+   "name": "nat-ippool6",
+   "category": "table",
+   "help": "IPv6 pools to be used for source NAT.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv6 pool name.",
+     "required": true,
+     "datasource": [
+      "firewall.ippool6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "port-preserve": {
+   "name": "port-preserve",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable preservation of the original source port from source NAT if it has not been used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Use the original source port if it has not been used."
+    },
+    {
+     "name": "disable",
+     "help": "Source NAT always changes the source port."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "nat-port": {
+   "name": "nat-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Translated port or port range (1 to 65535, 0 means any port).",
+   "default": "",
+   "multiple_values": false
+  },
+  "dst-port": {
+   "name": "dst-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Destination port or port range (1 to 65535, 0 means any port).",
+   "default": "",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 1023,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 256,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 438,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

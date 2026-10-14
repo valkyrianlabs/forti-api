@@ -1,0 +1,545 @@
+{
+ "name": "link-monitor",
+ "category": "table",
+ "help": "Configure Link Health Monitor.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Link monitor name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "addr-mode": {
+   "name": "addr-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address mode (IPv4 or IPv6).",
+   "options": [
+    {
+     "name": "ipv4",
+     "help": "IPv4 mode."
+    },
+    {
+     "name": "ipv6",
+     "help": "IPv6 mode."
+    }
+   ],
+   "default": "ipv4",
+   "multiple_values": false
+  },
+  "srcintf": {
+   "name": "srcintf",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface that receives the traffic to be monitored.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-config": {
+   "name": "server-config",
+   "category": "unitary",
+   "type": "option",
+   "help": "Mode of server configuration.",
+   "options": [
+    {
+     "name": "default",
+     "help": "All servers share the same attributes."
+    },
+    {
+     "name": "individual",
+     "help": "Some attributes can be specified for individual servers."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "server-type": {
+   "name": "server-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Server type (static or dynamic).",
+   "options": [
+    {
+     "name": "static",
+     "help": "Static servers."
+    },
+    {
+     "name": "dynamic",
+     "help": "Dynamic servers."
+    }
+   ],
+   "default": "static",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "table",
+   "help": "IP address of the server(s) to be monitored.",
+   "required": true,
+   "member_table": true,
+   "mkey": "address",
+   "mkey_type": "string",
+   "children": {
+    "address": {
+     "name": "address",
+     "category": "unitary",
+     "type": "string",
+     "help": "Server address.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocols used to monitor the server.",
+   "options": [
+    {
+     "name": "ping",
+     "help": "PING link monitor."
+    },
+    {
+     "name": "tcp-echo",
+     "help": "TCP echo link monitor."
+    },
+    {
+     "name": "udp-echo",
+     "help": "UDP echo link monitor."
+    },
+    {
+     "name": "http",
+     "help": "HTTP-GET link monitor."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS-GET link monitor."
+    },
+    {
+     "name": "twamp",
+     "help": "TWAMP link monitor."
+    }
+   ],
+   "default": "ping",
+   "multiple_values": true
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number of the traffic to be used to monitor the server.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "gateway-ip": {
+   "name": "gateway-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Gateway IP address used to probe the server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "gateway-ip6": {
+   "name": "gateway-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Gateway IPv6 address used to probe the server.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "route": {
+   "name": "route",
+   "category": "table",
+   "help": "Subnet to monitor.",
+   "member_table": true,
+   "mkey": "subnet",
+   "mkey_type": "string",
+   "children": {
+    "subnet": {
+     "name": "subnet",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP and netmask (x.x.x.x/y).",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Source IP address used in packet to the server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Source IPv6 address used in packet to the server.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "http-get": {
+   "name": "http-get",
+   "category": "unitary",
+   "type": "string",
+   "help": "If you are monitoring an HTML server you can send an HTTP-GET request with a custom string. Use this option to define the string.",
+   "required": true,
+   "size": 1024,
+   "default": "/",
+   "multiple_values": false
+  },
+  "http-agent": {
+   "name": "http-agent",
+   "category": "unitary",
+   "type": "string",
+   "help": "String in the http-agent field in the HTTP header.",
+   "size": 1024,
+   "default": "Chrome/ Safari/",
+   "multiple_values": false
+  },
+  "http-match": {
+   "name": "http-match",
+   "category": "unitary",
+   "type": "string",
+   "help": "String that you expect to see in the HTTP-GET requests of the traffic to be monitored.",
+   "size": 1024,
+   "default": "",
+   "multiple_values": false
+  },
+  "interval": {
+   "name": "interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Detection interval in milliseconds (20 - 3600 * 1000 msec, default = 500).",
+   "min-value": 20,
+   "max-value": 3600000,
+   "default": 500,
+   "multiple_values": false
+  },
+  "probe-timeout": {
+   "name": "probe-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait before a probe packet is considered lost (20 - 5000 msec, default = 500).",
+   "min-value": 20,
+   "max-value": 5000,
+   "default": 500,
+   "multiple_values": false
+  },
+  "failtime": {
+   "name": "failtime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of retry attempts before the server is considered down (1 - 3600, default = 5).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 5,
+   "multiple_values": false
+  },
+  "recoverytime": {
+   "name": "recoverytime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of successful responses received before server is considered recovered (1 - 3600, default = 5).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 5,
+   "multiple_values": false
+  },
+  "probe-count": {
+   "name": "probe-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of most recent probes that should be used to calculate latency and jitter (5 - 30, default = 30).",
+   "min-value": 5,
+   "max-value": 30,
+   "default": 30,
+   "multiple_values": false
+  },
+  "security-mode": {
+   "name": "security-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Twamp controller security mode.",
+   "options": [
+    {
+     "name": "none",
+     "help": "Unauthenticated mode."
+    },
+    {
+     "name": "authentication",
+     "help": "Authenticated mode."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "TWAMP controller password in authentication mode.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "packet-size": {
+   "name": "packet-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Packet size of a TWAMP test session (124/158 - 1024).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 124,
+   "multiple_values": false
+  },
+  "ha-priority": {
+   "name": "ha-priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "HA election priority (1 - 50).",
+   "min-value": 1,
+   "max-value": 50,
+   "default": 1,
+   "multiple_values": false
+  },
+  "fail-weight": {
+   "name": "fail-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold weight to trigger link failure alert.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "update-cascade-interface": {
+   "name": "update-cascade-interface",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable update cascade interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable update cascade interface."
+    },
+    {
+     "name": "disable",
+     "help": "Disable update cascade interface."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "update-static-route": {
+   "name": "update-static-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable updating the static route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable updating the static route."
+    },
+    {
+     "name": "disable",
+     "help": "Disable updating the static route."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "update-policy-route": {
+   "name": "update-policy-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable updating the policy route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable updating the policy route."
+    },
+    {
+     "name": "disable",
+     "help": "Disable updating the policy route."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this link monitor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this link monitor."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this link monitor."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "diffservcode": {
+   "name": "diffservcode",
+   "category": "unitary",
+   "type": "user",
+   "help": "Differentiated services code point (DSCP) in the IP header of the probe packet.",
+   "default": "",
+   "multiple_values": false
+  },
+  "class-id": {
+   "name": "class-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Traffic class ID.",
+   "datasource": [
+    "firewall.traffic-class.class-id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "service-detection": {
+   "name": "service-detection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Only use monitor to read quality values. If enabled, static routes and cascade interfaces will not be updated.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Only use monitor for service-detection."
+    },
+    {
+     "name": "disable",
+     "help": "Monitor will update routes/interfaces on link failure."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server-list": {
+   "name": "server-list",
+   "category": "table",
+   "help": "Servers for link-monitor to monitor.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Server ID.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 32,
+     "default": 0,
+     "multiple_values": false
+    },
+    "dst": {
+     "name": "dst",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP address of the server to be monitored.",
+     "required": true,
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "option",
+     "help": "Protocols used to monitor the server.",
+     "options": [
+      {
+       "name": "ping",
+       "help": "PING link monitor."
+      },
+      {
+       "name": "tcp-echo",
+       "help": "TCP echo link monitor."
+      },
+      {
+       "name": "udp-echo",
+       "help": "UDP echo link monitor."
+      },
+      {
+       "name": "http",
+       "help": "HTTP-GET link monitor."
+      },
+      {
+       "name": "https",
+       "help": "HTTPS-GET link monitor."
+      },
+      {
+       "name": "twamp",
+       "help": "TWAMP link monitor."
+      }
+     ],
+     "default": "ping",
+     "multiple_values": true
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port number of the traffic to be used to monitor the server.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "weight": {
+     "name": "weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Weight of the monitor to this dst (0 - 255).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 398,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

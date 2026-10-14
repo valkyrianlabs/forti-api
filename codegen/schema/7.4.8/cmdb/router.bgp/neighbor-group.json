@@ -1,0 +1,2389 @@
+{
+ "name": "neighbor-group",
+ "category": "table",
+ "help": "BGP neighbor group table.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Neighbor group name.",
+   "required": true,
+   "size": 45,
+   "default": "",
+   "multiple_values": false
+  },
+  "advertisement-interval": {
+   "name": "advertisement-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum interval (sec) between sending updates.",
+   "min-value": 0,
+   "max-value": 600,
+   "default": 30,
+   "multiple_values": false
+  },
+  "allowas-in-enable": {
+   "name": "allowas-in-enable",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 Enable to allow my AS in AS path.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allowas-in-enable6": {
+   "name": "allowas-in-enable6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 Enable to allow my AS in AS path.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allowas-in-enable-vpnv4": {
+   "name": "allowas-in-enable-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to allow my AS in AS path for VPNv4 route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allowas-in-enable-vpnv6": {
+   "name": "allowas-in-enable-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of my AS in AS path for VPNv6 route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allowas-in-enable-evpn": {
+   "name": "allowas-in-enable-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to allow my AS in AS path for L2VPN EVPN route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allowas-in": {
+   "name": "allowas-in",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IPv4 The maximum number of occurrence of my AS number allowed.",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "allowas-in6": {
+   "name": "allowas-in6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IPv6 The maximum number of occurrence of my AS number allowed.",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "allowas-in-vpnv4": {
+   "name": "allowas-in-vpnv4",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The maximum number of occurrence of my AS number allowed for VPNv4 route.",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "allowas-in-vpnv6": {
+   "name": "allowas-in-vpnv6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The maximum number of occurrence of my AS number allowed for VPNv6 route.",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "allowas-in-evpn": {
+   "name": "allowas-in-evpn",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The maximum number of occurrence of my AS number allowed for L2VPN EVPN route.",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "attribute-unchanged": {
+   "name": "attribute-unchanged",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv4 List of attributes that should be unchanged.",
+   "options": [
+    {
+     "name": "as-path",
+     "help": "AS path."
+    },
+    {
+     "name": "med",
+     "help": "MED."
+    },
+    {
+     "name": "next-hop",
+     "help": "Next hop."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "attribute-unchanged6": {
+   "name": "attribute-unchanged6",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv6 List of attributes that should be unchanged.",
+   "options": [
+    {
+     "name": "as-path",
+     "help": "AS path."
+    },
+    {
+     "name": "med",
+     "help": "MED."
+    },
+    {
+     "name": "next-hop",
+     "help": "Next hop."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "attribute-unchanged-vpnv4": {
+   "name": "attribute-unchanged-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "List of attributes that should be unchanged for VPNv4 route.",
+   "options": [
+    {
+     "name": "as-path",
+     "help": "AS path."
+    },
+    {
+     "name": "med",
+     "help": "MED."
+    },
+    {
+     "name": "next-hop",
+     "help": "Next hop."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "attribute-unchanged-vpnv6": {
+   "name": "attribute-unchanged-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "List of attributes that should not be changed for VPNv6 route.",
+   "options": [
+    {
+     "name": "as-path",
+     "help": "AS path."
+    },
+    {
+     "name": "med",
+     "help": "MED."
+    },
+    {
+     "name": "next-hop",
+     "help": "Next hop."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "activate": {
+   "name": "activate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable address family IPv4 for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "activate6": {
+   "name": "activate6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable address family IPv6 for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "activate-vpnv4": {
+   "name": "activate-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable address family VPNv4 for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "activate-vpnv6": {
+   "name": "activate-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable address family VPNv6 for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "activate-evpn": {
+   "name": "activate-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable address family L2VPN EVPN for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "bfd": {
+   "name": "bfd",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable BFD for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-dynamic": {
+   "name": "capability-dynamic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertise dynamic capability to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-orf": {
+   "name": "capability-orf",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept/Send IPv4 ORF lists to/from this neighbor.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None."
+    },
+    {
+     "name": "receive",
+     "help": "Receive ORF lists."
+    },
+    {
+     "name": "send",
+     "help": "Send ORF list."
+    },
+    {
+     "name": "both",
+     "help": "Send and receive ORF lists."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "capability-orf6": {
+   "name": "capability-orf6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept/Send IPv6 ORF lists to/from this neighbor.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None."
+    },
+    {
+     "name": "receive",
+     "help": "Receive ORF lists."
+    },
+    {
+     "name": "send",
+     "help": "Send ORF list."
+    },
+    {
+     "name": "both",
+     "help": "Send and receive ORF lists."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "capability-graceful-restart": {
+   "name": "capability-graceful-restart",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertise IPv4 graceful restart capability to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-graceful-restart6": {
+   "name": "capability-graceful-restart6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertise IPv6 graceful restart capability to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-graceful-restart-vpnv4": {
+   "name": "capability-graceful-restart-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertise VPNv4 graceful restart capability to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-graceful-restart-vpnv6": {
+   "name": "capability-graceful-restart-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertisement of VPNv6 graceful restart capability to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-graceful-restart-evpn": {
+   "name": "capability-graceful-restart-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertisement of L2VPN EVPN graceful restart capability to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-route-refresh": {
+   "name": "capability-route-refresh",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertise route refresh capability to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "capability-default-originate": {
+   "name": "capability-default-originate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertise default IPv4 route to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "capability-default-originate6": {
+   "name": "capability-default-originate6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable advertise default IPv6 route to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dont-capability-negotiate": {
+   "name": "dont-capability-negotiate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Do not negotiate capabilities with this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ebgp-enforce-multihop": {
+   "name": "ebgp-enforce-multihop",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allow multi-hop EBGP neighbors.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "link-down-failover": {
+   "name": "link-down-failover",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable failover upon link down.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "stale-route": {
+   "name": "stale-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable stale route after neighbor down.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "next-hop-self": {
+   "name": "next-hop-self",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 next-hop calculation for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "next-hop-self6": {
+   "name": "next-hop-self6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 next-hop calculation for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "next-hop-self-rr": {
+   "name": "next-hop-self-rr",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable setting nexthop's address to interface's IPv4 address for route-reflector routes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "next-hop-self-rr6": {
+   "name": "next-hop-self-rr6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable setting nexthop's address to interface's IPv6 address for route-reflector routes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "next-hop-self-vpnv4": {
+   "name": "next-hop-self-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable setting VPNv4 next-hop to interface's IP address for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "next-hop-self-vpnv6": {
+   "name": "next-hop-self-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of outgoing interface's IP address as VPNv6 next-hop for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "override-capability": {
+   "name": "override-capability",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable override result of capability negotiation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "passive": {
+   "name": "passive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending of open messages to this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "remove-private-as": {
+   "name": "remove-private-as",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable remove private AS number from IPv4 outbound updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "remove-private-as6": {
+   "name": "remove-private-as6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable remove private AS number from IPv6 outbound updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "remove-private-as-vpnv4": {
+   "name": "remove-private-as-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable remove private AS number from VPNv4 outbound updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "remove-private-as-vpnv6": {
+   "name": "remove-private-as-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to remove private AS number from VPNv6 outbound updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "remove-private-as-evpn": {
+   "name": "remove-private-as-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable removing private AS number from L2VPN EVPN outbound updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-reflector-client": {
+   "name": "route-reflector-client",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 AS route reflector client.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-reflector-client6": {
+   "name": "route-reflector-client6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 AS route reflector client.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-reflector-client-vpnv4": {
+   "name": "route-reflector-client-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VPNv4 AS route reflector client for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-reflector-client-vpnv6": {
+   "name": "route-reflector-client-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VPNv6 AS route reflector client for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-reflector-client-evpn": {
+   "name": "route-reflector-client-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable L2VPN EVPN AS route reflector client for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-server-client": {
+   "name": "route-server-client",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 AS route server client.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-server-client6": {
+   "name": "route-server-client6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 AS route server client.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-server-client-vpnv4": {
+   "name": "route-server-client-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VPNv4 AS route server client for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-server-client-vpnv6": {
+   "name": "route-server-client-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VPNv6 AS route server client for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-server-client-evpn": {
+   "name": "route-server-client-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable L2VPN EVPN AS route server client for this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "shutdown": {
+   "name": "shutdown",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable shutdown this neighbor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "soft-reconfiguration": {
+   "name": "soft-reconfiguration",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allow IPv4 inbound soft reconfiguration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "soft-reconfiguration6": {
+   "name": "soft-reconfiguration6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allow IPv6 inbound soft reconfiguration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "soft-reconfiguration-vpnv4": {
+   "name": "soft-reconfiguration-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allow VPNv4 inbound soft reconfiguration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "soft-reconfiguration-vpnv6": {
+   "name": "soft-reconfiguration-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VPNv6 inbound soft reconfiguration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "soft-reconfiguration-evpn": {
+   "name": "soft-reconfiguration-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable L2VPN EVPN inbound soft reconfiguration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "as-override": {
+   "name": "as-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable replace peer AS with own AS for IPv4.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "as-override6": {
+   "name": "as-override6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable replace peer AS with own AS for IPv6.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "strict-capability-match": {
+   "name": "strict-capability-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable strict capability matching.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-originate-routemap": {
+   "name": "default-originate-routemap",
+   "category": "unitary",
+   "type": "string",
+   "help": "Route map to specify criteria to originate IPv4 default.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "default-originate-routemap6": {
+   "name": "default-originate-routemap6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Route map to specify criteria to originate IPv6 default.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-in": {
+   "name": "distribute-list-in",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for IPv4 updates from this neighbor.",
+   "datasource": [
+    "router.access-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-in6": {
+   "name": "distribute-list-in6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for IPv6 updates from this neighbor.",
+   "datasource": [
+    "router.access-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-in-vpnv4": {
+   "name": "distribute-list-in-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for VPNv4 updates from this neighbor.",
+   "datasource": [
+    "router.access-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-in-vpnv6": {
+   "name": "distribute-list-in-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for VPNv6 updates from this neighbor.",
+   "datasource": [
+    "router.access-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-out": {
+   "name": "distribute-list-out",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for IPv4 updates to this neighbor.",
+   "datasource": [
+    "router.access-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-out6": {
+   "name": "distribute-list-out6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for IPv6 updates to this neighbor.",
+   "datasource": [
+    "router.access-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-out-vpnv4": {
+   "name": "distribute-list-out-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for VPNv4 updates to this neighbor.",
+   "datasource": [
+    "router.access-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-list-out-vpnv6": {
+   "name": "distribute-list-out-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter for VPNv6 updates to this neighbor.",
+   "datasource": [
+    "router.access-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ebgp-multihop-ttl": {
+   "name": "ebgp-multihop-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "EBGP multihop TTL for this peer.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 255,
+   "multiple_values": false
+  },
+  "filter-list-in": {
+   "name": "filter-list-in",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for IPv4 inbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-list-in6": {
+   "name": "filter-list-in6",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for IPv6 inbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-list-in-vpnv4": {
+   "name": "filter-list-in-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for VPNv4 inbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-list-in-vpnv6": {
+   "name": "filter-list-in-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for VPNv6 inbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-list-out": {
+   "name": "filter-list-out",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for IPv4 outbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-list-out6": {
+   "name": "filter-list-out6",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for IPv6 outbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-list-out-vpnv4": {
+   "name": "filter-list-out-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for VPNv4 outbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-list-out-vpnv6": {
+   "name": "filter-list-out-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for VPNv6 outbound routes.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface for peer connection. For IPv6 peer, the interface should have link-local address.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "maximum-prefix": {
+   "name": "maximum-prefix",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of IPv4 prefixes to accept from this peer.",
+   "min-value": 1,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maximum-prefix6": {
+   "name": "maximum-prefix6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of IPv6 prefixes to accept from this peer.",
+   "min-value": 1,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maximum-prefix-vpnv4": {
+   "name": "maximum-prefix-vpnv4",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of VPNv4 prefixes to accept from this peer.",
+   "min-value": 1,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maximum-prefix-vpnv6": {
+   "name": "maximum-prefix-vpnv6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of VPNv6 prefixes to accept from this peer.",
+   "min-value": 1,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maximum-prefix-evpn": {
+   "name": "maximum-prefix-evpn",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of L2VPN EVPN prefixes to accept from this peer.",
+   "min-value": 1,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maximum-prefix-threshold": {
+   "name": "maximum-prefix-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum IPv4 prefix threshold value (1 - 100 percent).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 75,
+   "multiple_values": false
+  },
+  "maximum-prefix-threshold6": {
+   "name": "maximum-prefix-threshold6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum IPv6 prefix threshold value (1 - 100 percent).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 75,
+   "multiple_values": false
+  },
+  "maximum-prefix-threshold-vpnv4": {
+   "name": "maximum-prefix-threshold-vpnv4",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum VPNv4 prefix threshold value (1 - 100 percent).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 75,
+   "multiple_values": false
+  },
+  "maximum-prefix-threshold-vpnv6": {
+   "name": "maximum-prefix-threshold-vpnv6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum VPNv6 prefix threshold value (1 - 100 percent).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 75,
+   "multiple_values": false
+  },
+  "maximum-prefix-threshold-evpn": {
+   "name": "maximum-prefix-threshold-evpn",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum L2VPN EVPN prefix threshold value (1 - 100 percent).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 75,
+   "multiple_values": false
+  },
+  "maximum-prefix-warning-only": {
+   "name": "maximum-prefix-warning-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 Only give warning message when limit is exceeded.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "maximum-prefix-warning-only6": {
+   "name": "maximum-prefix-warning-only6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 Only give warning message when limit is exceeded.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "maximum-prefix-warning-only-vpnv4": {
+   "name": "maximum-prefix-warning-only-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable only giving warning message when limit is exceeded for VPNv4 routes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "maximum-prefix-warning-only-vpnv6": {
+   "name": "maximum-prefix-warning-only-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable warning message when limit is exceeded for VPNv6 routes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "maximum-prefix-warning-only-evpn": {
+   "name": "maximum-prefix-warning-only-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable only sending warning message when exceeding limit of L2VPN EVPN routes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "prefix-list-in": {
+   "name": "prefix-list-in",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 Inbound filter for updates from this neighbor.",
+   "datasource": [
+    "router.prefix-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "prefix-list-in6": {
+   "name": "prefix-list-in6",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 Inbound filter for updates from this neighbor.",
+   "datasource": [
+    "router.prefix-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "prefix-list-in-vpnv4": {
+   "name": "prefix-list-in-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "Inbound filter for VPNv4 updates from this neighbor.",
+   "datasource": [
+    "router.prefix-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "prefix-list-in-vpnv6": {
+   "name": "prefix-list-in-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Inbound filter for VPNv6 updates from this neighbor.",
+   "datasource": [
+    "router.prefix-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "prefix-list-out": {
+   "name": "prefix-list-out",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 Outbound filter for updates to this neighbor.",
+   "datasource": [
+    "router.prefix-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "prefix-list-out6": {
+   "name": "prefix-list-out6",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 Outbound filter for updates to this neighbor.",
+   "datasource": [
+    "router.prefix-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "prefix-list-out-vpnv4": {
+   "name": "prefix-list-out-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "Outbound filter for VPNv4 updates to this neighbor.",
+   "datasource": [
+    "router.prefix-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "prefix-list-out-vpnv6": {
+   "name": "prefix-list-out-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "Outbound filter for VPNv6 updates to this neighbor.",
+   "datasource": [
+    "router.prefix-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "remote-as": {
+   "name": "remote-as",
+   "category": "unitary",
+   "type": "user",
+   "help": "AS number of neighbor.",
+   "default": "",
+   "multiple_values": false
+  },
+  "remote-as-filter": {
+   "name": "remote-as-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "BGP filter for remote AS.",
+   "datasource": [
+    "router.aspath-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "local-as": {
+   "name": "local-as",
+   "category": "unitary",
+   "type": "user",
+   "help": "Local AS number of neighbor.",
+   "default": "",
+   "multiple_values": false
+  },
+  "local-as-no-prepend": {
+   "name": "local-as-no-prepend",
+   "category": "unitary",
+   "type": "option",
+   "help": "Do not prepend local-as to incoming updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-as-replace-as": {
+   "name": "local-as-replace-as",
+   "category": "unitary",
+   "type": "option",
+   "help": "Replace real AS with local-as in outgoing updates.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "retain-stale-time": {
+   "name": "retain-stale-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to retain stale routes.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "route-map-in": {
+   "name": "route-map-in",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 Inbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-in6": {
+   "name": "route-map-in6",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 Inbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-in-vpnv4": {
+   "name": "route-map-in-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "VPNv4 inbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-in-vpnv6": {
+   "name": "route-map-in-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "VPNv6 inbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-in-evpn": {
+   "name": "route-map-in-evpn",
+   "category": "unitary",
+   "type": "string",
+   "help": "L2VPN EVPN inbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out": {
+   "name": "route-map-out",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 outbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out-preferable": {
+   "name": "route-map-out-preferable",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 outbound route map filter if the peer is preferred.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out6": {
+   "name": "route-map-out6",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 Outbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out6-preferable": {
+   "name": "route-map-out6-preferable",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 outbound route map filter if the peer is preferred.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out-vpnv4": {
+   "name": "route-map-out-vpnv4",
+   "category": "unitary",
+   "type": "string",
+   "help": "VPNv4 outbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out-vpnv6": {
+   "name": "route-map-out-vpnv6",
+   "category": "unitary",
+   "type": "string",
+   "help": "VPNv6 outbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out-vpnv4-preferable": {
+   "name": "route-map-out-vpnv4-preferable",
+   "category": "unitary",
+   "type": "string",
+   "help": "VPNv4 outbound route map filter if the peer is preferred.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out-vpnv6-preferable": {
+   "name": "route-map-out-vpnv6-preferable",
+   "category": "unitary",
+   "type": "string",
+   "help": "VPNv6 outbound route map filter if this neighbor is preferred.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "route-map-out-evpn": {
+   "name": "route-map-out-evpn",
+   "category": "unitary",
+   "type": "string",
+   "help": "L2VPN EVPN outbound route map filter.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "send-community": {
+   "name": "send-community",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv4 Send community attribute to neighbor.",
+   "options": [
+    {
+     "name": "standard",
+     "help": "Standard."
+    },
+    {
+     "name": "extended",
+     "help": "Extended."
+    },
+    {
+     "name": "both",
+     "help": "Both."
+    },
+    {
+     "name": "disable",
+     "help": "Disable"
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "send-community6": {
+   "name": "send-community6",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv6 Send community attribute to neighbor.",
+   "options": [
+    {
+     "name": "standard",
+     "help": "Standard."
+    },
+    {
+     "name": "extended",
+     "help": "Extended."
+    },
+    {
+     "name": "both",
+     "help": "Both."
+    },
+    {
+     "name": "disable",
+     "help": "Disable"
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "send-community-vpnv4": {
+   "name": "send-community-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Send community attribute to neighbor for VPNv4 address family.",
+   "options": [
+    {
+     "name": "standard",
+     "help": "Standard."
+    },
+    {
+     "name": "extended",
+     "help": "Extended."
+    },
+    {
+     "name": "both",
+     "help": "Both."
+    },
+    {
+     "name": "disable",
+     "help": "Disable"
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "send-community-vpnv6": {
+   "name": "send-community-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending community attribute to this neighbor for VPNv6 address family.",
+   "options": [
+    {
+     "name": "standard",
+     "help": "Standard."
+    },
+    {
+     "name": "extended",
+     "help": "Extended."
+    },
+    {
+     "name": "both",
+     "help": "Both."
+    },
+    {
+     "name": "disable",
+     "help": "Disable"
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "send-community-evpn": {
+   "name": "send-community-evpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending community attribute to neighbor for L2VPN EVPN address family.",
+   "options": [
+    {
+     "name": "standard",
+     "help": "Standard."
+    },
+    {
+     "name": "extended",
+     "help": "Extended."
+    },
+    {
+     "name": "both",
+     "help": "Both."
+    },
+    {
+     "name": "disable",
+     "help": "Disable"
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "keep-alive-timer": {
+   "name": "keep-alive-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Keep alive timer interval (sec).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 4294967295,
+   "multiple_values": false
+  },
+  "holdtime-timer": {
+   "name": "holdtime-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval (sec) before peer considered dead.",
+   "min-value": 3,
+   "max-value": 65535,
+   "default": 4294967295,
+   "multiple_values": false
+  },
+  "connect-timer": {
+   "name": "connect-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval (sec) for connect timer.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 4294967295,
+   "multiple_values": false
+  },
+  "unsuppress-map": {
+   "name": "unsuppress-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 Route map to selectively unsuppress suppressed routes.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "unsuppress-map6": {
+   "name": "unsuppress-map6",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 Route map to selectively unsuppress suppressed routes.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "update-source": {
+   "name": "update-source",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface to use as source IP/IPv6 address of TCP connections.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "weight": {
+   "name": "weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Neighbor weight.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 4294967295,
+   "multiple_values": false
+  },
+  "restart-time": {
+   "name": "restart-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Graceful restart delay time (sec, 0 = global default).",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 0,
+   "multiple_values": false
+  },
+  "additional-path": {
+   "name": "additional-path",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv4 additional-path capability.",
+   "options": [
+    {
+     "name": "send",
+     "help": "Enable sending additional paths."
+    },
+    {
+     "name": "receive",
+     "help": "Enable receiving additional paths."
+    },
+    {
+     "name": "both",
+     "help": "Enable sending and receiving additional paths."
+    },
+    {
+     "name": "disable",
+     "help": "Disable additional paths."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "additional-path6": {
+   "name": "additional-path6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 additional-path capability.",
+   "options": [
+    {
+     "name": "send",
+     "help": "Enable sending additional paths."
+    },
+    {
+     "name": "receive",
+     "help": "Enable receiving additional paths."
+    },
+    {
+     "name": "both",
+     "help": "Enable sending and receiving additional paths."
+    },
+    {
+     "name": "disable",
+     "help": "Disable additional paths."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "additional-path-vpnv4": {
+   "name": "additional-path-vpnv4",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VPNv4 additional-path capability.",
+   "options": [
+    {
+     "name": "send",
+     "help": "Enable sending additional paths."
+    },
+    {
+     "name": "receive",
+     "help": "Enable receiving additional paths."
+    },
+    {
+     "name": "both",
+     "help": "Enable sending and receiving additional paths."
+    },
+    {
+     "name": "disable",
+     "help": "Disable additional paths."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "additional-path-vpnv6": {
+   "name": "additional-path-vpnv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VPNv6 additional-path capability.",
+   "options": [
+    {
+     "name": "send",
+     "help": "Enable sending additional paths."
+    },
+    {
+     "name": "receive",
+     "help": "Enable receiving additional paths."
+    },
+    {
+     "name": "both",
+     "help": "Enable sending and receiving additional paths."
+    },
+    {
+     "name": "disable",
+     "help": "Disable additional paths."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "adv-additional-path": {
+   "name": "adv-additional-path",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of IPv4 additional paths that can be advertised to this neighbor.",
+   "min-value": 2,
+   "max-value": 255,
+   "default": 2,
+   "multiple_values": false
+  },
+  "adv-additional-path6": {
+   "name": "adv-additional-path6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of IPv6 additional paths that can be advertised to this neighbor.",
+   "min-value": 2,
+   "max-value": 255,
+   "default": 2,
+   "multiple_values": false
+  },
+  "adv-additional-path-vpnv4": {
+   "name": "adv-additional-path-vpnv4",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of VPNv4 additional paths that can be advertised to this neighbor.",
+   "min-value": 2,
+   "max-value": 255,
+   "default": 2,
+   "multiple_values": false
+  },
+  "adv-additional-path-vpnv6": {
+   "name": "adv-additional-path-vpnv6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of VPNv6 additional paths that can be advertised to this neighbor.",
+   "min-value": 2,
+   "max-value": 255,
+   "default": 2,
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password used in MD5 authentication.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "auth-options": {
+   "name": "auth-options",
+   "category": "unitary",
+   "type": "string",
+   "help": "Key-chain name for TCP authentication options.",
+   "datasource": [
+    "router.key-chain.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "router.bgp",
+ "q_type": 133,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

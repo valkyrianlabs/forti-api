@@ -1,0 +1,57 @@
+{
+ "name": "fortishield",
+ "category": "complex",
+ "help": "Configure FortiGuard - AntiSpam.",
+ "children": {
+  "spam-submit-srv": {
+   "name": "spam-submit-srv",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hostname of the spam submission server.",
+   "required": true,
+   "size": 63,
+   "default": "www.nospammer.net",
+   "multiple_values": false
+  },
+  "spam-submit-force": {
+   "name": "spam-submit-force",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable force insertion of a new mime entity for the submission text.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "spam-submit-txt2htm": {
+   "name": "spam-submit-txt2htm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable conversion of text email to HTML email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "emailfilter",
+ "q_type": 137,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

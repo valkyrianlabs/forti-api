@@ -1,0 +1,175 @@
+{
+ "name": "vxlan",
+ "category": "table",
+ "help": "Configure VXLAN devices.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "VXLAN device or interface name. Must be a unique interface name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Outgoing interface for VXLAN encapsulated traffic.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "vni": {
+   "name": "vni",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VXLAN network ID.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 16777215,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ip-version": {
+   "name": "ip-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "IP version to use for the VXLAN interface and so for communication over the VXLAN. IPv4 or IPv6 unicast or multicast.",
+   "required": true,
+   "options": [
+    {
+     "name": "ipv4-unicast",
+     "help": "Use IPv4 unicast addressing over the VXLAN."
+    },
+    {
+     "name": "ipv6-unicast",
+     "help": "Use IPv6 unicast addressing over the VXLAN."
+    },
+    {
+     "name": "ipv4-multicast",
+     "help": "Use IPv4 multicast addressing over the VXLAN."
+    },
+    {
+     "name": "ipv6-multicast",
+     "help": "Use IPv6 multicast addressing over the VXLAN."
+    }
+   ],
+   "default": "ipv4-unicast",
+   "multiple_values": false
+  },
+  "remote-ip": {
+   "name": "remote-ip",
+   "category": "table",
+   "help": "IPv4 address of the VXLAN interface on the device at the remote end of the VXLAN.",
+   "member_table": true,
+   "mkey": "ip",
+   "mkey_type": "string",
+   "children": {
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv4 address.",
+     "required": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "remote-ip6": {
+   "name": "remote-ip6",
+   "category": "table",
+   "help": "IPv6 IP address of the VXLAN interface on the device at the remote end of the VXLAN.",
+   "required": true,
+   "member_table": true,
+   "mkey": "ip6",
+   "mkey_type": "string",
+   "children": {
+    "ip6": {
+     "name": "ip6",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv6 address.",
+     "required": true,
+     "size": 45,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstport": {
+   "name": "dstport",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VXLAN destination port (1 - 65535, default = 4789).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 4789,
+   "multiple_values": false
+  },
+  "multicast-ttl": {
+   "name": "multicast-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VXLAN multicast TTL (1-255, default = 0).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "evpn-id": {
+   "name": "evpn-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "EVPN instance.",
+   "datasource": [
+    "system.evpn.id"
+   ],
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "learn-from-traffic": {
+   "name": "learn-from-traffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VXLAN MAC learning from traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable VXLAN MAC learning from traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Disable VXLAN MAC learning from traffic."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 179,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

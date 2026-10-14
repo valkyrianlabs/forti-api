@@ -1,0 +1,119 @@
+{
+ "name": "session-helper",
+ "category": "table",
+ "help": "Configure session helper.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Session helper ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "option",
+   "help": "Helper name.",
+   "required": true,
+   "options": [
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "tftp",
+     "help": "TFTP."
+    },
+    {
+     "name": "ras",
+     "help": "RAS."
+    },
+    {
+     "name": "h323",
+     "help": "H323."
+    },
+    {
+     "name": "tns",
+     "help": "TNS."
+    },
+    {
+     "name": "mms",
+     "help": "MMS."
+    },
+    {
+     "name": "sip",
+     "help": "SIP."
+    },
+    {
+     "name": "pptp",
+     "help": "PPTP."
+    },
+    {
+     "name": "rtsp",
+     "help": "RTSP."
+    },
+    {
+     "name": "dns-udp",
+     "help": "DNS UDP."
+    },
+    {
+     "name": "dns-tcp",
+     "help": "DNS TCP."
+    },
+    {
+     "name": "pmap",
+     "help": "PMAP."
+    },
+    {
+     "name": "rsh",
+     "help": "RSH."
+    },
+    {
+     "name": "dcerpc",
+     "help": "DCERPC."
+    },
+    {
+     "name": "mgcp",
+     "help": "MGCP."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Protocol number.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Protocol port.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 165,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

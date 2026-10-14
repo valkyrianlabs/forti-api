@@ -15,8 +15,20 @@ namespace fortiapi::system {
 
 // Configure API users.
 struct ApiUser {
+    // Values of PeerAuth: Enable/disable peer authentication.
+    struct PeerAuth {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
     // Trusthost.
     struct TrusthostEntry {
+        // Values of Type: Trusthost type.
+        struct Type {
+            static constexpr std::string_view ipv4_trusthost = "ipv4-trusthost";
+            static constexpr std::string_view ipv6_trusthost = "ipv6-trusthost";
+        };
+
         fortiapi::Field<std::uint32_t> id;  // ID.
         fortiapi::Field<std::string> type;  // Trusthost type.
         fortiapi::Field<std::string> ipv4_trusthost;  // IPv4 trusted host address.
@@ -64,16 +76,6 @@ struct ApiUserSpec {
 };
 
 using ApiUsers = fortiapi::Table<ApiUserSpec>;
-
-// Allowed values of option attributes.
-namespace api_user::peer_auth {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace api_user::trusthost::type {
-    inline constexpr std::string_view ipv4_trusthost = "ipv4-trusthost";
-    inline constexpr std::string_view ipv6_trusthost = "ipv6-trusthost";
-}
 
 }  // namespace fortiapi::system
 

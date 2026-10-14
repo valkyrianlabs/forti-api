@@ -1,0 +1,140 @@
+{
+ "name": "domain-filter",
+ "category": "table",
+ "help": "Configure DNS domain filters.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "DNS domain filter entries.",
+   "required": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Id.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "domain": {
+     "name": "domain",
+     "category": "unitary",
+     "type": "string",
+     "help": "Domain entries to be filtered.",
+     "size": 511,
+     "default": "",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "DNS domain filter type.",
+     "options": [
+      {
+       "name": "simple",
+       "help": "Simple domain string."
+      },
+      {
+       "name": "regex",
+       "help": "Regular expression domain string."
+      },
+      {
+       "name": "wildcard",
+       "help": "Wildcard domain string."
+      }
+     ],
+     "default": "simple",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action to take for domain filter matches.",
+     "options": [
+      {
+       "name": "block",
+       "help": "Block DNS requests matching the domain filter."
+      },
+      {
+       "name": "allow",
+       "help": "Allow DNS requests matching the domain filter without logging."
+      },
+      {
+       "name": "monitor",
+       "help": "Allow DNS requests matching the domain filter with logging."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this domain filter.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable this domain filter."
+      },
+      {
+       "name": "disable",
+       "help": "Disable this domain filter."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 20000,
+   "max_table_size_global": 40000,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "dnsfilter",
+ "q_type": 512,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

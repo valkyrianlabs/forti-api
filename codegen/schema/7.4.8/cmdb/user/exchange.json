@@ -1,0 +1,239 @@
+{
+ "name": "exchange",
+ "category": "table",
+ "help": "Configure MS Exchange server entries.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "MS Exchange server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-name": {
+   "name": "server-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "MS Exchange server hostname.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "domain-name": {
+   "name": "domain-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "MS Exchange server fully qualified domain name.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name used to sign in to the server. Must have proper permissions for service.",
+   "required": true,
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for the specified username.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Server IPv4 address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "connect-protocol": {
+   "name": "connect-protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Connection protocol used to connect to MS Exchange service.",
+   "options": [
+    {
+     "name": "rpc-over-tcp",
+     "help": "Connect using RPC-over-TCP. Use for MS Exchange 2010 and earlier versions. Supported in MS Exchange 2013."
+    },
+    {
+     "name": "rpc-over-http",
+     "help": "Connect using RPC-over-HTTP. Use for MS Exchange 2016 and later versions. Supported in MS Exchange 2013."
+    },
+    {
+     "name": "rpc-over-https",
+     "help": "Connect using RPC-over-HTTPS. Use for MS Exchange 2016 and later versions. Supported in MS Exchange 2013."
+    }
+   ],
+   "default": "rpc-over-https",
+   "multiple_values": false
+  },
+  "auth-type": {
+   "name": "auth-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication security type used for the RPC protocol layer.",
+   "options": [
+    {
+     "name": "spnego",
+     "help": "Negotiate authentication."
+    },
+    {
+     "name": "ntlm",
+     "help": "NTLM authentication."
+    },
+    {
+     "name": "kerberos",
+     "help": "Kerberos authentication."
+    }
+   ],
+   "default": "kerberos",
+   "multiple_values": false
+  },
+  "auth-level": {
+   "name": "auth-level",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication security level used for the RPC protocol layer.",
+   "options": [
+    {
+     "name": "connect",
+     "help": "RPC authentication level 'connect'."
+    },
+    {
+     "name": "call",
+     "help": "RPC authentication level 'call'."
+    },
+    {
+     "name": "packet",
+     "help": "RPC authentication level 'packet'."
+    },
+    {
+     "name": "integrity",
+     "help": "RPC authentication level 'integrity'."
+    },
+    {
+     "name": "privacy",
+     "help": "RPC authentication level 'privacy'."
+    }
+   ],
+   "default": "privacy",
+   "multiple_values": false
+  },
+  "http-auth-type": {
+   "name": "http-auth-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication security type used for the HTTP transport.",
+   "options": [
+    {
+     "name": "basic",
+     "help": "Basic HTTP authentication."
+    },
+    {
+     "name": "ntlm",
+     "help": "NTLM HTTP authentication."
+    }
+   ],
+   "default": "ntlm",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum SSL/TLS protocol version for HTTPS transport (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "auto-discover-kdc": {
+   "name": "auto-discover-kdc",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic discovery of KDC IP addresses.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic discovery of KDC IP addresses."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic discovery of KDC IP addresses."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "kdc-ip": {
+   "name": "kdc-ip",
+   "category": "table",
+   "help": "KDC IPv4 addresses for Kerberos authentication.",
+   "member_table": true,
+   "mkey": "ipv4",
+   "mkey_type": "string",
+   "children": {
+    "ipv4": {
+     "name": "ipv4",
+     "category": "unitary",
+     "type": "string",
+     "help": "KDC IPv4 addresses for Kerberos authentication.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 543,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,160 @@
+{
+ "name": "host-key",
+ "category": "table",
+ "help": "SSH proxy host public keys.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SSH public key name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the trust status of the public key.",
+   "options": [
+    {
+     "name": "trusted",
+     "help": "The public key is trusted."
+    },
+    {
+     "name": "revoked",
+     "help": "The public key is revoked."
+    }
+   ],
+   "default": "trusted",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the type of the public key.",
+   "options": [
+    {
+     "name": "RSA",
+     "help": "The type of the public key is RSA."
+    },
+    {
+     "name": "DSA",
+     "help": "The type of the public key is DSA."
+    },
+    {
+     "name": "ECDSA",
+     "help": "The type of the public key is ECDSA."
+    },
+    {
+     "name": "ED25519",
+     "help": "The type of the public key is ED25519."
+    },
+    {
+     "name": "RSA-CA",
+     "help": "The type of the public key is from RSA CA."
+    },
+    {
+     "name": "DSA-CA",
+     "help": "The type of the public key is from DSA CA."
+    },
+    {
+     "name": "ECDSA-CA",
+     "help": "The type of the public key is from ECDSA CA."
+    },
+    {
+     "name": "ED25519-CA",
+     "help": "The type of the public key is from ED25519 CA."
+    }
+   ],
+   "default": "RSA",
+   "multiple_values": false
+  },
+  "nid": {
+   "name": "nid",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the nid of the ECDSA key.",
+   "options": [
+    {
+     "name": "256",
+     "help": "The NID is ecdsa-sha2-nistp256."
+    },
+    {
+     "name": "384",
+     "help": "The NID is ecdsa-sha2-nistp384."
+    },
+    {
+     "name": "521",
+     "help": "The NID is ecdsa-sha2-nistp521."
+    }
+   ],
+   "default": "256",
+   "multiple_values": false
+  },
+  "usage": {
+   "name": "usage",
+   "category": "unitary",
+   "type": "option",
+   "help": "Usage for this public key.",
+   "options": [
+    {
+     "name": "transparent-proxy",
+     "help": "Transparent proxy uses this public key to validate server."
+    },
+    {
+     "name": "access-proxy",
+     "help": "Access proxy uses this public key to validate server."
+    }
+   ],
+   "default": "transparent-proxy",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IP address of the SSH server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the SSH server.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 22,
+   "multiple_values": false
+  },
+  "hostname": {
+   "name": "hostname",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hostname of the SSH server to match SSH certificate principals.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "public-key": {
+   "name": "public-key",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "SSH public key.",
+   "size": 32768,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 2000,
+ "path": "firewall.ssh",
+ "q_type": 402,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

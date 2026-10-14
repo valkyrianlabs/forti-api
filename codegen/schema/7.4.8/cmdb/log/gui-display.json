@@ -1,0 +1,65 @@
+{
+ "name": "gui-display",
+ "category": "complex",
+ "help": "Configure how log messages are displayed on the GUI.",
+ "children": {
+  "resolve-hosts": {
+   "name": "resolve-hosts",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable resolving IP addresses to hostname in log messages on the GUI using reverse DNS lookup.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable resolving IP addresses to hostnames."
+    },
+    {
+     "name": "disable",
+     "help": "Disable resolving IP addresses to hostnames."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "resolve-apps": {
+   "name": "resolve-apps",
+   "category": "unitary",
+   "type": "option",
+   "help": "Resolve unknown applications on the GUI using Fortinet's remote application database.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable unknown applications on the GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable unknown applications on the GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fortiview-unscanned-apps": {
+   "name": "fortiview-unscanned-apps",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable showing unscanned traffic in FortiView application charts.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable showing unscanned traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Disable showing unscanned traffic."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "log",
+ "q_type": 490,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

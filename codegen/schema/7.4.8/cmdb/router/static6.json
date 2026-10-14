@@ -1,0 +1,242 @@
+{
+ "name": "static6",
+ "category": "table",
+ "help": "Configure IPv6 static routing tables.",
+ "mkey": "seq-num",
+ "mkey_type": "integer",
+ "children": {
+  "seq-num": {
+   "name": "seq-num",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Sequence number.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this static route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable static route."
+    },
+    {
+     "name": "disable",
+     "help": "Disable static route."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dst": {
+   "name": "dst",
+   "category": "unitary",
+   "type": "ipv6-network",
+   "help": "Destination IPv6 prefix.",
+   "required": true,
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "gateway": {
+   "name": "gateway",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address of the gateway.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "device": {
+   "name": "device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Gateway out interface or tunnel.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "devindex": {
+   "name": "devindex",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Device index (0 - 4294967295).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "distance": {
+   "name": "distance",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative distance (1 - 255).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 10,
+   "multiple_values": false
+  },
+  "weight": {
+   "name": "weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative weight (0 - 255).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative priority (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1024,
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "blackhole": {
+   "name": "blackhole",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable black hole.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable black hole."
+    },
+    {
+     "name": "disable",
+     "help": "Disable black hole."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dynamic-gateway": {
+   "name": "dynamic-gateway",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable use of dynamic gateway retrieved from Router Advertisement (RA).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dynamic gateway."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dynamic gateway."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sdwan-zone": {
+   "name": "sdwan-zone",
+   "category": "table",
+   "help": "Choose SD-WAN Zone.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "SD-WAN zone name.",
+     "datasource": [
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr": {
+   "name": "dstaddr",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of firewall address or address group.",
+   "datasource": [
+    "firewall.address6.name",
+    "firewall.addrgrp6.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "link-monitor-exempt": {
+   "name": "link-monitor-exempt",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable withdrawal of this static route when link monitor or health check is down.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Keep this static route when link monitor or health check is down."
+    },
+    {
+     "name": "disable",
+     "help": "Withdraw this static route when link monitor or health check is down. (default)"
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vrf": {
+   "name": "vrf",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Virtual Routing Forwarding ID.",
+   "min-value": 0,
+   "max-value": 251,
+   "default": "unspecified",
+   "multiple_values": false
+  },
+  "bfd": {
+   "name": "bfd",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Bidirectional Forwarding Detection (BFD).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Bidirectional Forwarding Detection (BFD)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Bidirectional Forwarding Detection (BFD)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 250,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "router",
+ "q_type": 3,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

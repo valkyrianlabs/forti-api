@@ -1,0 +1,34 @@
+{
+ "name": "sub-class",
+ "category": "table",
+ "help": "Hidden table for datasource.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Signature subclass name.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Signature subclass ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "waf",
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

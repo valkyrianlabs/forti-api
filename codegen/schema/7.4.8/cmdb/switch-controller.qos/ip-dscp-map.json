@@ -1,0 +1,211 @@
+{
+ "name": "ip-dscp-map",
+ "category": "table",
+ "help": "Configure FortiSwitch QoS IP precedence/DSCP.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dscp map name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description of the ip-dscp map name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "map": {
+   "name": "map",
+   "category": "table",
+   "help": "Maps between IP-DSCP value to COS queue.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Dscp mapping entry name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "cos-queue": {
+     "name": "cos-queue",
+     "category": "unitary",
+     "type": "integer",
+     "help": "COS queue number.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 7,
+     "default": 0,
+     "multiple_values": false
+    },
+    "diffserv": {
+     "name": "diffserv",
+     "category": "unitary",
+     "type": "option",
+     "help": "Differentiated service.",
+     "options": [
+      {
+       "name": "CS0",
+       "help": "DSCP CS0."
+      },
+      {
+       "name": "CS1",
+       "help": "DSCP CS1."
+      },
+      {
+       "name": "AF11",
+       "help": "DSCP AF11."
+      },
+      {
+       "name": "AF12",
+       "help": "DSCP AF12."
+      },
+      {
+       "name": "AF13",
+       "help": "DSCP AF13."
+      },
+      {
+       "name": "CS2",
+       "help": "DSCP CS2."
+      },
+      {
+       "name": "AF21",
+       "help": "DSCP AF21."
+      },
+      {
+       "name": "AF22",
+       "help": "DSCP AF22."
+      },
+      {
+       "name": "AF23",
+       "help": "DSCP AF23."
+      },
+      {
+       "name": "CS3",
+       "help": "DSCP CS3."
+      },
+      {
+       "name": "AF31",
+       "help": "DSCP AF31."
+      },
+      {
+       "name": "AF32",
+       "help": "DSCP AF32."
+      },
+      {
+       "name": "AF33",
+       "help": "DSCP AF33."
+      },
+      {
+       "name": "CS4",
+       "help": "DSCP CS4."
+      },
+      {
+       "name": "AF41",
+       "help": "DSCP AF41."
+      },
+      {
+       "name": "AF42",
+       "help": "DSCP AF42."
+      },
+      {
+       "name": "AF43",
+       "help": "DSCP AF43."
+      },
+      {
+       "name": "CS5",
+       "help": "DSCP CS5."
+      },
+      {
+       "name": "EF",
+       "help": "DSCP EF."
+      },
+      {
+       "name": "CS6",
+       "help": "DSCP CS6."
+      },
+      {
+       "name": "CS7",
+       "help": "DSCP CS7."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "ip-precedence": {
+     "name": "ip-precedence",
+     "category": "unitary",
+     "type": "option",
+     "help": "IP Precedence.",
+     "options": [
+      {
+       "name": "network-control",
+       "help": "Network control."
+      },
+      {
+       "name": "internetwork-control",
+       "help": "Internetwork control."
+      },
+      {
+       "name": "critic-ecp",
+       "help": "Critic ECP."
+      },
+      {
+       "name": "flashoverride",
+       "help": "Flash override."
+      },
+      {
+       "name": "flash",
+       "help": "Flash."
+      },
+      {
+       "name": "immediate",
+       "help": "Immediate."
+      },
+      {
+       "name": "priority",
+       "help": "Priority."
+      },
+      {
+       "name": "routine",
+       "help": "Routine."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "value": {
+     "name": "value",
+     "category": "unitary",
+     "type": "user",
+     "help": "Raw values of DSCP (0 - 63).",
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller.qos",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

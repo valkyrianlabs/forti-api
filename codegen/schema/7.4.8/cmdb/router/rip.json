@@ -1,0 +1,650 @@
+{
+ "name": "rip",
+ "category": "complex",
+ "help": "Configure RIP.",
+ "children": {
+  "default-information-originate": {
+   "name": "default-information-originate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable generation of default route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-metric": {
+   "name": "default-metric",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default metric.",
+   "min-value": 1,
+   "max-value": 16,
+   "default": 1,
+   "multiple_values": false
+  },
+  "max-out-metric": {
+   "name": "max-out-metric",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum metric allowed to output(0 means 'not set').",
+   "min-value": 0,
+   "max-value": 15,
+   "default": 0,
+   "multiple_values": false
+  },
+  "distance": {
+   "name": "distance",
+   "category": "table",
+   "help": "Distance.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Distance ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet-any",
+     "help": "Distance prefix.",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "distance": {
+     "name": "distance",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Distance (1 - 255).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "access-list": {
+     "name": "access-list",
+     "category": "unitary",
+     "type": "string",
+     "help": "Access list for route destination.",
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 100,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "distribute-list": {
+   "name": "distribute-list",
+   "category": "table",
+   "help": "Distribute list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Distribute list ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "direction": {
+     "name": "direction",
+     "category": "unitary",
+     "type": "option",
+     "help": "Distribute list direction.",
+     "required": true,
+     "options": [
+      {
+       "name": "in",
+       "help": "Filter incoming packets."
+      },
+      {
+       "name": "out",
+       "help": "Filter outgoing packets."
+      }
+     ],
+     "default": "out",
+     "multiple_values": false
+    },
+    "listname": {
+     "name": "listname",
+     "category": "unitary",
+     "type": "string",
+     "help": "Distribute access/prefix list name.",
+     "required": true,
+     "datasource": [
+      "router.access-list.name",
+      "router.prefix-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Distribute list interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 100,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "neighbor": {
+   "name": "neighbor",
+   "category": "table",
+   "help": "Neighbor.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Neighbor entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IP address.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 100,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "network": {
+   "name": "network",
+   "category": "table",
+   "help": "Network.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Network entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Network prefix.",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 100,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "offset-list": {
+   "name": "offset-list",
+   "category": "table",
+   "help": "Offset list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Offset-list ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "direction": {
+     "name": "direction",
+     "category": "unitary",
+     "type": "option",
+     "help": "Offset list direction.",
+     "required": true,
+     "options": [
+      {
+       "name": "in",
+       "help": "Filter incoming packets."
+      },
+      {
+       "name": "out",
+       "help": "Filter outgoing packets."
+      }
+     ],
+     "default": "out",
+     "multiple_values": false
+    },
+    "access-list": {
+     "name": "access-list",
+     "category": "unitary",
+     "type": "string",
+     "help": "Access list name.",
+     "required": true,
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "offset": {
+     "name": "offset",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Offset.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 16,
+     "default": 0,
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 32,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "passive-interface": {
+   "name": "passive-interface",
+   "category": "table",
+   "help": "Passive interface configuration.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Passive interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "redistribute": {
+   "name": "redistribute",
+   "category": "table",
+   "help": "Redistribute configuration.",
+   "readonly": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Redistribute name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "metric": {
+     "name": "metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Redistribute metric setting.",
+     "min-value": 1,
+     "max-value": 16,
+     "default": 0,
+     "multiple_values": false
+    },
+    "routemap": {
+     "name": "routemap",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route map name.",
+     "datasource": [
+      "router.route-map.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "update-timer": {
+   "name": "update-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Update timer in seconds.",
+   "min-value": 1,
+   "max-value": 2147483647,
+   "default": 30,
+   "multiple_values": false
+  },
+  "timeout-timer": {
+   "name": "timeout-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout timer in seconds.",
+   "min-value": 5,
+   "max-value": 2147483647,
+   "default": 180,
+   "multiple_values": false
+  },
+  "garbage-timer": {
+   "name": "garbage-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Garbage timer in seconds.",
+   "min-value": 5,
+   "max-value": 2147483647,
+   "default": 120,
+   "multiple_values": false
+  },
+  "version": {
+   "name": "version",
+   "category": "unitary",
+   "type": "option",
+   "help": "RIP version.",
+   "options": [
+    {
+     "name": "1",
+     "help": "Version 1."
+    },
+    {
+     "name": "2",
+     "help": "Version 2."
+    }
+   ],
+   "default": "2",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "table",
+   "help": "RIP interface configuration.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "auth-keychain": {
+     "name": "auth-keychain",
+     "category": "unitary",
+     "type": "string",
+     "help": "Authentication key-chain name.",
+     "datasource": [
+      "router.key-chain.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "auth-mode": {
+     "name": "auth-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authentication mode.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "text",
+       "help": "Text."
+      },
+      {
+       "name": "md5",
+       "help": "MD5."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "auth-string": {
+     "name": "auth-string",
+     "category": "unitary",
+     "type": "password",
+     "help": "Authentication string/password.",
+     "size": 16,
+     "multiple_values": false
+    },
+    "receive-version": {
+     "name": "receive-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Receive version.",
+     "options": [
+      {
+       "name": "1",
+       "help": "Version 1."
+      },
+      {
+       "name": "2",
+       "help": "Version 2."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "send-version": {
+     "name": "send-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Send version.",
+     "options": [
+      {
+       "name": "1",
+       "help": "Version 1."
+      },
+      {
+       "name": "2",
+       "help": "Version 2."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "send-version2-broadcast": {
+     "name": "send-version2-broadcast",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable broadcast version 1 compatible packets.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable broadcasting."
+      },
+      {
+       "name": "enable",
+       "help": "Enable broadcasting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "split-horizon-status": {
+     "name": "split-horizon-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable split horizon.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "split-horizon": {
+     "name": "split-horizon",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable split horizon.",
+     "options": [
+      {
+       "name": "poisoned",
+       "help": "Poisoned."
+      },
+      {
+       "name": "regular",
+       "help": "Regular."
+      }
+     ],
+     "default": "poisoned",
+     "multiple_values": false
+    },
+    "flags": {
+     "name": "flags",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Flags.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 8,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 32,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "router",
+ "q_type": 107,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

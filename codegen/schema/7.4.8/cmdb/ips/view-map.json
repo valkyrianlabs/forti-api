@@ -1,0 +1,96 @@
+{
+ "name": "view-map",
+ "category": "table",
+ "help": "Configure IPS view-map.",
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "View ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "vdom-id": {
+   "name": "vdom-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VDOM ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "policy-id": {
+   "name": "policy-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Policy ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "id-policy-id": {
+   "name": "id-policy-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID-based policy ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "which": {
+   "name": "which",
+   "category": "unitary",
+   "type": "option",
+   "help": "Policy.",
+   "readonly": true,
+   "options": [
+    {
+     "name": "firewall",
+     "help": "Firewall policy."
+    },
+    {
+     "name": "interface",
+     "help": "Interface policy."
+    },
+    {
+     "name": "interface6",
+     "help": "Interface policy6."
+    },
+    {
+     "name": "sniffer",
+     "help": "Sniffer policy."
+    },
+    {
+     "name": "sniffer6",
+     "help": "Sniffer policy6."
+    },
+    {
+     "name": "explicit",
+     "help": "explicit proxy policy."
+    }
+   ],
+   "default": "firewall",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "ips",
+ "q_type": 245,
+ "access_group": "utmgrp",
+ "object_range": "both"
+}

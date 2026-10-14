@@ -1,0 +1,690 @@
+{
+ "name": "explicit",
+ "category": "complex",
+ "help": "Configure explicit Web proxy settings.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the explicit Web proxy for HTTP and HTTPS session.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the explicit web proxy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the explicit web proxy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "secure-web-proxy": {
+   "name": "secure-web-proxy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable/require the secure web proxy for HTTP and HTTPS session.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable secure webproxy."
+    },
+    {
+     "name": "enable",
+     "help": "Enable secure webproxy access."
+    },
+    {
+     "name": "secure",
+     "help": "Require secure webproxy access."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ftp-over-http": {
+   "name": "ftp-over-http",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to proxy FTP-over-HTTP sessions sent from a web browser.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FTP-over-HTTP sessions."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FTP-over-HTTP sessions."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "socks": {
+   "name": "socks",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the SOCKS proxy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the SOCKS proxy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the SOCKS proxy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-incoming-port": {
+   "name": "http-incoming-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Accept incoming HTTP requests on one or more ports (0 - 65535, default = 8080).",
+   "default": "",
+   "multiple_values": false
+  },
+  "http-connection-mode": {
+   "name": "http-connection-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "HTTP connection mode (default = static).",
+   "options": [
+    {
+     "name": "static",
+     "help": "Only one server connection exists during the proxy session."
+    },
+    {
+     "name": "multiplex",
+     "help": "Established connections are held until the proxy session ends."
+    },
+    {
+     "name": "serverpool",
+     "help": "Established connections are shared with other proxy sessions."
+    }
+   ],
+   "default": "static",
+   "multiple_values": false
+  },
+  "https-incoming-port": {
+   "name": "https-incoming-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Accept incoming HTTPS requests on one or more ports (0 - 65535, default = 0, use the same as HTTP).",
+   "default": "",
+   "multiple_values": false
+  },
+  "secure-web-proxy-cert": {
+   "name": "secure-web-proxy-cert",
+   "category": "table",
+   "help": "Name of certificates for secure web proxy.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate list.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "Fortinet_SSL",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "client-cert": {
+   "name": "client-cert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to request client certificate.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable client certificate request."
+    },
+    {
+     "name": "enable",
+     "help": "Enable client certificate request."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "user-agent-detect": {
+   "name": "user-agent-detect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to detect device type by HTTP user-agent if no client certificate provided.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable to detect unknown device by HTTP user-agent if no client certificate provided."
+    },
+    {
+     "name": "enable",
+     "help": "Enable to detect unknown device by HTTP user-agent if no client certificate provided."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "empty-cert-action": {
+   "name": "empty-cert-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action of an empty client certificate.",
+   "options": [
+    {
+     "name": "accept",
+     "help": "Accept the SSL handshake if the client certificate is empty."
+    },
+    {
+     "name": "block",
+     "help": "Block the SSL handshake if the client certificate is empty."
+    },
+    {
+     "name": "accept-unmanageable",
+     "help": "Accept the SSL handshake only if the end-point is unmanageable."
+    }
+   ],
+   "default": "block",
+   "multiple_values": false
+  },
+  "ssl-dh-bits": {
+   "name": "ssl-dh-bits",
+   "category": "unitary",
+   "type": "option",
+   "help": "Bit-size of Diffie-Hellman (DH) prime used in DHE-RSA negotiation (default = 2048).",
+   "options": [
+    {
+     "name": "768",
+     "help": "768-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1024",
+     "help": "1024-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1536",
+     "help": "1536-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "2048",
+     "help": "2048-bit Diffie-Hellman prime."
+    }
+   ],
+   "default": "2048",
+   "multiple_values": false
+  },
+  "ftp-incoming-port": {
+   "name": "ftp-incoming-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Accept incoming FTP-over-HTTP requests on one or more ports (0 - 65535, default = 0; use the same as HTTP).",
+   "default": "",
+   "multiple_values": false
+  },
+  "socks-incoming-port": {
+   "name": "socks-incoming-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Accept incoming SOCKS proxy requests on one or more ports (0 - 65535, default = 0; use the same as HTTP).",
+   "default": "",
+   "multiple_values": false
+  },
+  "incoming-ip": {
+   "name": "incoming-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Restrict the explicit HTTP proxy to only accept sessions from this IP address. An interface must have this IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "outgoing-ip": {
+   "name": "outgoing-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Outgoing HTTP requests will have this IP address as their source address. An interface must have this IP address.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 8
+  },
+  "ipv6-status": {
+   "name": "ipv6-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing an IPv6 web proxy destination in policies and all IPv6 related entries in this command.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable allowing an IPv6 web proxy destination."
+    },
+    {
+     "name": "disable",
+     "help": "Disable allowing an IPv6 web proxy destination."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "incoming-ip6": {
+   "name": "incoming-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Restrict the explicit web proxy to only accept sessions from this IPv6 address. An interface must have this IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "outgoing-ip6": {
+   "name": "outgoing-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Outgoing HTTP requests will leave this IPv6. Multiple interfaces can be specified. Interfaces must have these IPv6 addresses.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 8
+  },
+  "strict-guest": {
+   "name": "strict-guest",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable strict guest user checking by the explicit web proxy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable strict guest user checking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable strict guest user checking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pref-dns-result": {
+   "name": "pref-dns-result",
+   "category": "unitary",
+   "type": "option",
+   "help": "Prefer resolving addresses using the configured IPv4 or IPv6 DNS server (default = ipv4).",
+   "options": [
+    {
+     "name": "ipv4",
+     "help": "Send the IPv4 request first and then the IPv6 request. Use the DNS response that returns to the FortiGate first."
+    },
+    {
+     "name": "ipv6",
+     "help": "Send the IPv6 request first and then the IPv4 request. Use the DNS response that returns to the FortiGate first."
+    },
+    {
+     "name": "ipv4-strict",
+     "help": "Use the IPv4 DNS response. If the IPv6 DNS response arrives first, wait 50ms for the IPv4 response and then use the IPv4 response, otherwise the IPv6."
+    },
+    {
+     "name": "ipv6-strict",
+     "help": "Use the IPv6 DNS response. If the IPv4 DNS response arrives first, wait 50ms for the IPv6 response and then use the IPv6 response, otherwise the IPv4."
+    }
+   ],
+   "default": "ipv4",
+   "multiple_values": false
+  },
+  "unknown-http-version": {
+   "name": "unknown-http-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "How to handle HTTP sessions that do not comply with HTTP 0.9, 1.0, or 1.1.",
+   "options": [
+    {
+     "name": "reject",
+     "help": "Reject or tear down HTTP sessions that do not use HTTP 0.9, 1.0, or 1.1."
+    },
+    {
+     "name": "best-effort",
+     "help": "Assume all HTTP sessions comply with HTTP 0.9, 1.0, or 1.1. If a session uses a different HTTP version, it may not parse correctly and the connection may be lost."
+    }
+   ],
+   "default": "reject",
+   "multiple_values": false
+  },
+  "realm": {
+   "name": "realm",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication realm used to identify the explicit web proxy (maximum of 63 characters).",
+   "required": true,
+   "size": 63,
+   "default": "default",
+   "multiple_values": false
+  },
+  "sec-default-action": {
+   "name": "sec-default-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept or deny explicit web proxy sessions when no web proxy firewall policy exists.",
+   "options": [
+    {
+     "name": "accept",
+     "help": "Accept requests. All explicit web proxy traffic is accepted whether there is an explicit web proxy policy or not."
+    },
+    {
+     "name": "deny",
+     "help": "Deny requests unless there is a matching explicit web proxy policy."
+    }
+   ],
+   "default": "deny",
+   "multiple_values": false
+  },
+  "https-replacement-message": {
+   "name": "https-replacement-message",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending the client a replacement message for HTTPS requests.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display a replacement message for HTTPS requests."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display a replacement message for HTTPS requests."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "message-upon-server-error": {
+   "name": "message-upon-server-error",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable displaying a replacement message when a server error is detected.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display a replacement message when a server error is detected."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display a replacement message when a server error is detected."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "pac-file-server-status": {
+   "name": "pac-file-server-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Proxy Auto-Configuration (PAC) for users of this explicit proxy profile.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Proxy Auto-Configuration (PAC)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Proxy Auto-Configuration (PAC)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pac-file-url": {
+   "name": "pac-file-url",
+   "category": "unitary",
+   "type": "user",
+   "help": "PAC file access URL.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "pac-file-server-port": {
+   "name": "pac-file-server-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Port number that PAC traffic from client web browsers uses to connect to the explicit web proxy (0 - 65535, default = 0; use the same as HTTP).",
+   "default": "",
+   "multiple_values": false
+  },
+  "pac-file-through-https": {
+   "name": "pac-file-through-https",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to get Proxy Auto-Configuration (PAC) through HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable to get Proxy Auto-Configuration (PAC) through HTTPS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable to get Proxy Auto-Configuration (PAC) through HTTPS."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pac-file-name": {
+   "name": "pac-file-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Pac file name.",
+   "required": true,
+   "size": 63,
+   "default": "proxy.pac",
+   "multiple_values": false
+  },
+  "pac-file-data": {
+   "name": "pac-file-data",
+   "category": "unitary",
+   "type": "user",
+   "help": "PAC file contents enclosed in quotes (maximum of 256K bytes).",
+   "default": "",
+   "multiple_values": false
+  },
+  "pac-policy": {
+   "name": "pac-policy",
+   "category": "table",
+   "help": "PAC policies.",
+   "mkey": "policyid",
+   "mkey_type": "integer",
+   "children": {
+    "policyid": {
+     "name": "policyid",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Policy ID.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 100,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable policy.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable policy."
+      },
+      {
+       "name": "disable",
+       "help": "Disable policy."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "srcaddr": {
+     "name": "srcaddr",
+     "category": "table",
+     "help": "Source address objects.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name",
+        "firewall.proxy-address.name",
+        "firewall.proxy-addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "srcaddr6": {
+     "name": "srcaddr6",
+     "category": "table",
+     "help": "Source address6 objects.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "required": true,
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dstaddr": {
+     "name": "dstaddr",
+     "category": "table",
+     "help": "Destination address objects.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "pac-file-name": {
+     "name": "pac-file-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Pac file name.",
+     "required": true,
+     "size": 63,
+     "default": "proxy.pac",
+     "multiple_values": false
+    },
+    "pac-file-data": {
+     "name": "pac-file-data",
+     "category": "unitary",
+     "type": "user",
+     "help": "PAC file contents enclosed in quotes (maximum of 256K bytes).",
+     "default": "",
+     "multiple_values": false
+    },
+    "comments": {
+     "name": "comments",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Optional comments.",
+     "size": 1023,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "ssl-algorithm": {
+   "name": "ssl-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Relative strength of encryption algorithms accepted in HTTPS deep scan: high, medium, or low.",
+   "options": [
+    {
+     "name": "high",
+     "help": "High encrption. Allow only AES and ChaCha."
+    },
+    {
+     "name": "medium",
+     "help": "Medium encryption. Allow AES, ChaCha, 3DES, and RC4."
+    },
+    {
+     "name": "low",
+     "help": "Low encryption. Allow AES, ChaCha, 3DES, RC4, and DES."
+    }
+   ],
+   "default": "low",
+   "multiple_values": false
+  },
+  "trace-auth-no-rsp": {
+   "name": "trace-auth-no-rsp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging timed-out authentication requests.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging timed-out authentication requests."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging timed-out authentication requests."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "web-proxy",
+ "q_type": 338,
+ "access_group": "fwgrp.service",
+ "object_range": "vdom"
+}

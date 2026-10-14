@@ -1,0 +1,421 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure web proxy profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "header-client-ip": {
+   "name": "header-client-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP client-IP header in forwarded requests: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "header-via-request": {
+   "name": "header-via-request",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP via header in forwarded requests: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "header-via-response": {
+   "name": "header-via-response",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP via header in forwarded responses: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "header-x-forwarded-for": {
+   "name": "header-x-forwarded-for",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP x-forwarded-for header in forwarded requests: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "header-x-forwarded-client-cert": {
+   "name": "header-x-forwarded-client-cert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP x-forwarded-client-cert header in forwarded requests: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "header-front-end-https": {
+   "name": "header-front-end-https",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP front-end-HTTPS header in forwarded requests: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "header-x-authenticated-user": {
+   "name": "header-x-authenticated-user",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP x-authenticated-user header in forwarded requests: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "header-x-authenticated-groups": {
+   "name": "header-x-authenticated-groups",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take on the HTTP x-authenticated-groups header in forwarded requests: forwards (pass), adds, or removes the HTTP header.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Forward the same HTTP header."
+    },
+    {
+     "name": "add",
+     "help": "Add the HTTP header."
+    },
+    {
+     "name": "remove",
+     "help": "Remove the HTTP header."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "strip-encoding": {
+   "name": "strip-encoding",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable stripping unsupported encoding from the request header.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable stripping of unsupported encoding from the request header."
+    },
+    {
+     "name": "disable",
+     "help": "Disable stripping of unsupported encoding from the request header."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-header-change": {
+   "name": "log-header-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging HTTP header changes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Enable/disable logging HTTP header changes."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Enable/disable logging HTTP header changes."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "headers": {
+   "name": "headers",
+   "category": "table",
+   "help": "Configure HTTP forwarded requests headers.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "HTTP forwarded header id.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "HTTP forwarded header name.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "dstaddr": {
+     "name": "dstaddr",
+     "category": "table",
+     "help": "Destination address and address group names.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dstaddr6": {
+     "name": "dstaddr6",
+     "category": "table",
+     "help": "Destination address and address group names (IPv6).",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure adding, removing, or logging of the HTTP header entry in HTTP requests and responses.",
+     "options": [
+      {
+       "name": "add-to-request",
+       "help": "Add the HTTP header to request."
+      },
+      {
+       "name": "add-to-response",
+       "help": "Add the HTTP header to response."
+      },
+      {
+       "name": "remove-from-request",
+       "help": "Remove the HTTP header from request."
+      },
+      {
+       "name": "remove-from-response",
+       "help": "Remove the HTTP header from response."
+      },
+      {
+       "name": "monitor-request",
+       "help": "Record the HTTP header in utm-webfilter log."
+      },
+      {
+       "name": "monitor-response",
+       "help": "Record the HTTP header in utm-webfilter log."
+      }
+     ],
+     "default": "add-to-request",
+     "multiple_values": false
+    },
+    "content": {
+     "name": "content",
+     "category": "unitary",
+     "type": "string",
+     "help": "HTTP header content.",
+     "size": 1023,
+     "default": "",
+     "multiple_values": false
+    },
+    "base64-encoding": {
+     "name": "base64-encoding",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of base64 encoding of HTTP content.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable use of base64 encoding of HTTP content."
+      },
+      {
+       "name": "enable",
+       "help": "Enable use of base64 encoding of HTTP content."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "add-option": {
+     "name": "add-option",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure options to append content to existing HTTP header or add new HTTP header.",
+     "options": [
+      {
+       "name": "append",
+       "help": "Append content to existing HTTP header or create new header if HTTP header is not found."
+      },
+      {
+       "name": "new-on-not-found",
+       "help": "Create new header only if existing HTTP header is not found."
+      },
+      {
+       "name": "new",
+       "help": "Create new header regardless if existing HTTP header is found or not."
+      }
+     ],
+     "default": "new",
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol(s) to take add-option action on (HTTP, HTTPS, or both).",
+     "options": [
+      {
+       "name": "https",
+       "help": "Perform add-option action on HTTPS."
+      },
+      {
+       "name": "http",
+       "help": "Perform add-option action on HTTP."
+      }
+     ],
+     "default": "https http",
+     "multiple_values": true
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "web-proxy",
+ "q_type": 341,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,59 @@
+{
+ "name": "replacemsg-image",
+ "category": "table",
+ "help": "Configure replacement message images.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Image name.",
+   "size": 23,
+   "default": "",
+   "multiple_values": false
+  },
+  "image-type": {
+   "name": "image-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Image type.",
+   "options": [
+    {
+     "name": "gif",
+     "help": "GIF image."
+    },
+    {
+     "name": "jpg",
+     "help": "JPEG image."
+    },
+    {
+     "name": "tiff",
+     "help": "TIFF image."
+    },
+    {
+     "name": "png",
+     "help": "PNG image."
+    }
+   ],
+   "default": "png",
+   "multiple_values": false
+  },
+  "image-base64": {
+   "name": "image-base64",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Image data.",
+   "size": 32768,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 10,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 381,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

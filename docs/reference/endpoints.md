@@ -14,19 +14,554 @@ tags:
 Generated from FortiOS 7.4.8 schemas. Each header declares the object type, its option
 constants and the endpoint alias; `forti_api/gen/all.hpp` includes them all.
 
+487 configuration endpoints (360 tables, 127 singletons) and 47 monitor endpoints.
+
+## Configuration (cmdb)
+
 | FortiOS path | Type | Endpoint | Header | Attributes |
 |---|---|---|---|---|
+| `cmdb/alertemail/setting` | `fortiapi::alertemail::Setting` | `fortiapi::alertemail::SettingSettings` (Singleton) | `forti_api/gen/alertemail/setting.hpp` | 35 |
+| `cmdb/antivirus/exempt-list` | `fortiapi::antivirus::ExemptList` | `fortiapi::antivirus::ExemptLists` (Table) | `forti_api/gen/antivirus/exempt_list.hpp` | 5 |
+| `cmdb/antivirus/filetype` | `fortiapi::antivirus::Filetype` | `fortiapi::antivirus::Filetypes` (Table) | `forti_api/gen/antivirus/filetype.hpp` | 4 |
+| `cmdb/antivirus/profile` | `fortiapi::antivirus::Profile` | `fortiapi::antivirus::Profiles` (Table) | `forti_api/gen/antivirus/profile.hpp` | 32 |
+| `cmdb/antivirus/quarantine` | `fortiapi::antivirus::Quarantine` | `fortiapi::antivirus::QuarantineSettings` (Singleton) | `forti_api/gen/antivirus/quarantine.hpp` | 9 |
+| `cmdb/antivirus/settings` | `fortiapi::antivirus::Settings` | `fortiapi::antivirus::SettingsSettings` (Singleton) | `forti_api/gen/antivirus/settings.hpp` | 5 |
+| `cmdb/application/custom` | `fortiapi::application::Custom` | `fortiapi::application::Customs` (Table) | `forti_api/gen/application/custom.hpp` | 9 |
+| `cmdb/application/group` | `fortiapi::application::Group` | `fortiapi::application::Groups` (Table) | `forti_api/gen/application/group.hpp` | 11 |
+| `cmdb/application/list` | `fortiapi::application::List` | `fortiapi::application::Lists` (Table) | `forti_api/gen/application/list.hpp` | 17 |
+| `cmdb/application/name` | `fortiapi::application::Name` | `fortiapi::application::Names` (Table) | `forti_api/gen/application/name.hpp` | 13 |
+| `cmdb/authentication/rule` | `fortiapi::authentication::Rule` | `fortiapi::authentication::Rules` (Table) | `forti_api/gen/authentication/rule.hpp` | 18 |
+| `cmdb/authentication/scheme` | `fortiapi::authentication::Scheme` | `fortiapi::authentication::Schemes` (Table) | `forti_api/gen/authentication/scheme.hpp` | 13 |
+| `cmdb/authentication/setting` | `fortiapi::authentication::Setting` | `fortiapi::authentication::SettingSettings` (Singleton) | `forti_api/gen/authentication/setting.hpp` | 21 |
+| `cmdb/automation/setting` | `fortiapi::automation::Setting` | `fortiapi::automation::SettingSettings` (Singleton) | `forti_api/gen/automation/setting.hpp` | 2 |
+| `cmdb/casb/profile` | `fortiapi::casb::Profile` | `fortiapi::casb::Profiles` (Table) | `forti_api/gen/casb/profile.hpp` | 3 |
+| `cmdb/casb/saas-application` | `fortiapi::casb::SaasApplication` | `fortiapi::casb::SaasApplications` (Table) | `forti_api/gen/casb/saas_application.hpp` | 7 |
+| `cmdb/casb/user-activity` | `fortiapi::casb::UserActivity` | `fortiapi::casb::UserActivities` (Table) | `forti_api/gen/casb/user_activity.hpp` | 11 |
+| `cmdb/certificate/ca` | `fortiapi::certificate::Ca` | `fortiapi::certificate::Cas` (Table) | `forti_api/gen/certificate/ca.hpp` | 14 |
+| `cmdb/certificate/crl` | `fortiapi::certificate::Crl` | `fortiapi::certificate::Crls` (Table) | `forti_api/gen/certificate/crl.hpp` | 13 |
+| `cmdb/certificate/local` | `fortiapi::certificate::Local` | `fortiapi::certificate::Locals` (Table) | `forti_api/gen/certificate/local.hpp` | 39 |
+| `cmdb/certificate/remote` | `fortiapi::certificate::Remote` | `fortiapi::certificate::Remotes` (Table) | `forti_api/gen/certificate/remote.hpp` | 4 |
+| `cmdb/cifs/profile` | `fortiapi::cifs::Profile` | `fortiapi::cifs::Profiles` (Table) | `forti_api/gen/cifs/profile.hpp` | 4 |
+| `cmdb/credential-store/domain-controller` | `fortiapi::credential_store::DomainController` | `fortiapi::credential_store::DomainControllers` (Table) | `forti_api/gen/credential-store/domain_controller.hpp` | 8 |
+| `cmdb/diameter-filter/profile` | `fortiapi::diameter_filter::Profile` | `fortiapi::diameter_filter::Profiles` (Table) | `forti_api/gen/diameter-filter/profile.hpp` | 12 |
+| `cmdb/dlp/data-type` | `fortiapi::dlp::DataType` | `fortiapi::dlp::DataTypes` (Table) | `forti_api/gen/dlp/data_type.hpp` | 12 |
+| `cmdb/dlp/dictionary` | `fortiapi::dlp::Dictionary` | `fortiapi::dlp::Dictionaries` (Table) | `forti_api/gen/dlp/dictionary.hpp` | 6 |
+| `cmdb/dlp/exact-data-match` | `fortiapi::dlp::ExactDataMatch` | `fortiapi::dlp::ExactDataMatches` (Table) | `forti_api/gen/dlp/exact_data_match.hpp` | 4 |
+| `cmdb/dlp/filepattern` | `fortiapi::dlp::Filepattern` | `fortiapi::dlp::Filepatterns` (Table) | `forti_api/gen/dlp/filepattern.hpp` | 4 |
+| `cmdb/dlp/profile` | `fortiapi::dlp::Profile` | `fortiapi::dlp::Profiles` (Table) | `forti_api/gen/dlp/profile.hpp` | 10 |
+| `cmdb/dlp/sensitivity` | `fortiapi::dlp::Sensitivity` | `fortiapi::dlp::Sensitivities` (Table) | `forti_api/gen/dlp/sensitivity.hpp` | 1 |
+| `cmdb/dlp/sensor` | `fortiapi::dlp::Sensor` | `fortiapi::dlp::Sensors` (Table) | `forti_api/gen/dlp/sensor.hpp` | 5 |
+| `cmdb/dlp/settings` | `fortiapi::dlp::Settings` | `fortiapi::dlp::SettingsSettings` (Singleton) | `forti_api/gen/dlp/settings.hpp` | 5 |
+| `cmdb/dnsfilter/domain-filter` | `fortiapi::dnsfilter::DomainFilter` | `fortiapi::dnsfilter::DomainFilters` (Table) | `forti_api/gen/dnsfilter/domain_filter.hpp` | 4 |
 | `cmdb/dnsfilter/profile` | `fortiapi::dnsfilter::Profile` | `fortiapi::dnsfilter::Profiles` (Table) | `forti_api/gen/dnsfilter/profile.hpp` | 17 |
+| `cmdb/emailfilter/block-allow-list` | `fortiapi::emailfilter::BlockAllowList` | `fortiapi::emailfilter::BlockAllowLists` (Table) | `forti_api/gen/emailfilter/block_allow_list.hpp` | 4 |
+| `cmdb/emailfilter/bword` | `fortiapi::emailfilter::Bword` | `fortiapi::emailfilter::Bwords` (Table) | `forti_api/gen/emailfilter/bword.hpp` | 4 |
+| `cmdb/emailfilter/dnsbl` | `fortiapi::emailfilter::Dnsbl` | `fortiapi::emailfilter::Dnsbls` (Table) | `forti_api/gen/emailfilter/dnsbl.hpp` | 4 |
+| `cmdb/emailfilter/fortishield` | `fortiapi::emailfilter::Fortishield` | `fortiapi::emailfilter::FortishieldSettings` (Singleton) | `forti_api/gen/emailfilter/fortishield.hpp` | 3 |
+| `cmdb/emailfilter/iptrust` | `fortiapi::emailfilter::Iptrust` | `fortiapi::emailfilter::Iptrusts` (Table) | `forti_api/gen/emailfilter/iptrust.hpp` | 4 |
+| `cmdb/emailfilter/mheader` | `fortiapi::emailfilter::Mheader` | `fortiapi::emailfilter::Mheaders` (Table) | `forti_api/gen/emailfilter/mheader.hpp` | 4 |
+| `cmdb/emailfilter/options` | `fortiapi::emailfilter::Options` | `fortiapi::emailfilter::OptionsSettings` (Singleton) | `forti_api/gen/emailfilter/options.hpp` | 1 |
+| `cmdb/emailfilter/profile` | `fortiapi::emailfilter::Profile` | `fortiapi::emailfilter::Profiles` (Table) | `forti_api/gen/emailfilter/profile.hpp` | 23 |
+| `cmdb/endpoint-control/fctems` | `fortiapi::endpoint_control::Fctems` | `fortiapi::endpoint_control::Fctemses` (Table) | `forti_api/gen/endpoint-control/fctems.hpp` | 26 |
+| `cmdb/endpoint-control/fctems-override` | `fortiapi::endpoint_control::FctemsOverride` | `fortiapi::endpoint_control::FctemsOverrides` (Table) | `forti_api/gen/endpoint-control/fctems_override.hpp` | 26 |
+| `cmdb/endpoint-control/settings` | `fortiapi::endpoint_control::Settings` | `fortiapi::endpoint_control::SettingsSettings` (Singleton) | `forti_api/gen/endpoint-control/settings.hpp` | 1 |
+| `cmdb/extension-controller/dataplan` | `fortiapi::extension_controller::Dataplan` | `fortiapi::extension_controller::Dataplans` (Table) | `forti_api/gen/extension-controller/dataplan.hpp` | 19 |
+| `cmdb/extension-controller/extender` | `fortiapi::extension_controller::Extender` | `fortiapi::extension_controller::Extenders` (Table) | `forti_api/gen/extension-controller/extender.hpp` | 19 |
+| `cmdb/extension-controller/extender-profile` | `fortiapi::extension_controller::ExtenderProfile` | `fortiapi::extension_controller::ExtenderProfiles` (Table) | `forti_api/gen/extension-controller/extender_profile.hpp` | 12 |
+| `cmdb/extension-controller/extender-vap` | `fortiapi::extension_controller::ExtenderVap` | `fortiapi::extension_controller::ExtenderVaps` (Table) | `forti_api/gen/extension-controller/extender_vap.hpp` | 21 |
+| `cmdb/extension-controller/fortigate` | `fortiapi::extension_controller::Fortigate` | `fortiapi::extension_controller::Fortigates` (Table) | `forti_api/gen/extension-controller/fortigate.hpp` | 8 |
+| `cmdb/extension-controller/fortigate-profile` | `fortiapi::extension_controller::FortigateProfile` | `fortiapi::extension_controller::FortigateProfiles` (Table) | `forti_api/gen/extension-controller/fortigate_profile.hpp` | 4 |
+| `cmdb/file-filter/profile` | `fortiapi::file_filter::Profile` | `fortiapi::file_filter::Profiles` (Table) | `forti_api/gen/file-filter/profile.hpp` | 8 |
+| `cmdb/firewall.ipmacbinding/setting` | `fortiapi::firewall::ipmacbinding::Setting` | `fortiapi::firewall::ipmacbinding::SettingSettings` (Singleton) | `forti_api/gen/firewall/ipmacbinding/setting.hpp` | 3 |
+| `cmdb/firewall.ipmacbinding/table` | `fortiapi::firewall::ipmacbinding::Table` | `fortiapi::firewall::ipmacbinding::Tables` (Table) | `forti_api/gen/firewall/ipmacbinding/table.hpp` | 5 |
+| `cmdb/firewall.schedule/group` | `fortiapi::firewall::schedule::Group` | `fortiapi::firewall::schedule::Groups` (Table) | `forti_api/gen/firewall/schedule/group.hpp` | 4 |
+| `cmdb/firewall.schedule/onetime` | `fortiapi::firewall::schedule::Onetime` | `fortiapi::firewall::schedule::Onetimes` (Table) | `forti_api/gen/firewall/schedule/onetime.hpp` | 8 |
 | `cmdb/firewall.schedule/recurring` | `fortiapi::firewall::RecurringSchedule` | `fortiapi::firewall::RecurringSchedules` (Table) | `forti_api/gen/firewall/schedule/recurring.hpp` | 6 |
 | `cmdb/firewall.service/category` | `fortiapi::firewall::ServiceCategory` | `fortiapi::firewall::ServiceCategories` (Table) | `forti_api/gen/firewall/service/category.hpp` | 3 |
 | `cmdb/firewall.service/custom` | `fortiapi::firewall::Service` | `fortiapi::firewall::Services` (Table) | `forti_api/gen/firewall/service/custom.hpp` | 27 |
+| `cmdb/firewall.service/group` | `fortiapi::firewall::service::Group` | `fortiapi::firewall::service::Groups` (Table) | `forti_api/gen/firewall/service/group.hpp` | 7 |
+| `cmdb/firewall.shaper/per-ip-shaper` | `fortiapi::firewall::shaper::PerIpShaper` | `fortiapi::firewall::shaper::PerIpShapers` (Table) | `forti_api/gen/firewall/shaper/per_ip_shaper.hpp` | 10 |
+| `cmdb/firewall.shaper/traffic-shaper` | `fortiapi::firewall::shaper::TrafficShaper` | `fortiapi::firewall::shaper::TrafficShapers` (Table) | `forti_api/gen/firewall/shaper/traffic_shaper.hpp` | 19 |
+| `cmdb/firewall.ssh/host-key` | `fortiapi::firewall::ssh::HostKey` | `fortiapi::firewall::ssh::HostKeys` (Table) | `forti_api/gen/firewall/ssh/host_key.hpp` | 9 |
+| `cmdb/firewall.ssh/local-ca` | `fortiapi::firewall::ssh::LocalCa` | `fortiapi::firewall::ssh::LocalCas` (Table) | `forti_api/gen/firewall/ssh/local_ca.hpp` | 5 |
+| `cmdb/firewall.ssh/local-key` | `fortiapi::firewall::ssh::LocalKey` | `fortiapi::firewall::ssh::LocalKeys` (Table) | `forti_api/gen/firewall/ssh/local_key.hpp` | 5 |
+| `cmdb/firewall.ssh/setting` | `fortiapi::firewall::ssh::Setting` | `fortiapi::firewall::ssh::SettingSettings` (Singleton) | `forti_api/gen/firewall/ssh/setting.hpp` | 9 |
+| `cmdb/firewall.ssl/setting` | `fortiapi::firewall::ssl::Setting` | `fortiapi::firewall::ssl::SettingSettings` (Singleton) | `forti_api/gen/firewall/ssl/setting.hpp` | 11 |
+| `cmdb/firewall.wildcard-fqdn/custom` | `fortiapi::firewall::wildcard_fqdn::Custom` | `fortiapi::firewall::wildcard_fqdn::Customs` (Table) | `forti_api/gen/firewall/wildcard-fqdn/custom.hpp` | 5 |
+| `cmdb/firewall.wildcard-fqdn/group` | `fortiapi::firewall::wildcard_fqdn::Group` | `fortiapi::firewall::wildcard_fqdn::Groups` (Table) | `forti_api/gen/firewall/wildcard-fqdn/group.hpp` | 5 |
+| `cmdb/firewall/access-proxy` | `fortiapi::firewall::AccessProxy` | `fortiapi::firewall::AccessProxies` (Table) | `forti_api/gen/firewall/access_proxy.hpp` | 16 |
+| `cmdb/firewall/access-proxy-ssh-client-cert` | `fortiapi::firewall::AccessProxySshClientCert` | `fortiapi::firewall::AccessProxySshClientCerts` (Table) | `forti_api/gen/firewall/access_proxy_ssh_client_cert.hpp` | 9 |
+| `cmdb/firewall/access-proxy-virtual-host` | `fortiapi::firewall::AccessProxyVirtualHost` | `fortiapi::firewall::AccessProxyVirtualHosts` (Table) | `forti_api/gen/firewall/access_proxy_virtual_host.hpp` | 5 |
+| `cmdb/firewall/access-proxy6` | `fortiapi::firewall::AccessProxy6` | `fortiapi::firewall::AccessProxy6s` (Table) | `forti_api/gen/firewall/access_proxy6.hpp` | 16 |
 | `cmdb/firewall/address` | `fortiapi::firewall::Address` | `fortiapi::firewall::Addresses` (Table) | `forti_api/gen/firewall/address.hpp` | 43 |
+| `cmdb/firewall/address6` | `fortiapi::firewall::Address6` | `fortiapi::firewall::Address6s` (Table) | `forti_api/gen/firewall/address6.hpp` | 27 |
+| `cmdb/firewall/address6-template` | `fortiapi::firewall::Address6Template` | `fortiapi::firewall::Address6Templates` (Table) | `forti_api/gen/firewall/address6_template.hpp` | 5 |
+| `cmdb/firewall/addrgrp` | `fortiapi::firewall::Addrgrp` | `fortiapi::firewall::Addrgrps` (Table) | `forti_api/gen/firewall/addrgrp.hpp` | 12 |
+| `cmdb/firewall/addrgrp6` | `fortiapi::firewall::Addrgrp6` | `fortiapi::firewall::Addrgrp6s` (Table) | `forti_api/gen/firewall/addrgrp6.hpp` | 9 |
+| `cmdb/firewall/auth-portal` | `fortiapi::firewall::AuthPortal` | `fortiapi::firewall::AuthPortalSettings` (Singleton) | `forti_api/gen/firewall/auth_portal.hpp` | 5 |
+| `cmdb/firewall/central-snat-map` | `fortiapi::firewall::CentralSnatMap` | `fortiapi::firewall::CentralSnatMaps` (Table) | `forti_api/gen/firewall/central_snat_map.hpp` | 21 |
+| `cmdb/firewall/city` | `fortiapi::firewall::City` | `fortiapi::firewall::Cities` (Table) | `forti_api/gen/firewall/city.hpp` | 2 |
+| `cmdb/firewall/country` | `fortiapi::firewall::Country` | `fortiapi::firewall::Countries` (Table) | `forti_api/gen/firewall/country.hpp` | 3 |
+| `cmdb/firewall/decrypted-traffic-mirror` | `fortiapi::firewall::DecryptedTrafficMirror` | `fortiapi::firewall::DecryptedTrafficMirrors` (Table) | `forti_api/gen/firewall/decrypted_traffic_mirror.hpp` | 5 |
+| `cmdb/firewall/dnstranslation` | `fortiapi::firewall::Dnstranslation` | `fortiapi::firewall::Dnstranslations` (Table) | `forti_api/gen/firewall/dnstranslation.hpp` | 4 |
+| `cmdb/firewall/global` | `fortiapi::firewall::Global` | `fortiapi::firewall::GlobalSettings` (Singleton) | `forti_api/gen/firewall/global.hpp` | 1 |
+| `cmdb/firewall/identity-based-route` | `fortiapi::firewall::IdentityBasedRoute` | `fortiapi::firewall::IdentityBasedRoutes` (Table) | `forti_api/gen/firewall/identity_based_route.hpp` | 3 |
+| `cmdb/firewall/interface-policy` | `fortiapi::firewall::InterfacePolicy` | `fortiapi::firewall::InterfacePolicies` (Table) | `forti_api/gen/firewall/interface_policy.hpp` | 24 |
+| `cmdb/firewall/interface-policy6` | `fortiapi::firewall::InterfacePolicy6` | `fortiapi::firewall::InterfacePolicy6s` (Table) | `forti_api/gen/firewall/interface_policy6.hpp` | 24 |
+| `cmdb/firewall/internet-service` | `fortiapi::firewall::InternetService` | `fortiapi::firewall::InternetServices` (Table) | `forti_api/gen/firewall/internet_service.hpp` | 12 |
+| `cmdb/firewall/internet-service-custom` | `fortiapi::firewall::InternetServiceCustom` | `fortiapi::firewall::InternetServiceCustoms` (Table) | `forti_api/gen/firewall/internet_service_custom.hpp` | 4 |
+| `cmdb/firewall/internet-service-custom-group` | `fortiapi::firewall::InternetServiceCustomGroup` | `fortiapi::firewall::InternetServiceCustomGroups` (Table) | `forti_api/gen/firewall/internet_service_custom_group.hpp` | 3 |
+| `cmdb/firewall/internet-service-group` | `fortiapi::firewall::InternetServiceGroup` | `fortiapi::firewall::InternetServiceGroups` (Table) | `forti_api/gen/firewall/internet_service_group.hpp` | 4 |
+| `cmdb/firewall/internet-service-name` | `fortiapi::firewall::InternetServiceName` | `fortiapi::firewall::InternetServiceNames` (Table) | `forti_api/gen/firewall/internet_service_name.hpp` | 6 |
+| `cmdb/firewall/internet-service-reputation` | `fortiapi::firewall::InternetServiceReputation` | `fortiapi::firewall::InternetServiceReputations` (Table) | `forti_api/gen/firewall/internet_service_reputation.hpp` | 2 |
+| `cmdb/firewall/ip-translation` | `fortiapi::firewall::IpTranslation` | `fortiapi::firewall::IpTranslations` (Table) | `forti_api/gen/firewall/ip_translation.hpp` | 5 |
+| `cmdb/firewall/ippool` | `fortiapi::firewall::Ippool` | `fortiapi::firewall::Ippools` (Table) | `forti_api/gen/firewall/ippool.hpp` | 21 |
+| `cmdb/firewall/ippool6` | `fortiapi::firewall::Ippool6` | `fortiapi::firewall::Ippool6s` (Table) | `forti_api/gen/firewall/ippool6.hpp` | 6 |
+| `cmdb/firewall/ldb-monitor` | `fortiapi::firewall::LdbMonitor` | `fortiapi::firewall::LdbMonitors` (Table) | `forti_api/gen/firewall/ldb_monitor.hpp` | 13 |
+| `cmdb/firewall/local-in-policy` | `fortiapi::firewall::LocalInPolicy` | `fortiapi::firewall::LocalInPolicies` (Table) | `forti_api/gen/firewall/local_in_policy.hpp` | 21 |
+| `cmdb/firewall/local-in-policy6` | `fortiapi::firewall::LocalInPolicy6` | `fortiapi::firewall::LocalInPolicy6s` (Table) | `forti_api/gen/firewall/local_in_policy6.hpp` | 20 |
+| `cmdb/firewall/multicast-address` | `fortiapi::firewall::MulticastAddress` | `fortiapi::firewall::MulticastAddresses` (Table) | `forti_api/gen/firewall/multicast_address.hpp` | 9 |
+| `cmdb/firewall/multicast-address6` | `fortiapi::firewall::MulticastAddress6` | `fortiapi::firewall::MulticastAddress6s` (Table) | `forti_api/gen/firewall/multicast_address6.hpp` | 5 |
+| `cmdb/firewall/multicast-policy` | `fortiapi::firewall::MulticastPolicy` | `fortiapi::firewall::MulticastPolicies` (Table) | `forti_api/gen/firewall/multicast_policy.hpp` | 21 |
+| `cmdb/firewall/multicast-policy6` | `fortiapi::firewall::MulticastPolicy6` | `fortiapi::firewall::MulticastPolicy6s` (Table) | `forti_api/gen/firewall/multicast_policy6.hpp` | 17 |
+| `cmdb/firewall/network-service-dynamic` | `fortiapi::firewall::NetworkServiceDynamic` | `fortiapi::firewall::NetworkServiceDynamics` (Table) | `forti_api/gen/firewall/network_service_dynamic.hpp` | 4 |
+| `cmdb/firewall/on-demand-sniffer` | `fortiapi::firewall::OnDemandSniffer` | `fortiapi::firewall::OnDemandSniffers` (Table) | `forti_api/gen/firewall/on_demand_sniffer.hpp` | 8 |
 | `cmdb/firewall/policy` | `fortiapi::firewall::Policy` | `fortiapi::firewall::Policies` (Table) | `forti_api/gen/firewall/policy.hpp` | 170 |
+| `cmdb/firewall/profile-group` | `fortiapi::firewall::ProfileGroup` | `fortiapi::firewall::ProfileGroups` (Table) | `forti_api/gen/firewall/profile_group.hpp` | 22 |
+| `cmdb/firewall/profile-protocol-options` | `fortiapi::firewall::ProfileProtocolOptions` | `fortiapi::firewall::ProfileProtocolOptionses` (Table) | `forti_api/gen/firewall/profile_protocol_options.hpp` | 17 |
+| `cmdb/firewall/proxy-address` | `fortiapi::firewall::ProxyAddress` | `fortiapi::firewall::ProxyAddresses` (Table) | `forti_api/gen/firewall/proxy_address.hpp` | 21 |
+| `cmdb/firewall/proxy-addrgrp` | `fortiapi::firewall::ProxyAddrgrp` | `fortiapi::firewall::ProxyAddrgrps` (Table) | `forti_api/gen/firewall/proxy_addrgrp.hpp` | 7 |
+| `cmdb/firewall/proxy-policy` | `fortiapi::firewall::ProxyPolicy` | `fortiapi::firewall::ProxyPolicies` (Table) | `forti_api/gen/firewall/proxy_policy.hpp` | 72 |
+| `cmdb/firewall/region` | `fortiapi::firewall::Region` | `fortiapi::firewall::Regions` (Table) | `forti_api/gen/firewall/region.hpp` | 3 |
+| `cmdb/firewall/security-policy` | `fortiapi::firewall::SecurityPolicy` | `fortiapi::firewall::SecurityPolicies` (Table) | `forti_api/gen/firewall/security_policy.hpp` | 78 |
+| `cmdb/firewall/shaping-policy` | `fortiapi::firewall::ShapingPolicy` | `fortiapi::firewall::ShapingPolicies` (Table) | `forti_api/gen/firewall/shaping_policy.hpp` | 44 |
+| `cmdb/firewall/shaping-profile` | `fortiapi::firewall::ShapingProfile` | `fortiapi::firewall::ShapingProfiles` (Table) | `forti_api/gen/firewall/shaping_profile.hpp` | 6 |
+| `cmdb/firewall/sniffer` | `fortiapi::firewall::Sniffer` | `fortiapi::firewall::Sniffers` (Table) | `forti_api/gen/firewall/sniffer.hpp` | 30 |
+| `cmdb/firewall/ssl-server` | `fortiapi::firewall::SslServer` | `fortiapi::firewall::SslServers` (Table) | `forti_api/gen/firewall/ssl_server.hpp` | 14 |
+| `cmdb/firewall/ssl-ssh-profile` | `fortiapi::firewall::SslSshProfile` | `fortiapi::firewall::SslSshProfiles` (Table) | `forti_api/gen/firewall/ssl_ssh_profile.hpp` | 29 |
+| `cmdb/firewall/traffic-class` | `fortiapi::firewall::TrafficClass` | `fortiapi::firewall::TrafficClasses` (Table) | `forti_api/gen/firewall/traffic_class.hpp` | 2 |
+| `cmdb/firewall/ttl-policy` | `fortiapi::firewall::TtlPolicy` | `fortiapi::firewall::TtlPolicies` (Table) | `forti_api/gen/firewall/ttl_policy.hpp` | 8 |
+| `cmdb/firewall/vendor-mac` | `fortiapi::firewall::VendorMac` | `fortiapi::firewall::VendorMacs` (Table) | `forti_api/gen/firewall/vendor_mac.hpp` | 4 |
 | `cmdb/firewall/vip` | `fortiapi::firewall::Vip` | `fortiapi::firewall::Vips` (Table) | `forti_api/gen/firewall/vip.hpp` | 95 |
+| `cmdb/firewall/vip6` | `fortiapi::firewall::Vip6` | `fortiapi::firewall::Vip6s` (Table) | `forti_api/gen/firewall/vip6.hpp` | 80 |
+| `cmdb/firewall/vipgrp` | `fortiapi::firewall::Vipgrp` | `fortiapi::firewall::Vipgrps` (Table) | `forti_api/gen/firewall/vipgrp.hpp` | 6 |
+| `cmdb/firewall/vipgrp6` | `fortiapi::firewall::Vipgrp6` | `fortiapi::firewall::Vipgrp6s` (Table) | `forti_api/gen/firewall/vipgrp6.hpp` | 5 |
+| `cmdb/ftp-proxy/explicit` | `fortiapi::ftp_proxy::Explicit` | `fortiapi::ftp_proxy::ExplicitSettings` (Singleton) | `forti_api/gen/ftp-proxy/explicit.hpp` | 10 |
+| `cmdb/icap/profile` | `fortiapi::icap::Profile` | `fortiapi::icap::Profiles` (Table) | `forti_api/gen/icap/profile.hpp` | 30 |
+| `cmdb/icap/server` | `fortiapi::icap::Server` | `fortiapi::icap::Servers` (Table) | `forti_api/gen/icap/server.hpp` | 11 |
+| `cmdb/icap/server-group` | `fortiapi::icap::ServerGroup` | `fortiapi::icap::ServerGroups` (Table) | `forti_api/gen/icap/server_group.hpp` | 3 |
+| `cmdb/ips/attr-map` | `fortiapi::ips::AttrMap` | `fortiapi::ips::AttrMaps` (Table) | `forti_api/gen/ips/attr_map.hpp` | 3 |
+| `cmdb/ips/custom` | `fortiapi::ips::Custom` | `fortiapi::ips::Customs` (Table) | `forti_api/gen/ips/custom.hpp` | 13 |
+| `cmdb/ips/decoder` | `fortiapi::ips::Decoder` | `fortiapi::ips::Decoders` (Table) | `forti_api/gen/ips/decoder.hpp` | 3 |
+| `cmdb/ips/global` | `fortiapi::ips::Global` | `fortiapi::ips::GlobalSettings` (Singleton) | `forti_api/gen/ips/global.hpp` | 18 |
+| `cmdb/ips/metadata-map` | `fortiapi::ips::MetadataMap` | `fortiapi::ips::MetadataMaps` (Table) | `forti_api/gen/ips/metadata_map.hpp` | 4 |
+| `cmdb/ips/rule` | `fortiapi::ips::Rule` | `fortiapi::ips::Rules` (Table) | `forti_api/gen/ips/rule.hpp` | 15 |
+| `cmdb/ips/rule-settings` | `fortiapi::ips::RuleSettings` | `fortiapi::ips::RuleSettingses` (Table) | `forti_api/gen/ips/rule_settings.hpp` | 1 |
+| `cmdb/ips/sensor` | `fortiapi::ips::Sensor` | `fortiapi::ips::Sensors` (Table) | `forti_api/gen/ips/sensor.hpp` | 7 |
+| `cmdb/ips/settings` | `fortiapi::ips::Settings` | `fortiapi::ips::SettingsSettings` (Singleton) | `forti_api/gen/ips/settings.hpp` | 5 |
+| `cmdb/ips/view-map` | `fortiapi::ips::ViewMap` | `fortiapi::ips::ViewMaps` (Table) | `forti_api/gen/ips/view_map.hpp` | 5 |
+| `cmdb/log.disk/filter` | `fortiapi::log::disk::Filter` | `fortiapi::log::disk::FilterSettings` (Singleton) | `forti_api/gen/log/disk/filter.hpp` | 10 |
+| `cmdb/log.disk/setting` | `fortiapi::log::disk::Setting` | `fortiapi::log::disk::SettingSettings` (Singleton) | `forti_api/gen/log/disk/setting.hpp` | 29 |
+| `cmdb/log.fortianalyzer-cloud/override-setting` | `fortiapi::log::fortianalyzer_cloud::OverrideSetting` | `fortiapi::log::fortianalyzer_cloud::OverrideSettingSettings` (Singleton) | `forti_api/gen/log/fortianalyzer-cloud/override_setting.hpp` | 1 |
+| `cmdb/log.fortianalyzer-cloud/setting` | `fortiapi::log::fortianalyzer_cloud::Setting` | `fortiapi::log::fortianalyzer_cloud::SettingSettings` (Singleton) | `forti_api/gen/log/fortianalyzer-cloud/setting.hpp` | 22 |
+| `cmdb/log.fortianalyzer/filter` | `fortiapi::log::fortianalyzer::Filter` | `fortiapi::log::fortianalyzer::FilterSettings` (Singleton) | `forti_api/gen/log/fortianalyzer/filter.hpp` | 11 |
+| `cmdb/log.fortianalyzer/override-filter` | `fortiapi::log::fortianalyzer::OverrideFilter` | `fortiapi::log::fortianalyzer::OverrideFilterSettings` (Singleton) | `forti_api/gen/log/fortianalyzer/override_filter.hpp` | 11 |
+| `cmdb/log.fortianalyzer/override-setting` | `fortiapi::log::fortianalyzer::OverrideSetting` | `fortiapi::log::fortianalyzer::OverrideSettingSettings` (Singleton) | `forti_api/gen/log/fortianalyzer/override_setting.hpp` | 28 |
+| `cmdb/log.fortianalyzer/setting` | `fortiapi::log::fortianalyzer::Setting` | `fortiapi::log::fortianalyzer::SettingSettings` (Singleton) | `forti_api/gen/log/fortianalyzer/setting.hpp` | 27 |
+| `cmdb/log.fortiguard/filter` | `fortiapi::log::fortiguard::Filter` | `fortiapi::log::fortiguard::FilterSettings` (Singleton) | `forti_api/gen/log/fortiguard/filter.hpp` | 10 |
+| `cmdb/log.fortiguard/override-filter` | `fortiapi::log::fortiguard::OverrideFilter` | `fortiapi::log::fortiguard::OverrideFilterSettings` (Singleton) | `forti_api/gen/log/fortiguard/override_filter.hpp` | 10 |
+| `cmdb/log.fortiguard/override-setting` | `fortiapi::log::fortiguard::OverrideSetting` | `fortiapi::log::fortiguard::OverrideSettingSettings` (Singleton) | `forti_api/gen/log/fortiguard/override_setting.hpp` | 9 |
+| `cmdb/log.fortiguard/setting` | `fortiapi::log::fortiguard::Setting` | `fortiapi::log::fortiguard::SettingSettings` (Singleton) | `forti_api/gen/log/fortiguard/setting.hpp` | 14 |
+| `cmdb/log.memory/filter` | `fortiapi::log::memory::Filter` | `fortiapi::log::memory::FilterSettings` (Singleton) | `forti_api/gen/log/memory/filter.hpp` | 10 |
+| `cmdb/log.memory/global-setting` | `fortiapi::log::memory::GlobalSetting` | `fortiapi::log::memory::GlobalSettingSettings` (Singleton) | `forti_api/gen/log/memory/global_setting.hpp` | 4 |
+| `cmdb/log.memory/setting` | `fortiapi::log::memory::Setting` | `fortiapi::log::memory::SettingSettings` (Singleton) | `forti_api/gen/log/memory/setting.hpp` | 1 |
+| `cmdb/log.null-device/filter` | `fortiapi::log::null_device::Filter` | `fortiapi::log::null_device::FilterSettings` (Singleton) | `forti_api/gen/log/null-device/filter.hpp` | 10 |
+| `cmdb/log.null-device/setting` | `fortiapi::log::null_device::Setting` | `fortiapi::log::null_device::SettingSettings` (Singleton) | `forti_api/gen/log/null-device/setting.hpp` | 1 |
+| `cmdb/log.syslogd/filter` | `fortiapi::log::syslogd::Filter` | `fortiapi::log::syslogd::FilterSettings` (Singleton) | `forti_api/gen/log/syslogd/filter.hpp` | 10 |
+| `cmdb/log.syslogd/override-filter` | `fortiapi::log::syslogd::OverrideFilter` | `fortiapi::log::syslogd::OverrideFilterSettings` (Singleton) | `forti_api/gen/log/syslogd/override_filter.hpp` | 10 |
+| `cmdb/log.syslogd/override-setting` | `fortiapi::log::syslogd::OverrideSetting` | `fortiapi::log::syslogd::OverrideSettingSettings` (Singleton) | `forti_api/gen/log/syslogd/override_setting.hpp` | 15 |
+| `cmdb/log.syslogd/setting` | `fortiapi::log::syslogd::Setting` | `fortiapi::log::syslogd::SettingSettings` (Singleton) | `forti_api/gen/log/syslogd/setting.hpp` | 15 |
+| `cmdb/log.tacacs+accounting/filter` | `fortiapi::log::tacacs_accounting::Filter` | `fortiapi::log::tacacs_accounting::FilterSettings` (Singleton) | `forti_api/gen/log/tacacs+accounting/filter.hpp` | 3 |
+| `cmdb/log.tacacs+accounting/setting` | `fortiapi::log::tacacs_accounting::Setting` | `fortiapi::log::tacacs_accounting::SettingSettings` (Singleton) | `forti_api/gen/log/tacacs+accounting/setting.hpp` | 6 |
+| `cmdb/log.webtrends/filter` | `fortiapi::log::webtrends::Filter` | `fortiapi::log::webtrends::FilterSettings` (Singleton) | `forti_api/gen/log/webtrends/filter.hpp` | 10 |
+| `cmdb/log.webtrends/setting` | `fortiapi::log::webtrends::Setting` | `fortiapi::log::webtrends::SettingSettings` (Singleton) | `forti_api/gen/log/webtrends/setting.hpp` | 2 |
+| `cmdb/log/custom-field` | `fortiapi::log::CustomField` | `fortiapi::log::CustomFields` (Table) | `forti_api/gen/log/custom_field.hpp` | 3 |
+| `cmdb/log/eventfilter` | `fortiapi::log::Eventfilter` | `fortiapi::log::EventfilterSettings` (Singleton) | `forti_api/gen/log/eventfilter.hpp` | 17 |
+| `cmdb/log/gui-display` | `fortiapi::log::GuiDisplay` | `fortiapi::log::GuiDisplaySettings` (Singleton) | `forti_api/gen/log/gui_display.hpp` | 3 |
+| `cmdb/log/setting` | `fortiapi::log::Setting` | `fortiapi::log::SettingSettings` (Singleton) | `forti_api/gen/log/setting.hpp` | 24 |
+| `cmdb/log/threat-weight` | `fortiapi::log::ThreatWeight` | `fortiapi::log::ThreatWeightSettings` (Singleton) | `forti_api/gen/log/threat_weight.hpp` | 11 |
+| `cmdb/router.bgp/neighbor` | `fortiapi::router::bgp::Neighbor` | `fortiapi::router::bgp::Neighbors` (Table) | `forti_api/gen/router/bgp/neighbor.hpp` | 157 |
+| `cmdb/router.bgp/neighbor-group` | `fortiapi::router::bgp::NeighborGroup` | `fortiapi::router::bgp::NeighborGroups` (Table) | `forti_api/gen/router/bgp/neighbor_group.hpp` | 156 |
+| `cmdb/router.bgp/neighbor-range` | `fortiapi::router::bgp::NeighborRange` | `fortiapi::router::bgp::NeighborRanges` (Table) | `forti_api/gen/router/bgp/neighbor_range.hpp` | 4 |
+| `cmdb/router.bgp/network` | `fortiapi::router::bgp::Network` | `fortiapi::router::bgp::Networks` (Table) | `forti_api/gen/router/bgp/network.hpp` | 5 |
+| `cmdb/router/access-list` | `fortiapi::router::AccessList` | `fortiapi::router::AccessLists` (Table) | `forti_api/gen/router/access_list.hpp` | 3 |
+| `cmdb/router/access-list6` | `fortiapi::router::AccessList6` | `fortiapi::router::AccessList6s` (Table) | `forti_api/gen/router/access_list6.hpp` | 3 |
+| `cmdb/router/aspath-list` | `fortiapi::router::AspathList` | `fortiapi::router::AspathLists` (Table) | `forti_api/gen/router/aspath_list.hpp` | 2 |
+| `cmdb/router/auth-path` | `fortiapi::router::AuthPath` | `fortiapi::router::AuthPaths` (Table) | `forti_api/gen/router/auth_path.hpp` | 3 |
+| `cmdb/router/bfd` | `fortiapi::router::Bfd` | `fortiapi::router::BfdSettings` (Singleton) | `forti_api/gen/router/bfd.hpp` | 2 |
+| `cmdb/router/bfd6` | `fortiapi::router::Bfd6` | `fortiapi::router::Bfd6Settings` (Singleton) | `forti_api/gen/router/bfd6.hpp` | 2 |
+| `cmdb/router/bgp` | `fortiapi::router::Bgp` | `fortiapi::router::BgpSettings` (Singleton) | `forti_api/gen/router/bgp.hpp` | 66 |
+| `cmdb/router/community-list` | `fortiapi::router::CommunityList` | `fortiapi::router::CommunityLists` (Table) | `forti_api/gen/router/community_list.hpp` | 3 |
+| `cmdb/router/extcommunity-list` | `fortiapi::router::ExtcommunityList` | `fortiapi::router::ExtcommunityLists` (Table) | `forti_api/gen/router/extcommunity_list.hpp` | 3 |
+| `cmdb/router/isis` | `fortiapi::router::Isis` | `fortiapi::router::IsisSettings` (Singleton) | `forti_api/gen/router/isis.hpp` | 41 |
+| `cmdb/router/key-chain` | `fortiapi::router::KeyChain` | `fortiapi::router::KeyChains` (Table) | `forti_api/gen/router/key_chain.hpp` | 2 |
+| `cmdb/router/multicast` | `fortiapi::router::Multicast` | `fortiapi::router::MulticastSettings` (Singleton) | `forti_api/gen/router/multicast.hpp` | 5 |
+| `cmdb/router/multicast-flow` | `fortiapi::router::MulticastFlow` | `fortiapi::router::MulticastFlows` (Table) | `forti_api/gen/router/multicast_flow.hpp` | 3 |
+| `cmdb/router/multicast6` | `fortiapi::router::Multicast6` | `fortiapi::router::Multicast6Settings` (Singleton) | `forti_api/gen/router/multicast6.hpp` | 4 |
+| `cmdb/router/ospf` | `fortiapi::router::Ospf` | `fortiapi::router::OspfSettings` (Singleton) | `forti_api/gen/router/ospf.hpp` | 32 |
+| `cmdb/router/ospf6` | `fortiapi::router::Ospf6` | `fortiapi::router::Ospf6Settings` (Singleton) | `forti_api/gen/router/ospf6.hpp` | 19 |
+| `cmdb/router/policy` | `fortiapi::router::Policy` | `fortiapi::router::Policies` (Table) | `forti_api/gen/router/policy.hpp` | 23 |
+| `cmdb/router/policy6` | `fortiapi::router::Policy6` | `fortiapi::router::Policy6s` (Table) | `forti_api/gen/router/policy6.hpp` | 23 |
+| `cmdb/router/prefix-list` | `fortiapi::router::PrefixList` | `fortiapi::router::PrefixLists` (Table) | `forti_api/gen/router/prefix_list.hpp` | 3 |
+| `cmdb/router/prefix-list6` | `fortiapi::router::PrefixList6` | `fortiapi::router::PrefixList6s` (Table) | `forti_api/gen/router/prefix_list6.hpp` | 3 |
+| `cmdb/router/rip` | `fortiapi::router::Rip` | `fortiapi::router::RipSettings` (Singleton) | `forti_api/gen/router/rip.hpp` | 15 |
+| `cmdb/router/ripng` | `fortiapi::router::Ripng` | `fortiapi::router::RipngSettings` (Singleton) | `forti_api/gen/router/ripng.hpp` | 15 |
+| `cmdb/router/route-map` | `fortiapi::router::RouteMap` | `fortiapi::router::RouteMaps` (Table) | `forti_api/gen/router/route_map.hpp` | 3 |
+| `cmdb/router/setting` | `fortiapi::router::Setting` | `fortiapi::router::SettingSettings` (Singleton) | `forti_api/gen/router/setting.hpp` | 2 |
+| `cmdb/router/static` | `fortiapi::router::Static` | `fortiapi::router::Statics` (Table) | `forti_api/gen/router/static.hpp` | 21 |
+| `cmdb/router/static6` | `fortiapi::router::Static6` | `fortiapi::router::Static6s` (Table) | `forti_api/gen/router/static6.hpp` | 17 |
+| `cmdb/rule/fmwp` | `fortiapi::rule::Fmwp` | `fortiapi::rule::Fmwps` (Table) | `forti_api/gen/rule/fmwp.hpp` | 15 |
+| `cmdb/rule/otdt` | `fortiapi::rule::Otdt` | `fortiapi::rule::Otdts` (Table) | `forti_api/gen/rule/otdt.hpp` | 13 |
+| `cmdb/rule/otvp` | `fortiapi::rule::Otvp` | `fortiapi::rule::Otvps` (Table) | `forti_api/gen/rule/otvp.hpp` | 15 |
+| `cmdb/sctp-filter/profile` | `fortiapi::sctp_filter::Profile` | `fortiapi::sctp_filter::Profiles` (Table) | `forti_api/gen/sctp-filter/profile.hpp` | 3 |
+| `cmdb/ssh-filter/profile` | `fortiapi::ssh_filter::Profile` | `fortiapi::ssh_filter::Profiles` (Table) | `forti_api/gen/ssh-filter/profile.hpp` | 5 |
+| `cmdb/switch-controller.acl/group` | `fortiapi::switch_controller::acl::Group` | `fortiapi::switch_controller::acl::Groups` (Table) | `forti_api/gen/switch-controller/acl/group.hpp` | 2 |
+| `cmdb/switch-controller.acl/ingress` | `fortiapi::switch_controller::acl::Ingress` | `fortiapi::switch_controller::acl::Ingresses` (Table) | `forti_api/gen/switch-controller/acl/ingress.hpp` | 4 |
+| `cmdb/switch-controller.dsl/policy` | `fortiapi::switch_controller::dsl::Policy` | `fortiapi::switch_controller::dsl::Policies` (Table) | `forti_api/gen/switch-controller/dsl/policy.hpp` | 10 |
+| `cmdb/switch-controller.ptp/interface-policy` | `fortiapi::switch_controller::ptp::InterfacePolicy` | `fortiapi::switch_controller::ptp::InterfacePolicies` (Table) | `forti_api/gen/switch-controller/ptp/interface_policy.hpp` | 4 |
+| `cmdb/switch-controller.ptp/profile` | `fortiapi::switch_controller::ptp::Profile` | `fortiapi::switch_controller::ptp::Profiles` (Table) | `forti_api/gen/switch-controller/ptp/profile.hpp` | 7 |
+| `cmdb/switch-controller.qos/dot1p-map` | `fortiapi::switch_controller::qos::Dot1pMap` | `fortiapi::switch_controller::qos::Dot1pMaps` (Table) | `forti_api/gen/switch-controller/qos/dot1p_map.hpp` | 11 |
+| `cmdb/switch-controller.qos/ip-dscp-map` | `fortiapi::switch_controller::qos::IpDscpMap` | `fortiapi::switch_controller::qos::IpDscpMaps` (Table) | `forti_api/gen/switch-controller/qos/ip_dscp_map.hpp` | 3 |
+| `cmdb/switch-controller.qos/qos-policy` | `fortiapi::switch_controller::qos::QosPolicy` | `fortiapi::switch_controller::qos::QosPolicies` (Table) | `forti_api/gen/switch-controller/qos/qos_policy.hpp` | 5 |
+| `cmdb/switch-controller.qos/queue-policy` | `fortiapi::switch_controller::qos::QueuePolicy` | `fortiapi::switch_controller::qos::QueuePolicies` (Table) | `forti_api/gen/switch-controller/qos/queue_policy.hpp` | 4 |
+| `cmdb/switch-controller.security-policy/802-1X` | `fortiapi::switch_controller::security_policy::_8021X` | `fortiapi::switch_controller::security_policy::_8021Xs` (Table) | `forti_api/gen/switch-controller/security-policy/802_1X.hpp` | 21 |
+| `cmdb/switch-controller.security-policy/captive-portal` | `fortiapi::switch_controller::security_policy::CaptivePortal` | `fortiapi::switch_controller::security_policy::CaptivePortals` (Table) | `forti_api/gen/switch-controller/security-policy/captive_portal.hpp` | 3 |
+| `cmdb/switch-controller.security-policy/local-access` | `fortiapi::switch_controller::security_policy::LocalAccess` | `fortiapi::switch_controller::security_policy::LocalAccesses` (Table) | `forti_api/gen/switch-controller/security-policy/local_access.hpp` | 3 |
+| `cmdb/switch-controller/custom-command` | `fortiapi::switch_controller::CustomCommand` | `fortiapi::switch_controller::CustomCommands` (Table) | `forti_api/gen/switch-controller/custom_command.hpp` | 3 |
+| `cmdb/switch-controller/dynamic-port-policy` | `fortiapi::switch_controller::DynamicPortPolicy` | `fortiapi::switch_controller::DynamicPortPolicies` (Table) | `forti_api/gen/switch-controller/dynamic_port_policy.hpp` | 4 |
+| `cmdb/switch-controller/fortilink-settings` | `fortiapi::switch_controller::FortilinkSettings` | `fortiapi::switch_controller::FortilinkSettingses` (Table) | `forti_api/gen/switch-controller/fortilink_settings.hpp` | 6 |
+| `cmdb/switch-controller/global` | `fortiapi::switch_controller::Global` | `fortiapi::switch_controller::GlobalSettings` (Singleton) | `forti_api/gen/switch-controller/global.hpp` | 26 |
+| `cmdb/switch-controller/lldp-profile` | `fortiapi::switch_controller::LldpProfile` | `fortiapi::switch_controller::LldpProfiles` (Table) | `forti_api/gen/switch-controller/lldp_profile.hpp` | 18 |
+| `cmdb/switch-controller/location` | `fortiapi::switch_controller::Location` | `fortiapi::switch_controller::Locations` (Table) | `forti_api/gen/switch-controller/location.hpp` | 4 |
+| `cmdb/switch-controller/mac-policy` | `fortiapi::switch_controller::MacPolicy` | `fortiapi::switch_controller::MacPolicies` (Table) | `forti_api/gen/switch-controller/mac_policy.hpp` | 7 |
+| `cmdb/switch-controller/managed-switch` | `fortiapi::switch_controller::ManagedSwitch` | `fortiapi::switch_controller::ManagedSwitches` (Table) | `forti_api/gen/switch-controller/managed_switch.hpp` | 63 |
+| `cmdb/switch-controller/storm-control-policy` | `fortiapi::switch_controller::StormControlPolicy` | `fortiapi::switch_controller::StormControlPolicies` (Table) | `forti_api/gen/switch-controller/storm_control_policy.hpp` | 7 |
+| `cmdb/switch-controller/switch-group` | `fortiapi::switch_controller::SwitchGroup` | `fortiapi::switch_controller::SwitchGroups` (Table) | `forti_api/gen/switch-controller/switch_group.hpp` | 4 |
+| `cmdb/switch-controller/switch-interface-tag` | `fortiapi::switch_controller::SwitchInterfaceTag` | `fortiapi::switch_controller::SwitchInterfaceTags` (Table) | `forti_api/gen/switch-controller/switch_interface_tag.hpp` | 1 |
+| `cmdb/switch-controller/switch-profile` | `fortiapi::switch_controller::SwitchProfile` | `fortiapi::switch_controller::SwitchProfiles` (Table) | `forti_api/gen/switch-controller/switch_profile.hpp` | 6 |
+| `cmdb/switch-controller/system` | `fortiapi::switch_controller::System` | `fortiapi::switch_controller::SystemSettings` (Singleton) | `forti_api/gen/switch-controller/system.hpp` | 12 |
+| `cmdb/switch-controller/traffic-policy` | `fortiapi::switch_controller::TrafficPolicy` | `fortiapi::switch_controller::TrafficPolicies` (Table) | `forti_api/gen/switch-controller/traffic_policy.hpp` | 8 |
+| `cmdb/switch-controller/virtual-port-pool` | `fortiapi::switch_controller::VirtualPortPool` | `fortiapi::switch_controller::VirtualPortPools` (Table) | `forti_api/gen/switch-controller/virtual_port_pool.hpp` | 2 |
+| `cmdb/switch-controller/vlan-policy` | `fortiapi::switch_controller::VlanPolicy` | `fortiapi::switch_controller::VlanPolicies` (Table) | `forti_api/gen/switch-controller/vlan_policy.hpp` | 8 |
+| `cmdb/system.3g-modem/custom` | `fortiapi::system::_3g_modem::Custom` | `fortiapi::system::_3g_modem::Customs` (Table) | `forti_api/gen/system/3g-modem/custom.hpp` | 8 |
+| `cmdb/system.autoupdate/schedule` | `fortiapi::system::autoupdate::Schedule` | `fortiapi::system::autoupdate::ScheduleSettings` (Singleton) | `forti_api/gen/system/autoupdate/schedule.hpp` | 4 |
+| `cmdb/system.autoupdate/tunneling` | `fortiapi::system::autoupdate::Tunneling` | `fortiapi::system::autoupdate::TunnelingSettings` (Singleton) | `forti_api/gen/system/autoupdate/tunneling.hpp` | 5 |
+| `cmdb/system.dhcp/server` | `fortiapi::system::dhcp::Server` | `fortiapi::system::dhcp::Servers` (Table) | `forti_api/gen/system/dhcp/server.hpp` | 52 |
+| `cmdb/system.dhcp6/server` | `fortiapi::system::dhcp6::Server` | `fortiapi::system::dhcp6::Servers` (Table) | `forti_api/gen/system/dhcp6/server.hpp` | 22 |
+| `cmdb/system.fabric-vpn/advertised-subnets` | `fortiapi::system::fabric_vpn::AdvertisedSubnets` | `fortiapi::system::fabric_vpn::AdvertisedSubnetses` (Table) | `forti_api/gen/system/fabric-vpn/advertised_subnets.hpp` | 6 |
+| `cmdb/system.ipam/pools` | `fortiapi::system::ipam::Pools` | `fortiapi::system::ipam::Poolses` (Table) | `forti_api/gen/system/ipam/pools.hpp` | 4 |
+| `cmdb/system.lldp/network-policy` | `fortiapi::system::lldp::NetworkPolicy` | `fortiapi::system::lldp::NetworkPolicies` (Table) | `forti_api/gen/system/lldp/network_policy.hpp` | 10 |
+| `cmdb/system.object-tagging/tags` | `fortiapi::system::object_tagging::Tags` | `fortiapi::system::object_tagging::Tagses` (Table) | `forti_api/gen/system/object-tagging/tags.hpp` | 1 |
+| `cmdb/system.pcp-server/pools` | `fortiapi::system::pcp_server::Pools` | `fortiapi::system::pcp_server::Poolses` (Table) | `forti_api/gen/system/pcp-server/pools.hpp` | 19 |
+| `cmdb/system.replacemsg/admin` | `fortiapi::system::replacemsg::Admin` | `fortiapi::system::replacemsg::Admins` (Table) | `forti_api/gen/system/replacemsg/admin.hpp` | 4 |
+| `cmdb/system.replacemsg/auth` | `fortiapi::system::replacemsg::Auth` | `fortiapi::system::replacemsg::Auths` (Table) | `forti_api/gen/system/replacemsg/auth.hpp` | 4 |
+| `cmdb/system.replacemsg/http` | `fortiapi::system::replacemsg::Http` | `fortiapi::system::replacemsg::Https` (Table) | `forti_api/gen/system/replacemsg/http.hpp` | 4 |
+| `cmdb/system.replacemsg/mail` | `fortiapi::system::replacemsg::Mail` | `fortiapi::system::replacemsg::Mails` (Table) | `forti_api/gen/system/replacemsg/mail.hpp` | 4 |
+| `cmdb/system.sdwan/health-check` | `fortiapi::system::sdwan::HealthCheck` | `fortiapi::system::sdwan::HealthChecks` (Table) | `forti_api/gen/system/sdwan/health_check.hpp` | 46 |
+| `cmdb/system.sdwan/members` | `fortiapi::system::sdwan::Members` | `fortiapi::system::sdwan::Memberses` (Table) | `forti_api/gen/system/sdwan/members.hpp` | 18 |
+| `cmdb/system.sdwan/service` | `fortiapi::system::sdwan::Service` | `fortiapi::system::sdwan::Services` (Table) | `forti_api/gen/system/sdwan/service.hpp` | 63 |
+| `cmdb/system.sdwan/zone` | `fortiapi::system::sdwan::Zone` | `fortiapi::system::sdwan::Zones` (Table) | `forti_api/gen/system/sdwan/zone.hpp` | 5 |
+| `cmdb/system.snmp/community` | `fortiapi::system::snmp::Community` | `fortiapi::system::snmp::Communities` (Table) | `forti_api/gen/system/snmp/community.hpp` | 18 |
+| `cmdb/system.snmp/mib-view` | `fortiapi::system::snmp::MibView` | `fortiapi::system::snmp::MibViews` (Table) | `forti_api/gen/system/snmp/mib_view.hpp` | 3 |
+| `cmdb/system.snmp/sysinfo` | `fortiapi::system::snmp::Sysinfo` | `fortiapi::system::snmp::SysinfoSettings` (Singleton) | `forti_api/gen/system/snmp/sysinfo.hpp` | 12 |
+| `cmdb/system.snmp/user` | `fortiapi::system::snmp::User` | `fortiapi::system::snmp::Users` (Table) | `forti_api/gen/system/snmp/user.hpp` | 20 |
+| `cmdb/system/accprofile` | `fortiapi::system::Accprofile` | `fortiapi::system::Accprofiles` (Table) | `forti_api/gen/system/accprofile.hpp` | 27 |
+| `cmdb/system/acme` | `fortiapi::system::Acme` | `fortiapi::system::AcmeSettings` (Singleton) | `forti_api/gen/system/acme.hpp` | 7 |
+| `cmdb/system/admin` | `fortiapi::system::Admin` | `fortiapi::system::Admins` (Table) | `forti_api/gen/system/admin.hpp` | 53 |
+| `cmdb/system/alarm` | `fortiapi::system::Alarm` | `fortiapi::system::AlarmSettings` (Singleton) | `forti_api/gen/system/alarm.hpp` | 3 |
 | `cmdb/system/api-user` | `fortiapi::system::ApiUser` | `fortiapi::system::ApiUsers` (Table) | `forti_api/gen/system/api_user.hpp` | 10 |
+| `cmdb/system/arp-table` | `fortiapi::system::ArpTable` | `fortiapi::system::ArpTables` (Table) | `forti_api/gen/system/arp_table.hpp` | 4 |
+| `cmdb/system/auto-install` | `fortiapi::system::AutoInstall` | `fortiapi::system::AutoInstallSettings` (Singleton) | `forti_api/gen/system/auto_install.hpp` | 4 |
+| `cmdb/system/auto-script` | `fortiapi::system::AutoScript` | `fortiapi::system::AutoScripts` (Table) | `forti_api/gen/system/auto_script.hpp` | 7 |
+| `cmdb/system/automation-action` | `fortiapi::system::AutomationAction` | `fortiapi::system::AutomationActions` (Table) | `forti_api/gen/system/automation_action.hpp` | 34 |
+| `cmdb/system/automation-condition` | `fortiapi::system::AutomationCondition` | `fortiapi::system::AutomationConditions` (Table) | `forti_api/gen/system/automation_condition.hpp` | 8 |
+| `cmdb/system/automation-destination` | `fortiapi::system::AutomationDestination` | `fortiapi::system::AutomationDestinations` (Table) | `forti_api/gen/system/automation_destination.hpp` | 4 |
+| `cmdb/system/automation-stitch` | `fortiapi::system::AutomationStitch` | `fortiapi::system::AutomationStitches` (Table) | `forti_api/gen/system/automation_stitch.hpp` | 8 |
+| `cmdb/system/automation-trigger` | `fortiapi::system::AutomationTrigger` | `fortiapi::system::AutomationTriggers` (Table) | `forti_api/gen/system/automation_trigger.hpp` | 21 |
+| `cmdb/system/central-management` | `fortiapi::system::CentralManagement` | `fortiapi::system::CentralManagementSettings` (Singleton) | `forti_api/gen/system/central_management.hpp` | 22 |
+| `cmdb/system/console` | `fortiapi::system::Console` | `fortiapi::system::ConsoleSettings` (Singleton) | `forti_api/gen/system/console.hpp` | 3 |
+| `cmdb/system/csf` | `fortiapi::system::Csf` | `fortiapi::system::CsfSettings` (Singleton) | `forti_api/gen/system/csf.hpp` | 26 |
+| `cmdb/system/custom-language` | `fortiapi::system::CustomLanguage` | `fortiapi::system::CustomLanguages` (Table) | `forti_api/gen/system/custom_language.hpp` | 3 |
+| `cmdb/system/datasource` | `fortiapi::system::Datasource` | `fortiapi::system::Datasources` (Table) | `forti_api/gen/system/datasource.hpp` | 2 |
+| `cmdb/system/ddns` | `fortiapi::system::Ddns` | `fortiapi::system::Ddnses` (Table) | `forti_api/gen/system/ddns.hpp` | 20 |
+| `cmdb/system/dedicated-mgmt` | `fortiapi::system::DedicatedMgmt` | `fortiapi::system::DedicatedMgmtSettings` (Singleton) | `forti_api/gen/system/dedicated_mgmt.hpp` | 7 |
+| `cmdb/system/device-upgrade` | `fortiapi::system::DeviceUpgrade` | `fortiapi::system::DeviceUpgrades` (Table) | `forti_api/gen/system/device_upgrade.hpp` | 11 |
+| `cmdb/system/dns` | `fortiapi::system::Dns` | `fortiapi::system::DnsSettings` (Singleton) | `forti_api/gen/system/dns.hpp` | 23 |
+| `cmdb/system/dns-database` | `fortiapi::system::DnsDatabase` | `fortiapi::system::DnsDatabases` (Table) | `forti_api/gen/system/dns_database.hpp` | 17 |
+| `cmdb/system/dns-server` | `fortiapi::system::DnsServer` | `fortiapi::system::DnsServers` (Table) | `forti_api/gen/system/dns_server.hpp` | 6 |
+| `cmdb/system/dns64` | `fortiapi::system::Dns64` | `fortiapi::system::Dns64Settings` (Singleton) | `forti_api/gen/system/dns64.hpp` | 3 |
+| `cmdb/system/dscp-based-priority` | `fortiapi::system::DscpBasedPriority` | `fortiapi::system::DscpBasedPriorities` (Table) | `forti_api/gen/system/dscp_based_priority.hpp` | 3 |
+| `cmdb/system/email-server` | `fortiapi::system::EmailServer` | `fortiapi::system::EmailServerSettings` (Singleton) | `forti_api/gen/system/email_server.hpp` | 13 |
+| `cmdb/system/evpn` | `fortiapi::system::Evpn` | `fortiapi::system::Evpns` (Table) | `forti_api/gen/system/evpn.hpp` | 6 |
 | `cmdb/system/external-resource` | `fortiapi::system::ExternalResource` | `fortiapi::system::ExternalResources` (Table) | `forti_api/gen/system/external_resource.hpp` | 16 |
+| `cmdb/system/fabric-vpn` | `fortiapi::system::FabricVpn` | `fortiapi::system::FabricVpnSettings` (Singleton) | `forti_api/gen/system/fabric_vpn.hpp` | 14 |
+| `cmdb/system/federated-upgrade` | `fortiapi::system::FederatedUpgrade` | `fortiapi::system::FederatedUpgradeSettings` (Singleton) | `forti_api/gen/system/federated_upgrade.hpp` | 9 |
+| `cmdb/system/fips-cc` | `fortiapi::system::FipsCc` | `fortiapi::system::FipsCcSettings` (Singleton) | `forti_api/gen/system/fips_cc.hpp` | 3 |
+| `cmdb/system/fortiguard` | `fortiapi::system::Fortiguard` | `fortiapi::system::FortiguardSettings` (Singleton) | `forti_api/gen/system/fortiguard.hpp` | 58 |
+| `cmdb/system/fortisandbox` | `fortiapi::system::Fortisandbox` | `fortiapi::system::FortisandboxSettings` (Singleton) | `forti_api/gen/system/fortisandbox.hpp` | 10 |
+| `cmdb/system/fsso-polling` | `fortiapi::system::FssoPolling` | `fortiapi::system::FssoPollingSettings` (Singleton) | `forti_api/gen/system/fsso_polling.hpp` | 4 |
+| `cmdb/system/ftm-push` | `fortiapi::system::FtmPush` | `fortiapi::system::FtmPushSettings` (Singleton) | `forti_api/gen/system/ftm_push.hpp` | 7 |
+| `cmdb/system/geneve` | `fortiapi::system::Geneve` | `fortiapi::system::Geneves` (Table) | `forti_api/gen/system/geneve.hpp` | 8 |
+| `cmdb/system/geoip-country` | `fortiapi::system::GeoipCountry` | `fortiapi::system::GeoipCountries` (Table) | `forti_api/gen/system/geoip_country.hpp` | 2 |
+| `cmdb/system/geoip-override` | `fortiapi::system::GeoipOverride` | `fortiapi::system::GeoipOverrides` (Table) | `forti_api/gen/system/geoip_override.hpp` | 5 |
 | `cmdb/system/global` | `fortiapi::system::Global` | `fortiapi::system::GlobalSettings` (Singleton) | `forti_api/gen/system/global.hpp` | 230 |
+| `cmdb/system/gre-tunnel` | `fortiapi::system::GreTunnel` | `fortiapi::system::GreTunnels` (Table) | `forti_api/gen/system/gre_tunnel.hpp` | 18 |
+| `cmdb/system/ha` | `fortiapi::system::Ha` | `fortiapi::system::HaSettings` (Singleton) | `forti_api/gen/system/ha.hpp` | 71 |
+| `cmdb/system/ha-monitor` | `fortiapi::system::HaMonitor` | `fortiapi::system::HaMonitorSettings` (Singleton) | `forti_api/gen/system/ha_monitor.hpp` | 3 |
+| `cmdb/system/ike` | `fortiapi::system::Ike` | `fortiapi::system::IkeSettings` (Singleton) | `forti_api/gen/system/ike.hpp` | 24 |
 | `cmdb/system/interface` | `fortiapi::system::Interface` | `fortiapi::system::Interfaces` (Table) | `forti_api/gen/system/interface.hpp` | 232 |
+| `cmdb/system/ipam` | `fortiapi::system::Ipam` | `fortiapi::system::IpamSettings` (Singleton) | `forti_api/gen/system/ipam.hpp` | 9 |
+| `cmdb/system/ipam/rules` | `fortiapi::system::IpamRules` | `fortiapi::system::IpamRuleses` (Table) | `forti_api/gen/system/ipam/rules.hpp` | 7 |
+| `cmdb/system/ipip-tunnel` | `fortiapi::system::IpipTunnel` | `fortiapi::system::IpipTunnels` (Table) | `forti_api/gen/system/ipip_tunnel.hpp` | 6 |
+| `cmdb/system/ips` | `fortiapi::system::Ips` | `fortiapi::system::IpsSettings` (Singleton) | `forti_api/gen/system/ips.hpp` | 2 |
+| `cmdb/system/ips-urlfilter-dns` | `fortiapi::system::IpsUrlfilterDns` | `fortiapi::system::IpsUrlfilterDnses` (Table) | `forti_api/gen/system/ips_urlfilter_dns.hpp` | 3 |
+| `cmdb/system/ips-urlfilter-dns6` | `fortiapi::system::IpsUrlfilterDns6` | `fortiapi::system::IpsUrlfilterDns6s` (Table) | `forti_api/gen/system/ips_urlfilter_dns6.hpp` | 2 |
+| `cmdb/system/ipsec-aggregate` | `fortiapi::system::IpsecAggregate` | `fortiapi::system::IpsecAggregates` (Table) | `forti_api/gen/system/ipsec_aggregate.hpp` | 3 |
+| `cmdb/system/ipv6-neighbor-cache` | `fortiapi::system::Ipv6NeighborCache` | `fortiapi::system::Ipv6NeighborCaches` (Table) | `forti_api/gen/system/ipv6_neighbor_cache.hpp` | 4 |
+| `cmdb/system/ipv6-tunnel` | `fortiapi::system::Ipv6Tunnel` | `fortiapi::system::Ipv6Tunnels` (Table) | `forti_api/gen/system/ipv6_tunnel.hpp` | 6 |
+| `cmdb/system/link-monitor` | `fortiapi::system::LinkMonitor` | `fortiapi::system::LinkMonitors` (Table) | `forti_api/gen/system/link_monitor.hpp` | 34 |
+| `cmdb/system/lte-modem` | `fortiapi::system::LteModem` | `fortiapi::system::LteModemSettings` (Singleton) | `forti_api/gen/system/lte_modem.hpp` | 11 |
+| `cmdb/system/mac-address-table` | `fortiapi::system::MacAddressTable` | `fortiapi::system::MacAddressTables` (Table) | `forti_api/gen/system/mac_address_table.hpp` | 3 |
+| `cmdb/system/mobile-tunnel` | `fortiapi::system::MobileTunnel` | `fortiapi::system::MobileTunnels` (Table) | `forti_api/gen/system/mobile_tunnel.hpp` | 15 |
+| `cmdb/system/modem` | `fortiapi::system::Modem` | `fortiapi::system::ModemSettings` (Singleton) | `forti_api/gen/system/modem.hpp` | 46 |
+| `cmdb/system/netflow` | `fortiapi::system::Netflow` | `fortiapi::system::NetflowSettings` (Singleton) | `forti_api/gen/system/netflow.hpp` | 5 |
+| `cmdb/system/network-visibility` | `fortiapi::system::NetworkVisibility` | `fortiapi::system::NetworkVisibilitySettings` (Singleton) | `forti_api/gen/system/network_visibility.hpp` | 6 |
+| `cmdb/system/npu` | `fortiapi::system::Npu` | `fortiapi::system::NpuSettings` (Singleton) | `forti_api/gen/system/npu.hpp` | 8 |
+| `cmdb/system/ntp` | `fortiapi::system::Ntp` | `fortiapi::system::NtpSettings` (Singleton) | `forti_api/gen/system/ntp.hpp` | 12 |
+| `cmdb/system/object-tagging` | `fortiapi::system::ObjectTagging` | `fortiapi::system::ObjectTaggings` (Table) | `forti_api/gen/system/object_tagging.hpp` | 7 |
+| `cmdb/system/password-policy` | `fortiapi::system::PasswordPolicy` | `fortiapi::system::PasswordPolicySettings` (Singleton) | `forti_api/gen/system/password_policy.hpp` | 12 |
+| `cmdb/system/password-policy-guest-admin` | `fortiapi::system::PasswordPolicyGuestAdmin` | `fortiapi::system::PasswordPolicyGuestAdminSettings` (Singleton) | `forti_api/gen/system/password_policy_guest_admin.hpp` | 11 |
+| `cmdb/system/physical-switch` | `fortiapi::system::PhysicalSwitch` | `fortiapi::system::PhysicalSwitches` (Table) | `forti_api/gen/system/physical_switch.hpp` | 3 |
+| `cmdb/system/pppoe-interface` | `fortiapi::system::PppoeInterface` | `fortiapi::system::PppoeInterfaces` (Table) | `forti_api/gen/system/pppoe_interface.hpp` | 17 |
+| `cmdb/system/probe-response` | `fortiapi::system::ProbeResponse` | `fortiapi::system::ProbeResponseSettings` (Singleton) | `forti_api/gen/system/probe_response.hpp` | 7 |
+| `cmdb/system/proxy-arp` | `fortiapi::system::ProxyArp` | `fortiapi::system::ProxyArps` (Table) | `forti_api/gen/system/proxy_arp.hpp` | 4 |
+| `cmdb/system/ptp` | `fortiapi::system::Ptp` | `fortiapi::system::PtpSettings` (Singleton) | `forti_api/gen/system/ptp.hpp` | 7 |
+| `cmdb/system/replacemsg-group` | `fortiapi::system::ReplacemsgGroup` | `fortiapi::system::ReplacemsgGroups` (Table) | `forti_api/gen/system/replacemsg_group.hpp` | 19 |
+| `cmdb/system/replacemsg-image` | `fortiapi::system::ReplacemsgImage` | `fortiapi::system::ReplacemsgImages` (Table) | `forti_api/gen/system/replacemsg_image.hpp` | 3 |
+| `cmdb/system/resource-limits` | `fortiapi::system::ResourceLimits` | `fortiapi::system::ResourceLimitsSettings` (Singleton) | `forti_api/gen/system/resource_limits.hpp` | 18 |
+| `cmdb/system/saml` | `fortiapi::system::Saml` | `fortiapi::system::SamlSettings` (Singleton) | `forti_api/gen/system/saml.hpp` | 18 |
+| `cmdb/system/sdn-connector` | `fortiapi::system::SdnConnector` | `fortiapi::system::SdnConnectors` (Table) | `forti_api/gen/system/sdn_connector.hpp` | 52 |
+| `cmdb/system/sdn-proxy` | `fortiapi::system::SdnProxy` | `fortiapi::system::SdnProxies` (Table) | `forti_api/gen/system/sdn_proxy.hpp` | 6 |
+| `cmdb/system/sdwan` | `fortiapi::system::Sdwan` | `fortiapi::system::SdwanSettings` (Singleton) | `forti_api/gen/system/sdwan.hpp` | 16 |
+| `cmdb/system/session-helper` | `fortiapi::system::SessionHelper` | `fortiapi::system::SessionHelpers` (Table) | `forti_api/gen/system/session_helper.hpp` | 4 |
+| `cmdb/system/session-ttl` | `fortiapi::system::SessionTtl` | `fortiapi::system::SessionTtlSettings` (Singleton) | `forti_api/gen/system/session_ttl.hpp` | 2 |
+| `cmdb/system/settings` | `fortiapi::system::Settings` | `fortiapi::system::SettingsSettings` (Singleton) | `forti_api/gen/system/settings.hpp` | 137 |
+| `cmdb/system/sflow` | `fortiapi::system::Sflow` | `fortiapi::system::SflowSettings` (Singleton) | `forti_api/gen/system/sflow.hpp` | 1 |
+| `cmdb/system/sit-tunnel` | `fortiapi::system::SitTunnel` | `fortiapi::system::SitTunnels` (Table) | `forti_api/gen/system/sit_tunnel.hpp` | 7 |
+| `cmdb/system/sms-server` | `fortiapi::system::SmsServer` | `fortiapi::system::SmsServers` (Table) | `forti_api/gen/system/sms_server.hpp` | 2 |
+| `cmdb/system/speed-test-schedule` | `fortiapi::system::SpeedTestSchedule` | `fortiapi::system::SpeedTestSchedules` (Table) | `forti_api/gen/system/speed_test_schedule.hpp` | 16 |
+| `cmdb/system/speed-test-server` | `fortiapi::system::SpeedTestServer` | `fortiapi::system::SpeedTestServers` (Table) | `forti_api/gen/system/speed_test_server.hpp` | 3 |
+| `cmdb/system/speed-test-setting` | `fortiapi::system::SpeedTestSetting` | `fortiapi::system::SpeedTestSettingSettings` (Singleton) | `forti_api/gen/system/speed_test_setting.hpp` | 2 |
+| `cmdb/system/ssh-config` | `fortiapi::system::SshConfig` | `fortiapi::system::SshConfigSettings` (Singleton) | `forti_api/gen/system/ssh_config.hpp` | 7 |
+| `cmdb/system/sso-admin` | `fortiapi::system::SsoAdmin` | `fortiapi::system::SsoAdmins` (Table) | `forti_api/gen/system/sso_admin.hpp` | 3 |
+| `cmdb/system/sso-forticloud-admin` | `fortiapi::system::SsoForticloudAdmin` | `fortiapi::system::SsoForticloudAdmins` (Table) | `forti_api/gen/system/sso_forticloud_admin.hpp` | 3 |
+| `cmdb/system/sso-fortigate-cloud-admin` | `fortiapi::system::SsoFortigateCloudAdmin` | `fortiapi::system::SsoFortigateCloudAdmins` (Table) | `forti_api/gen/system/sso_fortigate_cloud_admin.hpp` | 3 |
+| `cmdb/system/standalone-cluster` | `fortiapi::system::StandaloneCluster` | `fortiapi::system::StandaloneClusterSettings` (Singleton) | `forti_api/gen/system/standalone_cluster.hpp` | 8 |
+| `cmdb/system/storage` | `fortiapi::system::Storage` | `fortiapi::system::Storages` (Table) | `forti_api/gen/system/storage.hpp` | 8 |
+| `cmdb/system/stp` | `fortiapi::system::Stp` | `fortiapi::system::StpSettings` (Singleton) | `forti_api/gen/system/stp.hpp` | 6 |
+| `cmdb/system/switch-interface` | `fortiapi::system::SwitchInterface` | `fortiapi::system::SwitchInterfaces` (Table) | `forti_api/gen/system/switch_interface.hpp` | 10 |
+| `cmdb/system/timezone` | `fortiapi::system::Timezone` | `fortiapi::system::Timezones` (Table) | `forti_api/gen/system/timezone.hpp` | 1 |
+| `cmdb/system/tos-based-priority` | `fortiapi::system::TosBasedPriority` | `fortiapi::system::TosBasedPriorities` (Table) | `forti_api/gen/system/tos_based_priority.hpp` | 3 |
+| `cmdb/system/vdom` | `fortiapi::system::Vdom` | `fortiapi::system::Vdoms` (Table) | `forti_api/gen/system/vdom.hpp` | 4 |
+| `cmdb/system/vdom-dns` | `fortiapi::system::VdomDns` | `fortiapi::system::VdomDnsSettings` (Singleton) | `forti_api/gen/system/vdom_dns.hpp` | 14 |
+| `cmdb/system/vdom-exception` | `fortiapi::system::VdomException` | `fortiapi::system::VdomExceptions` (Table) | `forti_api/gen/system/vdom_exception.hpp` | 4 |
+| `cmdb/system/vdom-link` | `fortiapi::system::VdomLink` | `fortiapi::system::VdomLinks` (Table) | `forti_api/gen/system/vdom_link.hpp` | 3 |
+| `cmdb/system/vdom-netflow` | `fortiapi::system::VdomNetflow` | `fortiapi::system::VdomNetflowSettings` (Singleton) | `forti_api/gen/system/vdom_netflow.hpp` | 2 |
+| `cmdb/system/vdom-property` | `fortiapi::system::VdomProperty` | `fortiapi::system::VdomProperties` (Table) | `forti_api/gen/system/vdom_property.hpp` | 21 |
+| `cmdb/system/vdom-radius-server` | `fortiapi::system::VdomRadiusServer` | `fortiapi::system::VdomRadiusServers` (Table) | `forti_api/gen/system/vdom_radius_server.hpp` | 3 |
+| `cmdb/system/vdom-sflow` | `fortiapi::system::VdomSflow` | `fortiapi::system::VdomSflowSettings` (Singleton) | `forti_api/gen/system/vdom_sflow.hpp` | 2 |
+| `cmdb/system/virtual-switch` | `fortiapi::system::VirtualSwitch` | `fortiapi::system::VirtualSwitches` (Table) | `forti_api/gen/system/virtual_switch.hpp` | 8 |
+| `cmdb/system/virtual-wire-pair` | `fortiapi::system::VirtualWirePair` | `fortiapi::system::VirtualWirePairs` (Table) | `forti_api/gen/system/virtual_wire_pair.hpp` | 4 |
+| `cmdb/system/vne-tunnel` | `fortiapi::system::VneTunnel` | `fortiapi::system::VneTunnelSettings` (Singleton) | `forti_api/gen/system/vne_tunnel.hpp` | 11 |
+| `cmdb/system/vxlan` | `fortiapi::system::Vxlan` | `fortiapi::system::Vxlans` (Table) | `forti_api/gen/system/vxlan.hpp` | 10 |
+| `cmdb/system/wccp` | `fortiapi::system::Wccp` | `fortiapi::system::Wccps` (Table) | `forti_api/gen/system/wccp.hpp` | 23 |
+| `cmdb/system/zone` | `fortiapi::system::Zone` | `fortiapi::system::Zones` (Table) | `forti_api/gen/system/zone.hpp` | 5 |
+| `cmdb/user/adgrp` | `fortiapi::user::Adgrp` | `fortiapi::user::Adgrps` (Table) | `forti_api/gen/user/adgrp.hpp` | 4 |
+| `cmdb/user/certificate` | `fortiapi::user::Certificate` | `fortiapi::user::Certificates` (Table) | `forti_api/gen/user/certificate.hpp` | 6 |
+| `cmdb/user/domain-controller` | `fortiapi::user::DomainController` | `fortiapi::user::DomainControllers` (Table) | `forti_api/gen/user/domain_controller.hpp` | 24 |
+| `cmdb/user/exchange` | `fortiapi::user::Exchange` | `fortiapi::user::Exchanges` (Table) | `forti_api/gen/user/exchange.hpp` | 13 |
+| `cmdb/user/external-identity-provider` | `fortiapi::user::ExternalIdentityProvider` | `fortiapi::user::ExternalIdentityProviders` (Table) | `forti_api/gen/user/external_identity_provider.hpp` | 12 |
+| `cmdb/user/fortitoken` | `fortiapi::user::Fortitoken` | `fortiapi::user::Fortitokens` (Table) | `forti_api/gen/user/fortitoken.hpp` | 8 |
+| `cmdb/user/fsso` | `fortiapi::user::Fsso` | `fortiapi::user::Fssos` (Table) | `forti_api/gen/user/fsso.hpp` | 32 |
+| `cmdb/user/fsso-polling` | `fortiapi::user::FssoPolling` | `fortiapi::user::FssoPollings` (Table) | `forti_api/gen/user/fsso_polling.hpp` | 13 |
+| `cmdb/user/group` | `fortiapi::user::Group` | `fortiapi::user::Groups` (Table) | `forti_api/gen/user/group.hpp` | 24 |
+| `cmdb/user/krb-keytab` | `fortiapi::user::KrbKeytab` | `fortiapi::user::KrbKeytabs` (Table) | `forti_api/gen/user/krb_keytab.hpp` | 5 |
+| `cmdb/user/ldap` | `fortiapi::user::Ldap` | `fortiapi::user::Ldaps` (Table) | `forti_api/gen/user/ldap.hpp` | 40 |
+| `cmdb/user/local` | `fortiapi::user::Local` | `fortiapi::user::Locals` (Table) | `forti_api/gen/user/local.hpp` | 26 |
+| `cmdb/user/nac-policy` | `fortiapi::user::NacPolicy` | `fortiapi::user::NacPolicies` (Table) | `forti_api/gen/user/nac_policy.hpp` | 25 |
+| `cmdb/user/password-policy` | `fortiapi::user::PasswordPolicy` | `fortiapi::user::PasswordPolicies` (Table) | `forti_api/gen/user/password_policy.hpp` | 12 |
+| `cmdb/user/peer` | `fortiapi::user::Peer` | `fortiapi::user::Peers` (Table) | `forti_api/gen/user/peer.hpp` | 13 |
+| `cmdb/user/peergrp` | `fortiapi::user::Peergrp` | `fortiapi::user::Peergrps` (Table) | `forti_api/gen/user/peergrp.hpp` | 2 |
+| `cmdb/user/pop3` | `fortiapi::user::Pop3` | `fortiapi::user::Pop3s` (Table) | `forti_api/gen/user/pop3.hpp` | 5 |
+| `cmdb/user/quarantine` | `fortiapi::user::Quarantine` | `fortiapi::user::QuarantineSettings` (Singleton) | `forti_api/gen/user/quarantine.hpp` | 4 |
+| `cmdb/user/radius` | `fortiapi::user::Radius` | `fortiapi::user::Radiuses` (Table) | `forti_api/gen/user/radius.hpp` | 60 |
+| `cmdb/user/saml` | `fortiapi::user::Saml` | `fortiapi::user::Samls` (Table) | `forti_api/gen/user/saml.hpp` | 18 |
+| `cmdb/user/security-exempt-list` | `fortiapi::user::SecurityExemptList` | `fortiapi::user::SecurityExemptLists` (Table) | `forti_api/gen/user/security_exempt_list.hpp` | 3 |
+| `cmdb/user/setting` | `fortiapi::user::Setting` | `fortiapi::user::SettingSettings` (Singleton) | `forti_api/gen/user/setting.hpp` | 22 |
+| `cmdb/user/tacacs+` | `fortiapi::user::Tacacs` | `fortiapi::user::Tacacses` (Table) | `forti_api/gen/user/tacacs+.hpp` | 14 |
+| `cmdb/videofilter/keyword` | `fortiapi::videofilter::Keyword` | `fortiapi::videofilter::Keywords` (Table) | `forti_api/gen/videofilter/keyword.hpp` | 5 |
+| `cmdb/videofilter/profile` | `fortiapi::videofilter::Profile` | `fortiapi::videofilter::Profiles` (Table) | `forti_api/gen/videofilter/profile.hpp` | 7 |
+| `cmdb/videofilter/youtube-key` | `fortiapi::videofilter::YoutubeKey` | `fortiapi::videofilter::YoutubeKeys` (Table) | `forti_api/gen/videofilter/youtube_key.hpp` | 2 |
+| `cmdb/virtual-patch/profile` | `fortiapi::virtual_patch::Profile` | `fortiapi::virtual_patch::Profiles` (Table) | `forti_api/gen/virtual-patch/profile.hpp` | 6 |
+| `cmdb/voip/profile` | `fortiapi::voip::Profile` | `fortiapi::voip::Profiles` (Table) | `forti_api/gen/voip/profile.hpp` | 6 |
+| `cmdb/vpn.certificate/ca` | `fortiapi::vpn::certificate::Ca` | `fortiapi::vpn::certificate::Cas` (Table) | `forti_api/gen/vpn/certificate/ca.hpp` | 14 |
+| `cmdb/vpn.certificate/crl` | `fortiapi::vpn::certificate::Crl` | `fortiapi::vpn::certificate::Crls` (Table) | `forti_api/gen/vpn/certificate/crl.hpp` | 13 |
+| `cmdb/vpn.certificate/local` | `fortiapi::vpn::certificate::Local` | `fortiapi::vpn::certificate::Locals` (Table) | `forti_api/gen/vpn/certificate/local.hpp` | 39 |
+| `cmdb/vpn.certificate/ocsp-server` | `fortiapi::vpn::certificate::OcspServer` | `fortiapi::vpn::certificate::OcspServers` (Table) | `forti_api/gen/vpn/certificate/ocsp_server.hpp` | 7 |
+| `cmdb/vpn.certificate/remote` | `fortiapi::vpn::certificate::Remote` | `fortiapi::vpn::certificate::Remotes` (Table) | `forti_api/gen/vpn/certificate/remote.hpp` | 4 |
+| `cmdb/vpn.certificate/setting` | `fortiapi::vpn::certificate::Setting` | `fortiapi::vpn::certificate::SettingSettings` (Singleton) | `forti_api/gen/vpn/certificate/setting.hpp` | 32 |
+| `cmdb/vpn.ipsec/concentrator` | `fortiapi::vpn::ipsec::Concentrator` | `fortiapi::vpn::ipsec::Concentrators` (Table) | `forti_api/gen/vpn/ipsec/concentrator.hpp` | 4 |
+| `cmdb/vpn.ipsec/fec` | `fortiapi::vpn::ipsec::Fec` | `fortiapi::vpn::ipsec::Fecs` (Table) | `forti_api/gen/vpn/ipsec/fec.hpp` | 2 |
+| `cmdb/vpn.ipsec/manualkey` | `fortiapi::vpn::ipsec::Manualkey` | `fortiapi::vpn::ipsec::Manualkeys` (Table) | `forti_api/gen/vpn/ipsec/manualkey.hpp` | 11 |
+| `cmdb/vpn.ipsec/manualkey-interface` | `fortiapi::vpn::ipsec::ManualkeyInterface` | `fortiapi::vpn::ipsec::ManualkeyInterfaces` (Table) | `forti_api/gen/vpn/ipsec/manualkey_interface.hpp` | 15 |
+| `cmdb/vpn.ipsec/phase1` | `fortiapi::vpn::ipsec::Phase1` | `fortiapi::vpn::ipsec::Phase1s` (Table) | `forti_api/gen/vpn/ipsec/phase1.hpp` | 149 |
+| `cmdb/vpn.ipsec/phase1-interface` | `fortiapi::vpn::ipsec::Phase1Interface` | `fortiapi::vpn::ipsec::Phase1Interfaces` (Table) | `forti_api/gen/vpn/ipsec/phase1_interface.hpp` | 183 |
+| `cmdb/vpn.ipsec/phase2` | `fortiapi::vpn::ipsec::Phase2` | `fortiapi::vpn::ipsec::Phase2s` (Table) | `forti_api/gen/vpn/ipsec/phase2.hpp` | 46 |
+| `cmdb/vpn.ipsec/phase2-interface` | `fortiapi::vpn::ipsec::Phase2Interface` | `fortiapi::vpn::ipsec::Phase2Interfaces` (Table) | `forti_api/gen/vpn/ipsec/phase2_interface.hpp` | 46 |
+| `cmdb/vpn.ssl.web/host-check-software` | `fortiapi::vpn::ssl::web::HostCheckSoftware` | `fortiapi::vpn::ssl::web::HostCheckSoftwares` (Table) | `forti_api/gen/vpn/ssl/web/host_check_software.hpp` | 6 |
+| `cmdb/vpn.ssl.web/portal` | `fortiapi::vpn::ssl::web::Portal` | `fortiapi::vpn::ssl::web::Portals` (Table) | `forti_api/gen/vpn/ssl/web/portal.hpp` | 77 |
+| `cmdb/vpn.ssl.web/realm` | `fortiapi::vpn::ssl::web::Realm` | `fortiapi::vpn::ssl::web::Realms` (Table) | `forti_api/gen/vpn/ssl/web/realm.hpp` | 9 |
+| `cmdb/vpn.ssl.web/user-bookmark` | `fortiapi::vpn::ssl::web::UserBookmark` | `fortiapi::vpn::ssl::web::UserBookmarks` (Table) | `forti_api/gen/vpn/ssl/web/user_bookmark.hpp` | 4 |
+| `cmdb/vpn.ssl.web/user-group-bookmark` | `fortiapi::vpn::ssl::web::UserGroupBookmark` | `fortiapi::vpn::ssl::web::UserGroupBookmarks` (Table) | `forti_api/gen/vpn/ssl/web/user_group_bookmark.hpp` | 2 |
+| `cmdb/vpn.ssl/client` | `fortiapi::vpn::ssl::Client` | `fortiapi::vpn::ssl::Clients` (Table) | `forti_api/gen/vpn/ssl/client.hpp` | 17 |
+| `cmdb/vpn.ssl/settings` | `fortiapi::vpn::ssl::Settings` | `fortiapi::vpn::ssl::SettingsSettings` (Singleton) | `forti_api/gen/vpn/ssl/settings.hpp` | 71 |
+| `cmdb/vpn/kmip-server` | `fortiapi::vpn::KmipServer` | `fortiapi::vpn::KmipServers` (Table) | `forti_api/gen/vpn/kmip_server.hpp` | 9 |
+| `cmdb/vpn/l2tp` | `fortiapi::vpn::L2tp` | `fortiapi::vpn::L2tpSettings` (Singleton) | `forti_api/gen/vpn/l2tp.hpp` | 9 |
+| `cmdb/vpn/pptp` | `fortiapi::vpn::Pptp` | `fortiapi::vpn::PptpSettings` (Singleton) | `forti_api/gen/vpn/pptp.hpp` | 6 |
+| `cmdb/vpn/qkd` | `fortiapi::vpn::Qkd` | `fortiapi::vpn::Qkds` (Table) | `forti_api/gen/vpn/qkd.hpp` | 7 |
+| `cmdb/waf/main-class` | `fortiapi::waf::MainClass` | `fortiapi::waf::MainClasses` (Table) | `forti_api/gen/waf/main_class.hpp` | 2 |
+| `cmdb/waf/profile` | `fortiapi::waf::Profile` | `fortiapi::waf::Profiles` (Table) | `forti_api/gen/waf/profile.hpp` | 9 |
+| `cmdb/waf/signature` | `fortiapi::waf::Signature` | `fortiapi::waf::Signatures` (Table) | `forti_api/gen/waf/signature.hpp` | 2 |
+| `cmdb/waf/sub-class` | `fortiapi::waf::SubClass` | `fortiapi::waf::SubClasses` (Table) | `forti_api/gen/waf/sub_class.hpp` | 2 |
+| `cmdb/web-proxy/debug-url` | `fortiapi::web_proxy::DebugUrl` | `fortiapi::web_proxy::DebugUrls` (Table) | `forti_api/gen/web-proxy/debug_url.hpp` | 4 |
+| `cmdb/web-proxy/explicit` | `fortiapi::web_proxy::Explicit` | `fortiapi::web_proxy::ExplicitSettings` (Singleton) | `forti_api/gen/web-proxy/explicit.hpp` | 35 |
+| `cmdb/web-proxy/fast-fallback` | `fortiapi::web_proxy::FastFallback` | `fortiapi::web_proxy::FastFallbacks` (Table) | `forti_api/gen/web-proxy/fast_fallback.hpp` | 5 |
+| `cmdb/web-proxy/forward-server` | `fortiapi::web_proxy::ForwardServer` | `fortiapi::web_proxy::ForwardServers` (Table) | `forti_api/gen/web-proxy/forward_server.hpp` | 13 |
+| `cmdb/web-proxy/forward-server-group` | `fortiapi::web_proxy::ForwardServerGroup` | `fortiapi::web_proxy::ForwardServerGroups` (Table) | `forti_api/gen/web-proxy/forward_server_group.hpp` | 5 |
+| `cmdb/web-proxy/global` | `fortiapi::web_proxy::Global` | `fortiapi::web_proxy::GlobalSettings` (Singleton) | `forti_api/gen/web-proxy/global.hpp` | 25 |
+| `cmdb/web-proxy/profile` | `fortiapi::web_proxy::Profile` | `fortiapi::web_proxy::Profiles` (Table) | `forti_api/gen/web-proxy/profile.hpp` | 12 |
+| `cmdb/web-proxy/url-match` | `fortiapi::web_proxy::UrlMatch` | `fortiapi::web_proxy::UrlMatches` (Table) | `forti_api/gen/web-proxy/url_match.hpp` | 7 |
+| `cmdb/web-proxy/wisp` | `fortiapi::web_proxy::Wisp` | `fortiapi::web_proxy::Wisps` (Table) | `forti_api/gen/web-proxy/wisp.hpp` | 7 |
+| `cmdb/webfilter/content` | `fortiapi::webfilter::Content` | `fortiapi::webfilter::Contents` (Table) | `forti_api/gen/webfilter/content.hpp` | 4 |
+| `cmdb/webfilter/content-header` | `fortiapi::webfilter::ContentHeader` | `fortiapi::webfilter::ContentHeaders` (Table) | `forti_api/gen/webfilter/content_header.hpp` | 4 |
+| `cmdb/webfilter/fortiguard` | `fortiapi::webfilter::Fortiguard` | `fortiapi::webfilter::FortiguardSettings` (Singleton) | `forti_api/gen/webfilter/fortiguard.hpp` | 12 |
+| `cmdb/webfilter/ftgd-local-cat` | `fortiapi::webfilter::FtgdLocalCat` | `fortiapi::webfilter::FtgdLocalCats` (Table) | `forti_api/gen/webfilter/ftgd_local_cat.hpp` | 3 |
+| `cmdb/webfilter/ftgd-local-rating` | `fortiapi::webfilter::FtgdLocalRating` | `fortiapi::webfilter::FtgdLocalRatings` (Table) | `forti_api/gen/webfilter/ftgd_local_rating.hpp` | 4 |
+| `cmdb/webfilter/ips-urlfilter-cache-setting` | `fortiapi::webfilter::IpsUrlfilterCacheSetting` | `fortiapi::webfilter::IpsUrlfilterCacheSettingSettings` (Singleton) | `forti_api/gen/webfilter/ips_urlfilter_cache_setting.hpp` | 2 |
+| `cmdb/webfilter/ips-urlfilter-setting` | `fortiapi::webfilter::IpsUrlfilterSetting` | `fortiapi::webfilter::IpsUrlfilterSettingSettings` (Singleton) | `forti_api/gen/webfilter/ips_urlfilter_setting.hpp` | 4 |
+| `cmdb/webfilter/ips-urlfilter-setting6` | `fortiapi::webfilter::IpsUrlfilterSetting6` | `fortiapi::webfilter::IpsUrlfilterSetting6Settings` (Singleton) | `forti_api/gen/webfilter/ips_urlfilter_setting6.hpp` | 4 |
+| `cmdb/webfilter/override` | `fortiapi::webfilter::Override` | `fortiapi::webfilter::Overrides` (Table) | `forti_api/gen/webfilter/override.hpp` | 11 |
+| `cmdb/webfilter/profile` | `fortiapi::webfilter::Profile` | `fortiapi::webfilter::Profiles` (Table) | `forti_api/gen/webfilter/profile.hpp` | 35 |
+| `cmdb/webfilter/search-engine` | `fortiapi::webfilter::SearchEngine` | `fortiapi::webfilter::SearchEngines` (Table) | `forti_api/gen/webfilter/search_engine.hpp` | 7 |
+| `cmdb/webfilter/urlfilter` | `fortiapi::webfilter::Urlfilter` | `fortiapi::webfilter::Urlfilters` (Table) | `forti_api/gen/webfilter/urlfilter.hpp` | 7 |
+| `cmdb/wireless-controller.hotspot20/anqp-3gpp-cellular` | `fortiapi::wireless_controller::hotspot20::Anqp3gppCellular` | `fortiapi::wireless_controller::hotspot20::Anqp3gppCellulars` (Table) | `forti_api/gen/wireless-controller/hotspot20/anqp_3gpp_cellular.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/anqp-ip-address-type` | `fortiapi::wireless_controller::hotspot20::AnqpIpAddressType` | `fortiapi::wireless_controller::hotspot20::AnqpIpAddressTypes` (Table) | `forti_api/gen/wireless-controller/hotspot20/anqp_ip_address_type.hpp` | 3 |
+| `cmdb/wireless-controller.hotspot20/anqp-nai-realm` | `fortiapi::wireless_controller::hotspot20::AnqpNaiRealm` | `fortiapi::wireless_controller::hotspot20::AnqpNaiRealms` (Table) | `forti_api/gen/wireless-controller/hotspot20/anqp_nai_realm.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/anqp-network-auth-type` | `fortiapi::wireless_controller::hotspot20::AnqpNetworkAuthType` | `fortiapi::wireless_controller::hotspot20::AnqpNetworkAuthTypes` (Table) | `forti_api/gen/wireless-controller/hotspot20/anqp_network_auth_type.hpp` | 3 |
+| `cmdb/wireless-controller.hotspot20/anqp-roaming-consortium` | `fortiapi::wireless_controller::hotspot20::AnqpRoamingConsortium` | `fortiapi::wireless_controller::hotspot20::AnqpRoamingConsortiums` (Table) | `forti_api/gen/wireless-controller/hotspot20/anqp_roaming_consortium.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/anqp-venue-name` | `fortiapi::wireless_controller::hotspot20::AnqpVenueName` | `fortiapi::wireless_controller::hotspot20::AnqpVenueNames` (Table) | `forti_api/gen/wireless-controller/hotspot20/anqp_venue_name.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/anqp-venue-url` | `fortiapi::wireless_controller::hotspot20::AnqpVenueUrl` | `fortiapi::wireless_controller::hotspot20::AnqpVenueUrls` (Table) | `forti_api/gen/wireless-controller/hotspot20/anqp_venue_url.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/h2qp-advice-of-charge` | `fortiapi::wireless_controller::hotspot20::H2qpAdviceOfCharge` | `fortiapi::wireless_controller::hotspot20::H2qpAdviceOfCharges` (Table) | `forti_api/gen/wireless-controller/hotspot20/h2qp_advice_of_charge.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/h2qp-conn-capability` | `fortiapi::wireless_controller::hotspot20::H2qpConnCapability` | `fortiapi::wireless_controller::hotspot20::H2qpConnCapabilities` (Table) | `forti_api/gen/wireless-controller/hotspot20/h2qp_conn_capability.hpp` | 12 |
+| `cmdb/wireless-controller.hotspot20/h2qp-operator-name` | `fortiapi::wireless_controller::hotspot20::H2qpOperatorName` | `fortiapi::wireless_controller::hotspot20::H2qpOperatorNames` (Table) | `forti_api/gen/wireless-controller/hotspot20/h2qp_operator_name.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/h2qp-osu-provider` | `fortiapi::wireless_controller::hotspot20::H2qpOsuProvider` | `fortiapi::wireless_controller::hotspot20::H2qpOsuProviders` (Table) | `forti_api/gen/wireless-controller/hotspot20/h2qp_osu_provider.hpp` | 7 |
+| `cmdb/wireless-controller.hotspot20/h2qp-osu-provider-nai` | `fortiapi::wireless_controller::hotspot20::H2qpOsuProviderNai` | `fortiapi::wireless_controller::hotspot20::H2qpOsuProviderNais` (Table) | `forti_api/gen/wireless-controller/hotspot20/h2qp_osu_provider_nai.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/h2qp-terms-and-conditions` | `fortiapi::wireless_controller::hotspot20::H2qpTermsAndConditions` | `fortiapi::wireless_controller::hotspot20::H2qpTermsAndConditionses` (Table) | `forti_api/gen/wireless-controller/hotspot20/h2qp_terms_and_conditions.hpp` | 4 |
+| `cmdb/wireless-controller.hotspot20/h2qp-wan-metric` | `fortiapi::wireless_controller::hotspot20::H2qpWanMetric` | `fortiapi::wireless_controller::hotspot20::H2qpWanMetrics` (Table) | `forti_api/gen/wireless-controller/hotspot20/h2qp_wan_metric.hpp` | 9 |
+| `cmdb/wireless-controller.hotspot20/hs-profile` | `fortiapi::wireless_controller::hotspot20::HsProfile` | `fortiapi::wireless_controller::hotspot20::HsProfiles` (Table) | `forti_api/gen/wireless-controller/hotspot20/hs_profile.hpp` | 38 |
+| `cmdb/wireless-controller.hotspot20/icon` | `fortiapi::wireless_controller::hotspot20::Icon` | `fortiapi::wireless_controller::hotspot20::Icons` (Table) | `forti_api/gen/wireless-controller/hotspot20/icon.hpp` | 2 |
+| `cmdb/wireless-controller.hotspot20/qos-map` | `fortiapi::wireless_controller::hotspot20::QosMap` | `fortiapi::wireless_controller::hotspot20::QosMaps` (Table) | `forti_api/gen/wireless-controller/hotspot20/qos_map.hpp` | 3 |
+| `cmdb/wireless-controller/access-control-list` | `fortiapi::wireless_controller::AccessControlList` | `fortiapi::wireless_controller::AccessControlLists` (Table) | `forti_api/gen/wireless-controller/access_control_list.hpp` | 4 |
+| `cmdb/wireless-controller/ap-status` | `fortiapi::wireless_controller::ApStatus` | `fortiapi::wireless_controller::ApStatuses` (Table) | `forti_api/gen/wireless-controller/ap_status.hpp` | 4 |
+| `cmdb/wireless-controller/apcfg-profile` | `fortiapi::wireless_controller::ApcfgProfile` | `fortiapi::wireless_controller::ApcfgProfiles` (Table) | `forti_api/gen/wireless-controller/apcfg_profile.hpp` | 8 |
+| `cmdb/wireless-controller/arrp-profile` | `fortiapi::wireless_controller::ArrpProfile` | `fortiapi::wireless_controller::ArrpProfiles` (Table) | `forti_api/gen/wireless-controller/arrp_profile.hpp` | 22 |
+| `cmdb/wireless-controller/ble-profile` | `fortiapi::wireless_controller::BleProfile` | `fortiapi::wireless_controller::BleProfiles` (Table) | `forti_api/gen/wireless-controller/ble_profile.hpp` | 18 |
+| `cmdb/wireless-controller/bonjour-profile` | `fortiapi::wireless_controller::BonjourProfile` | `fortiapi::wireless_controller::BonjourProfiles` (Table) | `forti_api/gen/wireless-controller/bonjour_profile.hpp` | 3 |
+| `cmdb/wireless-controller/global` | `fortiapi::wireless_controller::Global` | `fortiapi::wireless_controller::GlobalSettings` (Singleton) | `forti_api/gen/wireless-controller/global.hpp` | 29 |
+| `cmdb/wireless-controller/inter-controller` | `fortiapi::wireless_controller::InterController` | `fortiapi::wireless_controller::InterControllerSettings` (Singleton) | `forti_api/gen/wireless-controller/inter_controller.hpp` | 7 |
+| `cmdb/wireless-controller/log` | `fortiapi::wireless_controller::Log` | `fortiapi::wireless_controller::LogSettings` (Singleton) | `forti_api/gen/wireless-controller/log.hpp` | 13 |
+| `cmdb/wireless-controller/mpsk-profile` | `fortiapi::wireless_controller::MpskProfile` | `fortiapi::wireless_controller::MpskProfiles` (Table) | `forti_api/gen/wireless-controller/mpsk_profile.hpp` | 6 |
+| `cmdb/wireless-controller/nac-profile` | `fortiapi::wireless_controller::NacProfile` | `fortiapi::wireless_controller::NacProfiles` (Table) | `forti_api/gen/wireless-controller/nac_profile.hpp` | 3 |
+| `cmdb/wireless-controller/qos-profile` | `fortiapi::wireless_controller::QosProfile` | `fortiapi::wireless_controller::QosProfiles` (Table) | `forti_api/gen/wireless-controller/qos_profile.hpp` | 23 |
+| `cmdb/wireless-controller/region` | `fortiapi::wireless_controller::Region` | `fortiapi::wireless_controller::Regions` (Table) | `forti_api/gen/wireless-controller/region.hpp` | 4 |
+| `cmdb/wireless-controller/setting` | `fortiapi::wireless_controller::Setting` | `fortiapi::wireless_controller::SettingSettings` (Singleton) | `forti_api/gen/wireless-controller/setting.hpp` | 15 |
+| `cmdb/wireless-controller/snmp` | `fortiapi::wireless_controller::Snmp` | `fortiapi::wireless_controller::SnmpSettings` (Singleton) | `forti_api/gen/wireless-controller/snmp.hpp` | 6 |
+| `cmdb/wireless-controller/ssid-policy` | `fortiapi::wireless_controller::SsidPolicy` | `fortiapi::wireless_controller::SsidPolicies` (Table) | `forti_api/gen/wireless-controller/ssid_policy.hpp` | 3 |
+| `cmdb/wireless-controller/syslog-profile` | `fortiapi::wireless_controller::SyslogProfile` | `fortiapi::wireless_controller::SyslogProfiles` (Table) | `forti_api/gen/wireless-controller/syslog_profile.hpp` | 8 |
+| `cmdb/wireless-controller/timers` | `fortiapi::wireless_controller::Timers` | `fortiapi::wireless_controller::TimersSettings` (Singleton) | `forti_api/gen/wireless-controller/timers.hpp` | 23 |
+| `cmdb/wireless-controller/utm-profile` | `fortiapi::wireless_controller::UtmProfile` | `fortiapi::wireless_controller::UtmProfiles` (Table) | `forti_api/gen/wireless-controller/utm_profile.hpp` | 8 |
+| `cmdb/wireless-controller/vap` | `fortiapi::wireless_controller::Vap` | `fortiapi::wireless_controller::Vaps` (Table) | `forti_api/gen/wireless-controller/vap.hpp` | 167 |
+| `cmdb/wireless-controller/vap-group` | `fortiapi::wireless_controller::VapGroup` | `fortiapi::wireless_controller::VapGroups` (Table) | `forti_api/gen/wireless-controller/vap_group.hpp` | 3 |
+| `cmdb/wireless-controller/wag-profile` | `fortiapi::wireless_controller::WagProfile` | `fortiapi::wireless_controller::WagProfiles` (Table) | `forti_api/gen/wireless-controller/wag_profile.hpp` | 9 |
+| `cmdb/wireless-controller/wids-profile` | `fortiapi::wireless_controller::WidsProfile` | `fortiapi::wireless_controller::WidsProfiles` (Table) | `forti_api/gen/wireless-controller/wids_profile.hpp` | 50 |
+| `cmdb/wireless-controller/wtp` | `fortiapi::wireless_controller::Wtp` | `fortiapi::wireless_controller::Wtps` (Table) | `forti_api/gen/wireless-controller/wtp.hpp` | 44 |
+| `cmdb/wireless-controller/wtp-group` | `fortiapi::wireless_controller::WtpGroup` | `fortiapi::wireless_controller::WtpGroups` (Table) | `forti_api/gen/wireless-controller/wtp_group.hpp` | 4 |
+| `cmdb/wireless-controller/wtp-profile` | `fortiapi::wireless_controller::WtpProfile` | `fortiapi::wireless_controller::WtpProfiles` (Table) | `forti_api/gen/wireless-controller/wtp_profile.hpp` | 50 |
 
-The monitor API (status, statistics, actions) is available untyped through `fortiapi::Monitor`.
+## Monitor
+
+Read-only monitor endpoints with result types generated from response shapes recorded on a
+FortiOS 7.4.8 device. Every other monitor path, and every monitor action, is available untyped
+through `fortiapi::Monitor`.
+
+| FortiOS path | Endpoint | Result | Header |
+|---|---|---|---|
+| `monitor/endpoint-control/ems/status-summary` | `fortiapi::monitor::endpoint_control::EmsStatusSummary` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/endpoint_control/ems/status_summary.hpp` |
+| `monitor/firewall/address-dynamic` | `fortiapi::monitor::firewall::AddressDynamic` | `nlohmann::json` | `forti_api/gen/monitor/firewall/address_dynamic.hpp` |
+| `monitor/firewall/address-fqdns` | `fortiapi::monitor::firewall::AddressFqdns` | `std::vector<AddressFqdnsEntry>` | `forti_api/gen/monitor/firewall/address_fqdns.hpp` |
+| `monitor/firewall/address-fqdns6` | `fortiapi::monitor::firewall::AddressFqdns6` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/firewall/address_fqdns6.hpp` |
+| `monitor/firewall/address6-dynamic` | `fortiapi::monitor::firewall::Address6Dynamic` | `Address6DynamicResult` | `forti_api/gen/monitor/firewall/address6_dynamic.hpp` |
+| `monitor/firewall/internet-service-basic` | `fortiapi::monitor::firewall::InternetServiceBasic` | `std::vector<InternetServiceBasicEntry>` | `forti_api/gen/monitor/firewall/internet_service_basic.hpp` |
+| `monitor/firewall/ippool` | `fortiapi::monitor::firewall::Ippool` | `IppoolResult` | `forti_api/gen/monitor/firewall/ippool.hpp` |
+| `monitor/firewall/local-in` | `fortiapi::monitor::firewall::LocalIn` | `LocalInResult` | `forti_api/gen/monitor/firewall/local_in.hpp` |
+| `monitor/firewall/policy` | `fortiapi::monitor::firewall::Policy` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/firewall/policy.hpp` |
+| `monitor/firewall/security-policy` | `fortiapi::monitor::firewall::SecurityPolicy` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/firewall/security_policy.hpp` |
+| `monitor/license/status` | `fortiapi::monitor::license::Status` | `StatusResult` | `forti_api/gen/monitor/license/status.hpp` |
+| `monitor/log/device/state` | `fortiapi::monitor::log::DeviceState` | `DeviceStateResult` | `forti_api/gen/monitor/log/device/state.hpp` |
+| `monitor/log/forticloud-report-list` | `fortiapi::monitor::log::ForticloudReportList` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/log/forticloud_report_list.hpp` |
+| `monitor/network/dns/latency` | `fortiapi::monitor::network::DnsLatency` | `std::vector<DnsLatencyEntry>` | `forti_api/gen/monitor/network/dns/latency.hpp` |
+| `monitor/network/lldp/neighbors` | `fortiapi::monitor::network::LldpNeighbors` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/network/lldp/neighbors.hpp` |
+| `monitor/router/bgp/neighbors` | `fortiapi::monitor::router::BgpNeighbors` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/router/bgp/neighbors.hpp` |
+| `monitor/router/bgp/paths` | `fortiapi::monitor::router::BgpPaths` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/router/bgp/paths.hpp` |
+| `monitor/router/lookup` | `fortiapi::monitor::router::Lookup` | `LookupResult` | `forti_api/gen/monitor/router/lookup.hpp` |
+| `monitor/router/ospf/neighbors` | `fortiapi::monitor::router::OspfNeighbors` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/router/ospf/neighbors.hpp` |
+| `monitor/router/policy` | `fortiapi::monitor::router::Policy` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/router/policy.hpp` |
+| `monitor/router/statistics` | `fortiapi::monitor::router::Statistics` | `StatisticsResult` | `forti_api/gen/monitor/router/statistics.hpp` |
+| `monitor/system/3g-modem` | `fortiapi::monitor::system::_3gModem` | `_3gModemResult` | `forti_api/gen/monitor/system/3g_modem.hpp` |
+| `monitor/system/acquired-dns` | `fortiapi::monitor::system::AcquiredDns` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/system/acquired_dns.hpp` |
+| `monitor/system/automation-action/stats` | `fortiapi::monitor::system::AutomationActionStats` | `std::vector<AutomationActionStatsEntry>` | `forti_api/gen/monitor/system/automation_action/stats.hpp` |
+| `monitor/system/automation-stitch/stats` | `fortiapi::monitor::system::AutomationStitchStats` | `std::vector<AutomationStitchStatsEntry>` | `forti_api/gen/monitor/system/automation_stitch/stats.hpp` |
+| `monitor/system/available-certificates` | `fortiapi::monitor::system::AvailableCertificates` | `std::vector<AvailableCertificatesEntry>` | `forti_api/gen/monitor/system/available_certificates.hpp` |
+| `monitor/system/available-interfaces` | `fortiapi::monitor::system::AvailableInterfaces` | `std::vector<AvailableInterfacesEntry>` | `forti_api/gen/monitor/system/available_interfaces.hpp` |
+| `monitor/system/available-interfaces/meta` | `fortiapi::monitor::system::AvailableInterfacesMeta` | `AvailableInterfacesMetaResult` | `forti_api/gen/monitor/system/available_interfaces/meta.hpp` |
+| `monitor/system/central-management/status` | `fortiapi::monitor::system::CentralManagementStatus` | `CentralManagementStatusResult` | `forti_api/gen/monitor/system/central_management/status.hpp` |
+| `monitor/system/csf` | `fortiapi::monitor::system::Csf` | `CsfResult` | `forti_api/gen/monitor/system/csf.hpp` |
+| `monitor/system/modem` | `fortiapi::monitor::system::Modem` | `ModemResult` | `forti_api/gen/monitor/system/modem.hpp` |
+| `monitor/system/navigation-favorites` | `fortiapi::monitor::system::NavigationFavorites` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/system/navigation_favorites.hpp` |
+| `monitor/system/sdn-connector/status` | `fortiapi::monitor::system::SdnConnectorStatus` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/system/sdn_connector/status.hpp` |
+| `monitor/system/time` | `fortiapi::monitor::system::Time` | `TimeResult` | `forti_api/gen/monitor/system/time.hpp` |
+| `monitor/system/usb-log` | `fortiapi::monitor::system::UsbLog` | `UsbLogResult` | `forti_api/gen/monitor/system/usb_log.hpp` |
+| `monitor/system/vdom-link` | `fortiapi::monitor::system::VdomLink` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/system/vdom_link.hpp` |
+| `monitor/system/wan-lan-ip-conflict` | `fortiapi::monitor::system::WanLanIpConflict` | `WanLanIpConflictResult` | `forti_api/gen/monitor/system/wan_lan_ip_conflict.hpp` |
+| `monitor/utm/application-categories` | `fortiapi::monitor::utm::ApplicationCategories` | `std::vector<ApplicationCategoriesEntry>` | `forti_api/gen/monitor/utm/application_categories.hpp` |
+| `monitor/virtual-wan/health-check` | `fortiapi::monitor::virtual_wan::HealthCheck` | `HealthCheckResult` | `forti_api/gen/monitor/virtual_wan/health_check.hpp` |
+| `monitor/virtual-wan/members` | `fortiapi::monitor::virtual_wan::Members` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/virtual_wan/members.hpp` |
+| `monitor/virtual-wan/sla-log` | `fortiapi::monitor::virtual_wan::SlaLog` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/virtual_wan/sla_log.hpp` |
+| `monitor/vpn/ipsec` | `fortiapi::monitor::vpn::Ipsec` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/vpn/ipsec.hpp` |
+| `monitor/web-ui/extend-session` | `fortiapi::monitor::web_ui::ExtendSession` | `ExtendSessionResult` | `forti_api/gen/monitor/web_ui/extend_session.hpp` |
+| `monitor/web-ui/navbar-dependencies` | `fortiapi::monitor::web_ui::NavbarDependencies` | `NavbarDependenciesResult` | `forti_api/gen/monitor/web_ui/navbar_dependencies.hpp` |
+| `monitor/web-ui/object-urls` | `fortiapi::monitor::web_ui::ObjectUrls` | `ObjectUrlsResult` | `forti_api/gen/monitor/web_ui/object_urls.hpp` |
+| `monitor/web-ui/state` | `fortiapi::monitor::web_ui::State` | `StateResult` | `forti_api/gen/monitor/web_ui/state.hpp` |
+| `monitor/wifi/client` | `fortiapi::monitor::wifi::Client` | `std::vector<nlohmann::json>` | `forti_api/gen/monitor/wifi/client.hpp` |
+
 New endpoints are added through the generator; see [Code generation](/development/code-generation).

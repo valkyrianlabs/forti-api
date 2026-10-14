@@ -1,0 +1,97 @@
+{
+ "name": "certificate",
+ "category": "table",
+ "help": "Configure certificate users.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "User ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the certificate user to authenticate with the FortiGate unit.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable user."
+    },
+    {
+     "name": "disable",
+     "help": "Disable user."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of certificate authentication method.",
+   "required": true,
+   "options": [
+    {
+     "name": "single-certificate",
+     "help": "Single certificate."
+    },
+    {
+     "name": "trusted-issuer",
+     "help": "Trusted CA issuer."
+    }
+   ],
+   "default": "single-certificate",
+   "multiple_values": false
+  },
+  "common-name": {
+   "name": "common-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate common name.",
+   "required": true,
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "issuer": {
+   "name": "issuer",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA certificate used for client certificate verification.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 22,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

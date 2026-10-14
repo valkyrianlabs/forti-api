@@ -1,0 +1,82 @@
+{
+ "name": "ipsec-aggregate",
+ "category": "table",
+ "help": "Configure an aggregate of IPsec tunnels.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPsec aggregate name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "member": {
+   "name": "member",
+   "category": "table",
+   "help": "Member tunnels of the aggregate.",
+   "required": true,
+   "member_table": true,
+   "mkey": "tunnel-name",
+   "mkey_type": "string",
+   "children": {
+    "tunnel-name": {
+     "name": "tunnel-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tunnel name.",
+     "required": true,
+     "datasource": [
+      "vpn.ipsec.phase1-interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "algorithm": {
+   "name": "algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Frame distribution algorithm.",
+   "options": [
+    {
+     "name": "L3",
+     "help": "Use layer 3 address for distribution."
+    },
+    {
+     "name": "L4",
+     "help": "Use layer 4 information for distribution."
+    },
+    {
+     "name": "round-robin",
+     "help": "Per-packet round-robin distribution."
+    },
+    {
+     "name": "redundant",
+     "help": "Use first tunnel that is up for all traffic."
+    },
+    {
+     "name": "weighted-round-robin",
+     "help": "Weighted round-robin distribution."
+    }
+   ],
+   "default": "round-robin",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 187,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

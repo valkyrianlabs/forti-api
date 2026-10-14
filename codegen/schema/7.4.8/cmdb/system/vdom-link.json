@@ -1,0 +1,61 @@
+{
+ "name": "vdom-link",
+ "category": "table",
+ "help": "Configure VDOM links.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "VDOM link name (maximum = 11 characters).",
+   "size": 11,
+   "default": "",
+   "multiple_values": false
+  },
+  "vcluster": {
+   "name": "vcluster",
+   "category": "unitary",
+   "type": "option",
+   "help": "Virtual cluster.",
+   "options": [
+    {
+     "name": "vcluster1",
+     "help": "Virtual cluster 1."
+    },
+    {
+     "name": "vcluster2",
+     "help": "Virtual cluster 2."
+    }
+   ],
+   "default": "vcluster1",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "VDOM link type: PPP or Ethernet.",
+   "options": [
+    {
+     "name": "ppp",
+     "help": "PPP VDOM link."
+    },
+    {
+     "name": "ethernet",
+     "help": "Ethernet VDOM link."
+    }
+   ],
+   "default": "ppp",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 200,
+ "access_group": "netgrp",
+ "object_range": "global"
+}

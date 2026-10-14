@@ -1,0 +1,122 @@
+{
+ "name": "geoip-override",
+ "category": "table",
+ "help": "Configure geographical location mapping for IP address(es) to override mappings from FortiGuard.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Location name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "country-id": {
+   "name": "country-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Two character Country ID code.",
+   "size": 2,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-range": {
+   "name": "ip-range",
+   "category": "table",
+   "help": "Table of IP ranges assigned to country.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID of individual entry in the IP range table.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-ip": {
+     "name": "start-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Starting IP address, inclusive, of the address range (format: xxx.xxx.xxx.xxx).",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "end-ip": {
+     "name": "end-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Ending IP address, inclusive, of the address range (format: xxx.xxx.xxx.xxx).",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ip6-range": {
+   "name": "ip6-range",
+   "category": "table",
+   "help": "Table of IPv6 ranges assigned to country.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID of individual entry in the IPv6 range table.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-ip": {
+     "name": "start-ip",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Starting IP address, inclusive, of the address range (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).",
+     "default": "::",
+     "multiple_values": false
+    },
+    "end-ip": {
+     "name": "end-ip",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Ending IP address, inclusive, of the address range (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).",
+     "default": "::",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 486,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

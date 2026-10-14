@@ -1,0 +1,455 @@
+{
+ "name": "location",
+ "category": "table",
+ "help": "Configure FortiSwitch location services.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Unique location item name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "address-civic": {
+   "name": "address-civic",
+   "category": "complex",
+   "help": "Configure location civic address.",
+   "children": {
+    "additional": {
+     "name": "additional",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location additional details.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "additional-code": {
+     "name": "additional-code",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location additional code details.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "block": {
+     "name": "block",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location block details.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "branch-road": {
+     "name": "branch-road",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location branch road details.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "building": {
+     "name": "building",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location building details.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "city": {
+     "name": "city",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location city details.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "city-division": {
+     "name": "city-division",
+     "category": "unitary",
+     "type": "string",
+     "help": "Location city division details.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "country": {
+     "name": "country",
+     "category": "unitary",
+     "type": "string",
+     "help": "The two-letter ISO 3166 country code in capital ASCII letters eg. US, CA, DK, DE.",
+     "required": true,
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "country-subdivision": {
+     "name": "country-subdivision",
+     "category": "unitary",
+     "type": "string",
+     "help": "National subdivisions (state, canton, region, province, or prefecture).",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "county": {
+     "name": "county",
+     "category": "unitary",
+     "type": "string",
+     "help": "County, parish, gun (JP), or district (IN).",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "direction": {
+     "name": "direction",
+     "category": "unitary",
+     "type": "string",
+     "help": "Leading street direction.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "floor": {
+     "name": "floor",
+     "category": "unitary",
+     "type": "string",
+     "help": "Floor.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "landmark": {
+     "name": "landmark",
+     "category": "unitary",
+     "type": "string",
+     "help": "Landmark or vanity address.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "language": {
+     "name": "language",
+     "category": "unitary",
+     "type": "string",
+     "help": "Language.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name (residence and office occupant).",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "number": {
+     "name": "number",
+     "category": "unitary",
+     "type": "string",
+     "help": "House number.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "number-suffix": {
+     "name": "number-suffix",
+     "category": "unitary",
+     "type": "string",
+     "help": "House number suffix.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "place-type": {
+     "name": "place-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Place type.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "post-office-box": {
+     "name": "post-office-box",
+     "category": "unitary",
+     "type": "string",
+     "help": "Post office box.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "postal-community": {
+     "name": "postal-community",
+     "category": "unitary",
+     "type": "string",
+     "help": "Postal community name.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "primary-road": {
+     "name": "primary-road",
+     "category": "unitary",
+     "type": "string",
+     "help": "Primary road name.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "road-section": {
+     "name": "road-section",
+     "category": "unitary",
+     "type": "string",
+     "help": "Road section.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "room": {
+     "name": "room",
+     "category": "unitary",
+     "type": "string",
+     "help": "Room number.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "script": {
+     "name": "script",
+     "category": "unitary",
+     "type": "string",
+     "help": "Script used to present the address information.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "seat": {
+     "name": "seat",
+     "category": "unitary",
+     "type": "string",
+     "help": "Seat number.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "street": {
+     "name": "street",
+     "category": "unitary",
+     "type": "string",
+     "help": "Street.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "street-name-post-mod": {
+     "name": "street-name-post-mod",
+     "category": "unitary",
+     "type": "string",
+     "help": "Street name post modifier.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "street-name-pre-mod": {
+     "name": "street-name-pre-mod",
+     "category": "unitary",
+     "type": "string",
+     "help": "Street name pre modifier.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "street-suffix": {
+     "name": "street-suffix",
+     "category": "unitary",
+     "type": "string",
+     "help": "Street suffix.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "sub-branch-road": {
+     "name": "sub-branch-road",
+     "category": "unitary",
+     "type": "string",
+     "help": "Sub branch road name.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "trailing-str-suffix": {
+     "name": "trailing-str-suffix",
+     "category": "unitary",
+     "type": "string",
+     "help": "Trailing street suffix.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "unit": {
+     "name": "unit",
+     "category": "unitary",
+     "type": "string",
+     "help": "Unit (apartment, suite).",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "zip": {
+     "name": "zip",
+     "category": "unitary",
+     "type": "string",
+     "help": "Postal/zip code.",
+     "size": 47,
+     "default": "",
+     "multiple_values": false
+    },
+    "parent-key": {
+     "name": "parent-key",
+     "category": "unitary",
+     "type": "string",
+     "help": "Parent key name.",
+     "readonly": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "coordinates": {
+   "name": "coordinates",
+   "category": "complex",
+   "help": "Configure location GPS coordinates.",
+   "children": {
+    "altitude": {
+     "name": "altitude",
+     "category": "unitary",
+     "type": "string",
+     "help": "Plus or minus floating point number. For example, 117.47.",
+     "required": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "altitude-unit": {
+     "name": "altitude-unit",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure the unit for which the altitude is to (m = meters, f = floors of a building).",
+     "required": true,
+     "options": [
+      {
+       "name": "m",
+       "help": "set altitude unit meters"
+      },
+      {
+       "name": "f",
+       "help": "set altitude unit floors"
+      }
+     ],
+     "default": "m",
+     "multiple_values": false
+    },
+    "datum": {
+     "name": "datum",
+     "category": "unitary",
+     "type": "option",
+     "help": "WGS84, NAD83, NAD83/MLLW.",
+     "required": true,
+     "options": [
+      {
+       "name": "WGS84",
+       "help": "set coordinates datum WGS84"
+      },
+      {
+       "name": "NAD83",
+       "help": "set coordinates datum NAD83"
+      },
+      {
+       "name": "NAD83/MLLW",
+       "help": "set coordinates datum NAD83/MLLW"
+      }
+     ],
+     "default": "WGS84",
+     "multiple_values": false
+    },
+    "latitude": {
+     "name": "latitude",
+     "category": "unitary",
+     "type": "string",
+     "help": "Floating point starting with +/- or ending with (N or S). For example, +/-16.67 or 16.67N.",
+     "required": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "longitude": {
+     "name": "longitude",
+     "category": "unitary",
+     "type": "string",
+     "help": "Floating point starting with +/- or ending with (N or S). For example, +/-26.789 or 26.789E.",
+     "required": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "parent-key": {
+     "name": "parent-key",
+     "category": "unitary",
+     "type": "string",
+     "help": "Parent key name.",
+     "readonly": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "elin-number": {
+   "name": "elin-number",
+   "category": "complex",
+   "help": "Configure location ELIN number.",
+   "children": {
+    "elin-num": {
+     "name": "elin-num",
+     "category": "unitary",
+     "type": "string",
+     "help": "Configure ELIN callback number.",
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "parent-key": {
+     "name": "parent-key",
+     "category": "unitary",
+     "type": "string",
+     "help": "Parent key name.",
+     "readonly": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "q_type": 319,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

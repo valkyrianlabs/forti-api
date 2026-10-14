@@ -1,0 +1,203 @@
+{
+ "name": "policy",
+ "category": "table",
+ "help": "DSL policy.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Policy name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type.",
+   "options": [
+    {
+     "name": "Proscend",
+     "help": "Proscend."
+    }
+   ],
+   "default": "Proscend",
+   "multiple_values": false
+  },
+  "us-bitswap": {
+   "name": "us-bitswap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bitswap.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "enable",
+     "help": "Enable."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ds-bitswap": {
+   "name": "ds-bitswap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bitswap.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "enable",
+     "help": "Enable."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "profile": {
+   "name": "profile",
+   "category": "unitary",
+   "type": "option",
+   "help": "VDSL CPE profile.",
+   "options": [
+    {
+     "name": "auto-30a",
+     "help": "vdsl CPE profile."
+    },
+    {
+     "name": "auto-17a",
+     "help": "vdsl CPE profile."
+    },
+    {
+     "name": "auto-12ab",
+     "help": "vdsl CPE profile."
+    }
+   ],
+   "default": "auto-30a",
+   "multiple_values": false
+  },
+  "cs": {
+   "name": "cs",
+   "category": "unitary",
+   "type": "option",
+   "help": "CPE carrier set.",
+   "options": [
+    {
+     "name": "A43",
+     "help": "CPE carrier set."
+    },
+    {
+     "name": "B43",
+     "help": "CPE carrier set."
+    },
+    {
+     "name": "A43C",
+     "help": "CPE carrier set."
+    },
+    {
+     "name": "V43",
+     "help": "CPE carrier set."
+    }
+   ],
+   "default": "A43 B43 A43C",
+   "multiple_values": true
+  },
+  "pause-frame": {
+   "name": "pause-frame",
+   "category": "unitary",
+   "type": "option",
+   "help": "Device pause frame configuration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "enable",
+     "help": "Enable."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "cpe-aele": {
+   "name": "cpe-aele",
+   "category": "unitary",
+   "type": "option",
+   "help": "CPE AELE.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "enable",
+     "help": "Enable."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "cpe-aele-mode": {
+   "name": "cpe-aele-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "CPE AELE-Mode with given string.",
+   "options": [
+    {
+     "name": "ELE_M0",
+     "help": "cpe AELE-Mode with given string."
+    },
+    {
+     "name": "ELE_DS",
+     "help": "cpe AELE-Mode with given string."
+    },
+    {
+     "name": "ELE_PB",
+     "help": "cpe AELE-Mode with given string."
+    },
+    {
+     "name": "ELE_MIN",
+     "help": "cpe AELE-Mode with given string."
+    }
+   ],
+   "default": "ELE_MIN",
+   "multiple_values": false
+  },
+  "append_padding": {
+   "name": "append_padding",
+   "category": "unitary",
+   "type": "option",
+   "help": "Device pause frame configuration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "enable",
+     "help": "Enable."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "switch-controller.dsl",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

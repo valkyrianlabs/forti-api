@@ -1,0 +1,82 @@
+{
+ "name": "wisp",
+ "category": "table",
+ "help": "Configure Websense Integrated Services Protocol (WISP) servers.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "outgoing-ip": {
+   "name": "outgoing-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "WISP outgoing IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "server-ip": {
+   "name": "server-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "WISP server IP address.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "server-port": {
+   "name": "server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "WISP server port (1 - 65535, default = 15868).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 15868,
+   "multiple_values": false
+  },
+  "max-connections": {
+   "name": "max-connections",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of web proxy WISP connections (4 - 4096, default = 64).",
+   "min-value": 4,
+   "max-value": 4096,
+   "default": 64,
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period of time before WISP requests time out (1 - 15 sec, default = 5).",
+   "min-value": 1,
+   "max-value": 15,
+   "default": 5,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "web-proxy",
+ "q_type": 343,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

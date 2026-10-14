@@ -1,0 +1,595 @@
+{
+ "name": "sniffer",
+ "category": "table",
+ "help": "Configure sniffer.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Sniffer ID (0 - 9999).",
+   "min-value": 0,
+   "max-value": 9999,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the active status of the sniffer.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sniffer status."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sniffer status."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "logtraffic": {
+   "name": "logtraffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Either log all sessions, only sessions that have a security profile applied, or disable all logging for this policy.",
+   "options": [
+    {
+     "name": "all",
+     "help": "Log all sessions accepted or denied by this policy."
+    },
+    {
+     "name": "utm",
+     "help": "Log traffic that has a security profile applied to it."
+    },
+    {
+     "name": "disable",
+     "help": "Disable all logging for this policy."
+    }
+   ],
+   "default": "utm",
+   "multiple_values": false
+  },
+  "ipv6": {
+   "name": "ipv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sniffing IPv6 packets.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sniffer for IPv6 packets."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sniffer for IPv6 packets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "non-ip": {
+   "name": "non-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sniffing non-IP packets.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sniffer for non-IP packets."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sniffer for non-IP packets."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name that traffic sniffing will take place on.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "host": {
+   "name": "host",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hosts to filter for in sniffer traffic (Format examples: 1.1.1.1, 2.2.2.0/24, 3.3.3.3/255.255.255.0, 4.4.4.0-4.4.4.240).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "string",
+   "help": "Ports to sniff (Format examples: 10, :20, 30:40, 50-, 100-200).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "string",
+   "help": "Integer value for the protocol type as defined by IANA (0 - 255).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "vlan": {
+   "name": "vlan",
+   "category": "unitary",
+   "type": "string",
+   "help": "List of VLANs to sniff.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "application-list-status": {
+   "name": "application-list-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable application control profile.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "application-list": {
+   "name": "application-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing application list.",
+   "required": true,
+   "datasource": [
+    "application.list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ips-sensor-status": {
+   "name": "ips-sensor-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPS sensor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ips-sensor": {
+   "name": "ips-sensor",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing IPS sensor.",
+   "required": true,
+   "datasource": [
+    "ips.sensor.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dsri": {
+   "name": "dsri",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DSRI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DSRI."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DSRI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "av-profile-status": {
+   "name": "av-profile-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable antivirus profile.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "av-profile": {
+   "name": "av-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing antivirus profile.",
+   "required": true,
+   "datasource": [
+    "antivirus.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "webfilter-profile-status": {
+   "name": "webfilter-profile-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable web filter profile.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "webfilter-profile": {
+   "name": "webfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing web filter profile.",
+   "required": true,
+   "datasource": [
+    "webfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "emailfilter-profile-status": {
+   "name": "emailfilter-profile-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable emailfilter.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "emailfilter-profile": {
+   "name": "emailfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing email filter profile.",
+   "required": true,
+   "datasource": [
+    "emailfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dlp-profile-status": {
+   "name": "dlp-profile-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DLP profile.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dlp-profile": {
+   "name": "dlp-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing DLP profile.",
+   "required": true,
+   "datasource": [
+    "dlp.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-threatfeed-status": {
+   "name": "ip-threatfeed-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IP threat feed.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ip-threatfeed": {
+   "name": "ip-threatfeed",
+   "category": "table",
+   "help": "Name of an existing IP threat feed.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Threat feed name.",
+     "required": true,
+     "datasource": [
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "file-filter-profile-status": {
+   "name": "file-filter-profile-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable file filter.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "file-filter-profile": {
+   "name": "file-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing file-filter profile.",
+   "required": true,
+   "datasource": [
+    "file-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ips-dos-status": {
+   "name": "ips-dos-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPS DoS anomaly detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "anomaly": {
+   "name": "anomaly",
+   "category": "table",
+   "help": "Configuration method to edit Denial of Service (DoS) anomaly settings.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Anomaly name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this anomaly.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable this status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable this status."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "log": {
+     "name": "log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable anomaly logging.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable anomaly logging."
+      },
+      {
+       "name": "disable",
+       "help": "Disable anomaly logging."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action taken when the threshold is reached.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Allow traffic but record a log message if logging is enabled."
+      },
+      {
+       "name": "block",
+       "help": "Block traffic if this anomaly is found."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    },
+    "quarantine": {
+     "name": "quarantine",
+     "category": "unitary",
+     "type": "option",
+     "help": "Quarantine method.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Quarantine is disabled."
+      },
+      {
+       "name": "attacker",
+       "help": "Block all traffic sent from attacker's IP address. The attacker's IP address is also added to the banned user list. The target's address is not affected."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "quarantine-expiry": {
+     "name": "quarantine-expiry",
+     "category": "unitary",
+     "type": "user",
+     "help": "Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.",
+     "default": "5m",
+     "multiple_values": false
+    },
+    "quarantine-log": {
+     "name": "quarantine-log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable quarantine logging.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable quarantine logging."
+      },
+      {
+       "name": "enable",
+       "help": "Enable quarantine logging."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "threshold": {
+     "name": "threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Anomaly threshold. Number of detected instances (packets per second or concurrent session number) that triggers the anomaly action.",
+     "min-value": 1,
+     "max-value": 2147483647,
+     "default": 0,
+     "multiple_values": false
+    },
+    "threshold(default)": {
+     "name": "threshold(default)",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of detected instances (packets per second or concurrent session number) which triggers action (1 - 2147483647, default = 1000). Note that each anomaly has a different threshold value assigned to it.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 382,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

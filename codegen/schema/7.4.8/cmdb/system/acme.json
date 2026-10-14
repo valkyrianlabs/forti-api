@@ -1,0 +1,154 @@
+{
+ "name": "acme",
+ "category": "complex",
+ "help": "Configure ACME client.",
+ "children": {
+  "interface": {
+   "name": "interface",
+   "category": "table",
+   "help": "Interface(s) on which the ACME client will listen for challenges.",
+   "member_table": true,
+   "mkey": "interface-name",
+   "mkey_type": "string",
+   "children": {
+    "interface-name": {
+     "name": "interface-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "use-ha-direct": {
+   "name": "use-ha-direct",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable the use of 'ha-mgmt' interface to connect to the ACME server when 'ha-direct' is enabled in HA configuration",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IPv4 address used to connect to the ACME server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Source IPv6 address used to connect to the ACME server.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "accounts": {
+   "name": "accounts",
+   "category": "table",
+   "help": "ACME accounts list.",
+   "mkey": "id",
+   "mkey_type": "string",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Account id.",
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "string",
+     "help": "Account status.",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "url": {
+     "name": "url",
+     "category": "unitary",
+     "type": "string",
+     "help": "Account url.",
+     "required": true,
+     "size": 511,
+     "default": "",
+     "multiple_values": false
+    },
+    "ca_url": {
+     "name": "ca_url",
+     "category": "unitary",
+     "type": "string",
+     "help": "Account ca_url.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "email": {
+     "name": "email",
+     "category": "unitary",
+     "type": "string",
+     "help": "Account email.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "privatekey": {
+     "name": "privatekey",
+     "category": "unitary",
+     "type": "string",
+     "help": "Account Private Key.",
+     "required": true,
+     "size": 8191,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "acc-details": {
+   "name": "acc-details",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "Print Account information and decrypted key."
+  },
+  "status": {
+   "name": "status",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "Print information about the current status of the acme client."
+  }
+ },
+ "path": "system",
+ "q_type": 557,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

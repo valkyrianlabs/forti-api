@@ -1,0 +1,89 @@
+{
+ "name": "pptp",
+ "category": "complex",
+ "help": "Configure PPTP.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGate as a PPTP gateway.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ip-mode": {
+   "name": "ip-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "IP assignment mode for PPTP client.",
+   "required": true,
+   "options": [
+    {
+     "name": "range",
+     "help": "PPTP client IP from manual config (range from sip to eip)."
+    },
+    {
+     "name": "usrgrp",
+     "help": "PPTP client IP from user-group defined server."
+    }
+   ],
+   "default": "range",
+   "multiple_values": false
+  },
+  "eip": {
+   "name": "eip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "End IP.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "sip": {
+   "name": "sip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Start IP.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "local-ip": {
+   "name": "local-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Local IP to be used for peer's remote IP.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "usrgrp": {
+   "name": "usrgrp",
+   "category": "unitary",
+   "type": "string",
+   "help": "User group.",
+   "required": true,
+   "datasource": [
+    "user.group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "vpn",
+ "q_type": 66,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

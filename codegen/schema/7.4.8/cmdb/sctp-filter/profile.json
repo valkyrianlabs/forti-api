@@ -1,0 +1,97 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure SCTP filter profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "ppid-filters": {
+   "name": "ppid-filters",
+   "category": "table",
+   "help": "PPID filters list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ppid": {
+     "name": "ppid",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Payload protocol identifier.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": "",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action taken when PPID is matched.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Pass data chunk."
+      },
+      {
+       "name": "reset",
+       "help": "Reset SCTP session."
+      },
+      {
+       "name": "replace",
+       "help": "Replace data chunk."
+      }
+     ],
+     "default": "reset",
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comment.",
+     "size": 255,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "sctp-filter",
+ "q_type": 376,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

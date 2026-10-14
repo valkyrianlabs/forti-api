@@ -1,0 +1,29 @@
+{
+ "name": "settings",
+ "category": "complex",
+ "help": "Configure endpoint control settings.",
+ "children": {
+  "override": {
+   "name": "override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Override global EMS table for this VDOM.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Overriding global EMS table."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Overriding global EMS table."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "endpoint-control",
+ "q_type": 406,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

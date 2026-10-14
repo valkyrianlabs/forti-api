@@ -1,0 +1,285 @@
+{
+ "name": "pools",
+ "category": "table",
+ "help": "Configure PCP pools.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "PCP pool name.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "client-subnet": {
+   "name": "client-subnet",
+   "category": "table",
+   "help": "Subnets from which PCP requests are accepted.",
+   "required": true,
+   "member_table": true,
+   "mkey": "subnet",
+   "mkey_type": "string",
+   "children": {
+    "subnet": {
+     "name": "subnet",
+     "category": "unitary",
+     "type": "string",
+     "help": "Client subnets.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ext-intf": {
+   "name": "ext-intf",
+   "category": "unitary",
+   "type": "string",
+   "help": "External interface name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "arp-reply": {
+   "name": "arp-reply",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to respond to ARP requests for external IP (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable ARP reply."
+    },
+    {
+     "name": "enable",
+     "help": "Enable ARP reply."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "extip": {
+   "name": "extip",
+   "category": "unitary",
+   "type": "user",
+   "help": "IP address or address range on the external interface that you want to map to an address on the internal network.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "extport": {
+   "name": "extport",
+   "category": "unitary",
+   "type": "user",
+   "help": "Incoming port number range that you want to map to a port number on the internal network.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "minimal-lifetime": {
+   "name": "minimal-lifetime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimal lifetime of a PCP mapping in seconds (60 - 300, default = 120).",
+   "min-value": 60,
+   "max-value": 300,
+   "default": 120,
+   "multiple_values": false
+  },
+  "maximal-lifetime": {
+   "name": "maximal-lifetime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximal lifetime of a PCP mapping in seconds (3600 - 604800, default = 86400).",
+   "min-value": 3600,
+   "max-value": 604800,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "client-mapping-limit": {
+   "name": "client-mapping-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Mapping limit per client (0 - 65535, default = 0, 0 = unlimited).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "mapping-filter-limit": {
+   "name": "mapping-filter-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Filter limit per mapping (0 - 5, default = 1).",
+   "min-value": 0,
+   "max-value": 5,
+   "default": 1,
+   "multiple_values": false
+  },
+  "allow-opcode": {
+   "name": "allow-opcode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed PCP opcode.",
+   "options": [
+    {
+     "name": "map",
+     "help": "Allow opcode MAP."
+    },
+    {
+     "name": "peer",
+     "help": "Allow opcode PEER."
+    },
+    {
+     "name": "announce",
+     "help": "Allow opcode ANNOUNCE."
+    }
+   ],
+   "default": "map peer announce",
+   "multiple_values": true
+  },
+  "third-party": {
+   "name": "third-party",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow/disallow third party option.",
+   "options": [
+    {
+     "name": "allow",
+     "help": "Allow third party option."
+    },
+    {
+     "name": "disallow",
+     "help": "Disallow third party opiton."
+    }
+   ],
+   "default": "disallow",
+   "multiple_values": false
+  },
+  "third-party-subnet": {
+   "name": "third-party-subnet",
+   "category": "table",
+   "help": "Subnets from which third party requests are accepted.",
+   "member_table": true,
+   "mkey": "subnet",
+   "mkey_type": "string",
+   "children": {
+    "subnet": {
+     "name": "subnet",
+     "category": "unitary",
+     "type": "string",
+     "help": "Third party subnets.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "multicast-announcement": {
+   "name": "multicast-announcement",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable multicast announcements.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable multicast announcements."
+    },
+    {
+     "name": "disable",
+     "help": "Disable multicast announcements."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "announcement-count": {
+   "name": "announcement-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of multicast announcements.",
+   "min-value": 3,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "intl-intf": {
+   "name": "intl-intf",
+   "category": "table",
+   "help": "Internal interface name.",
+   "required": true,
+   "member_table": true,
+   "mkey": "interface-name",
+   "mkey_type": "string",
+   "children": {
+    "interface-name": {
+     "name": "interface-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "recycle-delay": {
+   "name": "recycle-delay",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum delay (in seconds) the PCP Server will wait before recycling mappings that have expired (0 - 3600, default = 0).",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system.pcp-server",
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

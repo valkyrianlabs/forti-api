@@ -1,0 +1,101 @@
+{
+ "name": "pop3",
+ "category": "table",
+ "help": "POP3 server entry configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "POP3 server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server domain name or IP address.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "POP3 service port number.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "secure": {
+   "name": "secure",
+   "category": "unitary",
+   "type": "option",
+   "help": "SSL connection.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None."
+    },
+    {
+     "name": "starttls",
+     "help": "Use StartTLS."
+    },
+    {
+     "name": "pop3s",
+     "help": "Use POP3 over SSL."
+    }
+   ],
+   "default": "starttls",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 29,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

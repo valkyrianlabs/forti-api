@@ -1,0 +1,1163 @@
+{
+ "name": "accprofile",
+ "category": "table",
+ "help": "Configure access profiles for system administrators.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "scope": {
+   "name": "scope",
+   "category": "unitary",
+   "type": "option",
+   "help": "Scope of admin access: global or specific VDOM(s).",
+   "options": [
+    {
+     "name": "vdom",
+     "help": "VDOM access."
+    },
+    {
+     "name": "global",
+     "help": "Global access."
+    }
+   ],
+   "default": "vdom",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "secfabgrp": {
+   "name": "secfabgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "ftviewgrp": {
+   "name": "ftviewgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "FortiView.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "authgrp": {
+   "name": "authgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Administrator access to Users and Devices.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "sysgrp": {
+   "name": "sysgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "System Configuration.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    },
+    {
+     "name": "custom",
+     "help": "Customized access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "netgrp": {
+   "name": "netgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Network Configuration.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    },
+    {
+     "name": "custom",
+     "help": "Customized access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "loggrp": {
+   "name": "loggrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Administrator access to Logging and Reporting including viewing log messages.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    },
+    {
+     "name": "custom",
+     "help": "Customized access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "fwgrp": {
+   "name": "fwgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Administrator access to the Firewall configuration.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    },
+    {
+     "name": "custom",
+     "help": "Customized access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "vpngrp": {
+   "name": "vpngrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Administrator access to IPsec, SSL, PPTP, and L2TP VPN.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "utmgrp": {
+   "name": "utmgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Administrator access to Security Profiles.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    },
+    {
+     "name": "custom",
+     "help": "Customized access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "wifi": {
+   "name": "wifi",
+   "category": "unitary",
+   "type": "option",
+   "help": "Administrator access to the WiFi controller and Switch controller.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No access."
+    },
+    {
+     "name": "read",
+     "help": "Read access."
+    },
+    {
+     "name": "read-write",
+     "help": "Read/write access."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "netgrp-permission": {
+   "name": "netgrp-permission",
+   "category": "complex",
+   "help": "Custom network permission.",
+   "children": {
+    "cfg": {
+     "name": "cfg",
+     "category": "unitary",
+     "type": "option",
+     "help": "Network Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "packet-capture": {
+     "name": "packet-capture",
+     "category": "unitary",
+     "type": "option",
+     "help": "Packet Capture Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "route-cfg": {
+     "name": "route-cfg",
+     "category": "unitary",
+     "type": "option",
+     "help": "Router Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   }
+  },
+  "sysgrp-permission": {
+   "name": "sysgrp-permission",
+   "category": "complex",
+   "help": "Custom system permission.",
+   "children": {
+    "admin": {
+     "name": "admin",
+     "category": "unitary",
+     "type": "option",
+     "help": "Administrator Users.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "upd": {
+     "name": "upd",
+     "category": "unitary",
+     "type": "option",
+     "help": "FortiGuard Updates.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "cfg": {
+     "name": "cfg",
+     "category": "unitary",
+     "type": "option",
+     "help": "System Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "mnt": {
+     "name": "mnt",
+     "category": "unitary",
+     "type": "option",
+     "help": "Maintenance.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   }
+  },
+  "fwgrp-permission": {
+   "name": "fwgrp-permission",
+   "category": "complex",
+   "help": "Custom firewall permission.",
+   "children": {
+    "policy": {
+     "name": "policy",
+     "category": "unitary",
+     "type": "option",
+     "help": "Policy Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "address": {
+     "name": "address",
+     "category": "unitary",
+     "type": "option",
+     "help": "Address Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "service": {
+     "name": "service",
+     "category": "unitary",
+     "type": "option",
+     "help": "Service Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "schedule": {
+     "name": "schedule",
+     "category": "unitary",
+     "type": "option",
+     "help": "Schedule Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "others": {
+     "name": "others",
+     "category": "unitary",
+     "type": "option",
+     "help": "Other Firewall Configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   }
+  },
+  "loggrp-permission": {
+   "name": "loggrp-permission",
+   "category": "complex",
+   "help": "Custom Log & Report permission.",
+   "children": {
+    "config": {
+     "name": "config",
+     "category": "unitary",
+     "type": "option",
+     "help": "Log & Report configuration.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "data-access": {
+     "name": "data-access",
+     "category": "unitary",
+     "type": "option",
+     "help": "Log & Report Data Access.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "report-access": {
+     "name": "report-access",
+     "category": "unitary",
+     "type": "option",
+     "help": "Log & Report Report Access.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "threat-weight": {
+     "name": "threat-weight",
+     "category": "unitary",
+     "type": "option",
+     "help": "Log & Report Threat Weight.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   }
+  },
+  "utmgrp-permission": {
+   "name": "utmgrp-permission",
+   "category": "complex",
+   "help": "Custom Security Profile permissions.",
+   "children": {
+    "antivirus": {
+     "name": "antivirus",
+     "category": "unitary",
+     "type": "option",
+     "help": "Antivirus profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "ips": {
+     "name": "ips",
+     "category": "unitary",
+     "type": "option",
+     "help": "IPS profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "webfilter": {
+     "name": "webfilter",
+     "category": "unitary",
+     "type": "option",
+     "help": "Web Filter profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "emailfilter": {
+     "name": "emailfilter",
+     "category": "unitary",
+     "type": "option",
+     "help": "Email Filter and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "dlp": {
+     "name": "dlp",
+     "category": "unitary",
+     "type": "option",
+     "help": "DLP profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "file-filter": {
+     "name": "file-filter",
+     "category": "unitary",
+     "type": "option",
+     "help": "File-filter profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "application-control": {
+     "name": "application-control",
+     "category": "unitary",
+     "type": "option",
+     "help": "Application Control profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "icap": {
+     "name": "icap",
+     "category": "unitary",
+     "type": "option",
+     "help": "ICAP profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "voip": {
+     "name": "voip",
+     "category": "unitary",
+     "type": "option",
+     "help": "VoIP profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "waf": {
+     "name": "waf",
+     "category": "unitary",
+     "type": "option",
+     "help": "Web Application Firewall profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "dnsfilter": {
+     "name": "dnsfilter",
+     "category": "unitary",
+     "type": "option",
+     "help": "DNS Filter profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "endpoint-control": {
+     "name": "endpoint-control",
+     "category": "unitary",
+     "type": "option",
+     "help": "FortiClient Profiles.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "videofilter": {
+     "name": "videofilter",
+     "category": "unitary",
+     "type": "option",
+     "help": "Video filter profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "virtual-patch": {
+     "name": "virtual-patch",
+     "category": "unitary",
+     "type": "option",
+     "help": "Virtual patch profiles and settings.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "casb": {
+     "name": "casb",
+     "category": "unitary",
+     "type": "option",
+     "help": "Inline CASB filter profile and settings",
+     "options": [
+      {
+       "name": "none",
+       "help": "No access."
+      },
+      {
+       "name": "read",
+       "help": "Read access."
+      },
+      {
+       "name": "read-write",
+       "help": "Read/write access."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   }
+  },
+  "admintimeout-override": {
+   "name": "admintimeout-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the global administrator idle timeout.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable overriding the global administrator idle timeout."
+    },
+    {
+     "name": "disable",
+     "help": "Disable overriding the global administrator idle timeout."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "admintimeout": {
+   "name": "admintimeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrator timeout for this access profile (0 - 480 min, default = 10, 0 means never timeout).",
+   "min-value": 1,
+   "max-value": 480,
+   "default": 10,
+   "multiple_values": false
+  },
+  "cli-diagnose": {
+   "name": "cli-diagnose",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable permission to run diagnostic commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable permission to run diagnostic commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable permission to run diagnostic commands."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cli-get": {
+   "name": "cli-get",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable permission to run get commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable permission to run get commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable permission to run get commands."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cli-show": {
+   "name": "cli-show",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable permission to run show commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable permission to run show commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable permission to run show commands."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cli-exec": {
+   "name": "cli-exec",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable permission to run execute commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable permission to run execute commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable permission to run execute commands."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cli-config": {
+   "name": "cli-config",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable permission to run config commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable permission to run config commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable permission to run config commands."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "system-execute-ssh": {
+   "name": "system-execute-ssh",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable permission to execute SSH commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable permission to execute SSH commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable permission to execute SSH commands."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "system-execute-telnet": {
+   "name": "system-execute-telnet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable permission to execute TELNET commands.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable permission to execute TELNET commands."
+    },
+    {
+     "name": "disable",
+     "help": "Disable permission to execute TELNET commands."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 18,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 10,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

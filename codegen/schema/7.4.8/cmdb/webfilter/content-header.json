@@ -1,0 +1,98 @@
+{
+ "name": "content-header",
+ "category": "table",
+ "help": "Configure content types used by Web filter.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "Configure content types used by web filter.",
+   "mkey": "pattern",
+   "mkey_type": "string",
+   "children": {
+    "pattern": {
+     "name": "pattern",
+     "category": "unitary",
+     "type": "string",
+     "help": "Content type (regular expression).",
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action to take for this content type.",
+     "required": true,
+     "options": [
+      {
+       "name": "block",
+       "help": "Block content type."
+      },
+      {
+       "name": "allow",
+       "help": "Allow content type."
+      },
+      {
+       "name": "exempt",
+       "help": "Exempt content type."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "user",
+     "help": "Categories that this content type applies to.",
+     "required": true,
+     "default": "all",
+     "multiple_values": true
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "webfilter",
+ "q_type": 409,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

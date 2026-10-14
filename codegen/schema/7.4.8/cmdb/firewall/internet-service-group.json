@@ -1,0 +1,81 @@
+{
+ "name": "internet-service-group",
+ "category": "table",
+ "help": "Configure group of Internet Service.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Internet Service group name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "direction": {
+   "name": "direction",
+   "category": "unitary",
+   "type": "option",
+   "help": "How this service may be used (source, destination or both).",
+   "options": [
+    {
+     "name": "source",
+     "help": "As source when applied."
+    },
+    {
+     "name": "destination",
+     "help": "As destination when applied."
+    },
+    {
+     "name": "both",
+     "help": "Both directions when applied."
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "member": {
+   "name": "member",
+   "category": "table",
+   "help": "Internet Service group member.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-name.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 353,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

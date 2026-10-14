@@ -1,0 +1,189 @@
+{
+ "name": "switch-interface",
+ "category": "table",
+ "help": "Configure software switch interfaces by grouping physical and WiFi interfaces.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name (name cannot be in use by any other interfaces, VLANs, or inter-VDOM links).",
+   "required": true,
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "vdom": {
+   "name": "vdom",
+   "category": "unitary",
+   "type": "string",
+   "help": "VDOM that the software switch belongs to.",
+   "required": true,
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "span-dest-port": {
+   "name": "span-dest-port",
+   "category": "unitary",
+   "type": "string",
+   "help": "SPAN destination port name. All traffic on the SPAN source ports is echoed to the SPAN destination port.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "span-source-port": {
+   "name": "span-source-port",
+   "category": "table",
+   "help": "Physical interface name. Port spanning echoes all traffic on the SPAN source ports to the SPAN destination port.",
+   "member_table": true,
+   "mkey": "interface-name",
+   "mkey_type": "string",
+   "children": {
+    "interface-name": {
+     "name": "interface-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Physical interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "member": {
+   "name": "member",
+   "category": "table",
+   "help": "Names of the interfaces that belong to the virtual switch.",
+   "member_table": true,
+   "mkey": "interface-name",
+   "mkey_type": "string",
+   "children": {
+    "interface-name": {
+     "name": "interface-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 1024
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of switch based on functionality: switch for normal functionality, or hub to duplicate packets to all port members.",
+   "options": [
+    {
+     "name": "switch",
+     "help": "Switch for normal switch functionality (available in NAT mode only)."
+    },
+    {
+     "name": "hub",
+     "help": "Hub to duplicate packets to all member ports."
+    }
+   ],
+   "default": "switch",
+   "multiple_values": false
+  },
+  "intra-switch-policy": {
+   "name": "intra-switch-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow any traffic between switch interfaces or require firewall policies to allow traffic between switch interfaces.",
+   "options": [
+    {
+     "name": "implicit",
+     "help": "Traffic between switch members is implicitly allowed."
+    },
+    {
+     "name": "explicit",
+     "help": "Traffic between switch members must match firewall policies."
+    }
+   ],
+   "default": "implicit",
+   "multiple_values": false
+  },
+  "mac-ttl": {
+   "name": "mac-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Duration for which MAC addresses are held in the ARP table (300 - 8640000 sec, default = 300).",
+   "min-value": 300,
+   "max-value": 8640000,
+   "default": 300,
+   "multiple_values": false
+  },
+  "span": {
+   "name": "span",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable port spanning. Port spanning echoes traffic received by the software switch to the span destination port.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable port spanning."
+    },
+    {
+     "name": "enable",
+     "help": "Enable port spanning."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "span-direction": {
+   "name": "span-direction",
+   "category": "unitary",
+   "type": "option",
+   "help": "The direction in which the SPAN port operates, either: rx, tx, or both.",
+   "options": [
+    {
+     "name": "rx",
+     "help": "Copies only received packets from source SPAN ports to the destination SPAN port."
+    },
+    {
+     "name": "tx",
+     "help": "Copies only transmitted packets from source SPAN ports to the destination SPAN port."
+    },
+    {
+     "name": "both",
+     "help": "Copies both received and transmitted packets from source SPAN ports to the destination SPAN port."
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 230,
+ "access_group": "sysgrp",
+ "object_range": "both"
+}

@@ -1,0 +1,65 @@
+{
+ "name": "fsso-polling",
+ "category": "complex",
+ "help": "Configure Fortinet Single Sign On (FSSO) server.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FSSO Polling Mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FSSO Polling Mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FSSO Polling Mode."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "listening-port": {
+   "name": "listening-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Listening port to accept clients (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8000,
+   "multiple_values": false
+  },
+  "authentication": {
+   "name": "authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FSSO Agent Authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FSSO Agent Authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FSSO Agent Authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-password": {
+   "name": "auth-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password to connect to FSSO Agent.",
+   "size": 128,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 161,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

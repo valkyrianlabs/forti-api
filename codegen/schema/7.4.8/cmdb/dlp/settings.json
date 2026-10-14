@@ -1,0 +1,75 @@
+{
+ "name": "settings",
+ "category": "complex",
+ "help": "Designate logical storage for DLP fingerprint database.",
+ "children": {
+  "storage-device": {
+   "name": "storage-device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Storage device name.",
+   "datasource": [
+    "system.storage.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "size": {
+   "name": "size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum total size of files within the storage (MB).",
+   "min-value": 16,
+   "max-value": 4294967295,
+   "default": 16,
+   "multiple_values": false
+  },
+  "db-mode": {
+   "name": "db-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Behavior when the maximum size is reached.",
+   "options": [
+    {
+     "name": "stop-adding",
+     "help": "Stop adding entries."
+    },
+    {
+     "name": "remove-modified-then-oldest",
+     "help": "Remove modified chunks first, then oldest file entries."
+    },
+    {
+     "name": "remove-oldest",
+     "help": "Remove the oldest files first."
+    }
+   ],
+   "default": "stop-adding",
+   "multiple_values": false
+  },
+  "cache-mem-percent": {
+   "name": "cache-mem-percent",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum percentage of available memory allocated to caching (1 - 15).",
+   "min-value": 1,
+   "max-value": 15,
+   "default": 2,
+   "multiple_values": false
+  },
+  "chunk-size": {
+   "name": "chunk-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum fingerprint chunk size. Caution, changing this setting will flush the entire database.",
+   "min-value": 100,
+   "max-value": 100000,
+   "default": 2800,
+   "multiple_values": false
+  }
+ },
+ "path": "dlp",
+ "q_type": 255,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

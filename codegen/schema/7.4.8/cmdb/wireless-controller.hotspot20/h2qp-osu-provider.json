@@ -1,0 +1,162 @@
+{
+ "name": "h2qp-osu-provider",
+ "category": "table",
+ "help": "Configure online sign up (OSU) provider list.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "OSU provider ID.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "friendly-name": {
+   "name": "friendly-name",
+   "category": "table",
+   "help": "OSU provider friendly name.",
+   "mkey": "index",
+   "mkey_type": "integer",
+   "children": {
+    "index": {
+     "name": "index",
+     "category": "unitary",
+     "type": "integer",
+     "help": "OSU provider friendly name index.",
+     "min-value": 1,
+     "max-value": 10,
+     "default": 0,
+     "multiple_values": false
+    },
+    "lang": {
+     "name": "lang",
+     "category": "unitary",
+     "type": "string",
+     "help": "Language code.",
+     "required": true,
+     "size": 3,
+     "default": "eng",
+     "multiple_values": false
+    },
+    "friendly-name": {
+     "name": "friendly-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "OSU provider friendly name.",
+     "required": true,
+     "size": 252,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "server-uri": {
+   "name": "server-uri",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server URI.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "osu-method": {
+   "name": "osu-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "OSU method list.",
+   "options": [
+    {
+     "name": "oma-dm",
+     "help": "OMA DM."
+    },
+    {
+     "name": "soap-xml-spp",
+     "help": "SOAP XML SPP."
+    },
+    {
+     "name": "reserved",
+     "help": "Reserved."
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 2
+  },
+  "osu-nai": {
+   "name": "osu-nai",
+   "category": "unitary",
+   "type": "string",
+   "help": "OSU NAI.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "service-description": {
+   "name": "service-description",
+   "category": "table",
+   "help": "OSU service name.",
+   "mkey": "service-id",
+   "mkey_type": "integer",
+   "children": {
+    "service-id": {
+     "name": "service-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "OSU service ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "lang": {
+     "name": "lang",
+     "category": "unitary",
+     "type": "string",
+     "help": "Language code.",
+     "required": true,
+     "size": 3,
+     "default": "eng",
+     "multiple_values": false
+    },
+    "service-description": {
+     "name": "service-description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Service description.",
+     "required": true,
+     "size": 252,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "icon": {
+   "name": "icon",
+   "category": "unitary",
+   "type": "string",
+   "help": "OSU provider icon.",
+   "datasource": [
+    "wireless-controller.hotspot20.icon.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 302,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

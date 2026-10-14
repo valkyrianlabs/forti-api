@@ -1,0 +1,248 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Configure logging to FortiCloud.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging to FortiCloud.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging to FortiCloud."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging to FortiCloud."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "upload-option": {
+   "name": "upload-option",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure how log messages are sent to FortiCloud.",
+   "options": [
+    {
+     "name": "store-and-upload",
+     "help": "Log to the hard disk and then upload logs to FortiCloud."
+    },
+    {
+     "name": "realtime",
+     "help": "Log directly to FortiCloud in real time."
+    },
+    {
+     "name": "1-minute",
+     "help": "Log directly to FortiCloud at 1-minute intervals."
+    },
+    {
+     "name": "5-minute",
+     "help": "Log directly to FortiCloud at 5-minute intervals."
+    }
+   ],
+   "default": "5-minute",
+   "multiple_values": false
+  },
+  "upload-interval": {
+   "name": "upload-interval",
+   "category": "unitary",
+   "type": "option",
+   "help": "Frequency of uploading log files to FortiCloud.",
+   "options": [
+    {
+     "name": "daily",
+     "help": "Upload log files to FortiCloud once a day."
+    },
+    {
+     "name": "weekly",
+     "help": "Upload log files to FortiCloud once a week."
+    },
+    {
+     "name": "monthly",
+     "help": "Upload log files to FortiCloud once a month."
+    }
+   ],
+   "default": "daily",
+   "multiple_values": false
+  },
+  "upload-day": {
+   "name": "upload-day",
+   "category": "unitary",
+   "type": "user",
+   "help": "Day of week to roll logs.",
+   "default": "",
+   "multiple_values": false
+  },
+  "upload-time": {
+   "name": "upload-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of day to roll logs (hh:mm).",
+   "default": "",
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set log transmission priority.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Set FortiCloud log transmission priority to default."
+    },
+    {
+     "name": "low",
+     "help": "Set FortiCloud log transmission priority to low."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "max-log-rate": {
+   "name": "max-log-rate",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiCloud maximum log rate in MBps (0 = unlimited).",
+   "min-value": 0,
+   "max-value": 100000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "access-config": {
+   "name": "access-config",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiCloud access to configuration and data.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiCloud access to configuration and data."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiCloud access to configuration and data."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "enc-algorithm": {
+   "name": "enc-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure the level of SSL protection for secure communication with FortiCloud.",
+   "options": [
+    {
+     "name": "high-medium",
+     "help": "Encrypt logs using high and medium encryption."
+    },
+    {
+     "name": "high",
+     "help": "Encrypt logs using high encryption."
+    },
+    {
+     "name": "low",
+     "help": "Encrypt logs using low encryption."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "conn-timeout": {
+   "name": "conn-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiGate Cloud connection timeout in seconds.",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 10,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address used to connect FortiCloud.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "log.fortiguard",
+ "q_type": 214,
+ "access_group": "loggrp",
+ "object_range": "global"
+}

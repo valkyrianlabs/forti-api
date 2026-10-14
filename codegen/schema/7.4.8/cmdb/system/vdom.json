@@ -1,0 +1,54 @@
+{
+ "name": "vdom",
+ "category": "table",
+ "help": "Configure virtual domain.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "VDOM name.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "short-name": {
+   "name": "short-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "VDOM short name.",
+   "size": 11,
+   "default": "",
+   "multiple_values": false
+  },
+  "vcluster-id": {
+   "name": "vcluster-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Virtual cluster ID (0 - 4294967295).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "flag": {
+   "name": "flag",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Flag.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 10,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 110,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

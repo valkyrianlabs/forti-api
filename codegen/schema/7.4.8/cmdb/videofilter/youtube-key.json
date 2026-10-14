@@ -1,0 +1,37 @@
+{
+ "name": "youtube-key",
+ "category": "table",
+ "help": "Configure YouTube API keys.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "key": {
+   "name": "key",
+   "category": "unitary",
+   "type": "string",
+   "help": "Key.",
+   "required": true,
+   "size": 47,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "videofilter",
+ "q_type": 95,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

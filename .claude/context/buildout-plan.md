@@ -242,3 +242,14 @@ Architectural requirements:
   45 POST, 122 method not visible statically, 9 templated), 6 log and 6 service paths. Static
   coverage is exhausted, which meets the author's condition for the read-only GUI recon: it is the
   only remaining source for monitor methods, parameters and response shapes.
+- Phase 5 deviations: option constants are nested in their type (`firewall::Policy::Action::deny`)
+  instead of `snake_type::field::value` namespaces, which collided once every cmdb path was generated
+  (a type's field constants and a child endpoint's namespace can share a name). Name fallbacks are
+  deterministic: `...Values` (constants), `...Object` (nested objects), `...TableEntry` (tables);
+  identifiers avoid C++ keywords and common preprocessor macros (`NULL` -> `NULL_`). Typed monitor
+  endpoints are generated from the sanitized GUI recon shapes (`gui-recon.json`), not hand-written.
+- GUI recon (phase 4b) results: pass 1 refused 2,755 requests incl. writes the GUI attempts merely
+  from viewing pages (POST cmdb/firewall/policy, cmdb/firewall/security-policy, cmdb/system/ddns,
+  cmdb/system/admin/..., monitor/system/debug); 27 monitor GETs learned and 24 reviewed into
+  tools/recon/reviewed-gets.txt (4 kept out: FortiGuard/FortiSandbox outbound). Pass 2: 2,587 reads,
+  44 monitor endpoints with shapes.

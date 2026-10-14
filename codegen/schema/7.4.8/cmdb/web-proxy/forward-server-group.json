@@ -1,0 +1,117 @@
+{
+ "name": "forward-server-group",
+ "category": "table",
+ "help": "Configure a forward server group consisting or multiple forward servers. Supports failover and load balancing.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Configure a forward server group consisting one or multiple forward servers. Supports failover and load balancing.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "affinity": {
+   "name": "affinity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable affinity, attaching a source-ip's traffic to the assigned forwarding server until the forward-server-affinity-timeout is reached (under web-proxy global).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable affinity."
+    },
+    {
+     "name": "disable",
+     "help": "Disable affinity."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ldb-method": {
+   "name": "ldb-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Load balance method: weighted or least-session.",
+   "options": [
+    {
+     "name": "weighted",
+     "help": "Load balance traffic to forward servers based on assigned weights. Weights are ratios of total number of sessions."
+    },
+    {
+     "name": "least-session",
+     "help": "Send new sessions to the server with lowest session count."
+    },
+    {
+     "name": "active-passive",
+     "help": "Send new sessions to the next active server in the list. Servers are selected with highest weight first and then in order as they are configured. Traffic switches back to the first server upon failure recovery."
+    }
+   ],
+   "default": "weighted",
+   "multiple_values": false
+  },
+  "group-down-option": {
+   "name": "group-down-option",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take when all of the servers in the forward server group are down: block sessions until at least one server is back up or pass sessions to their destination.",
+   "options": [
+    {
+     "name": "block",
+     "help": "Block sessions until at least one server in the group is back up."
+    },
+    {
+     "name": "pass",
+     "help": "Pass sessions to their destination bypassing servers in the forward server group."
+    }
+   ],
+   "default": "block",
+   "multiple_values": false
+  },
+  "server-list": {
+   "name": "server-list",
+   "category": "table",
+   "help": "Add web forward servers to a list to form a server group. Optionally assign weights to each server.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Forward server name.",
+     "datasource": [
+      "web-proxy.forward-server.name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "weight": {
+     "name": "weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Optionally assign a weight of the forwarding server for weighted load balancing (1 - 100, default = 10).",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 10,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "web-proxy",
+ "q_type": 452,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -23,8 +23,20 @@ for (const auto& address: fortiapi::system::interface_addresses("wan1"))
 
 ## Monitor API
 
-Status, statistics and actions have no schema; `fortiapi::Monitor` passes them through as JSON.
-Paths are relative to `monitor/`:
+Read-only monitor endpoints the web GUI uses are generated with typed results, from response shapes
+recorded on a FortiOS 7.4.8 device (see [Supported endpoints](/reference/endpoints)):
+
+```cpp
+#include <forti_api/gen/monitor.hpp>
+
+auto now = fortiapi::monitor::system::Time::get();                    // TimeResult
+std::cout << now.time.value_or(0) << "\n";
+auto routes = fortiapi::monitor::router::Statistics::get(Query().vdom("root"));   // StatisticsResult
+```
+
+Attributes the device did not report while the shapes were recorded are absent; unknown attributes
+are ignored. Every other monitor path and every monitor action goes through `fortiapi::Monitor`,
+which passes JSON through. Paths are relative to `monitor/`:
 
 ```cpp
 auto status = fortiapi::Monitor::get("system/status");

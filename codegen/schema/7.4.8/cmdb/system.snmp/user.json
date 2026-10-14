@@ -1,0 +1,486 @@
+{
+ "name": "user",
+ "category": "table",
+ "help": "SNMP user configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SNMP user name.",
+   "required": true,
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this SNMP user.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "trap-status": {
+   "name": "trap-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable traps for this SNMP user.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "trap-lport": {
+   "name": "trap-lport",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SNMPv3 local trap port (default = 162).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 162,
+   "multiple_values": false
+  },
+  "trap-rport": {
+   "name": "trap-rport",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SNMPv3 trap remote port (default = 162).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 162,
+   "multiple_values": false
+  },
+  "queries": {
+   "name": "queries",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SNMP queries for this user.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "query-port": {
+   "name": "query-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SNMPv3 query port (default = 161).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 161,
+   "multiple_values": false
+  },
+  "notify-hosts": {
+   "name": "notify-hosts",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "SNMP managers to send notifications (traps) to.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 16
+  },
+  "notify-hosts6": {
+   "name": "notify-hosts6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 SNMP managers to send notifications (traps) to.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 16
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP for SNMP trap.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ipv6": {
+   "name": "source-ipv6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Source IPv6 for SNMP trap.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ha-direct": {
+   "name": "ha-direct",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable direct management of HA cluster members.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "events": {
+   "name": "events",
+   "category": "unitary",
+   "type": "option",
+   "help": "SNMP notifications (traps) to send.",
+   "options": [
+    {
+     "name": "cpu-high",
+     "help": "Send a trap when CPU usage is high."
+    },
+    {
+     "name": "mem-low",
+     "help": "Send a trap when used memory is high, free memory is low, or freeable memory is high."
+    },
+    {
+     "name": "log-full",
+     "help": "Send a trap when log disk space becomes low."
+    },
+    {
+     "name": "intf-ip",
+     "help": "Send a trap when an interface IP address is changed."
+    },
+    {
+     "name": "vpn-tun-up",
+     "help": "Send a trap when a VPN tunnel comes up."
+    },
+    {
+     "name": "vpn-tun-down",
+     "help": "Send a trap when a VPN tunnel goes down."
+    },
+    {
+     "name": "ha-switch",
+     "help": "Send a trap after an HA failover when the backup unit has taken over."
+    },
+    {
+     "name": "ha-hb-failure",
+     "help": "Send a trap when HA heartbeats are not received."
+    },
+    {
+     "name": "ips-signature",
+     "help": "Send a trap when IPS detects an attack."
+    },
+    {
+     "name": "ips-anomaly",
+     "help": "Send a trap when IPS finds an anomaly."
+    },
+    {
+     "name": "av-virus",
+     "help": "Send a trap when AntiVirus finds a virus."
+    },
+    {
+     "name": "av-oversize",
+     "help": "Send a trap when AntiVirus finds an oversized file."
+    },
+    {
+     "name": "av-pattern",
+     "help": "Send a trap when AntiVirus finds file matching pattern."
+    },
+    {
+     "name": "av-fragmented",
+     "help": "Send a trap when AntiVirus finds a fragmented file."
+    },
+    {
+     "name": "fm-if-change",
+     "help": "Send a trap when FortiManager interface changes. Send a FortiManager trap."
+    },
+    {
+     "name": "fm-conf-change",
+     "help": "Send a trap when a configuration change is made by a FortiGate administrator and the FortiGate is managed by FortiManager."
+    },
+    {
+     "name": "bgp-established",
+     "help": "Send a trap when a BGP FSM transitions to the established state."
+    },
+    {
+     "name": "bgp-backward-transition",
+     "help": "Send a trap when a BGP FSM goes from a high numbered state to a lower numbered state."
+    },
+    {
+     "name": "ha-member-up",
+     "help": "Send a trap when an HA cluster member goes up."
+    },
+    {
+     "name": "ha-member-down",
+     "help": "Send a trap when an HA cluster member goes down."
+    },
+    {
+     "name": "ent-conf-change",
+     "help": "Send a trap when an entity MIB change occurs (RFC4133)."
+    },
+    {
+     "name": "av-conserve",
+     "help": "Send a trap when the FortiGate enters conserve mode."
+    },
+    {
+     "name": "av-bypass",
+     "help": "Send a trap when the FortiGate enters bypass mode."
+    },
+    {
+     "name": "av-oversize-passed",
+     "help": "Send a trap when AntiVirus passes an oversized file."
+    },
+    {
+     "name": "av-oversize-blocked",
+     "help": "Send a trap when AntiVirus blocks an oversized file."
+    },
+    {
+     "name": "ips-pkg-update",
+     "help": "Send a trap when the IPS signature database or engine is updated."
+    },
+    {
+     "name": "ips-fail-open",
+     "help": "Send a trap when the IPS network buffer is full."
+    },
+    {
+     "name": "temperature-high",
+     "help": "Send a trap when a temperature sensor registers a temperature that is too high."
+    },
+    {
+     "name": "voltage-alert",
+     "help": "Send a trap when a voltage sensor registers a voltage that is outside of the normal range."
+    },
+    {
+     "name": "power-supply",
+     "help": "Send a trap when a power supply fails or restores."
+    },
+    {
+     "name": "faz-disconnect",
+     "help": "Send a trap when a FortiAnalyzer disconnects from the FortiGate."
+    },
+    {
+     "name": "faz",
+     "help": "Send a trap when Fortianalyzer main server failover and alternate server take over, or alternate server failover and main server take over."
+    },
+    {
+     "name": "wc-ap-up",
+     "help": "Send a trap when a managed FortiAP comes up."
+    },
+    {
+     "name": "wc-ap-down",
+     "help": "Send a trap when a managed FortiAP goes down."
+    },
+    {
+     "name": "fswctl-session-up",
+     "help": "Send a trap when a FortiSwitch controller session comes up."
+    },
+    {
+     "name": "fswctl-session-down",
+     "help": "Send a trap when a FortiSwitch controller session goes down."
+    },
+    {
+     "name": "load-balance-real-server-down",
+     "help": "Send a trap when a server load balance real server goes down."
+    },
+    {
+     "name": "device-new",
+     "help": "Send a trap when a new device is found."
+    },
+    {
+     "name": "per-cpu-high",
+     "help": "Send a trap when per-CPU usage is high."
+    },
+    {
+     "name": "dhcp",
+     "help": "Send a trap when the DHCP server exhausts the IP pool, an IP address already is in use, or a DHCP client interface received a DHCP-NAK."
+    },
+    {
+     "name": "pool-usage",
+     "help": "Send a trap about ippool usage."
+    },
+    {
+     "name": "interface",
+     "help": "Send a trap for interface event."
+    },
+    {
+     "name": "ospf-nbr-state-change",
+     "help": "Send a trap when there has been a change in the state of a non-virtual OSPF neighbor."
+    },
+    {
+     "name": "ospf-virtnbr-state-change",
+     "help": "Send a trap when there has been a change in the state of an OSPF virtual neighbor."
+    }
+   ],
+   "default": "cpu-high mem-low log-full intf-ip vpn-tun-up vpn-tun-down ha-switch ha-hb-failure ips-signature ips-anomaly av-virus av-oversize av-pattern av-fragmented fm-if-change bgp-established bgp-backward-transition ha-member-up ha-member-down ent-conf-change av-conserve av-bypass av-oversize-passed av-oversize-blocked ips-pkg-update ips-fail-open temperature-high voltage-alert power-supply faz-disconnect faz wc-ap-up wc-ap-down fswctl-session-up fswctl-session-down load-balance-real-server-down per-cpu-high dhcp pool-usage interface ospf-nbr-state-change ospf-virtnbr-state-change",
+   "multiple_values": true
+  },
+  "mib-view": {
+   "name": "mib-view",
+   "category": "unitary",
+   "type": "string",
+   "help": "SNMP access control MIB view.",
+   "datasource": [
+    "system.snmp.mib-view.name"
+   ],
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "vdoms": {
+   "name": "vdoms",
+   "category": "table",
+   "help": "SNMP access control VDOMs.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "VDOM name.",
+     "required": true,
+     "datasource": [
+      "system.vdom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "security-level": {
+   "name": "security-level",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security level for message authentication and encryption.",
+   "options": [
+    {
+     "name": "no-auth-no-priv",
+     "help": "Message with no authentication and no privacy (encryption)."
+    },
+    {
+     "name": "auth-no-priv",
+     "help": "Message with authentication but no privacy (encryption)."
+    },
+    {
+     "name": "auth-priv",
+     "help": "Message with authentication and privacy (encryption)."
+    }
+   ],
+   "default": "no-auth-no-priv",
+   "multiple_values": false
+  },
+  "auth-proto": {
+   "name": "auth-proto",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication protocol.",
+   "options": [
+    {
+     "name": "md5",
+     "help": "HMAC-MD5-96 authentication protocol."
+    },
+    {
+     "name": "sha",
+     "help": "HMAC-SHA-96 authentication protocol."
+    },
+    {
+     "name": "sha224",
+     "help": "HMAC-SHA224 authentication protocol."
+    },
+    {
+     "name": "sha256",
+     "help": "HMAC-SHA256 authentication protocol."
+    },
+    {
+     "name": "sha384",
+     "help": "HMAC-SHA384 authentication protocol."
+    },
+    {
+     "name": "sha512",
+     "help": "HMAC-SHA512 authentication protocol."
+    }
+   ],
+   "default": "sha",
+   "multiple_values": false
+  },
+  "auth-pwd": {
+   "name": "auth-pwd",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for authentication protocol.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "priv-proto": {
+   "name": "priv-proto",
+   "category": "unitary",
+   "type": "option",
+   "help": "Privacy (encryption) protocol.",
+   "options": [
+    {
+     "name": "aes",
+     "help": "CFB128-AES-128 symmetric encryption protocol."
+    },
+    {
+     "name": "des",
+     "help": "CBC-DES symmetric encryption protocol."
+    },
+    {
+     "name": "aes256",
+     "help": "CFB128-AES-256 symmetric encryption protocol."
+    },
+    {
+     "name": "aes256cisco",
+     "help": "CFB128-AES-256 symmetric encryption protocol compatible with CISCO."
+    }
+   ],
+   "default": "aes",
+   "multiple_values": false
+  },
+  "priv-pwd": {
+   "name": "priv-pwd",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for privacy (encryption) protocol.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "system.snmp",
+ "q_type": 268,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

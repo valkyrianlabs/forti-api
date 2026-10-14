@@ -1,0 +1,1028 @@
+{
+ "name": "threat-weight",
+ "category": "complex",
+ "help": "Configure threat weight settings.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the threat weight feature.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the threat weight feature."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the threat weight feature."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "level": {
+   "name": "level",
+   "category": "complex",
+   "help": "Score mapping for threat weight levels.",
+   "children": {
+    "low": {
+     "name": "low",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Low level score value (1 - 100).",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 5,
+     "multiple_values": false
+    },
+    "medium": {
+     "name": "medium",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Medium level score value (1 - 100).",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 10,
+     "multiple_values": false
+    },
+    "high": {
+     "name": "high",
+     "category": "unitary",
+     "type": "integer",
+     "help": "High level score value (1 - 100).",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 30,
+     "multiple_values": false
+    },
+    "critical": {
+     "name": "critical",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Critical level score value (1 - 100).",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 50,
+     "multiple_values": false
+    }
+   }
+  },
+  "blocked-connection": {
+   "name": "blocked-connection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Threat weight score for blocked connections.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable threat weight scoring for blocked connections."
+    },
+    {
+     "name": "low",
+     "help": "Use the low level score for blocked connections."
+    },
+    {
+     "name": "medium",
+     "help": "Use the medium level score for blocked connections."
+    },
+    {
+     "name": "high",
+     "help": "Use the high level score for blocked connections."
+    },
+    {
+     "name": "critical",
+     "help": "Use the critical level score for blocked connections."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "failed-connection": {
+   "name": "failed-connection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Threat weight score for failed connections.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable threat weight scoring for failed connections."
+    },
+    {
+     "name": "low",
+     "help": "Use the low level score for failed connections."
+    },
+    {
+     "name": "medium",
+     "help": "Use the medium level score for failed connections."
+    },
+    {
+     "name": "high",
+     "help": "Use the high level score for failed connections."
+    },
+    {
+     "name": "critical",
+     "help": "Use the critical level score for failed connections."
+    }
+   ],
+   "default": "low",
+   "multiple_values": false
+  },
+  "url-block-detected": {
+   "name": "url-block-detected",
+   "category": "unitary",
+   "type": "option",
+   "help": "Threat weight score for URL blocking.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable threat weight scoring for URL blocking."
+    },
+    {
+     "name": "low",
+     "help": "Use the low level score for URL blocking."
+    },
+    {
+     "name": "medium",
+     "help": "Use the medium level score for URL blocking."
+    },
+    {
+     "name": "high",
+     "help": "Use the high level score for URL blocking."
+    },
+    {
+     "name": "critical",
+     "help": "Use the critical level score for URL blocking."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "botnet-connection-detected": {
+   "name": "botnet-connection-detected",
+   "category": "unitary",
+   "type": "option",
+   "help": "Threat weight score for detected botnet connections.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable threat weight scoring for detected botnet connections."
+    },
+    {
+     "name": "low",
+     "help": "Use the low level score for detected botnet connections."
+    },
+    {
+     "name": "medium",
+     "help": "Use the medium level score for detected botnet connections."
+    },
+    {
+     "name": "high",
+     "help": "Use the high level score for detected botnet connections."
+    },
+    {
+     "name": "critical",
+     "help": "Use the critical level score for detected botnet connections."
+    }
+   ],
+   "default": "critical",
+   "multiple_values": false
+  },
+  "malware": {
+   "name": "malware",
+   "category": "complex",
+   "help": "Anti-virus malware threat weight settings.",
+   "children": {
+    "virus-infected": {
+     "name": "virus-infected",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for virus (infected) detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus (infected) detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus (infected) detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus (infected) detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus (infected) detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus (infected) detected."
+      }
+     ],
+     "default": "critical",
+     "multiple_values": false
+    },
+    "inline-block": {
+     "name": "inline-block",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for malware detected by inline block.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus detected by inline block."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus detected by inline block."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus detected by inline block."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus detected by inline block."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus detected by inline block."
+      }
+     ],
+     "default": "critical",
+     "multiple_values": false
+    },
+    "file-blocked": {
+     "name": "file-blocked",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for blocked file detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for blocked file detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for blocked file detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for blocked file detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for blocked file detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for blocked file detected."
+      }
+     ],
+     "default": "low",
+     "multiple_values": false
+    },
+    "command-blocked": {
+     "name": "command-blocked",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for blocked command detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for blocked command detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for blocked command detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for blocked command detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for blocked command detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for blocked command detected."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "oversized": {
+     "name": "oversized",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for oversized file detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for oversized file detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for oversized file detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for oversized file detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for oversized file detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for oversized file detected."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "virus-scan-error": {
+     "name": "virus-scan-error",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for virus (scan error) detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus (scan error) detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus (scan error) detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus (scan error) detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus (scan error) detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus (scan error) detected."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "switch-proto": {
+     "name": "switch-proto",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for switch proto detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for switch proto detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for switch proto detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for switch proto detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for switch proto detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for switch proto detected."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "mimefragmented": {
+     "name": "mimefragmented",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for mimefragmented detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for mimefragmented detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for mimefragmented detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for mimefragmented detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for mimefragmented detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for mimefragmented detected."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "virus-file-type-executable": {
+     "name": "virus-file-type-executable",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for virus (file type executable) detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus (filetype executable) detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus (filetype executable) detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus (filetype executable) detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus (filetype executable) detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus (filetype executable) detected."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "virus-outbreak-prevention": {
+     "name": "virus-outbreak-prevention",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for virus (outbreak prevention) event.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus (outbreak prevention) event."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus (outbreak prevention) event."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus (outbreak prevention) event."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus (outbreak prevention) event."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus (outbreak prevention) event."
+      }
+     ],
+     "default": "critical",
+     "multiple_values": false
+    },
+    "content-disarm": {
+     "name": "content-disarm",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for virus (content disarm) detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus (content disarm) detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus (content disarm) detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus (content disarm) detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus (content disarm) detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus (content disarm) detected."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "malware-list": {
+     "name": "malware-list",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for virus (malware list) detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus (malware list) detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus (malware list) detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus (malware list) detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus (malware list) detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus (malware list) detected."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "ems-threat-feed": {
+     "name": "ems-threat-feed",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for virus (EMS threat feed) detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for virus (EMS threat feed) detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for virus (EMS threat feed) detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for virus (EMS threat feed) detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for virus (EMS threat feed) detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for virus (EMS threat feed) detected."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "fsa-malicious": {
+     "name": "fsa-malicious",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for FortiSandbox malicious malware detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for FortiSandbox malicious malware detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for FortiSandbox malicious malware detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for FortiSandbox malicious malware detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for FortiSandbox malicious malware detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for FortiSandbox malicious malware detected."
+      }
+     ],
+     "default": "critical",
+     "multiple_values": false
+    },
+    "fsa-high-risk": {
+     "name": "fsa-high-risk",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for FortiSandbox high risk malware detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for FortiSandbox high risk malware detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for FortiSandbox high risk malware detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for FortiSandbox high risk malware detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for FortiSandbox high risk malware detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for FortiSandbox high risk malware detected."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "fsa-medium-risk": {
+     "name": "fsa-medium-risk",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for FortiSandbox medium risk malware detected.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for FortiSandbox medium risk malware detected."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for FortiSandbox medium risk malware detected."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for FortiSandbox medium risk malware detected."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for FortiSandbox medium risk malware detected."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for FortiSandbox medium risk malware detected."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    }
+   }
+  },
+  "ips": {
+   "name": "ips",
+   "category": "complex",
+   "help": "IPS threat weight settings.",
+   "children": {
+    "info-severity": {
+     "name": "info-severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for IPS info severity events.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for IPS info severity events."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for IPS info severity events."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for IPS info severity events."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for IPS info severity events."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for IPS info severity events."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "low-severity": {
+     "name": "low-severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for IPS low severity events.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for IPS low severity events."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for IPS low severity events."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for IPS low severity events."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for IPS low severity events."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for IPS low severity events."
+      }
+     ],
+     "default": "low",
+     "multiple_values": false
+    },
+    "medium-severity": {
+     "name": "medium-severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for IPS medium severity events.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for IPS medium severity events."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for IPS medium severity events."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for IPS medium severity events."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for IPS medium severity events."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for IPS medium severity events."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "high-severity": {
+     "name": "high-severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for IPS high severity events.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for IPS high severity events."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for IPS high severity events."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for IPS high severity events."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for IPS high severity events."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for IPS high severity events."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "critical-severity": {
+     "name": "critical-severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for IPS critical severity events.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for IPS critical severity events."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for IPS critical severity events."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for IPS critical severity events."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for IPS critical severity events."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for IPS critical severity events."
+      }
+     ],
+     "default": "critical",
+     "multiple_values": false
+    }
+   }
+  },
+  "web": {
+   "name": "web",
+   "category": "table",
+   "help": "Web filtering threat weight settings.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Threat weight score for web category filtering matches.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for web category filtering matches.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for web category filtering matches."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for web category filtering matches."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for web category filtering matches."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for web category filtering matches."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for web category filtering matches."
+      }
+     ],
+     "default": "low",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 96,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "geolocation": {
+   "name": "geolocation",
+   "category": "table",
+   "help": "Geolocation-based threat weight settings.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "country": {
+     "name": "country",
+     "category": "unitary",
+     "type": "string",
+     "help": "Country code.",
+     "required": true,
+     "size": 2,
+     "default": "",
+     "multiple_values": false
+    },
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for Geolocation-based events.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for Geolocation-based events."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for Geolocation-based events."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for Geolocation-based events."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for Geolocation-based events."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for Geolocation-based events."
+      }
+     ],
+     "default": "low",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 10,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "application": {
+   "name": "application",
+   "category": "table",
+   "help": "Application-control threat weight settings.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Application category.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Threat weight score for Application events.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable threat weight scoring for Application events."
+      },
+      {
+       "name": "low",
+       "help": "Use the low level score for Application events."
+      },
+      {
+       "name": "medium",
+       "help": "Use the medium level score for Application events."
+      },
+      {
+       "name": "high",
+       "help": "Use the high level score for Application events."
+      },
+      {
+       "name": "critical",
+       "help": "Use the critical level score for Application events."
+      }
+     ],
+     "default": "low",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 32,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "log",
+ "q_type": 475,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

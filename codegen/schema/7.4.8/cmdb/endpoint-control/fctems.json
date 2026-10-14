@@ -1,0 +1,427 @@
+{
+ "name": "fctems",
+ "category": "table",
+ "help": "Configure FortiClient Enterprise Management Server (EMS) entries.",
+ "mkey": "ems-id",
+ "mkey_type": "integer",
+ "children": {
+  "ems-id": {
+   "name": "ems-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "EMS ID in order (1 - 7).",
+   "min-value": 1,
+   "max-value": 7,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable or disable this EMS configuration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable EMS configuration and operation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable EMS configuration and operation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiClient Enterprise Management Server (EMS) name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dirty-reason": {
+   "name": "dirty-reason",
+   "category": "unitary",
+   "type": "option",
+   "help": "Dirty Reason for FortiClient EMS.",
+   "options": [
+    {
+     "name": "none",
+     "help": "FortiClient EMS entry not dirty."
+    },
+    {
+     "name": "mismatched-ems-sn",
+     "help": "FortiClient EMS entry dirty because EMS SN is mismatched with configured SN."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "fortinetone-cloud-authentication": {
+   "name": "fortinetone-cloud-authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authentication of FortiClient EMS Cloud through FortiCloud account.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable authentication of FortiClient EMS Cloud through FortiCloud account."
+    },
+    {
+     "name": "disable",
+     "help": "Disable authentication of FortiClient EMS Cloud through FortiCloud account."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cloud-authentication-access-key": {
+   "name": "cloud-authentication-access-key",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiClient EMS Cloud multitenancy access key",
+   "size": 20,
+   "default": "",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiClient EMS FQDN or IPv4 address.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "https-port": {
+   "name": "https-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiClient EMS HTTPS access port number. (1 - 65535, default: 443).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 443,
+   "multiple_values": false
+  },
+  "serial-number": {
+   "name": "serial-number",
+   "category": "unitary",
+   "type": "string",
+   "help": "EMS Serial Number.",
+   "size": 16,
+   "default": "",
+   "multiple_values": false
+  },
+  "tenant-id": {
+   "name": "tenant-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "EMS Tenant ID.",
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "REST API call source IP.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "pull-sysinfo": {
+   "name": "pull-sysinfo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable pulling SysInfo from EMS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable pulling FortiClient user SysInfo from EMS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable pulling FortiClient user SysInfo from EMS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "pull-vulnerabilities": {
+   "name": "pull-vulnerabilities",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable pulling vulnerabilities from EMS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable pulling client vulnerabilities from EMS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable pulling client vulnerabilities from EMS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "pull-avatars": {
+   "name": "pull-avatars",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable pulling avatars from EMS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable pulling FortiClient user avatars from EMS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable pulling FortiClient user avatars from EMS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "pull-tags": {
+   "name": "pull-tags",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable pulling FortiClient user tags from EMS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable pulling FortiClient user tags from EMS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable pulling FortiClient user tags from EMS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "pull-malware-hash": {
+   "name": "pull-malware-hash",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable pulling FortiClient malware hash from EMS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable pulling FortiClient malware hash from EMS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable pulling FortiClient malware hash from EMS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "capabilities": {
+   "name": "capabilities",
+   "category": "unitary",
+   "type": "option",
+   "help": "List of EMS capabilities.",
+   "options": [
+    {
+     "name": "fabric-auth",
+     "help": "Allow this FortiGate unit to load the authentication page provided by EMS to authenticate itself with EMS."
+    },
+    {
+     "name": "silent-approval",
+     "help": "Allow silent approval of non-root or FortiGate HA clusters on EMS in the Security Fabric."
+    },
+    {
+     "name": "websocket",
+     "help": "Enable/disable websockets for this FortiGate unit. Override behavior using websocket-override."
+    },
+    {
+     "name": "websocket-malware",
+     "help": "Allow this FortiGate unit to request malware hash notifications over websocket."
+    },
+    {
+     "name": "push-ca-certs",
+     "help": "Enable/disable syncing deep inspection certificates with EMS."
+    },
+    {
+     "name": "common-tags-api",
+     "help": "Can recieve tag information from New Common Tags API from EMS."
+    },
+    {
+     "name": "tenant-id",
+     "help": "Allow this FortiGate to retrieve Tenant-ID from EMS."
+    },
+    {
+     "name": "client-avatars",
+     "help": "Allow this FortiGate to retrieve avatars from EMS by fingerprint."
+    },
+    {
+     "name": "single-vdom-connector",
+     "help": "Allow this FortiGate to create a vdom connector to EMS."
+    },
+    {
+     "name": "fgt-sysinfo-api",
+     "help": "Allow this FortiGate to send additional info to EMS."
+    },
+    {
+     "name": "ztna-server-info",
+     "help": "Allow this FortiGate to send vdom's ZTNA server information to EMS."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "call-timeout": {
+   "name": "call-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiClient EMS call timeout in seconds (1 - 180 seconds, default = 30).",
+   "min-value": 1,
+   "max-value": 180,
+   "default": 30,
+   "multiple_values": false
+  },
+  "out-of-sync-threshold": {
+   "name": "out-of-sync-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Outdated resource threshold in seconds (10 - 3600, default = 180).",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 180,
+   "multiple_values": false
+  },
+  "send-tags-to-all-vdoms": {
+   "name": "send-tags-to-all-vdoms",
+   "category": "unitary",
+   "type": "option",
+   "help": "Relax restrictions on tags to send all EMS tags to all VDOMs",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sending tags to all vdoms."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sending tags to all vdoms."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "websocket-override": {
+   "name": "websocket-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable override behavior for how this FortiGate unit connects to EMS using a WebSocket connection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Do not override the WebSocket connection. Connect to WebSocket of this EMS server if it is capable (default)."
+    },
+    {
+     "name": "disable",
+     "help": "Override the WebSocket connection. Do not connect to WebSocket even if EMS is capable of a WebSocket connection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "preserve-ssl-session": {
+   "name": "preserve-ssl-session",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable preservation of EMS SSL session connection. Warning, most users should not touch this setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow preservation of EMS SSL session connection."
+    },
+    {
+     "name": "disable",
+     "help": "Don't allow preservation of EMS SSL session connection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "trust-ca-cn": {
+   "name": "trust-ca-cn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable trust of the EMS certificate issuer(CA) and common name(CN) for certificate auto-renewal.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Trust EMS certificate CA & CN to automatically renew certificate."
+    },
+    {
+     "name": "disable",
+     "help": "Do not trust EMS certificate CA & CN to automatically renew certificate."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "verifying-ca": {
+   "name": "verifying-ca",
+   "category": "unitary",
+   "type": "string",
+   "help": "Lowest CA cert on Fortigate in verified EMS cert chain.",
+   "datasource": [
+    "certificate.ca.name",
+    "vpn.certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "endpoint-control",
+ "q_type": 407,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

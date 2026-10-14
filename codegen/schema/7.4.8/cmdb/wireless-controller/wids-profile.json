@@ -1,0 +1,721 @@
+{
+ "name": "wids-profile",
+ "category": "table",
+ "help": "Configure wireless intrusion detection system (WIDS) profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WIDS profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comment.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "sensor-mode": {
+   "name": "sensor-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Scan nearby WiFi stations (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable the scan."
+    },
+    {
+     "name": "foreign",
+     "help": "Enable the scan and monitor foreign channels. Foreign channels are all other available channels than the current operating channel."
+    },
+    {
+     "name": "both",
+     "help": "Enable the scan and monitor both foreign and home channels. Select this option to monitor all WiFi channels."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ap-scan": {
+   "name": "ap-scan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable rogue AP detection.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable rogue AP detection."
+    },
+    {
+     "name": "enable",
+     "help": "Enable rogue AP detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ap-scan-channel-list-2G-5G": {
+   "name": "ap-scan-channel-list-2G-5G",
+   "category": "table",
+   "help": "Selected ap scan channel list for 2.4G and 5G bands.",
+   "member_table": true,
+   "mkey": "chan",
+   "mkey_type": "string",
+   "children": {
+    "chan": {
+     "name": "chan",
+     "category": "unitary",
+     "type": "string",
+     "help": "Channel number.",
+     "required": true,
+     "size": 3,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ap-scan-channel-list-6G": {
+   "name": "ap-scan-channel-list-6G",
+   "category": "table",
+   "help": "Selected ap scan channel list for 6G band.",
+   "member_table": true,
+   "mkey": "chan",
+   "mkey_type": "string",
+   "children": {
+    "chan": {
+     "name": "chan",
+     "category": "unitary",
+     "type": "string",
+     "help": "Channel 6g number.",
+     "required": true,
+     "size": 3,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ap-bgscan-period": {
+   "name": "ap-bgscan-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period between background scans (10 - 3600 sec, default = 600).",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 600,
+   "multiple_values": false
+  },
+  "ap-bgscan-intv": {
+   "name": "ap-bgscan-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period between successive channel scans (1 - 600 sec, default = 3).",
+   "min-value": 1,
+   "max-value": 600,
+   "default": 3,
+   "multiple_values": false
+  },
+  "ap-bgscan-duration": {
+   "name": "ap-bgscan-duration",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Listen time on scanning a channel (10 - 1000 msec, default = 30).",
+   "min-value": 10,
+   "max-value": 1000,
+   "default": 30,
+   "multiple_values": false
+  },
+  "ap-bgscan-idle": {
+   "name": "ap-bgscan-idle",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wait time for channel inactivity before scanning this channel (0 - 1000 msec, default = 20).",
+   "min-value": 0,
+   "max-value": 1000,
+   "default": 20,
+   "multiple_values": false
+  },
+  "ap-bgscan-report-intv": {
+   "name": "ap-bgscan-report-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period between background scan reports (15 - 600 sec, default = 30).",
+   "min-value": 15,
+   "max-value": 600,
+   "default": 30,
+   "multiple_values": false
+  },
+  "ap-bgscan-disable-schedules": {
+   "name": "ap-bgscan-disable-schedules",
+   "category": "table",
+   "help": "Firewall schedules for turning off FortiAP radio background scan. Background scan will be disabled when at least one of the schedules is valid. Separate multiple schedule names with a space.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Schedule name.",
+     "required": true,
+     "datasource": [
+      "firewall.schedule.group.name",
+      "firewall.schedule.recurring.name",
+      "firewall.schedule.onetime.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 16
+  },
+  "ap-fgscan-report-intv": {
+   "name": "ap-fgscan-report-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period between foreground scan reports (15 - 600 sec, default = 15).",
+   "min-value": 15,
+   "max-value": 600,
+   "default": 15,
+   "multiple_values": false
+  },
+  "ap-scan-passive": {
+   "name": "ap-scan-passive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable passive scanning. Enable means do not send probe request on any channels (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Passive scanning on all channels."
+    },
+    {
+     "name": "disable",
+     "help": "Passive scanning only on DFS channels."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ap-scan-threshold": {
+   "name": "ap-scan-threshold",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the AP to report detected rogue AP (-95 to -20, default = -90).",
+   "size": 7,
+   "default": "-90",
+   "multiple_values": false
+  },
+  "ap-auto-suppress": {
+   "name": "ap-auto-suppress",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable on-wire rogue AP auto-suppression (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable on-wire rogue AP auto-suppression."
+    },
+    {
+     "name": "disable",
+     "help": "Disable on-wire rogue AP auto-suppression."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "wireless-bridge": {
+   "name": "wireless-bridge",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable wireless bridge detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable wireless bridge detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable wireless bridge detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "deauth-broadcast": {
+   "name": "deauth-broadcast",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable broadcasting de-authentication detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable broadcast de-authentication detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable broadcast de-authentication detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "null-ssid-probe-resp": {
+   "name": "null-ssid-probe-resp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable null SSID probe response detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable null SSID probe resp detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable null SSID probe resp detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "long-duration-attack": {
+   "name": "long-duration-attack",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable long duration attack detection based on user configured threshold (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable long duration attack detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable long duration attack detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "long-duration-thresh": {
+   "name": "long-duration-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold value for long duration attack detection (1000 - 32767 usec, default = 8200).",
+   "min-value": 1000,
+   "max-value": 32767,
+   "default": 8200,
+   "multiple_values": false
+  },
+  "invalid-mac-oui": {
+   "name": "invalid-mac-oui",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable invalid MAC OUI detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable invalid MAC OUI detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable invalid MAC OUI detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "weak-wep-iv": {
+   "name": "weak-wep-iv",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable weak WEP IV (Initialization Vector) detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable weak WEP IV detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable weak WEP IV detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-frame-flood": {
+   "name": "auth-frame-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authentication frame flooding detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable authentication frame flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable authentication frame flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-flood-time": {
+   "name": "auth-flood-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds after which a station is considered not connected.",
+   "min-value": 5,
+   "max-value": 120,
+   "default": 10,
+   "multiple_values": false
+  },
+  "auth-flood-thresh": {
+   "name": "auth-flood-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for authentication frame flooding.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 30,
+   "multiple_values": false
+  },
+  "assoc-frame-flood": {
+   "name": "assoc-frame-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable association frame flooding detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable association frame flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable association frame flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "assoc-flood-time": {
+   "name": "assoc-flood-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds after which a station is considered not connected.",
+   "min-value": 5,
+   "max-value": 120,
+   "default": 10,
+   "multiple_values": false
+  },
+  "assoc-flood-thresh": {
+   "name": "assoc-flood-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for association frame flooding.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 30,
+   "multiple_values": false
+  },
+  "spoofed-deauth": {
+   "name": "spoofed-deauth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable spoofed de-authentication attack detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable spoofed de-authentication attack detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable spoofed de-authentication attack detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "asleap-attack": {
+   "name": "asleap-attack",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable asleap attack detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable asleap attack detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable asleap attack detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eapol-start-flood": {
+   "name": "eapol-start-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable EAPOL-Start flooding (to AP) detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable EAPOL-Start flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable EAPOL-Start flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eapol-start-thresh": {
+   "name": "eapol-start-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for EAPOL-Start flooding in specified interval.",
+   "min-value": 2,
+   "max-value": 100,
+   "default": 10,
+   "multiple_values": false
+  },
+  "eapol-start-intv": {
+   "name": "eapol-start-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The detection interval for EAPOL-Start flooding (1 - 3600 sec).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 1,
+   "multiple_values": false
+  },
+  "eapol-logoff-flood": {
+   "name": "eapol-logoff-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable EAPOL-Logoff flooding (to AP) detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable EAPOL-Logoff flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable EAPOL-Logoff flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eapol-logoff-thresh": {
+   "name": "eapol-logoff-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for EAPOL-Logoff flooding in specified interval.",
+   "min-value": 2,
+   "max-value": 100,
+   "default": 10,
+   "multiple_values": false
+  },
+  "eapol-logoff-intv": {
+   "name": "eapol-logoff-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The detection interval for EAPOL-Logoff flooding (1 - 3600 sec).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 1,
+   "multiple_values": false
+  },
+  "eapol-succ-flood": {
+   "name": "eapol-succ-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable EAPOL-Success flooding (to AP) detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable EAPOL-Success flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable EAPOL-Success flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eapol-succ-thresh": {
+   "name": "eapol-succ-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for EAPOL-Success flooding in specified interval.",
+   "min-value": 2,
+   "max-value": 100,
+   "default": 10,
+   "multiple_values": false
+  },
+  "eapol-succ-intv": {
+   "name": "eapol-succ-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The detection interval for EAPOL-Success flooding (1 - 3600 sec).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 1,
+   "multiple_values": false
+  },
+  "eapol-fail-flood": {
+   "name": "eapol-fail-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable EAPOL-Failure flooding (to AP) detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable EAPOL-Failure flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable EAPOL-Failure flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eapol-fail-thresh": {
+   "name": "eapol-fail-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for EAPOL-Failure flooding in specified interval.",
+   "min-value": 2,
+   "max-value": 100,
+   "default": 10,
+   "multiple_values": false
+  },
+  "eapol-fail-intv": {
+   "name": "eapol-fail-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The detection interval for EAPOL-Failure flooding (1 - 3600 sec).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 1,
+   "multiple_values": false
+  },
+  "eapol-pre-succ-flood": {
+   "name": "eapol-pre-succ-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable premature EAPOL-Success flooding (to STA) detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable premature EAPOL-Success flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable premature EAPOL-Success flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eapol-pre-succ-thresh": {
+   "name": "eapol-pre-succ-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for premature EAPOL-Success flooding in specified interval.",
+   "min-value": 2,
+   "max-value": 100,
+   "default": 10,
+   "multiple_values": false
+  },
+  "eapol-pre-succ-intv": {
+   "name": "eapol-pre-succ-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The detection interval for premature EAPOL-Success flooding (1 - 3600 sec).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 1,
+   "multiple_values": false
+  },
+  "eapol-pre-fail-flood": {
+   "name": "eapol-pre-fail-flood",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable premature EAPOL-Failure flooding (to STA) detection (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable premature EAPOL-Failure flooding detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable premature EAPOL-Failure flooding detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eapol-pre-fail-thresh": {
+   "name": "eapol-pre-fail-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The threshold value for premature EAPOL-Failure flooding in specified interval.",
+   "min-value": 2,
+   "max-value": 100,
+   "default": 10,
+   "multiple_values": false
+  },
+  "eapol-pre-fail-intv": {
+   "name": "eapol-pre-fail-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The detection interval for premature EAPOL-Failure flooding (1 - 3600 sec).",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 1,
+   "multiple_values": false
+  },
+  "deauth-unknown-src-thresh": {
+   "name": "deauth-unknown-src-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold value per second to deauth unknown src for DoS attack (0: no limit).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 10,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 276,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

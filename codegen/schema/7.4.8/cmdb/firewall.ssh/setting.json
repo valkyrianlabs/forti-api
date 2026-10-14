@@ -1,0 +1,125 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "SSH proxy settings.",
+ "children": {
+  "caname": {
+   "name": "caname",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA certificate used by SSH Inspection.",
+   "datasource": [
+    "firewall.ssh.local-ca.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "untrusted-caname": {
+   "name": "untrusted-caname",
+   "category": "unitary",
+   "type": "string",
+   "help": "Untrusted CA certificate used by SSH Inspection.",
+   "datasource": [
+    "firewall.ssh.local-ca.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostkey-rsa2048": {
+   "name": "hostkey-rsa2048",
+   "category": "unitary",
+   "type": "string",
+   "help": "RSA certificate used by SSH proxy.",
+   "datasource": [
+    "firewall.ssh.local-key.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostkey-dsa1024": {
+   "name": "hostkey-dsa1024",
+   "category": "unitary",
+   "type": "string",
+   "help": "DSA certificate used by SSH proxy.",
+   "datasource": [
+    "firewall.ssh.local-key.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostkey-ecdsa256": {
+   "name": "hostkey-ecdsa256",
+   "category": "unitary",
+   "type": "string",
+   "help": "ECDSA nid256 certificate used by SSH proxy.",
+   "datasource": [
+    "firewall.ssh.local-key.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostkey-ecdsa384": {
+   "name": "hostkey-ecdsa384",
+   "category": "unitary",
+   "type": "string",
+   "help": "ECDSA nid384 certificate used by SSH proxy.",
+   "datasource": [
+    "firewall.ssh.local-key.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostkey-ecdsa521": {
+   "name": "hostkey-ecdsa521",
+   "category": "unitary",
+   "type": "string",
+   "help": "ECDSA nid384 certificate used by SSH proxy.",
+   "datasource": [
+    "firewall.ssh.local-key.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostkey-ed25519": {
+   "name": "hostkey-ed25519",
+   "category": "unitary",
+   "type": "string",
+   "help": "ED25519 hostkey used by SSH proxy.",
+   "datasource": [
+    "firewall.ssh.local-key.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "host-trusted-checking": {
+   "name": "host-trusted-checking",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable host trusted checking.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable host key trusted checking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable host key trusted checking."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "firewall.ssh",
+ "q_type": 401,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

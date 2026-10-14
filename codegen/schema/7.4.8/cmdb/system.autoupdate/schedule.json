@@ -1,0 +1,105 @@
+{
+ "name": "schedule",
+ "category": "complex",
+ "help": "Configure update schedule.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable scheduled updates.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "frequency": {
+   "name": "frequency",
+   "category": "unitary",
+   "type": "option",
+   "help": "Update frequency.",
+   "required": true,
+   "options": [
+    {
+     "name": "every",
+     "help": "Time interval."
+    },
+    {
+     "name": "daily",
+     "help": "Every day."
+    },
+    {
+     "name": "weekly",
+     "help": "Every week."
+    },
+    {
+     "name": "automatic",
+     "help": "Update automatically within every one hour period."
+    }
+   ],
+   "default": "automatic",
+   "multiple_values": false
+  },
+  "time": {
+   "name": "time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Update time.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "day": {
+   "name": "day",
+   "category": "unitary",
+   "type": "option",
+   "help": "Update day.",
+   "required": true,
+   "options": [
+    {
+     "name": "Sunday",
+     "help": "Update every Sunday."
+    },
+    {
+     "name": "Monday",
+     "help": "Update every Monday."
+    },
+    {
+     "name": "Tuesday",
+     "help": "Update every Tuesday."
+    },
+    {
+     "name": "Wednesday",
+     "help": "Update every Wednesday."
+    },
+    {
+     "name": "Thursday",
+     "help": "Update every Thursday."
+    },
+    {
+     "name": "Friday",
+     "help": "Update every Friday."
+    },
+    {
+     "name": "Saturday",
+     "help": "Update every Saturday."
+    }
+   ],
+   "default": "Monday",
+   "multiple_values": false
+  }
+ },
+ "path": "system.autoupdate",
+ "q_type": 14,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

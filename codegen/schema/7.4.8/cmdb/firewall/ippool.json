@@ -1,0 +1,284 @@
+{
+ "name": "ippool",
+ "category": "table",
+ "help": "Configure IPv4 IP pools.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IP pool name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IP pool type: overload, one-to-one, fixed-port-range, port-block-allocation, cgn-resource-allocation (hyperscale vdom only)",
+   "options": [
+    {
+     "name": "overload",
+     "help": "IP addresses in the IP pool can be shared by clients."
+    },
+    {
+     "name": "one-to-one",
+     "help": "One to one mapping."
+    },
+    {
+     "name": "fixed-port-range",
+     "help": "Fixed port range."
+    },
+    {
+     "name": "port-block-allocation",
+     "help": "Port block allocation."
+    }
+   ],
+   "default": "overload",
+   "multiple_values": false
+  },
+  "startip": {
+   "name": "startip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "First IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx, Default: 0.0.0.0).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "endip": {
+   "name": "endip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Final IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx, Default: 0.0.0.0).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "startport": {
+   "name": "startport",
+   "category": "unitary",
+   "type": "integer",
+   "help": "First port number (inclusive) in the range for the address pool (Default: 5117).",
+   "required": true,
+   "min-value": 5117,
+   "max-value": 65533,
+   "default": 5117,
+   "multiple_values": false
+  },
+  "endport": {
+   "name": "endport",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Final port number (inclusive) in the range for the address pool (Default: 65533).",
+   "required": true,
+   "min-value": 5117,
+   "max-value": 65533,
+   "default": 65533,
+   "multiple_values": false
+  },
+  "source-startip": {
+   "name": "source-startip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "First IPv4 address (inclusive) in the range of the source addresses to be translated (format = xxx.xxx.xxx.xxx, default = 0.0.0.0).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-endip": {
+   "name": "source-endip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Final IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx.xxx.xxx.xxx, Default: 0.0.0.0).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "block-size": {
+   "name": "block-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of addresses in a block (64 - 4096, default = 128).",
+   "required": true,
+   "min-value": 64,
+   "max-value": 4096,
+   "default": 128,
+   "multiple_values": false
+  },
+  "port-per-user": {
+   "name": "port-per-user",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of port for each user (32 - 60416, default = 0, which is auto).",
+   "required": true,
+   "min-value": 32,
+   "max-value": 60417,
+   "default": 0,
+   "multiple_values": false
+  },
+  "num-blocks-per-user": {
+   "name": "num-blocks-per-user",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of addresses blocks that can be used by a user (1 to 128, default = 8).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 128,
+   "default": 8,
+   "multiple_values": false
+  },
+  "pba-timeout": {
+   "name": "pba-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port block allocation timeout (seconds).",
+   "min-value": 3,
+   "max-value": 86400,
+   "default": 30,
+   "multiple_values": false
+  },
+  "pba-interim-log": {
+   "name": "pba-interim-log",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port block allocation interim logging interval (600 - 86400 seconds, default = 0 which disables interim logging).",
+   "min-value": 600,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "permit-any-host": {
+   "name": "permit-any-host",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable full cone NAT.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable full cone NAT."
+    },
+    {
+     "name": "enable",
+     "help": "Enable full cone NAT."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "arp-reply": {
+   "name": "arp-reply",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable replying to ARP requests when an IP Pool is added to a policy (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable ARP reply."
+    },
+    {
+     "name": "enable",
+     "help": "Enable ARP reply."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "arp-intf": {
+   "name": "arp-intf",
+   "category": "unitary",
+   "type": "string",
+   "help": "Select an interface from available options that will reply to ARP requests. (If blank, any is selected).",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "associated-interface": {
+   "name": "associated-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Associated interface name.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "nat64": {
+   "name": "nat64",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAT64.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable DNAT64."
+    },
+    {
+     "name": "enable",
+     "help": "Enable DNAT64."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "add-nat64-route": {
+   "name": "add-nat64-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding NAT64 route.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable adding NAT64 route."
+    },
+    {
+     "name": "enable",
+     "help": "Enable adding NAT64 route."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "subnet-broadcast-in-ippool": {
+   "name": "subnet-broadcast-in-ippool",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable inclusion of the subnetwork address and broadcast IP address in the NAT64 IP pool.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not include the subnetwork address and broadcast IP address in the NAT64 IP pool."
+    },
+    {
+     "name": "enable",
+     "help": "Include the subnetwork address and broadcast IP address in the NAT64 IP pool."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 512,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 41,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

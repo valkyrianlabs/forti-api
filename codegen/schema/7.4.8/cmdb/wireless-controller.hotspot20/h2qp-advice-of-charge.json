@@ -1,0 +1,142 @@
+{
+ "name": "h2qp-advice-of-charge",
+ "category": "table",
+ "help": "Configure advice of charge.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Plan name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "aoc-list": {
+   "name": "aoc-list",
+   "category": "table",
+   "help": "AOC list.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Advice of charge ID.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Usage charge type.",
+     "required": true,
+     "options": [
+      {
+       "name": "time-based",
+       "help": "Time based usage charge."
+      },
+      {
+       "name": "volume-based",
+       "help": "Volume based usage charge."
+      },
+      {
+       "name": "time-and-volume-based",
+       "help": "Time and volume based usage charge."
+      },
+      {
+       "name": "unlimited",
+       "help": "Unlimited usage."
+      }
+     ],
+     "default": "time-based",
+     "multiple_values": false
+    },
+    "nai-realm-encoding": {
+     "name": "nai-realm-encoding",
+     "category": "unitary",
+     "type": "string",
+     "help": "NAI realm encoding.",
+     "size": 1,
+     "default": "",
+     "multiple_values": false
+    },
+    "nai-realm": {
+     "name": "nai-realm",
+     "category": "unitary",
+     "type": "string",
+     "help": "NAI realm list name.",
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "plan-info": {
+     "name": "plan-info",
+     "category": "table",
+     "help": "Plan info.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Plan name.",
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "lang": {
+       "name": "lang",
+       "category": "unitary",
+       "type": "string",
+       "help": "Language code.",
+       "required": true,
+       "size": 3,
+       "default": "",
+       "multiple_values": false
+      },
+      "currency": {
+       "name": "currency",
+       "category": "unitary",
+       "type": "string",
+       "help": "Currency code.",
+       "required": true,
+       "size": 3,
+       "default": "",
+       "multiple_values": false
+      },
+      "info-file": {
+       "name": "info-file",
+       "category": "unitary",
+       "type": "string",
+       "help": "Info file.",
+       "required": true,
+       "size": 64,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 3
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 3
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 16,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 304,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,2862 @@
+{
+ "name": "extender-profile",
+ "category": "table",
+ "help": "FortiExtender extender profile configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiExtender profile name.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "min-value": 0,
+   "max-value": 102400000,
+   "default": 32,
+   "multiple_values": false
+  },
+  "model": {
+   "name": "model",
+   "category": "unitary",
+   "type": "option",
+   "help": "Model.",
+   "required": true,
+   "options": [
+    {
+     "name": "FX201E",
+     "help": "FEX-201E model."
+    },
+    {
+     "name": "FX211E",
+     "help": "FEX-211E model."
+    },
+    {
+     "name": "FX200F",
+     "help": "FEX-200F model."
+    },
+    {
+     "name": "FXA11F",
+     "help": "FEX-101F-AM model."
+    },
+    {
+     "name": "FXE11F",
+     "help": "FEX-101F-EA model."
+    },
+    {
+     "name": "FXE11G",
+     "help": "FEX-101G model."
+    },
+    {
+     "name": "FXA21F",
+     "help": "FEX-201F-AM model."
+    },
+    {
+     "name": "FXE21F",
+     "help": "FEX-201F-EA model."
+    },
+    {
+     "name": "FXA22F",
+     "help": "FEX-202F-AM model."
+    },
+    {
+     "name": "FXE22F",
+     "help": "FEX-202F-EA model."
+    },
+    {
+     "name": "FX212F",
+     "help": "FEX-212F model."
+    },
+    {
+     "name": "FX311F",
+     "help": "FEX-311F model."
+    },
+    {
+     "name": "FX312F",
+     "help": "FEX-312F model."
+    },
+    {
+     "name": "FX511F",
+     "help": "FEX-511F model."
+    },
+    {
+     "name": "FXR51G",
+     "help": "FER-511G model."
+    },
+    {
+     "name": "FXN51G",
+     "help": "FEX-511G model."
+    },
+    {
+     "name": "FXW51G",
+     "help": "FEX-511G-Wifi model."
+    },
+    {
+     "name": "FVG21F",
+     "help": "FEV-211F model."
+    },
+    {
+     "name": "FVA21F",
+     "help": "FEV-211F-AM model."
+    },
+    {
+     "name": "FVG22F",
+     "help": "FEV-212F model."
+    },
+    {
+     "name": "FVA22F",
+     "help": "FEV-212F-AM model."
+    },
+    {
+     "name": "FX04DA",
+     "help": "FX40D-AMEU model."
+    },
+    {
+     "name": "FG",
+     "help": "FG-CONNECTOR model."
+    },
+    {
+     "name": "BS10FW",
+     "help": "FBS-10FW model."
+    },
+    {
+     "name": "BS20GW",
+     "help": "FBS-20GW model."
+    },
+    {
+     "name": "BS20GN",
+     "help": "FBS-20G model."
+    }
+   ],
+   "default": "FX201E",
+   "multiple_values": false
+  },
+  "extension": {
+   "name": "extension",
+   "category": "unitary",
+   "type": "option",
+   "help": "Extension option.",
+   "required": true,
+   "options": [
+    {
+     "name": "wan-extension",
+     "help": "WAN extension."
+    },
+    {
+     "name": "lan-extension",
+     "help": "LAN extension."
+    }
+   ],
+   "default": "wan-extension",
+   "multiple_values": false
+  },
+  "allowaccess": {
+   "name": "allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control management access to the managed extender. Separate entries with a space.",
+   "options": [
+    {
+     "name": "ping",
+     "help": "PING access."
+    },
+    {
+     "name": "telnet",
+     "help": "TELNET access."
+    },
+    {
+     "name": "http",
+     "help": "HTTP access."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS access."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH access."
+    },
+    {
+     "name": "snmp",
+     "help": "SNMP access."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "login-password-change": {
+   "name": "login-password-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Change or reset the administrator password of a managed extender (yes, default, or no, default = no).",
+   "options": [
+    {
+     "name": "yes",
+     "help": "Change the managed extender's administrator password. Use the login-password option to set the password."
+    },
+    {
+     "name": "default",
+     "help": "Keep the managed extender's administrator password set to the factory default."
+    },
+    {
+     "name": "no",
+     "help": "Do not change the managed extender's administrator password."
+    }
+   ],
+   "default": "no",
+   "multiple_values": false
+  },
+  "login-password": {
+   "name": "login-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Set the managed extender's administrator password.",
+   "required": true,
+   "size": 27,
+   "multiple_values": false
+  },
+  "enforce-bandwidth": {
+   "name": "enforce-bandwidth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable enforcement of bandwidth on LAN extension interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable to enforce bandwidth limit on LAN extension interface."
+    },
+    {
+     "name": "disable",
+     "help": "Disable to enforce bandwidth limit on LAN extension interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "bandwidth-limit": {
+   "name": "bandwidth-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiExtender LAN extension bandwidth limit (Mbps).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 16776000,
+   "default": 1024,
+   "multiple_values": false
+  },
+  "cellular": {
+   "name": "cellular",
+   "category": "complex",
+   "help": "FortiExtender cellular configuration.",
+   "required": true,
+   "children": {
+    "dataplan": {
+     "name": "dataplan",
+     "category": "table",
+     "help": "Dataplan names.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Dataplan name.",
+       "datasource": [
+        "extension-controller.dataplan.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "controller-report": {
+     "name": "controller-report",
+     "category": "complex",
+     "help": "FortiExtender controller report configuration.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender controller report status.",
+       "required": true,
+       "options": [
+        {
+         "name": "disable",
+         "help": "Controller is configured to not provide service to this FortiExtender."
+        },
+        {
+         "name": "enable",
+         "help": "Controller is configured to provide service to this FortiExtender."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "interval": {
+       "name": "interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Controller report interval.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 300,
+       "multiple_values": false
+      },
+      "signal-threshold": {
+       "name": "signal-threshold",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Controller report signal threshold.",
+       "required": true,
+       "min-value": 10,
+       "max-value": 50,
+       "default": 10,
+       "multiple_values": false
+      }
+     }
+    },
+    "sms-notification": {
+     "name": "sms-notification",
+     "category": "complex",
+     "help": "FortiExtender cellular SMS notification configuration.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender SMS notification status.",
+       "required": true,
+       "options": [
+        {
+         "name": "disable",
+         "help": "SMS notification is configured to not provide service to this FortiExtender."
+        },
+        {
+         "name": "enable",
+         "help": "SMS notification is configured to provide service to this FortiExtender."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "alert": {
+       "name": "alert",
+       "category": "complex",
+       "help": "SMS alert list.",
+       "children": {
+        "system-reboot": {
+         "name": "system-reboot",
+         "category": "unitary",
+         "type": "string",
+         "help": "Display string when system rebooted.",
+         "required": true,
+         "size": 63,
+         "default": "system will reboot",
+         "multiple_values": false
+        },
+        "data-exhausted": {
+         "name": "data-exhausted",
+         "category": "unitary",
+         "type": "string",
+         "help": "Display string when data exhausted.",
+         "required": true,
+         "size": 63,
+         "default": "data plan is exhausted",
+         "multiple_values": false
+        },
+        "session-disconnect": {
+         "name": "session-disconnect",
+         "category": "unitary",
+         "type": "string",
+         "help": "Display string when session disconnected.",
+         "required": true,
+         "size": 63,
+         "default": "LTE data session is disconnected",
+         "multiple_values": false
+        },
+        "low-signal-strength": {
+         "name": "low-signal-strength",
+         "category": "unitary",
+         "type": "string",
+         "help": "Display string when signal strength is low.",
+         "required": true,
+         "size": 63,
+         "default": "LTE signal strength is too low",
+         "multiple_values": false
+        },
+        "os-image-fallback": {
+         "name": "os-image-fallback",
+         "category": "unitary",
+         "type": "string",
+         "help": "Display string when falling back to a previous OS image.",
+         "required": true,
+         "size": 63,
+         "default": "system start to fallback OS image",
+         "multiple_values": false
+        },
+        "mode-switch": {
+         "name": "mode-switch",
+         "category": "unitary",
+         "type": "string",
+         "help": "Display string when mode is switched.",
+         "required": true,
+         "size": 63,
+         "default": "system networking mode switched",
+         "multiple_values": false
+        },
+        "fgt-backup-mode-switch": {
+         "name": "fgt-backup-mode-switch",
+         "category": "unitary",
+         "type": "string",
+         "help": "Display string when FortiGate backup mode switched.",
+         "required": true,
+         "size": 63,
+         "default": "FortiGate backup work mode switched",
+         "multiple_values": false
+        }
+       }
+      },
+      "receiver": {
+       "name": "receiver",
+       "category": "table",
+       "help": "SMS notification receiver list.",
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "FortiExtender SMS notification receiver name.",
+         "size": 31,
+         "default": "",
+         "multiple_values": false
+        },
+        "status": {
+         "name": "status",
+         "category": "unitary",
+         "type": "option",
+         "help": "SMS notification receiver status.",
+         "options": [
+          {
+           "name": "disable",
+           "help": "Disable SMS notification receiver."
+          },
+          {
+           "name": "enable",
+           "help": "Enable SMS notification receiver."
+          }
+         ],
+         "default": "disable",
+         "multiple_values": false
+        },
+        "phone-number": {
+         "name": "phone-number",
+         "category": "unitary",
+         "type": "string",
+         "help": "Receiver phone number. Format: [+][country code][area code][local phone number]. For example, +16501234567.",
+         "required": true,
+         "size": 31,
+         "default": "",
+         "multiple_values": false
+        },
+        "alert": {
+         "name": "alert",
+         "category": "unitary",
+         "type": "option",
+         "help": "Alert multi-options.",
+         "options": [
+          {
+           "name": "system-reboot",
+           "help": "System will reboot."
+          },
+          {
+           "name": "data-exhausted",
+           "help": "Data plan is exhausted."
+          },
+          {
+           "name": "session-disconnect",
+           "help": "LTE data session is disconnected."
+          },
+          {
+           "name": "low-signal-strength",
+           "help": "LTE signal strength is too low."
+          },
+          {
+           "name": "mode-switch",
+           "help": "System is starting to use fallback OS image."
+          },
+          {
+           "name": "os-image-fallback",
+           "help": "System networking mode switched."
+          },
+          {
+           "name": "fgt-backup-mode-switch",
+           "help": "FortiGate backup work mode switched."
+          }
+         ],
+         "default": "",
+         "multiple_values": true
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     }
+    },
+    "modem1": {
+     "name": "modem1",
+     "category": "complex",
+     "help": "Configuration options for modem 1.",
+     "children": {
+      "redundant-mode": {
+       "name": "redundant-mode",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender mode.",
+       "required": true,
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable interface redundancy."
+        },
+        {
+         "name": "enable",
+         "help": "Enable interface redundancy."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "redundant-intf": {
+       "name": "redundant-intf",
+       "category": "unitary",
+       "type": "string",
+       "help": "Redundant interface.",
+       "required": true,
+       "size": 15,
+       "default": "",
+       "multiple_values": false
+      },
+      "conn-status": {
+       "name": "conn-status",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Connection status.",
+       "readonly": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "default-sim": {
+       "name": "default-sim",
+       "category": "unitary",
+       "type": "option",
+       "help": "Default SIM selection.",
+       "required": true,
+       "options": [
+        {
+         "name": "sim1",
+         "help": "Use SIM #1 by default."
+        },
+        {
+         "name": "sim2",
+         "help": "Use SIM #2 by default."
+        },
+        {
+         "name": "carrier",
+         "help": "Assign default SIM based on carrier."
+        },
+        {
+         "name": "cost",
+         "help": "Assign default SIM based on cost."
+        }
+       ],
+       "default": "sim1",
+       "multiple_values": false
+      },
+      "gps": {
+       "name": "gps",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender GPS enable/disable.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable GPS."
+        },
+        {
+         "name": "enable",
+         "help": "Enable GPS."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "sim1-pin": {
+       "name": "sim1-pin",
+       "category": "unitary",
+       "type": "option",
+       "help": "SIM #1 PIN status.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable SIM #1 PIN."
+        },
+        {
+         "name": "enable",
+         "help": "Enable SIM #1 PIN."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "sim2-pin": {
+       "name": "sim2-pin",
+       "category": "unitary",
+       "type": "option",
+       "help": "SIM #2 PIN status.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable SIM #2 PIN."
+        },
+        {
+         "name": "enable",
+         "help": "Enable SIM #2 PIN."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "sim1-pin-code": {
+       "name": "sim1-pin-code",
+       "category": "unitary",
+       "type": "password",
+       "help": "SIM #1 PIN password.",
+       "size": 27,
+       "multiple_values": false
+      },
+      "sim2-pin-code": {
+       "name": "sim2-pin-code",
+       "category": "unitary",
+       "type": "password",
+       "help": "SIM #2 PIN password.",
+       "size": 27,
+       "multiple_values": false
+      },
+      "preferred-carrier": {
+       "name": "preferred-carrier",
+       "category": "unitary",
+       "type": "string",
+       "help": "Preferred carrier.",
+       "size": 31,
+       "default": "",
+       "multiple_values": false
+      },
+      "auto-switch": {
+       "name": "auto-switch",
+       "category": "complex",
+       "help": "FortiExtender auto switch configuration.",
+       "children": {
+        "disconnect": {
+         "name": "disconnect",
+         "category": "unitary",
+         "type": "option",
+         "help": "Auto switch by disconnect.",
+         "required": true,
+         "options": [
+          {
+           "name": "disable",
+           "help": "Disable switching of SIM card based on cellular disconnections."
+          },
+          {
+           "name": "enable",
+           "help": "Enable switching of SIM card based on cellular disconnections."
+          }
+         ],
+         "default": "disable",
+         "multiple_values": false
+        },
+        "disconnect-threshold": {
+         "name": "disconnect-threshold",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Automatically switch based on disconnect threshold.",
+         "required": true,
+         "min-value": 1,
+         "max-value": 100,
+         "default": 3,
+         "multiple_values": false
+        },
+        "disconnect-period": {
+         "name": "disconnect-period",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Automatically switch based on disconnect period.",
+         "required": true,
+         "min-value": 600,
+         "max-value": 18000,
+         "default": 600,
+         "multiple_values": false
+        },
+        "signal": {
+         "name": "signal",
+         "category": "unitary",
+         "type": "option",
+         "help": "Automatically switch based on signal strength.",
+         "required": true,
+         "options": [
+          {
+           "name": "disable",
+           "help": "Disable switching of SIM card based on cellular signal quality."
+          },
+          {
+           "name": "enable",
+           "help": "Enable switching of SIM card based on cellular signal quality."
+          }
+         ],
+         "default": "disable",
+         "multiple_values": false
+        },
+        "dataplan": {
+         "name": "dataplan",
+         "category": "unitary",
+         "type": "option",
+         "help": "Automatically switch based on data usage.",
+         "required": true,
+         "options": [
+          {
+           "name": "disable",
+           "help": "Disable switching of SIM card based on cellular data usage."
+          },
+          {
+           "name": "enable",
+           "help": "Enable switching of SIM card based on cellular data usage."
+          }
+         ],
+         "default": "disable",
+         "multiple_values": false
+        },
+        "switch-back": {
+         "name": "switch-back",
+         "category": "unitary",
+         "type": "option",
+         "help": "Auto switch with switch back multi-options.",
+         "options": [
+          {
+           "name": "time",
+           "help": "Switch back based on specific time in UTC (HH:MM)."
+          },
+          {
+           "name": "timer",
+           "help": "Switch back based on an interval."
+          }
+         ],
+         "default": "",
+         "multiple_values": true
+        },
+        "switch-back-time": {
+         "name": "switch-back-time",
+         "category": "unitary",
+         "type": "string",
+         "help": "Automatically switch over to preferred SIM/carrier at a specified time in UTC (HH:MM).",
+         "size": 31,
+         "default": "00:01",
+         "multiple_values": false
+        },
+        "switch-back-timer": {
+         "name": "switch-back-timer",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Automatically switch over to preferred SIM/carrier after the given time (3600 - 2147483647 sec).",
+         "min-value": 3600,
+         "max-value": 2147483647,
+         "default": 86400,
+         "multiple_values": false
+        }
+       }
+      }
+     }
+    },
+    "modem2": {
+     "name": "modem2",
+     "category": "complex",
+     "help": "Configuration options for modem 2.",
+     "children": {
+      "redundant-mode": {
+       "name": "redundant-mode",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender mode.",
+       "required": true,
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable interface redundancy."
+        },
+        {
+         "name": "enable",
+         "help": "Enable interface redundancy."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "redundant-intf": {
+       "name": "redundant-intf",
+       "category": "unitary",
+       "type": "string",
+       "help": "Redundant interface.",
+       "required": true,
+       "size": 15,
+       "default": "",
+       "multiple_values": false
+      },
+      "conn-status": {
+       "name": "conn-status",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Connection status.",
+       "readonly": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "default-sim": {
+       "name": "default-sim",
+       "category": "unitary",
+       "type": "option",
+       "help": "Default SIM selection.",
+       "required": true,
+       "options": [
+        {
+         "name": "sim1",
+         "help": "Use SIM #1 by default."
+        },
+        {
+         "name": "sim2",
+         "help": "Use SIM #2 by default."
+        },
+        {
+         "name": "carrier",
+         "help": "Assign default SIM based on carrier."
+        },
+        {
+         "name": "cost",
+         "help": "Assign default SIM based on cost."
+        }
+       ],
+       "default": "sim1",
+       "multiple_values": false
+      },
+      "gps": {
+       "name": "gps",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender GPS enable/disable.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable GPS."
+        },
+        {
+         "name": "enable",
+         "help": "Enable GPS."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "sim1-pin": {
+       "name": "sim1-pin",
+       "category": "unitary",
+       "type": "option",
+       "help": "SIM #1 PIN status.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable SIM #1 PIN."
+        },
+        {
+         "name": "enable",
+         "help": "Enable SIM #1 PIN."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "sim2-pin": {
+       "name": "sim2-pin",
+       "category": "unitary",
+       "type": "option",
+       "help": "SIM #2 PIN status.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable SIM #2 PIN."
+        },
+        {
+         "name": "enable",
+         "help": "Enable SIM #2 PIN."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "sim1-pin-code": {
+       "name": "sim1-pin-code",
+       "category": "unitary",
+       "type": "password",
+       "help": "SIM #1 PIN password.",
+       "size": 27,
+       "multiple_values": false
+      },
+      "sim2-pin-code": {
+       "name": "sim2-pin-code",
+       "category": "unitary",
+       "type": "password",
+       "help": "SIM #2 PIN password.",
+       "size": 27,
+       "multiple_values": false
+      },
+      "preferred-carrier": {
+       "name": "preferred-carrier",
+       "category": "unitary",
+       "type": "string",
+       "help": "Preferred carrier.",
+       "size": 31,
+       "default": "",
+       "multiple_values": false
+      },
+      "auto-switch": {
+       "name": "auto-switch",
+       "category": "complex",
+       "help": "FortiExtender auto switch configuration.",
+       "children": {
+        "disconnect": {
+         "name": "disconnect",
+         "category": "unitary",
+         "type": "option",
+         "help": "Auto switch by disconnect.",
+         "required": true,
+         "options": [
+          {
+           "name": "disable",
+           "help": "Disable switching of SIM card based on cellular disconnections."
+          },
+          {
+           "name": "enable",
+           "help": "Enable switching of SIM card based on cellular disconnections."
+          }
+         ],
+         "default": "disable",
+         "multiple_values": false
+        },
+        "disconnect-threshold": {
+         "name": "disconnect-threshold",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Automatically switch based on disconnect threshold.",
+         "required": true,
+         "min-value": 1,
+         "max-value": 100,
+         "default": 3,
+         "multiple_values": false
+        },
+        "disconnect-period": {
+         "name": "disconnect-period",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Automatically switch based on disconnect period.",
+         "required": true,
+         "min-value": 600,
+         "max-value": 18000,
+         "default": 600,
+         "multiple_values": false
+        },
+        "signal": {
+         "name": "signal",
+         "category": "unitary",
+         "type": "option",
+         "help": "Automatically switch based on signal strength.",
+         "required": true,
+         "options": [
+          {
+           "name": "disable",
+           "help": "Disable switching of SIM card based on cellular signal quality."
+          },
+          {
+           "name": "enable",
+           "help": "Enable switching of SIM card based on cellular signal quality."
+          }
+         ],
+         "default": "disable",
+         "multiple_values": false
+        },
+        "dataplan": {
+         "name": "dataplan",
+         "category": "unitary",
+         "type": "option",
+         "help": "Automatically switch based on data usage.",
+         "required": true,
+         "options": [
+          {
+           "name": "disable",
+           "help": "Disable switching of SIM card based on cellular data usage."
+          },
+          {
+           "name": "enable",
+           "help": "Enable switching of SIM card based on cellular data usage."
+          }
+         ],
+         "default": "disable",
+         "multiple_values": false
+        },
+        "switch-back": {
+         "name": "switch-back",
+         "category": "unitary",
+         "type": "option",
+         "help": "Auto switch with switch back multi-options.",
+         "options": [
+          {
+           "name": "time",
+           "help": "Switch back based on specific time in UTC (HH:MM)."
+          },
+          {
+           "name": "timer",
+           "help": "Switch back based on an interval."
+          }
+         ],
+         "default": "",
+         "multiple_values": true
+        },
+        "switch-back-time": {
+         "name": "switch-back-time",
+         "category": "unitary",
+         "type": "string",
+         "help": "Automatically switch over to preferred SIM/carrier at a specified time in UTC (HH:MM).",
+         "size": 31,
+         "default": "00:01",
+         "multiple_values": false
+        },
+        "switch-back-timer": {
+         "name": "switch-back-timer",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Automatically switch over to preferred SIM/carrier after the given time (3600 - 2147483647 sec).",
+         "min-value": 3600,
+         "max-value": 2147483647,
+         "default": 86400,
+         "multiple_values": false
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "lan-extension": {
+   "name": "lan-extension",
+   "category": "complex",
+   "help": "FortiExtender lan extension configuration.",
+   "required": true,
+   "children": {
+    "link-loadbalance": {
+     "name": "link-loadbalance",
+     "category": "unitary",
+     "type": "option",
+     "help": "LAN extension link load balance strategy.",
+     "required": true,
+     "options": [
+      {
+       "name": "activebackup",
+       "help": "FortiExtender LAN extension active-backup."
+      },
+      {
+       "name": "loadbalance",
+       "help": "FortiExtender LAN extension load-balance."
+      }
+     ],
+     "default": "activebackup",
+     "multiple_values": false
+    },
+    "ipsec-tunnel": {
+     "name": "ipsec-tunnel",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec tunnel name.",
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "backhaul-interface": {
+     "name": "backhaul-interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec phase1 interface.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "backhaul-ip": {
+     "name": "backhaul-ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec phase1 IPv4/FQDN. Used to specify the external IP/FQDN when the FortiGate unit is behind a NAT device.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "backhaul": {
+     "name": "backhaul",
+     "category": "table",
+     "help": "LAN extension backhaul tunnel configuration.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "FortiExtender LAN extension backhaul name.",
+       "size": 31,
+       "default": "",
+       "multiple_values": false
+      },
+      "port": {
+       "name": "port",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender uplink port.",
+       "required": true,
+       "options": [
+        {
+         "name": "wan",
+         "help": "FortiExtender WAN port."
+        },
+        {
+         "name": "lte1",
+         "help": "FortiExtender LTE1 port."
+        },
+        {
+         "name": "lte2",
+         "help": "FortiExtender LTE2 port."
+        },
+        {
+         "name": "port1",
+         "help": "FortiExtender port1 port."
+        },
+        {
+         "name": "port2",
+         "help": "FortiExtender port2 port."
+        },
+        {
+         "name": "port3",
+         "help": "FortiExtender port3 port."
+        },
+        {
+         "name": "port4",
+         "help": "FortiExtender port4 port."
+        },
+        {
+         "name": "port5",
+         "help": "FortiExtender port5 port."
+        },
+        {
+         "name": "sfp",
+         "help": "FortiExtender SFP port."
+        }
+       ],
+       "default": "wan",
+       "multiple_values": false
+      },
+      "role": {
+       "name": "role",
+       "category": "unitary",
+       "type": "option",
+       "help": "FortiExtender uplink port.",
+       "required": true,
+       "options": [
+        {
+         "name": "primary",
+         "help": "FortiExtender LAN extension primary role."
+        },
+        {
+         "name": "secondary",
+         "help": "FortiExtender LAN extension secondary role."
+        }
+       ],
+       "default": "primary",
+       "multiple_values": false
+      },
+      "weight": {
+       "name": "weight",
+       "category": "unitary",
+       "type": "integer",
+       "help": "WRR weight parameter.",
+       "required": true,
+       "min-value": 1,
+       "max-value": 256,
+       "default": 1,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "wifi": {
+   "name": "wifi",
+   "category": "complex",
+   "help": "FortiExtender wifi configuration.",
+   "children": {
+    "country": {
+     "name": "country",
+     "category": "unitary",
+     "type": "option",
+     "help": "Country in which this FEX will operate (default = NA).",
+     "options": [
+      {
+       "name": "--",
+       "help": "NO_COUNTRY_SET"
+      },
+      {
+       "name": "AF",
+       "help": "AFGHANISTAN"
+      },
+      {
+       "name": "AL",
+       "help": "ALBANIA"
+      },
+      {
+       "name": "DZ",
+       "help": "ALGERIA"
+      },
+      {
+       "name": "AS",
+       "help": "AMERICAN SAMOA"
+      },
+      {
+       "name": "AO",
+       "help": "ANGOLA"
+      },
+      {
+       "name": "AR",
+       "help": "ARGENTINA"
+      },
+      {
+       "name": "AM",
+       "help": "ARMENIA"
+      },
+      {
+       "name": "AU",
+       "help": "AUSTRALIA"
+      },
+      {
+       "name": "AT",
+       "help": "AUSTRIA"
+      },
+      {
+       "name": "AZ",
+       "help": "AZERBAIJAN"
+      },
+      {
+       "name": "BS",
+       "help": "BAHAMAS"
+      },
+      {
+       "name": "BH",
+       "help": "BAHRAIN"
+      },
+      {
+       "name": "BD",
+       "help": "BANGLADESH"
+      },
+      {
+       "name": "BB",
+       "help": "BARBADOS"
+      },
+      {
+       "name": "BY",
+       "help": "BELARUS"
+      },
+      {
+       "name": "BE",
+       "help": "BELGIUM"
+      },
+      {
+       "name": "BZ",
+       "help": "BELIZE"
+      },
+      {
+       "name": "BJ",
+       "help": "BENIN"
+      },
+      {
+       "name": "BM",
+       "help": "BERMUDA"
+      },
+      {
+       "name": "BT",
+       "help": "BHUTAN"
+      },
+      {
+       "name": "BO",
+       "help": "BOLIVIA"
+      },
+      {
+       "name": "BA",
+       "help": "BOSNIA AND HERZEGOVINA"
+      },
+      {
+       "name": "BW",
+       "help": "BOTSWANA"
+      },
+      {
+       "name": "BR",
+       "help": "BRAZIL"
+      },
+      {
+       "name": "BN",
+       "help": "BRUNEI DARUSSALAM"
+      },
+      {
+       "name": "BG",
+       "help": "BULGARIA"
+      },
+      {
+       "name": "BF",
+       "help": "BURKINA-FASO"
+      },
+      {
+       "name": "KH",
+       "help": "CAMBODIA"
+      },
+      {
+       "name": "CM",
+       "help": "CAMEROON"
+      },
+      {
+       "name": "KY",
+       "help": "CAYMAN ISLANDS"
+      },
+      {
+       "name": "CF",
+       "help": "CENTRAL AFRICA REPUBLIC"
+      },
+      {
+       "name": "TD",
+       "help": "CHAD  "
+      },
+      {
+       "name": "CL",
+       "help": "CHILE"
+      },
+      {
+       "name": "CN",
+       "help": "CHINA"
+      },
+      {
+       "name": "CX",
+       "help": "CHRISTMAS ISLAND"
+      },
+      {
+       "name": "CO",
+       "help": "COLOMBIA"
+      },
+      {
+       "name": "CG",
+       "help": "CONGO REPUBLIC"
+      },
+      {
+       "name": "CD",
+       "help": "DEMOCRATIC REPUBLIC OF CONGO"
+      },
+      {
+       "name": "CR",
+       "help": "COSTA RICA"
+      },
+      {
+       "name": "HR",
+       "help": "CROATIA"
+      },
+      {
+       "name": "CY",
+       "help": "CYPRUS"
+      },
+      {
+       "name": "CZ",
+       "help": "CZECH REPUBLIC"
+      },
+      {
+       "name": "DK",
+       "help": "DENMARK"
+      },
+      {
+       "name": "DJ",
+       "help": "DJIBOUTI"
+      },
+      {
+       "name": "DM",
+       "help": "DOMINICA"
+      },
+      {
+       "name": "DO",
+       "help": "DOMINICAN REPUBLIC"
+      },
+      {
+       "name": "EC",
+       "help": "ECUADOR"
+      },
+      {
+       "name": "EG",
+       "help": "EGYPT"
+      },
+      {
+       "name": "SV",
+       "help": "EL SALVADOR"
+      },
+      {
+       "name": "ET",
+       "help": "ETHIOPIA"
+      },
+      {
+       "name": "EE",
+       "help": "ESTONIA"
+      },
+      {
+       "name": "GF",
+       "help": "FRENCH GUIANA"
+      },
+      {
+       "name": "PF",
+       "help": "FRENCH POLYNESIA"
+      },
+      {
+       "name": "FO",
+       "help": "FAEROE ISLANDS"
+      },
+      {
+       "name": "FJ",
+       "help": "FIJI"
+      },
+      {
+       "name": "FI",
+       "help": "FINLAND"
+      },
+      {
+       "name": "FR",
+       "help": "FRANCE"
+      },
+      {
+       "name": "GA",
+       "help": "GABON"
+      },
+      {
+       "name": "GE",
+       "help": "GEORGIA"
+      },
+      {
+       "name": "GM",
+       "help": "GAMBIA"
+      },
+      {
+       "name": "DE",
+       "help": "GERMANY"
+      },
+      {
+       "name": "GH",
+       "help": "GHANA"
+      },
+      {
+       "name": "GI",
+       "help": "GIBRALTAR"
+      },
+      {
+       "name": "GR",
+       "help": "GREECE"
+      },
+      {
+       "name": "GL",
+       "help": "GREENLAND"
+      },
+      {
+       "name": "GD",
+       "help": "GRENADA"
+      },
+      {
+       "name": "GP",
+       "help": "GUADELOUPE"
+      },
+      {
+       "name": "GU",
+       "help": "GUAM"
+      },
+      {
+       "name": "GT",
+       "help": "GUATEMALA"
+      },
+      {
+       "name": "GY",
+       "help": "GUYANA"
+      },
+      {
+       "name": "HT",
+       "help": "HAITI"
+      },
+      {
+       "name": "HN",
+       "help": "HONDURAS"
+      },
+      {
+       "name": "HK",
+       "help": "HONG KONG"
+      },
+      {
+       "name": "HU",
+       "help": "HUNGARY"
+      },
+      {
+       "name": "IS",
+       "help": "ICELAND"
+      },
+      {
+       "name": "IN",
+       "help": "INDIA"
+      },
+      {
+       "name": "ID",
+       "help": "INDONESIA"
+      },
+      {
+       "name": "IQ",
+       "help": "IRAQ"
+      },
+      {
+       "name": "IE",
+       "help": "IRELAND"
+      },
+      {
+       "name": "IM",
+       "help": "ISLE OF MAN"
+      },
+      {
+       "name": "IL",
+       "help": "ISRAEL"
+      },
+      {
+       "name": "IT",
+       "help": "ITALY"
+      },
+      {
+       "name": "CI",
+       "help": "COTE_D_IVOIRE"
+      },
+      {
+       "name": "JM",
+       "help": "JAMAICA"
+      },
+      {
+       "name": "JO",
+       "help": "JORDAN"
+      },
+      {
+       "name": "KZ",
+       "help": "KAZAKHSTAN"
+      },
+      {
+       "name": "KE",
+       "help": "KENYA"
+      },
+      {
+       "name": "KR",
+       "help": "KOREA REPUBLIC"
+      },
+      {
+       "name": "KW",
+       "help": "KUWAIT"
+      },
+      {
+       "name": "LA",
+       "help": "LAOS"
+      },
+      {
+       "name": "LV",
+       "help": "LATVIA"
+      },
+      {
+       "name": "LB",
+       "help": "LEBANON"
+      },
+      {
+       "name": "LS",
+       "help": "LESOTHO"
+      },
+      {
+       "name": "LR",
+       "help": "LIBERIA"
+      },
+      {
+       "name": "LY",
+       "help": "LIBYA"
+      },
+      {
+       "name": "LI",
+       "help": "LIECHTENSTEIN"
+      },
+      {
+       "name": "LT",
+       "help": "LITHUANIA"
+      },
+      {
+       "name": "LU",
+       "help": "LUXEMBOURG"
+      },
+      {
+       "name": "MO",
+       "help": "MACAU SAR"
+      },
+      {
+       "name": "MK",
+       "help": "MACEDONIA, FYRO"
+      },
+      {
+       "name": "MG",
+       "help": "MADAGASCAR"
+      },
+      {
+       "name": "MW",
+       "help": "MALAWI"
+      },
+      {
+       "name": "MY",
+       "help": "MALAYSIA"
+      },
+      {
+       "name": "MV",
+       "help": "MALDIVES"
+      },
+      {
+       "name": "ML",
+       "help": "MALI"
+      },
+      {
+       "name": "MT",
+       "help": "MALTA"
+      },
+      {
+       "name": "MH",
+       "help": "MARSHALL ISLANDS"
+      },
+      {
+       "name": "MQ",
+       "help": "MARTINIQUE"
+      },
+      {
+       "name": "MR",
+       "help": "MAURITANIA"
+      },
+      {
+       "name": "MU",
+       "help": "MAURITIUS"
+      },
+      {
+       "name": "YT",
+       "help": "MAYOTTE"
+      },
+      {
+       "name": "MX",
+       "help": "MEXICO"
+      },
+      {
+       "name": "FM",
+       "help": "MICRONESIA"
+      },
+      {
+       "name": "MD",
+       "help": "REPUBLIC OF MOLDOVA"
+      },
+      {
+       "name": "MC",
+       "help": "MONACO"
+      },
+      {
+       "name": "MN",
+       "help": "MONGOLIA"
+      },
+      {
+       "name": "MA",
+       "help": "MOROCCO"
+      },
+      {
+       "name": "MZ",
+       "help": "MOZAMBIQUE"
+      },
+      {
+       "name": "MM",
+       "help": "MYANMAR"
+      },
+      {
+       "name": "NA",
+       "help": "NAMIBIA"
+      },
+      {
+       "name": "NP",
+       "help": "NEPAL"
+      },
+      {
+       "name": "NL",
+       "help": "NETHERLANDS"
+      },
+      {
+       "name": "AN",
+       "help": "NETHERLANDS ANTILLES"
+      },
+      {
+       "name": "AW",
+       "help": "ARUBA"
+      },
+      {
+       "name": "NZ",
+       "help": "NEW ZEALAND"
+      },
+      {
+       "name": "NI",
+       "help": "NICARAGUA"
+      },
+      {
+       "name": "NE",
+       "help": "NIGER"
+      },
+      {
+       "name": "NG",
+       "help": "NIGERIA"
+      },
+      {
+       "name": "NO",
+       "help": "NORWAY"
+      },
+      {
+       "name": "MP",
+       "help": "NORTHERN MARIANA ISLANDS"
+      },
+      {
+       "name": "OM",
+       "help": "OMAN"
+      },
+      {
+       "name": "PK",
+       "help": "PAKISTAN"
+      },
+      {
+       "name": "PW",
+       "help": "PALAU"
+      },
+      {
+       "name": "PA",
+       "help": "PANAMA"
+      },
+      {
+       "name": "PG",
+       "help": "PAPUA NEW GUINEA"
+      },
+      {
+       "name": "PY",
+       "help": "PARAGUAY"
+      },
+      {
+       "name": "PE",
+       "help": "PERU"
+      },
+      {
+       "name": "PH",
+       "help": "PHILIPPINES"
+      },
+      {
+       "name": "PL",
+       "help": "POLAND"
+      },
+      {
+       "name": "PT",
+       "help": "PORTUGAL"
+      },
+      {
+       "name": "PR",
+       "help": "PUERTO RICO"
+      },
+      {
+       "name": "QA",
+       "help": "QATAR"
+      },
+      {
+       "name": "RE",
+       "help": "REUNION"
+      },
+      {
+       "name": "RO",
+       "help": "ROMANIA"
+      },
+      {
+       "name": "RU",
+       "help": "RUSSIA"
+      },
+      {
+       "name": "RW",
+       "help": "RWANDA"
+      },
+      {
+       "name": "BL",
+       "help": "SAINT BARTHELEMY"
+      },
+      {
+       "name": "KN",
+       "help": "SAINT KITTS AND NEVIS"
+      },
+      {
+       "name": "LC",
+       "help": "SAINT LUCIA"
+      },
+      {
+       "name": "MF",
+       "help": "SAINT MARTIN"
+      },
+      {
+       "name": "PM",
+       "help": "SAINT PIERRE AND MIQUELON"
+      },
+      {
+       "name": "VC",
+       "help": "SAINT VINCENT AND GRENADIENS"
+      },
+      {
+       "name": "SA",
+       "help": "SAUDI ARABIA"
+      },
+      {
+       "name": "SN",
+       "help": "SENEGAL"
+      },
+      {
+       "name": "RS",
+       "help": "REPUBLIC OF SERBIA"
+      },
+      {
+       "name": "ME",
+       "help": "MONTENEGRO"
+      },
+      {
+       "name": "SL",
+       "help": "SIERRA LEONE"
+      },
+      {
+       "name": "SG",
+       "help": "SINGAPORE"
+      },
+      {
+       "name": "SK",
+       "help": "SLOVAKIA"
+      },
+      {
+       "name": "SI",
+       "help": "SLOVENIA"
+      },
+      {
+       "name": "SO",
+       "help": "SOMALIA"
+      },
+      {
+       "name": "ZA",
+       "help": "SOUTH AFRICA"
+      },
+      {
+       "name": "ES",
+       "help": "SPAIN"
+      },
+      {
+       "name": "LK",
+       "help": "SRI LANKA"
+      },
+      {
+       "name": "SR",
+       "help": "SURINAME"
+      },
+      {
+       "name": "SZ",
+       "help": "SWAZILAND"
+      },
+      {
+       "name": "SE",
+       "help": "SWEDEN"
+      },
+      {
+       "name": "CH",
+       "help": "SWITZERLAND"
+      },
+      {
+       "name": "TW",
+       "help": "TAIWAN"
+      },
+      {
+       "name": "TZ",
+       "help": "TANZANIA"
+      },
+      {
+       "name": "TH",
+       "help": "THAILAND"
+      },
+      {
+       "name": "TL",
+       "help": "TIMOR-LESTE"
+      },
+      {
+       "name": "TG",
+       "help": "TOGO"
+      },
+      {
+       "name": "TT",
+       "help": "TRINIDAD AND TOBAGO"
+      },
+      {
+       "name": "TN",
+       "help": "TUNISIA"
+      },
+      {
+       "name": "TR",
+       "help": "TURKEY"
+      },
+      {
+       "name": "TM",
+       "help": "TURKMENISTAN"
+      },
+      {
+       "name": "AE",
+       "help": "UNITED ARAB EMIRATES"
+      },
+      {
+       "name": "TC",
+       "help": "TURKS AND CAICOS"
+      },
+      {
+       "name": "UG",
+       "help": "UGANDA"
+      },
+      {
+       "name": "UA",
+       "help": "UKRAINE"
+      },
+      {
+       "name": "GB",
+       "help": "UNITED KINGDOM"
+      },
+      {
+       "name": "US",
+       "help": "UNITED STATES2"
+      },
+      {
+       "name": "PS",
+       "help": "UNITED STATES (PUBLIC SAFETY)"
+      },
+      {
+       "name": "UY",
+       "help": "URUGUAY"
+      },
+      {
+       "name": "UZ",
+       "help": "UZBEKISTAN"
+      },
+      {
+       "name": "VU",
+       "help": "VANUATU"
+      },
+      {
+       "name": "VE",
+       "help": "VENEZUELA"
+      },
+      {
+       "name": "VN",
+       "help": "VIET NAM"
+      },
+      {
+       "name": "VI",
+       "help": "VIRGIN ISLANDS"
+      },
+      {
+       "name": "WF",
+       "help": "WALLIS AND FUTUNA"
+      },
+      {
+       "name": "YE",
+       "help": "YEMEN"
+      },
+      {
+       "name": "ZM",
+       "help": "ZAMBIA"
+      },
+      {
+       "name": "ZW",
+       "help": "ZIMBABWE"
+      },
+      {
+       "name": "JP",
+       "help": "JAPAN14"
+      },
+      {
+       "name": "CA",
+       "help": "CANADA2"
+      }
+     ],
+     "default": "--",
+     "multiple_values": false
+    },
+    "radio-1": {
+     "name": "radio-1",
+     "category": "complex",
+     "help": "Radio-1 config for Wi-Fi 2.4GHz",
+     "children": {
+      "mode": {
+       "name": "mode",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi radio mode AP(LAN mode) / Client(WAN mode).",
+       "options": [
+        {
+         "name": "AP",
+         "help": "AP Mode (LAN mode)"
+        },
+        {
+         "name": "Client",
+         "help": "Client mode (WAN mode)"
+        }
+       ],
+       "default": "AP",
+       "multiple_values": false
+      },
+      "band": {
+       "name": "band",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi band selection 2.4GHz / 5GHz.",
+       "options": [
+        {
+         "name": "2.4GHz",
+         "help": "Wi-Fi 2.4GHz"
+        }
+       ],
+       "default": "2.4GHz",
+       "multiple_values": false
+      },
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable Wi-Fi radio.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable Wi-Fi radio."
+        },
+        {
+         "name": "enable",
+         "help": "Enable Wi-Fi radio."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "operating-standard": {
+       "name": "operating-standard",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi operating standard.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi operating standard auto"
+        },
+        {
+         "name": "11A-N-AC-AX",
+         "help": "Wi-Fi support 802.11 A-N-AC"
+        },
+        {
+         "name": "11A-N-AC",
+         "help": "Wi-Fi support 802.11 A-N-AC"
+        },
+        {
+         "name": "11A-N",
+         "help": "Wi-Fi support 802.11 A-N"
+        },
+        {
+         "name": "11A",
+         "help": "Wi-Fi support 802.11 A"
+        },
+        {
+         "name": "11N-AC-AX",
+         "help": "Wi-Fi support 802.11 N-AC-AX"
+        },
+        {
+         "name": "11AC-AX",
+         "help": "Wi-Fi support 802.11 AC-AX"
+        },
+        {
+         "name": "11AC",
+         "help": "Wi-Fi support 802.11 AC"
+        },
+        {
+         "name": "11N-AC",
+         "help": "Wi-Fi support 802.11 N-AC"
+        },
+        {
+         "name": "11B-G-N-AX",
+         "help": "Wi-Fi support 802.11 B-G-N-AX"
+        },
+        {
+         "name": "11B-G-N",
+         "help": "Wi-Fi support 802.11 B-G-N"
+        },
+        {
+         "name": "11B-G",
+         "help": "Wi-Fi support 802.11 B-G"
+        },
+        {
+         "name": "11B",
+         "help": "Wi-Fi support 802.11 B"
+        },
+        {
+         "name": "11G-N-AX",
+         "help": "Wi-Fi support 802.11 G-N-AX"
+        },
+        {
+         "name": "11N-AX",
+         "help": "Wi-Fi support 802.11 N-AX"
+        },
+        {
+         "name": "11AX",
+         "help": "Wi-Fi support 802.11 AX"
+        },
+        {
+         "name": "11G-N",
+         "help": "Wi-Fi support 802.11 G-N"
+        },
+        {
+         "name": "11N",
+         "help": "Wi-Fi support 802.11 N"
+        },
+        {
+         "name": "11G",
+         "help": "Wi-Fi support 802.11 G"
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "guard-interval": {
+       "name": "guard-interval",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi guard interval.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi guard_interval auto"
+        },
+        {
+         "name": "400ns",
+         "help": "Wi-Fi guard_interval 400ns"
+        },
+        {
+         "name": "800ns",
+         "help": "Wi-Fi guard_interval 800ns"
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "channel": {
+       "name": "channel",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi channels.",
+       "options": [
+        {
+         "name": "CH1",
+         "help": "Channel 1"
+        },
+        {
+         "name": "CH2",
+         "help": "Channel 2"
+        },
+        {
+         "name": "CH3",
+         "help": "Channel 3"
+        },
+        {
+         "name": "CH4",
+         "help": "Channel 4"
+        },
+        {
+         "name": "CH5",
+         "help": "Channel 5"
+        },
+        {
+         "name": "CH6",
+         "help": "Channel 6"
+        },
+        {
+         "name": "CH7",
+         "help": "Channel 7"
+        },
+        {
+         "name": "CH8",
+         "help": "Channel 8"
+        },
+        {
+         "name": "CH9",
+         "help": "Channel 9"
+        },
+        {
+         "name": "CH10",
+         "help": "Channel 10"
+        },
+        {
+         "name": "CH11",
+         "help": "Channel 11"
+        }
+       ],
+       "default": "",
+       "multiple_values": true
+      },
+      "bandwidth": {
+       "name": "bandwidth",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi channel bandwidth.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi channel bandwidth auto"
+        },
+        {
+         "name": "20MHz",
+         "help": "Wi-Fi channel bandwidth 20MHz"
+        },
+        {
+         "name": "40MHz",
+         "help": "Wi-Fi channel bandwidth 40MHz"
+        },
+        {
+         "name": "80MHz",
+         "help": "Wi-Fi channel bandwidth 80MHz"
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "power-level": {
+       "name": "power-level",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Wi-Fi power level in percent (0 - 100, 0 = auto, default = 100).",
+       "min-value": 0,
+       "max-value": 100,
+       "default": 100,
+       "multiple_values": false
+      },
+      "beacon-interval": {
+       "name": "beacon-interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Wi-Fi beacon interval in miliseconds (100 - 3500, default = 100).",
+       "min-value": 100,
+       "max-value": 3500,
+       "default": 100,
+       "multiple_values": false
+      },
+      "80211d": {
+       "name": "80211d",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable Wi-Fi 802.11d.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable 802.11d."
+        },
+        {
+         "name": "enable",
+         "help": "Enable 802.11d."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "max-clients": {
+       "name": "max-clients",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum number of Wi-Fi radio clients (0 - 512, 0 = unlimited, default = 0).",
+       "min-value": 0,
+       "max-value": 512,
+       "default": 0,
+       "multiple_values": false
+      },
+      "extension-channel": {
+       "name": "extension-channel",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi extension channel.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi extension channel auto."
+        },
+        {
+         "name": "higher",
+         "help": "Wi-Fi extension channel higher."
+        },
+        {
+         "name": "lower",
+         "help": "Wi-Fi extension channel lower."
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "bss-color-mode": {
+       "name": "bss-color-mode",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi 802.11AX BSS color mode.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi BSS color mode auto."
+        },
+        {
+         "name": "static",
+         "help": "Wi-Fi BSS color mode static."
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "bss-color": {
+       "name": "bss-color",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Wi-Fi 802.11AX BSS color value (0 - 63, 0 = disable, default = 0).",
+       "min-value": 0,
+       "max-value": 63,
+       "default": 0,
+       "multiple_values": false
+      },
+      "lan-ext-vap": {
+       "name": "lan-ext-vap",
+       "category": "unitary",
+       "type": "string",
+       "help": "Wi-Fi LAN-Extention VAP. Select only one VAP.",
+       "datasource": [
+        "extension-controller.extender-vap.name"
+       ],
+       "size": 31,
+       "default": "",
+       "multiple_values": false
+      },
+      "local-vaps": {
+       "name": "local-vaps",
+       "category": "table",
+       "help": "Wi-Fi local VAP. Select up to three VAPs.",
+       "member_table": true,
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "Wi-Fi local VAP name.",
+         "datasource": [
+          "extension-controller.extender-vap.name"
+         ],
+         "size": 79,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     }
+    },
+    "radio-2": {
+     "name": "radio-2",
+     "category": "complex",
+     "help": "Radio-2 config for Wi-Fi 5GHz",
+     "children": {
+      "mode": {
+       "name": "mode",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi radio mode AP(LAN mode) / Client(WAN mode).",
+       "options": [
+        {
+         "name": "AP",
+         "help": "AP Mode (LAN mode)"
+        },
+        {
+         "name": "Client",
+         "help": "Client mode (WAN mode)"
+        }
+       ],
+       "default": "AP",
+       "multiple_values": false
+      },
+      "band": {
+       "name": "band",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi band selection 2.4GHz / 5GHz.",
+       "options": [
+        {
+         "name": "5GHz",
+         "help": "Wi-Fi 5GHz"
+        }
+       ],
+       "default": "5GHz",
+       "multiple_values": false
+      },
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable Wi-Fi radio.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable Wi-Fi radio."
+        },
+        {
+         "name": "enable",
+         "help": "Enable Wi-Fi radio."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "operating-standard": {
+       "name": "operating-standard",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi operating standard.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi operating standard auto"
+        },
+        {
+         "name": "11A-N-AC-AX",
+         "help": "Wi-Fi support 802.11 A-N-AC"
+        },
+        {
+         "name": "11A-N-AC",
+         "help": "Wi-Fi support 802.11 A-N-AC"
+        },
+        {
+         "name": "11A-N",
+         "help": "Wi-Fi support 802.11 A-N"
+        },
+        {
+         "name": "11A",
+         "help": "Wi-Fi support 802.11 A"
+        },
+        {
+         "name": "11N-AC-AX",
+         "help": "Wi-Fi support 802.11 N-AC-AX"
+        },
+        {
+         "name": "11AC-AX",
+         "help": "Wi-Fi support 802.11 AC-AX"
+        },
+        {
+         "name": "11AC",
+         "help": "Wi-Fi support 802.11 AC"
+        },
+        {
+         "name": "11N-AC",
+         "help": "Wi-Fi support 802.11 N-AC"
+        },
+        {
+         "name": "11B-G-N-AX",
+         "help": "Wi-Fi support 802.11 B-G-N-AX"
+        },
+        {
+         "name": "11B-G-N",
+         "help": "Wi-Fi support 802.11 B-G-N"
+        },
+        {
+         "name": "11B-G",
+         "help": "Wi-Fi support 802.11 B-G"
+        },
+        {
+         "name": "11B",
+         "help": "Wi-Fi support 802.11 B"
+        },
+        {
+         "name": "11G-N-AX",
+         "help": "Wi-Fi support 802.11 G-N-AX"
+        },
+        {
+         "name": "11N-AX",
+         "help": "Wi-Fi support 802.11 N-AX"
+        },
+        {
+         "name": "11AX",
+         "help": "Wi-Fi support 802.11 AX"
+        },
+        {
+         "name": "11G-N",
+         "help": "Wi-Fi support 802.11 G-N"
+        },
+        {
+         "name": "11N",
+         "help": "Wi-Fi support 802.11 N"
+        },
+        {
+         "name": "11G",
+         "help": "Wi-Fi support 802.11 G"
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "guard-interval": {
+       "name": "guard-interval",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi guard interval.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi guard_interval auto"
+        },
+        {
+         "name": "400ns",
+         "help": "Wi-Fi guard_interval 400ns"
+        },
+        {
+         "name": "800ns",
+         "help": "Wi-Fi guard_interval 800ns"
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "channel": {
+       "name": "channel",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi channels.",
+       "options": [
+        {
+         "name": "CH36",
+         "help": "Channel 36"
+        },
+        {
+         "name": "CH40",
+         "help": "Channel 40"
+        },
+        {
+         "name": "CH44",
+         "help": "Channel 44"
+        },
+        {
+         "name": "CH48",
+         "help": "Channel 48"
+        },
+        {
+         "name": "CH52",
+         "help": "Channel 52"
+        },
+        {
+         "name": "CH56",
+         "help": "Channel 56"
+        },
+        {
+         "name": "CH60",
+         "help": "Channel 60"
+        },
+        {
+         "name": "CH64",
+         "help": "Channel 64"
+        },
+        {
+         "name": "CH100",
+         "help": "Channel 100"
+        },
+        {
+         "name": "CH104",
+         "help": "Channel 104"
+        },
+        {
+         "name": "CH108",
+         "help": "Channel 108"
+        },
+        {
+         "name": "CH112",
+         "help": "Channel 112"
+        },
+        {
+         "name": "CH116",
+         "help": "Channel 116"
+        },
+        {
+         "name": "CH120",
+         "help": "Channel 120"
+        },
+        {
+         "name": "CH124",
+         "help": "Channel 124"
+        },
+        {
+         "name": "CH128",
+         "help": "Channel 128"
+        },
+        {
+         "name": "CH132",
+         "help": "Channel 132"
+        },
+        {
+         "name": "CH136",
+         "help": "Channel 136"
+        },
+        {
+         "name": "CH140",
+         "help": "Channel 140"
+        },
+        {
+         "name": "CH144",
+         "help": "Channel 144"
+        },
+        {
+         "name": "CH149",
+         "help": "Channel 149"
+        },
+        {
+         "name": "CH153",
+         "help": "Channel 153"
+        },
+        {
+         "name": "CH157",
+         "help": "Channel 157"
+        },
+        {
+         "name": "CH161",
+         "help": "Channel 161"
+        },
+        {
+         "name": "CH165",
+         "help": "Channel 165"
+        }
+       ],
+       "default": "",
+       "multiple_values": true
+      },
+      "bandwidth": {
+       "name": "bandwidth",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi channel bandwidth.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi channel bandwidth auto"
+        },
+        {
+         "name": "20MHz",
+         "help": "Wi-Fi channel bandwidth 20MHz"
+        },
+        {
+         "name": "40MHz",
+         "help": "Wi-Fi channel bandwidth 40MHz"
+        },
+        {
+         "name": "80MHz",
+         "help": "Wi-Fi channel bandwidth 80MHz"
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "power-level": {
+       "name": "power-level",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Wi-Fi power level in percent (0 - 100, 0 = auto, default = 100).",
+       "min-value": 0,
+       "max-value": 100,
+       "default": 100,
+       "multiple_values": false
+      },
+      "beacon-interval": {
+       "name": "beacon-interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Wi-Fi beacon interval in miliseconds (100 - 3500, default = 100).",
+       "min-value": 100,
+       "max-value": 3500,
+       "default": 100,
+       "multiple_values": false
+      },
+      "80211d": {
+       "name": "80211d",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable Wi-Fi 802.11d.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable 802.11d."
+        },
+        {
+         "name": "enable",
+         "help": "Enable 802.11d."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "max-clients": {
+       "name": "max-clients",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum number of Wi-Fi radio clients (0 - 512, 0 = unlimited, default = 0).",
+       "min-value": 0,
+       "max-value": 512,
+       "default": 0,
+       "multiple_values": false
+      },
+      "extension-channel": {
+       "name": "extension-channel",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi extension channel.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi extension channel auto."
+        },
+        {
+         "name": "higher",
+         "help": "Wi-Fi extension channel higher."
+        },
+        {
+         "name": "lower",
+         "help": "Wi-Fi extension channel lower."
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "bss-color-mode": {
+       "name": "bss-color-mode",
+       "category": "unitary",
+       "type": "option",
+       "help": "Wi-Fi 802.11AX BSS color mode.",
+       "options": [
+        {
+         "name": "auto",
+         "help": "Wi-Fi BSS color mode auto."
+        },
+        {
+         "name": "static",
+         "help": "Wi-Fi BSS color mode static."
+        }
+       ],
+       "default": "auto",
+       "multiple_values": false
+      },
+      "bss-color": {
+       "name": "bss-color",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Wi-Fi 802.11AX BSS color value (0 - 63, 0 = disable, default = 0).",
+       "min-value": 0,
+       "max-value": 63,
+       "default": 0,
+       "multiple_values": false
+      },
+      "lan-ext-vap": {
+       "name": "lan-ext-vap",
+       "category": "unitary",
+       "type": "string",
+       "help": "Wi-Fi LAN-Extention VAP. Select only one VAP.",
+       "datasource": [
+        "extension-controller.extender-vap.name"
+       ],
+       "size": 31,
+       "default": "",
+       "multiple_values": false
+      },
+      "local-vaps": {
+       "name": "local-vaps",
+       "category": "table",
+       "help": "Wi-Fi local VAP. Select up to three VAPs.",
+       "member_table": true,
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "Wi-Fi local VAP name.",
+         "datasource": [
+          "extension-controller.extender-vap.name"
+         ],
+         "size": 79,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     }
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "extension-controller",
+ "q_type": 239,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

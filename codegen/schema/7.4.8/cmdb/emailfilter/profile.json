@@ -1,0 +1,670 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure Email Filter profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "feature-set": {
+   "name": "feature-set",
+   "category": "unitary",
+   "type": "option",
+   "help": "Flow/proxy feature set.",
+   "options": [
+    {
+     "name": "flow",
+     "help": "Flow feature set."
+    },
+    {
+     "name": "proxy",
+     "help": "Proxy feature set."
+    }
+   ],
+   "default": "flow",
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "spam-log": {
+   "name": "spam-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable spam logging for email filtering.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable spam logging for email filtering."
+    },
+    {
+     "name": "enable",
+     "help": "Enable spam logging for email filtering."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "spam-log-fortiguard-response": {
+   "name": "spam-log-fortiguard-response",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging FortiGuard spam response.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging FortiGuard spam response."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging FortiGuard spam response."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "spam-filtering": {
+   "name": "spam-filtering",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable spam filtering.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "external": {
+   "name": "external",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable external Email inspection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "options": {
+   "name": "options",
+   "category": "unitary",
+   "type": "option",
+   "help": "Options.",
+   "options": [
+    {
+     "name": "bannedword",
+     "help": "Content block."
+    },
+    {
+     "name": "spambal",
+     "help": "Block/allow list."
+    },
+    {
+     "name": "spamfsip",
+     "help": "Email IP address FortiGuard AntiSpam block list check."
+    },
+    {
+     "name": "spamfssubmit",
+     "help": "Add FortiGuard AntiSpam spam submission text."
+    },
+    {
+     "name": "spamfschksum",
+     "help": "Email checksum FortiGuard AntiSpam check."
+    },
+    {
+     "name": "spamfsurl",
+     "help": "Email content URL FortiGuard AntiSpam check."
+    },
+    {
+     "name": "spamhelodns",
+     "help": "Email helo/ehlo domain DNS check."
+    },
+    {
+     "name": "spamraddrdns",
+     "help": "Email return address DNS check."
+    },
+    {
+     "name": "spamrbl",
+     "help": "Email DNSBL & ORBL check."
+    },
+    {
+     "name": "spamhdrcheck",
+     "help": "Email mime header check."
+    },
+    {
+     "name": "spamfsphish",
+     "help": "Email content phishing URL FortiGuard AntiSpam check."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "imap": {
+   "name": "imap",
+   "category": "complex",
+   "help": "IMAP.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for spam email.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Allow spam email to pass through."
+      },
+      {
+       "name": "tag",
+       "help": "Tag spam email with configured text in subject or header."
+      }
+     ],
+     "default": "tag",
+     "multiple_values": false
+    },
+    "tag-type": {
+     "name": "tag-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Tag subject or header for spam email.",
+     "options": [
+      {
+       "name": "subject",
+       "help": "Prepend text to spam email subject."
+      },
+      {
+       "name": "header",
+       "help": "Append a user defined mime header to spam email."
+      },
+      {
+       "name": "spaminfo",
+       "help": "Append spam info to spam email header."
+      }
+     ],
+     "default": "subject spaminfo",
+     "multiple_values": true
+    },
+    "tag-msg": {
+     "name": "tag-msg",
+     "category": "unitary",
+     "type": "string",
+     "help": "Subject text or header added to spam email.",
+     "size": 63,
+     "default": "Spam",
+     "multiple_values": false
+    }
+   }
+  },
+  "pop3": {
+   "name": "pop3",
+   "category": "complex",
+   "help": "POP3.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for spam email.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Allow spam email to pass through."
+      },
+      {
+       "name": "tag",
+       "help": "Tag spam email with configured text in subject or header."
+      }
+     ],
+     "default": "tag",
+     "multiple_values": false
+    },
+    "tag-type": {
+     "name": "tag-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Tag subject or header for spam email.",
+     "options": [
+      {
+       "name": "subject",
+       "help": "Prepend text to spam email subject."
+      },
+      {
+       "name": "header",
+       "help": "Append a user defined mime header to spam email."
+      },
+      {
+       "name": "spaminfo",
+       "help": "Append spam info to spam email header."
+      }
+     ],
+     "default": "subject spaminfo",
+     "multiple_values": true
+    },
+    "tag-msg": {
+     "name": "tag-msg",
+     "category": "unitary",
+     "type": "string",
+     "help": "Subject text or header added to spam email.",
+     "size": 63,
+     "default": "Spam",
+     "multiple_values": false
+    }
+   }
+  },
+  "smtp": {
+   "name": "smtp",
+   "category": "complex",
+   "help": "SMTP.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for spam email.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Allow spam email to pass through."
+      },
+      {
+       "name": "tag",
+       "help": "Tag spam email with configured text in subject or header."
+      },
+      {
+       "name": "discard",
+       "help": "Discard (block) spam email."
+      }
+     ],
+     "default": "discard",
+     "multiple_values": false
+    },
+    "tag-type": {
+     "name": "tag-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Tag subject or header for spam email.",
+     "options": [
+      {
+       "name": "subject",
+       "help": "Prepend text to spam email subject."
+      },
+      {
+       "name": "header",
+       "help": "Append a user defined mime header to spam email."
+      },
+      {
+       "name": "spaminfo",
+       "help": "Append spam info to spam email header."
+      }
+     ],
+     "default": "subject spaminfo",
+     "multiple_values": true
+    },
+    "tag-msg": {
+     "name": "tag-msg",
+     "category": "unitary",
+     "type": "string",
+     "help": "Subject text or header added to spam email.",
+     "size": 63,
+     "default": "Spam",
+     "multiple_values": false
+    },
+    "hdrip": {
+     "name": "hdrip",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SMTP email header IP checks for spamfsip, spamrbl, and spambal filters.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SMTP email header IP checks for spamfsip, spamrbl, and spambal filters."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SMTP email header IP checks for spamfsip, spamrbl, and spambal filters."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "local-override": {
+     "name": "local-override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable local filter to override SMTP remote check result.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable local filter to override SMTP remote check result."
+      },
+      {
+       "name": "enable",
+       "help": "Enable local filter to override SMTP remote check result."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "mapi": {
+   "name": "mapi",
+   "category": "complex",
+   "help": "MAPI.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for spam email.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Allow spam email to pass through."
+      },
+      {
+       "name": "discard",
+       "help": "Discard (block) spam email."
+      }
+     ],
+     "default": "pass",
+     "multiple_values": false
+    }
+   }
+  },
+  "msn-hotmail": {
+   "name": "msn-hotmail",
+   "category": "complex",
+   "help": "MSN Hotmail.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "yahoo-mail": {
+   "name": "yahoo-mail",
+   "category": "complex",
+   "help": "Yahoo! Mail.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "gmail": {
+   "name": "gmail",
+   "category": "complex",
+   "help": "Gmail.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "other-webmails": {
+   "name": "other-webmails",
+   "category": "complex",
+   "help": "Other supported webmails.",
+   "children": {
+    "log-all": {
+     "name": "log-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging of all email traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging of all email traffic."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging of all email traffic."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   }
+  },
+  "spam-bword-threshold": {
+   "name": "spam-bword-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Spam banned word threshold.",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 10,
+   "multiple_values": false
+  },
+  "spam-bword-table": {
+   "name": "spam-bword-table",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Anti-spam banned word table ID.",
+   "datasource": [
+    "emailfilter.bword.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "spam-bal-table": {
+   "name": "spam-bal-table",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Anti-spam block/allow list table ID.",
+   "datasource": [
+    "emailfilter.block-allow-list.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "spam-mheader-table": {
+   "name": "spam-mheader-table",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Anti-spam MIME header table ID.",
+   "datasource": [
+    "emailfilter.mheader.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "spam-rbl-table": {
+   "name": "spam-rbl-table",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Anti-spam DNSBL table ID.",
+   "datasource": [
+    "emailfilter.dnsbl.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "spam-iptrust-table": {
+   "name": "spam-iptrust-table",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Anti-spam IP trust table ID.",
+   "datasource": [
+    "emailfilter.iptrust.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "emailfilter",
+ "q_type": 443,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

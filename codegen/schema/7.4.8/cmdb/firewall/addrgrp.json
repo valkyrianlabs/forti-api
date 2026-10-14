@@ -1,0 +1,259 @@
+{
+ "name": "addrgrp",
+ "category": "table",
+ "help": "Configure IPv4 address groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address group name.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address group type.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Default address group type (address may belong to multiple groups)."
+    },
+    {
+     "name": "folder",
+     "help": "Address folder group (members may not belong to any other group)."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "category": {
+   "name": "category",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address group category.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Default address group category (cannot be used as ztna-ems-tag/ztna-geo-tag in policy)."
+    },
+    {
+     "name": "ztna-ems-tag",
+     "help": "Members must be ztna-ems-tag group or ems-tag address, can be used as ztna-ems-tag in policy."
+    },
+    {
+     "name": "ztna-geo-tag",
+     "help": "Members must be ztna-geo-tag group or geographic address, can be used as ztna-geo-tag in policy."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "allow-routing": {
+   "name": "allow-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of this group in the static route configuration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of this group in the static route configuration."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of this group in the static route configuration."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "member": {
+   "name": "member",
+   "category": "table",
+   "help": "Address objects contained within the group.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 600
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "exclude": {
+   "name": "exclude",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable address exclusion.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable address exclusion."
+    },
+    {
+     "name": "disable",
+     "help": "Disable address exclusion."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "exclude-member": {
+   "name": "exclude-member",
+   "category": "table",
+   "help": "Address exclusion member.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Color of icon on the GUI.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tagging": {
+   "name": "tagging",
+   "category": "table",
+   "help": "Config object tagging.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tagging entry name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tag category.",
+     "datasource": [
+      "system.object-tagging.category"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "tags": {
+     "name": "tags",
+     "category": "table",
+     "help": "Tags.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Tag name.",
+       "datasource": [
+        "system.object-tagging.tags.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 2500,
+ "max_table_size_global": 2500,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 34,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

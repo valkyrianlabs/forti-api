@@ -15,6 +15,834 @@ namespace fortiapi::system {
 
 // Configure global attributes.
 struct Global {
+    // Values of Language: GUI display language.
+    struct Language {
+        static constexpr std::string_view english = "english";
+        static constexpr std::string_view french = "french";
+        static constexpr std::string_view spanish = "spanish";
+        static constexpr std::string_view portuguese = "portuguese";
+        static constexpr std::string_view japanese = "japanese";
+        static constexpr std::string_view trach = "trach";
+        static constexpr std::string_view simch = "simch";
+        static constexpr std::string_view korean = "korean";
+    };
+
+    // Values of GuiIpv6: Enable/disable IPv6 settings on the GUI.
+    struct GuiIpv6 {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiReplacementMessageGroups: Enable/disable replacement message groups on the GUI.
+    struct GuiReplacementMessageGroups {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiLocalOut: Enable/disable Local-out traffic on the GUI.
+    struct GuiLocalOut {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiCertificates: Enable/disable the System > Certificate GUI page, allowing you to add and configure certificates from the GUI.
+    struct GuiCertificates {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiCustomLanguage: Enable/disable custom languages in GUI.
+    struct GuiCustomLanguage {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiWirelessOpensecurity: Enable/disable wireless open security option on the GUI.
+    struct GuiWirelessOpensecurity {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiAppDetectionSdwan: Enable/disable Allow app-detection based SD-WAN.
+    struct GuiAppDetectionSdwan {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiDisplayHostname: Enable/disable displaying the FortiGate's hostname on the GUI login page.
+    struct GuiDisplayHostname {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiFortigateCloudSandbox: Enable/disable displaying FortiGate Cloud Sandbox on the GUI.
+    struct GuiFortigateCloudSandbox {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiFirmwareUpgradeWarning: Enable/disable the firmware upgrade warning on the GUI.
+    struct GuiFirmwareUpgradeWarning {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiForticareRegistrationSetupWarning: Enable/disable the FortiCare registration setup warning on the GUI.
+    struct GuiForticareRegistrationSetupWarning {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiAutoUpgradeSetupWarning: Enable/disable the automatic patch upgrade setup prompt on the GUI.
+    struct GuiAutoUpgradeSetupWarning {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiWorkflowManagement: Enable/disable Workflow management features on the GUI.
+    struct GuiWorkflowManagement {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiCdnUsage: Enable/disable Load GUI static files from a CDN.
+    struct GuiCdnUsage {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminHttpsSslVersions: Allowed TLS versions for web administration.
+    struct AdminHttpsSslVersions {
+        static constexpr std::string_view tlsv1_1 = "tlsv1-1";
+        static constexpr std::string_view tlsv1_2 = "tlsv1-2";
+        static constexpr std::string_view tlsv1_3 = "tlsv1-3";
+    };
+
+    // Values of AdminHttpsSslCiphersuites: Select one or more TLS 1.3 ciphersuites to enable. Does not affect ciphers in TLS 1.2 and below. At least one must be enabled. To disable all, remove TLS1.3 from admin-https-ssl-versions.
+    struct AdminHttpsSslCiphersuites {
+        static constexpr std::string_view TLS_AES_128_GCM_SHA256 = "TLS-AES-128-GCM-SHA256";
+        static constexpr std::string_view TLS_AES_256_GCM_SHA384 = "TLS-AES-256-GCM-SHA384";
+        static constexpr std::string_view TLS_CHACHA20_POLY1305_SHA256 = "TLS-CHACHA20-POLY1305-SHA256";
+        static constexpr std::string_view TLS_AES_128_CCM_SHA256 = "TLS-AES-128-CCM-SHA256";
+        static constexpr std::string_view TLS_AES_128_CCM_8_SHA256 = "TLS-AES-128-CCM-8-SHA256";
+    };
+
+    // Values of AdminHttpsSslBannedCiphers: Select one or more cipher technologies that cannot be used in GUI HTTPS negotiations. Only applies to TLS 1.2 and below.
+    struct AdminHttpsSslBannedCiphers {
+        static constexpr std::string_view RSA = "RSA";
+        static constexpr std::string_view DHE = "DHE";
+        static constexpr std::string_view ECDHE = "ECDHE";
+        static constexpr std::string_view DSS = "DSS";
+        static constexpr std::string_view ECDSA = "ECDSA";
+        static constexpr std::string_view AES = "AES";
+        static constexpr std::string_view AESGCM = "AESGCM";
+        static constexpr std::string_view CAMELLIA = "CAMELLIA";
+        static constexpr std::string_view _3DES = "3DES";
+        static constexpr std::string_view SHA1 = "SHA1";
+        static constexpr std::string_view SHA256 = "SHA256";
+        static constexpr std::string_view SHA384 = "SHA384";
+        static constexpr std::string_view STATIC = "STATIC";
+        static constexpr std::string_view CHACHA20 = "CHACHA20";
+        static constexpr std::string_view ARIA = "ARIA";
+        static constexpr std::string_view AESCCM = "AESCCM";
+    };
+
+    // Values of AdminConcurrent: Enable/disable concurrent administrator logins. Use policy-auth-concurrent for firewall authenticated users.
+    struct AdminConcurrent {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PurdueLevel: Purdue Level of this FortiGate.
+    struct PurdueLevel {
+        static constexpr std::string_view _1 = "1";
+        static constexpr std::string_view _1_5 = "1.5";
+        static constexpr std::string_view _2 = "2";
+        static constexpr std::string_view _2_5 = "2.5";
+        static constexpr std::string_view _3 = "3";
+        static constexpr std::string_view _3_5 = "3.5";
+        static constexpr std::string_view _4 = "4";
+        static constexpr std::string_view _5 = "5";
+        static constexpr std::string_view _5_5 = "5.5";
+    };
+
+    // Values of DailyRestart: Enable/disable daily restart of FortiGate unit. Use the restart-time option to set the time of day for the restart.
+    struct DailyRestart {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of WadRestartMode: WAD worker restart mode (default = none).
+    struct WadRestartMode {
+        static constexpr std::string_view none = "none";
+        static constexpr std::string_view time = "time";
+        static constexpr std::string_view memory = "memory";
+    };
+
+    // Values of BatchCmdb: Enable/disable batch mode, allowing you to enter a series of CLI commands that will execute as a group once they are loaded.
+    struct BatchCmdb {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of MultiFactorAuthentication: Enforce all login methods to require an additional authentication factor (default = optional).
+    struct MultiFactorAuthentication {
+        static constexpr std::string_view optional = "optional";
+        static constexpr std::string_view mandatory = "mandatory";
+    };
+
+    // Values of SslMinProtoVersion: Minimum supported protocol version for SSL/TLS connections (default = TLSv1.2).
+    struct SslMinProtoVersion {
+        static constexpr std::string_view SSLv3 = "SSLv3";
+        static constexpr std::string_view TLSv1 = "TLSv1";
+        static constexpr std::string_view TLSv1_1 = "TLSv1-1";
+        static constexpr std::string_view TLSv1_2 = "TLSv1-2";
+        static constexpr std::string_view TLSv1_3 = "TLSv1-3";
+    };
+
+    // Values of AutorunLogFsck: Enable/disable automatic log partition check after ungraceful shutdown.
+    struct AutorunLogFsck {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of TrafficPriority: Choose Type of Service (ToS) or Differentiated Services Code Point (DSCP) for traffic prioritization in traffic shaping.
+    struct TrafficPriority {
+        static constexpr std::string_view tos = "tos";
+        static constexpr std::string_view dscp = "dscp";
+    };
+
+    // Values of TrafficPriorityLevel: Default system-wide level of priority for traffic prioritization.
+    struct TrafficPriorityLevel {
+        static constexpr std::string_view low = "low";
+        static constexpr std::string_view medium = "medium";
+        static constexpr std::string_view high = "high";
+    };
+
+    // Values of QuicCongestionControlAlgo: QUIC congestion control algorithm (default = cubic).
+    struct QuicCongestionControlAlgo {
+        static constexpr std::string_view cubic = "cubic";
+        static constexpr std::string_view bbr = "bbr";
+        static constexpr std::string_view bbr2 = "bbr2";
+        static constexpr std::string_view reno = "reno";
+    };
+
+    // Values of QuicUdpPayloadSizeShapingPerCid: Enable/disable UDP payload size shaping per connection ID (default = enable).
+    struct QuicUdpPayloadSizeShapingPerCid {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of QuicPmtud: Enable/disable path MTU discovery (default = enable).
+    struct QuicPmtud {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AntiReplay: Level of checking for packet replay and TCP sequence checking.
+    struct AntiReplay {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view loose = "loose";
+        static constexpr std::string_view strict = "strict";
+    };
+
+    // Values of SendPmtuIcmp: Enable/disable sending of path maximum transmission unit (PMTU) - ICMP destination unreachable packet and to support PMTUD protocol on your network to reduce fragmentation of packets.
+    struct SendPmtuIcmp {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of HonorDf: Enable/disable honoring of Don't-Fragment (DF) flag.
+    struct HonorDf {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PmtuDiscovery: Enable/disable path MTU discovery.
+    struct PmtuDiscovery {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of VirtualSwitchVlan: Enable/disable virtual switch VLAN.
+    struct VirtualSwitchVlan {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of RevisionImageAutoBackup: Enable/disable back-up of the latest image revision after the firmware is upgraded.
+    struct RevisionImageAutoBackup {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of RevisionBackupOnLogout: Enable/disable back-up of the latest configuration revision when an administrator logs out of the CLI or GUI.
+    struct RevisionBackupOnLogout {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of StrongCrypto: Enable to use strong encryption and only allow strong ciphers and digest for HTTPS/SSH/TLS/SSL functions.
+    struct StrongCrypto {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SslStaticKeyCiphers: Enable/disable static key ciphers in SSL/TLS connections (e.g. AES128-SHA, AES256-SHA, AES128-SHA256, AES256-SHA256).
+    struct SslStaticKeyCiphers {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SnatRouteChange: Enable/disable the ability to change the source NAT route.
+    struct SnatRouteChange {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SpeedtestServer: Enable/disable speed test server.
+    struct SpeedtestServer {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of CliAuditLog: Enable/disable CLI audit log.
+    struct CliAuditLog {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DhParams: Number of bits to use in the Diffie-Hellman exchange for HTTPS/SSH protocols.
+    struct DhParams {
+        static constexpr std::string_view _1024 = "1024";
+        static constexpr std::string_view _1536 = "1536";
+        static constexpr std::string_view _2048 = "2048";
+        static constexpr std::string_view _3072 = "3072";
+        static constexpr std::string_view _4096 = "4096";
+        static constexpr std::string_view _6144 = "6144";
+        static constexpr std::string_view _8192 = "8192";
+    };
+
+    // Values of FdsStatistics: Enable/disable sending IPS, Application Control, and AntiVirus data to FortiGuard. This data is used to improve FortiGuard services and is not shared with external parties and is protected by Fortinet's privacy policy.
+    struct FdsStatistics {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of TcpOption: Enable SACK, timestamp and MSS TCP options.
+    struct TcpOption {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of LldpTransmission: Enable/disable Link Layer Discovery Protocol (LLDP) transmission.
+    struct LldpTransmission {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of LldpReception: Enable/disable Link Layer Discovery Protocol (LLDP) reception.
+    struct LldpReception {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ProxyKeepAliveMode: Control if users must re-authenticate after a session is closed, traffic has been idle, or from the point at which the user was authenticated.
+    struct ProxyKeepAliveMode {
+        static constexpr std::string_view session = "session";
+        static constexpr std::string_view traffic = "traffic";
+        static constexpr std::string_view re_authentication = "re-authentication";
+    };
+
+    // Values of ProxyAuthLifetime: Enable/disable authenticated users lifetime control. This is a cap on the total time a proxy user can be authenticated for after which re-authentication will take place.
+    struct ProxyAuthLifetime {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ProxyResourceMode: Enable/disable use of the maximum memory usage on the FortiGate unit's proxy processing of resources, such as block lists, allow lists, and external resources.
+    struct ProxyResourceMode {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ProxyCertUseMgmtVdom: Enable/disable using management VDOM to send requests.
+    struct ProxyCertUseMgmtVdom {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of CheckProtocolHeader: Level of checking performed on protocol headers. Strict checking is more thorough but may affect performance. Loose checking is OK in most cases.
+    struct CheckProtocolHeader {
+        static constexpr std::string_view loose = "loose";
+        static constexpr std::string_view strict = "strict";
+    };
+
+    // Values of VipArpRange: Controls the number of ARPs that the FortiGate sends for a Virtual IP (VIP) address range.
+    struct VipArpRange {
+        static constexpr std::string_view unlimited = "unlimited";
+        static constexpr std::string_view restricted = "restricted";
+    };
+
+    // Values of ResetSessionlessTcp: Action to perform if the FortiGate receives a TCP packet but cannot find a corresponding session in its session table. NAT/Route mode only.
+    struct ResetSessionlessTcp {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AllowTrafficRedirect: Disable to prevent traffic with same local ingress and egress interface from being forwarded without policy check.
+    struct AllowTrafficRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ipv6AllowTrafficRedirect: Disable to prevent IPv6 traffic with same local ingress and egress interface from being forwarded without policy check.
+    struct Ipv6AllowTrafficRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of StrictDirtySessionCheck: Enable to check the session against the original policy when revalidating. This can prevent dropping of redirected sessions when web-filtering and authentication are enabled together. If this option is enabled, the FortiGate unit deletes a session if a routing or policy change causes the session to no longer match the policy that originally allowed the session.
+    struct StrictDirtySessionCheck {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PreLoginBanner: Enable/disable displaying the administrator access disclaimer message on the login page before an administrator logs in.
+    struct PreLoginBanner {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PostLoginBanner: Enable/disable displaying the administrator access disclaimer message after an administrator successfully logs in.
+    struct PostLoginBanner {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of Tftp: Enable/disable TFTP.
+    struct Tftp {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AvFailopen: Set the action to take if the FortiGate is running low on memory or the proxy connection limit has been reached.
+    struct AvFailopen {
+        static constexpr std::string_view pass = "pass";
+        static constexpr std::string_view off = "off";
+        static constexpr std::string_view one_shot = "one-shot";
+    };
+
+    // Values of AvFailopenSession: When enabled and a proxy for a protocol runs out of room in its session table, that protocol goes into failopen mode and enacts the action specified by av-failopen.
+    struct AvFailopenSession {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of LogSingleCpuHigh: Enable/disable logging the event of a single CPU core reaching CPU usage threshold.
+    struct LogSingleCpuHigh {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of CheckResetRange: Configure ICMP error message verification. You can either apply strict RST range checking or disable it.
+    struct CheckResetRange {
+        static constexpr std::string_view strict = "strict";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of VdomMode: Enable/disable support for multiple virtual domains (VDOMs).
+    struct VdomMode {
+        static constexpr std::string_view no_vdom = "no-vdom";
+        static constexpr std::string_view multi_vdom = "multi-vdom";
+    };
+
+    // Values of LongVdomName: Enable/disable long VDOM name support.
+    struct LongVdomName {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of EditVdomPrompt: Enable/disable edit new VDOM prompt.
+    struct EditVdomPrompt {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminHttpsRedirect: Enable/disable redirection of HTTP administration access to HTTPS.
+    struct AdminHttpsRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminSshPassword: Enable/disable password authentication for SSH admin access.
+    struct AdminSshPassword {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminRestrictLocal: Enable/disable local admin authentication restriction when remote authenticator is up and running (default = disable).
+    struct AdminRestrictLocal {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminSshV1: Enable/disable SSH v1 compatibility.
+    struct AdminSshV1 {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminTelnet: Enable/disable TELNET service.
+    struct AdminTelnet {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminForticloudSsoLogin: Enable/disable FortiCloud admin login via SSO.
+    struct AdminForticloudSsoLogin {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminResetButton: Press the reset button can reset to factory default.
+    struct AdminResetButton {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminHttpsPkiRequired: Enable/disable admin login method. Enable to force administrators to provide a valid certificate to log in if PKI is enabled. Disable to allow administrators to log in with a certificate or password.
+    struct AdminHttpsPkiRequired {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AuthKeepalive: Enable to prevent user authentication sessions from timing out when idle.
+    struct AuthKeepalive {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AuthSessionLimit: Action to take when the number of allowed user authenticated sessions is reached.
+    struct AuthSessionLimit {
+        static constexpr std::string_view block_new = "block-new";
+        static constexpr std::string_view logout_inactive = "logout-inactive";
+    };
+
+    // Values of CltCertReq: Enable/disable requiring administrators to have a client certificate to log into the GUI using HTTPS.
+    struct CltCertReq {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of CfgSave: Configuration file save mode for CLI changes.
+    struct CfgSave {
+        static constexpr std::string_view automatic = "automatic";
+        static constexpr std::string_view manual = "manual";
+        static constexpr std::string_view revert = "revert";
+    };
+
+    // Values of RebootUponConfigRestore: Enable/disable reboot of system upon restoring configuration.
+    struct RebootUponConfigRestore {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AdminScp: Enable/disable SCP support for system configuration backup, restore, and firmware file upload.
+    struct AdminScp {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SecurityRatingRunOnSchedule: Enable/disable scheduled runs of Security Rating.
+    struct SecurityRatingRunOnSchedule {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of WirelessController: Enable/disable the wireless controller feature to use the FortiGate unit to manage FortiAPs.
+    struct WirelessController {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Fortiextender: Enable/disable FortiExtender.
+    struct Fortiextender {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of FortiextenderDiscoveryLockdown: Enable/disable FortiExtender CAPWAP lockdown.
+    struct FortiextenderDiscoveryLockdown {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of FortiextenderVlanMode: Enable/disable FortiExtender VLAN mode.
+    struct FortiextenderVlanMode {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of FortiextenderProvisionOnAuthorization: Enable/disable automatic provisioning of latest FortiExtender firmware on authorization.
+    struct FortiextenderProvisionOnAuthorization {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchController: Enable/disable switch controller feature. Switch controller allows you to manage FortiSwitch from the FortiGate itself.
+    struct SwitchController {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of ProxyHardwareAcceleration: Enable/disable email proxy hardware acceleration.
+    struct ProxyHardwareAcceleration {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of FgdAlertSubscription: Type of alert to retrieve from FortiGuard.
+    struct FgdAlertSubscription {
+        static constexpr std::string_view advisory = "advisory";
+        static constexpr std::string_view latest_threat = "latest-threat";
+        static constexpr std::string_view latest_virus = "latest-virus";
+        static constexpr std::string_view latest_attack = "latest-attack";
+        static constexpr std::string_view new_antivirus_db = "new-antivirus-db";
+        static constexpr std::string_view new_attack_db = "new-attack-db";
+    };
+
+    // Values of IpsecHmacOffload: Enable/disable offloading (hardware acceleration) of HMAC processing for IPsec VPN.
+    struct IpsecHmacOffload {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ipv6AllowAnycastProbe: Enable/disable IPv6 address probe through Anycast.
+    struct Ipv6AllowAnycastProbe {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ipv6AllowMulticastProbe: Enable/disable IPv6 address probe through Multicast.
+    struct Ipv6AllowMulticastProbe {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ipv6AllowLocalInSilentDrop: Enable/disable silent drop of IPv6 local-in traffic.
+    struct Ipv6AllowLocalInSilentDrop {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of CsrCaAttribute: Enable/disable the CA attribute in certificates. Some CA servers reject CSRs that have the CA attribute.
+    struct CsrCaAttribute {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Wimax4gUsb: Enable/disable comparability with WiMAX 4G USB devices.
+    struct Wimax4gUsb {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of VpnEmsSnCheck: Enable/disable verification of EMS serial number in SSL-VPN connection.
+    struct VpnEmsSnCheck {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SslvpnWebMode: Enable/disable SSL-VPN web mode.
+    struct SslvpnWebMode {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of WadSourceAffinity: Enable/disable dispatching traffic to WAD workers based on source affinity.
+    struct WadSourceAffinity {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of LoginTimestamp: Enable/disable login time recording.
+    struct LoginTimestamp {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of IpConflictDetection: Enable/disable logging of IPv4 address conflict detection.
+    struct IpConflictDetection {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SpecialFile23Support: Enable/disable detection of those special format files when using Data Loss Prevention.
+    struct SpecialFile23Support {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of LogUuidAddress: Enable/disable insertion of address UUIDs to traffic logs.
+    struct LogUuidAddress {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of LogSslConnection: Enable/disable logging of SSL connection events.
+    struct LogSslConnection {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiRestApiCache: Enable/disable REST API result caching on FortiGate.
+    struct GuiRestApiCache {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of RestApiKeyUrlQuery: Enable/disable support for passing REST API keys through URL query parameters.
+    struct RestApiKeyUrlQuery {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of IpsecAsicOffload: Enable/disable ASIC offloading (hardware acceleration) for IPsec VPN traffic. Hardware acceleration can offload IPsec VPN sessions and accelerate encryption and decryption.
+    struct IpsecAsicOffload {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of IpsecRoundRobin: Enable/disable round-robin redistribution to multiple CPUs for IPsec VPN traffic.
+    struct IpsecRoundRobin {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PrivateDataEncryption: Enable/disable private data encryption using an AES 128-bit key or passpharse.
+    struct PrivateDataEncryption {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of AutoAuthExtensionDevice: Enable/disable automatic authorization of dedicated Fortinet extension devices.
+    struct AutoAuthExtensionDevice {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GuiTheme: Color scheme for the administration GUI.
+    struct GuiTheme {
+        static constexpr std::string_view jade = "jade";
+        static constexpr std::string_view neutrino = "neutrino";
+        static constexpr std::string_view mariner = "mariner";
+        static constexpr std::string_view graphite = "graphite";
+        static constexpr std::string_view melongene = "melongene";
+        static constexpr std::string_view jet_stream = "jet-stream";
+        static constexpr std::string_view security_fabric = "security-fabric";
+        static constexpr std::string_view retro = "retro";
+        static constexpr std::string_view dark_matter = "dark-matter";
+        static constexpr std::string_view onyx = "onyx";
+        static constexpr std::string_view eclipse = "eclipse";
+    };
+
+    // Values of GuiDateFormat: Default date format used throughout GUI.
+    struct GuiDateFormat {
+        static constexpr std::string_view yyyy_MM_dd = "yyyy/MM/dd";
+        static constexpr std::string_view dd_MM_yyyy = "dd/MM/yyyy";
+        static constexpr std::string_view MM_dd_yyyy = "MM/dd/yyyy";
+        static constexpr std::string_view yyyy_MM_dd_2 = "yyyy-MM-dd";
+        static constexpr std::string_view dd_MM_yyyy_2 = "dd-MM-yyyy";
+        static constexpr std::string_view MM_dd_yyyy_2 = "MM-dd-yyyy";
+    };
+
+    // Values of GuiDateTimeSource: Source from which the FortiGate GUI uses to display date and time entries.
+    struct GuiDateTimeSource {
+        static constexpr std::string_view system = "system";
+        static constexpr std::string_view browser = "browser";
+    };
+
+    // Values of CloudCommunication: Enable/disable all cloud communication.
+    struct CloudCommunication {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of FortitokenCloud: Enable/disable FortiToken Cloud service.
+    struct FortitokenCloud {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of FortitokenCloudPushStatus: Enable/disable FTM push service of FortiToken Cloud.
+    struct FortitokenCloudPushStatus {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of IrqTimeAccounting: Configure CPU IRQ time accounting mode.
+    struct IrqTimeAccounting {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view force = "force";
+    };
+
+    // Values of ManagementPortUseAdminSport: Enable/disable use of the admin-sport setting for the management port. If disabled, FortiGate will allow user to specify management-port.
+    struct ManagementPortUseAdminSport {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ForticonverterIntegration: Enable/disable FortiConverter integration service.
+    struct ForticonverterIntegration {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ForticonverterConfigUpload: Enable/disable config upload to FortiConverter.
+    struct ForticonverterConfigUpload {
+        static constexpr std::string_view once = "once";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InternetServiceDatabase: Configure which Internet Service database size to download from FortiGuard and use.
+    struct InternetServiceDatabase {
+        static constexpr std::string_view mini = "mini";
+        static constexpr std::string_view standard = "standard";
+        static constexpr std::string_view full = "full";
+        static constexpr std::string_view on_demand = "on-demand";
+    };
+
+    // Values of EarlyTcpNpuSession: Enable/disable early TCP NPU session.
+    struct EarlyTcpNpuSession {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of NpuNeighborUpdate: Enable/disable sending of ARP/ICMP6 probing packets to update neighbors for offloaded sessions.
+    struct NpuNeighborUpdate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DelayTcpNpuSession: Enable TCP NPU session delay to guarantee packet order of 3-way handshake.
+    struct DelayTcpNpuSession {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InterfaceSubnetUsage: Enable/disable allowing use of interface-subnet setting in firewall addresses (default = enable).
+    struct InterfaceSubnetUsage {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of FortigslbIntegration: Enable/disable integration with the FortiGSLB cloud service.
+    struct FortigslbIntegration {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
     // Configure which on-demand Internet Service IDs are to be downloaded.
     struct InternetServiceDownloadListEntry {
         fortiapi::Field<std::uint32_t> id;  // Internet Service ID. Required. References: firewall.internet-service.id.
@@ -497,582 +1325,6 @@ struct GlobalSpec {
 };
 
 using GlobalSettings = fortiapi::Singleton<GlobalSpec>;
-
-// Allowed values of option attributes.
-namespace global::language {
-    inline constexpr std::string_view english = "english";
-    inline constexpr std::string_view french = "french";
-    inline constexpr std::string_view spanish = "spanish";
-    inline constexpr std::string_view portuguese = "portuguese";
-    inline constexpr std::string_view japanese = "japanese";
-    inline constexpr std::string_view trach = "trach";
-    inline constexpr std::string_view simch = "simch";
-    inline constexpr std::string_view korean = "korean";
-}
-namespace global::gui_ipv6 {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_replacement_message_groups {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_local_out {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_certificates {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_custom_language {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_wireless_opensecurity {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_app_detection_sdwan {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_display_hostname {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_fortigate_cloud_sandbox {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_firmware_upgrade_warning {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_forticare_registration_setup_warning {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_auto_upgrade_setup_warning {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_workflow_management {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_cdn_usage {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_https_ssl_versions {
-    inline constexpr std::string_view tlsv1_1 = "tlsv1-1";
-    inline constexpr std::string_view tlsv1_2 = "tlsv1-2";
-    inline constexpr std::string_view tlsv1_3 = "tlsv1-3";
-}
-namespace global::admin_https_ssl_ciphersuites {
-    inline constexpr std::string_view TLS_AES_128_GCM_SHA256 = "TLS-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_AES_256_GCM_SHA384 = "TLS-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_CHACHA20_POLY1305_SHA256 = "TLS-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_AES_128_CCM_SHA256 = "TLS-AES-128-CCM-SHA256";
-    inline constexpr std::string_view TLS_AES_128_CCM_8_SHA256 = "TLS-AES-128-CCM-8-SHA256";
-}
-namespace global::admin_https_ssl_banned_ciphers {
-    inline constexpr std::string_view RSA = "RSA";
-    inline constexpr std::string_view DHE = "DHE";
-    inline constexpr std::string_view ECDHE = "ECDHE";
-    inline constexpr std::string_view DSS = "DSS";
-    inline constexpr std::string_view ECDSA = "ECDSA";
-    inline constexpr std::string_view AES = "AES";
-    inline constexpr std::string_view AESGCM = "AESGCM";
-    inline constexpr std::string_view CAMELLIA = "CAMELLIA";
-    inline constexpr std::string_view _3DES = "3DES";
-    inline constexpr std::string_view SHA1 = "SHA1";
-    inline constexpr std::string_view SHA256 = "SHA256";
-    inline constexpr std::string_view SHA384 = "SHA384";
-    inline constexpr std::string_view STATIC = "STATIC";
-    inline constexpr std::string_view CHACHA20 = "CHACHA20";
-    inline constexpr std::string_view ARIA = "ARIA";
-    inline constexpr std::string_view AESCCM = "AESCCM";
-}
-namespace global::admin_concurrent {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::purdue_level {
-    inline constexpr std::string_view _1 = "1";
-    inline constexpr std::string_view _1_5 = "1.5";
-    inline constexpr std::string_view _2 = "2";
-    inline constexpr std::string_view _2_5 = "2.5";
-    inline constexpr std::string_view _3 = "3";
-    inline constexpr std::string_view _3_5 = "3.5";
-    inline constexpr std::string_view _4 = "4";
-    inline constexpr std::string_view _5 = "5";
-    inline constexpr std::string_view _5_5 = "5.5";
-}
-namespace global::daily_restart {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::wad_restart_mode {
-    inline constexpr std::string_view none = "none";
-    inline constexpr std::string_view time = "time";
-    inline constexpr std::string_view memory = "memory";
-}
-namespace global::batch_cmdb {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::multi_factor_authentication {
-    inline constexpr std::string_view optional = "optional";
-    inline constexpr std::string_view mandatory = "mandatory";
-}
-namespace global::ssl_min_proto_version {
-    inline constexpr std::string_view SSLv3 = "SSLv3";
-    inline constexpr std::string_view TLSv1 = "TLSv1";
-    inline constexpr std::string_view TLSv1_1 = "TLSv1-1";
-    inline constexpr std::string_view TLSv1_2 = "TLSv1-2";
-    inline constexpr std::string_view TLSv1_3 = "TLSv1-3";
-}
-namespace global::autorun_log_fsck {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::traffic_priority {
-    inline constexpr std::string_view tos = "tos";
-    inline constexpr std::string_view dscp = "dscp";
-}
-namespace global::traffic_priority_level {
-    inline constexpr std::string_view low = "low";
-    inline constexpr std::string_view medium = "medium";
-    inline constexpr std::string_view high = "high";
-}
-namespace global::quic_congestion_control_algo {
-    inline constexpr std::string_view cubic = "cubic";
-    inline constexpr std::string_view bbr = "bbr";
-    inline constexpr std::string_view bbr2 = "bbr2";
-    inline constexpr std::string_view reno = "reno";
-}
-namespace global::quic_udp_payload_size_shaping_per_cid {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::quic_pmtud {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::anti_replay {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view loose = "loose";
-    inline constexpr std::string_view strict = "strict";
-}
-namespace global::send_pmtu_icmp {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::honor_df {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::pmtu_discovery {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::virtual_switch_vlan {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::revision_image_auto_backup {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::revision_backup_on_logout {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::strong_crypto {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ssl_static_key_ciphers {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::snat_route_change {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::speedtest_server {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::cli_audit_log {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::dh_params {
-    inline constexpr std::string_view _1024 = "1024";
-    inline constexpr std::string_view _1536 = "1536";
-    inline constexpr std::string_view _2048 = "2048";
-    inline constexpr std::string_view _3072 = "3072";
-    inline constexpr std::string_view _4096 = "4096";
-    inline constexpr std::string_view _6144 = "6144";
-    inline constexpr std::string_view _8192 = "8192";
-}
-namespace global::fds_statistics {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::tcp_option {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::lldp_transmission {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::lldp_reception {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::proxy_keep_alive_mode {
-    inline constexpr std::string_view session = "session";
-    inline constexpr std::string_view traffic = "traffic";
-    inline constexpr std::string_view re_authentication = "re-authentication";
-}
-namespace global::proxy_auth_lifetime {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::proxy_resource_mode {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::proxy_cert_use_mgmt_vdom {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::check_protocol_header {
-    inline constexpr std::string_view loose = "loose";
-    inline constexpr std::string_view strict = "strict";
-}
-namespace global::vip_arp_range {
-    inline constexpr std::string_view unlimited = "unlimited";
-    inline constexpr std::string_view restricted = "restricted";
-}
-namespace global::reset_sessionless_tcp {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::allow_traffic_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ipv6_allow_traffic_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::strict_dirty_session_check {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::pre_login_banner {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::post_login_banner {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::tftp {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::av_failopen {
-    inline constexpr std::string_view pass = "pass";
-    inline constexpr std::string_view off = "off";
-    inline constexpr std::string_view one_shot = "one-shot";
-}
-namespace global::av_failopen_session {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::log_single_cpu_high {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::check_reset_range {
-    inline constexpr std::string_view strict = "strict";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::vdom_mode {
-    inline constexpr std::string_view no_vdom = "no-vdom";
-    inline constexpr std::string_view multi_vdom = "multi-vdom";
-}
-namespace global::long_vdom_name {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::edit_vdom_prompt {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_https_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_ssh_password {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_restrict_local {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_ssh_v1 {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_telnet {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_forticloud_sso_login {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_reset_button {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_https_pki_required {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::auth_keepalive {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::auth_session_limit {
-    inline constexpr std::string_view block_new = "block-new";
-    inline constexpr std::string_view logout_inactive = "logout-inactive";
-}
-namespace global::clt_cert_req {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::cfg_save {
-    inline constexpr std::string_view automatic = "automatic";
-    inline constexpr std::string_view manual = "manual";
-    inline constexpr std::string_view revert = "revert";
-}
-namespace global::reboot_upon_config_restore {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::admin_scp {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::security_rating_run_on_schedule {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::wireless_controller {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::fortiextender {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::fortiextender_discovery_lockdown {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::fortiextender_vlan_mode {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::fortiextender_provision_on_authorization {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::switch_controller {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::proxy_hardware_acceleration {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::fgd_alert_subscription {
-    inline constexpr std::string_view advisory = "advisory";
-    inline constexpr std::string_view latest_threat = "latest-threat";
-    inline constexpr std::string_view latest_virus = "latest-virus";
-    inline constexpr std::string_view latest_attack = "latest-attack";
-    inline constexpr std::string_view new_antivirus_db = "new-antivirus-db";
-    inline constexpr std::string_view new_attack_db = "new-attack-db";
-}
-namespace global::ipsec_hmac_offload {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ipv6_allow_anycast_probe {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ipv6_allow_multicast_probe {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ipv6_allow_local_in_silent_drop {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::csr_ca_attribute {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::wimax_4g_usb {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::vpn_ems_sn_check {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::sslvpn_web_mode {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::wad_source_affinity {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::login_timestamp {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ip_conflict_detection {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::special_file_23_support {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::log_uuid_address {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::log_ssl_connection {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_rest_api_cache {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::rest_api_key_url_query {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ipsec_asic_offload {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::ipsec_round_robin {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::private_data_encryption {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::auto_auth_extension_device {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::gui_theme {
-    inline constexpr std::string_view jade = "jade";
-    inline constexpr std::string_view neutrino = "neutrino";
-    inline constexpr std::string_view mariner = "mariner";
-    inline constexpr std::string_view graphite = "graphite";
-    inline constexpr std::string_view melongene = "melongene";
-    inline constexpr std::string_view jet_stream = "jet-stream";
-    inline constexpr std::string_view security_fabric = "security-fabric";
-    inline constexpr std::string_view retro = "retro";
-    inline constexpr std::string_view dark_matter = "dark-matter";
-    inline constexpr std::string_view onyx = "onyx";
-    inline constexpr std::string_view eclipse = "eclipse";
-}
-namespace global::gui_date_format {
-    inline constexpr std::string_view yyyy_MM_dd = "yyyy/MM/dd";
-    inline constexpr std::string_view dd_MM_yyyy = "dd/MM/yyyy";
-    inline constexpr std::string_view MM_dd_yyyy = "MM/dd/yyyy";
-    inline constexpr std::string_view yyyy_MM_dd_2 = "yyyy-MM-dd";
-    inline constexpr std::string_view dd_MM_yyyy_2 = "dd-MM-yyyy";
-    inline constexpr std::string_view MM_dd_yyyy_2 = "MM-dd-yyyy";
-}
-namespace global::gui_date_time_source {
-    inline constexpr std::string_view system = "system";
-    inline constexpr std::string_view browser = "browser";
-}
-namespace global::cloud_communication {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::fortitoken_cloud {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::fortitoken_cloud_push_status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::irq_time_accounting {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view force = "force";
-}
-namespace global::management_port_use_admin_sport {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::forticonverter_integration {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::forticonverter_config_upload {
-    inline constexpr std::string_view once = "once";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::internet_service_database {
-    inline constexpr std::string_view mini = "mini";
-    inline constexpr std::string_view standard = "standard";
-    inline constexpr std::string_view full = "full";
-    inline constexpr std::string_view on_demand = "on-demand";
-}
-namespace global::early_tcp_npu_session {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::npu_neighbor_update {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::delay_tcp_npu_session {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace global::interface_subnet_usage {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace global::fortigslb_integration {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
 
 }  // namespace fortiapi::system
 

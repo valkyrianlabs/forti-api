@@ -24,9 +24,11 @@ firewall::Addresses::update(address);   // sends {"comment": "managed by forti-a
 
 ## What you get
 
-- **Generated endpoints**: one struct per FortiOS object with every attribute as a
-  `fortiapi::Field<T>`, and a `Table` (list, find, get, contains, add, update, del) or `Singleton`
-  (get, update) per endpoint.
+- **Every configuration endpoint**: generated from FortiOS 7.4.8 schemas, 487 endpoints on a
+  FortiGate-60F, one struct per object with every attribute as a `fortiapi::Field<T>`, and a `Table`
+  (list, find, get, contains, add, update, del) or `Singleton` (get, update) per endpoint.
+- **Typed monitor reads**: the read-only monitor endpoints the web GUI uses, with result types
+  generated from recorded response shapes; everything else through `fortiapi::Monitor`.
 - **Exact writes**: fields know whether they are absent, read from the device, modified or
   cleared. An update sends only modified and cleared attributes.
 - **A careful transport**: timeouts, one kept-alive connection per client, URL-encoded object

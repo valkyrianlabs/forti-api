@@ -123,7 +123,7 @@ def write_snapshot(version: str, api_path: str, schema: dict) -> Path:
 
 
 def cmd_pull(args: argparse.Namespace) -> int:
-    version, entries = codegen.load_manifest()
+    version, entries, _ = codegen.load_manifest()
     paths = args.paths or [e["path"] for e in entries]
     device = FortiGate()
     status, body = device.get("monitor/system/status")
@@ -155,7 +155,7 @@ def references(node: dict, out: set[str]) -> None:
 
 
 def cmd_crawl(args: argparse.Namespace) -> int:
-    version, entries = codegen.load_manifest()
+    version, entries, _ = codegen.load_manifest()
     seeds_file = ROOT / "codegen" / "seeds.txt"
     seeds = [e["path"] for e in entries]
     if seeds_file.exists():
@@ -205,7 +205,7 @@ def normalize_template(path: str) -> str:
 def cmd_mine(args: argparse.Namespace) -> int:
     """Statically extracts API paths from the GUI bundle. Only path strings and the HTTP method of
     the call site (when visible) are kept; the bundle itself is never stored."""
-    version, _ = codegen.load_manifest()
+    version, _, _ = codegen.load_manifest()
     device = FortiGate()
     status, main = device.static("main.js")
     if status != 200:

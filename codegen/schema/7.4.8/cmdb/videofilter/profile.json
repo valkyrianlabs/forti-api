@@ -1,0 +1,233 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure VideoFilter profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "filters": {
+   "name": "filters",
+   "category": "table",
+   "help": "YouTube filter entries.",
+   "required": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comment.",
+     "size": 255,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Filter type.",
+     "required": true,
+     "options": [
+      {
+       "name": "category",
+       "help": "Filter videos by FortiGuard category."
+      },
+      {
+       "name": "channel",
+       "help": "Filter videos by channel ID."
+      },
+      {
+       "name": "title",
+       "help": "Filter videos by title."
+      },
+      {
+       "name": "description",
+       "help": "Filter videos by description."
+      }
+     ],
+     "default": "category",
+     "multiple_values": false
+    },
+    "keyword": {
+     "name": "keyword",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Video filter keyword ID.",
+     "required": true,
+     "datasource": [
+      "videofilter.keyword.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "string",
+     "help": "FortiGuard category ID.",
+     "required": true,
+     "size": 7,
+     "default": "",
+     "multiple_values": false
+    },
+    "channel": {
+     "name": "channel",
+     "category": "unitary",
+     "type": "string",
+     "help": "Channel ID.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Video filter action.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow videos to be accessed."
+      },
+      {
+       "name": "monitor",
+       "help": "Monitor videos."
+      },
+      {
+       "name": "block",
+       "help": "Block videos."
+      }
+     ],
+     "default": "monitor",
+     "multiple_values": false
+    },
+    "log": {
+     "name": "log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable logging."
+      },
+      {
+       "name": "disable",
+       "help": "Disable logging."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "youtube": {
+   "name": "youtube",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable YouTube video source.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable YouTube source."
+    },
+    {
+     "name": "disable",
+     "help": "Disable YouTube source."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "vimeo": {
+   "name": "vimeo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Vimeo video source.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Vimeo source."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Vimeo source."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dailymotion": {
+   "name": "dailymotion",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Dailymotion video source.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Dailymotion source."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Dailymotion source."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "videofilter",
+ "q_type": 94,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}
