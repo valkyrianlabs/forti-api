@@ -153,6 +153,8 @@ namespace fortiapi {
             std::string what = std::format("{} {}: HTTP {}", to_string(method), path, status);
             if (body.is_object() && body.contains("error") && body["error"].is_number_integer())
                 what += std::format(", FortiOS error {}", body["error"].get<int>());
+            if (body.is_object() && body.contains("error") && body["error"].is_string())
+                what += ": " + body["error"].get<std::string>();
             if (body.is_object() && body.contains("cli_error") && body["cli_error"].is_array())
                 for (const auto& line: body["cli_error"]) if (line.is_string()) what += "; " + line.get<std::string>();
             return what;

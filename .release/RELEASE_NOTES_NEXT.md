@@ -50,3 +50,29 @@ what you changed (`clear()` resets an attribute to its default), reads never mar
 and option attributes come with constants (`firewall::policy::action::deny`). Generated so far:
 firewall policy, address, VIP, service, service category, recurring schedule, DNS filter profile,
 external resource, API user, interface and global settings.
+
+## Breaking: the pre-generation API is gone
+
+`FortiAPI`, `FortiAuth`, `FortiGate::Policies`/`Services`/`Schedules`, `DNSFilter`, `ThreatFeed`,
+`System::Interface`, `System::Admin` and the hand-written types are removed. Everything lives in
+`fortiapi::` on generated endpoints, with small helpers for the domain logic:
+
+| Before | Now |
+|---|---|
+| `FortiAuth::set_vars_from_env()` | automatic (`Config::from_env()`), or `set_default_client(...)` |
+| `FortiGate::Policies::get()` | `firewall::Policies::list()` |
+| `DNSFilter::add(name)` / `del(name)` | `dnsfilter::Profiles::add(profile)` / `del(name)` |
+| `DNSProfile::block_category(c)` | `dnsfilter::block_category(profile, c)` + `Profiles::update(profile)` |
+| `DNSFilter::global_allow_category(c)` | `dnsfilter::allow_category_everywhere(c)` |
+| `ThreatFeed::add(name, category)` | `system::ExternalResources::add(system::push_threat_feed(name, category))` |
+| `ThreatFeed::update_feed(commands)` | `system::push_entries(feed, entries, FeedCommand::snapshot)` |
+| `ThreatFeed::get_entry_list(feed)` | `system::feed_state(feed).entries` |
+| `ThreatFeed::del(name)` | `system::delete_threat_feed(name)` |
+| `System::Interface::get_wan_ip()` | `system::interface_addresses("wan1")` |
+| `APIUser::trust(subnet)` | `system::trust(user, subnet)` + `ApiUsers::update(user)` |
+| `FirewallSchedule::set_days(...)` | `schedule.day = firewall::days({...})` |
+| `FirewallService::set_port_range(...)` | `service.tcp_portrange = firewall::port_ranges({...})` |
+
+Fixed on the way: schedule days are written as FortiOS day names (were ordinals), IPv6 trusted hosts
+get the IPv6 type, CIDR trusted hosts are accepted, and rejected threat-feed pushes raise an error
+instead of passing silently.

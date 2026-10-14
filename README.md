@@ -81,50 +81,61 @@ meson test -C build --suite live -v
 
 ---
 
-## Basic Usage
+## Usage
 
 ```cpp
-#include <forti_api/firewall.hpp>
+#include <forti_api.hpp>      // or just the area you need: <forti_api/firewall.hpp>
+using namespace fortiapi;
 
-using namespace FortiGate;
+int main() {
+    // Connection from the environment (FORTIGATE_HOST, FORTIGATE_API_KEY, ... see .env.example),
+    // or set_default_client(std::make_shared<Client>(Config{...})).
+    for (const auto& policy: firewall::Policies::list(Query().filter("status==enable")))
+        std::cout << *policy.policyid << " " << policy.name.value_or("") << "\n";
 
-auto policies = Policies::get();
+    auto address = firewall::Addresses::get("LAN 10.0.0.0/24");   // keys are URL-encoded for you
+    address.comment = "managed by forti-api";
+    firewall::Addresses::update(address);                        // sends {"comment": ...} only
 
-for (const auto& policy : policies) {
-    std::cout << policy.name << " -> " << policy.action << "\n";
+    firewall::Address host;
+    host.name = "printer";
+    host.subnet = "192.168.1.50 255.255.255.255";
+    firewall::Addresses::add(host);
 }
 ```
 
-Updating a policy:
+Every FortiOS attribute is a `fortiapi::Field<T>` that knows whether it is absent, read from the device,
+modified, or cleared (`clear()` resets it to the FortiOS default). An update sends exactly the modified
+and cleared attributes, so reading an object, changing one field and writing it back never touches
+anything else. Option attributes come with constants (`firewall::policy::action::deny`).
 
-```cpp
-auto policy = Policies::get("Allow-Internal");
-policy.comments = "Updated via Forti-API";
-Policies::update(policy);
-```
+Each table offers `list`, `find` (nullopt on 404), `get`, `contains`, `add`, `update`, `del` and `schema`;
+singletons (`system::GlobalSettings`) offer `get` and `update`. Every call takes an optional `Query`
+(`vdom`, `filter`, `format`, `start`/`count`, ...) and `Client`. Errors are exceptions:
+`fortiapi::ApiError` (HTTP status, FortiOS error code and CLI messages), `TransportError`, `DecodeError`
+(naming the attribute that did not match). Reads retry on throttling; writes are never retried.
+
+The monitor API (status, statistics, actions) is available as `Monitor::get("system/status")`.
+
+Helpers on top of the generated endpoints:
+
+- **DNS filter** (`forti_api/dnsfilter.hpp`): `block_category`, `monitor_category`, `allow_category`,
+  `category_action`, `allow_category_everywhere`.
+- **Threat feeds** (`forti_api/threat_feed.hpp`): `push_threat_feed`, `push_entries` (snapshot / add /
+  remove), `feed_state`, `delete_threat_feed` (frees the category in profiles that block it first).
+- **Firewall** (`forti_api/firewall.hpp`): `days({Weekday::monday, ...})`, `port_ranges({{80}, {8000, 8080}})`.
+- **System** (`forti_api/system.hpp`): `trust` / `distrust` / `trusts` for API-user trusted hosts,
+  `interface_addresses("wan1")`.
+
+`examples/inventory.cpp` is a complete read-only program.
 
 ---
 
-## Current Module Coverage
+## Coverage
 
-- Firewall (policies, services, schedules)
-- DNS Filter
-- Threat Feed
-- System
-- Additional modules expanding incrementally
-
-The architecture is designed to support full FortiOS coverage without collapsing into a monolithic wrapper.
-
----
-
-## Real-World Integration
-
-Forti-API powers tools such as:
-
-- **forti-hole** (Pi-hole integration)
-- **forti2ban** (Fail2Ban integration)
-
-These integrations leverage FortiGate’s API surface for automated enforcement and network hygiene workflows.
+Generated from FortiOS 7.4.8 schemas: firewall policy, address, VIP, custom service, service category,
+recurring schedule; DNS filter profile; system external resource, API user, interface and global
+settings. More endpoints are a manifest entry away (`codegen/api.toml`, see [AGENTS.md](AGENTS.md)).
 
 ---
 
