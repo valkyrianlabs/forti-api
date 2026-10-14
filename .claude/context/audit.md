@@ -89,6 +89,10 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   for `api-admin`, even with CLI permissions.
 - The GUI bundle (`/static/main.js`) is fetchable with the API token and names ~98 monitor endpoints
   literally; others are built from templates at runtime.
+- Configuration backup: `GET monitor/system/config/backup?scope=global` works for `api-admin` on
+  7.4.8 and answers `application/octet-stream`, starting with `#config-version=`; the device takes
+  ~7 s before the first byte. The GUI uses POST on the same path (catalog: POST only), but the GET
+  form is accepted.
 
 ## Resolution log
 
@@ -125,3 +129,8 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   ~3.6 s of parsing; area/group/single headers are documented as the faster path.
 - **Phase 6 (live coverage):** 24 CRUD round-trips (create, read, update comment, delete) pass on
   the lab device under the guard; the config-log audit confirms only forti-api-test-* objects change.
+- **Raw downloads (post-1.0, gap G9 from forti-cli/forti-mcp):** `Client::download` /
+  `Monitor::download` return non-JSON bodies (configuration backups) through the same transport and
+  retry policy, bounded by `DownloadOptions::max_bytes` or streamed to a sink; on_exchange records
+  omit successful download bodies. `Transport` gained defaulted fields only (source-compatible).
+  The live backup test runs read-only (`FORTI_API_LIVE_READ_ONLY=1`) and keeps the backup in memory.
