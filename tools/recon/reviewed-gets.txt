@@ -1,0 +1,4 @@
+# Monitor endpoints reviewed as read-only and allowed for GET during GUI reconnaissance, in addition
+# to those the bundle catalog confirms (codegen/catalog/<version>/gui-api.json). One path per line,
+# relative to monitor/, followed by the reason it was judged safe. The unsafe-word check in
+# policy.py still applies to every entry.

@@ -233,6 +233,18 @@ def cmd_mine(args: argparse.Namespace) -> int:
             entry["files"].add(source)
     catalog = {key: {"kind": v["kind"], "methods": sorted(v["methods"]), "templated": v["templated"],
                      "seen_in": len(v["files"])} for key, v in sorted(found.items())}
+    # GUI page routes (/ng/...), for the recon recorder to visit. View pages only: no editors,
+    # wizards, creation dialogs, components or stylesheets.
+    skip = re.compile(r"(\.css$|/components/|/directives/|/edit\b|/create\b|/new\b|wizard|/clone\b|/import\b)")
+    routes = set()
+    for text in sources.values():
+        for route in re.findall(r"[\"'`](/ng/[\w./-]+)", text):
+            route = route.rstrip("/.")
+            if not skip.search(route):
+                routes.add(route)
+    routes_out = ROOT / "codegen" / "catalog" / version / "gui-routes.json"
+    routes_out.parent.mkdir(parents=True, exist_ok=True)
+    routes_out.write_text(json.dumps(sorted(routes), indent=1) + "\n")
     out = ROOT / "codegen" / "catalog" / version / "gui-api.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(catalog, indent=1) + "\n")
@@ -240,7 +252,7 @@ def cmd_mine(args: argparse.Namespace) -> int:
     for v in catalog.values():
         kinds[v["kind"]] = kinds.get(v["kind"], 0) + 1
     print(f"{len(sources)} bundle files ({len(chunks)} lazy chunks): {len(catalog)} API paths {kinds} "
-          f"-> {out.relative_to(ROOT)}")
+          f"-> {out.relative_to(ROOT)}; {len(routes)} GUI page routes")
     return 0
 
 
