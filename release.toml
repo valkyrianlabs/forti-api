@@ -23,7 +23,7 @@ urgency = "medium"
 maintainer = "Cooper Larson <cooper@valkyrianlabs.com>"
 # build-deb copies the work tree, not a Git commit: never let the live-test credentials
 # (.env, .certs/*.p12) or local tooling state into the build tree.
-build_excludes = [".env", ".certs", ".idea", ".claude", ".DS_Store"]
+build_excludes = [".env", ".certs", ".idea", ".claude", ".agents", ".DS_Store"]
 
 [[debian.packages]]
 name = "libforti-api-dev"

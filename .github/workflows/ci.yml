@@ -70,6 +70,10 @@ jobs:
           vlr install-skill --check
           vlr status --github-output
 
+      # Published by release.yml; PRs only validate (docs set slug: forti-api).
+      - name: Docs package
+        run: pmdocs validate --source forti-api
+
       # A full local release in this ephemeral checkout; nothing is published.
       # Between releases (staged docs, version not bumped yet) the rehearsal bumps the version in this
       # ephemeral checkout only, so every PR still builds and validates the package.

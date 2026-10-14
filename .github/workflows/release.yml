@@ -3,6 +3,7 @@
 #   vlr cut patch|minor|major|X.Y.Z --push      (locally) -> pushes vX.Y.Z -> this workflow
 #
 # build ─▶ publish-apt ─▶ github-release ─▶ finalize
+#                     └──▶ docs (independent of finalize: a docs failure never fails the release)
 #
 # Every job runs on the self-hosted VPS runner, every step in the disposable CI container
 # (ci/run-ci, rootless Podman). `vlr prepare` is deterministic, so later jobs re-run it and get
@@ -13,6 +14,8 @@
 #   secrets.NEXUS_USER, secrets.NEXUS_PASSWORD   Nexus upload credentials
 #   vars.NEXUS_APT_REPO                          Nexus APT upload URL (https://apt.valkyrianlabs.com)
 #   vars.RELEASE_PUBLISH_MODE   (optional)       `nexus` (default here) or `disabled`
+#   vars.VL_DOCS_ENDPOINT                        pmdocs sync endpoint; the forti-api docs set must
+#                                                trust this repository's release workflow for OIDC
 
 name: Release
 
@@ -71,7 +74,9 @@ jobs:
           fi
 
       - name: Release gate
-        run: vlr check --release --tag "${RELEASE_REF#refs/tags/}"
+        run: |
+          vlr check --release --tag "${RELEASE_REF#refs/tags/}"
+          pmdocs validate --source forti-api
 
       - name: Prepare release documents (work tree only)
         run: vlr prepare --record release/meta/prepare.json
@@ -169,6 +174,40 @@ jobs:
             g++ -std=c++23 ci/consumer.cpp $(pkg-config --cflags --libs forti-api) -o /tmp/consumer
             /tmp/consumer
           '
+
+  docs:
+    name: Publish docs
+    runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
+    needs: [build, publish-apt]
+    if: needs.build.outputs.publish == 'true'
+    environment: Production
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    env:
+      VL_DOCS_ENDPOINT: ${{ vars.VL_DOCS_ENDPOINT }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      # Docs set slug forti-api (never inferred). Sync is idempotent, so retrying a failed push is safe.
+      - name: Validate and publish the docs package
+        run: |
+          if [ -z "$VL_DOCS_ENDPOINT" ]; then echo "::error::vars.VL_DOCS_ENDPOINT is not set"; exit 1; fi
+          pmdocs validate --source forti-api
+          for attempt in 1 2 3; do
+            if timeout 300 pmdocs push --endpoint "$VL_DOCS_ENDPOINT" --source forti-api --github-oidc --publish; then
+              exit 0
+            fi
+            echo "pmdocs push attempt ${attempt}/3 failed; retrying in $((attempt * 20))s"
+            sleep $((attempt * 20))
+          done
+          echo "::error::pmdocs push failed after 3 attempts. The package release is unaffected; re-run this job."
+          exit 1
 
   github-release:
     name: GitHub release

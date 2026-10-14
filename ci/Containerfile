@@ -2,8 +2,8 @@
 # host).
 #
 # Ubuntu 24.04 (the release target) with the build dependencies (build-essential, meson, ninja, libcurl,
-# GoogleTest), the Debian packaging toolchain, the GitHub CLI (`vlr github-release`) and
-# vl-release from the ValkyrianLabs APT repository.
+# GoogleTest), the Debian packaging toolchain, the GitHub CLI (`vlr github-release`), and
+# vl-release and pmdocs from the ValkyrianLabs APT repository.
 FROM docker.io/library/ubuntu:24.04@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55
 
 # Newest vl-release / pmdocs in the ValkyrianLabs APT index when ci/run-ci built the image; part
@@ -25,7 +25,8 @@ RUN apt-get update \
  && chmod 0440 /etc/sudoers.d/ci \
  && rm -rf /var/lib/apt/lists/*
 
-# GitHub CLI (vlr github-release) and vl-release, from their signed APT repositories.
+# GitHub CLI (vlr github-release), vl-release and pmdocs (docs validation and publication), from
+# their signed APT repositories.
 RUN set -eux; \
     install -d -m 0755 /etc/apt/keyrings; \
     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg -o /etc/apt/keyrings/githubcli.gpg; \
@@ -34,10 +35,10 @@ RUN set -eux; \
     echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/githubcli.gpg] https://cli.github.com/packages stable main" > /etc/apt/sources.list.d/github-cli.list; \
     echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/valkyrianlabs.gpg] https://apt.valkyrianlabs.com stable main" > /etc/apt/sources.list.d/valkyrianlabs.list; \
     apt-get update; \
-    apt-get install -y --no-install-recommends gh vl-release; \
+    apt-get install -y --no-install-recommends gh vl-release pmdocs; \
     rm -rf /var/lib/apt/lists/*; \
     echo "tools: ${VALKYRIANLABS_TOOLS}"; \
-    vlr --version; gh --version | head -1
+    vlr --version; pmdocs --version; gh --version | head -1
 
 # HOME for whichever host uid ci/run-ci maps in (--userns=keep-id).
 RUN install -d -m 1777 /home/ci
