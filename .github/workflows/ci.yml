@@ -59,9 +59,12 @@ jobs:
           vlr status --github-output
 
       # A full local release in this ephemeral checkout; nothing is published.
+      # Between releases (staged docs, version not bumped yet) the rehearsal bumps the version in this
+      # ephemeral checkout only, so every PR still builds and validates the package.
       - name: Release rehearsal
-        if: steps.state.outputs.phase == 'pending' || steps.state.outputs.phase == 'prepared'
+        if: contains(fromJSON('["pending","prepared","unbumped"]'), steps.state.outputs.phase)
         run: |
+          if [ "${{ steps.state.outputs.phase }}" = unbumped ]; then vlr version bump minor; fi
           vlr prepare
           vlr build-deb
           vlr checksums
@@ -70,7 +73,7 @@ jobs:
       # Install the built .deb into a clean, stock Ubuntu 24.04 (container root, no host access) and
       # build a consumer against it.
       - name: Clean-install smoke test of the built package
-        if: steps.state.outputs.phase == 'pending' || steps.state.outputs.phase == 'prepared'
+        if: contains(fromJSON('["pending","prepared","unbumped"]'), steps.state.outputs.phase)
         shell: bash
         run: |
           # shellcheck disable=SC2016  # expanded inside the container
