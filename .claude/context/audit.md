@@ -89,3 +89,15 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   for `api-admin`, even with CLI permissions.
 - The GUI bundle (`/static/main.js`) is fetchable with the API token and names ~98 monitor endpoints
   literally; others are built from templates at runtime.
+
+## Resolution log
+
+- **Phase 1 (transport, PR "Phase 1"):** every row of the Transport table is resolved by
+  `include/forti_api/client.hpp` (`fortiapi::Client`): timeouts, ApiError/TransportError/DecodeError
+  instead of stderr, percent-encoded keys, no Authorization in the exchange hook, RAII header lists,
+  one kept-alive handle, optional CA/client cert with `VERIFYHOST 2`, Query builder, retry policy
+  (GETs only; mutations only before send), no global auth state beyond the replaceable default
+  client. The runtime `_`↔`-` key rewriting and the namespace-scope regexes remain only for the
+  pre-generation accessors and go with them in phase 3.
+- New finding, fixed in phase 1: FortiOS answers `log/*` with `Content-Encoding: deflate` streams
+  that libcurl fails to decode (CURLE_WRITE_ERROR); the client requests gzip only.

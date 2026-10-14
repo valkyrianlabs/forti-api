@@ -8,6 +8,7 @@
 #define FORTI_API_TESTS_LIVE_HPP
 
 #include <forti_api/dns_filter.hpp>
+#include "guard.hpp"
 #include <forti_api/threat_feed.hpp>
 #include <set>
 #include <string>
@@ -16,7 +17,6 @@
 
 namespace live {
 
-    inline constexpr std::string_view prefix = "forti-api-test-";
     inline constexpr std::string_view comment = "Created by the forti-api test suite; safe to delete.";
 
     inline std::string name(std::string_view suffix) { return std::string(prefix) + std::string(suffix); }

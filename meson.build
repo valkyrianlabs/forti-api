@@ -35,15 +35,27 @@ import('pkgconfig').generate(
 # Compile check of the umbrella header; never installed.
 executable('forti-api', 'main.cpp', dependencies : forti_api_dep, implicit_include_directories : false)
 
-# The tests run against a live FortiGate (see .env.example), so they are optional.
-gtest_dep = dependency('gtest', main : false, required : get_option('tests'))
+# Unit tests: network-free (a scripted transport), run by CI.
+gtest_dep = dependency('gtest', main : true, required : get_option('tests'))
 if gtest_dep.found()
-    test('fortigate', executable('runTests',
-                                 'tests/main.cpp',
-                                 'tests/test_dns_filter.cpp',
-                                 'tests/test_system.cpp',
-                                 'tests/test_threat_feed.cpp',
-                                 dependencies : [forti_api_dep, gtest_dep],
+    test('unit', executable('unitTests',
+                            'tests/unit/test_client.cpp',
+                            'tests/unit/test_live_guard.cpp',
+                            dependencies : [forti_api_dep, gtest_dep],
+                            implicit_include_directories : false),
+         suite : 'unit')
+endif
+
+# Live tests run against a real FortiGate (AGENTS.md, .env.example): opt-in, and in their own suite so
+# `meson test --suite unit` never touches a device. CI compiles them but never runs them.
+if get_option('live_tests')
+    gtest_nomain_dep = dependency('gtest', main : false)
+    test('fortigate', executable('liveTests',
+                                 'tests/live/main.cpp',
+                                 'tests/live/test_dns_filter.cpp',
+                                 'tests/live/test_system.cpp',
+                                 'tests/live/test_threat_feed.cpp',
+                                 dependencies : [forti_api_dep, gtest_nomain_dep],
                                  implicit_include_directories : false),
-         timeout : 120)
+         suite : 'live', timeout : 300, is_parallel : false)
 endif
