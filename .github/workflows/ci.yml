@@ -55,6 +55,9 @@ jobs:
   package:
     name: Release contract and Debian rehearsal
     runs-on: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && fromJSON('["ubuntu-latest"]') || fromJSON('["self-hosted","Linux","X64","ubuntu-latest-lts"]') }}
+    permissions:
+      contents: read
+      id-token: write   # docs dry-run sync over GitHub OIDC
     defaults:
       run:
         shell: bash ./ci/run-ci bash -euo pipefail {0}
@@ -70,9 +73,18 @@ jobs:
           vlr install-skill --check
           vlr status --github-output
 
-      # Published by release.yml; PRs only validate (docs set slug: forti-api).
+      # Published by release.yml (docs set slug: forti-api). PRs from this repository also send a
+      # dry-run sync over GitHub OIDC: it checks the endpoint, the slug and the trust configuration
+      # without writing anything. Fork PRs only validate.
       - name: Docs package
-        run: pmdocs validate --source forti-api
+        env:
+          VL_DOCS_ENDPOINT: ${{ vars.VL_DOCS_ENDPOINT }}
+          SAME_REPO: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        run: |
+          pmdocs validate --source forti-api
+          if [ "$SAME_REPO" = true ] && [ -n "$VL_DOCS_ENDPOINT" ]; then
+            pmdocs push --endpoint "$VL_DOCS_ENDPOINT" --source forti-api --github-oidc --dry-run
+          fi
 
       # A full local release in this ephemeral checkout; nothing is published.
       # Between releases (staged docs, version not bumped yet) the rehearsal bumps the version in this
