@@ -1,0 +1,49 @@
+{
+ "name": "ips-urlfilter-setting",
+ "category": "complex",
+ "help": "Configure IPS URL filter settings.",
+ "children": {
+  "device": {
+   "name": "device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface for this route.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distance": {
+   "name": "distance",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative distance (1 - 255) for this route.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "gateway": {
+   "name": "gateway",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Gateway IP address for this route.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "geo-filter": {
+   "name": "geo-filter",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Filter based on geographical location. Route will NOT be installed if the resolved IP address belongs to the country in the filter.",
+   "size": 255,
+   "multiple_values": false
+  }
+ },
+ "path": "webfilter",
+ "q_type": 467,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

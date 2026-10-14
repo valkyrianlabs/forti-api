@@ -1,0 +1,273 @@
+{
+ "name": "arrp-profile",
+ "category": "table",
+ "help": "Configure WiFi Automatic Radio Resource Provisioning (ARRP) profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WiFi ARRP profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "selection-period": {
+   "name": "selection-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period in seconds to measure average channel load, noise floor, spectral RSSI (default = 3600).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 3600,
+   "multiple_values": false
+  },
+  "monitor-period": {
+   "name": "monitor-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period in seconds to measure average transmit retries and receive errors (default = 300).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 300,
+   "multiple_values": false
+  },
+  "weight-managed-ap": {
+   "name": "weight-managed-ap",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight in DARRP channel score calculation for managed APs (0 - 2000, default = 50).",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 50,
+   "multiple_values": false
+  },
+  "weight-rogue-ap": {
+   "name": "weight-rogue-ap",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight in DARRP channel score calculation for rogue APs (0 - 2000, default = 10).",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 10,
+   "multiple_values": false
+  },
+  "weight-noise-floor": {
+   "name": "weight-noise-floor",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight in DARRP channel score calculation for noise floor (0 - 2000, default = 40).",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 40,
+   "multiple_values": false
+  },
+  "weight-channel-load": {
+   "name": "weight-channel-load",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight in DARRP channel score calculation for channel load (0 - 2000, default = 20).",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 20,
+   "multiple_values": false
+  },
+  "weight-spectral-rssi": {
+   "name": "weight-spectral-rssi",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight in DARRP channel score calculation for spectral RSSI (0 - 2000, default = 40).",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 40,
+   "multiple_values": false
+  },
+  "weight-weather-channel": {
+   "name": "weight-weather-channel",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight in DARRP channel score calculation for weather channel (0 - 2000, default = 1000).",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "weight-dfs-channel": {
+   "name": "weight-dfs-channel",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight in DARRP channel score calculation for DFS channel (0 - 2000, default = 500).",
+   "min-value": 0,
+   "max-value": 2000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "threshold-ap": {
+   "name": "threshold-ap",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold to reject channel in DARRP channel selection phase 1 due to surrounding APs (0 - 500, default = 250).",
+   "min-value": 0,
+   "max-value": 500,
+   "default": 250,
+   "multiple_values": false
+  },
+  "threshold-noise-floor": {
+   "name": "threshold-noise-floor",
+   "category": "unitary",
+   "type": "string",
+   "help": "Threshold in dBm to reject channel in DARRP channel selection phase 1 due to noise floor (-95 to -20, default = -85).",
+   "size": 7,
+   "default": "-85",
+   "multiple_values": false
+  },
+  "threshold-channel-load": {
+   "name": "threshold-channel-load",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold in percentage to reject channel in DARRP channel selection phase 1 due to channel load (0 - 100, default = 60).",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 60,
+   "multiple_values": false
+  },
+  "threshold-spectral-rssi": {
+   "name": "threshold-spectral-rssi",
+   "category": "unitary",
+   "type": "string",
+   "help": "Threshold in dBm to reject channel in DARRP channel selection phase 1 due to spectral RSSI (-95 to -20, default = -65).",
+   "size": 7,
+   "default": "-65",
+   "multiple_values": false
+  },
+  "threshold-tx-retries": {
+   "name": "threshold-tx-retries",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold in percentage for transmit retries to trigger channel reselection in DARRP monitor stage (0 - 1000, default = 300).",
+   "min-value": 0,
+   "max-value": 1000,
+   "default": 300,
+   "multiple_values": false
+  },
+  "threshold-rx-errors": {
+   "name": "threshold-rx-errors",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold in percentage for receive errors to trigger channel reselection in DARRP monitor stage (0 - 100, default = 50).",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 50,
+   "multiple_values": false
+  },
+  "include-weather-channel": {
+   "name": "include-weather-channel",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of weather channel in DARRP channel selection phase 1 (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Include weather channel in darrp channel selection phase 1."
+    },
+    {
+     "name": "disable",
+     "help": "Exclude weather channel in darrp channel selection phase 1."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "include-dfs-channel": {
+   "name": "include-dfs-channel",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of DFS channel in DARRP channel selection phase 1 (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Include DFS channel in darrp channel selection phase 1."
+    },
+    {
+     "name": "disable",
+     "help": "Exclude DFS channel in darrp channel selection phase 1."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "override-darrp-optimize": {
+   "name": "override-darrp-optimize",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override setting darrp-optimize and darrp-optimize-schedules (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override setting darrp-optimize and darrp-optimize-schedules."
+    },
+    {
+     "name": "disable",
+     "help": "Use setting darrp-optimize and darrp-optimize-schedules."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "darrp-optimize": {
+   "name": "darrp-optimize",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time for running Distributed Automatic Radio Resource Provisioning (DARRP) optimizations (0 - 86400 sec, default = 86400, 0 = disable).",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "darrp-optimize-schedules": {
+   "name": "darrp-optimize-schedules",
+   "category": "table",
+   "help": "Firewall schedules for DARRP running time. DARRP will run periodically based on darrp-optimize within the schedules. Separate multiple schedule names with a space.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Schedule name.",
+     "required": true,
+     "datasource": [
+      "firewall.schedule.group.name",
+      "firewall.schedule.recurring.name",
+      "firewall.schedule.onetime.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 280,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,104 @@
+{
+ "name": "url-match",
+ "category": "table",
+ "help": "Exempt URLs from web proxy forwarding and caching.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Configure a name for the URL to be exempted.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable exempting the URLs matching the URL pattern from web proxy forwarding and caching.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable exempting the matching URLs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable exempting the matching URLs."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "url-pattern": {
+   "name": "url-pattern",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL pattern to be exempted from web proxy forwarding and caching.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "forward-server": {
+   "name": "forward-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Forward server name.",
+   "datasource": [
+    "web-proxy.forward-server.name",
+    "web-proxy.forward-server-group.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "fast-fallback": {
+   "name": "fast-fallback",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fast fallback configuration entry name.",
+   "datasource": [
+    "web-proxy.fast-fallback.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "cache-exemption": {
+   "name": "cache-exemption",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable exempting this URL pattern from caching.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable exempting this URL pattern from caching."
+    },
+    {
+     "name": "disable",
+     "help": "Disable exempting this URL pattern from caching."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "web-proxy",
+ "q_type": 342,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,157 @@
+{
+ "name": "multicast-address",
+ "category": "table",
+ "help": "Configure multicast addresses.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Multicast address name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of address object: multicast IP address range or broadcast IP/mask to be treated as a multicast address.",
+   "options": [
+    {
+     "name": "multicastrange",
+     "help": "Multicast range."
+    },
+    {
+     "name": "broadcastmask",
+     "help": "Broadcast IP/mask."
+    }
+   ],
+   "default": "multicastrange",
+   "multiple_values": false
+  },
+  "subnet": {
+   "name": "subnet",
+   "category": "unitary",
+   "type": "ipv4-classnet-any",
+   "help": "Broadcast address and subnet.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "start-ip": {
+   "name": "start-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "First IPv4 address (inclusive) in the range for the address.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "end-ip": {
+   "name": "end-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Final IPv4 address (inclusive) in the range for the address.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "associated-interface": {
+   "name": "associated-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface associated with the address object. When setting up a policy, only addresses associated with this interface are available.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value to determine the color of the icon in the GUI (1 - 32, default = 0, which sets value to 1).",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tagging": {
+   "name": "tagging",
+   "category": "table",
+   "help": "Config object tagging.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tagging entry name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tag category.",
+     "datasource": [
+      "system.object-tagging.category"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "tags": {
+     "name": "tags",
+     "category": "table",
+     "help": "Tags.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Tag name.",
+       "datasource": [
+        "system.object-tagging.tags.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 512,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 33,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

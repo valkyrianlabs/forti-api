@@ -1,0 +1,267 @@
+{
+ "name": "h2qp-conn-capability",
+ "category": "table",
+ "help": "Configure connection capability.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Connection capability name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "icmp-port": {
+   "name": "icmp-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set ICMP port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "ftp-port": {
+   "name": "ftp-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set FTP port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "ssh-port": {
+   "name": "ssh-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set SSH port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "http-port": {
+   "name": "http-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set HTTP port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "tls-port": {
+   "name": "tls-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set TLS VPN (HTTPS) port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "pptp-vpn-port": {
+   "name": "pptp-vpn-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set Point to Point Tunneling Protocol (PPTP) VPN port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "voip-tcp-port": {
+   "name": "voip-tcp-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set VoIP TCP port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "voip-udp-port": {
+   "name": "voip-udp-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set VoIP UDP port service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "ikev2-port": {
+   "name": "ikev2-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set IKEv2 port service for IPsec VPN status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "ikev2-xx-port": {
+   "name": "ikev2-xx-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set UDP port 4500 (which may be used by IKEv2 for IPsec VPN) service status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "esp-port": {
+   "name": "esp-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set ESP port service (used by IPsec VPNs) status.",
+   "options": [
+    {
+     "name": "closed",
+     "help": "The port is not open for communication."
+    },
+    {
+     "name": "open",
+     "help": "The port is open for communication."
+    },
+    {
+     "name": "unknown",
+     "help": "The port may or may not be open for communication."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 299,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

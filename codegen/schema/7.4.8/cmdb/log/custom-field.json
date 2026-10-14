@@ -1,0 +1,45 @@
+{
+ "name": "custom-field",
+ "category": "table",
+ "help": "Configure custom log fields.",
+ "mkey": "id",
+ "mkey_type": "string",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Field ID string.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Field name (max: 15 characters).",
+   "required": true,
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "value": {
+   "name": "value",
+   "category": "unitary",
+   "type": "string",
+   "help": "Field value (max: 15 characters).",
+   "required": true,
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 1000,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "log",
+ "q_type": 227,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

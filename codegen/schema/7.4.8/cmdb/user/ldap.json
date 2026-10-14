@@ -1,0 +1,587 @@
+{
+ "name": "ldap",
+ "category": "table",
+ "help": "Configure LDAP server entries.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "LDAP server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "LDAP server CN domain name or IP.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "secondary-server": {
+   "name": "secondary-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Secondary LDAP server CN domain name or IP.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "tertiary-server": {
+   "name": "tertiary-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tertiary LDAP server CN domain name or IP.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "status-ttl": {
+   "name": "status-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time for which server reachability is cached so that when a server is unreachable, it will not be retried for at least this period of time (0 = cache disabled, default = 300).",
+   "min-value": 0,
+   "max-value": 600,
+   "default": 300,
+   "multiple_values": false
+  },
+  "server-identity-check": {
+   "name": "server-identity-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable LDAP server identity check (verify server domain name/IP address against the server certificate).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable server identity check."
+    },
+    {
+     "name": "disable",
+     "help": "Disable server identity check."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate IP address to be used for communication with the LDAP server.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "source-port": {
+   "name": "source-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Source port to be used for communication with the LDAP server.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "cnid": {
+   "name": "cnid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Common name identifier for the LDAP server. The common name identifier for most LDAP servers is \"cn\".",
+   "size": 20,
+   "default": "cn",
+   "multiple_values": false
+  },
+  "dn": {
+   "name": "dn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Distinguished name used to look up entries on the LDAP server.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication type for LDAP searches.",
+   "options": [
+    {
+     "name": "simple",
+     "help": "Simple password authentication without search."
+    },
+    {
+     "name": "anonymous",
+     "help": "Bind using anonymous user search."
+    },
+    {
+     "name": "regular",
+     "help": "Bind using username/password and then search."
+    }
+   ],
+   "default": "simple",
+   "multiple_values": false
+  },
+  "two-factor": {
+   "name": "two-factor",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable two-factor authentication.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "disable two-factor authentication."
+    },
+    {
+     "name": "fortitoken-cloud",
+     "help": "FortiToken Cloud Service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "two-factor-authentication": {
+   "name": "two-factor-authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication method by FortiToken Cloud.",
+   "options": [
+    {
+     "name": "fortitoken",
+     "help": "FortiToken authentication."
+    },
+    {
+     "name": "email",
+     "help": "Email one time password."
+    },
+    {
+     "name": "sms",
+     "help": "SMS one time password."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "two-factor-notification": {
+   "name": "two-factor-notification",
+   "category": "unitary",
+   "type": "option",
+   "help": "Notification method for user activation by FortiToken Cloud.",
+   "options": [
+    {
+     "name": "email",
+     "help": "Email notification for activation code."
+    },
+    {
+     "name": "sms",
+     "help": "SMS notification for activation code."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "two-factor-filter": {
+   "name": "two-factor-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter used to synchronize users to FortiToken Cloud.",
+   "size": 2047,
+   "default": "",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Username (full DN) for initial binding.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for initial binding.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "group-member-check": {
+   "name": "group-member-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Group member checking methods.",
+   "options": [
+    {
+     "name": "user-attr",
+     "help": "User attribute checking."
+    },
+    {
+     "name": "group-object",
+     "help": "Group object checking."
+    },
+    {
+     "name": "posix-group-object",
+     "help": "POSIX group object checking."
+    }
+   ],
+   "default": "user-attr",
+   "multiple_values": false
+  },
+  "group-search-base": {
+   "name": "group-search-base",
+   "category": "unitary",
+   "type": "string",
+   "help": "Search base used for group searching.",
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "group-object-filter": {
+   "name": "group-object-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter used for group searching.",
+   "size": 2047,
+   "default": "(&(objectcategory=group)(member=*))",
+   "multiple_values": false
+  },
+  "group-filter": {
+   "name": "group-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter used for group matching.",
+   "size": 2047,
+   "default": "",
+   "multiple_values": false
+  },
+  "secure": {
+   "name": "secure",
+   "category": "unitary",
+   "type": "option",
+   "help": "Port to be used for authentication.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "No SSL."
+    },
+    {
+     "name": "starttls",
+     "help": "Use StartTLS."
+    },
+    {
+     "name": "ldaps",
+     "help": "Use LDAPS."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "ca-cert": {
+   "name": "ca-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA certificate name.",
+   "datasource": [
+    "vpn.certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to be used for communication with the LDAP server (default = 389).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 389,
+   "multiple_values": false
+  },
+  "password-expiry-warning": {
+   "name": "password-expiry-warning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable password expiry warnings.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable password expiry warnings."
+    },
+    {
+     "name": "disable",
+     "help": "Disable password expiry warnings."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "password-renewal": {
+   "name": "password-renewal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable online password renewal.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable online password renewal."
+    },
+    {
+     "name": "disable",
+     "help": "Disable online password renewal."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "member-attr": {
+   "name": "member-attr",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of attribute from which to get group membership.",
+   "size": 63,
+   "default": "memberOf",
+   "multiple_values": false
+  },
+  "account-key-processing": {
+   "name": "account-key-processing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Account key processing operation. The FortiGate will keep either the whole domain or strip the domain from the subject identity.",
+   "options": [
+    {
+     "name": "same",
+     "help": "Same as subject identity field."
+    },
+    {
+     "name": "strip",
+     "help": "Strip domain string from subject identity field."
+    }
+   ],
+   "default": "same",
+   "multiple_values": false
+  },
+  "account-key-cert-field": {
+   "name": "account-key-cert-field",
+   "category": "unitary",
+   "type": "option",
+   "help": "Define subject identity field in certificate for user access right checking.",
+   "options": [
+    {
+     "name": "othername",
+     "help": "Other name in SAN."
+    },
+    {
+     "name": "rfc822name",
+     "help": "RFC822 email address in SAN."
+    },
+    {
+     "name": "dnsname",
+     "help": "DNS name in SAN."
+    },
+    {
+     "name": "cn",
+     "help": "CN in subject."
+    }
+   ],
+   "default": "othername",
+   "multiple_values": false
+  },
+  "account-key-filter": {
+   "name": "account-key-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Account key filter, using the UPN as the search filter.",
+   "size": 2047,
+   "default": "(&(userPrincipalName=%s)(!(UserAccountControl:1.2.840.113556.1.4.803:=2)))",
+   "multiple_values": false
+  },
+  "search-type": {
+   "name": "search-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Search type.",
+   "options": [
+    {
+     "name": "recursive",
+     "help": "Recursively retrieve the user-group chain information of a user in a particular Microsoft AD domain."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "client-cert-auth": {
+   "name": "client-cert-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using client certificate for TLS authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable using client certificate for TLS authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable using client certificate for TLS authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "client-cert": {
+   "name": "client-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Client certificate name.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "obtain-user-info": {
+   "name": "obtain-user-info",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable obtaining of user information.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable obtaining of user information."
+    },
+    {
+     "name": "disable",
+     "help": "Disable obtaining of user information."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "user-info-exchange-server": {
+   "name": "user-info-exchange-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "MS Exchange server from which to fetch user information.",
+   "datasource": [
+    "user.exchange.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "antiphish": {
+   "name": "antiphish",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AntiPhishing credential backend.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AntiPhishing credential backend."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AntiPhishing credential backend."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "password-attr": {
+   "name": "password-attr",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of attribute to get password hash.",
+   "size": 35,
+   "default": "userPassword",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 24,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,388 @@
+{
+ "name": "saml",
+ "category": "table",
+ "help": "SAML server entry configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SAML server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "cert": {
+   "name": "cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate to sign SAML messages.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "entity-id": {
+   "name": "entity-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "SP entity ID.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "single-sign-on-url": {
+   "name": "single-sign-on-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "SP single sign-on URL.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "single-logout-url": {
+   "name": "single-logout-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "SP single logout URL.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "idp-entity-id": {
+   "name": "idp-entity-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "IDP entity ID.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "idp-single-sign-on-url": {
+   "name": "idp-single-sign-on-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "IDP single sign-on URL.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "idp-single-logout-url": {
+   "name": "idp-single-logout-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "IDP single logout url.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "idp-cert": {
+   "name": "idp-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "IDP Certificate name.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.remote.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "user-name": {
+   "name": "user-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name in assertion statement.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "group-name": {
+   "name": "group-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Group name in assertion statement.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "digest-method": {
+   "name": "digest-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Digest method algorithm (default = sha1).",
+   "options": [
+    {
+     "name": "sha1",
+     "help": "Digest Method Algorithm is SHA1."
+    },
+    {
+     "name": "sha256",
+     "help": "Digest Method Algorithm is SHA256."
+    }
+   ],
+   "default": "sha1",
+   "multiple_values": false
+  },
+  "limit-relaystate": {
+   "name": "limit-relaystate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable limiting of relay-state parameter when it exceeds SAML 2.0 specification limits (80 bytes).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable limiting of relay-state parameter when it exceeds SAML 2.0 specification limits (80 bytes)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable limiting of relay-state parameter when it exceeds SAML 2.0 specification limits (80 bytes)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "clock-tolerance": {
+   "name": "clock-tolerance",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Clock skew tolerance in seconds (0 - 300, default = 15, 0 = no tolerance).",
+   "min-value": 0,
+   "max-value": 300,
+   "default": 15,
+   "multiple_values": false
+  },
+  "adfs-claim": {
+   "name": "adfs-claim",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ADFS Claim for user/group attribute in assertion statement (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable ADFS Claim for user/group attribute in assertion statement."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ADFS Claim for user/group attribute in assertion statement."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "user-claim-type": {
+   "name": "user-claim-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "User name claim in assertion statement.",
+   "options": [
+    {
+     "name": "email",
+     "help": "E-mail address of the user."
+    },
+    {
+     "name": "given-name",
+     "help": "Given name of the user."
+    },
+    {
+     "name": "name",
+     "help": "Unique name of the user."
+    },
+    {
+     "name": "upn",
+     "help": "User principal name (UPN) of the user."
+    },
+    {
+     "name": "common-name",
+     "help": "Common name of the user."
+    },
+    {
+     "name": "email-adfs-1x",
+     "help": "E-mail address of the user when interoperating with AD FS 1.1 or ADFS 1.0."
+    },
+    {
+     "name": "group",
+     "help": "Group that the user is a member of."
+    },
+    {
+     "name": "upn-adfs-1x",
+     "help": "User principal name (UPN) of the user."
+    },
+    {
+     "name": "role",
+     "help": "Role that the user has."
+    },
+    {
+     "name": "sur-name",
+     "help": "Surname of the user"
+    },
+    {
+     "name": "ppid",
+     "help": "Private identifier of the user."
+    },
+    {
+     "name": "name-identifier",
+     "help": "SAML name identifier of the user."
+    },
+    {
+     "name": "authentication-method",
+     "help": "Method used to authenticate the user."
+    },
+    {
+     "name": "deny-only-group-sid",
+     "help": "Deny-only group SID of the user."
+    },
+    {
+     "name": "deny-only-primary-sid",
+     "help": "Deny-only primary SID of the user."
+    },
+    {
+     "name": "deny-only-primary-group-sid",
+     "help": "Deny-only primary group SID of the user."
+    },
+    {
+     "name": "group-sid",
+     "help": "Group SID of the user."
+    },
+    {
+     "name": "primary-group-sid",
+     "help": "Primary group SID of the user."
+    },
+    {
+     "name": "primary-sid",
+     "help": "Primary SID of the user."
+    },
+    {
+     "name": "windows-account-name",
+     "help": "Domain account name of the user in the form of <domain>\\<user>."
+    }
+   ],
+   "default": "upn",
+   "multiple_values": false
+  },
+  "group-claim-type": {
+   "name": "group-claim-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Group claim in assertion statement.",
+   "options": [
+    {
+     "name": "email",
+     "help": "E-mail address of the user."
+    },
+    {
+     "name": "given-name",
+     "help": "Given name of the user."
+    },
+    {
+     "name": "name",
+     "help": "Unique name of the user."
+    },
+    {
+     "name": "upn",
+     "help": "User principal name (UPN) of the user."
+    },
+    {
+     "name": "common-name",
+     "help": "Common name of the user."
+    },
+    {
+     "name": "email-adfs-1x",
+     "help": "E-mail address of the user when interoperating with AD FS 1.1 or ADFS 1.0."
+    },
+    {
+     "name": "group",
+     "help": "Group that the user is a member of."
+    },
+    {
+     "name": "upn-adfs-1x",
+     "help": "User principal name (UPN) of the user."
+    },
+    {
+     "name": "role",
+     "help": "Role that the user has."
+    },
+    {
+     "name": "sur-name",
+     "help": "Surname of the user"
+    },
+    {
+     "name": "ppid",
+     "help": "Private identifier of the user."
+    },
+    {
+     "name": "name-identifier",
+     "help": "SAML name identifier of the user."
+    },
+    {
+     "name": "authentication-method",
+     "help": "Method used to authenticate the user."
+    },
+    {
+     "name": "deny-only-group-sid",
+     "help": "Deny-only group SID of the user."
+    },
+    {
+     "name": "deny-only-primary-sid",
+     "help": "Deny-only primary SID of the user."
+    },
+    {
+     "name": "deny-only-primary-group-sid",
+     "help": "Deny-only primary group SID of the user."
+    },
+    {
+     "name": "group-sid",
+     "help": "Group SID of the user."
+    },
+    {
+     "name": "primary-group-sid",
+     "help": "Primary group SID of the user."
+    },
+    {
+     "name": "primary-sid",
+     "help": "Primary SID of the user."
+    },
+    {
+     "name": "windows-account-name",
+     "help": "Domain account name of the user in the form of <domain>\\<user>."
+    }
+   ],
+   "default": "group",
+   "multiple_values": false
+  },
+  "reauth": {
+   "name": "reauth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable signalling of IDP to force user re-authentication (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable signalling of IDP to force user re-authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable signalling of IDP to force user re-authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 30,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,91 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Settings for TACACS+ accounting.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TACACS+ accounting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TACACS+ accounting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TACACS+ accounting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address of TACACS+ server.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-key": {
+   "name": "server-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Key to access the TACACS+ server.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source IP address for communication to TACACS+ server.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "log.tacacs+accounting",
+ "q_type": 79,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

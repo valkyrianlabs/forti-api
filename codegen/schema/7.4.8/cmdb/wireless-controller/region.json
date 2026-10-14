@@ -1,0 +1,62 @@
+{
+ "name": "region",
+ "category": "table",
+ "help": "Configure FortiAP regions (for floor plans and maps).",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiAP region name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comments.",
+   "size": 1027,
+   "default": "",
+   "multiple_values": false
+  },
+  "grayscale": {
+   "name": "grayscale",
+   "category": "unitary",
+   "type": "option",
+   "help": "Region image grayscale.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable region image grayscale."
+    },
+    {
+     "name": "disable",
+     "help": "Disable region image grayscale."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "opacity": {
+   "name": "opacity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Region image opacity (0 - 100).",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 100,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 306,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

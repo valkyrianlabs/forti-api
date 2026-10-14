@@ -1,0 +1,37 @@
+{
+ "name": "geoip-country",
+ "category": "table",
+ "help": "Define geoip country name-ID table.",
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "string",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Country ID.",
+   "required": true,
+   "size": 2,
+   "default": "",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Country name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 487,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

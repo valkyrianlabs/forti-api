@@ -7,7 +7,7 @@
 int main() {
     fortiapi::firewall::Policy policy;
     policy.name = "example";
-    policy.action = std::string(fortiapi::firewall::policy::action::deny);
+    policy.action = std::string(fortiapi::firewall::Policy::Action::deny);
     std::cout << "forti-api consumer: nlohmann " << NLOHMANN_JSON_VERSION_MAJOR << '.' << NLOHMANN_JSON_VERSION_MINOR
               << ", policy create body " << fortiapi::to_json(policy, fortiapi::Write::create).dump() << '\n';
 }

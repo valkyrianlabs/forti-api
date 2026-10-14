@@ -24,11 +24,11 @@ namespace fortiapi::system {
     // A push feed of `type` (domain, address, url, ...) for a remote category (192-221). Not sent;
     // pass it to ExternalResources::add().
     inline ExternalResource push_threat_feed(std::string name, std::uint32_t category,
-                                             std::string_view type = external_resource::type::domain) {
+                                             std::string_view type = ExternalResource::Type::domain) {
         ExternalResource feed;
         feed.name = std::move(name);
         feed.type = std::string(type);
-        feed.update_method = std::string(external_resource::update_method::push);
+        feed.update_method = std::string(ExternalResource::UpdateMethod::push);
         feed.category = category;
         return feed;
     }

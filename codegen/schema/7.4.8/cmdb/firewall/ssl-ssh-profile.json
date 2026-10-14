@@ -1,0 +1,2757 @@
+{
+ "name": "ssl-ssh-profile",
+ "category": "table",
+ "help": "Configure SSL/SSH protocol options.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "ssl": {
+   "name": "ssl",
+   "category": "complex",
+   "help": "Configure SSL options.",
+   "children": {
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level of SSL inspection.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "certificate-inspection",
+       "help": "Inspect SSL handshake only."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "client-certificate": {
+     "name": "client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "unsupported-ssl-version": {
+     "name": "unsupported-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL version used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the version is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the version is not supported."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "unsupported-ssl-cipher": {
+     "name": "unsupported-ssl-cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL cipher used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the cipher is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the cipher is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "unsupported-ssl-negotiation": {
+     "name": "unsupported-ssl-negotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL negotiation used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the negotiation is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the negotiation is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expired-server-cert": {
+     "name": "expired-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is expired.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "revoked-server-cert": {
+     "name": "revoked-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is revoked.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "untrusted-server-cert": {
+     "name": "untrusted-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is not issued by a trusted CA.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-timeout": {
+     "name": "cert-validation-timeout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation timeout.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-failure": {
+     "name": "cert-validation-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "sni-server-cert-check": {
+     "name": "sni-server-cert-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, use the CN in the server certificate to do URL filtering."
+      },
+      {
+       "name": "strict",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, close the connection."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check the SNI in the client hello message with the CN or SAN fields in the returned server certificate."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "cert-probe-failure": {
+     "name": "cert-probe-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate probe failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when unable to retrieve server's certificate for inspection."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when unable to retrieve server's certificate for inspection."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "encrypted-client-hello": {
+     "name": "encrypted-client-hello",
+     "category": "unitary",
+     "type": "option",
+     "help": "Block/allow session based on existence of encrypted-client-hello.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Pass the session when encrypted-client-hello exists."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when encrypted-client-hello exists."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "min-allowed-ssl-version": {
+     "name": "min-allowed-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Minimum SSL version to be allowed.",
+     "options": [
+      {
+       "name": "ssl-3.0",
+       "help": "SSL 3.0."
+      },
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.1",
+     "multiple_values": false
+    }
+   }
+  },
+  "https": {
+   "name": "https",
+   "category": "complex",
+   "help": "Configure HTTPS options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to use for scanning (1 - 65535, default = 443).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol inspection status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "certificate-inspection",
+       "help": "Inspect SSL handshake only."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "deep-inspection",
+     "multiple_values": false
+    },
+    "quic": {
+     "name": "quic",
+     "category": "unitary",
+     "type": "option",
+     "help": "QUIC inspection status (default = inspect).",
+     "options": [
+      {
+       "name": "inspect",
+       "help": "Inspect QUIC traffic."
+      },
+      {
+       "name": "bypass",
+       "help": "Bypass QUIC traffic."
+      },
+      {
+       "name": "block",
+       "help": "Block QUIC traffic."
+      }
+     ],
+     "default": "inspect",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "client-certificate": {
+     "name": "client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "unsupported-ssl-version": {
+     "name": "unsupported-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL version used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the version is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the version is not supported."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "unsupported-ssl-cipher": {
+     "name": "unsupported-ssl-cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL cipher used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the cipher is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the cipher is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "unsupported-ssl-negotiation": {
+     "name": "unsupported-ssl-negotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL negotiation used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the negotiation is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the negotiation is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expired-server-cert": {
+     "name": "expired-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is expired.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "revoked-server-cert": {
+     "name": "revoked-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is revoked.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "untrusted-server-cert": {
+     "name": "untrusted-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is not issued by a trusted CA.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-timeout": {
+     "name": "cert-validation-timeout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation timeout.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-failure": {
+     "name": "cert-validation-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "sni-server-cert-check": {
+     "name": "sni-server-cert-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, use the CN in the server certificate to do URL filtering."
+      },
+      {
+       "name": "strict",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, close the connection."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check the SNI in the client hello message with the CN or SAN fields in the returned server certificate."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "cert-probe-failure": {
+     "name": "cert-probe-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate probe failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when unable to retrieve server's certificate for inspection."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when unable to retrieve server's certificate for inspection."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "encrypted-client-hello": {
+     "name": "encrypted-client-hello",
+     "category": "unitary",
+     "type": "option",
+     "help": "Block/allow session based on existence of encrypted-client-hello.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Pass the session when encrypted-client-hello exists."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when encrypted-client-hello exists."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "min-allowed-ssl-version": {
+     "name": "min-allowed-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Minimum SSL version to be allowed.",
+     "options": [
+      {
+       "name": "ssl-3.0",
+       "help": "SSL 3.0."
+      },
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.1",
+     "multiple_values": false
+    }
+   }
+  },
+  "ftps": {
+   "name": "ftps",
+   "category": "complex",
+   "help": "Configure FTPS options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to use for scanning (1 - 65535, default = 443).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol inspection status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "deep-inspection",
+     "multiple_values": false
+    },
+    "client-certificate": {
+     "name": "client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "unsupported-ssl-version": {
+     "name": "unsupported-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL version used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the version is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the version is not supported."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "unsupported-ssl-cipher": {
+     "name": "unsupported-ssl-cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL cipher used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the cipher is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the cipher is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "unsupported-ssl-negotiation": {
+     "name": "unsupported-ssl-negotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL negotiation used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the negotiation is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the negotiation is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expired-server-cert": {
+     "name": "expired-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is expired.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "revoked-server-cert": {
+     "name": "revoked-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is revoked.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "untrusted-server-cert": {
+     "name": "untrusted-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is not issued by a trusted CA.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-timeout": {
+     "name": "cert-validation-timeout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation timeout.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-failure": {
+     "name": "cert-validation-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "sni-server-cert-check": {
+     "name": "sni-server-cert-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, use the CN in the server certificate to do URL filtering."
+      },
+      {
+       "name": "strict",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, close the connection."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check the SNI in the client hello message with the CN or SAN fields in the returned server certificate."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "min-allowed-ssl-version": {
+     "name": "min-allowed-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Minimum SSL version to be allowed.",
+     "options": [
+      {
+       "name": "ssl-3.0",
+       "help": "SSL 3.0."
+      },
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "tls-1.1",
+     "multiple_values": false
+    }
+   }
+  },
+  "imaps": {
+   "name": "imaps",
+   "category": "complex",
+   "help": "Configure IMAPS options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to use for scanning (1 - 65535, default = 443).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol inspection status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "deep-inspection",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "client-certificate": {
+     "name": "client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "inspect",
+     "multiple_values": false
+    },
+    "unsupported-ssl-version": {
+     "name": "unsupported-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL version used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the version is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the version is not supported."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "unsupported-ssl-cipher": {
+     "name": "unsupported-ssl-cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL cipher used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the cipher is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the cipher is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "unsupported-ssl-negotiation": {
+     "name": "unsupported-ssl-negotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL negotiation used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the negotiation is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the negotiation is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expired-server-cert": {
+     "name": "expired-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is expired.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "revoked-server-cert": {
+     "name": "revoked-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is revoked.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "untrusted-server-cert": {
+     "name": "untrusted-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is not issued by a trusted CA.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-timeout": {
+     "name": "cert-validation-timeout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation timeout.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-failure": {
+     "name": "cert-validation-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "sni-server-cert-check": {
+     "name": "sni-server-cert-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, use the CN in the server certificate to do URL filtering."
+      },
+      {
+       "name": "strict",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, close the connection."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check the SNI in the client hello message with the CN or SAN fields in the returned server certificate."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "pop3s": {
+   "name": "pop3s",
+   "category": "complex",
+   "help": "Configure POP3S options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to use for scanning (1 - 65535, default = 443).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol inspection status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "deep-inspection",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "client-certificate": {
+     "name": "client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "inspect",
+     "multiple_values": false
+    },
+    "unsupported-ssl-version": {
+     "name": "unsupported-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL version used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the version is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the version is not supported."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "unsupported-ssl-cipher": {
+     "name": "unsupported-ssl-cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL cipher used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the cipher is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the cipher is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "unsupported-ssl-negotiation": {
+     "name": "unsupported-ssl-negotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL negotiation used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the negotiation is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the negotiation is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expired-server-cert": {
+     "name": "expired-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is expired.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "revoked-server-cert": {
+     "name": "revoked-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is revoked.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "untrusted-server-cert": {
+     "name": "untrusted-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is not issued by a trusted CA.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-timeout": {
+     "name": "cert-validation-timeout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation timeout.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-failure": {
+     "name": "cert-validation-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "sni-server-cert-check": {
+     "name": "sni-server-cert-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, use the CN in the server certificate to do URL filtering."
+      },
+      {
+       "name": "strict",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, close the connection."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check the SNI in the client hello message with the CN or SAN fields in the returned server certificate."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "smtps": {
+   "name": "smtps",
+   "category": "complex",
+   "help": "Configure SMTPS options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to use for scanning (1 - 65535, default = 443).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol inspection status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "deep-inspection",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "client-certificate": {
+     "name": "client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "inspect",
+     "multiple_values": false
+    },
+    "unsupported-ssl-version": {
+     "name": "unsupported-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL version used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the version is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the version is not supported."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "unsupported-ssl-cipher": {
+     "name": "unsupported-ssl-cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL cipher used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the cipher is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the cipher is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "unsupported-ssl-negotiation": {
+     "name": "unsupported-ssl-negotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL negotiation used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the negotiation is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the negotiation is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expired-server-cert": {
+     "name": "expired-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is expired.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "revoked-server-cert": {
+     "name": "revoked-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is revoked.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "untrusted-server-cert": {
+     "name": "untrusted-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is not issued by a trusted CA.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-timeout": {
+     "name": "cert-validation-timeout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation timeout.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-failure": {
+     "name": "cert-validation-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "sni-server-cert-check": {
+     "name": "sni-server-cert-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, use the CN in the server certificate to do URL filtering."
+      },
+      {
+       "name": "strict",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, close the connection."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check the SNI in the client hello message with the CN or SAN fields in the returned server certificate."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "ssh": {
+   "name": "ssh",
+   "category": "complex",
+   "help": "Configure SSH options.",
+   "children": {
+    "ports": {
+     "name": "ports",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Ports to use for scanning (1 - 65535, default = 443).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65535,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 20
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol inspection status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "inspect-all": {
+     "name": "inspect-all",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level of SSL inspection.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "unsupported-version": {
+     "name": "unsupported-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on SSH version being unsupported.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "ssh-tun-policy-check": {
+     "name": "ssh-tun-policy-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SSH tunnel policy check.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SSH tunnel policy check."
+      },
+      {
+       "name": "enable",
+       "help": "Enable SSH tunnel policy check."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "ssh-algorithm": {
+     "name": "ssh-algorithm",
+     "category": "unitary",
+     "type": "option",
+     "help": "Relative strength of encryption algorithms accepted during negotiation.",
+     "options": [
+      {
+       "name": "compatible",
+       "help": "Allow a broader set of encryption algorithms for best compatibility."
+      },
+      {
+       "name": "high-encryption",
+       "help": "Allow only AES-CTR, AES-GCM ciphers and high encryption algorithms."
+      }
+     ],
+     "default": "compatible",
+     "multiple_values": false
+    }
+   }
+  },
+  "dot": {
+   "name": "dot",
+   "category": "complex",
+   "help": "Configure DNS over TLS options.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure protocol inspection status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable."
+      },
+      {
+       "name": "deep-inspection",
+       "help": "Full SSL inspection."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "quic": {
+     "name": "quic",
+     "category": "unitary",
+     "type": "option",
+     "help": "QUIC inspection status (default = inspect).",
+     "options": [
+      {
+       "name": "inspect",
+       "help": "Inspect QUIC traffic."
+      },
+      {
+       "name": "bypass",
+       "help": "Bypass QUIC traffic."
+      },
+      {
+       "name": "block",
+       "help": "Block QUIC traffic."
+      }
+     ],
+     "default": "inspect",
+     "multiple_values": false
+    },
+    "proxy-after-tcp-handshake": {
+     "name": "proxy-after-tcp-handshake",
+     "category": "unitary",
+     "type": "option",
+     "help": "Proxy traffic after the TCP 3-way handshake has been established (not before).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "client-certificate": {
+     "name": "client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "unsupported-ssl-version": {
+     "name": "unsupported-ssl-version",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL version used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the version is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the version is not supported."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "unsupported-ssl-cipher": {
+     "name": "unsupported-ssl-cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL cipher used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the cipher is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the cipher is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "unsupported-ssl-negotiation": {
+     "name": "unsupported-ssl-negotiation",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on the SSL negotiation used being unsupported.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Bypass the session when the negotiation is not supported."
+      },
+      {
+       "name": "block",
+       "help": "Block the session when the negotiation is not supported."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expired-server-cert": {
+     "name": "expired-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is expired.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "revoked-server-cert": {
+     "name": "revoked-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is revoked.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "untrusted-server-cert": {
+     "name": "untrusted-server-cert",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on server certificate is not issued by a trusted CA.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-timeout": {
+     "name": "cert-validation-timeout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation timeout.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "cert-validation-failure": {
+     "name": "cert-validation-failure",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on certificate validation failure.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the server certificate."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      },
+      {
+       "name": "ignore",
+       "help": "Re-sign the server certificate as trusted."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "sni-server-cert-check": {
+     "name": "sni-server-cert-check",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, use the CN in the server certificate to do URL filtering."
+      },
+      {
+       "name": "strict",
+       "help": "Check the SNI in the client hello message with the CN or SAN fields in the returned server certificate. If mismatched, close the connection."
+      },
+      {
+       "name": "disable",
+       "help": "Do not check the SNI in the client hello message with the CN or SAN fields in the returned server certificate."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "allowlist": {
+   "name": "allowlist",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable exempting servers by FortiGuard allowlist.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "block-blocklisted-certificates": {
+   "name": "block-blocklisted-certificates",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable blocking SSL-based botnet communication by FortiGuard certificate blocklist.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard certificate blocklist."
+    },
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard certificate blocklist."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-exempt": {
+   "name": "ssl-exempt",
+   "category": "table",
+   "help": "Servers to exempt from SSL inspection.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID number.",
+     "min-value": 0,
+     "max-value": 512,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Type of address object (IPv4 or IPv6) or FortiGuard category.",
+     "required": true,
+     "options": [
+      {
+       "name": "fortiguard-category",
+       "help": "FortiGuard category."
+      },
+      {
+       "name": "address",
+       "help": "Firewall IPv4 address."
+      },
+      {
+       "name": "address6",
+       "help": "Firewall IPv6 address."
+      },
+      {
+       "name": "wildcard-fqdn",
+       "help": "Fully Qualified Domain Name with wildcard characters."
+      },
+      {
+       "name": "regex",
+       "help": "Regular expression FQDN."
+      }
+     ],
+     "default": "fortiguard-category",
+     "multiple_values": false
+    },
+    "fortiguard-category": {
+     "name": "fortiguard-category",
+     "category": "unitary",
+     "type": "integer",
+     "help": "FortiGuard category ID.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "address": {
+     "name": "address",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv4 address object.",
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "address6": {
+     "name": "address6",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv6 address object.",
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "wildcard-fqdn": {
+     "name": "wildcard-fqdn",
+     "category": "unitary",
+     "type": "string",
+     "help": "Exempt servers by wildcard FQDN.",
+     "datasource": [
+      "firewall.wildcard-fqdn.custom.name",
+      "firewall.wildcard-fqdn.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "regex": {
+     "name": "regex",
+     "category": "unitary",
+     "type": "string",
+     "help": "Exempt servers by regular expression.",
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 255
+  },
+  "ech-outer-sni": {
+   "name": "ech-outer-sni",
+   "category": "table",
+   "help": "ClientHelloOuter SNIs to be blocked.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "ClientHelloOuter SNI name.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "sni": {
+     "name": "sni",
+     "category": "unitary",
+     "type": "string",
+     "help": "ClientHelloOuter SNI to be blocked.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "server-cert-mode": {
+   "name": "server-cert-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Re-sign or replace the server's certificate.",
+   "required": true,
+   "options": [
+    {
+     "name": "re-sign",
+     "help": "Multiple clients connecting to multiple servers."
+    },
+    {
+     "name": "replace",
+     "help": "Protect an SSL server."
+    }
+   ],
+   "default": "re-sign",
+   "multiple_values": false
+  },
+  "use-ssl-server": {
+   "name": "use-ssl-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the use of SSL server table for SSL offloading.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Don't use SSL server configuration."
+    },
+    {
+     "name": "enable",
+     "help": "Use SSL server configuration."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "caname": {
+   "name": "caname",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA certificate used by SSL Inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_CA_SSL",
+   "multiple_values": false
+  },
+  "untrusted-caname": {
+   "name": "untrusted-caname",
+   "category": "unitary",
+   "type": "string",
+   "help": "Untrusted CA certificate used by SSL Inspection.",
+   "required": true,
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_CA_Untrusted",
+   "multiple_values": false
+  },
+  "server-cert": {
+   "name": "server-cert",
+   "category": "table",
+   "help": "Certificate used by SSL Inspection to replace server certificate.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate list.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "Fortinet_SSL",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ssl-server": {
+   "name": "ssl-server",
+   "category": "table",
+   "help": "SSL server settings used for client certificate request.",
+   "required": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SSL server ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address-any",
+     "help": "IPv4 address of the SSL server.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "https-client-certificate": {
+     "name": "https-client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate during the HTTPS handshake.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "smtps-client-certificate": {
+     "name": "smtps-client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate during the SMTPS handshake.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "pop3s-client-certificate": {
+     "name": "pop3s-client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate during the POP3S handshake.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "imaps-client-certificate": {
+     "name": "imaps-client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate during the IMAPS handshake.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "ftps-client-certificate": {
+     "name": "ftps-client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate during the FTPS handshake.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    },
+    "ssl-other-client-certificate": {
+     "name": "ssl-other-client-certificate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action based on received client certificate during an SSL protocol handshake.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Bypass the session."
+      },
+      {
+       "name": "inspect",
+       "help": "Inspect the session."
+      },
+      {
+       "name": "block",
+       "help": "Block the session."
+      }
+     ],
+     "default": "bypass",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ssl-exemption-ip-rating": {
+   "name": "ssl-exemption-ip-rating",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IP based URL rating.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IP based URL rating."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IP based URL rating."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-exemption-log": {
+   "name": "ssl-exemption-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of SSL exemptions.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of SSL exemptions."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of SSL exemptions."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-anomaly-log": {
+   "name": "ssl-anomaly-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of SSL anomalies.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of SSL anomalies."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of SSL anomalies."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-negotiation-log": {
+   "name": "ssl-negotiation-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of SSL negotiation events.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of SSL negotiation events."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of SSL negotiation events."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-server-cert-log": {
+   "name": "ssl-server-cert-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of server certificate information.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of server certificate information."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of server certificate information."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-handshake-log": {
+   "name": "ssl-handshake-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of TLS handshakes.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of TLS handshakes."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of TLS handshakes."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rpc-over-https": {
+   "name": "rpc-over-https",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable inspection of RPC over HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable inspection of RPC over HTTPS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable inspection of RPC over HTTPS."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mapi-over-https": {
+   "name": "mapi-over-https",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable inspection of MAPI over HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable inspection of MAPI over HTTPS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable inspection of MAPI over HTTPS."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "supported-alpn": {
+   "name": "supported-alpn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure ALPN option.",
+   "options": [
+    {
+     "name": "http1-1",
+     "help": "Enable all ALPN including HTTP1.1 except HTTP2 and SPDY."
+    },
+    {
+     "name": "http2",
+     "help": "Enable all ALPN including HTTP2 except HTTP1.1 and SPDY."
+    },
+    {
+     "name": "all",
+     "help": "Allow all ALPN extensions except SPDY."
+    },
+    {
+     "name": "none",
+     "help": "Do not use ALPN."
+    }
+   ],
+   "default": "all",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 440,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

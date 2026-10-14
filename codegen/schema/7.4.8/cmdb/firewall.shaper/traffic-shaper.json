@@ -1,0 +1,260 @@
+{
+ "name": "traffic-shaper",
+ "category": "table",
+ "help": "Configure shared traffic shaper.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Traffic shaper name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "guaranteed-bandwidth": {
+   "name": "guaranteed-bandwidth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Amount of bandwidth guaranteed for this shaper (0 - 80000000). Units depend on the bandwidth-unit setting.",
+   "min-value": 0,
+   "max-value": 80000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "maximum-bandwidth": {
+   "name": "maximum-bandwidth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Upper bandwidth limit enforced by this shaper (0 - 80000000). 0 means no limit. Units depend on the bandwidth-unit setting.",
+   "min-value": 0,
+   "max-value": 80000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "bandwidth-unit": {
+   "name": "bandwidth-unit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Unit of measurement for guaranteed and maximum bandwidth for this shaper (Kbps, Mbps or Gbps).",
+   "options": [
+    {
+     "name": "kbps",
+     "help": "Kilobits per second."
+    },
+    {
+     "name": "mbps",
+     "help": "Megabits per second."
+    },
+    {
+     "name": "gbps",
+     "help": "Gigabits per second."
+    }
+   ],
+   "default": "kbps",
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "Higher priority traffic is more likely to be forwarded without delays and without compromising the guaranteed bandwidth.",
+   "options": [
+    {
+     "name": "low",
+     "help": "Low priority."
+    },
+    {
+     "name": "medium",
+     "help": "Medium priority."
+    },
+    {
+     "name": "high",
+     "help": "High priority."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "per-policy": {
+   "name": "per-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable applying a separate shaper for each policy. For example, if enabled the guaranteed bandwidth is applied separately for each policy.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "All referring policies share one traffic shaper."
+    },
+    {
+     "name": "enable",
+     "help": "Each referring policy has its own traffic shaper."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "diffserv": {
+   "name": "diffserv",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable changing the DiffServ setting applied to traffic accepted by this shaper.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting traffic DiffServ."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting traffic DiffServ."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "diffservcode": {
+   "name": "diffservcode",
+   "category": "unitary",
+   "type": "user",
+   "help": "DiffServ setting to be applied to traffic accepted by this shaper.",
+   "default": "",
+   "multiple_values": false
+  },
+  "dscp-marking-method": {
+   "name": "dscp-marking-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select DSCP marking method.",
+   "options": [
+    {
+     "name": "multi-stage",
+     "help": "Multistage marking."
+    },
+    {
+     "name": "static",
+     "help": "Static marking."
+    }
+   ],
+   "default": "static",
+   "multiple_values": false
+  },
+  "exceed-bandwidth": {
+   "name": "exceed-bandwidth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Exceed bandwidth used for DSCP/VLAN CoS multi-stage marking. Units depend on the bandwidth-unit setting.",
+   "min-value": 0,
+   "max-value": 80000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "exceed-dscp": {
+   "name": "exceed-dscp",
+   "category": "unitary",
+   "type": "user",
+   "help": "DSCP mark for traffic in guaranteed-bandwidth and exceed-bandwidth.",
+   "default": "",
+   "multiple_values": false
+  },
+  "maximum-dscp": {
+   "name": "maximum-dscp",
+   "category": "unitary",
+   "type": "user",
+   "help": "DSCP mark for traffic in exceed-bandwidth and maximum-bandwidth.",
+   "default": "",
+   "multiple_values": false
+  },
+  "cos-marking": {
+   "name": "cos-marking",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VLAN CoS marking.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable VLAN CoS marking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable VLAN CoS marking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cos-marking-method": {
+   "name": "cos-marking-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select VLAN CoS marking method.",
+   "options": [
+    {
+     "name": "multi-stage",
+     "help": "Multi stage marking."
+    },
+    {
+     "name": "static",
+     "help": "Static marking."
+    }
+   ],
+   "default": "static",
+   "multiple_values": false
+  },
+  "cos": {
+   "name": "cos",
+   "category": "unitary",
+   "type": "user",
+   "help": "VLAN CoS mark.",
+   "default": "",
+   "multiple_values": false
+  },
+  "exceed-cos": {
+   "name": "exceed-cos",
+   "category": "unitary",
+   "type": "user",
+   "help": "VLAN CoS mark for traffic in [guaranteed-bandwidth, exceed-bandwidth].",
+   "default": "",
+   "multiple_values": false
+  },
+  "maximum-cos": {
+   "name": "maximum-cos",
+   "category": "unitary",
+   "type": "user",
+   "help": "VLAN CoS mark for traffic in [exceed-bandwidth, maximum-bandwidth].",
+   "default": "",
+   "multiple_values": false
+  },
+  "overhead": {
+   "name": "overhead",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Per-packet size overhead used in rate computations.",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 0,
+   "multiple_values": false
+  },
+  "exceed-class-id": {
+   "name": "exceed-class-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Class ID for traffic in guaranteed-bandwidth and maximum-bandwidth.",
+   "datasource": [
+    "firewall.traffic-class.class-id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall.shaper",
+ "q_type": 264,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

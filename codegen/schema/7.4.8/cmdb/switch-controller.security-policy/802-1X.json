@@ -1,0 +1,358 @@
+{
+ "name": "802-1X",
+ "category": "table",
+ "help": "Configure 802.1x MAC Authentication Bypass (MAB) policies.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Policy name.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "security-mode": {
+   "name": "security-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Port or MAC based 802.1X security mode.",
+   "options": [
+    {
+     "name": "802.1X",
+     "help": "802.1X port based authentication."
+    },
+    {
+     "name": "802.1X-mac-based",
+     "help": "802.1X MAC based authentication."
+    }
+   ],
+   "default": "802.1X",
+   "multiple_values": false
+  },
+  "user-group": {
+   "name": "user-group",
+   "category": "table",
+   "help": "Name of user-group to assign to this MAC Authentication Bypass (MAB) policy.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Group name.",
+     "required": true,
+     "datasource": [
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "mac-auth-bypass": {
+   "name": "mac-auth-bypass",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable MAB for this policy.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable MAB."
+    },
+    {
+     "name": "enable",
+     "help": "Enable MAB."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "open-auth": {
+   "name": "open-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable open authentication for this policy.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable open authentication."
+    },
+    {
+     "name": "enable",
+     "help": "Enable open authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eap-passthru": {
+   "name": "eap-passthru",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable EAP pass-through mode, allowing protocols (such as LLDP) to pass through ports for more flexible authentication.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable EAP pass-through mode on this interface."
+    },
+    {
+     "name": "enable",
+     "help": "Enable EAP pass-through mode on this interface."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "eap-auto-untagged-vlans": {
+   "name": "eap-auto-untagged-vlans",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic inclusion of untagged VLANs.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable automatic inclusion of untagged VLANs."
+    },
+    {
+     "name": "enable",
+     "help": "Enable automatic inclusion of untagged VLANs."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "guest-vlan": {
+   "name": "guest-vlan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable the guest VLAN feature to allow limited access to non-802.1X-compliant clients.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable guest VLAN on this interface."
+    },
+    {
+     "name": "enable",
+     "help": "Enable guest VLAN on this interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "guest-vlan-id": {
+   "name": "guest-vlan-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Guest VLAN name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "guest-auth-delay": {
+   "name": "guest-auth-delay",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Guest authentication delay (1 - 900  sec, default = 30).",
+   "min-value": 1,
+   "max-value": 900,
+   "default": 30,
+   "multiple_values": false
+  },
+  "auth-fail-vlan": {
+   "name": "auth-fail-vlan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to allow limited access to clients that cannot authenticate.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable authentication fail VLAN on this interface."
+    },
+    {
+     "name": "enable",
+     "help": "Enable authentication fail VLAN on this interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-fail-vlan-id": {
+   "name": "auth-fail-vlan-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "VLAN ID on which authentication failed.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "framevid-apply": {
+   "name": "framevid-apply",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the capability to apply the EAP/MAB frame VLAN to the port native VLAN.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable the capability to apply the EAP/MAB frame VLAN to the port native VLAN."
+    },
+    {
+     "name": "enable",
+     "help": "Enable the capability to apply the EAP/MAB frame VLAN to the port native VLAN."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "radius-timeout-overwrite": {
+   "name": "radius-timeout-overwrite",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to override the global RADIUS session timeout.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Override the global RADIUS session timeout."
+    },
+    {
+     "name": "enable",
+     "help": "Use the global RADIUS session timeout."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "policy-type": {
+   "name": "policy-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Policy type.",
+   "options": [
+    {
+     "name": "802.1X",
+     "help": "802.1X security policy."
+    }
+   ],
+   "default": "802.1X",
+   "multiple_values": false
+  },
+  "authserver-timeout-period": {
+   "name": "authserver-timeout-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Authentication server timeout period (3 - 15 sec, default = 3).",
+   "min-value": 3,
+   "max-value": 15,
+   "default": 3,
+   "multiple_values": false
+  },
+  "authserver-timeout-vlan": {
+   "name": "authserver-timeout-vlan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the authentication server timeout VLAN to allow limited access when RADIUS is unavailable.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable authentication server timeout VLAN on this interface."
+    },
+    {
+     "name": "enable",
+     "help": "Enable authentication server timeout VLAN on this interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "authserver-timeout-vlanid": {
+   "name": "authserver-timeout-vlanid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication server timeout VLAN name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "authserver-timeout-tagged": {
+   "name": "authserver-timeout-tagged",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure timeout option for the tagged VLAN which allows limited access when the authentication server is unavailable.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable authentication server timeout on this interface."
+    },
+    {
+     "name": "lldp-voice",
+     "help": "LLDP voice timeout for the tagged VLAN on this interface."
+    },
+    {
+     "name": "static",
+     "help": "Static timeout for the tagged VLAN on this interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "authserver-timeout-tagged-vlanid": {
+   "name": "authserver-timeout-tagged-vlanid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tagged VLAN name for which the timeout option is applied to (only one VLAN ID).",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "dacl": {
+   "name": "dacl",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dynamic access control list on this interface.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable dynamic access control list on this interface."
+    },
+    {
+     "name": "enable",
+     "help": "Enable dynamic access control on this interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller.security-policy",
+ "q_type": 321,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

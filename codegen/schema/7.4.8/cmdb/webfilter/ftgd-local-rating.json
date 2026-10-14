@@ -1,0 +1,61 @@
+{
+ "name": "ftgd-local-rating",
+ "category": "table",
+ "help": "Configure local FortiGuard Web Filter local ratings.",
+ "mkey": "url",
+ "mkey_type": "string",
+ "children": {
+  "url": {
+   "name": "url",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL to rate locally.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local rating.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local rating."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local rating."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "rating": {
+   "name": "rating",
+   "category": "unitary",
+   "type": "user",
+   "help": "Local rating.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 2000,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "webfilter",
+ "q_type": 140,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

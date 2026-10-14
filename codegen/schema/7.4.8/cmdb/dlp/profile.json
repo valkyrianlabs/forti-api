@@ -1,0 +1,529 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure DLP profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the DLP profile.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "feature-set": {
+   "name": "feature-set",
+   "category": "unitary",
+   "type": "option",
+   "help": "Flow/proxy feature set.",
+   "options": [
+    {
+     "name": "flow",
+     "help": "Flow feature set."
+    },
+    {
+     "name": "proxy",
+     "help": "Proxy feature set."
+    }
+   ],
+   "default": "flow",
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group used by this DLP profile.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "rule": {
+   "name": "rule",
+   "category": "table",
+   "help": "Set up DLP rules for this profile.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Filter name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "severity": {
+     "name": "severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Select the severity or threat level that matches this filter.",
+     "options": [
+      {
+       "name": "info",
+       "help": "Informational."
+      },
+      {
+       "name": "low",
+       "help": "Low."
+      },
+      {
+       "name": "medium",
+       "help": "Medium."
+      },
+      {
+       "name": "high",
+       "help": "High."
+      },
+      {
+       "name": "critical",
+       "help": "Critical."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Select whether to check the content of messages (an email message) or files (downloaded files or email attachments).",
+     "options": [
+      {
+       "name": "file",
+       "help": "Check the contents of downloaded or attached files."
+      },
+      {
+       "name": "message",
+       "help": "Check the contents of email messages, web pages, etc."
+      }
+     ],
+     "default": "file",
+     "multiple_values": false
+    },
+    "proto": {
+     "name": "proto",
+     "category": "unitary",
+     "type": "option",
+     "help": "Check messages or files over one or more of these protocols.",
+     "options": [
+      {
+       "name": "smtp",
+       "help": "SMTP."
+      },
+      {
+       "name": "pop3",
+       "help": "POP3."
+      },
+      {
+       "name": "imap",
+       "help": "IMAP."
+      },
+      {
+       "name": "http-get",
+       "help": "HTTP GET."
+      },
+      {
+       "name": "http-post",
+       "help": "HTTP POST."
+      },
+      {
+       "name": "ftp",
+       "help": "FTP."
+      },
+      {
+       "name": "nntp",
+       "help": "NNTP."
+      },
+      {
+       "name": "mapi",
+       "help": "MAPI."
+      },
+      {
+       "name": "ssh",
+       "help": "SFTP and SCP."
+      },
+      {
+       "name": "cifs",
+       "help": "CIFS."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "filter-by": {
+     "name": "filter-by",
+     "category": "unitary",
+     "type": "option",
+     "help": "Select the type of content to match.",
+     "options": [
+      {
+       "name": "sensor",
+       "help": "Use DLP sensors to match content."
+      },
+      {
+       "name": "mip",
+       "help": "Use MIP label dictionary to match content."
+      },
+      {
+       "name": "fingerprint",
+       "help": "Match against a fingerprint sensitivity."
+      },
+      {
+       "name": "encrypted",
+       "help": "Look for encrypted files."
+      },
+      {
+       "name": "none",
+       "help": "No content scan."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "file-size": {
+     "name": "file-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Match files greater than or equal to this size (KB).",
+     "min-value": 0,
+     "max-value": 195584,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sensitivity": {
+     "name": "sensitivity",
+     "category": "table",
+     "help": "Select a DLP file pattern sensitivity to match.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Select a DLP sensitivity.",
+       "required": true,
+       "datasource": [
+        "dlp.sensitivity.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "match-percentage": {
+     "name": "match-percentage",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Percentage of fingerprints in the fingerprint databases designated with the selected sensitivity to match.",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 10,
+     "multiple_values": false
+    },
+    "file-type": {
+     "name": "file-type",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Select the number of a DLP file pattern table to match.",
+     "datasource": [
+      "dlp.filepattern.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "sensor": {
+     "name": "sensor",
+     "category": "table",
+     "help": "Select DLP sensors.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "required": true,
+       "datasource": [
+        "dlp.sensor.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "label": {
+     "name": "label",
+     "category": "unitary",
+     "type": "string",
+     "help": "MIP label dictionary.",
+     "required": true,
+     "datasource": [
+      "dlp.dictionary.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "archive": {
+     "name": "archive",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable DLP archiving.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "No DLP archiving."
+      },
+      {
+       "name": "enable",
+       "help": "Enable full DLP archiving."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action to take with content that this DLP profile matches.",
+     "options": [
+      {
+       "name": "allow",
+       "help": "Allow the content to pass through the FortiGate and do not create a log message."
+      },
+      {
+       "name": "log-only",
+       "help": "Allow the content to pass through the FortiGate, but write a log message."
+      },
+      {
+       "name": "block",
+       "help": "Block the content and write a log message."
+      },
+      {
+       "name": "quarantine-ip",
+       "help": "Quarantine all traffic from the IP address and write a log message."
+      }
+     ],
+     "default": "allow",
+     "multiple_values": false
+    },
+    "expiry": {
+     "name": "expiry",
+     "category": "unitary",
+     "type": "user",
+     "help": "Quarantine duration in days, hours, minutes (format = dddhhmm).",
+     "default": "5m",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dlp-log": {
+   "name": "dlp-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DLP logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DLP logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DLP logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "extended-log": {
+   "name": "extended-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable extended logging for data loss prevention.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nac-quar-log": {
+   "name": "nac-quar-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAC quarantine logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NAC quarantine logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NAC quarantine logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "full-archive-proto": {
+   "name": "full-archive-proto",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocols to always content archive.",
+   "options": [
+    {
+     "name": "smtp",
+     "help": "SMTP."
+    },
+    {
+     "name": "pop3",
+     "help": "POP3."
+    },
+    {
+     "name": "imap",
+     "help": "IMAP."
+    },
+    {
+     "name": "http-get",
+     "help": "HTTP GET."
+    },
+    {
+     "name": "http-post",
+     "help": "HTTP POST."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "nntp",
+     "help": "NNTP."
+    },
+    {
+     "name": "mapi",
+     "help": "MAPI."
+    },
+    {
+     "name": "ssh",
+     "help": "SFTP and SCP."
+    },
+    {
+     "name": "cifs",
+     "help": "CIFS."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "summary-proto": {
+   "name": "summary-proto",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocols to always log summary.",
+   "options": [
+    {
+     "name": "smtp",
+     "help": "SMTP."
+    },
+    {
+     "name": "pop3",
+     "help": "POP3."
+    },
+    {
+     "name": "imap",
+     "help": "IMAP."
+    },
+    {
+     "name": "http-get",
+     "help": "HTTP GET."
+    },
+    {
+     "name": "http-post",
+     "help": "HTTP POST."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "nntp",
+     "help": "NNTP."
+    },
+    {
+     "name": "mapi",
+     "help": "MAPI."
+    },
+    {
+     "name": "ssh",
+     "help": "SFTP and SCP."
+    },
+    {
+     "name": "cifs",
+     "help": "CIFS."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "dlp",
+ "q_type": 248,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

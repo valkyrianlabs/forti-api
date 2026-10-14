@@ -15,6 +15,24 @@ namespace fortiapi::firewall {
 
 // Recurring schedule configuration.
 struct RecurringSchedule {
+    // Values of Day: One or more days of the week on which the schedule is valid. Separate the names of the days with a space.
+    struct Day {
+        static constexpr std::string_view sunday = "sunday";
+        static constexpr std::string_view monday = "monday";
+        static constexpr std::string_view tuesday = "tuesday";
+        static constexpr std::string_view wednesday = "wednesday";
+        static constexpr std::string_view thursday = "thursday";
+        static constexpr std::string_view friday = "friday";
+        static constexpr std::string_view saturday = "saturday";
+        static constexpr std::string_view none = "none";
+    };
+
+    // Values of FabricObject: Security Fabric global object setting.
+    struct FabricObject {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
     fortiapi::Field<std::string> name;  // Recurring schedule name. Required.
     fortiapi::Field<std::string> start;  // Time of day to start the schedule, format hh:mm. Required.
     fortiapi::Field<std::string> end;  // Time of day to end the schedule, format hh:mm. Required.
@@ -40,22 +58,6 @@ struct RecurringScheduleSpec {
 };
 
 using RecurringSchedules = fortiapi::Table<RecurringScheduleSpec>;
-
-// Allowed values of option attributes.
-namespace recurring_schedule::day {
-    inline constexpr std::string_view sunday = "sunday";
-    inline constexpr std::string_view monday = "monday";
-    inline constexpr std::string_view tuesday = "tuesday";
-    inline constexpr std::string_view wednesday = "wednesday";
-    inline constexpr std::string_view thursday = "thursday";
-    inline constexpr std::string_view friday = "friday";
-    inline constexpr std::string_view saturday = "saturday";
-    inline constexpr std::string_view none = "none";
-}
-namespace recurring_schedule::fabric_object {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
 
 }  // namespace fortiapi::firewall
 

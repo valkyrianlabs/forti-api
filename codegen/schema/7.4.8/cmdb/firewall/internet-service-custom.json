@@ -1,0 +1,194 @@
+{
+ "name": "internet-service-custom",
+ "category": "table",
+ "help": "Configure custom Internet Services.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Internet Service name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "reputation": {
+   "name": "reputation",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Reputation level of the custom Internet Service.",
+   "datasource": [
+    "firewall.internet-service-reputation.id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 3,
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entry": {
+   "name": "entry",
+   "category": "table",
+   "help": "Entries added to the Internet Service database and custom database.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID(1-255).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "addr-mode": {
+     "name": "addr-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Address mode (IPv4 or IPv6).",
+     "options": [
+      {
+       "name": "ipv4",
+       "help": "IPv4 mode."
+      },
+      {
+       "name": "ipv6",
+       "help": "IPv6 mode."
+      }
+     ],
+     "default": "ipv4",
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Integer value for the protocol type as defined by IANA (0 - 255).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "port-range": {
+     "name": "port-range",
+     "category": "table",
+     "help": "Port ranges in the custom entry.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Custom entry port range ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "start-port": {
+       "name": "start-port",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Integer value for starting TCP/UDP/SCTP destination port in range (0 to 65535).",
+       "required": true,
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 1,
+       "multiple_values": false
+      },
+      "end-port": {
+       "name": "end-port",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Integer value for ending TCP/UDP/SCTP destination port in range (0 to 65535).",
+       "required": true,
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 65535,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dst": {
+     "name": "dst",
+     "category": "table",
+     "help": "Destination address or address group name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Select the destination address or address group object from available options.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "dst6": {
+     "name": "dst6",
+     "category": "table",
+     "help": "Destination address6 or address6 group name.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Select the destination address6 or address group object from available options.",
+       "required": true,
+       "datasource": [
+        "firewall.address6.name",
+        "firewall.addrgrp6.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 348,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

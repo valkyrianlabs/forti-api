@@ -1,0 +1,185 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure virtual-patch profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "severity": {
+   "name": "severity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Relative severity of the signature (low, medium, high, critical).",
+   "options": [
+    {
+     "name": "info",
+     "help": "info"
+    },
+    {
+     "name": "low",
+     "help": "low"
+    },
+    {
+     "name": "medium",
+     "help": "medium"
+    },
+    {
+     "name": "high",
+     "help": "high"
+    },
+    {
+     "name": "critical",
+     "help": "critical"
+    }
+   ],
+   "default": "info low medium high critical",
+   "multiple_values": true
+  },
+  "action": {
+   "name": "action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action (pass/block).",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Allows session that match the profile."
+    },
+    {
+     "name": "block",
+     "help": "Blocks sessions that match the profile."
+    }
+   ],
+   "default": "block",
+   "multiple_values": false
+  },
+  "log": {
+   "name": "log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "exemption": {
+   "name": "exemption",
+   "category": "table",
+   "help": "Exempt devices or rules.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "IDs.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable exemption.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable exemption."
+      },
+      {
+       "name": "disable",
+       "help": "Disable exemption."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "rule": {
+     "name": "rule",
+     "category": "table",
+     "help": "Patch signature rule IDs.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Rule IDs.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "device": {
+     "name": "device",
+     "category": "table",
+     "help": "Device MAC addresses.",
+     "member_table": true,
+     "mkey": "mac",
+     "mkey_type": "mac-address",
+     "children": {
+      "mac": {
+       "name": "mac",
+       "category": "unitary",
+       "type": "mac-address",
+       "help": "Device MAC address.",
+       "default": "00:00:00:00:00:00",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "virtual-patch",
+ "q_type": 378,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

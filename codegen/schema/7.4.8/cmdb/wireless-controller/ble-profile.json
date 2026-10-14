@@ -1,0 +1,269 @@
+{
+ "name": "ble-profile",
+ "category": "table",
+ "help": "Configure Bluetooth Low Energy profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Bluetooth Low Energy profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comment.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "advertising": {
+   "name": "advertising",
+   "category": "unitary",
+   "type": "option",
+   "help": "Advertising type.",
+   "options": [
+    {
+     "name": "ibeacon",
+     "help": "iBeacon advertising."
+    },
+    {
+     "name": "eddystone-uid",
+     "help": "Eddystone UID advertising."
+    },
+    {
+     "name": "eddystone-url",
+     "help": "Eddystone URL advertising."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "ibeacon-uuid": {
+   "name": "ibeacon-uuid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "size": 63,
+   "default": "005ea414-cbd1-11e5-9956-625662870761",
+   "multiple_values": false
+  },
+  "major-id": {
+   "name": "major-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Major ID.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "minor-id": {
+   "name": "minor-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minor ID.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 2000,
+   "multiple_values": false
+  },
+  "eddystone-namespace": {
+   "name": "eddystone-namespace",
+   "category": "unitary",
+   "type": "string",
+   "help": "Eddystone namespace ID.",
+   "size": 20,
+   "default": "0102030405",
+   "multiple_values": false
+  },
+  "eddystone-instance": {
+   "name": "eddystone-instance",
+   "category": "unitary",
+   "type": "string",
+   "help": "Eddystone instance ID.",
+   "size": 12,
+   "default": "abcdef",
+   "multiple_values": false
+  },
+  "eddystone-url": {
+   "name": "eddystone-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "Eddystone URL.",
+   "size": 127,
+   "default": "http://www.fortinet.com",
+   "multiple_values": false
+  },
+  "txpower": {
+   "name": "txpower",
+   "category": "unitary",
+   "type": "option",
+   "help": "Transmit power level (default = 0).",
+   "options": [
+    {
+     "name": "0",
+     "help": "Transmit power level 0 (-21 dBm)"
+    },
+    {
+     "name": "1",
+     "help": "Transmit power level 1 (-18 dBm)"
+    },
+    {
+     "name": "2",
+     "help": "Transmit power level 2 (-15 dBm)"
+    },
+    {
+     "name": "3",
+     "help": "Transmit power level 3 (-12 dBm)"
+    },
+    {
+     "name": "4",
+     "help": "Transmit power level 4 (-9 dBm)"
+    },
+    {
+     "name": "5",
+     "help": "Transmit power level 5 (-6 dBm)"
+    },
+    {
+     "name": "6",
+     "help": "Transmit power level 6 (-3 dBm)"
+    },
+    {
+     "name": "7",
+     "help": "Transmit power level 7 (0 dBm)"
+    },
+    {
+     "name": "8",
+     "help": "Transmit power level 8 (1 dBm)"
+    },
+    {
+     "name": "9",
+     "help": "Transmit power level 9 (2 dBm)"
+    },
+    {
+     "name": "10",
+     "help": "Transmit power level 10 (3 dBm)"
+    },
+    {
+     "name": "11",
+     "help": "Transmit power level 11 (4 dBm)"
+    },
+    {
+     "name": "12",
+     "help": "Transmit power level 12 (5 dBm)"
+    }
+   ],
+   "default": "0",
+   "multiple_values": false
+  },
+  "beacon-interval": {
+   "name": "beacon-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Beacon interval (default = 100 msec).",
+   "min-value": 40,
+   "max-value": 3500,
+   "default": 100,
+   "multiple_values": false
+  },
+  "ble-scanning": {
+   "name": "ble-scanning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Bluetooth Low Energy (BLE) scanning.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable BLE scanning."
+    },
+    {
+     "name": "disable",
+     "help": "Disable BLE scanning."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "scan-type": {
+   "name": "scan-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Scan Type (default = active).",
+   "options": [
+    {
+     "name": "active",
+     "help": "Active BLE scanning."
+    },
+    {
+     "name": "passive",
+     "help": "Passive BLE scanning."
+    }
+   ],
+   "default": "active",
+   "multiple_values": false
+  },
+  "scan-threshold": {
+   "name": "scan-threshold",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the AP to report detected BLE device (-95 to -20, default = -90).",
+   "size": 7,
+   "default": "-90",
+   "multiple_values": false
+  },
+  "scan-period": {
+   "name": "scan-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Scan Period (default = 4000 msec).",
+   "min-value": 1000,
+   "max-value": 10000,
+   "default": 4000,
+   "multiple_values": false
+  },
+  "scan-time": {
+   "name": "scan-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Scan Time (default = 1000 msec).",
+   "min-value": 1000,
+   "max-value": 10000,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "scan-interval": {
+   "name": "scan-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Scan Interval (default = 50 msec).",
+   "min-value": 10,
+   "max-value": 1000,
+   "default": 50,
+   "multiple_values": false
+  },
+  "scan-window": {
+   "name": "scan-window",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Scan Windows (default = 50 msec).",
+   "min-value": 10,
+   "max-value": 1000,
+   "default": 50,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 128,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 286,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

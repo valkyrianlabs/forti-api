@@ -1,0 +1,199 @@
+{
+ "name": "automation-stitch",
+ "category": "table",
+ "help": "Automation stitches.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Description.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this stitch.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable stitch."
+    },
+    {
+     "name": "disable",
+     "help": "Disable stitch."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "trigger": {
+   "name": "trigger",
+   "category": "unitary",
+   "type": "string",
+   "help": "Trigger name.",
+   "required": true,
+   "datasource": [
+    "system.automation-trigger.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "condition": {
+   "name": "condition",
+   "category": "table",
+   "help": "Automation conditions.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Condition name.",
+     "required": true,
+     "datasource": [
+      "system.automation-condition.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "condition-logic": {
+   "name": "condition-logic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Apply AND/OR logic to the specified automation conditions.",
+   "required": true,
+   "options": [
+    {
+     "name": "and",
+     "help": "All specified conditions must be met."
+    },
+    {
+     "name": "or",
+     "help": "At least one specified condition needs to be met."
+    }
+   ],
+   "default": "and",
+   "multiple_values": false
+  },
+  "actions": {
+   "name": "actions",
+   "category": "table",
+   "help": "Configure stitch actions.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "string",
+     "help": "Action name.",
+     "required": true,
+     "datasource": [
+      "system.automation-action.name"
+     ],
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "delay": {
+     "name": "delay",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Delay before execution (in seconds).",
+     "min-value": 0,
+     "max-value": 3600,
+     "default": 0,
+     "multiple_values": false
+    },
+    "required": {
+     "name": "required",
+     "category": "unitary",
+     "type": "option",
+     "help": "Required in action chain.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Required in action chain."
+      },
+      {
+       "name": "disable",
+       "help": "Not required in action chain."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "destination": {
+   "name": "destination",
+   "category": "table",
+   "help": "Serial number/HA group-name of destination devices.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Destination name.",
+     "required": true,
+     "datasource": [
+      "system.automation-destination.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 521,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

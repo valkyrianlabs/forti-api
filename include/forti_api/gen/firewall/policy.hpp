@@ -15,6 +15,465 @@ namespace fortiapi::firewall {
 
 // Configure IPv4/IPv6 policies.
 struct Policy {
+    // Values of Status: Enable or disable this policy.
+    struct Status {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Action: Policy action (accept/deny/ipsec).
+    struct Action {
+        static constexpr std::string_view accept = "accept";
+        static constexpr std::string_view deny = "deny";
+        static constexpr std::string_view ipsec = "ipsec";
+    };
+
+    // Values of Nat64: Enable/disable NAT64.
+    struct Nat64 {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Nat46: Enable/disable NAT46.
+    struct Nat46 {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ZtnaStatus: Enable/disable zero trust access.
+    struct ZtnaStatus {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ZtnaDeviceOwnership: Enable/disable zero trust device ownership.
+    struct ZtnaDeviceOwnership {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ZtnaTagsMatchLogic: ZTNA tag matching logic.
+    struct ZtnaTagsMatchLogic {
+        static constexpr std::string_view or_ = "or";
+        static constexpr std::string_view and_ = "and";
+    };
+
+    // Values of InternetService: Enable/disable use of Internet Services for this policy. If enabled, destination address and service are not used.
+    struct InternetService {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InternetServiceSrc: Enable/disable use of Internet Services in source for this policy. If enabled, source address is not used.
+    struct InternetServiceSrc {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ReputationDirection: Direction of the initial traffic for reputation to take effect.
+    struct ReputationDirection {
+        static constexpr std::string_view source = "source";
+        static constexpr std::string_view destination = "destination";
+    };
+
+    // Values of InternetService6: Enable/disable use of IPv6 Internet Services for this policy. If enabled, destination address and service are not used.
+    struct InternetService6 {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InternetService6Src: Enable/disable use of IPv6 Internet Services in source for this policy. If enabled, source address is not used.
+    struct InternetService6Src {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ReputationDirection6: Direction of the initial traffic for IPv6 reputation to take effect.
+    struct ReputationDirection6 {
+        static constexpr std::string_view source = "source";
+        static constexpr std::string_view destination = "destination";
+    };
+
+    // Values of RtpNat: Enable Real Time Protocol (RTP) NAT.
+    struct RtpNat {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SendDenyPacket: Enable to send a reply when a session is denied or blocked by a firewall policy.
+    struct SendDenyPacket {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of FirewallSessionDirty: How to handle sessions if the configuration of this firewall policy changes.
+    struct FirewallSessionDirty {
+        static constexpr std::string_view check_all = "check-all";
+        static constexpr std::string_view check_new = "check-new";
+    };
+
+    // Values of ScheduleTimeout: Enable to force current sessions to end when the schedule object times out. Disable allows them to end from inactivity.
+    struct ScheduleTimeout {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PolicyExpiry: Enable/disable policy expiry.
+    struct PolicyExpiry {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of TosNegate: Enable negated TOS match.
+    struct TosNegate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AntiReplay: Enable/disable anti-replay check.
+    struct AntiReplay {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of TcpSessionWithoutSyn: Enable/disable creation of TCP session without SYN flag.
+    struct TcpSessionWithoutSyn {
+        static constexpr std::string_view all = "all";
+        static constexpr std::string_view data_only = "data-only";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GeoipAnycast: Enable/disable recognition of anycast IP addresses using the geography IP database.
+    struct GeoipAnycast {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of GeoipMatch: Match geography address based either on its physical location or registered location.
+    struct GeoipMatch {
+        static constexpr std::string_view physical_location = "physical-location";
+        static constexpr std::string_view registered_location = "registered-location";
+    };
+
+    // Values of DynamicShaping: Enable/disable dynamic RADIUS defined traffic shaping.
+    struct DynamicShaping {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PassiveWanHealthMeasurement: Enable/disable passive WAN health measurement. When enabled, auto-asic-offload is disabled.
+    struct PassiveWanHealthMeasurement {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of UtmStatus: Enable to add one or more security profiles (AV, IPS, etc.) to the firewall policy.
+    struct UtmStatus {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InspectionMode: Policy inspection mode (Flow/proxy). Default is Flow mode.
+    struct InspectionMode {
+        static constexpr std::string_view proxy = "proxy";
+        static constexpr std::string_view flow = "flow";
+    };
+
+    // Values of HttpPolicyRedirect: Redirect HTTP(S) traffic to matching transparent web proxy policy.
+    struct HttpPolicyRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SshPolicyRedirect: Redirect SSH traffic to matching transparent proxy policy.
+    struct SshPolicyRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ZtnaPolicyRedirect: Redirect ZTNA traffic to matching Access-Proxy proxy-policy.
+    struct ZtnaPolicyRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ProfileType: Determine whether the firewall policy allows security profile groups or single profiles only.
+    struct ProfileType {
+        static constexpr std::string_view single = "single";
+        static constexpr std::string_view group = "group";
+    };
+
+    // Values of Logtraffic: Enable or disable logging. Log all sessions or security profile sessions.
+    struct Logtraffic {
+        static constexpr std::string_view all = "all";
+        static constexpr std::string_view utm = "utm";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of LogtrafficStart: Record logs when a session starts.
+    struct LogtrafficStart {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of CapturePacket: Enable/disable capture packets.
+    struct CapturePacket {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AutoAsicOffload: Enable/disable policy traffic ASIC offloading.
+    struct AutoAsicOffload {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of NpAcceleration: Enable/disable UTM Network Processor acceleration.
+    struct NpAcceleration {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Nat: Enable/disable source NAT.
+    struct Nat {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PcpOutbound: Enable/disable PCP outbound SNAT.
+    struct PcpOutbound {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PcpInbound: Enable/disable PCP inbound DNAT.
+    struct PcpInbound {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PermitAnyHost: Accept UDP packets from any host.
+    struct PermitAnyHost {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PermitStunHost: Accept UDP packets from any Session Traversal Utilities for NAT (STUN) host.
+    struct PermitStunHost {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Fixedport: Enable to prevent source NAT from changing a session's source port.
+    struct Fixedport {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PortPreserve: Enable/disable preservation of the original source port from source NAT if it has not been used.
+    struct PortPreserve {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ippool: Enable to use IP Pools for source NAT.
+    struct Ippool {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Inbound: Policy-based IPsec VPN: only traffic from the remote network can initiate a VPN.
+    struct Inbound {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Outbound: Policy-based IPsec VPN: only traffic from the internal network can initiate a VPN.
+    struct Outbound {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Natinbound: Policy-based IPsec VPN: apply destination NAT to inbound traffic.
+    struct Natinbound {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Natoutbound: Policy-based IPsec VPN: apply source NAT to outbound traffic.
+    struct Natoutbound {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Fec: Enable/disable Forward Error Correction on traffic matching this policy on a FEC device.
+    struct Fec {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Wccp: Enable/disable forwarding traffic matching this policy to a configured WCCP server.
+    struct Wccp {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ntlm: Enable/disable NTLM authentication.
+    struct Ntlm {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of NtlmGuest: Enable/disable NTLM guest user access.
+    struct NtlmGuest {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AuthPath: Enable/disable authentication-based routing.
+    struct AuthPath {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Disclaimer: Enable/disable user authentication disclaimer.
+    struct Disclaimer {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of EmailCollect: Enable/disable email collection.
+    struct EmailCollect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of MatchVip: Enable to match packets that have had their destination addresses changed by a VIP.
+    struct MatchVip {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of MatchVipOnly: Enable/disable matching of only those packets that have had their destination addresses changed by a VIP.
+    struct MatchVipOnly {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DiffservCopy: Enable to copy packet's DiffServ values from session's original direction to its reply direction.
+    struct DiffservCopy {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DiffservForward: Enable to change packet's DiffServ values to the specified diffservcode-forward value.
+    struct DiffservForward {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DiffservReverse: Enable to change packet's reverse (reply) DiffServ values to the specified diffservcode-rev value.
+    struct DiffservReverse {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of BlockNotification: Enable/disable block notification.
+    struct BlockNotification {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SrcaddrNegate: When enabled srcaddr specifies what the source address must NOT be.
+    struct SrcaddrNegate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Srcaddr6Negate: When enabled srcaddr6 specifies what the source address must NOT be.
+    struct Srcaddr6Negate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DstaddrNegate: When enabled dstaddr specifies what the destination address must NOT be.
+    struct DstaddrNegate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Dstaddr6Negate: When enabled dstaddr6 specifies what the destination address must NOT be.
+    struct Dstaddr6Negate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ServiceNegate: When enabled service specifies what the service must NOT be.
+    struct ServiceNegate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InternetServiceNegate: When enabled internet-service specifies what the service must NOT be.
+    struct InternetServiceNegate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InternetServiceSrcNegate: When enabled internet-service-src specifies what the service must NOT be.
+    struct InternetServiceSrcNegate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InternetService6Negate: When enabled internet-service6 specifies what the service must NOT be.
+    struct InternetService6Negate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of InternetService6SrcNegate: When enabled internet-service6-src specifies what the service must NOT be.
+    struct InternetService6SrcNegate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of TimeoutSendRst: Enable/disable sending RST packets when TCP sessions expire.
+    struct TimeoutSendRst {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of CaptivePortalExempt: Enable to exempt some users from the captive portal.
+    struct CaptivePortalExempt {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Dsri: Enable DSRI to ignore HTTP server responses.
+    struct Dsri {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of RadiusMacAuthBypass: Enable MAC authentication bypass. The bypassed MAC address must be received from RADIUS server.
+    struct RadiusMacAuthBypass {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DelayTcpNpuSession: Enable TCP NPU session delay to guarantee packet order of 3-way handshake.
+    struct DelayTcpNpuSession {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SgtCheck: Enable/disable security group tags (SGT) check.
+    struct SgtCheck {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
     // Vendor MAC source ID.
     struct SrcVendorMacEntry {
         fortiapi::Field<std::uint32_t> id;  // Vendor MAC ID. Required. References: firewall.vendor-mac.id.
@@ -408,315 +867,6 @@ struct PolicySpec {
 };
 
 using Policies = fortiapi::Table<PolicySpec>;
-
-// Allowed values of option attributes.
-namespace policy::status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::action {
-    inline constexpr std::string_view accept = "accept";
-    inline constexpr std::string_view deny = "deny";
-    inline constexpr std::string_view ipsec = "ipsec";
-}
-namespace policy::nat64 {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::nat46 {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ztna_status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ztna_device_ownership {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ztna_tags_match_logic {
-    inline constexpr std::string_view or_ = "or";
-    inline constexpr std::string_view and_ = "and";
-}
-namespace policy::internet_service {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::internet_service_src {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::reputation_direction {
-    inline constexpr std::string_view source = "source";
-    inline constexpr std::string_view destination = "destination";
-}
-namespace policy::internet_service6 {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::internet_service6_src {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::reputation_direction6 {
-    inline constexpr std::string_view source = "source";
-    inline constexpr std::string_view destination = "destination";
-}
-namespace policy::rtp_nat {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace policy::send_deny_packet {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace policy::firewall_session_dirty {
-    inline constexpr std::string_view check_all = "check-all";
-    inline constexpr std::string_view check_new = "check-new";
-}
-namespace policy::schedule_timeout {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::policy_expiry {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::tos_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::anti_replay {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::tcp_session_without_syn {
-    inline constexpr std::string_view all = "all";
-    inline constexpr std::string_view data_only = "data-only";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::geoip_anycast {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::geoip_match {
-    inline constexpr std::string_view physical_location = "physical-location";
-    inline constexpr std::string_view registered_location = "registered-location";
-}
-namespace policy::dynamic_shaping {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::passive_wan_health_measurement {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::utm_status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::inspection_mode {
-    inline constexpr std::string_view proxy = "proxy";
-    inline constexpr std::string_view flow = "flow";
-}
-namespace policy::http_policy_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ssh_policy_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ztna_policy_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::profile_type {
-    inline constexpr std::string_view single = "single";
-    inline constexpr std::string_view group = "group";
-}
-namespace policy::logtraffic {
-    inline constexpr std::string_view all = "all";
-    inline constexpr std::string_view utm = "utm";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::logtraffic_start {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::capture_packet {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::auto_asic_offload {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::np_acceleration {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::nat {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::pcp_outbound {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::pcp_inbound {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::permit_any_host {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::permit_stun_host {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::fixedport {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::port_preserve {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ippool {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::inbound {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::outbound {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::natinbound {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::natoutbound {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::fec {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::wccp {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ntlm {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::ntlm_guest {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::auth_path {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::disclaimer {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::email_collect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::match_vip {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::match_vip_only {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::diffserv_copy {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::diffserv_forward {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::diffserv_reverse {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::block_notification {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::srcaddr_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::srcaddr6_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::dstaddr_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::dstaddr6_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::service_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::internet_service_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::internet_service_src_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::internet_service6_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::internet_service6_src_negate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::timeout_send_rst {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::captive_portal_exempt {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::dsri {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::radius_mac_auth_bypass {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::delay_tcp_npu_session {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace policy::sgt_check {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
 
 }  // namespace fortiapi::firewall
 

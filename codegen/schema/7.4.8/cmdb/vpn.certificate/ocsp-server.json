@@ -1,0 +1,96 @@
+{
+ "name": "ocsp-server",
+ "category": "table",
+ "help": "OCSP server configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "OCSP server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "url": {
+   "name": "url",
+   "category": "unitary",
+   "type": "string",
+   "help": "OCSP server URL.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "cert": {
+   "name": "cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "OCSP server certificate.",
+   "datasource": [
+    "vpn.certificate.remote.name",
+    "vpn.certificate.ca.name"
+   ],
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "secondary-url": {
+   "name": "secondary-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "Secondary OCSP server URL.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "secondary-cert": {
+   "name": "secondary-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Secondary OCSP server certificate.",
+   "datasource": [
+    "vpn.certificate.remote.name",
+    "vpn.certificate.ca.name"
+   ],
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "unavail-action": {
+   "name": "unavail-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action when server is unavailable (revoke the certificate or ignore the result of the check).",
+   "options": [
+    {
+     "name": "revoke",
+     "help": "Revoke certificate if server is unavailable."
+    },
+    {
+     "name": "ignore",
+     "help": "Ignore OCSP check if server is unavailable."
+    }
+   ],
+   "default": "revoke",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source IP address for dynamic AIA and OCSP queries.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "vpn.certificate",
+ "q_type": 217,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

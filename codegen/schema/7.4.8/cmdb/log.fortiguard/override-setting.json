@@ -1,0 +1,157 @@
+{
+ "name": "override-setting",
+ "category": "complex",
+ "help": "Override global FortiCloud logging settings for this VDOM.",
+ "children": {
+  "override": {
+   "name": "override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Overriding FortiCloud settings for this VDOM or use global settings.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Override FortiCloud logging settings."
+    },
+    {
+     "name": "disable",
+     "help": "Use global FortiCloud logging settings."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging to FortiCloud.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging to FortiCloud."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging to FortiCloud."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "upload-option": {
+   "name": "upload-option",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure how log messages are sent to FortiCloud.",
+   "options": [
+    {
+     "name": "store-and-upload",
+     "help": "Log to the hard disk and then upload logs to FortiCloud."
+    },
+    {
+     "name": "realtime",
+     "help": "Log directly to FortiCloud in real time."
+    },
+    {
+     "name": "1-minute",
+     "help": "Log directly to FortiCloud at 1-minute intervals."
+    },
+    {
+     "name": "5-minute",
+     "help": "Log directly to FortiCloud at 5-minute intervals."
+    }
+   ],
+   "default": "5-minute",
+   "multiple_values": false
+  },
+  "upload-interval": {
+   "name": "upload-interval",
+   "category": "unitary",
+   "type": "option",
+   "help": "Frequency of uploading log files to FortiCloud.",
+   "options": [
+    {
+     "name": "daily",
+     "help": "Upload log files to FortiCloud once a day."
+    },
+    {
+     "name": "weekly",
+     "help": "Upload log files to FortiCloud once a week."
+    },
+    {
+     "name": "monthly",
+     "help": "Upload log files to FortiCloud once a month."
+    }
+   ],
+   "default": "daily",
+   "multiple_values": false
+  },
+  "upload-day": {
+   "name": "upload-day",
+   "category": "unitary",
+   "type": "user",
+   "help": "Day of week to roll logs.",
+   "default": "",
+   "multiple_values": false
+  },
+  "upload-time": {
+   "name": "upload-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of day to roll logs (hh:mm).",
+   "default": "",
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set log transmission priority.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Set FortiCloud log transmission priority to default."
+    },
+    {
+     "name": "low",
+     "help": "Set FortiCloud log transmission priority to low."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "max-log-rate": {
+   "name": "max-log-rate",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiCloud maximum log rate in MBps (0 = unlimited).",
+   "min-value": 0,
+   "max-value": 100000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "access-config": {
+   "name": "access-config",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiCloud access to configuration and data.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiCloud access to configuration and data."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiCloud access to configuration and data."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "log.fortiguard",
+ "q_type": 425,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

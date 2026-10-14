@@ -1,0 +1,441 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Configure general log settings.",
+ "children": {
+  "resolve-ip": {
+   "name": "resolve-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding resolved domain names to traffic logs if possible.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable adding resolved domain names to traffic logs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable adding resolved domain names to traffic logs."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "resolve-port": {
+   "name": "resolve-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding resolved service names to traffic logs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable adding resolved service names to traffic logs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable adding resolved service names to traffic logs."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "log-user-in-upper": {
+   "name": "log-user-in-upper",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logs with user-in-upper.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logs with user-in-upper."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logs with user-in-upper."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fwpolicy-implicit-log": {
+   "name": "fwpolicy-implicit-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable implicit firewall policy logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable implicit firewall policy logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable implicit firewall policy logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fwpolicy6-implicit-log": {
+   "name": "fwpolicy6-implicit-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable implicit firewall policy6 logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable implicit firewall policy6 logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable implicit firewall policy6 logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "extended-log": {
+   "name": "extended-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable extended traffic logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable extended traffic logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable extended traffic logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-in-allow": {
+   "name": "local-in-allow",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local-in-allow logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local-in-allow logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local-in-allow logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-in-deny-unicast": {
+   "name": "local-in-deny-unicast",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local-in-deny-unicast logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local-in-deny-unicast logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local-in-deny-unicast logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-in-deny-broadcast": {
+   "name": "local-in-deny-broadcast",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local-in-deny-broadcast logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local-in-deny-broadcast logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local-in-deny-broadcast logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-out": {
+   "name": "local-out",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local-out logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local-out logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local-out logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "local-out-ioc-detection": {
+   "name": "local-out-ioc-detection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local-out traffic IoC detection. Requires local-out to be enabled.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local-out traffic IoC detection. Requires local-out to be enabled."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local-out traffic IoC detection."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "daemon-log": {
+   "name": "daemon-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable daemon logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable daemon logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable daemon logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "neighbor-event": {
+   "name": "neighbor-event",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable neighbor event logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable neighbor event logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable neighbor event logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "brief-traffic-format": {
+   "name": "brief-traffic-format",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable brief format traffic logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable brief format traffic logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable brief format traffic logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "user-anonymize": {
+   "name": "user-anonymize",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable anonymizing user names in log messages.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable anonymizing user names in log messages."
+    },
+    {
+     "name": "disable",
+     "help": "Disable anonymizing user names in log messages."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "expolicy-implicit-log": {
+   "name": "expolicy-implicit-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable explicit proxy firewall implicit policy logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable explicit proxy firewall implicit policy logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable explicit proxy firewall implicit policy logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-policy-comment": {
+   "name": "log-policy-comment",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable inserting policy comments into traffic logs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable inserting policy comments into traffic logs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable inserting policy comments into traffic logs."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "faz-override": {
+   "name": "faz-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable override FortiAnalyzer settings.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable override FortiAnalyzer settings."
+    },
+    {
+     "name": "disable",
+     "help": "Disable override FortiAnalyzer settings."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "syslog-override": {
+   "name": "syslog-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable override Syslog settings.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable override Syslog settings."
+    },
+    {
+     "name": "disable",
+     "help": "Disable override Syslog settings."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rest-api-set": {
+   "name": "rest-api-set",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable REST API POST/PUT/DELETE request logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable POST/PUT/DELETE REST API logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable POST/PUT/DELETE REST API logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rest-api-get": {
+   "name": "rest-api-get",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable REST API GET request logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable GET REST API logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable GET REST API logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "long-live-session-stat": {
+   "name": "long-live-session-stat",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable long-live-session statistics logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable long-live-session statistics logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable long-live-session statistics logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "custom-log-fields": {
+   "name": "custom-log-fields",
+   "category": "table",
+   "help": "Custom fields to append to all log messages.",
+   "member_table": true,
+   "mkey": "field-id",
+   "mkey_type": "string",
+   "children": {
+    "field-id": {
+     "name": "field-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom log field.",
+     "datasource": [
+      "log.custom-field.id"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 5
+  },
+  "anonymization-hash": {
+   "name": "anonymization-hash",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name anonymization hash salt.",
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "log",
+ "q_type": 68,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

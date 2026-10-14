@@ -1,0 +1,93 @@
+{
+ "name": "access-proxy-virtual-host",
+ "category": "table",
+ "help": "Configure Access Proxy virtual hosts.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Virtual host name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssl-certificate": {
+   "name": "ssl-certificate",
+   "category": "table",
+   "type": "string",
+   "help": "SSL certificates for this host.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate list.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "size": 79,
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "host": {
+   "name": "host",
+   "category": "unitary",
+   "type": "string",
+   "help": "The host name.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "host-type": {
+   "name": "host-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of host pattern.",
+   "required": true,
+   "options": [
+    {
+     "name": "sub-string",
+     "help": "Match the pattern if a string contains the sub-string."
+    },
+    {
+     "name": "wildcard",
+     "help": "Match the pattern with wildcards."
+    }
+   ],
+   "default": "sub-string",
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access-proxy-virtual-host replacement message override group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 47,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

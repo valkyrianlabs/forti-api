@@ -1,0 +1,204 @@
+{
+ "name": "email-server",
+ "category": "complex",
+ "help": "Configure the email server used by the FortiGate various things. For example, for sending email messages to users to support user authentication features.",
+ "children": {
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use FortiGuard Message service or custom email server.",
+   "options": [
+    {
+     "name": "custom",
+     "help": "Use custom email server."
+    }
+   ],
+   "default": "custom",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "SMTP server IP address or hostname.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SMTP server port.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 25,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "SMTP server IPv4 source IP.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "SMTP server IPv6 source IP.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "authenticate": {
+   "name": "authenticate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "validate-server": {
+   "name": "validate-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable validation of server certificate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable validation of server certificate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable validation of server certificate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "SMTP server user name for authentication.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "SMTP server user password for authentication.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "security": {
+   "name": "security",
+   "category": "unitary",
+   "type": "option",
+   "help": "Connection security used by the email server.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None."
+    },
+    {
+     "name": "starttls",
+     "help": "STARTTLS."
+    },
+    {
+     "name": "smtps",
+     "help": "SSL/TLS."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 166,
+ "access_group": "loggrp",
+ "object_range": "global"
+}

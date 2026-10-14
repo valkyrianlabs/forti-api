@@ -1,0 +1,105 @@
+{
+ "name": "exact-data-match",
+ "category": "table",
+ "help": "Configure exact-data-match template used by DLP scan.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table containing the exact-data-match template.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "optional": {
+   "name": "optional",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of optional columns need to match.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "data": {
+   "name": "data",
+   "category": "unitary",
+   "type": "string",
+   "help": "External resource for exact data match.",
+   "required": true,
+   "datasource": [
+    "system.external-resource.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "columns": {
+   "name": "columns",
+   "category": "table",
+   "help": "DLP exact-data-match column types.",
+   "required": true,
+   "mkey": "index",
+   "mkey_type": "integer",
+   "children": {
+    "index": {
+     "name": "index",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Column index.",
+     "min-value": 1,
+     "max-value": 32,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Data-type for this column.",
+     "required": true,
+     "datasource": [
+      "dlp.data-type.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "optional": {
+     "name": "optional",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable optional match.",
+     "required": true,
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable optional match."
+      },
+      {
+       "name": "disable",
+       "help": "Disable optional match."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "dlp",
+ "q_type": 252,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

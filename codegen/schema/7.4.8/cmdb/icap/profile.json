@@ -1,0 +1,644 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure ICAP profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "ICAP profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "request": {
+   "name": "request",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable whether an HTTP request is passed to an ICAP server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable HTTP request passing to ICAP server."
+    },
+    {
+     "name": "enable",
+     "help": "Enable HTTP request passing to ICAP server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "response": {
+   "name": "response",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable whether an HTTP response is passed to an ICAP server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable HTTP response passing to ICAP server."
+    },
+    {
+     "name": "enable",
+     "help": "Enable HTTP response passing to ICAP server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "file-transfer": {
+   "name": "file-transfer",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure the file transfer protocols to pass transferred files to an ICAP server as REQMOD.",
+   "options": [
+    {
+     "name": "ssh",
+     "help": "Forward file transfer with SSH protocol to ICAP server for further processing."
+    },
+    {
+     "name": "ftp",
+     "help": "Forward file transfer with FTP protocol to ICAP server for further processing."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "streaming-content-bypass": {
+   "name": "streaming-content-bypass",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bypassing of ICAP server for streaming content.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable bypassing of ICAP server for streaming content."
+    },
+    {
+     "name": "enable",
+     "help": "Enable bypassing of ICAP server for streaming content."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "204-size-limit": {
+   "name": "204-size-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "204 response size limit to be saved by ICAP client in megabytes (1 - 10, default = 1 MB).",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 1,
+   "multiple_values": false
+  },
+  "204-response": {
+   "name": "204-response",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowance of 204 response from ICAP server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable allowance of 204 response from ICAP server."
+    },
+    {
+     "name": "enable",
+     "help": "Enable allowance of 204 response from ICAP server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "preview": {
+   "name": "preview",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable preview of data to ICAP server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable preview of data to ICAP server."
+    },
+    {
+     "name": "enable",
+     "help": "Enable preview of data to ICAP server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "preview-data-length": {
+   "name": "preview-data-length",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Preview data length to be sent to ICAP server.",
+   "min-value": 0,
+   "max-value": 4096,
+   "default": 0,
+   "multiple_values": false
+  },
+  "request-server": {
+   "name": "request-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "ICAP server to use for an HTTP request.",
+   "required": true,
+   "datasource": [
+    "icap.server.name",
+    "icap.server-group.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "response-server": {
+   "name": "response-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "ICAP server to use for an HTTP response.",
+   "required": true,
+   "datasource": [
+    "icap.server.name",
+    "icap.server-group.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "file-transfer-server": {
+   "name": "file-transfer-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "ICAP server to use for a file transfer.",
+   "required": true,
+   "datasource": [
+    "icap.server.name",
+    "icap.server-group.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "request-failure": {
+   "name": "request-failure",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take if the ICAP server cannot be contacted when processing an HTTP request.",
+   "options": [
+    {
+     "name": "error",
+     "help": "Error."
+    },
+    {
+     "name": "bypass",
+     "help": "Bypass."
+    }
+   ],
+   "default": "error",
+   "multiple_values": false
+  },
+  "response-failure": {
+   "name": "response-failure",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take if the ICAP server cannot be contacted when processing an HTTP response.",
+   "options": [
+    {
+     "name": "error",
+     "help": "Error."
+    },
+    {
+     "name": "bypass",
+     "help": "Bypass."
+    }
+   ],
+   "default": "error",
+   "multiple_values": false
+  },
+  "file-transfer-failure": {
+   "name": "file-transfer-failure",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take if the ICAP server cannot be contacted when processing a file transfer.",
+   "options": [
+    {
+     "name": "error",
+     "help": "Error."
+    },
+    {
+     "name": "bypass",
+     "help": "Bypass."
+    }
+   ],
+   "default": "error",
+   "multiple_values": false
+  },
+  "request-path": {
+   "name": "request-path",
+   "category": "unitary",
+   "type": "string",
+   "help": "Path component of the ICAP URI that identifies the HTTP request processing service.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "response-path": {
+   "name": "response-path",
+   "category": "unitary",
+   "type": "string",
+   "help": "Path component of the ICAP URI that identifies the HTTP response processing service.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "file-transfer-path": {
+   "name": "file-transfer-path",
+   "category": "unitary",
+   "type": "string",
+   "help": "Path component of the ICAP URI that identifies the file transfer processing service.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "methods": {
+   "name": "methods",
+   "category": "unitary",
+   "type": "option",
+   "help": "The allowed HTTP methods that will be sent to ICAP server for further processing.",
+   "options": [
+    {
+     "name": "delete",
+     "help": "Forward HTTP request or response with DELETE method to ICAP server for further processing."
+    },
+    {
+     "name": "get",
+     "help": "Forward HTTP request or response with GET method to ICAP server for further processing."
+    },
+    {
+     "name": "head",
+     "help": "Forward HTTP request or response with HEAD method to ICAP server for further processing."
+    },
+    {
+     "name": "options",
+     "help": "Forward HTTP request or response with OPTIONS method to ICAP server for further processing."
+    },
+    {
+     "name": "post",
+     "help": "Forward HTTP request or response with POST method to ICAP server for further processing."
+    },
+    {
+     "name": "put",
+     "help": "Forward HTTP request or response with PUT method to ICAP server for further processing."
+    },
+    {
+     "name": "trace",
+     "help": "Forward HTTP request or response with TRACE method to ICAP server for further processing."
+    },
+    {
+     "name": "connect",
+     "help": "Forward HTTP request or response with CONNECT method to ICAP server for further processing."
+    },
+    {
+     "name": "other",
+     "help": "Forward HTTP request or response with All other methods to ICAP server for further processing."
+    }
+   ],
+   "default": "delete get head options post put trace connect other",
+   "multiple_values": true
+  },
+  "response-req-hdr": {
+   "name": "response-req-hdr",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable addition of req-hdr for ICAP response modification (respmod) processing.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not add req-hdr for response modification (respmod) processing."
+    },
+    {
+     "name": "enable",
+     "help": "Add req-hdr for response modification (respmod) processing."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "respmod-default-action": {
+   "name": "respmod-default-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Default action to ICAP response modification (respmod) processing.",
+   "options": [
+    {
+     "name": "forward",
+     "help": "Forward response to ICAP server unless a rule specifies not to."
+    },
+    {
+     "name": "bypass",
+     "help": "Don't forward request to ICAP server unless a rule specifies to forward the request."
+    }
+   ],
+   "default": "forward",
+   "multiple_values": false
+  },
+  "icap-block-log": {
+   "name": "icap-block-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable UTM log when infection found (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable UTM log when infection found."
+    },
+    {
+     "name": "enable",
+     "help": "Enable UTM log when infection found."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "chunk-encap": {
+   "name": "chunk-encap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable chunked encapsulation (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not encapsulate chunked data."
+    },
+    {
+     "name": "enable",
+     "help": "Encapsulate chunked data into a new chunk."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "extension-feature": {
+   "name": "extension-feature",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ICAP extension features.",
+   "options": [
+    {
+     "name": "scan-progress",
+     "help": "Support X-Scan-Progress-Interval ICAP header."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "scan-progress-interval": {
+   "name": "scan-progress-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Scan progress interval value.",
+   "min-value": 5,
+   "max-value": 30,
+   "default": 10,
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time (in seconds) that ICAP client waits for the response from ICAP server.",
+   "min-value": 30,
+   "max-value": 3600,
+   "default": 30,
+   "multiple_values": false
+  },
+  "icap-headers": {
+   "name": "icap-headers",
+   "category": "table",
+   "help": "Configure ICAP forwarded request headers.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "HTTP forwarded header ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "HTTP forwarded header name.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "content": {
+     "name": "content",
+     "category": "unitary",
+     "type": "string",
+     "help": "HTTP header content.",
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "base64-encoding": {
+     "name": "base64-encoding",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable use of base64 encoding of HTTP content.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable use of base64 encoding of HTTP content."
+      },
+      {
+       "name": "enable",
+       "help": "Enable use of base64 encoding of HTTP content."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "respmod-forward-rules": {
+   "name": "respmod-forward-rules",
+   "category": "table",
+   "help": "ICAP response mode forward rules.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "host": {
+     "name": "host",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address object for the host.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "firewall.proxy-address.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "header-group": {
+     "name": "header-group",
+     "category": "table",
+     "help": "HTTP header group.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "header-name": {
+       "name": "header-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "HTTP header.",
+       "required": true,
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "header": {
+       "name": "header",
+       "category": "unitary",
+       "type": "string",
+       "help": "HTTP header regular expression.",
+       "required": true,
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      },
+      "case-sensitivity": {
+       "name": "case-sensitivity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable case sensitivity when matching header.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Ignore case when matching header."
+        },
+        {
+         "name": "enable",
+         "help": "Do not ignore case when matching header."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action to be taken for ICAP server.",
+     "options": [
+      {
+       "name": "forward",
+       "help": "Forward request to ICAP server when this rule is matched."
+      },
+      {
+       "name": "bypass",
+       "help": "Don't forward request to ICAP server when this rule is matched."
+      }
+     ],
+     "default": "forward",
+     "multiple_values": false
+    },
+    "http-resp-status-code": {
+     "name": "http-resp-status-code",
+     "category": "table",
+     "type": "integer",
+     "help": "HTTP response status code.",
+     "member_table": true,
+     "mkey": "code",
+     "mkey_type": "integer",
+     "children": {
+      "code": {
+       "name": "code",
+       "category": "unitary",
+       "type": "integer",
+       "help": "HTTP response status code.",
+       "min-value": 100,
+       "max-value": 599,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "icap",
+ "q_type": 462,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

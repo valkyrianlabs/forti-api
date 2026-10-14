@@ -1,0 +1,60 @@
+{
+ "name": "anqp-network-auth-type",
+ "category": "table",
+ "help": "Configure network authentication type.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication type name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-type": {
+   "name": "auth-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Network authentication type.",
+   "options": [
+    {
+     "name": "acceptance-of-terms",
+     "help": "Acceptance of terms and conditions."
+    },
+    {
+     "name": "online-enrollment",
+     "help": "Online enrollment supported."
+    },
+    {
+     "name": "http-redirection",
+     "help": "HTTP and HTTPS redirection."
+    },
+    {
+     "name": "dns-redirection",
+     "help": "DNS redirection."
+    }
+   ],
+   "default": "acceptance-of-terms",
+   "multiple_values": false
+  },
+  "url": {
+   "name": "url",
+   "category": "unitary",
+   "type": "string",
+   "help": "Redirect URL.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 292,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

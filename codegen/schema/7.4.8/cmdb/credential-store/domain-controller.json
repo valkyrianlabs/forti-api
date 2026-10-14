@@ -1,0 +1,91 @@
+{
+ "name": "domain-controller",
+ "category": "table",
+ "help": "Define known domain controller servers.",
+ "mkey": "server-name",
+ "mkey_type": "string",
+ "children": {
+  "server-name": {
+   "name": "server-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the domain controller.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostname": {
+   "name": "hostname",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hostname of the server to connect to.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "domain-name": {
+   "name": "domain-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fully qualified domain name (FQDN).",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name to sign in with. Must have proper permissions for service.",
+   "required": true,
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for specified username.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number of service. Port number 0 indicates automatic discovery.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IPv4 server address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ip6": {
+   "name": "ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 server address.",
+   "default": "::",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "credential-store",
+ "q_type": 538,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

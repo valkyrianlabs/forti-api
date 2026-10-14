@@ -1,0 +1,3118 @@
+{
+ "name": "vap",
+ "category": "table",
+ "help": "Configure Virtual Access Points (VAPs).",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Virtual AP name.",
+   "required": true,
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "fast-roaming": {
+   "name": "fast-roaming",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable fast-roaming, or pre-authentication, where supported by clients (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable fast-roaming, or pre-authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable fast-roaming, or pre-authentication."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "external-fast-roaming": {
+   "name": "external-fast-roaming",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable fast roaming or pre-authentication with external APs not managed by the FortiGate (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable fast roaming or pre-authentication with external APs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable fast roaming or pre-authentication with external APs."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mesh-backhaul": {
+   "name": "mesh-backhaul",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using this VAP as a WiFi mesh backhaul (default = disable). This entry is only available when security is set to a WPA type or open.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable mesh backhaul."
+    },
+    {
+     "name": "disable",
+     "help": "Disable mesh backhaul."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "atf-weight": {
+   "name": "atf-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Airtime weight in percentage (default = 20).",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 20,
+   "multiple_values": false
+  },
+  "max-clients": {
+   "name": "max-clients",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of clients that can connect simultaneously to the VAP (default = 0, meaning no limitation).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "max-clients-ap": {
+   "name": "max-clients-ap",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of clients that can connect simultaneously to the VAP per AP radio (default = 0, meaning no limitation).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ssid": {
+   "name": "ssid",
+   "category": "unitary",
+   "type": "string",
+   "help": "IEEE 802.11 service set identifier (SSID) for the wireless interface. Users who wish to use the wireless network must configure their computers to access this SSID name.",
+   "size": 32,
+   "default": "fortinet",
+   "multiple_values": false
+  },
+  "broadcast-ssid": {
+   "name": "broadcast-ssid",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable broadcasting the SSID (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable broadcasting the SSID."
+    },
+    {
+     "name": "disable",
+     "help": "Disable broadcasting the SSID."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "security": {
+   "name": "security",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security mode for the wireless interface (default = wpa2-only-personal).",
+   "options": [
+    {
+     "name": "open",
+     "help": "Open."
+    },
+    {
+     "name": "wep64",
+     "help": "WEP 64-bit."
+    },
+    {
+     "name": "wep128",
+     "help": "WEP 128-bit."
+    },
+    {
+     "name": "wpa-personal",
+     "help": "WPA/WPA2 personal."
+    },
+    {
+     "name": "wpa-enterprise",
+     "help": "WPA/WPA2 enterprise."
+    },
+    {
+     "name": "wpa-only-personal",
+     "help": "WPA personal."
+    },
+    {
+     "name": "wpa-only-enterprise",
+     "help": "WPA enterprise."
+    },
+    {
+     "name": "wpa2-only-personal",
+     "help": "WPA2 personal."
+    },
+    {
+     "name": "wpa2-only-enterprise",
+     "help": "WPA2 enterprise."
+    },
+    {
+     "name": "wpa3-enterprise",
+     "help": "WPA3 enterprise with 192-bit encryption and PMF mandatory."
+    },
+    {
+     "name": "wpa3-only-enterprise",
+     "help": "WPA3 enterprise with PMF mandatory."
+    },
+    {
+     "name": "wpa3-enterprise-transition",
+     "help": "WPA3 enterprise with PMF optional."
+    },
+    {
+     "name": "wpa3-sae",
+     "help": "WPA3 SAE."
+    },
+    {
+     "name": "wpa3-sae-transition",
+     "help": "WPA3 SAE transition."
+    },
+    {
+     "name": "owe",
+     "help": "Opportunistic wireless encryption."
+    },
+    {
+     "name": "osen",
+     "help": "OSEN."
+    }
+   ],
+   "default": "wpa2-only-personal",
+   "multiple_values": false
+  },
+  "pmf": {
+   "name": "pmf",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protected Management Frames (PMF) support (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable PMF completely."
+    },
+    {
+     "name": "enable",
+     "help": "Enable PMF but deny clients without PMF."
+    },
+    {
+     "name": "optional",
+     "help": "Enable PMF and allow clients without PMF."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pmf-assoc-comeback-timeout": {
+   "name": "pmf-assoc-comeback-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Protected Management Frames (PMF) comeback maximum timeout (1-20 sec).",
+   "min-value": 1,
+   "max-value": 20,
+   "default": 1,
+   "multiple_values": false
+  },
+  "pmf-sa-query-retry-timeout": {
+   "name": "pmf-sa-query-retry-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Protected Management Frames (PMF) SA query retry timeout interval (1 - 5 100s of msec).",
+   "min-value": 1,
+   "max-value": 5,
+   "default": 2,
+   "multiple_values": false
+  },
+  "beacon-protection": {
+   "name": "beacon-protection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable beacon protection support (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable beacon protection."
+    },
+    {
+     "name": "enable",
+     "help": "Enable beacon protection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "okc": {
+   "name": "okc",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Opportunistic Key Caching (OKC) (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Opportunistic Key Caching (OKC)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Opportunistic Key Caching (OKC)."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "mbo": {
+   "name": "mbo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Multiband Operation (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Multiband Operation (MBO)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Multiband Operation (MBO)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gas-comeback-delay": {
+   "name": "gas-comeback-delay",
+   "category": "unitary",
+   "type": "integer",
+   "help": "GAS comeback delay (0 or 100 - 10000 milliseconds, default = 500).",
+   "min-value": 100,
+   "max-value": 10000,
+   "default": 500,
+   "multiple_values": false
+  },
+  "gas-fragmentation-limit": {
+   "name": "gas-fragmentation-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "GAS fragmentation limit (512 - 4096, default = 1024).",
+   "min-value": 512,
+   "max-value": 4096,
+   "default": 1024,
+   "multiple_values": false
+  },
+  "mbo-cell-data-conn-pref": {
+   "name": "mbo-cell-data-conn-pref",
+   "category": "unitary",
+   "type": "option",
+   "help": "MBO cell data connection preference (0, 1, or 255, default = 1).",
+   "options": [
+    {
+     "name": "excluded",
+     "help": "Wi-Fi Agile Multiband AP does not want the Wi-Fi Agile Multiband STA to use the cellular data connection."
+    },
+    {
+     "name": "prefer-not",
+     "help": "Wi-Fi Agile Multiband AP prefers the Wi-Fi Agile Multiband STA should not use cellular data connection."
+    },
+    {
+     "name": "prefer-use",
+     "help": "Wi-Fi Agile Multiband AP prefers the Wi-Fi Agile Multiband STA should use cellular data connection."
+    }
+   ],
+   "default": "prefer-not",
+   "multiple_values": false
+  },
+  "80211k": {
+   "name": "80211k",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable 802.11k assisted roaming (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable 802.11k assisted roaming."
+    },
+    {
+     "name": "enable",
+     "help": "Enable 802.11k assisted roaming."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "80211v": {
+   "name": "80211v",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable 802.11v assisted roaming (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable 802.11v assisted roaming."
+    },
+    {
+     "name": "enable",
+     "help": "Enable 802.11v assisted roaming."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "neighbor-report-dual-band": {
+   "name": "neighbor-report-dual-band",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dual-band neighbor report (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable dual-band neighbor report."
+    },
+    {
+     "name": "enable",
+     "help": "Enable dual-band neighbor report."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fast-bss-transition": {
+   "name": "fast-bss-transition",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable 802.11r Fast BSS Transition (FT) (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable 802.11r Fast BSS Transition (FT)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable 802.11r Fast BSS Transition (FT)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ft-mobility-domain": {
+   "name": "ft-mobility-domain",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Mobility domain identifier in FT (1 - 65535, default = 1000).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "ft-r0-key-lifetime": {
+   "name": "ft-r0-key-lifetime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Lifetime of the PMK-R0 key in FT, 1-65535 minutes.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 480,
+   "multiple_values": false
+  },
+  "ft-over-ds": {
+   "name": "ft-over-ds",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FT over the Distribution System (DS).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable FT over the Distribution System (DS)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable FT over the Distribution System (DS)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sae-groups": {
+   "name": "sae-groups",
+   "category": "unitary",
+   "type": "option",
+   "help": "SAE-Groups.",
+   "options": [
+    {
+     "name": "19",
+     "help": "DH Group 19."
+    },
+    {
+     "name": "20",
+     "help": "DH Group 20."
+    },
+    {
+     "name": "21",
+     "help": "DH Group 21."
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 3
+  },
+  "owe-groups": {
+   "name": "owe-groups",
+   "category": "unitary",
+   "type": "option",
+   "help": "OWE-Groups.",
+   "options": [
+    {
+     "name": "19",
+     "help": "DH Group 19."
+    },
+    {
+     "name": "20",
+     "help": "DH Group 20."
+    },
+    {
+     "name": "21",
+     "help": "DH Group 21."
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 3
+  },
+  "owe-transition": {
+   "name": "owe-transition",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable OWE transition mode support.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable OWE transition mode support."
+    },
+    {
+     "name": "enable",
+     "help": "Enable OWE transition mode support."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "owe-transition-ssid": {
+   "name": "owe-transition-ssid",
+   "category": "unitary",
+   "type": "string",
+   "help": "OWE transition mode peer SSID.",
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "additional-akms": {
+   "name": "additional-akms",
+   "category": "unitary",
+   "type": "option",
+   "help": "Additional AKMs.",
+   "options": [
+    {
+     "name": "akm6",
+     "help": "Use AKM suite employing PSK_SHA256."
+    },
+    {
+     "name": "akm24",
+     "help": "Use AKM suite employing SAE_EXT."
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 2
+  },
+  "eapol-key-retries": {
+   "name": "eapol-key-retries",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable retransmission of EAPOL-Key frames (message 3/4 and group message 1/2) (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable retransmission of EAPOL-Key frames (message 3/4 and group message 1/2)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable retransmission of EAPOL-Key frames (message 3/4 and group message 1/2)."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "tkip-counter-measure": {
+   "name": "tkip-counter-measure",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TKIP counter measure.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TKIP counter measure."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TKIP counter measure."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "external-web": {
+   "name": "external-web",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "URL of external authentication web server.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "external-web-format": {
+   "name": "external-web-format",
+   "category": "unitary",
+   "type": "option",
+   "help": "URL query parameter detection (default = auto-detect).",
+   "options": [
+    {
+     "name": "auto-detect",
+     "help": "Automatically detect if \"external-web\" URL has any query parameter."
+    },
+    {
+     "name": "no-query-string",
+     "help": "\"external-web\" URL does not have any query parameter."
+    },
+    {
+     "name": "partial-query-string",
+     "help": "\"external-web\" URL has some query parameters."
+    }
+   ],
+   "default": "auto-detect",
+   "multiple_values": false
+  },
+  "external-logout": {
+   "name": "external-logout",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL of external authentication logout server.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "mac-username-delimiter": {
+   "name": "mac-username-delimiter",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC authentication username delimiter (default = hyphen).",
+   "options": [
+    {
+     "name": "hyphen",
+     "help": "Use hyphen as delimiter for MAC auth username."
+    },
+    {
+     "name": "single-hyphen",
+     "help": "Use single hyphen as delimiter for MAC auth username."
+    },
+    {
+     "name": "colon",
+     "help": "Use colon as delimiter for MAC auth username."
+    },
+    {
+     "name": "none",
+     "help": "No delimiter for MAC auth username."
+    }
+   ],
+   "default": "hyphen",
+   "multiple_values": false
+  },
+  "mac-password-delimiter": {
+   "name": "mac-password-delimiter",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC authentication password delimiter (default = hyphen).",
+   "options": [
+    {
+     "name": "hyphen",
+     "help": "Use hyphen as delimiter for MAC auth password."
+    },
+    {
+     "name": "single-hyphen",
+     "help": "Use single hyphen as delimiter for MAC auth password."
+    },
+    {
+     "name": "colon",
+     "help": "Use colon as delimiter for MAC auth password."
+    },
+    {
+     "name": "none",
+     "help": "No delimiter for MAC auth password."
+    }
+   ],
+   "default": "hyphen",
+   "multiple_values": false
+  },
+  "mac-calling-station-delimiter": {
+   "name": "mac-calling-station-delimiter",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC calling station delimiter (default = hyphen).",
+   "options": [
+    {
+     "name": "hyphen",
+     "help": "Use hyphen as delimiter for calling station."
+    },
+    {
+     "name": "single-hyphen",
+     "help": "Use single hyphen as delimiter for calling station."
+    },
+    {
+     "name": "colon",
+     "help": "Use colon as delimiter for calling station."
+    },
+    {
+     "name": "none",
+     "help": "No delimiter for calling station."
+    }
+   ],
+   "default": "hyphen",
+   "multiple_values": false
+  },
+  "mac-called-station-delimiter": {
+   "name": "mac-called-station-delimiter",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC called station delimiter (default = hyphen).",
+   "options": [
+    {
+     "name": "hyphen",
+     "help": "Use hyphen as delimiter for called station."
+    },
+    {
+     "name": "single-hyphen",
+     "help": "Use single hyphen as delimiter for called station."
+    },
+    {
+     "name": "colon",
+     "help": "Use colon as delimiter for called station."
+    },
+    {
+     "name": "none",
+     "help": "No delimiter for called station."
+    }
+   ],
+   "default": "hyphen",
+   "multiple_values": false
+  },
+  "mac-case": {
+   "name": "mac-case",
+   "category": "unitary",
+   "type": "option",
+   "help": "MAC case (default = uppercase).",
+   "options": [
+    {
+     "name": "uppercase",
+     "help": "Use uppercase MAC."
+    },
+    {
+     "name": "lowercase",
+     "help": "Use lowercase MAC."
+    }
+   ],
+   "default": "uppercase",
+   "multiple_values": false
+  },
+  "mac-auth-bypass": {
+   "name": "mac-auth-bypass",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable MAC authentication bypass.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable MAC authentication bypass."
+    },
+    {
+     "name": "disable",
+     "help": "Disable MAC authentication bypass."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "radius-mac-auth": {
+   "name": "radius-mac-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable RADIUS-based MAC authentication of clients (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable RADIUS-based MAC authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable RADIUS-based MAC authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "radius-mac-auth-server": {
+   "name": "radius-mac-auth-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "RADIUS-based MAC authentication server.",
+   "datasource": [
+    "user.radius.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "radius-mac-auth-block-interval": {
+   "name": "radius-mac-auth-block-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Don't send RADIUS MAC auth request again if the client has been rejected within specific interval (0 or 30 - 864000 seconds, default = 0, 0 to disable blocking).",
+   "min-value": 30,
+   "max-value": 864000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "radius-mac-mpsk-auth": {
+   "name": "radius-mac-mpsk-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable RADIUS-based MAC authentication of clients for MPSK authentication (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable RADIUS-based MAC authentication for MPSK authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable RADIUS-based MAC authentication for MPSK authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "radius-mac-mpsk-timeout": {
+   "name": "radius-mac-mpsk-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "RADIUS MAC MPSK cache timeout interval (0 or 300 - 864000, default = 86400, 0 to disable caching).",
+   "min-value": 300,
+   "max-value": 864000,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "radius-mac-auth-usergroups": {
+   "name": "radius-mac-auth-usergroups",
+   "category": "table",
+   "help": "Selective user groups that are permitted for RADIUS mac authentication.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "User group name.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "auth": {
+   "name": "auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication protocol.",
+   "options": [
+    {
+     "name": "radius",
+     "help": "Use a RADIUS server to authenticate clients."
+    },
+    {
+     "name": "usergroup",
+     "help": "Use a firewall usergroup to authenticate clients."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "encrypt": {
+   "name": "encrypt",
+   "category": "unitary",
+   "type": "option",
+   "help": "Encryption protocol to use (only available when security is set to a WPA type).",
+   "options": [
+    {
+     "name": "TKIP",
+     "help": "Use TKIP encryption."
+    },
+    {
+     "name": "AES",
+     "help": "Use AES encryption."
+    },
+    {
+     "name": "TKIP-AES",
+     "help": "Use TKIP and AES encryption."
+    }
+   ],
+   "default": "AES",
+   "multiple_values": false
+  },
+  "keyindex": {
+   "name": "keyindex",
+   "category": "unitary",
+   "type": "integer",
+   "help": "WEP key index (1 - 4).",
+   "min-value": 1,
+   "max-value": 4,
+   "default": 1,
+   "multiple_values": false
+  },
+  "key": {
+   "name": "key",
+   "category": "unitary",
+   "type": "password",
+   "help": "WEP Key.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "passphrase": {
+   "name": "passphrase",
+   "category": "unitary",
+   "type": "password",
+   "help": "WPA pre-shared key (PSK) to be used to authenticate WiFi users.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "sae-password": {
+   "name": "sae-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "WPA3 SAE password to be used to authenticate WiFi users.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "sae-h2e-only": {
+   "name": "sae-h2e-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use hash-to-element-only mechanism for PWE derivation (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WPA3 SAE-H2E-only."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WPA3 SAE-H2E-only."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sae-hnp-only": {
+   "name": "sae-hnp-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use hunting-and-pecking-only mechanism for PWE derivation (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WPA3 SAE-HNP-only."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WPA3 SAE-HNP-only."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sae-pk": {
+   "name": "sae-pk",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WPA3 SAE-PK (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WPA3 SAE-PK."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WPA3 SAE-PK."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sae-private-key": {
+   "name": "sae-private-key",
+   "category": "unitary",
+   "type": "string",
+   "help": "Private key used for WPA3 SAE-PK authentication.",
+   "size": 359,
+   "default": "",
+   "multiple_values": false
+  },
+  "akm24-only": {
+   "name": "akm24-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "WPA3 SAE using group-dependent hash only (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable WPA3 SAE using group-dependent hash only."
+    },
+    {
+     "name": "enable",
+     "help": "Enable WPA3 SAE using group-dependent hash only."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "radius-server": {
+   "name": "radius-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "RADIUS server to be used to authenticate WiFi users.",
+   "datasource": [
+    "user.radius.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "nas-filter-rule": {
+   "name": "nas-filter-rule",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAS filter rule support (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NAS filter rule for RADIUS server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NAS filter rule for RADIUS server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-standalone": {
+   "name": "local-standalone",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AP local standalone (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AP local standalone."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AP local standalone."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-standalone-nat": {
+   "name": "local-standalone-nat",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AP local standalone NAT mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AP local standalone NAT mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AP local standalone NAT mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-classnet-host",
+   "help": "IP address and subnet mask for the local standalone NAT subnet.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "dhcp-lease-time": {
+   "name": "dhcp-lease-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DHCP lease time in seconds for NAT IP address.",
+   "min-value": 300,
+   "max-value": 8640000,
+   "default": 2400,
+   "multiple_values": false
+  },
+  "local-standalone-dns": {
+   "name": "local-standalone-dns",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AP local standalone DNS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AP local standalone DNS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AP local standalone DNS."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-standalone-dns-ip": {
+   "name": "local-standalone-dns-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 addresses for the local standalone DNS.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 3
+  },
+  "local-bridging": {
+   "name": "local-bridging",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable bridging of wireless and Ethernet interfaces on the FortiAP (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AP local VAP to Ethernet bridging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AP local VAP to Ethernet bridging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-lan": {
+   "name": "local-lan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow/deny traffic destined for a Class A, B, or C private IP address (default = allow).",
+   "options": [
+    {
+     "name": "allow",
+     "help": "Allow traffic destined for a Class A, B, or C private IP address."
+    },
+    {
+     "name": "deny",
+     "help": "Deny traffic destined for a Class A, B, or C private IP address."
+    }
+   ],
+   "default": "allow",
+   "multiple_values": false
+  },
+  "local-authentication": {
+   "name": "local-authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AP local authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AP local authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AP local authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "usergroup": {
+   "name": "usergroup",
+   "category": "table",
+   "help": "Firewall user group to be used to authenticate WiFi users.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "User group name.",
+     "required": true,
+     "datasource": [
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "captive-portal": {
+   "name": "captive-portal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable captive portal.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable captive portal."
+    },
+    {
+     "name": "disable",
+     "help": "Disable captive portal."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "portal-message-override-group": {
+   "name": "portal-message-override-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group for this VAP (only available when security is set to a captive portal type).",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "portal-message-overrides": {
+   "name": "portal-message-overrides",
+   "category": "complex",
+   "help": "Individual message overrides.",
+   "children": {
+    "auth-disclaimer-page": {
+     "name": "auth-disclaimer-page",
+     "category": "unitary",
+     "type": "string",
+     "help": "Override auth-disclaimer-page message with message from portal-message-overrides group.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "auth-reject-page": {
+     "name": "auth-reject-page",
+     "category": "unitary",
+     "type": "string",
+     "help": "Override auth-reject-page message with message from portal-message-overrides group.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "auth-login-page": {
+     "name": "auth-login-page",
+     "category": "unitary",
+     "type": "string",
+     "help": "Override auth-login-page message with message from portal-message-overrides group.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "auth-login-failed-page": {
+     "name": "auth-login-failed-page",
+     "category": "unitary",
+     "type": "string",
+     "help": "Override auth-login-failed-page message with message from portal-message-overrides group.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  },
+  "portal-type": {
+   "name": "portal-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Captive portal functionality. Configure how the captive portal authenticates users and whether it includes a disclaimer.",
+   "options": [
+    {
+     "name": "auth",
+     "help": "Portal for authentication."
+    },
+    {
+     "name": "auth+disclaimer",
+     "help": "Portal for authentication and disclaimer."
+    },
+    {
+     "name": "disclaimer",
+     "help": "Portal for disclaimer."
+    },
+    {
+     "name": "email-collect",
+     "help": "Portal for email collection."
+    },
+    {
+     "name": "cmcc",
+     "help": "Portal for CMCC."
+    },
+    {
+     "name": "cmcc-macauth",
+     "help": "Portal for CMCC and MAC authentication."
+    },
+    {
+     "name": "auth-mac",
+     "help": "Portal for authentication and MAC authentication."
+    },
+    {
+     "name": "external-auth",
+     "help": "Portal for external portal authentication."
+    },
+    {
+     "name": "external-macauth",
+     "help": "Portal for external portal MAC authentication."
+    }
+   ],
+   "default": "auth",
+   "multiple_values": false
+  },
+  "selected-usergroups": {
+   "name": "selected-usergroups",
+   "category": "table",
+   "help": "Selective user groups that are permitted to authenticate.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "User group name.",
+     "required": true,
+     "datasource": [
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "security-exempt-list": {
+   "name": "security-exempt-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Optional security exempt list for captive portal authentication.",
+   "datasource": [
+    "user.security-exempt-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "security-redirect-url": {
+   "name": "security-redirect-url",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional URL for redirecting users after they pass captive portal authentication.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "auth-cert": {
+   "name": "auth-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTPS server certificate.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-portal-addr": {
+   "name": "auth-portal-addr",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address of captive portal.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "intra-vap-privacy": {
+   "name": "intra-vap-privacy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable blocking communication between clients on the same SSID (called intra-SSID privacy) (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable intra-SSID privacy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable intra-SSID privacy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "schedule": {
+   "name": "schedule",
+   "category": "table",
+   "help": "Firewall schedules for enabling this VAP on the FortiAP. This VAP will be enabled when at least one of the schedules is valid. Separate multiple schedule names with a space.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Schedule name.",
+     "required": true,
+     "datasource": [
+      "firewall.schedule.group.name",
+      "firewall.schedule.recurring.name",
+      "firewall.schedule.onetime.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 16
+  },
+  "ldpc": {
+   "name": "ldpc",
+   "category": "unitary",
+   "type": "option",
+   "help": "VAP low-density parity-check (LDPC) coding configuration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable LDPC."
+    },
+    {
+     "name": "rx",
+     "help": "Enable LDPC when receiving traffic."
+    },
+    {
+     "name": "tx",
+     "help": "Enable LDPC when transmitting traffic."
+    },
+    {
+     "name": "rxtx",
+     "help": "Enable LDPC when both receiving and transmitting traffic."
+    }
+   ],
+   "default": "rxtx",
+   "multiple_values": false
+  },
+  "high-efficiency": {
+   "name": "high-efficiency",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable 802.11ax high efficiency (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable 802.11ax high efficiency."
+    },
+    {
+     "name": "disable",
+     "help": "Disable 802.11ax high efficiency."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "target-wake-time": {
+   "name": "target-wake-time",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable 802.11ax target wake time (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable 802.11ax target wake time."
+    },
+    {
+     "name": "disable",
+     "help": "Disable 802.11ax target wake time."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "port-macauth": {
+   "name": "port-macauth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable LAN port MAC authentication (default = disable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable LAN port MAC authentication."
+    },
+    {
+     "name": "radius",
+     "help": "Enable LAN port RADIUS-based MAC authentication."
+    },
+    {
+     "name": "address-group",
+     "help": "Enable LAN port address-group based MAC authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "port-macauth-timeout": {
+   "name": "port-macauth-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "LAN port MAC authentication idle timeout value (default = 600 sec).",
+   "min-value": 60,
+   "max-value": 65535,
+   "default": 600,
+   "multiple_values": false
+  },
+  "port-macauth-reauth-timeout": {
+   "name": "port-macauth-reauth-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "LAN port MAC authentication re-authentication timeout value (default = 7200 sec).",
+   "min-value": 120,
+   "max-value": 65535,
+   "default": 7200,
+   "multiple_values": false
+  },
+  "bss-color-partial": {
+   "name": "bss-color-partial",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable 802.11ax partial BSS color (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable 802.11ax partial BSS color."
+    },
+    {
+     "name": "disable",
+     "help": "Disable 802.11ax partial BSS color."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "mpsk-profile": {
+   "name": "mpsk-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "MPSK profile name.",
+   "datasource": [
+    "wireless-controller.mpsk-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "split-tunneling": {
+   "name": "split-tunneling",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable split tunneling (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable split tunneling."
+    },
+    {
+     "name": "disable",
+     "help": "Disable split tunneling."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nac": {
+   "name": "nac",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable network access control.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable network access control."
+    },
+    {
+     "name": "disable",
+     "help": "Disable network access control."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "nac-profile": {
+   "name": "nac-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "NAC profile name.",
+   "datasource": [
+    "wireless-controller.nac-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "vlanid": {
+   "name": "vlanid",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Optional VLAN ID.",
+   "min-value": 0,
+   "max-value": 4094,
+   "default": 0,
+   "multiple_values": false
+  },
+  "vlan-auto": {
+   "name": "vlan-auto",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic management of SSID VLAN interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic management of SSID VLAN interface."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic management of SSID VLAN interface."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dynamic-vlan": {
+   "name": "dynamic-vlan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dynamic VLAN assignment.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dynamic VLAN assignment."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dynamic VLAN assignment."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "captive-portal-fw-accounting": {
+   "name": "captive-portal-fw-accounting",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable RADIUS accounting for captive portal firewall authentication session.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable RADIUS accounting for captive portal firewall authentication session."
+    },
+    {
+     "name": "disable",
+     "help": "Disable RADIUS accounting for captive portal firewall authentication session."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "captive-portal-ac-name": {
+   "name": "captive-portal-ac-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local-bridging captive portal ac-name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "captive-portal-auth-timeout": {
+   "name": "captive-portal-auth-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Hard timeout - AP will always clear the session after timeout regardless of traffic (0 - 864000 sec, default = 0).",
+   "min-value": 0,
+   "max-value": 864000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "multicast-rate": {
+   "name": "multicast-rate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Multicast rate (0, 6000, 12000, or 24000 kbps, default = 0).",
+   "options": [
+    {
+     "name": "0",
+     "help": "Use the default multicast rate."
+    },
+    {
+     "name": "6000",
+     "help": "6 Mbps."
+    },
+    {
+     "name": "12000",
+     "help": "12 Mbps."
+    },
+    {
+     "name": "24000",
+     "help": "24 Mbps."
+    }
+   ],
+   "default": "0",
+   "multiple_values": false
+  },
+  "multicast-enhance": {
+   "name": "multicast-enhance",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable converting multicast to unicast to improve performance (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable multicast enhancement."
+    },
+    {
+     "name": "disable",
+     "help": "Disable multicast enhancement."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "igmp-snooping": {
+   "name": "igmp-snooping",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IGMP snooping.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IGMP snooping."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IGMP snooping."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dhcp-address-enforcement": {
+   "name": "dhcp-address-enforcement",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DHCP address enforcement (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DHCP enforcement, data from clients that have not completed the DHCP process will be blocked."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DHCP enforcement, clients can access the network without DHCP process."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "broadcast-suppression": {
+   "name": "broadcast-suppression",
+   "category": "unitary",
+   "type": "option",
+   "help": "Optional suppression of broadcast messages. For example, you can keep DHCP messages, ARP broadcasts, and so on off of the wireless network.",
+   "options": [
+    {
+     "name": "dhcp-up",
+     "help": "Suppress broadcast uplink DHCP messages."
+    },
+    {
+     "name": "dhcp-down",
+     "help": "Suppress broadcast downlink DHCP messages."
+    },
+    {
+     "name": "dhcp-starvation",
+     "help": "Suppress broadcast DHCP starvation req messages."
+    },
+    {
+     "name": "dhcp-ucast",
+     "help": "Convert downlink broadcast DHCP messages to unicast messages."
+    },
+    {
+     "name": "arp-known",
+     "help": "Suppress broadcast ARP for known wireless clients."
+    },
+    {
+     "name": "arp-unknown",
+     "help": "Suppress broadcast ARP for unknown wireless clients."
+    },
+    {
+     "name": "arp-reply",
+     "help": "Suppress broadcast ARP reply from wireless clients."
+    },
+    {
+     "name": "arp-poison",
+     "help": "Suppress ARP poison messages from wireless clients."
+    },
+    {
+     "name": "arp-proxy",
+     "help": "Reply ARP requests for wireless clients as a proxy."
+    },
+    {
+     "name": "netbios-ns",
+     "help": "Suppress NetBIOS name services packets with UDP port 137."
+    },
+    {
+     "name": "netbios-ds",
+     "help": "Suppress NetBIOS datagram services packets with UDP port 138."
+    },
+    {
+     "name": "ipv6",
+     "help": "Suppress IPv6 packets."
+    },
+    {
+     "name": "all-other-mc",
+     "help": "Suppress all other multicast messages."
+    },
+    {
+     "name": "all-other-bc",
+     "help": "Suppress all other broadcast messages."
+    }
+   ],
+   "default": "dhcp-up dhcp-ucast arp-known",
+   "multiple_values": true
+  },
+  "ipv6-rules": {
+   "name": "ipv6-rules",
+   "category": "unitary",
+   "type": "option",
+   "help": "Optional rules of IPv6 packets. For example, you can keep RA, RS and so on off of the wireless network.",
+   "options": [
+    {
+     "name": "drop-icmp6ra",
+     "help": "Drop ICMP6 Router Advertisement (RA) packets that originate from wireless clients."
+    },
+    {
+     "name": "drop-icmp6rs",
+     "help": "Drop ICMP6 Router Solicitation (RS) packets to be sent to wireless clients."
+    },
+    {
+     "name": "drop-llmnr6",
+     "help": "Drop Link-Local Multicast Name Resolution (LLMNR) packets"
+    },
+    {
+     "name": "drop-icmp6mld2",
+     "help": "Drop ICMP6 Multicast Listener Report V2 (MLD2) packets"
+    },
+    {
+     "name": "drop-dhcp6s",
+     "help": "Drop DHCP6 server generated packets that originate from wireless clients."
+    },
+    {
+     "name": "drop-dhcp6c",
+     "help": "Drop DHCP6 client generated packets to be sent to wireless clients."
+    },
+    {
+     "name": "ndp-proxy",
+     "help": "Enable IPv6 ndp proxy - send back na on behalf of the client and drop the ns."
+    },
+    {
+     "name": "drop-ns-dad",
+     "help": "Drop ICMP6 NS-DAD when target address is not found in ndp proxy cache."
+    },
+    {
+     "name": "drop-ns-nondad",
+     "help": "Drop ICMP6 NS-NonDAD when target address is not found in ndp proxy cache."
+    }
+   ],
+   "default": "drop-icmp6ra drop-icmp6rs drop-llmnr6 drop-icmp6mld2 drop-dhcp6s drop-dhcp6c ndp-proxy drop-ns-dad",
+   "multiple_values": true
+  },
+  "me-disable-thresh": {
+   "name": "me-disable-thresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Disable multicast enhancement when this many clients are receiving multicast traffic.",
+   "min-value": 2,
+   "max-value": 256,
+   "default": 32,
+   "multiple_values": false
+  },
+  "mu-mimo": {
+   "name": "mu-mimo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Multi-user MIMO (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Multi-user MIMO."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Multi-user MIMO."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "probe-resp-suppression": {
+   "name": "probe-resp-suppression",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable probe response suppression (to ignore weak signals) (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable probe response suppression."
+    },
+    {
+     "name": "disable",
+     "help": "Disable probe response suppression."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "probe-resp-threshold": {
+   "name": "probe-resp-threshold",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the AP response to probe requests (-95 to -20, default = -80).",
+   "size": 7,
+   "default": "-80",
+   "multiple_values": false
+  },
+  "radio-sensitivity": {
+   "name": "radio-sensitivity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable software radio sensitivity (to ignore weak signals) (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable software radio sensitivity."
+    },
+    {
+     "name": "disable",
+     "help": "Disable software radio sensitivity."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "quarantine": {
+   "name": "quarantine",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable station quarantine (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable station quarantine."
+    },
+    {
+     "name": "disable",
+     "help": "Disable station quarantine."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "radio-5g-threshold": {
+   "name": "radio-5g-threshold",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the AP response to receive a packet in 5G band(-95 to -20, default = -76).",
+   "size": 7,
+   "default": "-76",
+   "multiple_values": false
+  },
+  "radio-2g-threshold": {
+   "name": "radio-2g-threshold",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the AP response to receive a packet in 2.4G band (-95 to -20, default = -79).",
+   "size": 7,
+   "default": "-79",
+   "multiple_values": false
+  },
+  "vlan-name": {
+   "name": "vlan-name",
+   "category": "table",
+   "help": "Table for mapping VLAN name to VLAN ID.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "vlan-id": {
+     "name": "vlan-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "VLAN IDs (maximum 8 VLAN IDs).",
+     "min-value": 0,
+     "max-value": 4094,
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 8
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 64
+  },
+  "vlan-pooling": {
+   "name": "vlan-pooling",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable VLAN pooling, to allow grouping of multiple wireless controller VLANs into VLAN pools (default = disable). When set to wtp-group, VLAN pooling occurs with VLAN assignment by wtp-group.",
+   "options": [
+    {
+     "name": "wtp-group",
+     "help": "Enable VLAN pooling with VLAN assignment by wtp-group."
+    },
+    {
+     "name": "round-robin",
+     "help": "Enable VLAN pooling with round-robin VLAN assignment."
+    },
+    {
+     "name": "hash",
+     "help": "Enable VLAN pooling with hash-based VLAN assignment."
+    },
+    {
+     "name": "disable",
+     "help": "Disable VLAN pooling."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vlan-pool": {
+   "name": "vlan-pool",
+   "category": "table",
+   "help": "VLAN pool.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "wtp-group": {
+     "name": "wtp-group",
+     "category": "unitary",
+     "type": "string",
+     "help": "WTP group name.",
+     "datasource": [
+      "wireless-controller.wtp-group.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 8
+  },
+  "dhcp-option43-insertion": {
+   "name": "dhcp-option43-insertion",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable insertion of DHCP option 43 (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable insertion of DHCP option 43."
+    },
+    {
+     "name": "disable",
+     "help": "Disable insertion of DHCP option 43."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dhcp-option82-insertion": {
+   "name": "dhcp-option82-insertion",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DHCP option 82 insert (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DHCP option 82 insert."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DHCP option 82 insert."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dhcp-option82-circuit-id-insertion": {
+   "name": "dhcp-option82-circuit-id-insertion",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DHCP option 82 circuit-id insert (default = disable).",
+   "options": [
+    {
+     "name": "style-1",
+     "help": "ASCII string composed of AP-MAC;SSID;SSID-TYPE. For example, \"xx:xx:xx:xx:xx:xx;wifi;s\"."
+    },
+    {
+     "name": "style-2",
+     "help": "ASCII string composed of AP-MAC. For example, \"xx:xx:xx:xx:xx:xx\"."
+    },
+    {
+     "name": "style-3",
+     "help": "ASCII string composed of NETWORK-TYPE:WTPPROF-NAME:VLAN:SSID:AP-MODEL:AP-HOSTNAME:AP-MAC. For example,\"WLAN:FAPS221E-default:100:wifi:PS221E:FortiAP-S221E:xx:xx:xx:xx:xx:xx\"."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DHCP option 82 circuit-id insert."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dhcp-option82-remote-id-insertion": {
+   "name": "dhcp-option82-remote-id-insertion",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DHCP option 82 remote-id insert (default = disable).",
+   "options": [
+    {
+     "name": "style-1",
+     "help": "ASCII string in the format \"xx:xx:xx:xx:xx:xx\" containing MAC address of client device."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DHCP option 82 remote-id insert."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ptk-rekey": {
+   "name": "ptk-rekey",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PTK rekey for WPA-Enterprise security.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable PTK rekey for WPA-Enterprise security."
+    },
+    {
+     "name": "disable",
+     "help": "Disable PTK rekey for WPA-Enterprise security."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ptk-rekey-intv": {
+   "name": "ptk-rekey-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "PTK rekey interval (600 - 864000 sec, default = 86400).",
+   "min-value": 600,
+   "max-value": 864000,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "gtk-rekey": {
+   "name": "gtk-rekey",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable GTK rekey for WPA security.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable GTK rekey for WPA security."
+    },
+    {
+     "name": "disable",
+     "help": "Disable GTK rekey for WPA security."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gtk-rekey-intv": {
+   "name": "gtk-rekey-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "GTK rekey interval (600 - 864000 sec, default = 86400).",
+   "min-value": 600,
+   "max-value": 864000,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "eap-reauth": {
+   "name": "eap-reauth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable EAP re-authentication for WPA-Enterprise security.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable EAP re-authentication for WPA-Enterprise security."
+    },
+    {
+     "name": "disable",
+     "help": "Disable EAP re-authentication for WPA-Enterprise security."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eap-reauth-intv": {
+   "name": "eap-reauth-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "EAP re-authentication interval (1800 - 864000 sec, default = 86400).",
+   "min-value": 1800,
+   "max-value": 864000,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "roaming-acct-interim-update": {
+   "name": "roaming-acct-interim-update",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using accounting interim update instead of accounting start/stop on roaming for WPA-Enterprise security.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable using accounting interim update on roaming for WPA-Enterprise security."
+    },
+    {
+     "name": "disable",
+     "help": "Disable using accounting interim update on roaming for WPA-Enterprise security."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "qos-profile": {
+   "name": "qos-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Quality of service profile name.",
+   "datasource": [
+    "wireless-controller.qos-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hotspot20-profile": {
+   "name": "hotspot20-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hotspot 2.0 profile name.",
+   "datasource": [
+    "wireless-controller.hotspot20.hs-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "access-control-list": {
+   "name": "access-control-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name for access-control-list.",
+   "datasource": [
+    "wireless-controller.access-control-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "primary-wag-profile": {
+   "name": "primary-wag-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Primary wireless access gateway profile name.",
+   "datasource": [
+    "wireless-controller.wag-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "secondary-wag-profile": {
+   "name": "secondary-wag-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Secondary wireless access gateway profile name.",
+   "datasource": [
+    "wireless-controller.wag-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "tunnel-echo-interval": {
+   "name": "tunnel-echo-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The time interval to send echo to both primary and secondary tunnel peers (1 - 65535 sec, default = 300).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 300,
+   "multiple_values": false
+  },
+  "tunnel-fallback-interval": {
+   "name": "tunnel-fallback-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The time interval for secondary tunnel to fall back to primary tunnel (0 - 65535 sec, default = 7200).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 7200,
+   "multiple_values": false
+  },
+  "rates-11a": {
+   "name": "rates-11a",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed data rates for 802.11a.",
+   "options": [
+    {
+     "name": "1",
+     "help": "1 Mbps supported rate."
+    },
+    {
+     "name": "1-basic",
+     "help": "1 Mbps BSS basic rate."
+    },
+    {
+     "name": "2",
+     "help": "2 Mbps supported rate."
+    },
+    {
+     "name": "2-basic",
+     "help": "2 Mbps BSS basic rate."
+    },
+    {
+     "name": "5.5",
+     "help": "5.5 Mbps supported rate."
+    },
+    {
+     "name": "5.5-basic",
+     "help": "5.5 Mbps BSS basic rate."
+    },
+    {
+     "name": "11",
+     "help": "11 Mbps supported rate."
+    },
+    {
+     "name": "11-basic",
+     "help": "11 Mbps BSS basic rate."
+    },
+    {
+     "name": "6",
+     "help": "6 Mbps supported rate."
+    },
+    {
+     "name": "6-basic",
+     "help": "6 Mbps BSS basic rate."
+    },
+    {
+     "name": "9",
+     "help": "9 Mbps supported rate."
+    },
+    {
+     "name": "9-basic",
+     "help": "9 Mbps BSS basic rate."
+    },
+    {
+     "name": "12",
+     "help": "12 Mbps supported rate."
+    },
+    {
+     "name": "12-basic",
+     "help": "12 Mbps BSS basic rate."
+    },
+    {
+     "name": "18",
+     "help": "18 Mbps supported rate."
+    },
+    {
+     "name": "18-basic",
+     "help": "18 Mbps BSS basic rate."
+    },
+    {
+     "name": "24",
+     "help": "24 Mbps supported rate."
+    },
+    {
+     "name": "24-basic",
+     "help": "24 Mbps BSS basic rate."
+    },
+    {
+     "name": "36",
+     "help": "36 Mbps supported rate."
+    },
+    {
+     "name": "36-basic",
+     "help": "36 Mbps BSS basic rate."
+    },
+    {
+     "name": "48",
+     "help": "48 Mbps supported rate."
+    },
+    {
+     "name": "48-basic",
+     "help": "48 Mbps BSS basic rate."
+    },
+    {
+     "name": "54",
+     "help": "54 Mbps supported rate."
+    },
+    {
+     "name": "54-basic",
+     "help": "54 Mbps BSS basic rate."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "rates-11bg": {
+   "name": "rates-11bg",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed data rates for 802.11b/g.",
+   "options": [
+    {
+     "name": "1",
+     "help": "1 Mbps supported rate."
+    },
+    {
+     "name": "1-basic",
+     "help": "1 Mbps BSS basic rate."
+    },
+    {
+     "name": "2",
+     "help": "2 Mbps supported rate."
+    },
+    {
+     "name": "2-basic",
+     "help": "2 Mbps BSS basic rate."
+    },
+    {
+     "name": "5.5",
+     "help": "5.5 Mbps supported rate."
+    },
+    {
+     "name": "5.5-basic",
+     "help": "5.5 Mbps BSS basic rate."
+    },
+    {
+     "name": "11",
+     "help": "11 Mbps supported rate."
+    },
+    {
+     "name": "11-basic",
+     "help": "11 Mbps BSS basic rate."
+    },
+    {
+     "name": "6",
+     "help": "6 Mbps supported rate."
+    },
+    {
+     "name": "6-basic",
+     "help": "6 Mbps BSS basic rate."
+    },
+    {
+     "name": "9",
+     "help": "9 Mbps supported rate."
+    },
+    {
+     "name": "9-basic",
+     "help": "9 Mbps BSS basic rate."
+    },
+    {
+     "name": "12",
+     "help": "12 Mbps supported rate."
+    },
+    {
+     "name": "12-basic",
+     "help": "12 Mbps BSS basic rate."
+    },
+    {
+     "name": "18",
+     "help": "18 Mbps supported rate."
+    },
+    {
+     "name": "18-basic",
+     "help": "18 Mbps BSS basic rate."
+    },
+    {
+     "name": "24",
+     "help": "24 Mbps supported rate."
+    },
+    {
+     "name": "24-basic",
+     "help": "24 Mbps BSS basic rate."
+    },
+    {
+     "name": "36",
+     "help": "36 Mbps supported rate."
+    },
+    {
+     "name": "36-basic",
+     "help": "36 Mbps BSS basic rate."
+    },
+    {
+     "name": "48",
+     "help": "48 Mbps supported rate."
+    },
+    {
+     "name": "48-basic",
+     "help": "48 Mbps BSS basic rate."
+    },
+    {
+     "name": "54",
+     "help": "54 Mbps supported rate."
+    },
+    {
+     "name": "54-basic",
+     "help": "54 Mbps BSS basic rate."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "rates-11n-ss12": {
+   "name": "rates-11n-ss12",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed data rates for 802.11n with 1 or 2 spatial streams.",
+   "options": [
+    {
+     "name": "mcs0/1",
+     "help": "Data rate for MCS index 0 with 1 spatial stream."
+    },
+    {
+     "name": "mcs1/1",
+     "help": "Data rate for MCS index 1 with 1 spatial stream."
+    },
+    {
+     "name": "mcs2/1",
+     "help": "Data rate for MCS index 2 with 1 spatial stream."
+    },
+    {
+     "name": "mcs3/1",
+     "help": "Data rate for MCS index 3 with 1 spatial stream."
+    },
+    {
+     "name": "mcs4/1",
+     "help": "Data rate for MCS index 4 with 1 spatial stream."
+    },
+    {
+     "name": "mcs5/1",
+     "help": "Data rate for MCS index 5 with 1 spatial stream."
+    },
+    {
+     "name": "mcs6/1",
+     "help": "Data rate for MCS index 6 with 1 spatial stream."
+    },
+    {
+     "name": "mcs7/1",
+     "help": "Data rate for MCS index 7 with 1 spatial stream."
+    },
+    {
+     "name": "mcs8/2",
+     "help": "Data rate for MCS index 8 with 2 spatial streams."
+    },
+    {
+     "name": "mcs9/2",
+     "help": "Data rate for MCS index 9 with 2 spatial streams."
+    },
+    {
+     "name": "mcs10/2",
+     "help": "Data rate for MCS index 10 with 2 spatial streams."
+    },
+    {
+     "name": "mcs11/2",
+     "help": "Data rate for MCS index 11 with 2 spatial streams."
+    },
+    {
+     "name": "mcs12/2",
+     "help": "Data rate for MCS index 12 with 2 spatial streams."
+    },
+    {
+     "name": "mcs13/2",
+     "help": "Data rate for MCS index 13 with 2 spatial streams."
+    },
+    {
+     "name": "mcs14/2",
+     "help": "Data rate for MCS index 14 with 2 spatial streams."
+    },
+    {
+     "name": "mcs15/2",
+     "help": "Data rate for MCS index 15 with 2 spatial streams."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "rates-11n-ss34": {
+   "name": "rates-11n-ss34",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed data rates for 802.11n with 3 or 4 spatial streams.",
+   "options": [
+    {
+     "name": "mcs16/3",
+     "help": "Data rate for MCS index 16 with 3 spatial streams."
+    },
+    {
+     "name": "mcs17/3",
+     "help": "Data rate for MCS index 17 with 3 spatial streams."
+    },
+    {
+     "name": "mcs18/3",
+     "help": "Data rate for MCS index 18 with 3 spatial streams."
+    },
+    {
+     "name": "mcs19/3",
+     "help": "Data rate for MCS index 19 with 3 spatial streams."
+    },
+    {
+     "name": "mcs20/3",
+     "help": "Data rate for MCS index 20 with 3 spatial streams."
+    },
+    {
+     "name": "mcs21/3",
+     "help": "Data rate for MCS index 21 with 3 spatial streams."
+    },
+    {
+     "name": "mcs22/3",
+     "help": "Data rate for MCS index 22 with 3 spatial streams."
+    },
+    {
+     "name": "mcs23/3",
+     "help": "Data rate for MCS index 23 with 3 spatial streams."
+    },
+    {
+     "name": "mcs24/4",
+     "help": "Data rate for MCS index 24 with 4 spatial streams."
+    },
+    {
+     "name": "mcs25/4",
+     "help": "Data rate for MCS index 25 with 4 spatial streams."
+    },
+    {
+     "name": "mcs26/4",
+     "help": "Data rate for MCS index 26 with 4 spatial streams."
+    },
+    {
+     "name": "mcs27/4",
+     "help": "Data rate for MCS index 27 with 4 spatial streams."
+    },
+    {
+     "name": "mcs28/4",
+     "help": "Data rate for MCS index 28 with 4 spatial streams."
+    },
+    {
+     "name": "mcs29/4",
+     "help": "Data rate for MCS index 29 with 4 spatial streams."
+    },
+    {
+     "name": "mcs30/4",
+     "help": "Data rate for MCS index 30 with 4 spatial streams."
+    },
+    {
+     "name": "mcs31/4",
+     "help": "Data rate for MCS index 31 with 4 spatial streams."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "rates-11ac-mcs-map": {
+   "name": "rates-11ac-mcs-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comma separated list of max supported VHT MCS for spatial streams 1 through 8.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "rates-11ax-mcs-map": {
+   "name": "rates-11ax-mcs-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comma separated list of max supported HE MCS for spatial streams 1 through 8.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "rates-11be-mcs-map": {
+   "name": "rates-11be-mcs-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comma separated list of max nss that supports EHT-MCS 0-9, 10-11, 12-13 for 20MHz/40MHz/80MHz bandwidth.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "rates-11be-mcs-map-160": {
+   "name": "rates-11be-mcs-map-160",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comma separated list of max nss that supports EHT-MCS 0-9, 10-11, 12-13 for 160MHz bandwidth.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "rates-11be-mcs-map-320": {
+   "name": "rates-11be-mcs-map-320",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comma separated list of max nss that supports EHT-MCS 0-9, 10-11, 12-13 for 320MHz bandwidth.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "utm-profile": {
+   "name": "utm-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "UTM profile name.",
+   "datasource": [
+    "wireless-controller.utm-profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "utm-status": {
+   "name": "utm-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to add one or more security profiles (AV, IPS, etc.) to the VAP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "utm-log": {
+   "name": "utm-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable UTM logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable UTM logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable UTM logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ips-sensor": {
+   "name": "ips-sensor",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPS sensor name.",
+   "datasource": [
+    "ips.sensor.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "application-list": {
+   "name": "application-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Application control list name.",
+   "datasource": [
+    "application.list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "antivirus-profile": {
+   "name": "antivirus-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "AntiVirus profile name.",
+   "datasource": [
+    "antivirus.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "webfilter-profile": {
+   "name": "webfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "WebFilter profile name.",
+   "datasource": [
+    "webfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "scan-botnet-connections": {
+   "name": "scan-botnet-connections",
+   "category": "unitary",
+   "type": "option",
+   "help": "Block or monitor connections to Botnet servers or disable Botnet scanning.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not scan connections to botnet servers."
+    },
+    {
+     "name": "monitor",
+     "help": "Log connections to botnet servers."
+    },
+    {
+     "name": "block",
+     "help": "Block connections to botnet servers."
+    }
+   ],
+   "default": "monitor",
+   "multiple_values": false
+  },
+  "address-group": {
+   "name": "address-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Firewall Address Group Name.",
+   "datasource": [
+    "firewall.addrgrp.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "address-group-policy": {
+   "name": "address-group-policy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure MAC address filtering policy for MAC addresses that are in the address-group.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable MAC address filtering policy for MAC addresses that are in the address-group"
+    },
+    {
+     "name": "allow",
+     "help": "Allow clients with MAC addresses that are in the address-group."
+    },
+    {
+     "name": "deny",
+     "help": "Block clients with MAC addresses that are in the address-group."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sticky-client-remove": {
+   "name": "sticky-client-remove",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sticky client remove to maintain good signal level clients in SSID (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sticky client remove."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sticky client remove."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sticky-client-threshold-5g": {
+   "name": "sticky-client-threshold-5g",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the 5G client to be serviced by the AP (-95 to -20, default = -76).",
+   "size": 7,
+   "default": "-76",
+   "multiple_values": false
+  },
+  "sticky-client-threshold-2g": {
+   "name": "sticky-client-threshold-2g",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the 2G client to be serviced by the AP (-95 to -20, default = -79).",
+   "size": 7,
+   "default": "-79",
+   "multiple_values": false
+  },
+  "sticky-client-threshold-6g": {
+   "name": "sticky-client-threshold-6g",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the 6G client to be serviced by the AP (-95 to -20, default = -76).",
+   "size": 7,
+   "default": "-76",
+   "multiple_values": false
+  },
+  "bstm-rssi-disassoc-timer": {
+   "name": "bstm-rssi-disassoc-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time interval for client to voluntarily leave AP before forcing a disassociation due to low RSSI (0 to 2000, default = 200).",
+   "min-value": 1,
+   "max-value": 2000,
+   "default": 200,
+   "multiple_values": false
+  },
+  "bstm-load-balancing-disassoc-timer": {
+   "name": "bstm-load-balancing-disassoc-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time interval for client to voluntarily leave AP before forcing a disassociation due to AP load-balancing (0 to 30, default = 10).",
+   "min-value": 1,
+   "max-value": 30,
+   "default": 10,
+   "multiple_values": false
+  },
+  "bstm-disassociation-imminent": {
+   "name": "bstm-disassociation-imminent",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forcing of disassociation after the BSTM request timer has been reached (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable BSTM disassociation imminent."
+    },
+    {
+     "name": "disable",
+     "help": "Disable BSTM disassociation imminent."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "beacon-advertising": {
+   "name": "beacon-advertising",
+   "category": "unitary",
+   "type": "option",
+   "help": "Fortinet beacon advertising IE data   (default = empty).",
+   "options": [
+    {
+     "name": "name",
+     "help": "AP name."
+    },
+    {
+     "name": "model",
+     "help": "AP model abbreviation."
+    },
+    {
+     "name": "serial-number",
+     "help": "AP serial number."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "osen": {
+   "name": "osen",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable OSEN as part of key management (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable OSEN auth."
+    },
+    {
+     "name": "disable",
+     "help": "Disable OSEN auth."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "application-detection-engine": {
+   "name": "application-detection-engine",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable application detection engine (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable application detection engine."
+    },
+    {
+     "name": "disable",
+     "help": "Disable application detection engine."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "application-dscp-marking": {
+   "name": "application-dscp-marking",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable application attribute based DSCP marking (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable application based DSCP marking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable application based DSCP marking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "application-report-intv": {
+   "name": "application-report-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Application report interval (30 - 864000 sec, default = 120).",
+   "min-value": 30,
+   "max-value": 864000,
+   "default": 120,
+   "multiple_values": false
+  },
+  "l3-roaming": {
+   "name": "l3-roaming",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable layer 3 roaming (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable layer 3 roaming."
+    },
+    {
+     "name": "disable",
+     "help": "Disable layer 3 roaming."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "l3-roaming-mode": {
+   "name": "l3-roaming-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select the way that layer 3 roaming traffic is passed (default = direct).",
+   "options": [
+    {
+     "name": "direct",
+     "help": "Layer 3 roaming traffic is passed between home AP and guest AP directly."
+    },
+    {
+     "name": "indirect",
+     "help": "Layer 3 roaming traffic is passed between home AP and guest AP through controllers."
+    }
+   ],
+   "default": "direct",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 282,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

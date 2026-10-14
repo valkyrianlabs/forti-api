@@ -1,0 +1,191 @@
+{
+ "name": "resource-limits",
+ "category": "complex",
+ "help": "Configure resource limits.",
+ "children": {
+  "session": {
+   "name": "session",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of sessions.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipsec-phase1": {
+   "name": "ipsec-phase1",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of VPN IPsec phase1 tunnels.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipsec-phase2": {
+   "name": "ipsec-phase2",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of VPN IPsec phase2 tunnels.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipsec-phase1-interface": {
+   "name": "ipsec-phase1-interface",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of VPN IPsec phase1 interface tunnels.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipsec-phase2-interface": {
+   "name": "ipsec-phase2-interface",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of VPN IPsec phase2 interface tunnels.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "dialup-tunnel": {
+   "name": "dialup-tunnel",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of dial-up tunnels.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "firewall-policy": {
+   "name": "firewall-policy",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of firewall policies (policy, DoS-policy4, DoS-policy6, multicast).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "firewall-address": {
+   "name": "firewall-address",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of firewall addresses (IPv4, IPv6, multicast).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "firewall-addrgrp": {
+   "name": "firewall-addrgrp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of firewall address groups (IPv4, IPv6).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "custom-service": {
+   "name": "custom-service",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of firewall custom services.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "service-group": {
+   "name": "service-group",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of firewall service groups.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "onetime-schedule": {
+   "name": "onetime-schedule",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of firewall one-time schedules.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "recurring-schedule": {
+   "name": "recurring-schedule",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of firewall recurring schedules.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "user": {
+   "name": "user",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of local users.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "user-group": {
+   "name": "user-group",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of user groups.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "sslvpn": {
+   "name": "sslvpn",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of SSL-VPN.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "proxy": {
+   "name": "proxy",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of concurrent proxy users.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "log-disk-quota": {
+   "name": "log-disk-quota",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log disk quota in megabytes (MB).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 258,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

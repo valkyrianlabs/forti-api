@@ -1,0 +1,393 @@
+{
+ "name": "override-setting",
+ "category": "complex",
+ "help": "Override settings for remote syslog server.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable remote syslog logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Log to remote syslog server."
+    },
+    {
+     "name": "disable",
+     "help": "Do not log to remote syslog server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address of remote syslog server.",
+   "required": true,
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Remote syslog logging over UDP/Reliable TCP.",
+   "options": [
+    {
+     "name": "udp",
+     "help": "Enable syslogging over UDP."
+    },
+    {
+     "name": "legacy-reliable",
+     "help": "Enable legacy reliable syslogging by RFC3195 (Reliable Delivery for Syslog)."
+    },
+    {
+     "name": "reliable",
+     "help": "Enable reliable syslogging by RFC6587 (Transmission of Syslog Messages over TCP)."
+    }
+   ],
+   "default": "udp",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Server listen port.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 514,
+   "multiple_values": false
+  },
+  "facility": {
+   "name": "facility",
+   "category": "unitary",
+   "type": "option",
+   "help": "Remote syslog facility.",
+   "options": [
+    {
+     "name": "kernel",
+     "help": "Kernel messages."
+    },
+    {
+     "name": "user",
+     "help": "Random user-level messages."
+    },
+    {
+     "name": "mail",
+     "help": "Mail system."
+    },
+    {
+     "name": "daemon",
+     "help": "System daemons."
+    },
+    {
+     "name": "auth",
+     "help": "Security/authorization messages."
+    },
+    {
+     "name": "syslog",
+     "help": "Messages generated internally by syslog."
+    },
+    {
+     "name": "lpr",
+     "help": "Line printer subsystem."
+    },
+    {
+     "name": "news",
+     "help": "Network news subsystem."
+    },
+    {
+     "name": "uucp",
+     "help": "Network news subsystem."
+    },
+    {
+     "name": "cron",
+     "help": "Clock daemon."
+    },
+    {
+     "name": "authpriv",
+     "help": "Security/authorization messages (private)."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP daemon."
+    },
+    {
+     "name": "ntp",
+     "help": "NTP daemon."
+    },
+    {
+     "name": "audit",
+     "help": "Log audit."
+    },
+    {
+     "name": "alert",
+     "help": "Log alert."
+    },
+    {
+     "name": "clock",
+     "help": "Clock daemon."
+    },
+    {
+     "name": "local0",
+     "help": "Reserved for local use."
+    },
+    {
+     "name": "local1",
+     "help": "Reserved for local use."
+    },
+    {
+     "name": "local2",
+     "help": "Reserved for local use."
+    },
+    {
+     "name": "local3",
+     "help": "Reserved for local use."
+    },
+    {
+     "name": "local4",
+     "help": "Reserved for local use."
+    },
+    {
+     "name": "local5",
+     "help": "Reserved for local use."
+    },
+    {
+     "name": "local6",
+     "help": "Reserved for local use."
+    },
+    {
+     "name": "local7",
+     "help": "Reserved for local use."
+    }
+   ],
+   "default": "local7",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source IP address of syslog.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "format": {
+   "name": "format",
+   "category": "unitary",
+   "type": "option",
+   "help": "Log format.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Syslog format."
+    },
+    {
+     "name": "csv",
+     "help": "CSV (Comma Separated Values) format."
+    },
+    {
+     "name": "cef",
+     "help": "CEF (Common Event Format) format."
+    },
+    {
+     "name": "rfc5424",
+     "help": "Syslog RFC5424 format."
+    },
+    {
+     "name": "json",
+     "help": "JSON (JavaScript Object Notation) format."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set log transmission priority.",
+   "options": [
+    {
+     "name": "default",
+     "help": "Set Syslog transmission priority to default."
+    },
+    {
+     "name": "low",
+     "help": "Set Syslog transmission priority to low."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "max-log-rate": {
+   "name": "max-log-rate",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Syslog maximum log rate in MBps (0 = unlimited).",
+   "min-value": 0,
+   "max-value": 100000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "enc-algorithm": {
+   "name": "enc-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable reliable syslogging with TLS encryption.",
+   "options": [
+    {
+     "name": "high-medium",
+     "help": "SSL communication with high and medium encryption algorithms."
+    },
+    {
+     "name": "high",
+     "help": "SSL communication with high encryption algorithms."
+    },
+    {
+     "name": "low",
+     "help": "SSL communication with low encryption algorithms."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSL communication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "certificate": {
+   "name": "certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate used to communicate with Syslog server.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "custom-field-name": {
+   "name": "custom-field-name",
+   "category": "table",
+   "help": "Custom field name for CEF format logging.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Field name [A-Za-z0-9_].",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "custom": {
+     "name": "custom",
+     "category": "unitary",
+     "type": "string",
+     "help": "Field custom name [A-Za-z0-9_].",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "log.syslogd",
+ "q_type": 417,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

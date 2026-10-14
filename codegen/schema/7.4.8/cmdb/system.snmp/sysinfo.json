@@ -1,0 +1,152 @@
+{
+ "name": "sysinfo",
+ "category": "complex",
+ "help": "SNMP system info configuration.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SNMP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "engine-id-type": {
+   "name": "engine-id-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Local SNMP engineID type (text/hex/mac).",
+   "options": [
+    {
+     "name": "text",
+     "help": "Text format."
+    },
+    {
+     "name": "hex",
+     "help": "Octets format."
+    },
+    {
+     "name": "mac",
+     "help": "MAC address format."
+    }
+   ],
+   "default": "text",
+   "multiple_values": false
+  },
+  "engine-id": {
+   "name": "engine-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local SNMP engineID string (maximum 27 characters).",
+   "size": 54,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "System description.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "contact-info": {
+   "name": "contact-info",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Contact information.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "location": {
+   "name": "location",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "System location.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "trap-high-cpu-threshold": {
+   "name": "trap-high-cpu-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "CPU usage when trap is sent.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 80,
+   "multiple_values": false
+  },
+  "trap-low-memory-threshold": {
+   "name": "trap-low-memory-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Memory usage when trap is sent.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 80,
+   "multiple_values": false
+  },
+  "trap-log-full-threshold": {
+   "name": "trap-log-full-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log disk usage when trap is sent.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 90,
+   "multiple_values": false
+  },
+  "trap-free-memory-threshold": {
+   "name": "trap-free-memory-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Free memory usage when trap is sent.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 5,
+   "multiple_values": false
+  },
+  "trap-freeable-memory-threshold": {
+   "name": "trap-freeable-memory-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Freeable memory usage when trap is sent.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 60,
+   "multiple_values": false
+  },
+  "append-index": {
+   "name": "append-index",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowance of appending vdom or interface index in some RFC tables.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "system.snmp",
+ "q_type": 6,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

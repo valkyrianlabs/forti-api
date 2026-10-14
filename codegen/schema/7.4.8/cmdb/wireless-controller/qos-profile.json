@@ -1,0 +1,352 @@
+{
+ "name": "qos-profile",
+ "category": "table",
+ "help": "Configure WiFi quality of service (QoS) profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WiFi QoS profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comment.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "uplink": {
+   "name": "uplink",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum uplink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps, default = 0, 0 means no limit).",
+   "min-value": 0,
+   "max-value": 2097152,
+   "default": 0,
+   "multiple_values": false
+  },
+  "downlink": {
+   "name": "downlink",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum downlink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps, default = 0, 0 means no limit).",
+   "min-value": 0,
+   "max-value": 2097152,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uplink-sta": {
+   "name": "uplink-sta",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum uplink bandwidth for clients (0 - 2097152 Kbps, default = 0, 0 means no limit).",
+   "min-value": 0,
+   "max-value": 2097152,
+   "default": 0,
+   "multiple_values": false
+  },
+  "downlink-sta": {
+   "name": "downlink-sta",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum downlink bandwidth for clients (0 - 2097152 Kbps, default = 0, 0 means no limit).",
+   "min-value": 0,
+   "max-value": 2097152,
+   "default": 0,
+   "multiple_values": false
+  },
+  "burst": {
+   "name": "burst",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable client rate burst.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable client rate burst."
+    },
+    {
+     "name": "disable",
+     "help": "Disable client rate burst."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "wmm": {
+   "name": "wmm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WiFi multi-media (WMM) control.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WiFi multi-media (WMM) control."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WiFi multi-media (WMM) control."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "wmm-uapsd": {
+   "name": "wmm-uapsd",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WMM Unscheduled Automatic Power Save Delivery (U-APSD) power save mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WMM Unscheduled Automatic Power Save Delivery (U-APSD) power save mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WMM Unscheduled Automatic Power Save Delivery (U-APSD) power save mode."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "call-admission-control": {
+   "name": "call-admission-control",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WMM call admission control.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WMM call admission control."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WMM call admission control."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "call-capacity": {
+   "name": "call-capacity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of Voice over WLAN (VoWLAN) phones allowed (0 - 60, default = 10).",
+   "min-value": 0,
+   "max-value": 60,
+   "default": 10,
+   "multiple_values": false
+  },
+  "bandwidth-admission-control": {
+   "name": "bandwidth-admission-control",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WMM bandwidth admission control.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WMM bandwidth admission control."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WMM bandwidth admission control."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "bandwidth-capacity": {
+   "name": "bandwidth-capacity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum bandwidth capacity allowed (1 - 600000 Kbps, default = 2000).",
+   "min-value": 1,
+   "max-value": 600000,
+   "default": 2000,
+   "multiple_values": false
+  },
+  "dscp-wmm-mapping": {
+   "name": "dscp-wmm-mapping",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Differentiated Services Code Point (DSCP) mapping.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Differentiated Services Code Point (DSCP) mapping."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Differentiated Services Code Point (DSCP) mapping."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dscp-wmm-vo": {
+   "name": "dscp-wmm-vo",
+   "category": "table",
+   "help": "DSCP mapping for voice access (default = 48 56).",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP WMM mapping numbers (0 - 63).",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dscp-wmm-vi": {
+   "name": "dscp-wmm-vi",
+   "category": "table",
+   "help": "DSCP mapping for video access (default = 32 40).",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP WMM mapping numbers (0 - 63).",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dscp-wmm-be": {
+   "name": "dscp-wmm-be",
+   "category": "table",
+   "help": "DSCP mapping for best effort access (default = 0 24).",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP WMM mapping numbers (0 - 63).",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dscp-wmm-bk": {
+   "name": "dscp-wmm-bk",
+   "category": "table",
+   "help": "DSCP mapping for background access (default = 8 16).",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DSCP WMM mapping numbers (0 - 63).",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "wmm-dscp-marking": {
+   "name": "wmm-dscp-marking",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WMM Differentiated Services Code Point (DSCP) marking.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WMM Differentiated Services Code Point (DSCP) marking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WMM Differentiated Services Code Point (DSCP) marking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "wmm-vo-dscp": {
+   "name": "wmm-vo-dscp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DSCP marking for voice access (default = 48).",
+   "min-value": 0,
+   "max-value": 63,
+   "default": 48,
+   "multiple_values": false
+  },
+  "wmm-vi-dscp": {
+   "name": "wmm-vi-dscp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DSCP marking for video access (default = 32).",
+   "min-value": 0,
+   "max-value": 63,
+   "default": 32,
+   "multiple_values": false
+  },
+  "wmm-be-dscp": {
+   "name": "wmm-be-dscp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DSCP marking for best effort access (default = 0).",
+   "min-value": 0,
+   "max-value": 63,
+   "default": 0,
+   "multiple_values": false
+  },
+  "wmm-bk-dscp": {
+   "name": "wmm-bk-dscp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DSCP marking for background access (default = 8).",
+   "min-value": 0,
+   "max-value": 63,
+   "default": 8,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 128,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 281,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,747 @@
+{
+ "name": "user-group-bookmark",
+ "category": "table",
+ "help": "Configure SSL-VPN user group bookmark.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Group name.",
+   "datasource": [
+    "user.group.name"
+   ],
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "bookmarks": {
+   "name": "bookmarks",
+   "category": "table",
+   "help": "Bookmark table.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Bookmark name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "apptype": {
+     "name": "apptype",
+     "category": "unitary",
+     "type": "option",
+     "help": "Application type.",
+     "required": true,
+     "options": [
+      {
+       "name": "ftp",
+       "help": "FTP."
+      },
+      {
+       "name": "rdp",
+       "help": "RDP."
+      },
+      {
+       "name": "sftp",
+       "help": "SFTP."
+      },
+      {
+       "name": "smb",
+       "help": "SMB/CIFS."
+      },
+      {
+       "name": "ssh",
+       "help": "SSH."
+      },
+      {
+       "name": "telnet",
+       "help": "Telnet."
+      },
+      {
+       "name": "vnc",
+       "help": "VNC."
+      },
+      {
+       "name": "web",
+       "help": "HTTP/HTTPS."
+      }
+     ],
+     "default": "web",
+     "multiple_values": false
+    },
+    "url": {
+     "name": "url",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "URL parameter.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "host": {
+     "name": "host",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Host name/IP parameter.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "folder": {
+     "name": "folder",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Network shared file folder parameter.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "domain": {
+     "name": "domain",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Login domain.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "additional-params": {
+     "name": "additional-params",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Additional parameters.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Description.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "keyboard-layout": {
+     "name": "keyboard-layout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Keyboard layout.",
+     "options": [
+      {
+       "name": "ar-101",
+       "help": "Arabic (101)."
+      },
+      {
+       "name": "ar-102",
+       "help": "Arabic (102)."
+      },
+      {
+       "name": "ar-102-azerty",
+       "help": "Arabic (102) AZERTY."
+      },
+      {
+       "name": "can-mul",
+       "help": "Canadian Multilingual Standard."
+      },
+      {
+       "name": "cz",
+       "help": "Czech."
+      },
+      {
+       "name": "cz-qwerty",
+       "help": "Czech (QWERTY)."
+      },
+      {
+       "name": "cz-pr",
+       "help": "Czech Programmers."
+      },
+      {
+       "name": "da",
+       "help": "Danish."
+      },
+      {
+       "name": "nl",
+       "help": "Dutch."
+      },
+      {
+       "name": "de",
+       "help": "German."
+      },
+      {
+       "name": "de-ch",
+       "help": "German, Switzerland."
+      },
+      {
+       "name": "de-ibm",
+       "help": "German (IBM)."
+      },
+      {
+       "name": "en-uk",
+       "help": "English, United Kingdom."
+      },
+      {
+       "name": "en-uk-ext",
+       "help": "English, United Kingdom Extended."
+      },
+      {
+       "name": "en-us",
+       "help": "English, United States."
+      },
+      {
+       "name": "en-us-dvorak",
+       "help": "English, United States-Dvorak."
+      },
+      {
+       "name": "es",
+       "help": "Spanish."
+      },
+      {
+       "name": "es-var",
+       "help": "Spanish Variation."
+      },
+      {
+       "name": "fi",
+       "help": "Finnish."
+      },
+      {
+       "name": "fi-sami",
+       "help": "Finnish with Sami."
+      },
+      {
+       "name": "fr",
+       "help": "French."
+      },
+      {
+       "name": "fr-apple",
+       "help": "French, Apple."
+      },
+      {
+       "name": "fr-ca",
+       "help": "French, Canada."
+      },
+      {
+       "name": "fr-ch",
+       "help": "French, Switzerland."
+      },
+      {
+       "name": "fr-be",
+       "help": "French, Belgium."
+      },
+      {
+       "name": "hr",
+       "help": "Croatian."
+      },
+      {
+       "name": "hu",
+       "help": "Hungarian."
+      },
+      {
+       "name": "hu-101",
+       "help": "Hungarian 101-Key."
+      },
+      {
+       "name": "it",
+       "help": "Italian."
+      },
+      {
+       "name": "it-142",
+       "help": "Italian (142)."
+      },
+      {
+       "name": "ja",
+       "help": "Japanese."
+      },
+      {
+       "name": "ja-106",
+       "help": "Japanese 106/109 key."
+      },
+      {
+       "name": "ko",
+       "help": "Korean."
+      },
+      {
+       "name": "la-am",
+       "help": "Latin American."
+      },
+      {
+       "name": "lt",
+       "help": "Lithuanian."
+      },
+      {
+       "name": "lt-ibm",
+       "help": "Lithuanian IBM."
+      },
+      {
+       "name": "lt-std",
+       "help": "Lithuanian Standard."
+      },
+      {
+       "name": "lav-std",
+       "help": "Latvian (Standard)."
+      },
+      {
+       "name": "lav-leg",
+       "help": "Latvian (Legacy)."
+      },
+      {
+       "name": "mk",
+       "help": "Macedonian (FYROM)."
+      },
+      {
+       "name": "mk-std",
+       "help": "Macedonia (FYROM) - Standard."
+      },
+      {
+       "name": "no",
+       "help": "Norwegian."
+      },
+      {
+       "name": "no-sami",
+       "help": "Norwegian with Sami."
+      },
+      {
+       "name": "pol-214",
+       "help": "Polish (214)."
+      },
+      {
+       "name": "pol-pr",
+       "help": "Polish (Programmers)."
+      },
+      {
+       "name": "pt",
+       "help": "Portuguese."
+      },
+      {
+       "name": "pt-br",
+       "help": "Portuguese (Brazilian ABNT)."
+      },
+      {
+       "name": "pt-br-abnt2",
+       "help": "Portuguese (Brazilian ABNT2)."
+      },
+      {
+       "name": "ru",
+       "help": "Russian."
+      },
+      {
+       "name": "ru-mne",
+       "help": "Russian - Mnemonic."
+      },
+      {
+       "name": "ru-t",
+       "help": "Russian (Typewriter)."
+      },
+      {
+       "name": "sl",
+       "help": "Slovenian."
+      },
+      {
+       "name": "sv",
+       "help": "Swedish."
+      },
+      {
+       "name": "sv-sami",
+       "help": "Swedish with Sami."
+      },
+      {
+       "name": "tuk",
+       "help": "Turkmen."
+      },
+      {
+       "name": "tur-f",
+       "help": "Turkish F."
+      },
+      {
+       "name": "tur-q",
+       "help": "Turkish Q."
+      },
+      {
+       "name": "zh-sym-sg-us",
+       "help": "Chinese (Simplified, Singapore) - US keyboard."
+      },
+      {
+       "name": "zh-sym-us",
+       "help": "Chinese (Simplified) - US Keyboard."
+      },
+      {
+       "name": "zh-tr-hk",
+       "help": "Chinese (Traditional, Hong Kong S.A.R.)."
+      },
+      {
+       "name": "zh-tr-mo",
+       "help": "Chinese (Traditional Macao S.A.R.) - US Keyboard."
+      },
+      {
+       "name": "zh-tr-us",
+       "help": "Chinese (Traditional) - US keyboard."
+      }
+     ],
+     "default": "en-us",
+     "multiple_values": false
+    },
+    "security": {
+     "name": "security",
+     "category": "unitary",
+     "type": "option",
+     "help": "Security mode for RDP connection (default = any).",
+     "options": [
+      {
+       "name": "any",
+       "help": "Allow the server to choose the type of security."
+      },
+      {
+       "name": "rdp",
+       "help": "Standard RDP encryption."
+      },
+      {
+       "name": "nla",
+       "help": "Network Level Authentication."
+      },
+      {
+       "name": "tls",
+       "help": "TLS encryption."
+      }
+     ],
+     "default": "any",
+     "multiple_values": false
+    },
+    "send-preconnection-id": {
+     "name": "send-preconnection-id",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable sending of preconnection ID.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable sending of preconnection ID."
+      },
+      {
+       "name": "disable",
+       "help": "Disable sending of preconnection ID."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "preconnection-id": {
+     "name": "preconnection-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The numeric ID of the RDP source (0-4294967295).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "preconnection-blob": {
+     "name": "preconnection-blob",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "An arbitrary string which identifies the RDP source.",
+     "size": 511,
+     "multiple_values": false
+    },
+    "load-balancing-info": {
+     "name": "load-balancing-info",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "The load balancing information or cookie which should be provided to the connection broker.",
+     "size": 511,
+     "multiple_values": false
+    },
+    "restricted-admin": {
+     "name": "restricted-admin",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable restricted admin mode for RDP.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable restricted admin mode for RDP."
+      },
+      {
+       "name": "disable",
+       "help": "Disable restricted admin mode for RDP."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Remote port.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "logon-user": {
+     "name": "logon-user",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Logon user.",
+     "size": 35,
+     "multiple_values": false
+    },
+    "logon-password": {
+     "name": "logon-password",
+     "category": "unitary",
+     "type": "password",
+     "help": "Logon password.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "color-depth": {
+     "name": "color-depth",
+     "category": "unitary",
+     "type": "option",
+     "help": "Color depth per pixel.",
+     "options": [
+      {
+       "name": "32",
+       "help": "32bits per pixel."
+      },
+      {
+       "name": "16",
+       "help": "16bits per pixel."
+      },
+      {
+       "name": "8",
+       "help": "8bits per pixel."
+      }
+     ],
+     "default": "16",
+     "multiple_values": false
+    },
+    "sso": {
+     "name": "sso",
+     "category": "unitary",
+     "type": "option",
+     "help": "Single sign-on.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable SSO."
+      },
+      {
+       "name": "static",
+       "help": "Static SSO."
+      },
+      {
+       "name": "auto",
+       "help": "Auto SSO."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "form-data": {
+     "name": "form-data",
+     "category": "table",
+     "help": "Form data.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Name.",
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "value": {
+       "name": "value",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Value.",
+       "size": 63,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "sso-credential": {
+     "name": "sso-credential",
+     "category": "unitary",
+     "type": "option",
+     "help": "Single sign-on credentials.",
+     "options": [
+      {
+       "name": "sslvpn-login",
+       "help": "SSL-VPN login."
+      },
+      {
+       "name": "alternative",
+       "help": "Alternative."
+      }
+     ],
+     "default": "sslvpn-login",
+     "multiple_values": false
+    },
+    "sso-username": {
+     "name": "sso-username",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "SSO user name.",
+     "size": 35,
+     "multiple_values": false
+    },
+    "sso-password": {
+     "name": "sso-password",
+     "category": "unitary",
+     "type": "password",
+     "help": "SSO password.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "sso-credential-sent-once": {
+     "name": "sso-credential-sent-once",
+     "category": "unitary",
+     "type": "option",
+     "help": "Single sign-on credentials are only sent once to remote server.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Single sign-on credentials are only sent once to remote server."
+      },
+      {
+       "name": "disable",
+       "help": "Single sign-on credentials are sent to remote server for every HTTP request."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "width": {
+     "name": "width",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Screen width (range from 0 - 65535, default = 0).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "height": {
+     "name": "height",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Screen height (range from 0 - 65535, default = 0).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "vnc-keyboard-layout": {
+     "name": "vnc-keyboard-layout",
+     "category": "unitary",
+     "type": "option",
+     "help": "Keyboard layout.",
+     "options": [
+      {
+       "name": "default",
+       "help": "Default."
+      },
+      {
+       "name": "da",
+       "help": "Danish."
+      },
+      {
+       "name": "nl",
+       "help": "Dutch."
+      },
+      {
+       "name": "en-uk",
+       "help": "English, United Kingdom."
+      },
+      {
+       "name": "en-uk-ext",
+       "help": "English, United Kingdom Extended."
+      },
+      {
+       "name": "fi",
+       "help": "Finnish."
+      },
+      {
+       "name": "fr",
+       "help": "French."
+      },
+      {
+       "name": "fr-be",
+       "help": "French, Belgium."
+      },
+      {
+       "name": "fr-ca-mul",
+       "help": "French, Canadian Multilingual Std."
+      },
+      {
+       "name": "de",
+       "help": "German."
+      },
+      {
+       "name": "de-ch",
+       "help": "German, Switzerland."
+      },
+      {
+       "name": "it",
+       "help": "Italian."
+      },
+      {
+       "name": "it-142",
+       "help": "Italian (142)."
+      },
+      {
+       "name": "pt",
+       "help": "Portuguese."
+      },
+      {
+       "name": "pt-br-abnt2",
+       "help": "Portuguese (Brazilian ABNT2)."
+      },
+      {
+       "name": "no",
+       "help": "Norwegian."
+      },
+      {
+       "name": "gd",
+       "help": "Scottish Gaelic."
+      },
+      {
+       "name": "es",
+       "help": "Spanish."
+      },
+      {
+       "name": "sv",
+       "help": "Swedish."
+      },
+      {
+       "name": "us-intl",
+       "help": "United States-International."
+      }
+     ],
+     "default": "default",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 128
+  }
+ },
+ "max_table_size_vdom": 100,
+ "max_table_size_global": 256,
+ "max_table_size_item": 0,
+ "path": "vpn.ssl.web",
+ "q_type": 157,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

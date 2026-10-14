@@ -1,0 +1,46 @@
+{
+ "name": "mac-address-table",
+ "category": "table",
+ "help": "Configure MAC address tables.",
+ "mkey": "mac",
+ "mkey_type": "mac-address",
+ "children": {
+  "mac": {
+   "name": "mac",
+   "category": "unitary",
+   "type": "mac-address",
+   "help": "MAC address.",
+   "required": true,
+   "default": "00:00:00:00:00:00",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "reply-substitute": {
+   "name": "reply-substitute",
+   "category": "unitary",
+   "type": "mac-address",
+   "help": "New MAC for reply traffic.",
+   "default": "00:00:00:00:00:00",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 200,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 17,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,290 @@
+{
+ "name": "ssh-config",
+ "category": "complex",
+ "help": "Configure SSH config.",
+ "children": {
+  "ssh-kex-algo": {
+   "name": "ssh-kex-algo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more SSH kex algorithms.",
+   "options": [
+    {
+     "name": "diffie-hellman-group1-sha1",
+     "help": "diffie-hellman-group1-sha1"
+    },
+    {
+     "name": "diffie-hellman-group14-sha1",
+     "help": "diffie-hellman-group14-sha1"
+    },
+    {
+     "name": "diffie-hellman-group14-sha256",
+     "help": "diffie-hellman-group14-sha256"
+    },
+    {
+     "name": "diffie-hellman-group16-sha512",
+     "help": "diffie-hellman-group16-sha512"
+    },
+    {
+     "name": "diffie-hellman-group18-sha512",
+     "help": "diffie-hellman-group18-sha512"
+    },
+    {
+     "name": "diffie-hellman-group-exchange-sha1",
+     "help": "diffie-hellman-group-exchange-sha1"
+    },
+    {
+     "name": "diffie-hellman-group-exchange-sha256",
+     "help": "diffie-hellman-group-exchange-sha256"
+    },
+    {
+     "name": "curve25519-sha256@libssh.org",
+     "help": "curve25519-sha256@libssh.org"
+    },
+    {
+     "name": "ecdh-sha2-nistp256",
+     "help": "ecdh-sha2-nistp256"
+    },
+    {
+     "name": "ecdh-sha2-nistp384",
+     "help": "ecdh-sha2-nistp384"
+    },
+    {
+     "name": "ecdh-sha2-nistp521",
+     "help": "ecdh-sha2-nistp521"
+    }
+   ],
+   "default": "diffie-hellman-group14-sha256 diffie-hellman-group16-sha512 diffie-hellman-group18-sha512 diffie-hellman-group-exchange-sha256 curve25519-sha256@libssh.org ecdh-sha2-nistp256 ecdh-sha2-nistp384 ecdh-sha2-nistp521",
+   "multiple_values": true
+  },
+  "ssh-enc-algo": {
+   "name": "ssh-enc-algo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more SSH ciphers.",
+   "options": [
+    {
+     "name": "chacha20-poly1305@openssh.com",
+     "help": "chacha20-poly1305@openssh.com"
+    },
+    {
+     "name": "aes128-ctr",
+     "help": "aes128-ctr"
+    },
+    {
+     "name": "aes192-ctr",
+     "help": "aes192-ctr"
+    },
+    {
+     "name": "aes256-ctr",
+     "help": "aes256-ctr"
+    },
+    {
+     "name": "arcfour256",
+     "help": "arcfour256"
+    },
+    {
+     "name": "arcfour128",
+     "help": "arcfour128"
+    },
+    {
+     "name": "aes128-cbc",
+     "help": "aes128-cbc"
+    },
+    {
+     "name": "3des-cbc",
+     "help": "3des-cbc"
+    },
+    {
+     "name": "blowfish-cbc",
+     "help": "blowfish-cbc"
+    },
+    {
+     "name": "cast128-cbc",
+     "help": "cast128-cbc"
+    },
+    {
+     "name": "aes192-cbc",
+     "help": "aes192-cbc"
+    },
+    {
+     "name": "aes256-cbc",
+     "help": "aes256-cbc"
+    },
+    {
+     "name": "arcfour",
+     "help": "arcfour"
+    },
+    {
+     "name": "rijndael-cbc@lysator.liu.se",
+     "help": "rijndael-cbc@lysator.liu.se"
+    },
+    {
+     "name": "aes128-gcm@openssh.com",
+     "help": "aes128-gcm@openssh.com"
+    },
+    {
+     "name": "aes256-gcm@openssh.com",
+     "help": "aes256-gcm@openssh.com"
+    }
+   ],
+   "default": "aes256-ctr aes256-gcm@openssh.com",
+   "multiple_values": true
+  },
+  "ssh-mac-algo": {
+   "name": "ssh-mac-algo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more SSH MAC algorithms.",
+   "options": [
+    {
+     "name": "hmac-md5",
+     "help": "hmac-md5"
+    },
+    {
+     "name": "hmac-md5-etm@openssh.com",
+     "help": "hmac-md5-etm@openssh.com"
+    },
+    {
+     "name": "hmac-md5-96",
+     "help": "hmac-md5-96"
+    },
+    {
+     "name": "hmac-md5-96-etm@openssh.com",
+     "help": "hmac-md5-96-etm@openssh.com"
+    },
+    {
+     "name": "hmac-sha1",
+     "help": "hmac-sha1"
+    },
+    {
+     "name": "hmac-sha1-etm@openssh.com",
+     "help": "hmac-sha1-etm@openssh.com"
+    },
+    {
+     "name": "hmac-sha2-256",
+     "help": "hmac-sha2-256"
+    },
+    {
+     "name": "hmac-sha2-256-etm@openssh.com",
+     "help": "hmac-sha2-256-etm@openssh.com"
+    },
+    {
+     "name": "hmac-sha2-512",
+     "help": "hmac-sha2-512"
+    },
+    {
+     "name": "hmac-sha2-512-etm@openssh.com",
+     "help": "hmac-sha2-512-etm@openssh.com"
+    },
+    {
+     "name": "hmac-ripemd160",
+     "help": "hmac-ripemd160"
+    },
+    {
+     "name": "hmac-ripemd160@openssh.com",
+     "help": "hmac-ripemd160@openssh.com"
+    },
+    {
+     "name": "hmac-ripemd160-etm@openssh.com",
+     "help": "hmac-ripemd160-etm@openssh.com"
+    },
+    {
+     "name": "umac-64@openssh.com",
+     "help": "umac-64@openssh.com"
+    },
+    {
+     "name": "umac-128@openssh.com",
+     "help": "umac-128@openssh.com"
+    },
+    {
+     "name": "umac-64-etm@openssh.com",
+     "help": "umac-64-etm@openssh.com"
+    },
+    {
+     "name": "umac-128-etm@openssh.com",
+     "help": "umac-128-etm@openssh.com"
+    }
+   ],
+   "default": "hmac-sha2-256 hmac-sha2-256-etm@openssh.com hmac-sha2-512 hmac-sha2-512-etm@openssh.com",
+   "multiple_values": true
+  },
+  "ssh-hsk-algo": {
+   "name": "ssh-hsk-algo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more SSH hostkey algorithms.",
+   "options": [
+    {
+     "name": "ssh-rsa",
+     "help": "ssh-rsa"
+    },
+    {
+     "name": "ecdsa-sha2-nistp521",
+     "help": "ecdsa-sha2-nistp521"
+    },
+    {
+     "name": "ecdsa-sha2-nistp384",
+     "help": "ecdsa-sha2-nistp384"
+    },
+    {
+     "name": "ecdsa-sha2-nistp256",
+     "help": "ecdsa-sha2-nistp256"
+    },
+    {
+     "name": "rsa-sha2-256",
+     "help": "rsa-sha2-256"
+    },
+    {
+     "name": "rsa-sha2-512",
+     "help": "rsa-sha2-512"
+    },
+    {
+     "name": "ssh-ed25519",
+     "help": "ssh-ed25519"
+    }
+   ],
+   "default": "ecdsa-sha2-nistp521 ecdsa-sha2-nistp384 ecdsa-sha2-nistp256 rsa-sha2-256 rsa-sha2-512 ssh-ed25519",
+   "multiple_values": true
+  },
+  "ssh-hsk-override": {
+   "name": "ssh-hsk-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSH host key override in SSH daemon.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable SSH host key override in SSH daemon."
+    },
+    {
+     "name": "enable",
+     "help": "Enable SSH host key override in SSH daemon."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssh-hsk-password": {
+   "name": "ssh-hsk-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for ssh-hostkey.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "ssh-hsk": {
+   "name": "ssh-hsk",
+   "category": "unitary",
+   "type": "user",
+   "help": "Config SSH host key.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 569,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

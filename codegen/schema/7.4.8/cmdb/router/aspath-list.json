@@ -1,0 +1,78 @@
+{
+ "name": "aspath-list",
+ "category": "table",
+ "help": "Configure Autonomous System (AS) path lists.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "AS path list name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "rule": {
+   "name": "rule",
+   "category": "table",
+   "help": "AS path list rule.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Permit or deny route-based operations, based on the route's AS_PATH attribute.",
+     "required": true,
+     "options": [
+      {
+       "name": "deny",
+       "help": "Deny route-based operations."
+      },
+      {
+       "name": "permit",
+       "help": "Permit route-based operations."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    },
+    "regexp": {
+     "name": "regexp",
+     "category": "unitary",
+     "type": "string",
+     "help": "Regular-expression to match the Border Gateway Protocol (BGP) AS paths.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "router",
+ "q_type": 134,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

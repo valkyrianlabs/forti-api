@@ -1,0 +1,55 @@
+{
+ "name": "adgrp",
+ "category": "table",
+ "help": "Configure FSSO groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-name": {
+   "name": "server-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FSSO agent name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "connector-source": {
+   "name": "connector-source",
+   "category": "unitary",
+   "type": "string",
+   "help": "FSSO connector source.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Group ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 1024,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 160,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

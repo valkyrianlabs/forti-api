@@ -1,0 +1,117 @@
+{
+ "name": "storage",
+ "category": "table",
+ "help": "Configure logical storage.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Storage name.",
+   "size": 35,
+   "default": "default_n",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable storage.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "media-status": {
+   "name": "media-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "The physical status of current media.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Storage is enabled."
+    },
+    {
+     "name": "disable",
+     "help": "Storage is disabled."
+    },
+    {
+     "name": "fail",
+     "help": "Storage have some fail sector."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "order": {
+   "name": "order",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Set storage order.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "partition": {
+   "name": "partition",
+   "category": "unitary",
+   "type": "string",
+   "help": "Label of underlying partition.",
+   "size": 16,
+   "default": "<unknown>",
+   "multiple_values": false
+  },
+  "device": {
+   "name": "device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Partition device.",
+   "size": 19,
+   "default": "?",
+   "multiple_values": false
+  },
+  "size": {
+   "name": "size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Partition size.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "usage": {
+   "name": "usage",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use hard disk for logging and WAN Optimization.",
+   "options": [
+    {
+     "name": "log",
+     "help": "Use hard disk for logging."
+    }
+   ],
+   "default": "log",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 345,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

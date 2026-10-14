@@ -69,7 +69,7 @@ TEST_F(EndpointTest, AddPostsKnownFieldsAndStoresTheAssignedKey) {
     fake->reply(200, write_reply(17));
     firewall::Policy policy;
     policy.name = "forti-api-test-p";
-    policy.action = std::string(firewall::policy::action::deny);
+    policy.action = std::string(firewall::Policy::Action::deny);
     auto reply = firewall::Policies::add(policy, {}, client);
 
     EXPECT_EQ(fake->requests[0].method, Method::Post);

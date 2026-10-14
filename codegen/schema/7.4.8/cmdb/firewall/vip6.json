@@ -1,0 +1,2330 @@
+{
+ "name": "vip6",
+ "category": "table",
+ "help": "Configure virtual IP for IPv6.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Virtual ip6 name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Custom defined ID.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure a static NAT server load balance VIP or access proxy.",
+   "options": [
+    {
+     "name": "static-nat",
+     "help": "Static NAT."
+    },
+    {
+     "name": "server-load-balance",
+     "help": "Server load balance."
+    },
+    {
+     "name": "access-proxy",
+     "help": "Access proxy."
+    }
+   ],
+   "default": "static-nat",
+   "multiple_values": false
+  },
+  "src-filter": {
+   "name": "src-filter",
+   "category": "table",
+   "help": "Source IP6 filter (x:x:x:x:x:x:x:x/x). Separate addresses with spaces.",
+   "member_table": true,
+   "mkey": "range",
+   "mkey_type": "string",
+   "children": {
+    "range": {
+     "name": "range",
+     "category": "unitary",
+     "type": "string",
+     "help": "Source-filter range.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "src-vip-filter": {
+   "name": "src-vip-filter",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of 'src-filter' to match destinations for the reverse SNAT rule.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Match any destination for the reverse SNAT rule."
+    },
+    {
+     "name": "enable",
+     "help": "Match only destinations in 'src-filter' for the reverse SNAT rule."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "extip": {
+   "name": "extip",
+   "category": "unitary",
+   "type": "user",
+   "help": "IPv6 address or address range on the external interface that you want to map to an address or address range on the destination network.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "mappedip": {
+   "name": "mappedip",
+   "category": "unitary",
+   "type": "user",
+   "help": "Mapped IPv6 address range in the format startIP-endIP.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "nat-source-vip": {
+   "name": "nat-source-vip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to perform SNAT on traffic from mappedip to the extip for all egress interfaces.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable nat-source-vip."
+    },
+    {
+     "name": "enable",
+     "help": "Perform SNAT on traffic from mappedip to the extip for all egress interfaces."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ndp-reply": {
+   "name": "ndp-reply",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this FortiGate unit's ability to respond to NDP requests for this virtual IP address (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable this FortiGate unit's ability to respond to NDP requests for this virtual IP address."
+    },
+    {
+     "name": "enable",
+     "help": "Enable this FortiGate unit's ability to respond to NDP requests for this virtual IP address."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "portforward": {
+   "name": "portforward",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable port forwarding.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable port forward."
+    },
+    {
+     "name": "enable",
+     "help": "Enable/disable port forwarding."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocol to use when forwarding packets.",
+   "options": [
+    {
+     "name": "tcp",
+     "help": "TCP."
+    },
+    {
+     "name": "udp",
+     "help": "UDP."
+    },
+    {
+     "name": "sctp",
+     "help": "SCTP."
+    }
+   ],
+   "default": "tcp",
+   "multiple_values": false
+  },
+  "extport": {
+   "name": "extport",
+   "category": "unitary",
+   "type": "user",
+   "help": "Incoming port number range that you want to map to a port number range on the destination network.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "mappedport": {
+   "name": "mappedport",
+   "category": "unitary",
+   "type": "user",
+   "help": "Port number range on the destination network to which the external port number range is mapped.",
+   "default": "",
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Color of icon on the GUI.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ldb-method": {
+   "name": "ldb-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method used to distribute sessions to real servers.",
+   "options": [
+    {
+     "name": "static",
+     "help": "Distribute sessions based on source IP."
+    },
+    {
+     "name": "round-robin",
+     "help": "Distribute sessions based round robin order."
+    },
+    {
+     "name": "weighted",
+     "help": "Distribute sessions based on weight."
+    },
+    {
+     "name": "least-session",
+     "help": "Sends new sessions to the server with the lowest session count."
+    },
+    {
+     "name": "least-rtt",
+     "help": "Distribute new sessions to the server with lowest Round-Trip-Time."
+    },
+    {
+     "name": "first-alive",
+     "help": "Distribute sessions to the first server that is alive."
+    },
+    {
+     "name": "http-host",
+     "help": "Distribute sessions to servers based on host field in HTTP header."
+    }
+   ],
+   "default": "static",
+   "multiple_values": false
+  },
+  "server-type": {
+   "name": "server-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocol to be load balanced by the virtual server (also called the server load balance virtual IP).",
+   "required": true,
+   "options": [
+    {
+     "name": "http",
+     "help": "HTTP."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS."
+    },
+    {
+     "name": "imaps",
+     "help": "IMAPS."
+    },
+    {
+     "name": "pop3s",
+     "help": "POP3S."
+    },
+    {
+     "name": "smtps",
+     "help": "SMTPS."
+    },
+    {
+     "name": "ssl",
+     "help": "SSL."
+    },
+    {
+     "name": "tcp",
+     "help": "TCP."
+    },
+    {
+     "name": "udp",
+     "help": "UDP."
+    },
+    {
+     "name": "ip",
+     "help": "IP."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "http-redirect": {
+   "name": "http-redirect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redirection of HTTP to HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable redirection of HTTP to HTTPS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable redirection of HTTP to HTTPS."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "persistence": {
+   "name": "persistence",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure how to make sure that clients connect to the same server every time they make a request that is part of the same session.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None."
+    },
+    {
+     "name": "http-cookie",
+     "help": "HTTP cookie."
+    },
+    {
+     "name": "ssl-session-id",
+     "help": "SSL session ID."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "h2-support": {
+   "name": "h2-support",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable HTTP2 support (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable HTTP2 support."
+    },
+    {
+     "name": "disable",
+     "help": "Disable HTTP2 support."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "h3-support": {
+   "name": "h3-support",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable HTTP3/QUIC support (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable HTTP3/QUIC support."
+    },
+    {
+     "name": "disable",
+     "help": "Disable HTTP3/QUIC support."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "quic": {
+   "name": "quic",
+   "category": "complex",
+   "help": "QUIC setting.",
+   "children": {
+    "max-idle-timeout": {
+     "name": "max-idle-timeout",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum idle timeout milliseconds (1 - 60000, default = 30000).",
+     "min-value": 1,
+     "max-value": 60000,
+     "default": 30000,
+     "multiple_values": false
+    },
+    "max-udp-payload-size": {
+     "name": "max-udp-payload-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum UDP payload size in bytes (1200 - 1500, default = 1500).",
+     "min-value": 1200,
+     "max-value": 1500,
+     "default": 1500,
+     "multiple_values": false
+    },
+    "active-connection-id-limit": {
+     "name": "active-connection-id-limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Active connection ID limit (1 - 8, default = 2).",
+     "min-value": 1,
+     "max-value": 8,
+     "default": 2,
+     "multiple_values": false
+    },
+    "ack-delay-exponent": {
+     "name": "ack-delay-exponent",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ACK delay exponent (1 - 20, default = 3).",
+     "min-value": 1,
+     "max-value": 20,
+     "default": 3,
+     "multiple_values": false
+    },
+    "max-ack-delay": {
+     "name": "max-ack-delay",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum ACK delay in milliseconds (1 - 16383, default = 25).",
+     "min-value": 1,
+     "max-value": 16383,
+     "default": 25,
+     "multiple_values": false
+    },
+    "max-datagram-frame-size": {
+     "name": "max-datagram-frame-size",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum datagram frame size in bytes (1 - 1500, default = 1500).",
+     "min-value": 1,
+     "max-value": 1500,
+     "default": 1500,
+     "multiple_values": false
+    },
+    "active-migration": {
+     "name": "active-migration",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable active migration (default = disable).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable active migration."
+      },
+      {
+       "name": "disable",
+       "help": "Disable active migration."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "grease-quic-bit": {
+     "name": "grease-quic-bit",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable grease QUIC bit (default = enable).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable grease QUIC bit."
+      },
+      {
+       "name": "disable",
+       "help": "Disable grease QUIC bit."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   }
+  },
+  "nat66": {
+   "name": "nat66",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DNAT66.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable DNAT66."
+    },
+    {
+     "name": "enable",
+     "help": "Enable DNAT66."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "nat64": {
+   "name": "nat64",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DNAT64.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable DNAT64."
+    },
+    {
+     "name": "enable",
+     "help": "Enable DNAT64."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "add-nat64-route": {
+   "name": "add-nat64-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adding NAT64 route.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable adding NAT64 route."
+    },
+    {
+     "name": "enable",
+     "help": "Enable adding NAT64 route."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "realservers": {
+   "name": "realservers",
+   "category": "table",
+   "help": "Select the real servers that this server load balancing VIP will distribute traffic to.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Real server ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "user",
+     "help": "IP address of the real server.",
+     "required": true,
+     "default": "",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port for communicating with the real server. Required if port forwarding is enabled.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Set the status of the real server to active so that it can accept traffic, or on standby or disabled so no traffic is sent.",
+     "options": [
+      {
+       "name": "active",
+       "help": "Server status active."
+      },
+      {
+       "name": "standby",
+       "help": "Server status standby."
+      },
+      {
+       "name": "disable",
+       "help": "Server status disable."
+      }
+     ],
+     "default": "active",
+     "multiple_values": false
+    },
+    "weight": {
+     "name": "weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Weight of the real server. If weighted load balancing is enabled, the server with the highest weight gets more connections.",
+     "min-value": 1,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    },
+    "holddown-interval": {
+     "name": "holddown-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time in seconds that the system waits before re-activating a previously down active server in the active-standby mode. This is to prevent any flapping issues.",
+     "min-value": 30,
+     "max-value": 65535,
+     "default": 300,
+     "multiple_values": false
+    },
+    "healthcheck": {
+     "name": "healthcheck",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to check the responsiveness of the real server before forwarding traffic.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable per server health check."
+      },
+      {
+       "name": "enable",
+       "help": "Enable per server health check."
+      },
+      {
+       "name": "vip",
+       "help": "Use health check defined in VIP."
+      }
+     ],
+     "default": "vip",
+     "multiple_values": false
+    },
+    "http-host": {
+     "name": "http-host",
+     "category": "unitary",
+     "type": "string",
+     "help": "HTTP server domain name in HTTP header.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "translate-host": {
+     "name": "translate-host",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable translation of hostname/IP from virtual server to real server.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable virtual hostname/IP translation."
+      },
+      {
+       "name": "disable",
+       "help": "Disable virtual hostname/IP translation."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "max-connections": {
+     "name": "max-connections",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Max number of active connections that can directed to the real server. When reached, sessions are sent to other real servers.",
+     "min-value": 0,
+     "max-value": 2147483647,
+     "default": 0,
+     "multiple_values": false
+    },
+    "monitor": {
+     "name": "monitor",
+     "category": "table",
+     "help": "Name of the health check monitor to use when polling to determine a virtual server's connectivity status.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Health monitor name.",
+       "required": true,
+       "datasource": [
+        "firewall.ldb-monitor.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 5
+    },
+    "client-ip": {
+     "name": "client-ip",
+     "category": "unitary",
+     "type": "user",
+     "help": "Only clients in this IP range can connect to this real server.",
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 4
+  },
+  "http-cookie-domain-from-host": {
+   "name": "http-cookie-domain-from-host",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of HTTP cookie domain from host field in HTTP.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of HTTP cookie domain from host field in HTTP (use http-cooke-domain setting)."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use of HTTP cookie domain from host field in HTTP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-cookie-domain": {
+   "name": "http-cookie-domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain that HTTP cookie persistence should apply to.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "http-cookie-path": {
+   "name": "http-cookie-path",
+   "category": "unitary",
+   "type": "string",
+   "help": "Limit HTTP cookie persistence to the specified path.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "http-cookie-generation": {
+   "name": "http-cookie-generation",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Generation of HTTP cookie to be accepted. Changing invalidates all existing cookies.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "http-cookie-age": {
+   "name": "http-cookie-age",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in minutes that client web browsers should keep a cookie. Default is 60 minutes. 0 = no time limit.",
+   "min-value": 0,
+   "max-value": 525600,
+   "default": 60,
+   "multiple_values": false
+  },
+  "http-cookie-share": {
+   "name": "http-cookie-share",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control sharing of cookies across virtual servers. Use of same-ip means a cookie from one virtual server can be used by another. Disable stops cookie sharing.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Only allow HTTP cookie to match this virtual server."
+    },
+    {
+     "name": "same-ip",
+     "help": "Allow HTTP cookie to match any virtual server with same IP."
+    }
+   ],
+   "default": "same-ip",
+   "multiple_values": false
+  },
+  "https-cookie-secure": {
+   "name": "https-cookie-secure",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification that inserted HTTPS cookies are secure.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not mark cookie as secure, allow sharing between an HTTP and HTTPS connection."
+    },
+    {
+     "name": "enable",
+     "help": "Mark inserted cookie as secure, cookie can only be used for HTTPS a connection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-multiplex": {
+   "name": "http-multiplex",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable HTTP multiplexing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable HTTP session multiplexing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable HTTP session multiplexing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-ip-header": {
+   "name": "http-ip-header",
+   "category": "unitary",
+   "type": "option",
+   "help": "For HTTP multiplexing, enable to add the original client IP address in the XForwarded-For HTTP header.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable adding HTTP header."
+    },
+    {
+     "name": "disable",
+     "help": "Disable adding HTTP header."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "http-ip-header-name": {
+   "name": "http-ip-header-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "For HTTP multiplexing, enter a custom HTTPS header name. The original client IP address is added to this header. If empty, X-Forwarded-For is used.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "outlook-web-access": {
+   "name": "outlook-web-access",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to add the Front-End-Https header for Microsoft Outlook Web Access.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Outlook Web Access support."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Outlook Web Access support."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "weblogic-server": {
+   "name": "weblogic-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to add an HTTP header to indicate SSL offloading for a WebLogic server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not add HTTP header indicating SSL offload for WebLogic server."
+    },
+    {
+     "name": "enable",
+     "help": "Add HTTP header indicating SSL offload for WebLogic server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "websphere-server": {
+   "name": "websphere-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to add an HTTP header to indicate SSL offloading for a WebSphere server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not add HTTP header indicating SSL offload for WebSphere server."
+    },
+    {
+     "name": "enable",
+     "help": "Add HTTP header indicating SSL offload for WebSphere server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-mode": {
+   "name": "ssl-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Apply SSL offloading between the client and the FortiGate (half) or from the client to the FortiGate and from the FortiGate to the server (full).",
+   "options": [
+    {
+     "name": "half",
+     "help": "Client to FortiGate SSL."
+    },
+    {
+     "name": "full",
+     "help": "Client to FortiGate and FortiGate to Server SSL."
+    }
+   ],
+   "default": "half",
+   "multiple_values": false
+  },
+  "ssl-certificate": {
+   "name": "ssl-certificate",
+   "category": "table",
+   "help": "Name of the certificate to use for SSL handshake.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate list.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ssl-dh-bits": {
+   "name": "ssl-dh-bits",
+   "category": "unitary",
+   "type": "option",
+   "help": "Number of bits to use in the Diffie-Hellman exchange for RSA encryption of SSL sessions.",
+   "options": [
+    {
+     "name": "768",
+     "help": "768-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1024",
+     "help": "1024-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1536",
+     "help": "1536-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "2048",
+     "help": "2048-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "3072",
+     "help": "3072-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "4096",
+     "help": "4096-bit Diffie-Hellman prime."
+    }
+   ],
+   "default": "2048",
+   "multiple_values": false
+  },
+  "ssl-algorithm": {
+   "name": "ssl-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Permitted encryption algorithms for SSL sessions according to encryption strength.",
+   "options": [
+    {
+     "name": "high",
+     "help": "Use AES."
+    },
+    {
+     "name": "medium",
+     "help": "Use AES, 3DES, or RC4."
+    },
+    {
+     "name": "low",
+     "help": "Use AES, 3DES, RC4, or DES."
+    },
+    {
+     "name": "custom",
+     "help": "Use config ssl-cipher-suites to select the cipher suites that are allowed."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  },
+  "ssl-cipher-suites": {
+   "name": "ssl-cipher-suites",
+   "category": "table",
+   "help": "SSL/TLS cipher suites acceptable from a client, ordered by priority.",
+   "mkey": "priority",
+   "mkey_type": "integer",
+   "children": {
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SSL/TLS cipher suites priority.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "cipher": {
+     "name": "cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Cipher suite name.",
+     "required": true,
+     "options": [
+      {
+       "name": "TLS-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-256-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-RSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA",
+       "help": "Cipher suite TLS-DSS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-SEED-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-SEED-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-SEED-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-SEED-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-RSA-WITH-SEED-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-SEED-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-RSA-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC_SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC_SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-RC4-128-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-RC4-128-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-RC4-128-MD5",
+       "help": "Cipher suite TLS-RSA-WITH-RC4-128-MD5."
+      },
+      {
+       "name": "TLS-RSA-WITH-RC4-128-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-RC4-128-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-DES-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-DES-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-DES-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-DES-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-DES-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-DES-CBC-SHA."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    },
+    "versions": {
+     "name": "versions",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL/TLS versions that the cipher suite can be used with.",
+     "options": [
+      {
+       "name": "ssl-3.0",
+       "help": "SSL 3.0."
+      },
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "ssl-3.0 tls-1.0 tls-1.1 tls-1.2 tls-1.3",
+     "multiple_values": true
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ssl-server-renegotiation": {
+   "name": "ssl-server-renegotiation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable secure renegotiation to comply with RFC 5746.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable secure renegotiation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable secure renegotiation."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-server-algorithm": {
+   "name": "ssl-server-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Permitted encryption algorithms for the server side of SSL full mode sessions according to encryption strength.",
+   "options": [
+    {
+     "name": "high",
+     "help": "Use AES."
+    },
+    {
+     "name": "medium",
+     "help": "Use AES, 3DES, or RC4."
+    },
+    {
+     "name": "low",
+     "help": "Use AES, 3DES, RC4, or DES."
+    },
+    {
+     "name": "custom",
+     "help": "Use config ssl-server-cipher-suites to select the cipher suites that are allowed."
+    },
+    {
+     "name": "client",
+     "help": "Use the same encryption algorithms for client and server sessions."
+    }
+   ],
+   "default": "client",
+   "multiple_values": false
+  },
+  "ssl-server-cipher-suites": {
+   "name": "ssl-server-cipher-suites",
+   "category": "table",
+   "help": "SSL/TLS cipher suites to offer to a server, ordered by priority.",
+   "mkey": "priority",
+   "mkey_type": "integer",
+   "children": {
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SSL/TLS cipher suites priority.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "cipher": {
+     "name": "cipher",
+     "category": "unitary",
+     "type": "option",
+     "help": "Cipher suite name.",
+     "required": true,
+     "options": [
+      {
+       "name": "TLS-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-128-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-256-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-128-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-AES-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-128-GCM-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-AES-128-GCM-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-256-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-AES-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-AES-256-GCM-SHA384",
+       "help": "Cipher suite TLS-RSA-WITH-AES-256-GCM-SHA384."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA",
+       "help": "Cipher suite TLS-DSS-RSA-WITH-CAMELLIA-128-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-SEED-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-SEED-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-SEED-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-SEED-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-RSA-WITH-SEED-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-SEED-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-RSA-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-RSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-RSA-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC_SHA256."
+      },
+      {
+       "name": "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384",
+       "help": "Cipher suite TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC_SHA384."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-RC4-128-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-RC4-128-SHA."
+      },
+      {
+       "name": "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-3DES-EDE-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-3DES-EDE-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-RC4-128-MD5",
+       "help": "Cipher suite TLS-RSA-WITH-RC4-128-MD5."
+      },
+      {
+       "name": "TLS-RSA-WITH-RC4-128-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-RC4-128-SHA."
+      },
+      {
+       "name": "TLS-DHE-RSA-WITH-DES-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-RSA-WITH-DES-CBC-SHA."
+      },
+      {
+       "name": "TLS-DHE-DSS-WITH-DES-CBC-SHA",
+       "help": "Cipher suite TLS-DHE-DSS-WITH-DES-CBC-SHA."
+      },
+      {
+       "name": "TLS-RSA-WITH-DES-CBC-SHA",
+       "help": "Cipher suite TLS-RSA-WITH-DES-CBC-SHA."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    },
+    "versions": {
+     "name": "versions",
+     "category": "unitary",
+     "type": "option",
+     "help": "SSL/TLS versions that the cipher suite can be used with.",
+     "options": [
+      {
+       "name": "ssl-3.0",
+       "help": "SSL 3.0."
+      },
+      {
+       "name": "tls-1.0",
+       "help": "TLS 1.0."
+      },
+      {
+       "name": "tls-1.1",
+       "help": "TLS 1.1."
+      },
+      {
+       "name": "tls-1.2",
+       "help": "TLS 1.2."
+      },
+      {
+       "name": "tls-1.3",
+       "help": "TLS 1.3."
+      }
+     ],
+     "default": "ssl-3.0 tls-1.0 tls-1.1 tls-1.2 tls-1.3",
+     "multiple_values": true
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ssl-pfs": {
+   "name": "ssl-pfs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select the cipher suites that can be used for SSL perfect forward secrecy (PFS). Applies to both client and server sessions.",
+   "options": [
+    {
+     "name": "require",
+     "help": "Allow only Diffie-Hellman cipher-suites, so PFS is applied."
+    },
+    {
+     "name": "deny",
+     "help": "Allow only non-Diffie-Hellman cipher-suites, so PFS is not applied."
+    },
+    {
+     "name": "allow",
+     "help": "Allow use of any cipher suite so PFS may or may not be used depending on the cipher suite selected."
+    }
+   ],
+   "default": "require",
+   "multiple_values": false
+  },
+  "ssl-min-version": {
+   "name": "ssl-min-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest SSL/TLS version acceptable from a client.",
+   "options": [
+    {
+     "name": "ssl-3.0",
+     "help": "SSL 3.0."
+    },
+    {
+     "name": "tls-1.0",
+     "help": "TLS 1.0."
+    },
+    {
+     "name": "tls-1.1",
+     "help": "TLS 1.1."
+    },
+    {
+     "name": "tls-1.2",
+     "help": "TLS 1.2."
+    },
+    {
+     "name": "tls-1.3",
+     "help": "TLS 1.3."
+    }
+   ],
+   "default": "tls-1.1",
+   "multiple_values": false
+  },
+  "ssl-max-version": {
+   "name": "ssl-max-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Highest SSL/TLS version acceptable from a client.",
+   "options": [
+    {
+     "name": "ssl-3.0",
+     "help": "SSL 3.0."
+    },
+    {
+     "name": "tls-1.0",
+     "help": "TLS 1.0."
+    },
+    {
+     "name": "tls-1.1",
+     "help": "TLS 1.1."
+    },
+    {
+     "name": "tls-1.2",
+     "help": "TLS 1.2."
+    },
+    {
+     "name": "tls-1.3",
+     "help": "TLS 1.3."
+    }
+   ],
+   "default": "tls-1.3",
+   "multiple_values": false
+  },
+  "ssl-server-min-version": {
+   "name": "ssl-server-min-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest SSL/TLS version acceptable from a server. Use the client setting by default.",
+   "options": [
+    {
+     "name": "ssl-3.0",
+     "help": "SSL 3.0."
+    },
+    {
+     "name": "tls-1.0",
+     "help": "TLS 1.0."
+    },
+    {
+     "name": "tls-1.1",
+     "help": "TLS 1.1."
+    },
+    {
+     "name": "tls-1.2",
+     "help": "TLS 1.2."
+    },
+    {
+     "name": "tls-1.3",
+     "help": "TLS 1.3."
+    },
+    {
+     "name": "client",
+     "help": "Use same value as client configuration."
+    }
+   ],
+   "default": "client",
+   "multiple_values": false
+  },
+  "ssl-server-max-version": {
+   "name": "ssl-server-max-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Highest SSL/TLS version acceptable from a server. Use the client setting by default.",
+   "options": [
+    {
+     "name": "ssl-3.0",
+     "help": "SSL 3.0."
+    },
+    {
+     "name": "tls-1.0",
+     "help": "TLS 1.0."
+    },
+    {
+     "name": "tls-1.1",
+     "help": "TLS 1.1."
+    },
+    {
+     "name": "tls-1.2",
+     "help": "TLS 1.2."
+    },
+    {
+     "name": "tls-1.3",
+     "help": "TLS 1.3."
+    },
+    {
+     "name": "client",
+     "help": "Use same value as client configuration."
+    }
+   ],
+   "default": "client",
+   "multiple_values": false
+  },
+  "ssl-accept-ffdhe-groups": {
+   "name": "ssl-accept-ffdhe-groups",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FFDHE cipher suite for SSL key exchange.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Accept FFDHE groups."
+    },
+    {
+     "name": "disable",
+     "help": "Do not accept FFDHE groups."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-send-empty-frags": {
+   "name": "ssl-send-empty-frags",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending empty fragments to avoid CBC IV attacks (SSL 3.0 & TLS 1.0 only). May need to be disabled for compatibility with older systems.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Send empty fragments."
+    },
+    {
+     "name": "disable",
+     "help": "Do not send empty fragments."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-client-fallback": {
+   "name": "ssl-client-fallback",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable support for preventing Downgrade Attacks on client connections (RFC 7507).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "enable",
+     "help": "Enable."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-client-renegotiation": {
+   "name": "ssl-client-renegotiation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow, deny, or require secure renegotiation of client sessions to comply with RFC 5746.",
+   "options": [
+    {
+     "name": "allow",
+     "help": "Allow a SSL client to renegotiate."
+    },
+    {
+     "name": "deny",
+     "help": "Abort any SSL connection that attempts to renegotiate."
+    },
+    {
+     "name": "secure",
+     "help": "Reject any SSL connection that does not offer a RFC 5746 Secure Renegotiation Indication."
+    }
+   ],
+   "default": "secure",
+   "multiple_values": false
+  },
+  "ssl-client-session-state-type": {
+   "name": "ssl-client-session-state-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "How to expire SSL sessions for the segment of the SSL connection between the client and the FortiGate.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not keep session states."
+    },
+    {
+     "name": "time",
+     "help": "Expire session states after this many minutes."
+    },
+    {
+     "name": "count",
+     "help": "Expire session states when this maximum is reached."
+    },
+    {
+     "name": "both",
+     "help": "Expire session states based on time or count, whichever occurs first."
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "ssl-client-session-state-timeout": {
+   "name": "ssl-client-session-state-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of minutes to keep client to FortiGate SSL session state.",
+   "min-value": 1,
+   "max-value": 14400,
+   "default": 30,
+   "multiple_values": false
+  },
+  "ssl-client-session-state-max": {
+   "name": "ssl-client-session-state-max",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of client to FortiGate SSL session states to keep.",
+   "min-value": 1,
+   "max-value": 10000,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "ssl-client-rekey-count": {
+   "name": "ssl-client-rekey-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum length of data in MB before triggering a client rekey (0 = disable).",
+   "min-value": 200,
+   "max-value": 1048576,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ssl-server-session-state-type": {
+   "name": "ssl-server-session-state-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "How to expire SSL sessions for the segment of the SSL connection between the server and the FortiGate.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not keep session states."
+    },
+    {
+     "name": "time",
+     "help": "Expire session states after this many minutes."
+    },
+    {
+     "name": "count",
+     "help": "Expire session states when this maximum is reached."
+    },
+    {
+     "name": "both",
+     "help": "Expire session states based on time or count, whichever occurs first."
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  },
+  "ssl-server-session-state-timeout": {
+   "name": "ssl-server-session-state-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of minutes to keep FortiGate to Server SSL session state.",
+   "min-value": 1,
+   "max-value": 14400,
+   "default": 60,
+   "multiple_values": false
+  },
+  "ssl-server-session-state-max": {
+   "name": "ssl-server-session-state-max",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of FortiGate to Server SSL session states to keep.",
+   "min-value": 1,
+   "max-value": 10000,
+   "default": 100,
+   "multiple_values": false
+  },
+  "ssl-http-location-conversion": {
+   "name": "ssl-http-location-conversion",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to replace HTTP with HTTPS in the reply's Location HTTP header field.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable HTTP location conversion."
+    },
+    {
+     "name": "disable",
+     "help": "Disable HTTP location conversion."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-http-match-host": {
+   "name": "ssl-http-match-host",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable HTTP host matching for location conversion.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Match HTTP host in response header."
+    },
+    {
+     "name": "disable",
+     "help": "Do not match HTTP host."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-hpkp": {
+   "name": "ssl-hpkp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable including HPKP header in response.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not add a HPKP header to each HTTP response."
+    },
+    {
+     "name": "enable",
+     "help": "Add a HPKP header to each a HTTP response."
+    },
+    {
+     "name": "report-only",
+     "help": "Add a HPKP Report-Only header to each HTTP response."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-hpkp-primary": {
+   "name": "ssl-hpkp-primary",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate to generate primary HPKP pin from.",
+   "datasource": [
+    "vpn.certificate.local.name",
+    "vpn.certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssl-hpkp-backup": {
+   "name": "ssl-hpkp-backup",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate to generate backup HPKP pin from.",
+   "datasource": [
+    "vpn.certificate.local.name",
+    "vpn.certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssl-hpkp-age": {
+   "name": "ssl-hpkp-age",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of minutes the web browser should keep HPKP.",
+   "min-value": 60,
+   "max-value": 157680000,
+   "default": 5184000,
+   "multiple_values": false
+  },
+  "ssl-hpkp-report-uri": {
+   "name": "ssl-hpkp-report-uri",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "URL to report HPKP violations to.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "ssl-hpkp-include-subdomains": {
+   "name": "ssl-hpkp-include-subdomains",
+   "category": "unitary",
+   "type": "option",
+   "help": "Indicate that HPKP header applies to all subdomains.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "HPKP header does not apply to subdomains."
+    },
+    {
+     "name": "enable",
+     "help": "HPKP header applies to subdomains."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-hsts": {
+   "name": "ssl-hsts",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable including HSTS header in response.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not add a HSTS header to each a HTTP response."
+    },
+    {
+     "name": "enable",
+     "help": "Add a HSTS header to each HTTP response."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-hsts-age": {
+   "name": "ssl-hsts-age",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds the client should honor the HSTS setting.",
+   "min-value": 60,
+   "max-value": 157680000,
+   "default": 5184000,
+   "multiple_values": false
+  },
+  "ssl-hsts-include-subdomains": {
+   "name": "ssl-hsts-include-subdomains",
+   "category": "unitary",
+   "type": "option",
+   "help": "Indicate that HSTS header applies to all subdomains.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "HSTS header does not apply to subdomains."
+    },
+    {
+     "name": "enable",
+     "help": "HSTS header applies to subdomains."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "monitor": {
+   "name": "monitor",
+   "category": "table",
+   "help": "Name of the health check monitor to use when polling to determine a virtual server's connectivity status.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Health monitor name.",
+     "required": true,
+     "datasource": [
+      "firewall.ldb-monitor.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 5
+  },
+  "max-embryonic-connections": {
+   "name": "max-embryonic-connections",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of incomplete connections.",
+   "min-value": 0,
+   "max-value": 100000,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "embedded-ipv4-address": {
+   "name": "embedded-ipv4-address",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of the lower 32 bits of the external IPv6 address as mapped IPv4 address.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of the lower 32 bits of the external IPv6 address as mapped IPv4 address."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use of the lower 32 bits of the external IPv6 address as mapped IPv4 address."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv4-mappedip": {
+   "name": "ipv4-mappedip",
+   "category": "unitary",
+   "type": "user",
+   "help": "Range of mapped IP addresses. Specify the start IP address followed by a space and the end IP address.",
+   "default": "",
+   "multiple_values": false
+  },
+  "ipv4-mappedport": {
+   "name": "ipv4-mappedport",
+   "category": "unitary",
+   "type": "user",
+   "help": "IPv4 port number range on the destination network to which the external port number range is mapped.",
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 4096,
+ "max_table_size_global": 4096,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 44,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

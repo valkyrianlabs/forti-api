@@ -1,0 +1,25 @@
+{
+ "name": "sensitivity",
+ "category": "table",
+ "help": "Create self-explanatory DLP sensitivity levels to be used when setting sensitivity under config fp-doc-source.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "DLP Sensitivity Levels.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 128,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "dlp",
+ "q_type": 253,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

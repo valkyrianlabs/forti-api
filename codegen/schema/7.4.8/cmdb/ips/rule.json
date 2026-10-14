@@ -1,0 +1,252 @@
+{
+ "name": "rule",
+ "category": "table",
+ "help": "Configure IPS rules.",
+ "readonly": true,
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Rule name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "Print all IPS rule status information.",
+   "readonly": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable status."
+    },
+    {
+     "name": "enable",
+     "help": "Enable status."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false,
+   "children": {
+    "<sensor name>": {
+     "name": "<sensor name>",
+     "category": "info-read-only",
+     "type": "value",
+     "help": "IPS sensor name.",
+     "children": {
+      "<filter name>": {
+       "name": "<filter name>",
+       "category": "info-read-only",
+       "type": "value",
+       "help": "IPS filter name."
+      }
+     }
+    }
+   }
+  },
+  "log": {
+   "name": "log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging.",
+   "readonly": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "log-packet": {
+   "name": "log-packet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable packet logging.",
+   "readonly": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable packet logging."
+    },
+    {
+     "name": "enable",
+     "help": "Enable packet logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "action": {
+   "name": "action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action.",
+   "readonly": true,
+   "options": [
+    {
+     "name": "pass",
+     "help": "Pass or allow matching traffic."
+    },
+    {
+     "name": "block",
+     "help": "Block or drop matching traffic."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "group": {
+   "name": "group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Group.",
+   "readonly": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "severity": {
+   "name": "severity",
+   "category": "unitary",
+   "type": "user",
+   "help": "Severity.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "location": {
+   "name": "location",
+   "category": "unitary",
+   "type": "user",
+   "help": "Vulnerable location.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": true
+  },
+  "os": {
+   "name": "os",
+   "category": "unitary",
+   "type": "user",
+   "help": "Vulnerable operation systems.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "application": {
+   "name": "application",
+   "category": "unitary",
+   "type": "user",
+   "help": "Vulnerable applications.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "service": {
+   "name": "service",
+   "category": "unitary",
+   "type": "user",
+   "help": "Vulnerable service.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "rule-id": {
+   "name": "rule-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Rule ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "rev": {
+   "name": "rev",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Revision.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "date": {
+   "name": "date",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Date.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "metadata": {
+   "name": "metadata",
+   "category": "table",
+   "help": "Meta data.",
+   "readonly": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "metaid": {
+     "name": "metaid",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Meta ID.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "valueid": {
+     "name": "valueid",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Value ID.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "ips",
+ "q_type": 242,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

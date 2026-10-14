@@ -1,0 +1,171 @@
+{
+ "name": "forward-server",
+ "category": "table",
+ "help": "Configure forward-server addresses.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "addr-type": {
+   "name": "addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address type of the forwarding proxy server: IP or FQDN.",
+   "options": [
+    {
+     "name": "ip",
+     "help": "Use an IPv4 address for the forwarding proxy server."
+    },
+    {
+     "name": "ipv6",
+     "help": "Use an IPv6 address for the forwarding proxy server."
+    },
+    {
+     "name": "fqdn",
+     "help": "Use the FQDN for the forwarding proxy server."
+    }
+   ],
+   "default": "ip",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Forward proxy server IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv6": {
+   "name": "ipv6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Forward proxy server IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "fqdn": {
+   "name": "fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Forward server Fully Qualified Domain Name (FQDN).",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number that the forwarding server expects to receive HTTP sessions on (1 - 65535, default = 3128).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 3128,
+   "multiple_values": false
+  },
+  "healthcheck": {
+   "name": "healthcheck",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forward server health checking. Attempts to connect through the remote forwarding server to a destination to verify that the forwarding server is operating normally.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable health checking."
+    },
+    {
+     "name": "enable",
+     "help": "Enable health checking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "monitor": {
+   "name": "monitor",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL for forward server health check monitoring (default = www.google.com).",
+   "size": 255,
+   "default": "www.google.com",
+   "multiple_values": false
+  },
+  "server-down-option": {
+   "name": "server-down-option",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take when the forward server is found to be down: block sessions until the server is back up or pass sessions to their destination.",
+   "options": [
+    {
+     "name": "block",
+     "help": "Block sessions until the server is back up."
+    },
+    {
+     "name": "pass",
+     "help": "Pass sessions to their destination bypassing the forward server."
+    }
+   ],
+   "default": "block",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTP authentication user name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "HTTP authentication password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comment.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "masquerade": {
+   "name": "masquerade",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of the of the IP address of the outgoing interface as the client IP address (default = enable)",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of the IP address of the outgoing interface as the client IP address."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of the of the IP address of the outgoing interface as the client IP address."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "web-proxy",
+ "q_type": 451,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

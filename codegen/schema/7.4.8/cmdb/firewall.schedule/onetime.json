@@ -1,0 +1,98 @@
+{
+ "name": "onetime",
+ "category": "table",
+ "help": "Onetime schedule configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Onetime schedule name.",
+   "required": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "start": {
+   "name": "start",
+   "category": "unitary",
+   "type": "user",
+   "help": "Schedule start date and time, format hh:mm yyyy/mm/dd.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "start-utc": {
+   "name": "start-utc",
+   "category": "unitary",
+   "type": "user",
+   "help": "Schedule start date and time, in epoch format.",
+   "default": "",
+   "multiple_values": false
+  },
+  "end": {
+   "name": "end",
+   "category": "unitary",
+   "type": "user",
+   "help": "Schedule end date and time, format hh:mm yyyy/mm/dd.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "end-utc": {
+   "name": "end-utc",
+   "category": "unitary",
+   "type": "user",
+   "help": "Schedule end date and time, in epoch format.",
+   "default": "",
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Color of icon on the GUI.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "expiration-days": {
+   "name": "expiration-days",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Write an event log message this many days before the schedule expires.",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 3,
+   "multiple_values": false
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall.schedule",
+ "q_type": 39,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,89 @@
+{
+ "name": "krb-keytab",
+ "category": "table",
+ "help": "Configure Kerberos keytab entries.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Kerberos keytab entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "pac-data": {
+   "name": "pac-data",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable parsing PAC data in the ticket.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable parsing PAC data in the ticket."
+    },
+    {
+     "name": "disable",
+     "help": "Disable parsing PAC data in the ticket."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "principal": {
+   "name": "principal",
+   "category": "unitary",
+   "type": "string",
+   "help": "Kerberos service principal. For example, HTTP/myfgt.example.com@example.com.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "ldap-server": {
+   "name": "ldap-server",
+   "category": "table",
+   "help": "LDAP server name(s).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "LDAP server name.",
+     "required": true,
+     "datasource": [
+      "user.ldap.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "keytab": {
+   "name": "keytab",
+   "category": "unitary",
+   "type": "string",
+   "help": "Base64 coded keytab file containing a pre-shared key.",
+   "required": true,
+   "size": 8191,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 25,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

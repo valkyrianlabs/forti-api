@@ -1,0 +1,95 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure CIFS profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-credential-type": {
+   "name": "server-credential-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "CIFS server credential type.",
+   "required": true,
+   "options": [
+    {
+     "name": "none",
+     "help": "Credential derivation not set."
+    },
+    {
+     "name": "credential-replication",
+     "help": "Credential derived using Replication account on Domain Controller."
+    },
+    {
+     "name": "credential-keytab",
+     "help": "Credential derived using server keytab."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "domain-controller": {
+   "name": "domain-controller",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain for which to decrypt CIFS traffic.",
+   "required": true,
+   "datasource": [
+    "credential-store.domain-controller.server-name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-keytab": {
+   "name": "server-keytab",
+   "category": "table",
+   "type": "string",
+   "help": "Server keytab.",
+   "mkey": "principal",
+   "mkey_type": "string",
+   "children": {
+    "principal": {
+     "name": "principal",
+     "category": "unitary",
+     "type": "string",
+     "help": "Service principal. For example, host/cifsserver.example.com@example.com.",
+     "required": true,
+     "size": 511,
+     "default": "",
+     "multiple_values": false
+    },
+    "keytab": {
+     "name": "keytab",
+     "category": "unitary",
+     "type": "string",
+     "help": "Base64 encoded keytab file containing credential of the server.",
+     "required": true,
+     "size": 8191,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "size": 8836,
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "cifs",
+ "q_type": 539,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

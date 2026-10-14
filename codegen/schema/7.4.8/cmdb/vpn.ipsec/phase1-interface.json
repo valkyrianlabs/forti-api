@@ -1,0 +1,3104 @@
+{
+ "name": "phase1-interface",
+ "category": "table",
+ "help": "Configure VPN remote gateway.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPsec remote gateway name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Remote gateway type.",
+   "options": [
+    {
+     "name": "static",
+     "help": "Remote VPN gateway has fixed IP address."
+    },
+    {
+     "name": "dynamic",
+     "help": "Remote VPN gateway has dynamic IP address."
+    },
+    {
+     "name": "ddns",
+     "help": "Remote VPN gateway has dynamic IP address and is a dynamic DNS client."
+    }
+   ],
+   "default": "static",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local physical, aggregate, or VLAN outgoing interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-version": {
+   "name": "ip-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "IP version to use for VPN interface.",
+   "options": [
+    {
+     "name": "4",
+     "help": "Use IPv4 addressing for gateways."
+    },
+    {
+     "name": "6",
+     "help": "Use IPv6 addressing for gateways."
+    }
+   ],
+   "default": "4",
+   "multiple_values": false
+  },
+  "ike-version": {
+   "name": "ike-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "IKE protocol version.",
+   "options": [
+    {
+     "name": "1",
+     "help": "Use IKEv1 protocol."
+    },
+    {
+     "name": "2",
+     "help": "Use IKEv2 protocol."
+    }
+   ],
+   "default": "1",
+   "multiple_values": false
+  },
+  "local-gw": {
+   "name": "local-gw",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address of the local gateway's external interface.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "local-gw6": {
+   "name": "local-gw6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address of the local gateway's external interface.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "remote-gw": {
+   "name": "remote-gw",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address of the remote gateway's external interface.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "remote-gw6": {
+   "name": "remote-gw6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address of the remote gateway's external interface.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "remotegw-ddns": {
+   "name": "remotegw-ddns",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name of remote gateway. For example, name.ddns.com.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "keylife": {
+   "name": "keylife",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait in seconds before phase 1 encryption key expires.",
+   "min-value": 120,
+   "max-value": 172800,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "certificate": {
+   "name": "certificate",
+   "category": "table",
+   "help": "The names of up to 4 signed personal certificates.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate name.",
+     "required": true,
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "authmethod": {
+   "name": "authmethod",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication method.",
+   "options": [
+    {
+     "name": "psk",
+     "help": "PSK authentication method."
+    },
+    {
+     "name": "signature",
+     "help": "Signature authentication method."
+    }
+   ],
+   "default": "psk",
+   "multiple_values": false
+  },
+  "authmethod-remote": {
+   "name": "authmethod-remote",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication method (remote side).",
+   "options": [
+    {
+     "name": "psk",
+     "help": "PSK authentication method."
+    },
+    {
+     "name": "signature",
+     "help": "Signature authentication method."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "The ID protection mode used to establish a secure channel.",
+   "options": [
+    {
+     "name": "aggressive",
+     "help": "Aggressive mode."
+    },
+    {
+     "name": "main",
+     "help": "Main mode."
+    }
+   ],
+   "default": "main",
+   "multiple_values": false
+  },
+  "peertype": {
+   "name": "peertype",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept this peer type.",
+   "options": [
+    {
+     "name": "any",
+     "help": "Accept any peer ID."
+    },
+    {
+     "name": "one",
+     "help": "Accept this peer ID."
+    },
+    {
+     "name": "dialup",
+     "help": "Accept peer ID in dialup group."
+    },
+    {
+     "name": "peer",
+     "help": "Accept this peer certificate."
+    },
+    {
+     "name": "peergrp",
+     "help": "Accept this peer certificate group."
+    }
+   ],
+   "default": "peer",
+   "multiple_values": false
+  },
+  "peerid": {
+   "name": "peerid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Accept this peer identity.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "default-gw": {
+   "name": "default-gw",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address of default route gateway to use for traffic exiting the interface.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "default-gw-priority": {
+   "name": "default-gw-priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Priority for default gateway route. A higher priority number signifies a less preferred route.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "usrgrp": {
+   "name": "usrgrp",
+   "category": "unitary",
+   "type": "string",
+   "help": "User group name for dialup peers.",
+   "required": true,
+   "datasource": [
+    "user.group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "peer": {
+   "name": "peer",
+   "category": "unitary",
+   "type": "string",
+   "help": "Accept this peer certificate.",
+   "required": true,
+   "datasource": [
+    "user.peer.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "peergrp": {
+   "name": "peergrp",
+   "category": "unitary",
+   "type": "string",
+   "help": "Accept this peer certificate group.",
+   "required": true,
+   "datasource": [
+    "user.peergrp.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "monitor": {
+   "name": "monitor",
+   "category": "table",
+   "help": "IPsec interface as backup for primary interface.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec interface as backup for primary interface.",
+     "datasource": [
+      "vpn.ipsec.phase1-interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "monitor-min": {
+   "name": "monitor-min",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum number of links to become degraded before activating this interface.  Zero (0) means all links must be down before activating this interface.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "monitor-hold-down-type": {
+   "name": "monitor-hold-down-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Recovery time method when primary interface re-establishes.",
+   "options": [
+    {
+     "name": "immediate",
+     "help": "Fail back immediately after primary recovers."
+    },
+    {
+     "name": "delay",
+     "help": "Number of seconds to delay fail back after primary recovers."
+    },
+    {
+     "name": "time",
+     "help": "Specify a time at which to fail back after primary recovers."
+    }
+   ],
+   "default": "immediate",
+   "multiple_values": false
+  },
+  "monitor-hold-down-delay": {
+   "name": "monitor-hold-down-delay",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait in seconds before recovery once primary re-establishes.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 31536000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "monitor-hold-down-weekday": {
+   "name": "monitor-hold-down-weekday",
+   "category": "unitary",
+   "type": "option",
+   "help": "Day of the week to recover once primary re-establishes.",
+   "required": true,
+   "options": [
+    {
+     "name": "everyday",
+     "help": "Every Day."
+    },
+    {
+     "name": "sunday",
+     "help": "Sunday."
+    },
+    {
+     "name": "monday",
+     "help": "Monday."
+    },
+    {
+     "name": "tuesday",
+     "help": "Tuesday."
+    },
+    {
+     "name": "wednesday",
+     "help": "Wednesday."
+    },
+    {
+     "name": "thursday",
+     "help": "Thursday."
+    },
+    {
+     "name": "friday",
+     "help": "Friday."
+    },
+    {
+     "name": "saturday",
+     "help": "Saturday."
+    }
+   ],
+   "default": "sunday",
+   "multiple_values": false
+  },
+  "monitor-hold-down-time": {
+   "name": "monitor-hold-down-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of day at which to fail back to primary after it re-establishes.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "net-device": {
+   "name": "net-device",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable kernel device creation.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Create a kernel device for every tunnel."
+    },
+    {
+     "name": "disable",
+     "help": "Do not create a kernel device for tunnels."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "passive-mode": {
+   "name": "passive-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec passive mode for static tunnels.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPsec passive mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPsec passive mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "exchange-interface-ip": {
+   "name": "exchange-interface-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable exchange of IPsec interface IP address.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable exchange of IPsec interface IP address."
+    },
+    {
+     "name": "disable",
+     "help": "Disable exchange of IPsec interface IP address."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "exchange-ip-addr4": {
+   "name": "exchange-ip-addr4",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address to exchange with peers.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "exchange-ip-addr6": {
+   "name": "exchange-ip-addr6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address to exchange with peers.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "aggregate-member": {
+   "name": "aggregate-member",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use as an aggregate member.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use as an aggregate member."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use as an aggregate member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "aggregate-weight": {
+   "name": "aggregate-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Link weight for aggregate.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 1,
+   "multiple_values": false
+  },
+  "packet-redistribution": {
+   "name": "packet-redistribution",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable packet distribution (RPS) on the IPsec interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable packet redistribution."
+    },
+    {
+     "name": "disable",
+     "help": "Disable packet redistribution."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mode-cfg": {
+   "name": "mode-cfg",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable configuration method.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Configuration Method."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Configuration Method."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mode-cfg-allow-client-selector": {
+   "name": "mode-cfg-allow-client-selector",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable mode-cfg client to use custom phase2 selectors.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Mode-cfg client to use wildcard selectors."
+    },
+    {
+     "name": "enable",
+     "help": "Mode-cfg client to use custom selectors."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "assign-ip": {
+   "name": "assign-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable assignment of IP to IPsec interface via configuration method.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not assign an IP address to the IPsec interface."
+    },
+    {
+     "name": "enable",
+     "help": "Assign an IP address to the IPsec interface."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "assign-ip-from": {
+   "name": "assign-ip-from",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method by which the IP address will be assigned.",
+   "options": [
+    {
+     "name": "range",
+     "help": "Assign IP address from locally defined range."
+    },
+    {
+     "name": "usrgrp",
+     "help": "Assign IP address via user group."
+    },
+    {
+     "name": "dhcp",
+     "help": "Assign IP address via DHCP."
+    },
+    {
+     "name": "name",
+     "help": "Assign IP address from firewall address or group."
+    }
+   ],
+   "default": "range",
+   "multiple_values": false
+  },
+  "ipv4-start-ip": {
+   "name": "ipv4-start-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Start of IPv4 range.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv4-end-ip": {
+   "name": "ipv4-end-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "End of IPv4 range.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv4-netmask": {
+   "name": "ipv4-netmask",
+   "category": "unitary",
+   "type": "ipv4-netmask",
+   "help": "IPv4 Netmask.",
+   "default": "255.255.255.255",
+   "multiple_values": false
+  },
+  "dhcp-ra-giaddr": {
+   "name": "dhcp-ra-giaddr",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Relay agent gateway IP address to use in the giaddr field of DHCP requests.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dhcp6-ra-linkaddr": {
+   "name": "dhcp6-ra-linkaddr",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Relay agent IPv6 link address to use in DHCP6 requests.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "dns-mode": {
+   "name": "dns-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "DNS server mode.",
+   "options": [
+    {
+     "name": "manual",
+     "help": "Manually configure DNS servers."
+    },
+    {
+     "name": "auto",
+     "help": "Use default DNS servers."
+    }
+   ],
+   "default": "manual",
+   "multiple_values": false
+  },
+  "ipv4-dns-server1": {
+   "name": "ipv4-dns-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 DNS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv4-dns-server2": {
+   "name": "ipv4-dns-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 DNS server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv4-dns-server3": {
+   "name": "ipv4-dns-server3",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 DNS server 3.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "internal-domain-list": {
+   "name": "internal-domain-list",
+   "category": "table",
+   "help": "One or more internal domain names in quotes separated by spaces.",
+   "member_table": true,
+   "mkey": "domain-name",
+   "mkey_type": "string",
+   "children": {
+    "domain-name": {
+     "name": "domain-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Domain name.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ipv4-wins-server1": {
+   "name": "ipv4-wins-server1",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WINS server 1.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv4-wins-server2": {
+   "name": "ipv4-wins-server2",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "WINS server 2.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ipv4-exclude-range": {
+   "name": "ipv4-exclude-range",
+   "category": "table",
+   "help": "Configuration Method IPv4 exclude ranges.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-ip": {
+     "name": "start-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Start of IPv4 exclusive range.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "end-ip": {
+     "name": "end-ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "End of IPv4 exclusive range.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ipv4-split-include": {
+   "name": "ipv4-split-include",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 split-include subnets.",
+   "datasource": [
+    "firewall.address.name",
+    "firewall.addrgrp.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "split-include-service": {
+   "name": "split-include-service",
+   "category": "unitary",
+   "type": "string",
+   "help": "Split-include services.",
+   "datasource": [
+    "firewall.service.group.name",
+    "firewall.service.custom.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipv4-name": {
+   "name": "ipv4-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 address name.",
+   "datasource": [
+    "firewall.address.name",
+    "firewall.addrgrp.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipv6-start-ip": {
+   "name": "ipv6-start-ip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Start of IPv6 range.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-end-ip": {
+   "name": "ipv6-end-ip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "End of IPv6 range.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-prefix": {
+   "name": "ipv6-prefix",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IPv6 prefix.",
+   "min-value": 1,
+   "max-value": 128,
+   "default": 128,
+   "multiple_values": false
+  },
+  "ipv6-dns-server1": {
+   "name": "ipv6-dns-server1",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 DNS server 1.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-dns-server2": {
+   "name": "ipv6-dns-server2",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 DNS server 2.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-dns-server3": {
+   "name": "ipv6-dns-server3",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 DNS server 3.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "ipv6-exclude-range": {
+   "name": "ipv6-exclude-range",
+   "category": "table",
+   "help": "Configuration method IPv6 exclude ranges.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-ip": {
+     "name": "start-ip",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Start of IPv6 exclusive range.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    },
+    "end-ip": {
+     "name": "end-ip",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "End of IPv6 exclusive range.",
+     "required": true,
+     "default": "::",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ipv6-split-include": {
+   "name": "ipv6-split-include",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 split-include subnets.",
+   "datasource": [
+    "firewall.address6.name",
+    "firewall.addrgrp6.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipv6-name": {
+   "name": "ipv6-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 address name.",
+   "datasource": [
+    "firewall.address6.name",
+    "firewall.addrgrp6.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-delay-interval": {
+   "name": "ip-delay-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IP address reuse delay interval in seconds (0 - 28800).",
+   "min-value": 0,
+   "max-value": 28800,
+   "default": 0,
+   "multiple_values": false
+  },
+  "unity-support": {
+   "name": "unity-support",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable support for Cisco UNITY Configuration Method extensions.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Cisco Unity Configuration Method Extensions."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Cisco Unity Configuration Method Extensions."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "domain": {
+   "name": "domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Instruct unity clients about the single default DNS domain.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "banner": {
+   "name": "banner",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Message that unity client should display after connecting.",
+   "size": 1024,
+   "multiple_values": false
+  },
+  "include-local-lan": {
+   "name": "include-local-lan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allow local LAN access on unity clients.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable local LAN access on Unity clients."
+    },
+    {
+     "name": "enable",
+     "help": "Enable local LAN access on Unity clients."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv4-split-exclude": {
+   "name": "ipv4-split-exclude",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 subnets that should not be sent over the IPsec tunnel.",
+   "datasource": [
+    "firewall.address.name",
+    "firewall.addrgrp.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipv6-split-exclude": {
+   "name": "ipv6-split-exclude",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 subnets that should not be sent over the IPsec tunnel.",
+   "datasource": [
+    "firewall.address6.name",
+    "firewall.addrgrp6.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "save-password": {
+   "name": "save-password",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable saving XAuth username and password on VPN clients.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable saving XAuth username and password on VPN clients."
+    },
+    {
+     "name": "enable",
+     "help": "Enable saving XAuth username and password on VPN clients."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "client-auto-negotiate": {
+   "name": "client-auto-negotiate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the VPN client to bring up the tunnel when there is no traffic.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable allowing the VPN client to bring up the tunnel when there is no traffic."
+    },
+    {
+     "name": "enable",
+     "help": "Enable allowing the VPN client to bring up the tunnel when there is no traffic."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "client-keep-alive": {
+   "name": "client-keep-alive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the VPN client to keep the tunnel up when there is no traffic.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable allowing the VPN client to keep the tunnel up when there is no traffic."
+    },
+    {
+     "name": "enable",
+     "help": "Enable allowing the VPN client to keep the tunnel up when there is no traffic."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "backup-gateway": {
+   "name": "backup-gateway",
+   "category": "table",
+   "help": "Instruct unity clients about the backup gateway address(es).",
+   "member_table": true,
+   "mkey": "address",
+   "mkey_type": "string",
+   "children": {
+    "address": {
+     "name": "address",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address of backup gateway.",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "proposal": {
+   "name": "proposal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Phase1 proposal.",
+   "required": true,
+   "options": [
+    {
+     "name": "des-md5",
+     "help": "des-md5"
+    },
+    {
+     "name": "des-sha1",
+     "help": "des-sha1"
+    },
+    {
+     "name": "des-sha256",
+     "help": "des-sha256"
+    },
+    {
+     "name": "des-sha384",
+     "help": "des-sha384"
+    },
+    {
+     "name": "des-sha512",
+     "help": "des-sha512"
+    },
+    {
+     "name": "3des-md5",
+     "help": "3des-md5"
+    },
+    {
+     "name": "3des-sha1",
+     "help": "3des-sha1"
+    },
+    {
+     "name": "3des-sha256",
+     "help": "3des-sha256"
+    },
+    {
+     "name": "3des-sha384",
+     "help": "3des-sha384"
+    },
+    {
+     "name": "3des-sha512",
+     "help": "3des-sha512"
+    },
+    {
+     "name": "aes128-md5",
+     "help": "aes128-md5"
+    },
+    {
+     "name": "aes128-sha1",
+     "help": "aes128-sha1"
+    },
+    {
+     "name": "aes128-sha256",
+     "help": "aes128-sha256"
+    },
+    {
+     "name": "aes128-sha384",
+     "help": "aes128-sha384"
+    },
+    {
+     "name": "aes128-sha512",
+     "help": "aes128-sha512"
+    },
+    {
+     "name": "aes128gcm-prfsha1",
+     "help": "aes128gcm-prfsha1"
+    },
+    {
+     "name": "aes128gcm-prfsha256",
+     "help": "aes128gcm-prfsha256"
+    },
+    {
+     "name": "aes128gcm-prfsha384",
+     "help": "aes128gcm-prfsha384"
+    },
+    {
+     "name": "aes128gcm-prfsha512",
+     "help": "aes128gcm-prfsha512"
+    },
+    {
+     "name": "aes192-md5",
+     "help": "aes192-md5"
+    },
+    {
+     "name": "aes192-sha1",
+     "help": "aes192-sha1"
+    },
+    {
+     "name": "aes192-sha256",
+     "help": "aes192-sha256"
+    },
+    {
+     "name": "aes192-sha384",
+     "help": "aes192-sha384"
+    },
+    {
+     "name": "aes192-sha512",
+     "help": "aes192-sha512"
+    },
+    {
+     "name": "aes256-md5",
+     "help": "aes256-md5"
+    },
+    {
+     "name": "aes256-sha1",
+     "help": "aes256-sha1"
+    },
+    {
+     "name": "aes256-sha256",
+     "help": "aes256-sha256"
+    },
+    {
+     "name": "aes256-sha384",
+     "help": "aes256-sha384"
+    },
+    {
+     "name": "aes256-sha512",
+     "help": "aes256-sha512"
+    },
+    {
+     "name": "aes256gcm-prfsha1",
+     "help": "aes256gcm-prfsha1"
+    },
+    {
+     "name": "aes256gcm-prfsha256",
+     "help": "aes256gcm-prfsha256"
+    },
+    {
+     "name": "aes256gcm-prfsha384",
+     "help": "aes256gcm-prfsha384"
+    },
+    {
+     "name": "aes256gcm-prfsha512",
+     "help": "aes256gcm-prfsha512"
+    },
+    {
+     "name": "chacha20poly1305-prfsha1",
+     "help": "chacha20poly1305-prfsha1"
+    },
+    {
+     "name": "chacha20poly1305-prfsha256",
+     "help": "chacha20poly1305-prfsha256"
+    },
+    {
+     "name": "chacha20poly1305-prfsha384",
+     "help": "chacha20poly1305-prfsha384"
+    },
+    {
+     "name": "chacha20poly1305-prfsha512",
+     "help": "chacha20poly1305-prfsha512"
+    },
+    {
+     "name": "aria128-md5",
+     "help": "aria128-md5"
+    },
+    {
+     "name": "aria128-sha1",
+     "help": "aria128-sha1"
+    },
+    {
+     "name": "aria128-sha256",
+     "help": "aria128-sha256"
+    },
+    {
+     "name": "aria128-sha384",
+     "help": "aria128-sha384"
+    },
+    {
+     "name": "aria128-sha512",
+     "help": "aria128-sha512"
+    },
+    {
+     "name": "aria192-md5",
+     "help": "aria192-md5"
+    },
+    {
+     "name": "aria192-sha1",
+     "help": "aria192-sha1"
+    },
+    {
+     "name": "aria192-sha256",
+     "help": "aria192-sha256"
+    },
+    {
+     "name": "aria192-sha384",
+     "help": "aria192-sha384"
+    },
+    {
+     "name": "aria192-sha512",
+     "help": "aria192-sha512"
+    },
+    {
+     "name": "aria256-md5",
+     "help": "aria256-md5"
+    },
+    {
+     "name": "aria256-sha1",
+     "help": "aria256-sha1"
+    },
+    {
+     "name": "aria256-sha256",
+     "help": "aria256-sha256"
+    },
+    {
+     "name": "aria256-sha384",
+     "help": "aria256-sha384"
+    },
+    {
+     "name": "aria256-sha512",
+     "help": "aria256-sha512"
+    },
+    {
+     "name": "seed-md5",
+     "help": "seed-md5"
+    },
+    {
+     "name": "seed-sha1",
+     "help": "seed-sha1"
+    },
+    {
+     "name": "seed-sha256",
+     "help": "seed-sha256"
+    },
+    {
+     "name": "seed-sha384",
+     "help": "seed-sha384"
+    },
+    {
+     "name": "seed-sha512",
+     "help": "seed-sha512"
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 10
+  },
+  "add-route": {
+   "name": "add-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable control addition of a route to peer destination selector.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not add a route to destination of peer selector."
+    },
+    {
+     "name": "enable",
+     "help": "Add route to destination of peer selector."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "add-gw-route": {
+   "name": "add-gw-route",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatically add a route to the remote gateway.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Automatically add a route to the remote gateway."
+    },
+    {
+     "name": "disable",
+     "help": "Do not automatically add a route to the remote gateway."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "psksecret": {
+   "name": "psksecret",
+   "category": "unitary",
+   "type": "password-3",
+   "help": "Pre-shared secret for PSK authentication (ASCII string or hexadecimal encoded with a leading 0x).",
+   "required": true,
+   "multiple_values": false
+  },
+  "psksecret-remote": {
+   "name": "psksecret-remote",
+   "category": "unitary",
+   "type": "password-3",
+   "help": "Pre-shared secret for remote side PSK authentication (ASCII string or hexadecimal encoded with a leading 0x).",
+   "required": true,
+   "multiple_values": false
+  },
+  "keepalive": {
+   "name": "keepalive",
+   "category": "unitary",
+   "type": "integer",
+   "help": "NAT-T keep alive interval.",
+   "min-value": 5,
+   "max-value": 900,
+   "default": 10,
+   "multiple_values": false
+  },
+  "distance": {
+   "name": "distance",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Distance for routes added by IKE (1 - 255).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 15,
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Priority for routes added by IKE (1 - 65535).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "localid": {
+   "name": "localid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local ID.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "localid-type": {
+   "name": "localid-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Local ID type.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Select ID type automatically."
+    },
+    {
+     "name": "fqdn",
+     "help": "Use fully qualified domain name."
+    },
+    {
+     "name": "user-fqdn",
+     "help": "Use user fully qualified domain name."
+    },
+    {
+     "name": "keyid",
+     "help": "Use key-id string."
+    },
+    {
+     "name": "address",
+     "help": "Use local IP address."
+    },
+    {
+     "name": "asn1dn",
+     "help": "Use ASN.1 distinguished name."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "auto-negotiate": {
+   "name": "auto-negotiate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic initiation of IKE SA negotiation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic initiation of IKE SA negotiation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic initiation of IKE SA negotiation."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "negotiate-timeout": {
+   "name": "negotiate-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IKE SA negotiation timeout in seconds (1 - 300).",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 30,
+   "multiple_values": false
+  },
+  "fragmentation": {
+   "name": "fragmentation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable fragment IKE message on re-transmission.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable intra-IKE fragmentation support on re-transmission."
+    },
+    {
+     "name": "disable",
+     "help": "Disable intra-IKE fragmentation support."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ip-fragmentation": {
+   "name": "ip-fragmentation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Determine whether IP packets are fragmented before or after IPsec encapsulation.",
+   "options": [
+    {
+     "name": "pre-encapsulation",
+     "help": "Fragment before IPsec encapsulation."
+    },
+    {
+     "name": "post-encapsulation",
+     "help": "Fragment after IPsec encapsulation (RFC compliant)."
+    }
+   ],
+   "default": "post-encapsulation",
+   "multiple_values": false
+  },
+  "dpd": {
+   "name": "dpd",
+   "category": "unitary",
+   "type": "option",
+   "help": "Dead Peer Detection mode.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Dead Peer Detection."
+    },
+    {
+     "name": "on-idle",
+     "help": "Trigger Dead Peer Detection when IPsec is idle."
+    },
+    {
+     "name": "on-demand",
+     "help": "Trigger Dead Peer Detection when IPsec traffic is sent but no reply is received from the peer."
+    }
+   ],
+   "default": "on-demand",
+   "multiple_values": false
+  },
+  "dpd-retrycount": {
+   "name": "dpd-retrycount",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of DPD retry attempts.",
+   "min-value": 0,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "dpd-retryinterval": {
+   "name": "dpd-retryinterval",
+   "category": "unitary",
+   "type": "user",
+   "help": "DPD retry interval.",
+   "default": "",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "npu-offload": {
+   "name": "npu-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable offloading NPU.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable NPU offloading."
+    },
+    {
+     "name": "disable",
+     "help": "Disable NPU offloading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "send-cert-chain": {
+   "name": "send-cert-chain",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending certificate chain.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sending certificate chain."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sending certificate chain."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dhgrp": {
+   "name": "dhgrp",
+   "category": "unitary",
+   "type": "option",
+   "help": "DH group.",
+   "options": [
+    {
+     "name": "1",
+     "help": "DH Group 1."
+    },
+    {
+     "name": "2",
+     "help": "DH Group 2."
+    },
+    {
+     "name": "5",
+     "help": "DH Group 5."
+    },
+    {
+     "name": "14",
+     "help": "DH Group 14."
+    },
+    {
+     "name": "15",
+     "help": "DH Group 15."
+    },
+    {
+     "name": "16",
+     "help": "DH Group 16."
+    },
+    {
+     "name": "17",
+     "help": "DH Group 17."
+    },
+    {
+     "name": "18",
+     "help": "DH Group 18."
+    },
+    {
+     "name": "19",
+     "help": "DH Group 19."
+    },
+    {
+     "name": "20",
+     "help": "DH Group 20."
+    },
+    {
+     "name": "21",
+     "help": "DH Group 21."
+    },
+    {
+     "name": "27",
+     "help": "DH Group 27."
+    },
+    {
+     "name": "28",
+     "help": "DH Group 28."
+    },
+    {
+     "name": "29",
+     "help": "DH Group 29."
+    },
+    {
+     "name": "30",
+     "help": "DH Group 30."
+    },
+    {
+     "name": "31",
+     "help": "DH Group 31."
+    },
+    {
+     "name": "32",
+     "help": "DH Group 32."
+    }
+   ],
+   "default": "14",
+   "multiple_values": true,
+   "max_num_values": 3
+  },
+  "suite-b": {
+   "name": "suite-b",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use Suite-B.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not use UI suite."
+    },
+    {
+     "name": "suite-b-gcm-128",
+     "help": "Use Suite-B-GCM-128."
+    },
+    {
+     "name": "suite-b-gcm-256",
+     "help": "Use Suite-B-GCM-256."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eap": {
+   "name": "eap",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKEv2 EAP authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IKEv2 EAP authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IKEv2 EAP authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "eap-identity": {
+   "name": "eap-identity",
+   "category": "unitary",
+   "type": "option",
+   "help": "IKEv2 EAP peer identity type.",
+   "options": [
+    {
+     "name": "use-id-payload",
+     "help": "Use IKEv2 IDi payload to resolve peer identity."
+    },
+    {
+     "name": "send-request",
+     "help": "Use EAP identity request to resolve peer identity."
+    }
+   ],
+   "default": "use-id-payload",
+   "multiple_values": false
+  },
+  "eap-exclude-peergrp": {
+   "name": "eap-exclude-peergrp",
+   "category": "unitary",
+   "type": "string",
+   "help": "Peer group excluded from EAP authentication.",
+   "datasource": [
+    "user.peergrp.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "eap-cert-auth": {
+   "name": "eap-cert-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable peer certificate authentication in addition to EAP if peer is a FortiClient endpoint.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable peer certificate authentication in addition to EAP if peer is a FortiClient endpoint."
+    },
+    {
+     "name": "disable",
+     "help": "Disable peer certificate authentication in addition to EAP if peer is a FortiClient endpoint."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "acct-verify": {
+   "name": "acct-verify",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of RADIUS accounting record.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification of RADIUS accounting record."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification of RADIUS accounting record."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ppk": {
+   "name": "ppk",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKEv2 Postquantum Preshared Key (PPK).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of IKEv2 Postquantum Preshared Key (PPK)."
+    },
+    {
+     "name": "allow",
+     "help": "Allow, but do not require, use of IKEv2 Postquantum Preshared Key (PPK)."
+    },
+    {
+     "name": "require",
+     "help": "Require use of IKEv2 Postquantum Preshared Key (PPK)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ppk-secret": {
+   "name": "ppk-secret",
+   "category": "unitary",
+   "type": "password-3",
+   "help": "IKEv2 Postquantum Preshared Key (ASCII string or hexadecimal encoded with a leading 0x).",
+   "required": true,
+   "multiple_values": false
+  },
+  "ppk-identity": {
+   "name": "ppk-identity",
+   "category": "unitary",
+   "type": "string",
+   "help": "IKEv2 Postquantum Preshared Key Identity.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "wizard-type": {
+   "name": "wizard-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "GUI VPN Wizard Type.",
+   "options": [
+    {
+     "name": "custom",
+     "help": "Custom VPN configuration."
+    },
+    {
+     "name": "dialup-forticlient",
+     "help": "Dial Up - FortiClient Windows, Mac and Android."
+    },
+    {
+     "name": "dialup-ios",
+     "help": "Dial Up - iPhone / iPad Native IPsec Client."
+    },
+    {
+     "name": "dialup-android",
+     "help": "Dial Up - Android Native IPsec Client."
+    },
+    {
+     "name": "dialup-windows",
+     "help": "Dial Up - Windows Native IPsec Client."
+    },
+    {
+     "name": "dialup-cisco",
+     "help": "Dial Up - Cisco IPsec Client."
+    },
+    {
+     "name": "static-fortigate",
+     "help": "Site to Site - FortiGate."
+    },
+    {
+     "name": "dialup-fortigate",
+     "help": "Dial Up - FortiGate."
+    },
+    {
+     "name": "static-cisco",
+     "help": "Site to Site - Cisco."
+    },
+    {
+     "name": "dialup-cisco-fw",
+     "help": "Dialup Up - Cisco Firewall."
+    },
+    {
+     "name": "simplified-static-fortigate",
+     "help": "Site to Site - FortiGate (SD-WAN)."
+    },
+    {
+     "name": "hub-fortigate-auto-discovery",
+     "help": "Hub role in a Hub-and-Spoke auto-discovery VPN."
+    },
+    {
+     "name": "spoke-fortigate-auto-discovery",
+     "help": "Spoke role in a Hub-and-Spoke auto-discovery VPN."
+    }
+   ],
+   "default": "custom",
+   "multiple_values": false
+  },
+  "xauthtype": {
+   "name": "xauthtype",
+   "category": "unitary",
+   "type": "option",
+   "help": "XAuth type.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "client",
+     "help": "Enable as client."
+    },
+    {
+     "name": "pap",
+     "help": "Enable as server PAP."
+    },
+    {
+     "name": "chap",
+     "help": "Enable as server CHAP."
+    },
+    {
+     "name": "auto",
+     "help": "Enable as server auto."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "reauth": {
+   "name": "reauth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable re-authentication upon IKE SA lifetime expiration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable IKE SA re-authentication."
+    },
+    {
+     "name": "enable",
+     "help": "Enable IKE SA re-authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "authusr": {
+   "name": "authusr",
+   "category": "unitary",
+   "type": "string",
+   "help": "XAuth user name.",
+   "required": true,
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "authpasswd": {
+   "name": "authpasswd",
+   "category": "unitary",
+   "type": "password",
+   "help": "XAuth password (max 35 characters).",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "group-authentication": {
+   "name": "group-authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKEv2 IDi group authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IKEv2 IDi group authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IKEv2 IDi group authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "group-authentication-secret": {
+   "name": "group-authentication-secret",
+   "category": "unitary",
+   "type": "password-3",
+   "help": "Password for IKEv2 ID group authentication. ASCII string or hexadecimal indicated by a leading 0x.",
+   "required": true,
+   "multiple_values": false
+  },
+  "authusrgrp": {
+   "name": "authusrgrp",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication user group.",
+   "datasource": [
+    "user.group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mesh-selector-type": {
+   "name": "mesh-selector-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Add selectors containing subsets of the configuration depending on traffic.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable."
+    },
+    {
+     "name": "subnet",
+     "help": "Enable addition of matching subnet selector."
+    },
+    {
+     "name": "host",
+     "help": "Enable addition of host to host selector."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "idle-timeout": {
+   "name": "idle-timeout",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec tunnel idle timeout.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPsec tunnel idle timeout."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPsec tunnel idle timeout."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "idle-timeoutinterval": {
+   "name": "idle-timeoutinterval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IPsec tunnel idle timeout in minutes (5 - 43200).",
+   "min-value": 5,
+   "max-value": 43200,
+   "default": 15,
+   "multiple_values": false
+  },
+  "ha-sync-esp-seqno": {
+   "name": "ha-sync-esp-seqno",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sequence number jump ahead for IPsec HA.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable HA syncing of ESP sequence numbers."
+    },
+    {
+     "name": "disable",
+     "help": "Disable HA syncing of ESP sequence numbers."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fgsp-sync": {
+   "name": "fgsp-sync",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec syncing of tunnels for FGSP IPsec.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPsec syncing of tunnels to other cluster members."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPsec syncing of tunnels to other cluster members."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "inbound-dscp-copy": {
+   "name": "inbound-dscp-copy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable copy the dscp in the ESP header to the inner IP Header.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable copy the dscp in the ESP header to the inner IP Header."
+    },
+    {
+     "name": "disable",
+     "help": "Disable copy the dscp in the ESP header to the inner IP Header."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-discovery-sender": {
+   "name": "auto-discovery-sender",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending auto-discovery short-cut messages.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sending auto-discovery short-cut messages."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sending auto-discovery short-cut messages."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-discovery-receiver": {
+   "name": "auto-discovery-receiver",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable accepting auto-discovery short-cut messages.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable receiving auto-discovery short-cut messages."
+    },
+    {
+     "name": "disable",
+     "help": "Disable receiving auto-discovery short-cut messages."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-discovery-forwarder": {
+   "name": "auto-discovery-forwarder",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forwarding auto-discovery short-cut messages.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable forwarding auto-discovery short-cut messages."
+    },
+    {
+     "name": "disable",
+     "help": "Disable forwarding auto-discovery short-cut messages."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-discovery-psk": {
+   "name": "auto-discovery-psk",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of pre-shared secrets for authentication of auto-discovery tunnels.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of pre-shared-secret authentication for auto-discovery tunnels."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of authentication defined by 'authmethod' for auto-discovery tunnels."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-discovery-shortcuts": {
+   "name": "auto-discovery-shortcuts",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control deletion of child short-cut tunnels when the parent tunnel goes down.",
+   "options": [
+    {
+     "name": "independent",
+     "help": "Short-cut tunnels remain up if the parent tunnel goes down."
+    },
+    {
+     "name": "dependent",
+     "help": "Short-cut tunnels are brought down if the parent tunnel goes down."
+    }
+   ],
+   "default": "independent",
+   "multiple_values": false
+  },
+  "auto-discovery-crossover": {
+   "name": "auto-discovery-crossover",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow/block set-up of short-cut tunnels between different network IDs.",
+   "options": [
+    {
+     "name": "allow",
+     "help": "Allow set-up of short-cut tunnels between different network IDs."
+    },
+    {
+     "name": "block",
+     "help": "Block set-up of short-cut tunnels between different network IDs."
+    }
+   ],
+   "default": "allow",
+   "multiple_values": false
+  },
+  "auto-discovery-offer-interval": {
+   "name": "auto-discovery-offer-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval between shortcut offer messages in seconds (1 - 300, default = 5).",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 5,
+   "multiple_values": false
+  },
+  "encapsulation": {
+   "name": "encapsulation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable GRE/VXLAN/VPNID encapsulation.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No additional encapsulation."
+    },
+    {
+     "name": "gre",
+     "help": "GRE encapsulation."
+    },
+    {
+     "name": "vxlan",
+     "help": "VXLAN encapsulation."
+    },
+    {
+     "name": "vpn-id-ipip",
+     "help": "VPN ID with IPIP encapsulation."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "encapsulation-address": {
+   "name": "encapsulation-address",
+   "category": "unitary",
+   "type": "option",
+   "help": "Source for GRE/VXLAN tunnel address.",
+   "options": [
+    {
+     "name": "ike",
+     "help": "Use IKE/IPsec gateway addresses."
+    },
+    {
+     "name": "ipv4",
+     "help": "Specify separate GRE/VXLAN tunnel address."
+    },
+    {
+     "name": "ipv6",
+     "help": "Specify separate GRE/VXLAN tunnel address."
+    }
+   ],
+   "default": "ike",
+   "multiple_values": false
+  },
+  "encap-local-gw4": {
+   "name": "encap-local-gw4",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Local IPv4 address of GRE/VXLAN tunnel.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "encap-local-gw6": {
+   "name": "encap-local-gw6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Local IPv6 address of GRE/VXLAN tunnel.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "encap-remote-gw4": {
+   "name": "encap-remote-gw4",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Remote IPv4 address of GRE/VXLAN tunnel.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "encap-remote-gw6": {
+   "name": "encap-remote-gw6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Remote IPv6 address of GRE/VXLAN tunnel.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "vni": {
+   "name": "vni",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VNI of VXLAN tunnel.",
+   "min-value": 1,
+   "max-value": 16777215,
+   "default": 0,
+   "multiple_values": false
+  },
+  "nattraversal": {
+   "name": "nattraversal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAT traversal.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPsec NAT traversal."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPsec NAT traversal."
+    },
+    {
+     "name": "forced",
+     "help": "Force IPsec NAT traversal on."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fragmentation-mtu": {
+   "name": "fragmentation-mtu",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IKE fragmentation MTU (500 - 16000).",
+   "min-value": 500,
+   "max-value": 16000,
+   "default": 1200,
+   "multiple_values": false
+  },
+  "childless-ike": {
+   "name": "childless-ike",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable childless IKEv2 initiation (RFC 6023).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable childless IKEv2 initiation (RFC 6023)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable childless IKEv2 initiation (RFC 6023)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "azure-ad-autoconnect": {
+   "name": "azure-ad-autoconnect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Azure AD Auto-Connect for FortiClient.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Azure AD Auto-Connect for FortiClient."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Azure AD Auto-Connect for FortiClient."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "client-resume": {
+   "name": "client-resume",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable resumption of offline FortiClient sessions.  When a FortiClient enabled laptop is closed or enters sleep/hibernate mode, enabling this feature allows FortiClient to keep the tunnel during this period, and allows users to immediately resume using the IPsec tunnel when the device wakes up.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable client session resumption."
+    },
+    {
+     "name": "disable",
+     "help": "Disable client session resumption."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "client-resume-interval": {
+   "name": "client-resume-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum time in seconds during which a VPN client may resume using a tunnel after a client PC has entered sleep mode or temporarily lost its network connection (120 - 172800, default = 7200).",
+   "min-value": 120,
+   "max-value": 172800,
+   "default": 7200,
+   "multiple_values": false
+  },
+  "rekey": {
+   "name": "rekey",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable phase1 rekey.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable phase1 rekey."
+    },
+    {
+     "name": "disable",
+     "help": "Disable phase1 rekey."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "digital-signature-auth": {
+   "name": "digital-signature-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKEv2 Digital Signature Authentication (RFC 7427).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IKEv2 Digital Signature Authentication (RFC 7427)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IKEv2 Digital Signature Authentication (RFC 7427)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "signature-hash-alg": {
+   "name": "signature-hash-alg",
+   "category": "unitary",
+   "type": "option",
+   "help": "Digital Signature Authentication hash algorithms.",
+   "required": true,
+   "options": [
+    {
+     "name": "sha1",
+     "help": "SHA1."
+    },
+    {
+     "name": "sha2-256",
+     "help": "SHA2-256."
+    },
+    {
+     "name": "sha2-384",
+     "help": "SHA2-384."
+    },
+    {
+     "name": "sha2-512",
+     "help": "SHA2-512."
+    }
+   ],
+   "default": "sha2-512",
+   "multiple_values": true,
+   "max_num_values": 4
+  },
+  "rsa-signature-format": {
+   "name": "rsa-signature-format",
+   "category": "unitary",
+   "type": "option",
+   "help": "Digital Signature Authentication RSA signature format.",
+   "options": [
+    {
+     "name": "pkcs1",
+     "help": "RSASSA PKCS#1 v1.5."
+    },
+    {
+     "name": "pss",
+     "help": "RSASSA Probabilistic Signature Scheme (PSS)."
+    }
+   ],
+   "default": "pkcs1",
+   "multiple_values": false
+  },
+  "rsa-signature-hash-override": {
+   "name": "rsa-signature-hash-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IKEv2 RSA signature hash algorithm override.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IKEv2 RSA signature hash algorithm override."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IKEv2 RSA signature hash algorithm override."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "enforce-unique-id": {
+   "name": "enforce-unique-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable peer ID uniqueness check.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable peer ID uniqueness enforcement."
+    },
+    {
+     "name": "keep-new",
+     "help": "Enforce peer ID uniqueness, keep new connection if collision found."
+    },
+    {
+     "name": "keep-old",
+     "help": "Enforce peer ID uniqueness, keep old connection if collision found."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cert-id-validation": {
+   "name": "cert-id-validation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable cross validation of peer ID and the identity in the peer's certificate as specified in RFC 4945.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable cross validation of peer ID and the identity in the peer's certificate as specified in RFC 4945."
+    },
+    {
+     "name": "disable",
+     "help": "Disable cross validation of peer ID and the identity in the peer's certificate as specified in RFC 4945."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fec-egress": {
+   "name": "fec-egress",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Forward Error Correction for egress IPsec traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Forward Error Correction for egress IPsec traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Forward Error Correction for egress IPsec traffic."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fec-send-timeout": {
+   "name": "fec-send-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout in milliseconds before sending Forward Error Correction packets (1 - 1000).",
+   "min-value": 1,
+   "max-value": 1000,
+   "default": 5,
+   "multiple_values": false
+  },
+  "fec-base": {
+   "name": "fec-base",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of base Forward Error Correction packets (1 - 20).",
+   "min-value": 1,
+   "max-value": 20,
+   "default": 10,
+   "multiple_values": false
+  },
+  "fec-codec": {
+   "name": "fec-codec",
+   "category": "unitary",
+   "type": "option",
+   "help": "Forward Error Correction encoding/decoding algorithm.",
+   "options": [
+    {
+     "name": "rs",
+     "help": "Reed-Solomon FEC algorithm."
+    },
+    {
+     "name": "xor",
+     "help": "XOR FEC algorithm."
+    }
+   ],
+   "default": "rs",
+   "multiple_values": false
+  },
+  "fec-redundant": {
+   "name": "fec-redundant",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of redundant Forward Error Correction packets (1 - 5 for reed-solomon, 1 for xor).",
+   "min-value": 1,
+   "max-value": 5,
+   "default": 1,
+   "multiple_values": false
+  },
+  "fec-ingress": {
+   "name": "fec-ingress",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Forward Error Correction for ingress IPsec traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Forward Error Correction for ingress IPsec traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Forward Error Correction for ingress IPsec traffic."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fec-receive-timeout": {
+   "name": "fec-receive-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout in milliseconds before dropping Forward Error Correction packets (1 - 1000).",
+   "min-value": 1,
+   "max-value": 1000,
+   "default": 50,
+   "multiple_values": false
+  },
+  "fec-health-check": {
+   "name": "fec-health-check",
+   "category": "unitary",
+   "type": "string",
+   "help": "SD-WAN health check.",
+   "datasource": [
+    "system.sdwan.health-check.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "fec-mapping-profile": {
+   "name": "fec-mapping-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Forward Error Correction (FEC) mapping profile.",
+   "datasource": [
+    "vpn.ipsec.fec.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "network-overlay": {
+   "name": "network-overlay",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable network overlays.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable network overlays."
+    },
+    {
+     "name": "enable",
+     "help": "Enable network overlays."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "network-id": {
+   "name": "network-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VPN gateway network ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "dev-id-notification": {
+   "name": "dev-id-notification",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable device ID notification.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable device ID notification."
+    },
+    {
+     "name": "enable",
+     "help": "Enable device ID notification."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dev-id": {
+   "name": "dev-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Device ID carried by the device ID notification.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "loopback-asymroute": {
+   "name": "loopback-asymroute",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable asymmetric routing for IKE traffic on loopback interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow ingress/egress IKE traffic to be routed over different interfaces."
+    },
+    {
+     "name": "disable",
+     "help": "Ingress/egress IKE traffic must be routed over the same interface."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "link-cost": {
+   "name": "link-cost",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VPN tunnel underlay link cost.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "kms": {
+   "name": "kms",
+   "category": "unitary",
+   "type": "string",
+   "help": "Key Management Services server.",
+   "datasource": [
+    "vpn.kmip-server.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "exchange-fgt-device-id": {
+   "name": "exchange-fgt-device-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable device identifier exchange with peer FortiGate units for use of VPN monitor data by FortiManager.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable exchange of FortiGate device identifier."
+    },
+    {
+     "name": "disable",
+     "help": "Disable exchange of FortiGate device identifier."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ems-sn-check": {
+   "name": "ems-sn-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of EMS serial number.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable EMS serial number verification."
+    },
+    {
+     "name": "disable",
+     "help": "Disable EMS serial number verification."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cert-trust-store": {
+   "name": "cert-trust-store",
+   "category": "unitary",
+   "type": "option",
+   "help": "CA certificate trust store.",
+   "options": [
+    {
+     "name": "local",
+     "help": "Use local CA certificate."
+    },
+    {
+     "name": "ems",
+     "help": "Use EMS CA certificate."
+    }
+   ],
+   "default": "local",
+   "multiple_values": false
+  },
+  "qkd": {
+   "name": "qkd",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of Quantum Key Distribution (QKD) server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of a Quantum Key Distribution (QKD) server."
+    },
+    {
+     "name": "allow",
+     "help": "Allow, but do not require, use of a Quantum Key Distribution (QKD) server."
+    },
+    {
+     "name": "require",
+     "help": "Require use of a Quantum Key Distribution (QKD) server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "qkd-profile": {
+   "name": "qkd-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Quantum Key Distribution (QKD) server profile.",
+   "datasource": [
+    "vpn.qkd.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "transport": {
+   "name": "transport",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set IKE transport protocol.",
+   "options": [
+    {
+     "name": "udp",
+     "help": "Use UDP transport for IKE."
+    },
+    {
+     "name": "udp-fallback-tcp",
+     "help": "Use UDP transport for IKE, with fallback to TCP transport."
+    },
+    {
+     "name": "tcp",
+     "help": "Use TCP transport for IKE."
+    }
+   ],
+   "default": "udp",
+   "multiple_values": false
+  },
+  "fortinet-esp": {
+   "name": "fortinet-esp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Fortinet ESP encapsulaton.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Fortinet ESP encapsulation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Fortinet ESP encapsulaton."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fallback-tcp-threshold": {
+   "name": "fallback-tcp-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout in seconds before falling back IKE/IPsec traffic to tcp.",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 15,
+   "multiple_values": false
+  },
+  "remote-gw-match": {
+   "name": "remote-gw-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set type of IPv4 remote gateway address matching.",
+   "options": [
+    {
+     "name": "any",
+     "help": "Match any IPv4 gateway address."
+    },
+    {
+     "name": "ipmask",
+     "help": "Match IPv4 gateway address and mask."
+    },
+    {
+     "name": "iprange",
+     "help": "Match IPv4 gateway address range."
+    },
+    {
+     "name": "geography",
+     "help": "Match IPv4 gateway address from a specified country."
+    }
+   ],
+   "default": "any",
+   "multiple_values": false
+  },
+  "remote-gw-subnet": {
+   "name": "remote-gw-subnet",
+   "category": "unitary",
+   "type": "ipv4-classnet-any",
+   "help": "IPv4 address and subnet mask.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "remote-gw-start-ip": {
+   "name": "remote-gw-start-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "First IPv4 address in the range.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "remote-gw-end-ip": {
+   "name": "remote-gw-end-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Last IPv4 address in the range.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "remote-gw-country": {
+   "name": "remote-gw-country",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4 addresses associated to a specific country.",
+   "size": 2,
+   "default": "",
+   "multiple_values": false
+  },
+  "remote-gw6-match": {
+   "name": "remote-gw6-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set type of IPv6 remote gateway address matching.",
+   "options": [
+    {
+     "name": "any",
+     "help": "Match any IPv6 gateway address."
+    },
+    {
+     "name": "ipprefix",
+     "help": "Match IPv6 gateway address and prefix."
+    },
+    {
+     "name": "iprange",
+     "help": "Match IPv6 gateway address range."
+    },
+    {
+     "name": "geography",
+     "help": "Match IPv6 gateway address from a specified country."
+    }
+   ],
+   "default": "any",
+   "multiple_values": false
+  },
+  "remote-gw6-subnet": {
+   "name": "remote-gw6-subnet",
+   "category": "unitary",
+   "type": "ipv6-network",
+   "help": "IPv6 address and prefix.",
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "remote-gw6-start-ip": {
+   "name": "remote-gw6-start-ip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "First IPv6 address in the range.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "remote-gw6-end-ip": {
+   "name": "remote-gw6-end-ip",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Last IPv6 address in the range.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "remote-gw6-country": {
+   "name": "remote-gw6-country",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 addresses associated to a specific country.",
+   "size": 2,
+   "default": "",
+   "multiple_values": false
+  },
+  "cert-peer-username-validation": {
+   "name": "cert-peer-username-validation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable cross validation of peer username and the identity in the peer's certificate.",
+   "options": [
+    {
+     "name": "none",
+     "help": "Disable cross validation of peer username and the identity in the peer's certificate."
+    },
+    {
+     "name": "othername",
+     "help": "Validate principal name in SAN othername."
+    },
+    {
+     "name": "rfc822name",
+     "help": "Validate RFC822 email address in SAN."
+    },
+    {
+     "name": "cn",
+     "help": "Validate CN in subject."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "cert-peer-username-strip": {
+   "name": "cert-peer-username-strip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable domain stripping on certificate identity.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable domain stripping on certificate identity."
+    },
+    {
+     "name": "enable",
+     "help": "Enable domain stripping on certificate identity."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "vpn.ipsec",
+ "q_type": 184,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

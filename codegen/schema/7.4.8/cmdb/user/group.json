@@ -1,0 +1,532 @@
+{
+ "name": "group",
+ "category": "table",
+ "help": "Configure user groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Group name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Group ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "group-type": {
+   "name": "group-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the group to be for firewall authentication, FSSO, RSSO, or guest users.",
+   "options": [
+    {
+     "name": "firewall",
+     "help": "Firewall."
+    },
+    {
+     "name": "fsso-service",
+     "help": "Fortinet Single Sign-On Service."
+    },
+    {
+     "name": "rsso",
+     "help": "RADIUS based Single Sign-On Service."
+    },
+    {
+     "name": "guest",
+     "help": "Guest."
+    }
+   ],
+   "default": "firewall",
+   "multiple_values": false
+  },
+  "authtimeout": {
+   "name": "authtimeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Authentication timeout in minutes for this user group. 0 to use the global user setting auth-timeout.",
+   "min-value": 0,
+   "max-value": 43200,
+   "default": 0,
+   "multiple_values": false
+  },
+  "auth-concurrent-override": {
+   "name": "auth-concurrent-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the global number of concurrent authentication sessions for this user group.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable auth-concurrent-override."
+    },
+    {
+     "name": "disable",
+     "help": "Disable auth-concurrent-override."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-concurrent-value": {
+   "name": "auth-concurrent-value",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of concurrent authenticated connections per user (0 - 100).",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 0,
+   "multiple_values": false
+  },
+  "http-digest-realm": {
+   "name": "http-digest-realm",
+   "category": "unitary",
+   "type": "string",
+   "help": "Realm attribute for MD5-digest authentication.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sso-attribute-value": {
+   "name": "sso-attribute-value",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the RADIUS user group that this local user group represents.",
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "member": {
+   "name": "member",
+   "category": "table",
+   "help": "Names of users, peers, LDAP severs, RADIUS servers or external idp servers to add to the user group.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Group member name.",
+     "required": true,
+     "datasource": [
+      "user.peer.name",
+      "user.local.name",
+      "user.radius.name",
+      "user.tacacs+.name",
+      "user.ldap.name",
+      "user.saml.name",
+      "user.external-identity-provider.name",
+      "user.adgrp.name",
+      "user.pop3.name",
+      "user.certificate.name"
+     ],
+     "size": 511,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 3000
+  },
+  "match": {
+   "name": "match",
+   "category": "table",
+   "help": "Group matches.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "server-name": {
+     "name": "server-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of remote auth server.",
+     "required": true,
+     "datasource": [
+      "user.radius.name",
+      "user.ldap.name",
+      "user.tacacs+.name",
+      "user.saml.name",
+      "user.external-identity-provider.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "group-name": {
+     "name": "group-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name of matching user or group on remote authentication server.",
+     "required": true,
+     "size": 511,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "user-id": {
+   "name": "user-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "Guest user ID type.",
+   "options": [
+    {
+     "name": "email",
+     "help": "Email address."
+    },
+    {
+     "name": "auto-generate",
+     "help": "Automatically generate."
+    },
+    {
+     "name": "specify",
+     "help": "Specify."
+    }
+   ],
+   "default": "email",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "option",
+   "help": "Guest user password type.",
+   "options": [
+    {
+     "name": "auto-generate",
+     "help": "Automatically generate."
+    },
+    {
+     "name": "specify",
+     "help": "Specify."
+    },
+    {
+     "name": "disable",
+     "help": "Disable."
+    }
+   ],
+   "default": "auto-generate",
+   "multiple_values": false
+  },
+  "user-name": {
+   "name": "user-name",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the guest user name entry.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    },
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sponsor": {
+   "name": "sponsor",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the action for the sponsor guest user field.",
+   "options": [
+    {
+     "name": "optional",
+     "help": "Optional."
+    },
+    {
+     "name": "mandatory",
+     "help": "Mandatory."
+    },
+    {
+     "name": "disabled",
+     "help": "Disabled."
+    }
+   ],
+   "default": "optional",
+   "multiple_values": false
+  },
+  "company": {
+   "name": "company",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the action for the company guest user field.",
+   "options": [
+    {
+     "name": "optional",
+     "help": "Optional."
+    },
+    {
+     "name": "mandatory",
+     "help": "Mandatory."
+    },
+    {
+     "name": "disabled",
+     "help": "Disabled."
+    }
+   ],
+   "default": "optional",
+   "multiple_values": false
+  },
+  "email": {
+   "name": "email",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the guest user email address field.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    },
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "mobile-phone": {
+   "name": "mobile-phone",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the guest user mobile phone number field.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    },
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sms-server": {
+   "name": "sms-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Send SMS through FortiGuard or other external server.",
+   "options": [
+    {
+     "name": "fortiguard",
+     "help": "Send SMS by FortiGuard."
+    },
+    {
+     "name": "custom",
+     "help": "Send SMS by custom server."
+    }
+   ],
+   "default": "fortiguard",
+   "multiple_values": false
+  },
+  "sms-custom-server": {
+   "name": "sms-custom-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "SMS server.",
+   "datasource": [
+    "system.sms-server.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "expire-type": {
+   "name": "expire-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Determine when the expiration countdown begins.",
+   "options": [
+    {
+     "name": "immediately",
+     "help": "Immediately."
+    },
+    {
+     "name": "first-successful-login",
+     "help": "First successful login."
+    }
+   ],
+   "default": "immediately",
+   "multiple_values": false
+  },
+  "expire": {
+   "name": "expire",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds before guest user accounts expire (1 - 31536000).",
+   "min-value": 1,
+   "max-value": 31536000,
+   "default": 14400,
+   "multiple_values": false
+  },
+  "max-accounts": {
+   "name": "max-accounts",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of guest accounts that can be created for this group (0 means unlimited).",
+   "min-value": 0,
+   "max-value": 500,
+   "default": 0,
+   "multiple_values": false
+  },
+  "multiple-guest-add": {
+   "name": "multiple-guest-add",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable addition of multiple guests.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    },
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "guest": {
+   "name": "guest",
+   "category": "table",
+   "help": "Guest User.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Guest ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "user-id": {
+     "name": "user-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Guest ID.",
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Guest name.",
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "password": {
+     "name": "password",
+     "category": "unitary",
+     "type": "password",
+     "help": "Guest password.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "mobile-phone": {
+     "name": "mobile-phone",
+     "category": "unitary",
+     "type": "string",
+     "help": "Mobile phone.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "sponsor": {
+     "name": "sponsor",
+     "category": "unitary",
+     "type": "string",
+     "help": "Set the action for the sponsor guest user field.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "company": {
+     "name": "company",
+     "category": "unitary",
+     "type": "string",
+     "help": "Set the action for the company guest user field.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "email": {
+     "name": "email",
+     "category": "unitary",
+     "type": "string",
+     "help": "Email.",
+     "size": 64,
+     "default": "",
+     "multiple_values": false
+    },
+    "expiration": {
+     "name": "expiration",
+     "category": "unitary",
+     "type": "user",
+     "help": "Expire time.",
+     "default": "",
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comment.",
+     "size": 255,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 500
+  }
+ },
+ "max_table_size_vdom": 100,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 31,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

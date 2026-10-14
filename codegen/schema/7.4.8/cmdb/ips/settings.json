@@ -1,0 +1,69 @@
+{
+ "name": "settings",
+ "category": "complex",
+ "help": "Configure IPS VDOM parameter.",
+ "children": {
+  "packet-log-history": {
+   "name": "packet-log-history",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of packets to capture before and including the one in which the IPS signature is detected (1 - 255).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "packet-log-post-attack": {
+   "name": "packet-log-post-attack",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of packets to log after the IPS signature is detected (0 - 255).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "packet-log-memory": {
+   "name": "packet-log-memory",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum memory can be used by packet log (64 - 8192 kB).",
+   "min-value": 64,
+   "max-value": 8192,
+   "default": 256,
+   "multiple_values": false
+  },
+  "ips-packet-quota": {
+   "name": "ips-packet-quota",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum amount of disk space in MB for logged packets when logging to disk. Range depends on disk size.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "proxy-inline-ips": {
+   "name": "proxy-inline-ips",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable proxy-mode policy inline IPS support.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Do not allow inline IPS in proxy-mode policy."
+    },
+    {
+     "name": "enable",
+     "help": "Allow inline IPS in proxy-mode policy."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "ips",
+ "q_type": 266,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

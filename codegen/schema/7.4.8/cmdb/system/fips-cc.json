@@ -1,0 +1,57 @@
+{
+ "name": "fips-cc",
+ "category": "complex",
+ "help": "Configure FIPS-CC mode.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ciphers for FIPS mode of operation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FIPS-CC mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FIPS-CC mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "self-test-period": {
+   "name": "self-test-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Self test period.",
+   "min-value": 1,
+   "max-value": 1440,
+   "default": 1440,
+   "multiple_values": false
+  },
+  "key-generation-self-test": {
+   "name": "key-generation-self-test",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable self tests after key generation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable self tests after key generation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable self tests after key generation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 223,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

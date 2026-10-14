@@ -1,0 +1,75 @@
+{
+ "name": "pools",
+ "category": "table",
+ "help": "Configure IPAM pools.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPAM pool name.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "subnet": {
+   "name": "subnet",
+   "category": "unitary",
+   "type": "ipv4-classnet",
+   "help": "Configure IPAM pool subnet, Class A - Class B subnet.",
+   "required": true,
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "exclude": {
+   "name": "exclude",
+   "category": "table",
+   "help": "Configure pool exclude subnets.",
+   "mkey": "ID",
+   "mkey_type": "integer",
+   "children": {
+    "ID": {
+     "name": "ID",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Exclude ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "exclude-subnet": {
+     "name": "exclude-subnet",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Configure subnet to exclude from the IPAM pool.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system.ipam",
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

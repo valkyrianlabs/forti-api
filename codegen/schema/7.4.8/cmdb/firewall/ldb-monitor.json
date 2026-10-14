@@ -1,0 +1,167 @@
+{
+ "name": "ldb-monitor",
+ "category": "table",
+ "help": "Configure server load balancing health monitors.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Monitor name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select the Monitor type used by the health check monitor to check the health of the server (PING | TCP | HTTP | HTTPS | DNS).",
+   "required": true,
+   "options": [
+    {
+     "name": "ping",
+     "help": "PING health monitor."
+    },
+    {
+     "name": "tcp",
+     "help": "TCP-connect health monitor."
+    },
+    {
+     "name": "http",
+     "help": "HTTP-GET health monitor."
+    },
+    {
+     "name": "https",
+     "help": "HTTP-GET health monitor with SSL."
+    },
+    {
+     "name": "dns",
+     "help": "DNS health monitor."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "interval": {
+   "name": "interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between health checks (5 - 65535 sec, default = 10).",
+   "min-value": 5,
+   "max-value": 65535,
+   "default": 10,
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait to receive response to a health check from a server. Reaching the timeout means the health check failed (1 - 255 sec, default = 2).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 2,
+   "multiple_values": false
+  },
+  "retry": {
+   "name": "retry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number health check attempts before the server is considered down (1 - 255, default = 3).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 3,
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Service port used to perform the health check. If 0, health check monitor inherits port configured for the server (0 - 65535, default = 0).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "src-ip": {
+   "name": "src-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP for ldb-monitor.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "http-get": {
+   "name": "http-get",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL used to send a GET request to check the health of an HTTP server.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "http-match": {
+   "name": "http-match",
+   "category": "unitary",
+   "type": "string",
+   "help": "String to match the value expected in response to an HTTP-GET request.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "http-max-redirects": {
+   "name": "http-max-redirects",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The maximum number of HTTP redirects to be allowed (0 - 5, default = 0).",
+   "min-value": 0,
+   "max-value": 5,
+   "default": 0,
+   "multiple_values": false
+  },
+  "dns-protocol": {
+   "name": "dns-protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select the protocol used by the DNS health check monitor to check the health of the server (UDP | TCP).",
+   "options": [
+    {
+     "name": "udp",
+     "help": "UDP."
+    },
+    {
+     "name": "tcp",
+     "help": "TCP."
+    }
+   ],
+   "default": "udp",
+   "multiple_values": false
+  },
+  "dns-request-domain": {
+   "name": "dns-request-domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fully qualified domain name to resolve for the DNS probe.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "dns-match-ip": {
+   "name": "dns-match-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Response IP expected from DNS server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 234,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

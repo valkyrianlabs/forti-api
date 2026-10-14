@@ -1,0 +1,172 @@
+{
+ "name": "npu",
+ "category": "complex",
+ "help": "Configure NPU attributes.",
+ "children": {
+  "dedicated-management-cpu": {
+   "name": "dedicated-management-cpu",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to dedicate one CPU for GUI and CLI connections when NPs are busy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dedication of CPU #0 for management tasks."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dedication of CPU #0 for management tasks."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dedicated-management-affinity": {
+   "name": "dedicated-management-affinity",
+   "category": "unitary",
+   "type": "string",
+   "help": "Affinity setting for management daemons (hexadecimal value up to 256 bits in the format of xxxxxxxxxxxxxxxx).",
+   "size": 79,
+   "default": "1",
+   "multiple_values": false
+  },
+  "capwap-offload": {
+   "name": "capwap-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable offloading managed FortiAP and FortiLink CAPWAP sessions.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable CAPWAP offload."
+    },
+    {
+     "name": "disable",
+     "help": "Disable CAPWAP offload."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipsec-mtu-override": {
+   "name": "ipsec-mtu-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NP6 IPsec MTU override.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable NP6 IPsec MTU override."
+    },
+    {
+     "name": "enable",
+     "help": "Enable NP6 IPsec MTU override."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipsec-ordering": {
+   "name": "ipsec-ordering",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec ordering.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable IPsec ordering."
+    },
+    {
+     "name": "enable",
+     "help": "Enable IPsec ordering."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipsec-enc-subengine-mask": {
+   "name": "ipsec-enc-subengine-mask",
+   "category": "unitary",
+   "type": "user",
+   "help": "IPsec encryption subengine mask (0x1 - 0x0f, default 0x0f).",
+   "default": "",
+   "multiple_values": false
+  },
+  "ipsec-dec-subengine-mask": {
+   "name": "ipsec-dec-subengine-mask",
+   "category": "unitary",
+   "type": "user",
+   "help": "IPsec decryption subengine mask (0x1 - 0x0f, default 0x0f).",
+   "default": "",
+   "multiple_values": false
+  },
+  "priority-protocol": {
+   "name": "priority-protocol",
+   "category": "complex",
+   "type": "option",
+   "help": "Configure NPU priority protocol.",
+   "children": {
+    "bgp": {
+     "name": "bgp",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable NPU BGP priority protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable NPU BGP priority protocol."
+      },
+      {
+       "name": "disable",
+       "help": "Disable NPU BGP priority protocol."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "slbc": {
+     "name": "slbc",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable NPU SLBC priority protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable NPU SLBC priority protocol."
+      },
+      {
+       "name": "disable",
+       "help": "Disable NPU SLBC priority protocol."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "bfd": {
+     "name": "bfd",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable NPU BFD priority protocol.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable NPU BFD priority protocol."
+      },
+      {
+       "name": "disable",
+       "help": "Disable NPU BFD priority protocol."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "options": [],
+   "default": ""
+  }
+ },
+ "path": "system",
+ "q_type": 473,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

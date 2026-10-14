@@ -1,0 +1,155 @@
+{
+ "name": "override",
+ "category": "table",
+ "help": "Configure FortiGuard Web Filter administrative overrides.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Override rule ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable override rule.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable override rule."
+    },
+    {
+     "name": "disable",
+     "help": "Disable override rule."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "scope": {
+   "name": "scope",
+   "category": "unitary",
+   "type": "option",
+   "help": "Override either the specific user, user group, IPv4 address, or IPv6 address.",
+   "options": [
+    {
+     "name": "user",
+     "help": "Override the specified user."
+    },
+    {
+     "name": "user-group",
+     "help": "Override the specified user group."
+    },
+    {
+     "name": "ip",
+     "help": "Override the specified IP address."
+    },
+    {
+     "name": "ip6",
+     "help": "Override the specified IPv6 address."
+    }
+   ],
+   "default": "user",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address which the override applies.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "user": {
+   "name": "user",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the user which the override applies.",
+   "required": true,
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "user-group": {
+   "name": "user-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify the user group for which the override applies.",
+   "required": true,
+   "datasource": [
+    "user.group.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "old-profile": {
+   "name": "old-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the web filter profile which the override applies.",
+   "required": true,
+   "datasource": [
+    "webfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "new-profile": {
+   "name": "new-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the new web filter profile used by the override.",
+   "required": true,
+   "datasource": [
+    "webfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip6": {
+   "name": "ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address which the override applies.",
+   "required": true,
+   "default": "::",
+   "multiple_values": false
+  },
+  "expires": {
+   "name": "expires",
+   "category": "unitary",
+   "type": "user",
+   "help": "Override expiration date and time, from 5 minutes to 365 from now (format: yyyy/mm/dd hh:mm:ss).",
+   "required": true,
+   "default": "1969/12/31 17:00:00",
+   "multiple_values": false
+  },
+  "initiator": {
+   "name": "initiator",
+   "category": "unitary",
+   "type": "string",
+   "help": "Initiating user of override (read-only setting).",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 50,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "webfilter",
+ "q_type": 109,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

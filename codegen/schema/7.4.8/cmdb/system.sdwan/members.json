@@ -1,0 +1,195 @@
+{
+ "name": "members",
+ "category": "table",
+ "help": "FortiGate interfaces added to the SD-WAN.",
+ "mkey": "seq-num",
+ "mkey_type": "integer",
+ "children": {
+  "seq-num": {
+   "name": "seq-num",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Sequence number(1-512).",
+   "min-value": 0,
+   "max-value": 512,
+   "default": 0,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "zone": {
+   "name": "zone",
+   "category": "unitary",
+   "type": "string",
+   "help": "Zone name.",
+   "datasource": [
+    "system.sdwan.zone.name"
+   ],
+   "size": 35,
+   "default": "virtual-wan-link",
+   "multiple_values": false
+  },
+  "gateway": {
+   "name": "gateway",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "The default gateway for this interface. Usually the default gateway of the Internet service provider that this interface is connected to.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "preferred-source": {
+   "name": "preferred-source",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Preferred source of route for this member.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source": {
+   "name": "source",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address used in the health-check packet to the server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "gateway6": {
+   "name": "gateway6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 gateway.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "source6": {
+   "name": "source6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Source IPv6 address used in the health-check packet to the server.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "cost": {
+   "name": "cost",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Cost of this interface for services in SLA mode (0 - 4294967295, default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "weight": {
+   "name": "weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Weight of this interface for weighted load balancing. (1 - 255) More traffic is directed to interfaces with higher weights.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Priority of the interface for IPv4 (1 - 65535, default = 1). Used for SD-WAN rules or priority rules.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "priority6": {
+   "name": "priority6",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Priority of the interface for IPv6 (1 - 65535, default = 1024). Used for SD-WAN rules or priority rules.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1024,
+   "multiple_values": false
+  },
+  "spillover-threshold": {
+   "name": "spillover-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Egress spillover threshold for this interface (0 - 16776000 kbit/s). When this traffic volume threshold is reached, new sessions spill over to other interfaces in the SD-WAN.",
+   "min-value": 0,
+   "max-value": 16776000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ingress-spillover-threshold": {
+   "name": "ingress-spillover-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Ingress spillover threshold for this interface (0 - 16776000 kbit/s). When this traffic volume threshold is reached, new sessions spill over to other interfaces in the SD-WAN.",
+   "min-value": 0,
+   "max-value": 16776000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "volume-ratio": {
+   "name": "volume-ratio",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Measured volume ratio (this value / sum of all values = percentage of link volume, 1 - 255).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this interface in the SD-WAN.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable this interface in the SD-WAN."
+    },
+    {
+     "name": "enable",
+     "help": "Enable this interface in the SD-WAN."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "transport-group": {
+   "name": "transport-group",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Measured transport group (0 - 255).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comments.",
+   "size": 255,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 512,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system.sdwan",
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

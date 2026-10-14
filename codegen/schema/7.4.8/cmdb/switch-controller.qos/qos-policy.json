@@ -1,0 +1,72 @@
+{
+ "name": "qos-policy",
+ "category": "table",
+ "help": "Configure FortiSwitch QoS policy.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "QoS policy name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "default-cos": {
+   "name": "default-cos",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default cos queue for untagged packets.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 7,
+   "default": 0,
+   "multiple_values": false
+  },
+  "trust-dot1p-map": {
+   "name": "trust-dot1p-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "QoS trust 802.1p map.",
+   "datasource": [
+    "switch-controller.qos.dot1p-map.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "trust-ip-dscp-map": {
+   "name": "trust-ip-dscp-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "QoS trust ip dscp map.",
+   "datasource": [
+    "switch-controller.qos.ip-dscp-map.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "queue-policy": {
+   "name": "queue-policy",
+   "category": "unitary",
+   "type": "string",
+   "help": "QoS egress queue policy.",
+   "datasource": [
+    "switch-controller.qos.queue-policy.name"
+   ],
+   "size": 63,
+   "default": "default",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller.qos",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

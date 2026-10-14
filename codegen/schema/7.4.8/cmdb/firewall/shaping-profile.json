@@ -1,0 +1,230 @@
+{
+ "name": "shaping-profile",
+ "category": "table",
+ "help": "Configure shaping profiles.",
+ "mkey": "profile-name",
+ "mkey_type": "string",
+ "children": {
+  "profile-name": {
+   "name": "profile-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Shaping profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select shaping profile type: policing / queuing.",
+   "options": [
+    {
+     "name": "policing",
+     "help": "Enable policing mode."
+    },
+    {
+     "name": "queuing",
+     "help": "Enable queuing mode."
+    }
+   ],
+   "default": "policing",
+   "multiple_values": false
+  },
+  "npu-offloading": {
+   "name": "npu-offloading",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NPU offloading.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Diable shaper offloading."
+    },
+    {
+     "name": "enable",
+     "help": "Enable shaper offloading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "default-class-id": {
+   "name": "default-class-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default class ID to handle unclassified packets (including all local traffic).",
+   "required": true,
+   "datasource": [
+    "firewall.traffic-class.class-id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "shaping-entries": {
+   "name": "shaping-entries",
+   "category": "table",
+   "help": "Define shaping entries of this shaping profile.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID number.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "class-id": {
+     "name": "class-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Class ID.",
+     "required": true,
+     "datasource": [
+      "firewall.traffic-class.class-id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "option",
+     "help": "Priority.",
+     "options": [
+      {
+       "name": "top",
+       "help": "Top priority."
+      },
+      {
+       "name": "critical",
+       "help": "Critical priority."
+      },
+      {
+       "name": "high",
+       "help": "High priority."
+      },
+      {
+       "name": "medium",
+       "help": "Medium priority."
+      },
+      {
+       "name": "low",
+       "help": "Low priority."
+      }
+     ],
+     "default": "high",
+     "multiple_values": false
+    },
+    "guaranteed-bandwidth-percentage": {
+     "name": "guaranteed-bandwidth-percentage",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Guaranteed bandwidth in percentage.",
+     "min-value": 0,
+     "max-value": 100,
+     "default": 0,
+     "multiple_values": false
+    },
+    "maximum-bandwidth-percentage": {
+     "name": "maximum-bandwidth-percentage",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum bandwidth in percentage.",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 1,
+     "multiple_values": false
+    },
+    "limit": {
+     "name": "limit",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Hard limit on the real queue size in packets.",
+     "min-value": 5,
+     "max-value": 10000,
+     "default": 1000,
+     "multiple_values": false
+    },
+    "burst-in-msec": {
+     "name": "burst-in-msec",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of bytes that can be burst at maximum-bandwidth speed. Formula: burst = maximum-bandwidth*burst-in-msec.",
+     "min-value": 0,
+     "max-value": 2000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "cburst-in-msec": {
+     "name": "cburst-in-msec",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of bytes that can be burst as fast as the interface can transmit. Formula: cburst = maximum-bandwidth*cburst-in-msec.",
+     "min-value": 0,
+     "max-value": 2000,
+     "default": 0,
+     "multiple_values": false
+    },
+    "red-probability": {
+     "name": "red-probability",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Maximum probability (in percentage) for RED marking.",
+     "min-value": 0,
+     "max-value": 20,
+     "default": 0,
+     "multiple_values": false
+    },
+    "min": {
+     "name": "min",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Average queue size in packets at which RED drop becomes a possibility.",
+     "min-value": 3,
+     "max-value": 3000,
+     "default": 83,
+     "multiple_values": false
+    },
+    "max": {
+     "name": "max",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Average queue size in packets at which RED drop probability is maximal.",
+     "min-value": 3,
+     "max-value": 3000,
+     "default": 250,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 201,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,438 @@
+{
+ "name": "local-in-policy",
+ "category": "table",
+ "help": "Configure user defined IPv4 local-in policies.",
+ "mkey": "policyid",
+ "mkey_type": "integer",
+ "children": {
+  "policyid": {
+   "name": "policyid",
+   "category": "unitary",
+   "type": "integer",
+   "help": "User defined local in policy ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "ha-mgmt-intf-only": {
+   "name": "ha-mgmt-intf-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dedicating the HA management interface only for local-in policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dedicating HA management interface only for local-in policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dedicating HA management interface only for local-in policy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "intf": {
+   "name": "intf",
+   "category": "table",
+   "help": "Incoming interface name from available options.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "system.zone.name",
+      "system.sdwan.zone.name",
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr": {
+   "name": "srcaddr",
+   "category": "table",
+   "help": "Source address object from available options.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr-negate": {
+   "name": "srcaddr-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled srcaddr specifies what the source address must NOT be.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable source address negate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable source address negate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dstaddr": {
+   "name": "dstaddr",
+   "category": "table",
+   "help": "Destination address object from available options.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src": {
+   "name": "internet-service-src",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of Internet Services in source for this local-in policy. If enabled, source address is not used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of Internet Services source in local-in policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of Internet Services source in local-in policy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-src-name": {
+   "name": "internet-service-src-name",
+   "category": "table",
+   "help": "Internet Service source name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-name.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src-group": {
+   "name": "internet-service-src-group",
+   "category": "table",
+   "help": "Internet Service source group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src-custom": {
+   "name": "internet-service-src-custom",
+   "category": "table",
+   "help": "Custom Internet Service source name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src-custom-group": {
+   "name": "internet-service-src-custom-group",
+   "category": "table",
+   "help": "Custom Internet Service source group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr-negate": {
+   "name": "dstaddr-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled dstaddr specifies what the destination address must NOT be.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable destination address negate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable destination address negate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "action": {
+   "name": "action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action performed on traffic matching the policy (default = deny).",
+   "options": [
+    {
+     "name": "accept",
+     "help": "Allow traffic matching this policy."
+    },
+    {
+     "name": "deny",
+     "help": "Deny or block traffic matching this policy."
+    }
+   ],
+   "default": "deny",
+   "multiple_values": false
+  },
+  "service": {
+   "name": "service",
+   "category": "table",
+   "help": "Service object from available options.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.service.custom.name",
+      "firewall.service.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "service-negate": {
+   "name": "service-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled service specifies what the service must NOT be.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negated service match."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negated service match."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-src-negate": {
+   "name": "internet-service-src-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled internet-service-src specifies what the service must NOT be.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negated Internet Service source match."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negated Internet Service source match."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "schedule": {
+   "name": "schedule",
+   "category": "unitary",
+   "type": "string",
+   "help": "Schedule object from available options.",
+   "required": true,
+   "datasource": [
+    "firewall.schedule.onetime.name",
+    "firewall.schedule.recurring.name",
+    "firewall.schedule.group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this local-in policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this local-in policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this local-in policy."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "virtual-patch": {
+   "name": "virtual-patch",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable virtual patching.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable virtual patching."
+    },
+    {
+     "name": "disable",
+     "help": "Disable virtual patching."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 1023,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 447,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

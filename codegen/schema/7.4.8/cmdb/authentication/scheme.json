@@ -1,0 +1,249 @@
+{
+ "name": "scheme",
+ "category": "table",
+ "help": "Configure Authentication Schemes.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication scheme name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "method": {
+   "name": "method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication methods (default = basic).",
+   "required": true,
+   "options": [
+    {
+     "name": "ntlm",
+     "help": "NTLM authentication."
+    },
+    {
+     "name": "basic",
+     "help": "Basic HTTP authentication."
+    },
+    {
+     "name": "digest",
+     "help": "Digest HTTP authentication."
+    },
+    {
+     "name": "form",
+     "help": "Form-based HTTP authentication."
+    },
+    {
+     "name": "negotiate",
+     "help": "Negotiate authentication."
+    },
+    {
+     "name": "fsso",
+     "help": "Fortinet Single Sign-On (FSSO) authentication."
+    },
+    {
+     "name": "rsso",
+     "help": "RADIUS Single Sign-On (RSSO) authentication."
+    },
+    {
+     "name": "ssh-publickey",
+     "help": "Public key based SSH authentication."
+    },
+    {
+     "name": "cert",
+     "help": "Client certificate authentication."
+    },
+    {
+     "name": "saml",
+     "help": "SAML authentication."
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 4
+  },
+  "negotiate-ntlm": {
+   "name": "negotiate-ntlm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negotiate authentication for NTLM (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negotiate authentication for NTLM."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negotiate authentication for NTLM."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "kerberos-keytab": {
+   "name": "kerberos-keytab",
+   "category": "unitary",
+   "type": "string",
+   "help": "Kerberos keytab setting.",
+   "datasource": [
+    "user.krb-keytab.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "domain-controller": {
+   "name": "domain-controller",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain controller setting.",
+   "datasource": [
+    "user.domain-controller.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "saml-server": {
+   "name": "saml-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "SAML configuration.",
+   "datasource": [
+    "user.saml.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "saml-timeout": {
+   "name": "saml-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SAML authentication timeout in seconds.",
+   "min-value": 30,
+   "max-value": 1200,
+   "default": 120,
+   "multiple_values": false
+  },
+  "fsso-agent-for-ntlm": {
+   "name": "fsso-agent-for-ntlm",
+   "category": "unitary",
+   "type": "string",
+   "help": "FSSO agent to use for NTLM authentication.",
+   "datasource": [
+    "user.fsso.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "require-tfa": {
+   "name": "require-tfa",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable two-factor authentication (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable two-factor authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable two-factor authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fsso-guest": {
+   "name": "fsso-guest",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable user fsso-guest authentication (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable user fsso-guest authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable user fsso-guest authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "user-cert": {
+   "name": "user-cert",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authentication with user certificate (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable client certificate field authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable client certificate field authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "user-database": {
+   "name": "user-database",
+   "category": "table",
+   "help": "Authentication server to contain user information; \"local\" (default) or \"123\" (for LDAP).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Authentication server name.",
+     "required": true,
+     "datasource": [
+      "system.datasource.name",
+      "user.radius.name",
+      "user.tacacs+.name",
+      "user.ldap.name",
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ssh-ca": {
+   "name": "ssh-ca",
+   "category": "unitary",
+   "type": "string",
+   "help": "SSH CA name.",
+   "datasource": [
+    "firewall.ssh.local-ca.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "authentication",
+ "q_type": 507,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

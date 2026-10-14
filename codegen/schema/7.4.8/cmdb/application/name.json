@@ -1,0 +1,219 @@
+{
+ "name": "name",
+ "category": "table",
+ "help": "Configure application signatures.",
+ "readonly": true,
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Application name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Application ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "category": {
+   "name": "category",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Application category ID.",
+   "required": true,
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "popularity": {
+   "name": "popularity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Application popularity.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "risk": {
+   "name": "risk",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Application risk.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "weight": {
+   "name": "weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Application weight.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application protocol.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "technology": {
+   "name": "technology",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application technology.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "behavior": {
+   "name": "behavior",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application behavior.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "vendor": {
+   "name": "vendor",
+   "category": "unitary",
+   "type": "user",
+   "help": "Application vendor.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "parameters": {
+   "name": "parameters",
+   "category": "table",
+   "help": "Application parameters.",
+   "readonly": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Parameter name.",
+     "readonly": true,
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    },
+    "default value": {
+     "name": "default value",
+     "category": "unitary",
+     "type": "string",
+     "help": "Parameter default value.",
+     "readonly": true,
+     "size": 199,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "metadata": {
+   "name": "metadata",
+   "category": "table",
+   "help": "Meta data.",
+   "readonly": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "metaid": {
+     "name": "metaid",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Meta ID.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "valueid": {
+     "name": "valueid",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Value ID.",
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "status": {
+   "name": "status",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "print all application information",
+   "children": {
+    "<application list name>": {
+     "name": "<application list name>",
+     "category": "info-read-only",
+     "type": "value",
+     "help": "Application list name.",
+     "children": {
+      "<application entry name>": {
+       "name": "<application entry name>",
+       "category": "info-read-only",
+       "type": "value",
+       "help": "application entry name"
+      }
+     }
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "application",
+ "q_type": 372,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

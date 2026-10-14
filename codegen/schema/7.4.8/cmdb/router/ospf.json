@@ -1,0 +1,1502 @@
+{
+ "name": "ospf",
+ "category": "complex",
+ "help": "Configure OSPF.",
+ "children": {
+  "abr-type": {
+   "name": "abr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Area border router type.",
+   "options": [
+    {
+     "name": "cisco",
+     "help": "Cisco."
+    },
+    {
+     "name": "ibm",
+     "help": "IBM."
+    },
+    {
+     "name": "shortcut",
+     "help": "Shortcut."
+    },
+    {
+     "name": "standard",
+     "help": "Standard."
+    }
+   ],
+   "default": "standard",
+   "multiple_values": false
+  },
+  "auto-cost-ref-bandwidth": {
+   "name": "auto-cost-ref-bandwidth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Reference bandwidth in terms of megabits per second.",
+   "min-value": 1,
+   "max-value": 1000000,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "distance-external": {
+   "name": "distance-external",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative external distance.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 110,
+   "multiple_values": false
+  },
+  "distance-inter-area": {
+   "name": "distance-inter-area",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative inter-area distance.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 110,
+   "multiple_values": false
+  },
+  "distance-intra-area": {
+   "name": "distance-intra-area",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative intra-area distance.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 110,
+   "multiple_values": false
+  },
+  "database-overflow": {
+   "name": "database-overflow",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable database overflow.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "database-overflow-max-lsas": {
+   "name": "database-overflow-max-lsas",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Database overflow maximum LSAs.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 10000,
+   "multiple_values": false
+  },
+  "database-overflow-time-to-recover": {
+   "name": "database-overflow-time-to-recover",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Database overflow time to recover (sec).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 300,
+   "multiple_values": false
+  },
+  "default-information-originate": {
+   "name": "default-information-originate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable generation of default route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "always",
+     "help": "Always advertise the default router."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-information-metric": {
+   "name": "default-information-metric",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default information metric.",
+   "min-value": 1,
+   "max-value": 16777214,
+   "default": 10,
+   "multiple_values": false
+  },
+  "default-information-metric-type": {
+   "name": "default-information-metric-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Default information metric type.",
+   "options": [
+    {
+     "name": "1",
+     "help": "Type 1."
+    },
+    {
+     "name": "2",
+     "help": "Type 2."
+    }
+   ],
+   "default": "2",
+   "multiple_values": false
+  },
+  "default-information-route-map": {
+   "name": "default-information-route-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default information route map.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "default-metric": {
+   "name": "default-metric",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Default metric of redistribute routes.",
+   "min-value": 1,
+   "max-value": 16777214,
+   "default": 10,
+   "multiple_values": false
+  },
+  "distance": {
+   "name": "distance",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Distance of the route.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 110,
+   "multiple_values": false
+  },
+  "rfc1583-compatible": {
+   "name": "rfc1583-compatible",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable RFC1583 compatibility.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "router-id": {
+   "name": "router-id",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Router ID.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "spf-timers": {
+   "name": "spf-timers",
+   "category": "unitary",
+   "type": "user",
+   "help": "SPF calculation frequency.",
+   "default": "",
+   "multiple_values": false
+  },
+  "bfd": {
+   "name": "bfd",
+   "category": "unitary",
+   "type": "option",
+   "help": "Bidirectional Forwarding Detection (BFD).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-neighbour-changes": {
+   "name": "log-neighbour-changes",
+   "category": "unitary",
+   "type": "option",
+   "help": "Log of OSPF neighbor changes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "distribute-list-in": {
+   "name": "distribute-list-in",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter incoming routes.",
+   "datasource": [
+    "router.access-list.name",
+    "router.prefix-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "distribute-route-map-in": {
+   "name": "distribute-route-map-in",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter incoming external routes by route-map.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "restart-mode": {
+   "name": "restart-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "OSPF restart mode (graceful or LLS).",
+   "options": [
+    {
+     "name": "none",
+     "help": "Hitless restart disabled."
+    },
+    {
+     "name": "lls",
+     "help": "LLS mode."
+    },
+    {
+     "name": "graceful-restart",
+     "help": "Graceful Restart Mode."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "restart-period": {
+   "name": "restart-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Graceful restart period.",
+   "min-value": 1,
+   "max-value": 3600,
+   "default": 120,
+   "multiple_values": false
+  },
+  "restart-on-topology-change": {
+   "name": "restart-on-topology-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable continuing graceful restart upon topology change.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Continue graceful restart upon topology change."
+    },
+    {
+     "name": "disable",
+     "help": "Exit graceful restart upon topology change."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "area": {
+   "name": "area",
+   "category": "table",
+   "help": "OSPF area configuration.",
+   "mkey": "id",
+   "mkey_type": "ipv4-address-any",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "ipv4-address-any",
+     "help": "Area entry IP address.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "shortcut": {
+     "name": "shortcut",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable shortcut option.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable shortcut option."
+      },
+      {
+       "name": "enable",
+       "help": "Enable shortcut option."
+      },
+      {
+       "name": "default",
+       "help": "Default shortcut option."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "authentication": {
+     "name": "authentication",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authentication type.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "text",
+       "help": "Text."
+      },
+      {
+       "name": "message-digest",
+       "help": "Message digest."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "default-cost": {
+     "name": "default-cost",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Summary default cost of stub or NSSA area.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 10,
+     "multiple_values": false
+    },
+    "nssa-translator-role": {
+     "name": "nssa-translator-role",
+     "category": "unitary",
+     "type": "option",
+     "help": "NSSA translator role type.",
+     "options": [
+      {
+       "name": "candidate",
+       "help": "Candidate."
+      },
+      {
+       "name": "never",
+       "help": "Never."
+      },
+      {
+       "name": "always",
+       "help": "Always."
+      }
+     ],
+     "default": "candidate",
+     "multiple_values": false
+    },
+    "stub-type": {
+     "name": "stub-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Stub summary setting.",
+     "options": [
+      {
+       "name": "no-summary",
+       "help": "No summary."
+      },
+      {
+       "name": "summary",
+       "help": "Summary."
+      }
+     ],
+     "default": "summary",
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Area type setting.",
+     "options": [
+      {
+       "name": "regular",
+       "help": "Regular."
+      },
+      {
+       "name": "nssa",
+       "help": "NSSA."
+      },
+      {
+       "name": "stub",
+       "help": "Stub."
+      }
+     ],
+     "default": "regular",
+     "multiple_values": false
+    },
+    "nssa-default-information-originate": {
+     "name": "nssa-default-information-originate",
+     "category": "unitary",
+     "type": "option",
+     "help": "Redistribute, advertise, or do not originate Type-7 default route into NSSA area.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Redistribute Type-7 default route from routing table."
+      },
+      {
+       "name": "always",
+       "help": "Advertise a self-originated Type-7 default route."
+      },
+      {
+       "name": "disable",
+       "help": "Do not advertise Type-7 default route."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "nssa-default-information-originate-metric": {
+     "name": "nssa-default-information-originate-metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "OSPF default metric.",
+     "min-value": 0,
+     "max-value": 16777214,
+     "default": 10,
+     "multiple_values": false
+    },
+    "nssa-default-information-originate-metric-type": {
+     "name": "nssa-default-information-originate-metric-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "OSPF metric type for default routes.",
+     "options": [
+      {
+       "name": "1",
+       "help": "Type 1."
+      },
+      {
+       "name": "2",
+       "help": "Type 2."
+      }
+     ],
+     "default": "2",
+     "multiple_values": false
+    },
+    "nssa-redistribution": {
+     "name": "nssa-redistribution",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable redistribute into NSSA area.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable redistribute into NSSA area."
+      },
+      {
+       "name": "disable",
+       "help": "Disable redistribute into NSSA area."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "comments": {
+     "name": "comments",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comment.",
+     "size": 255,
+     "multiple_values": false
+    },
+    "range": {
+     "name": "range",
+     "category": "table",
+     "help": "OSPF area range configuration.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Range entry ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "prefix": {
+       "name": "prefix",
+       "category": "unitary",
+       "type": "ipv4-classnet-any",
+       "help": "Prefix.",
+       "required": true,
+       "default": "0.0.0.0 0.0.0.0",
+       "multiple_values": false
+      },
+      "advertise": {
+       "name": "advertise",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable advertise status.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Disable advertise status."
+        },
+        {
+         "name": "enable",
+         "help": "Enable advertise status."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "substitute": {
+       "name": "substitute",
+       "category": "unitary",
+       "type": "ipv4-classnet-any",
+       "help": "Substitute prefix.",
+       "default": "0.0.0.0 0.0.0.0",
+       "multiple_values": false
+      },
+      "substitute-status": {
+       "name": "substitute-status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable substitute status.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable substitute status."
+        },
+        {
+         "name": "disable",
+         "help": "Disable substitute status."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "virtual-link": {
+     "name": "virtual-link",
+     "category": "table",
+     "help": "OSPF virtual link configuration.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Virtual link entry name.",
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "authentication": {
+       "name": "authentication",
+       "category": "unitary",
+       "type": "option",
+       "help": "Authentication type.",
+       "options": [
+        {
+         "name": "none",
+         "help": "None."
+        },
+        {
+         "name": "text",
+         "help": "Text."
+        },
+        {
+         "name": "message-digest",
+         "help": "Message digest."
+        }
+       ],
+       "default": "none",
+       "multiple_values": false
+      },
+      "authentication-key": {
+       "name": "authentication-key",
+       "category": "unitary",
+       "type": "password",
+       "help": "Authentication key.",
+       "size": 8,
+       "multiple_values": false
+      },
+      "keychain": {
+       "name": "keychain",
+       "category": "unitary",
+       "type": "string",
+       "help": "Message-digest key-chain name.",
+       "datasource": [
+        "router.key-chain.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "dead-interval": {
+       "name": "dead-interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Dead interval.",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 40,
+       "multiple_values": false
+      },
+      "hello-interval": {
+       "name": "hello-interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Hello interval.",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 10,
+       "multiple_values": false
+      },
+      "retransmit-interval": {
+       "name": "retransmit-interval",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Retransmit interval.",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 5,
+       "multiple_values": false
+      },
+      "transmit-delay": {
+       "name": "transmit-delay",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Transmit delay.",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 1,
+       "multiple_values": false
+      },
+      "peer": {
+       "name": "peer",
+       "category": "unitary",
+       "type": "ipv4-address-any",
+       "help": "Peer IP.",
+       "required": true,
+       "default": "0.0.0.0",
+       "multiple_values": false
+      },
+      "md5-keys": {
+       "name": "md5-keys",
+       "category": "table",
+       "help": "MD5 key.",
+       "mkey": "id",
+       "mkey_type": "integer",
+       "children": {
+        "id": {
+         "name": "id",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Key ID (1 - 255).",
+         "required": true,
+         "min-value": 1,
+         "max-value": 255,
+         "default": 0,
+         "multiple_values": false
+        },
+        "key-string": {
+         "name": "key-string",
+         "category": "unitary",
+         "type": "password",
+         "help": "Password for the key.",
+         "required": true,
+         "size": 16,
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "filter-list": {
+     "name": "filter-list",
+     "category": "table",
+     "help": "OSPF area filter-list configuration.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Filter list entry ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "list": {
+       "name": "list",
+       "category": "unitary",
+       "type": "string",
+       "help": "Access-list or prefix-list name.",
+       "required": true,
+       "datasource": [
+        "router.access-list.name",
+        "router.prefix-list.name"
+       ],
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "direction": {
+       "name": "direction",
+       "category": "unitary",
+       "type": "option",
+       "help": "Direction.",
+       "required": true,
+       "options": [
+        {
+         "name": "in",
+         "help": "In."
+        },
+        {
+         "name": "out",
+         "help": "Out."
+        }
+       ],
+       "default": "out",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ospf-interface": {
+   "name": "ospf-interface",
+   "category": "table",
+   "help": "OSPF interface configuration.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface entry name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "comments": {
+     "name": "comments",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comment.",
+     "size": 255,
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Configuration interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IP address.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "authentication": {
+     "name": "authentication",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authentication type.",
+     "options": [
+      {
+       "name": "none",
+       "help": "None."
+      },
+      {
+       "name": "text",
+       "help": "Text."
+      },
+      {
+       "name": "message-digest",
+       "help": "Message digest."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "authentication-key": {
+     "name": "authentication-key",
+     "category": "unitary",
+     "type": "password",
+     "help": "Authentication key.",
+     "size": 8,
+     "multiple_values": false
+    },
+    "keychain": {
+     "name": "keychain",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message-digest key-chain name.",
+     "datasource": [
+      "router.key-chain.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "prefix-length": {
+     "name": "prefix-length",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Prefix length.",
+     "min-value": 0,
+     "max-value": 32,
+     "default": 0,
+     "multiple_values": false
+    },
+    "retransmit-interval": {
+     "name": "retransmit-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Retransmit interval.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 5,
+     "multiple_values": false
+    },
+    "transmit-delay": {
+     "name": "transmit-delay",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Transmit delay.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 1,
+     "multiple_values": false
+    },
+    "cost": {
+     "name": "cost",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Cost of the interface, value range from 0 to 65535, 0 means auto-cost.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Priority.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    },
+    "dead-interval": {
+     "name": "dead-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Dead interval.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "hello-interval": {
+     "name": "hello-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Hello interval.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "hello-multiplier": {
+     "name": "hello-multiplier",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of hello packets within dead interval.",
+     "min-value": 3,
+     "max-value": 10,
+     "default": 0,
+     "multiple_values": false
+    },
+    "database-filter-out": {
+     "name": "database-filter-out",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable control of flooding out LSAs.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "mtu": {
+     "name": "mtu",
+     "category": "unitary",
+     "type": "integer",
+     "help": "MTU for database description packets.",
+     "min-value": 576,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "mtu-ignore": {
+     "name": "mtu-ignore",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable ignore MTU.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "network-type": {
+     "name": "network-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Network type.",
+     "options": [
+      {
+       "name": "broadcast",
+       "help": "Broadcast."
+      },
+      {
+       "name": "non-broadcast",
+       "help": "Non-broadcast."
+      },
+      {
+       "name": "point-to-point",
+       "help": "Point-to-point."
+      },
+      {
+       "name": "point-to-multipoint",
+       "help": "Point-to-multipoint."
+      },
+      {
+       "name": "point-to-multipoint-non-broadcast",
+       "help": "Point-to-multipoint and non-broadcast."
+      }
+     ],
+     "default": "broadcast",
+     "multiple_values": false
+    },
+    "bfd": {
+     "name": "bfd",
+     "category": "unitary",
+     "type": "option",
+     "help": "Bidirectional Forwarding Detection (BFD).",
+     "options": [
+      {
+       "name": "global",
+       "help": "Follow global configuration."
+      },
+      {
+       "name": "enable",
+       "help": "Enable BFD on this interface."
+      },
+      {
+       "name": "disable",
+       "help": "Disable BFD on this interface."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "resync-timeout": {
+     "name": "resync-timeout",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Graceful restart neighbor resynchronization timeout.",
+     "min-value": 1,
+     "max-value": 3600,
+     "default": 40,
+     "multiple_values": false
+    },
+    "md5-keys": {
+     "name": "md5-keys",
+     "category": "table",
+     "help": "MD5 key.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Key ID (1 - 255).",
+       "required": true,
+       "min-value": 1,
+       "max-value": 255,
+       "default": 0,
+       "multiple_values": false
+      },
+      "key-string": {
+       "name": "key-string",
+       "category": "unitary",
+       "type": "password",
+       "help": "Password for the key.",
+       "required": true,
+       "size": 16,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "network": {
+   "name": "network",
+   "category": "table",
+   "help": "OSPF network configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Network entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Prefix.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "area": {
+     "name": "area",
+     "category": "unitary",
+     "type": "ipv4-address-any",
+     "help": "Attach the network to area.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "comments": {
+     "name": "comments",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comment.",
+     "size": 255,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "neighbor": {
+   "name": "neighbor",
+   "category": "table",
+   "help": "OSPF neighbor configuration are used when OSPF runs on non-broadcast media.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Neighbor entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Interface IP address of the neighbor.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "poll-interval": {
+     "name": "poll-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Poll interval time in seconds.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 10,
+     "multiple_values": false
+    },
+    "cost": {
+     "name": "cost",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Cost of the interface, value range from 0 to 65535, 0 means auto-cost.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Priority.",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 10,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "passive-interface": {
+   "name": "passive-interface",
+   "category": "table",
+   "help": "Passive interface configuration.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Passive interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "summary-address": {
+   "name": "summary-address",
+   "category": "table",
+   "help": "IP address summary configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Summary address entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Prefix.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Tag value.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "advertise": {
+     "name": "advertise",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertise status.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertise status."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertise status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "distribute-list": {
+   "name": "distribute-list",
+   "category": "table",
+   "help": "Distribute list configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Distribute list entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "access-list": {
+     "name": "access-list",
+     "category": "unitary",
+     "type": "string",
+     "help": "Access list name.",
+     "required": true,
+     "datasource": [
+      "router.access-list.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "option",
+     "help": "Protocol type.",
+     "required": true,
+     "options": [
+      {
+       "name": "connected",
+       "help": "Connected type."
+      },
+      {
+       "name": "static",
+       "help": "Static type."
+      },
+      {
+       "name": "rip",
+       "help": "RIP type."
+      }
+     ],
+     "default": "connected",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 10,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "redistribute": {
+   "name": "redistribute",
+   "category": "table",
+   "help": "Redistribute configuration.",
+   "readonly": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Redistribute name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "metric": {
+     "name": "metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Redistribute metric setting.",
+     "min-value": 0,
+     "max-value": 16777214,
+     "default": 0,
+     "multiple_values": false
+    },
+    "routemap": {
+     "name": "routemap",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route map name.",
+     "datasource": [
+      "router.route-map.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "metric-type": {
+     "name": "metric-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Metric type.",
+     "options": [
+      {
+       "name": "1",
+       "help": "Type 1."
+      },
+      {
+       "name": "2",
+       "help": "Type 2."
+      }
+     ],
+     "default": "2",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Tag value.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "router",
+ "q_type": 123,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

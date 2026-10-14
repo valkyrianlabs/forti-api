@@ -15,6 +15,343 @@ namespace fortiapi::firewall {
 
 // Configure virtual IP for IPv4.
 struct Vip {
+    // Values of Type: Configure a static NAT, load balance, server load balance, access proxy, DNS translation, or FQDN VIP.
+    struct Type {
+        static constexpr std::string_view static_nat = "static-nat";
+        static constexpr std::string_view load_balance = "load-balance";
+        static constexpr std::string_view server_load_balance = "server-load-balance";
+        static constexpr std::string_view dns_translation = "dns-translation";
+        static constexpr std::string_view fqdn = "fqdn";
+        static constexpr std::string_view access_proxy = "access-proxy";
+    };
+
+    // Values of ServerType: Protocol to be load balanced by the virtual server (also called the server load balance virtual IP).
+    struct ServerType {
+        static constexpr std::string_view http = "http";
+        static constexpr std::string_view https = "https";
+        static constexpr std::string_view imaps = "imaps";
+        static constexpr std::string_view pop3s = "pop3s";
+        static constexpr std::string_view smtps = "smtps";
+        static constexpr std::string_view ssl = "ssl";
+        static constexpr std::string_view tcp = "tcp";
+        static constexpr std::string_view udp = "udp";
+        static constexpr std::string_view ip = "ip";
+    };
+
+    // Values of LdbMethod: Method used to distribute sessions to real servers.
+    struct LdbMethod {
+        static constexpr std::string_view static_ = "static";
+        static constexpr std::string_view round_robin = "round-robin";
+        static constexpr std::string_view weighted = "weighted";
+        static constexpr std::string_view least_session = "least-session";
+        static constexpr std::string_view least_rtt = "least-rtt";
+        static constexpr std::string_view first_alive = "first-alive";
+        static constexpr std::string_view http_host = "http-host";
+    };
+
+    // Values of SrcVipFilter: Enable/disable use of 'src-filter' to match destinations for the reverse SNAT rule.
+    struct SrcVipFilter {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of H2Support: Enable/disable HTTP2 support (default = enable).
+    struct H2Support {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of H3Support: Enable/disable HTTP3/QUIC support (default = disable).
+    struct H3Support {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Nat44: Enable/disable NAT44.
+    struct Nat44 {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of Nat46: Enable/disable NAT46.
+    struct Nat46 {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of AddNat46Route: Enable/disable adding NAT46 route.
+    struct AddNat46Route {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of ArpReply: Enable to respond to ARP requests for this virtual IP address. Enabled by default.
+    struct ArpReply {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of HttpRedirect: Enable/disable redirection of HTTP to HTTPS.
+    struct HttpRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Persistence: Configure how to make sure that clients connect to the same server every time they make a request that is part of the same session.
+    struct Persistence {
+        static constexpr std::string_view none = "none";
+        static constexpr std::string_view http_cookie = "http-cookie";
+        static constexpr std::string_view ssl_session_id = "ssl-session-id";
+    };
+
+    // Values of NatSourceVip: Enable/disable forcing the source NAT mapped IP to the external IP for all traffic.
+    struct NatSourceVip {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of Portforward: Enable/disable port forwarding.
+    struct Portforward {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of Status: Enable/disable VIP.
+    struct Status {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of Protocol: Protocol to use when forwarding packets.
+    struct Protocol {
+        static constexpr std::string_view tcp = "tcp";
+        static constexpr std::string_view udp = "udp";
+        static constexpr std::string_view sctp = "sctp";
+        static constexpr std::string_view icmp = "icmp";
+    };
+
+    // Values of PortmappingType: Port mapping type.
+    struct PortmappingType {
+        static constexpr std::string_view _1_to_1 = "1-to-1";
+        static constexpr std::string_view m_to_n = "m-to-n";
+    };
+
+    // Values of HttpCookieDomainFromHost: Enable/disable use of HTTP cookie domain from host field in HTTP.
+    struct HttpCookieDomainFromHost {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of HttpCookieShare: Control sharing of cookies across virtual servers. Use of same-ip means a cookie from one virtual server can be used by another. Disable stops cookie sharing.
+    struct HttpCookieShare {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view same_ip = "same-ip";
+    };
+
+    // Values of HttpsCookieSecure: Enable/disable verification that inserted HTTPS cookies are secure.
+    struct HttpsCookieSecure {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of HttpMultiplex: Enable/disable HTTP multiplexing.
+    struct HttpMultiplex {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of HttpIpHeader: For HTTP multiplexing, enable to add the original client IP address in the XForwarded-For HTTP header.
+    struct HttpIpHeader {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of OutlookWebAccess: Enable to add the Front-End-Https header for Microsoft Outlook Web Access.
+    struct OutlookWebAccess {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of WeblogicServer: Enable to add an HTTP header to indicate SSL offloading for a WebLogic server.
+    struct WeblogicServer {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of WebsphereServer: Enable to add an HTTP header to indicate SSL offloading for a WebSphere server.
+    struct WebsphereServer {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SslMode: Apply SSL offloading between the client and the FortiGate (half) or from the client to the FortiGate and from the FortiGate to the server (full).
+    struct SslMode {
+        static constexpr std::string_view half = "half";
+        static constexpr std::string_view full = "full";
+    };
+
+    // Values of SslDhBits: Number of bits to use in the Diffie-Hellman exchange for RSA encryption of SSL sessions.
+    struct SslDhBits {
+        static constexpr std::string_view _768 = "768";
+        static constexpr std::string_view _1024 = "1024";
+        static constexpr std::string_view _1536 = "1536";
+        static constexpr std::string_view _2048 = "2048";
+        static constexpr std::string_view _3072 = "3072";
+        static constexpr std::string_view _4096 = "4096";
+    };
+
+    // Values of SslAlgorithm: Permitted encryption algorithms for SSL sessions according to encryption strength.
+    struct SslAlgorithm {
+        static constexpr std::string_view high = "high";
+        static constexpr std::string_view medium = "medium";
+        static constexpr std::string_view low = "low";
+        static constexpr std::string_view custom = "custom";
+    };
+
+    // Values of SslServerAlgorithm: Permitted encryption algorithms for the server side of SSL full mode sessions according to encryption strength.
+    struct SslServerAlgorithm {
+        static constexpr std::string_view high = "high";
+        static constexpr std::string_view medium = "medium";
+        static constexpr std::string_view low = "low";
+        static constexpr std::string_view custom = "custom";
+        static constexpr std::string_view client = "client";
+    };
+
+    // Values of SslPfs: Select the cipher suites that can be used for SSL perfect forward secrecy (PFS). Applies to both client and server sessions.
+    struct SslPfs {
+        static constexpr std::string_view require = "require";
+        static constexpr std::string_view deny = "deny";
+        static constexpr std::string_view allow = "allow";
+    };
+
+    // Values of SslMinVersion: Lowest SSL/TLS version acceptable from a client.
+    struct SslMinVersion {
+        static constexpr std::string_view ssl_3_0 = "ssl-3.0";
+        static constexpr std::string_view tls_1_0 = "tls-1.0";
+        static constexpr std::string_view tls_1_1 = "tls-1.1";
+        static constexpr std::string_view tls_1_2 = "tls-1.2";
+        static constexpr std::string_view tls_1_3 = "tls-1.3";
+    };
+
+    // Values of SslMaxVersion: Highest SSL/TLS version acceptable from a client.
+    struct SslMaxVersion {
+        static constexpr std::string_view ssl_3_0 = "ssl-3.0";
+        static constexpr std::string_view tls_1_0 = "tls-1.0";
+        static constexpr std::string_view tls_1_1 = "tls-1.1";
+        static constexpr std::string_view tls_1_2 = "tls-1.2";
+        static constexpr std::string_view tls_1_3 = "tls-1.3";
+    };
+
+    // Values of SslServerMinVersion: Lowest SSL/TLS version acceptable from a server. Use the client setting by default.
+    struct SslServerMinVersion {
+        static constexpr std::string_view ssl_3_0 = "ssl-3.0";
+        static constexpr std::string_view tls_1_0 = "tls-1.0";
+        static constexpr std::string_view tls_1_1 = "tls-1.1";
+        static constexpr std::string_view tls_1_2 = "tls-1.2";
+        static constexpr std::string_view tls_1_3 = "tls-1.3";
+        static constexpr std::string_view client = "client";
+    };
+
+    // Values of SslServerMaxVersion: Highest SSL/TLS version acceptable from a server. Use the client setting by default.
+    struct SslServerMaxVersion {
+        static constexpr std::string_view ssl_3_0 = "ssl-3.0";
+        static constexpr std::string_view tls_1_0 = "tls-1.0";
+        static constexpr std::string_view tls_1_1 = "tls-1.1";
+        static constexpr std::string_view tls_1_2 = "tls-1.2";
+        static constexpr std::string_view tls_1_3 = "tls-1.3";
+        static constexpr std::string_view client = "client";
+    };
+
+    // Values of SslAcceptFfdheGroups: Enable/disable FFDHE cipher suite for SSL key exchange.
+    struct SslAcceptFfdheGroups {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SslSendEmptyFrags: Enable/disable sending empty fragments to avoid CBC IV attacks (SSL 3.0 & TLS 1.0 only). May need to be disabled for compatibility with older systems.
+    struct SslSendEmptyFrags {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SslClientFallback: Enable/disable support for preventing Downgrade Attacks on client connections (RFC 7507).
+    struct SslClientFallback {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SslClientRenegotiation: Allow, deny, or require secure renegotiation of client sessions to comply with RFC 5746.
+    struct SslClientRenegotiation {
+        static constexpr std::string_view allow = "allow";
+        static constexpr std::string_view deny = "deny";
+        static constexpr std::string_view secure = "secure";
+    };
+
+    // Values of SslClientSessionStateType: How to expire SSL sessions for the segment of the SSL connection between the client and the FortiGate.
+    struct SslClientSessionStateType {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view time = "time";
+        static constexpr std::string_view count = "count";
+        static constexpr std::string_view both = "both";
+    };
+
+    // Values of SslServerRenegotiation: Enable/disable secure renegotiation to comply with RFC 5746.
+    struct SslServerRenegotiation {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SslServerSessionStateType: How to expire SSL sessions for the segment of the SSL connection between the server and the FortiGate.
+    struct SslServerSessionStateType {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view time = "time";
+        static constexpr std::string_view count = "count";
+        static constexpr std::string_view both = "both";
+    };
+
+    // Values of SslHttpLocationConversion: Enable to replace HTTP with HTTPS in the reply's Location HTTP header field.
+    struct SslHttpLocationConversion {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SslHttpMatchHost: Enable/disable HTTP host matching for location conversion.
+    struct SslHttpMatchHost {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SslHpkp: Enable/disable including HPKP header in response.
+    struct SslHpkp {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view report_only = "report-only";
+    };
+
+    // Values of SslHpkpIncludeSubdomains: Indicate that HPKP header applies to all subdomains.
+    struct SslHpkpIncludeSubdomains {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SslHsts: Enable/disable including HSTS header in response.
+    struct SslHsts {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SslHstsIncludeSubdomains: Indicate that HSTS header applies to all subdomains.
+    struct SslHstsIncludeSubdomains {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of OneClickGslbServer: Enable/disable one click GSLB server integration with FortiGSLB.
+    struct OneClickGslbServer {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
     // Source address filter. Each address must be either an IP/subnet (x.x.x.x/n) or a range (x.x.x.x-y.y.y.y). Separate addresses with spaces.
     struct SrcFilterEntry {
         fortiapi::Field<std::string> range;  // Source-filter range. Required.
@@ -27,6 +364,18 @@ struct Vip {
 
     // QUIC setting.
     struct Quic {
+        // Values of ActiveMigration: Enable/disable active migration (default = disable).
+        struct ActiveMigration {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of GreaseQuicBit: Enable/disable grease QUIC bit (default = enable).
+        struct GreaseQuicBit {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
         fortiapi::Field<std::uint32_t> max_idle_timeout;  // Maximum idle timeout milliseconds (1 - 60000, default = 30000).
         fortiapi::Field<std::uint32_t> max_udp_payload_size;  // Maximum UDP payload size in bytes (1200 - 1500, default = 1500).
         fortiapi::Field<std::uint32_t> active_connection_id_limit;  // Active connection ID limit (1 - 8, default = 2).
@@ -71,6 +420,32 @@ struct Vip {
 
     // Select the real servers that this server load balancing VIP will distribute traffic to.
     struct RealserversEntry {
+        // Values of Type: Type of address.
+        struct Type {
+            static constexpr std::string_view ip = "ip";
+            static constexpr std::string_view address = "address";
+        };
+
+        // Values of Status: Set the status of the real server to active so that it can accept traffic, or on standby or disabled so no traffic is sent.
+        struct Status {
+            static constexpr std::string_view active = "active";
+            static constexpr std::string_view standby = "standby";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Healthcheck: Enable to check the responsiveness of the real server before forwarding traffic.
+        struct Healthcheck {
+            static constexpr std::string_view disable = "disable";
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view vip = "vip";
+        };
+
+        // Values of TranslateHost: Enable/disable translation of hostname/IP from virtual server to real server.
+        struct TranslateHost {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
         fortiapi::Field<std::uint32_t> id;  // Real server ID.
         fortiapi::Field<std::string> type;  // Type of address. Required.
         fortiapi::Field<std::string> address;  // Dynamic address of the real server. Required. References: firewall.address.name.
@@ -107,6 +482,90 @@ struct Vip {
 
     // SSL/TLS cipher suites acceptable from a client, ordered by priority.
     struct SslCipherSuitesEntry {
+        // Values of Cipher: Cipher suite name.
+        struct Cipher {
+            static constexpr std::string_view TLS_AES_128_GCM_SHA256 = "TLS-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_AES_256_GCM_SHA384 = "TLS-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_CHACHA20_POLY1305_SHA256 = "TLS-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_GCM_SHA256 = "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_GCM_SHA384 = "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA = "TLS-RSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA = "TLS-RSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA256 = "TLS-RSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_AES_128_GCM_SHA256 = "TLS-RSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA256 = "TLS-RSA-WITH-AES-256-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_AES_256_GCM_SHA384 = "TLS-RSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_SEED_CBC_SHA = "TLS-DHE-RSA-WITH-SEED-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_SEED_CBC_SHA = "TLS-DHE-DSS-WITH-SEED-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_RSA_WITH_SEED_CBC_SHA = "TLS-RSA-WITH-SEED-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-RSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-RSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_RC4_128_SHA = "TLS-ECDHE-RSA-WITH-RC4-128-SHA";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-RSA-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_RC4_128_MD5 = "TLS-RSA-WITH-RC4-128-MD5";
+            static constexpr std::string_view TLS_RSA_WITH_RC4_128_SHA = "TLS-RSA-WITH-RC4-128-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_DES_CBC_SHA = "TLS-DHE-RSA-WITH-DES-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_DES_CBC_SHA = "TLS-DHE-DSS-WITH-DES-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_DES_CBC_SHA = "TLS-RSA-WITH-DES-CBC-SHA";
+        };
+
+        // Values of Versions: SSL/TLS versions that the cipher suite can be used with.
+        struct Versions {
+            static constexpr std::string_view ssl_3_0 = "ssl-3.0";
+            static constexpr std::string_view tls_1_0 = "tls-1.0";
+            static constexpr std::string_view tls_1_1 = "tls-1.1";
+            static constexpr std::string_view tls_1_2 = "tls-1.2";
+            static constexpr std::string_view tls_1_3 = "tls-1.3";
+        };
+
         fortiapi::Field<std::uint32_t> priority;  // SSL/TLS cipher suites priority.
         fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
         fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
@@ -121,6 +580,90 @@ struct Vip {
 
     // SSL/TLS cipher suites to offer to a server, ordered by priority.
     struct SslServerCipherSuitesEntry {
+        // Values of Cipher: Cipher suite name.
+        struct Cipher {
+            static constexpr std::string_view TLS_AES_128_GCM_SHA256 = "TLS-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_AES_256_GCM_SHA384 = "TLS-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_CHACHA20_POLY1305_SHA256 = "TLS-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_GCM_SHA256 = "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_GCM_SHA384 = "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA = "TLS-RSA-WITH-AES-128-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA = "TLS-RSA-WITH-AES-256-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA256 = "TLS-RSA-WITH-AES-128-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_AES_128_GCM_SHA256 = "TLS-RSA-WITH-AES-128-GCM-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA256 = "TLS-RSA-WITH-AES-256-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_AES_256_GCM_SHA384 = "TLS-RSA-WITH-AES-256-GCM-SHA384";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_SEED_CBC_SHA = "TLS-DHE-RSA-WITH-SEED-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_SEED_CBC_SHA = "TLS-DHE-DSS-WITH-SEED-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_RSA_WITH_SEED_CBC_SHA = "TLS-RSA-WITH-SEED-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-RSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-RSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256";
+            static constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_RC4_128_SHA = "TLS-ECDHE-RSA-WITH-RC4-128-SHA";
+            static constexpr std::string_view TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-RSA-WITH-3DES-EDE-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_RC4_128_MD5 = "TLS-RSA-WITH-RC4-128-MD5";
+            static constexpr std::string_view TLS_RSA_WITH_RC4_128_SHA = "TLS-RSA-WITH-RC4-128-SHA";
+            static constexpr std::string_view TLS_DHE_RSA_WITH_DES_CBC_SHA = "TLS-DHE-RSA-WITH-DES-CBC-SHA";
+            static constexpr std::string_view TLS_DHE_DSS_WITH_DES_CBC_SHA = "TLS-DHE-DSS-WITH-DES-CBC-SHA";
+            static constexpr std::string_view TLS_RSA_WITH_DES_CBC_SHA = "TLS-RSA-WITH-DES-CBC-SHA";
+        };
+
+        // Values of Versions: SSL/TLS versions that the cipher suite can be used with.
+        struct Versions {
+            static constexpr std::string_view ssl_3_0 = "ssl-3.0";
+            static constexpr std::string_view tls_1_0 = "tls-1.0";
+            static constexpr std::string_view tls_1_1 = "tls-1.1";
+            static constexpr std::string_view tls_1_2 = "tls-1.2";
+            static constexpr std::string_view tls_1_3 = "tls-1.3";
+        };
+
         fortiapi::Field<std::uint32_t> priority;  // SSL/TLS cipher suites priority.
         fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
         fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
@@ -348,435 +891,6 @@ struct VipSpec {
 };
 
 using Vips = fortiapi::Table<VipSpec>;
-
-// Allowed values of option attributes.
-namespace vip::type {
-    inline constexpr std::string_view static_nat = "static-nat";
-    inline constexpr std::string_view load_balance = "load-balance";
-    inline constexpr std::string_view server_load_balance = "server-load-balance";
-    inline constexpr std::string_view dns_translation = "dns-translation";
-    inline constexpr std::string_view fqdn = "fqdn";
-    inline constexpr std::string_view access_proxy = "access-proxy";
-}
-namespace vip::server_type {
-    inline constexpr std::string_view http = "http";
-    inline constexpr std::string_view https = "https";
-    inline constexpr std::string_view imaps = "imaps";
-    inline constexpr std::string_view pop3s = "pop3s";
-    inline constexpr std::string_view smtps = "smtps";
-    inline constexpr std::string_view ssl = "ssl";
-    inline constexpr std::string_view tcp = "tcp";
-    inline constexpr std::string_view udp = "udp";
-    inline constexpr std::string_view ip = "ip";
-}
-namespace vip::ldb_method {
-    inline constexpr std::string_view static_ = "static";
-    inline constexpr std::string_view round_robin = "round-robin";
-    inline constexpr std::string_view weighted = "weighted";
-    inline constexpr std::string_view least_session = "least-session";
-    inline constexpr std::string_view least_rtt = "least-rtt";
-    inline constexpr std::string_view first_alive = "first-alive";
-    inline constexpr std::string_view http_host = "http-host";
-}
-namespace vip::src_vip_filter {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::h2_support {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::h3_support {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::nat44 {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::nat46 {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::add_nat46_route {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::arp_reply {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::http_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::persistence {
-    inline constexpr std::string_view none = "none";
-    inline constexpr std::string_view http_cookie = "http-cookie";
-    inline constexpr std::string_view ssl_session_id = "ssl-session-id";
-}
-namespace vip::nat_source_vip {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::portforward {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::status {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::protocol {
-    inline constexpr std::string_view tcp = "tcp";
-    inline constexpr std::string_view udp = "udp";
-    inline constexpr std::string_view sctp = "sctp";
-    inline constexpr std::string_view icmp = "icmp";
-}
-namespace vip::portmapping_type {
-    inline constexpr std::string_view _1_to_1 = "1-to-1";
-    inline constexpr std::string_view m_to_n = "m-to-n";
-}
-namespace vip::http_cookie_domain_from_host {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::http_cookie_share {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view same_ip = "same-ip";
-}
-namespace vip::https_cookie_secure {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::http_multiplex {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::http_ip_header {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::outlook_web_access {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::weblogic_server {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::websphere_server {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::ssl_mode {
-    inline constexpr std::string_view half = "half";
-    inline constexpr std::string_view full = "full";
-}
-namespace vip::ssl_dh_bits {
-    inline constexpr std::string_view _768 = "768";
-    inline constexpr std::string_view _1024 = "1024";
-    inline constexpr std::string_view _1536 = "1536";
-    inline constexpr std::string_view _2048 = "2048";
-    inline constexpr std::string_view _3072 = "3072";
-    inline constexpr std::string_view _4096 = "4096";
-}
-namespace vip::ssl_algorithm {
-    inline constexpr std::string_view high = "high";
-    inline constexpr std::string_view medium = "medium";
-    inline constexpr std::string_view low = "low";
-    inline constexpr std::string_view custom = "custom";
-}
-namespace vip::ssl_server_algorithm {
-    inline constexpr std::string_view high = "high";
-    inline constexpr std::string_view medium = "medium";
-    inline constexpr std::string_view low = "low";
-    inline constexpr std::string_view custom = "custom";
-    inline constexpr std::string_view client = "client";
-}
-namespace vip::ssl_pfs {
-    inline constexpr std::string_view require = "require";
-    inline constexpr std::string_view deny = "deny";
-    inline constexpr std::string_view allow = "allow";
-}
-namespace vip::ssl_min_version {
-    inline constexpr std::string_view ssl_3_0 = "ssl-3.0";
-    inline constexpr std::string_view tls_1_0 = "tls-1.0";
-    inline constexpr std::string_view tls_1_1 = "tls-1.1";
-    inline constexpr std::string_view tls_1_2 = "tls-1.2";
-    inline constexpr std::string_view tls_1_3 = "tls-1.3";
-}
-namespace vip::ssl_max_version {
-    inline constexpr std::string_view ssl_3_0 = "ssl-3.0";
-    inline constexpr std::string_view tls_1_0 = "tls-1.0";
-    inline constexpr std::string_view tls_1_1 = "tls-1.1";
-    inline constexpr std::string_view tls_1_2 = "tls-1.2";
-    inline constexpr std::string_view tls_1_3 = "tls-1.3";
-}
-namespace vip::ssl_server_min_version {
-    inline constexpr std::string_view ssl_3_0 = "ssl-3.0";
-    inline constexpr std::string_view tls_1_0 = "tls-1.0";
-    inline constexpr std::string_view tls_1_1 = "tls-1.1";
-    inline constexpr std::string_view tls_1_2 = "tls-1.2";
-    inline constexpr std::string_view tls_1_3 = "tls-1.3";
-    inline constexpr std::string_view client = "client";
-}
-namespace vip::ssl_server_max_version {
-    inline constexpr std::string_view ssl_3_0 = "ssl-3.0";
-    inline constexpr std::string_view tls_1_0 = "tls-1.0";
-    inline constexpr std::string_view tls_1_1 = "tls-1.1";
-    inline constexpr std::string_view tls_1_2 = "tls-1.2";
-    inline constexpr std::string_view tls_1_3 = "tls-1.3";
-    inline constexpr std::string_view client = "client";
-}
-namespace vip::ssl_accept_ffdhe_groups {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::ssl_send_empty_frags {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::ssl_client_fallback {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::ssl_client_renegotiation {
-    inline constexpr std::string_view allow = "allow";
-    inline constexpr std::string_view deny = "deny";
-    inline constexpr std::string_view secure = "secure";
-}
-namespace vip::ssl_client_session_state_type {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view time = "time";
-    inline constexpr std::string_view count = "count";
-    inline constexpr std::string_view both = "both";
-}
-namespace vip::ssl_server_renegotiation {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::ssl_server_session_state_type {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view time = "time";
-    inline constexpr std::string_view count = "count";
-    inline constexpr std::string_view both = "both";
-}
-namespace vip::ssl_http_location_conversion {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::ssl_http_match_host {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::ssl_hpkp {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view report_only = "report-only";
-}
-namespace vip::ssl_hpkp_include_subdomains {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::ssl_hsts {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::ssl_hsts_include_subdomains {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::one_click_gslb_server {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace vip::quic::active_migration {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::quic::grease_quic_bit {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::realservers::type {
-    inline constexpr std::string_view ip = "ip";
-    inline constexpr std::string_view address = "address";
-}
-namespace vip::realservers::status {
-    inline constexpr std::string_view active = "active";
-    inline constexpr std::string_view standby = "standby";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::realservers::healthcheck {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view vip = "vip";
-}
-namespace vip::realservers::translate_host {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace vip::ssl_cipher_suites::cipher {
-    inline constexpr std::string_view TLS_AES_128_GCM_SHA256 = "TLS-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_AES_256_GCM_SHA384 = "TLS-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_CHACHA20_POLY1305_SHA256 = "TLS-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_GCM_SHA256 = "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_GCM_SHA384 = "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA = "TLS-RSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA = "TLS-RSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA256 = "TLS-RSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_128_GCM_SHA256 = "TLS-RSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA256 = "TLS-RSA-WITH-AES-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_256_GCM_SHA384 = "TLS-RSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_SEED_CBC_SHA = "TLS-DHE-RSA-WITH-SEED-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_SEED_CBC_SHA = "TLS-DHE-DSS-WITH-SEED-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_RSA_WITH_SEED_CBC_SHA = "TLS-RSA-WITH-SEED-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-RSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-RSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_RC4_128_SHA = "TLS-ECDHE-RSA-WITH-RC4-128-SHA";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-RSA-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_RC4_128_MD5 = "TLS-RSA-WITH-RC4-128-MD5";
-    inline constexpr std::string_view TLS_RSA_WITH_RC4_128_SHA = "TLS-RSA-WITH-RC4-128-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_DES_CBC_SHA = "TLS-DHE-RSA-WITH-DES-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_DES_CBC_SHA = "TLS-DHE-DSS-WITH-DES-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_DES_CBC_SHA = "TLS-RSA-WITH-DES-CBC-SHA";
-}
-namespace vip::ssl_cipher_suites::versions {
-    inline constexpr std::string_view ssl_3_0 = "ssl-3.0";
-    inline constexpr std::string_view tls_1_0 = "tls-1.0";
-    inline constexpr std::string_view tls_1_1 = "tls-1.1";
-    inline constexpr std::string_view tls_1_2 = "tls-1.2";
-    inline constexpr std::string_view tls_1_3 = "tls-1.3";
-}
-namespace vip::ssl_server_cipher_suites::cipher {
-    inline constexpr std::string_view TLS_AES_128_GCM_SHA256 = "TLS-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_AES_256_GCM_SHA384 = "TLS-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_CHACHA20_POLY1305_SHA256 = "TLS-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-ECDHE-ECDSA-WITH-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CHACHA20_POLY1305_SHA256 = "TLS-DHE-RSA-WITH-CHACHA20-POLY1305-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-DHE-RSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-AES-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-DHE-RSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_128_GCM_SHA256 = "TLS-DHE-DSS-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-AES-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_AES_256_GCM_SHA384 = "TLS-DHE-DSS-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-RSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-RSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 = "TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 = "TLS-ECDHE-ECDSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA = "TLS-RSA-WITH-AES-128-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA = "TLS-RSA-WITH-AES-256-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_128_CBC_SHA256 = "TLS-RSA-WITH-AES-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_128_GCM_SHA256 = "TLS-RSA-WITH-AES-128-GCM-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_256_CBC_SHA256 = "TLS-RSA-WITH-AES-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_AES_256_GCM_SHA384 = "TLS-RSA-WITH-AES-256-GCM-SHA384";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-RSA-WITH-CAMELLIA-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-RSA-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-RSA-WITH-CAMELLIA-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA256 = "TLS-DHE-DSS-WITH-CAMELLIA-256-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_SEED_CBC_SHA = "TLS-DHE-RSA-WITH-SEED-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_SEED_CBC_SHA = "TLS-DHE-DSS-WITH-SEED-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-RSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-RSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256 = "TLS-DHE-DSS-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384 = "TLS-DHE-DSS-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_RSA_WITH_SEED_CBC_SHA = "TLS-RSA-WITH-SEED-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-RSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-RSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-RSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-RSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 = "TLS-ECDHE-ECDSA-WITH-ARIA-128-CBC-SHA256";
-    inline constexpr std::string_view TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 = "TLS-ECDHE-ECDSA-WITH-ARIA-256-CBC-SHA384";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_RC4_128_SHA = "TLS-ECDHE-RSA-WITH-RC4-128-SHA";
-    inline constexpr std::string_view TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-ECDHE-RSA-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA = "TLS-DHE-DSS-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_3DES_EDE_CBC_SHA = "TLS-RSA-WITH-3DES-EDE-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_RC4_128_MD5 = "TLS-RSA-WITH-RC4-128-MD5";
-    inline constexpr std::string_view TLS_RSA_WITH_RC4_128_SHA = "TLS-RSA-WITH-RC4-128-SHA";
-    inline constexpr std::string_view TLS_DHE_RSA_WITH_DES_CBC_SHA = "TLS-DHE-RSA-WITH-DES-CBC-SHA";
-    inline constexpr std::string_view TLS_DHE_DSS_WITH_DES_CBC_SHA = "TLS-DHE-DSS-WITH-DES-CBC-SHA";
-    inline constexpr std::string_view TLS_RSA_WITH_DES_CBC_SHA = "TLS-RSA-WITH-DES-CBC-SHA";
-}
-namespace vip::ssl_server_cipher_suites::versions {
-    inline constexpr std::string_view ssl_3_0 = "ssl-3.0";
-    inline constexpr std::string_view tls_1_0 = "tls-1.0";
-    inline constexpr std::string_view tls_1_1 = "tls-1.1";
-    inline constexpr std::string_view tls_1_2 = "tls-1.2";
-    inline constexpr std::string_view tls_1_3 = "tls-1.3";
-}
 
 }  // namespace fortiapi::firewall
 

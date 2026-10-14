@@ -1,0 +1,344 @@
+{
+ "name": "filepattern",
+ "category": "table",
+ "help": "Configure file patterns used by DLP blocking.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table containing the file pattern list.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "Configure file patterns used by DLP blocking.",
+   "mkey": "pattern",
+   "mkey_type": "string",
+   "children": {
+    "filter-type": {
+     "name": "filter-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Filter by file name pattern or by file type.",
+     "required": true,
+     "options": [
+      {
+       "name": "pattern",
+       "help": "Filter by file name pattern."
+      },
+      {
+       "name": "type",
+       "help": "Filter by file type."
+      }
+     ],
+     "default": "pattern",
+     "multiple_values": false
+    },
+    "pattern": {
+     "name": "pattern",
+     "category": "unitary",
+     "type": "string",
+     "help": "Add a file name pattern.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "file-type": {
+     "name": "file-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Select a file type.",
+     "required": true,
+     "options": [
+      {
+       "name": "7z",
+       "help": "Match 7-zip files."
+      },
+      {
+       "name": "arj",
+       "help": "Match arj compressed files."
+      },
+      {
+       "name": "cab",
+       "help": "Match Windows cab files."
+      },
+      {
+       "name": "lzh",
+       "help": "Match lzh compressed files."
+      },
+      {
+       "name": "rar",
+       "help": "Match rar archives."
+      },
+      {
+       "name": "tar",
+       "help": "Match tar files."
+      },
+      {
+       "name": "zip",
+       "help": "Match zip files."
+      },
+      {
+       "name": "bzip",
+       "help": "Match bzip files."
+      },
+      {
+       "name": "gzip",
+       "help": "Match gzip files."
+      },
+      {
+       "name": "bzip2",
+       "help": "Match bzip2 files."
+      },
+      {
+       "name": "xz",
+       "help": "Match xz files."
+      },
+      {
+       "name": "bat",
+       "help": "Match Windows batch files."
+      },
+      {
+       "name": "uue",
+       "help": "Match uue files."
+      },
+      {
+       "name": "mime",
+       "help": "Match mime files."
+      },
+      {
+       "name": "base64",
+       "help": "Match base64 files."
+      },
+      {
+       "name": "binhex",
+       "help": "Match binhex files."
+      },
+      {
+       "name": "elf",
+       "help": "Match elf files."
+      },
+      {
+       "name": "exe",
+       "help": "Match Windows executable files."
+      },
+      {
+       "name": "hta",
+       "help": "Match hta files."
+      },
+      {
+       "name": "html",
+       "help": "Match html files."
+      },
+      {
+       "name": "jad",
+       "help": "Match jad files."
+      },
+      {
+       "name": "class",
+       "help": "Match class files."
+      },
+      {
+       "name": "cod",
+       "help": "Match cod files."
+      },
+      {
+       "name": "javascript",
+       "help": "Match javascript files."
+      },
+      {
+       "name": "msoffice",
+       "help": "Match MS-Office files. For example, doc, xls, ppt, and so on."
+      },
+      {
+       "name": "msofficex",
+       "help": "Match MS-Office XML files. For example, docx, xlsx, pptx, and so on."
+      },
+      {
+       "name": "fsg",
+       "help": "Match fsg files."
+      },
+      {
+       "name": "upx",
+       "help": "Match upx files."
+      },
+      {
+       "name": "petite",
+       "help": "Match petite files."
+      },
+      {
+       "name": "aspack",
+       "help": "Match aspack files."
+      },
+      {
+       "name": "sis",
+       "help": "Match sis files."
+      },
+      {
+       "name": "hlp",
+       "help": "Match Windows help files."
+      },
+      {
+       "name": "activemime",
+       "help": "Match activemime files."
+      },
+      {
+       "name": "jpeg",
+       "help": "Match jpeg files."
+      },
+      {
+       "name": "gif",
+       "help": "Match gif files."
+      },
+      {
+       "name": "tiff",
+       "help": "Match tiff files."
+      },
+      {
+       "name": "png",
+       "help": "Match png files."
+      },
+      {
+       "name": "bmp",
+       "help": "Match bmp files."
+      },
+      {
+       "name": "unknown",
+       "help": "Match unknown files."
+      },
+      {
+       "name": "mpeg",
+       "help": "Match mpeg files."
+      },
+      {
+       "name": "mov",
+       "help": "Match mov files."
+      },
+      {
+       "name": "mp3",
+       "help": "Match mp3 files."
+      },
+      {
+       "name": "wma",
+       "help": "Match wma files."
+      },
+      {
+       "name": "wav",
+       "help": "Match wav files."
+      },
+      {
+       "name": "pdf",
+       "help": "Match Acrobat PDF files."
+      },
+      {
+       "name": "avi",
+       "help": "Match avi files."
+      },
+      {
+       "name": "rm",
+       "help": "Match rm files."
+      },
+      {
+       "name": "torrent",
+       "help": "Match torrent files."
+      },
+      {
+       "name": "hibun",
+       "help": "Match special-file-23-support files."
+      },
+      {
+       "name": "msi",
+       "help": "Match Windows Installer msi files."
+      },
+      {
+       "name": "mach-o",
+       "help": "Match Mach object files."
+      },
+      {
+       "name": "dmg",
+       "help": "Match Apple disk image files."
+      },
+      {
+       "name": ".net",
+       "help": "Match .NET files."
+      },
+      {
+       "name": "xar",
+       "help": "Match xar archive files."
+      },
+      {
+       "name": "chm",
+       "help": "Match Windows compiled HTML help files."
+      },
+      {
+       "name": "iso",
+       "help": "Match ISO archive files."
+      },
+      {
+       "name": "crx",
+       "help": "Match Chrome extension files."
+      },
+      {
+       "name": "flac",
+       "help": "Match flac files."
+      },
+      {
+       "name": "registry",
+       "help": "Match registry files."
+      },
+      {
+       "name": "hwp",
+       "help": "Match hwp files."
+      },
+      {
+       "name": "rpm",
+       "help": "Match rpm files."
+      },
+      {
+       "name": "c/cpp",
+       "help": "Match c/cpp files."
+      }
+     ],
+     "default": "unknown",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 20000
+  }
+ },
+ "max_table_size_vdom": 200,
+ "max_table_size_global": 200,
+ "max_table_size_item": 0,
+ "path": "dlp",
+ "q_type": 247,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

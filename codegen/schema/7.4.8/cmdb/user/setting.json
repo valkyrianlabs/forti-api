@@ -1,0 +1,422 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Configure user authentication setting.",
+ "children": {
+  "auth-type": {
+   "name": "auth-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Supported firewall policy authentication protocols/methods.",
+   "options": [
+    {
+     "name": "http",
+     "help": "Allow HTTP authentication."
+    },
+    {
+     "name": "https",
+     "help": "Allow HTTPS authentication."
+    },
+    {
+     "name": "ftp",
+     "help": "Allow FTP authentication."
+    },
+    {
+     "name": "telnet",
+     "help": "Allow TELNET authentication."
+    }
+   ],
+   "default": "http https ftp telnet",
+   "multiple_values": true
+  },
+  "auth-cert": {
+   "name": "auth-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTPS server certificate for policy authentication.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-ca-cert": {
+   "name": "auth-ca-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTPS CA certificate for policy authentication.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-secure-http": {
+   "name": "auth-secure-http",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redirecting HTTP user authentication to more secure HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-http-basic": {
+   "name": "auth-http-basic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of HTTP basic authentication for identity-based firewall policies.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-ssl-allow-renegotiation": {
+   "name": "auth-ssl-allow-renegotiation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allow/forbid SSL re-negotiation for HTTPS authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow SSL re-negotiation."
+    },
+    {
+     "name": "disable",
+     "help": "Forbid SSL re-negotiation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-src-mac": {
+   "name": "auth-src-mac",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable source MAC for user identity.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable source MAC for user identity."
+    },
+    {
+     "name": "disable",
+     "help": "Disable source MAC for user identity."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "auth-on-demand": {
+   "name": "auth-on-demand",
+   "category": "unitary",
+   "type": "option",
+   "help": "Always/implicitly trigger firewall authentication on demand.",
+   "options": [
+    {
+     "name": "always",
+     "help": "Always trigger firewall authentication on demand."
+    },
+    {
+     "name": "implicitly",
+     "help": "Implicitly trigger firewall authentication on demand."
+    }
+   ],
+   "default": "implicitly",
+   "multiple_values": false
+  },
+  "auth-timeout": {
+   "name": "auth-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in minutes before the firewall user authentication timeout requires the user to re-authenticate.",
+   "min-value": 1,
+   "max-value": 1440,
+   "default": 5,
+   "multiple_values": false
+  },
+  "auth-timeout-type": {
+   "name": "auth-timeout-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control if authenticated users have to login again after a hard timeout, after an idle timeout, or after a session timeout.",
+   "options": [
+    {
+     "name": "idle-timeout",
+     "help": "Idle timeout."
+    },
+    {
+     "name": "hard-timeout",
+     "help": "Hard timeout."
+    },
+    {
+     "name": "new-session",
+     "help": "New session timeout."
+    }
+   ],
+   "default": "idle-timeout",
+   "multiple_values": false
+  },
+  "auth-portal-timeout": {
+   "name": "auth-portal-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in minutes before captive portal user have to re-authenticate (1 - 30 min, default 3 min).",
+   "min-value": 1,
+   "max-value": 30,
+   "default": 3,
+   "multiple_values": false
+  },
+  "radius-ses-timeout-act": {
+   "name": "radius-ses-timeout-act",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the RADIUS session timeout to a hard timeout or to ignore RADIUS server session timeouts.",
+   "options": [
+    {
+     "name": "hard-timeout",
+     "help": "Use session timeout from RADIUS as hard-timeout."
+    },
+    {
+     "name": "ignore-timeout",
+     "help": "Ignore session timeout from RADIUS."
+    }
+   ],
+   "default": "hard-timeout",
+   "multiple_values": false
+  },
+  "auth-blackout-time": {
+   "name": "auth-blackout-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds an IP address is denied access after failing to authenticate five times within one minute.",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 0,
+   "multiple_values": false
+  },
+  "auth-invalid-max": {
+   "name": "auth-invalid-max",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of failed authentication attempts before the user is blocked.",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 5,
+   "multiple_values": false
+  },
+  "auth-lockout-threshold": {
+   "name": "auth-lockout-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of failed login attempts before login lockout is triggered.",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "auth-lockout-duration": {
+   "name": "auth-lockout-duration",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Lockout period in seconds after too many login failures.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "per-policy-disclaimer": {
+   "name": "per-policy-disclaimer",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable per policy disclaimer.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable per policy disclaimer."
+    },
+    {
+     "name": "disable",
+     "help": "Disable per policy disclaimer."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-ports": {
+   "name": "auth-ports",
+   "category": "table",
+   "help": "Set up non-standard ports for authentication with HTTP, HTTPS, FTP, and TELNET.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Service type.",
+     "options": [
+      {
+       "name": "http",
+       "help": "HTTP service."
+      },
+      {
+       "name": "https",
+       "help": "HTTPS service."
+      },
+      {
+       "name": "ftp",
+       "help": "FTP service."
+      },
+      {
+       "name": "telnet",
+       "help": "TELNET service."
+      }
+     ],
+     "default": "http",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Non-standard port for firewall user authentication.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 1024,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "auth-ssl-min-proto-version": {
+   "name": "auth-ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "auth-ssl-max-proto-version": {
+   "name": "auth-ssl-max-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Maximum supported protocol version for SSL/TLS connections (default is no limit).",
+   "options": [
+    {
+     "name": "sslv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "tlsv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "tlsv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "tlsv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "tlsv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-ssl-sigalgs": {
+   "name": "auth-ssl-sigalgs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set signature algorithms related to HTTPS authentication (affects TLS version <= 1.2 only, default is to enable all).",
+   "options": [
+    {
+     "name": "no-rsa-pss",
+     "help": "Disable RSA-PSS signature algorithms for HTTPS authentication."
+    },
+    {
+     "name": "all",
+     "help": "Enable all supported signature algorithms for HTTPS authentication."
+    }
+   ],
+   "default": "all",
+   "multiple_values": false
+  },
+  "default-user-password-policy": {
+   "name": "default-user-password-policy",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default password policy to apply to all local users unless otherwise specified, as defined in config user password-policy.",
+   "datasource": [
+    "user.password-policy.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "user",
+ "q_type": 229,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

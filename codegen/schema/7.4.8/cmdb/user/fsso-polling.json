@@ -1,0 +1,182 @@
+{
+ "name": "fsso-polling",
+ "category": "table",
+ "help": "Configure FSSO active directory servers for polling mode.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Active Directory server ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable polling for the status of this Active Directory server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Host name or IP address of the Active Directory server.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "default-domain": {
+   "name": "default-domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Default domain managed by this Active Directory server.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to communicate with this Active Directory server.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "user": {
+   "name": "user",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name required to log into this Active Directory server.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password required to log into this Active Directory server.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "ldap-server": {
+   "name": "ldap-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "LDAP server name used in LDAP connection strings.",
+   "required": true,
+   "datasource": [
+    "user.ldap.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "logon-history": {
+   "name": "logon-history",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of hours of logon history to keep, 0 means keep all history.",
+   "min-value": 0,
+   "max-value": 48,
+   "default": 8,
+   "multiple_values": false
+  },
+  "polling-frequency": {
+   "name": "polling-frequency",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Polling frequency (every 1 to 30 seconds).",
+   "min-value": 1,
+   "max-value": 30,
+   "default": 10,
+   "multiple_values": false
+  },
+  "adgrp": {
+   "name": "adgrp",
+   "category": "table",
+   "help": "LDAP Group Info.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Name.",
+     "required": true,
+     "size": 511,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "smbv1": {
+   "name": "smbv1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable support of SMBv1 for Samba.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable support of SMBv1 for Samba."
+    },
+    {
+     "name": "disable",
+     "help": "Disable support of SMBv1 for Samba."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "smb-ntlmv1-auth": {
+   "name": "smb-ntlmv1-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable support of NTLMv1 for Samba authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable support of NTLMv1 for Samba authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable support of NTLMv1 for Samba authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 5,
+ "max_table_size_global": 5,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 162,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

@@ -9,7 +9,7 @@
 #ifndef FORTI_API_DNSFILTER_HPP
 #define FORTI_API_DNSFILTER_HPP
 
-#include "gen/dnsfilter/profile.hpp"
+#include "gen/dnsfilter.hpp"
 
 #include <algorithm>
 #include <optional>
@@ -47,15 +47,15 @@ namespace fortiapi::dnsfilter {
         const auto& filters = *profile.ftgd_dns->filters;
         auto it = detail::find(filters, category);
         if (it == filters.end()) return std::nullopt;
-        return it->action.value_or(std::string(profile::ftgd_dns::filters::action::monitor));
+        return it->action.value_or(std::string(Profile::FtgdDns::FiltersEntry::Action::monitor));
     }
 
     inline void block_category(Profile& profile, std::uint32_t category) {
-        detail::set_action(profile, category, profile::ftgd_dns::filters::action::block);
+        detail::set_action(profile, category, Profile::FtgdDns::FiltersEntry::Action::block);
     }
 
     inline void monitor_category(Profile& profile, std::uint32_t category) {
-        detail::set_action(profile, category, profile::ftgd_dns::filters::action::monitor);
+        detail::set_action(profile, category, Profile::FtgdDns::FiltersEntry::Action::monitor);
     }
 
     // Removes the category's filter; does nothing (and marks nothing) when it is not listed.

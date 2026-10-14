@@ -1,0 +1,109 @@
+{
+ "name": "key-chain",
+ "category": "table",
+ "help": "Configure key-chain.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Key-chain name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "key": {
+   "name": "key",
+   "category": "table",
+   "help": "Configuration method to edit key settings.",
+   "mkey": "id",
+   "mkey_type": "string",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Key ID (0 - 2147483647).",
+     "required": true,
+     "size": 10,
+     "default": "",
+     "multiple_values": false
+    },
+    "accept-lifetime": {
+     "name": "accept-lifetime",
+     "category": "unitary",
+     "type": "user",
+     "help": "Lifetime of received authentication key (format: hh:mm:ss day month year).",
+     "required": true,
+     "default": "",
+     "multiple_values": false
+    },
+    "send-lifetime": {
+     "name": "send-lifetime",
+     "category": "unitary",
+     "type": "user",
+     "help": "Lifetime of sent authentication key (format: hh:mm:ss day month year).",
+     "required": true,
+     "default": "",
+     "multiple_values": false
+    },
+    "key-string": {
+     "name": "key-string",
+     "category": "unitary",
+     "type": "password",
+     "help": "Password for the key (maximum = 64 characters).",
+     "required": true,
+     "size": 60,
+     "multiple_values": false
+    },
+    "algorithm": {
+     "name": "algorithm",
+     "category": "unitary",
+     "type": "option",
+     "help": "Cryptographic algorithm.",
+     "options": [
+      {
+       "name": "md5",
+       "help": "MD5."
+      },
+      {
+       "name": "hmac-sha1",
+       "help": "HMAC-SHA1."
+      },
+      {
+       "name": "hmac-sha256",
+       "help": "HMAC-SHA256."
+      },
+      {
+       "name": "hmac-sha384",
+       "help": "HMAC-SHA384."
+      },
+      {
+       "name": "hmac-sha512",
+       "help": "HMAC-SHA512."
+      },
+      {
+       "name": "cmac-aes128",
+       "help": "CMAC-AES128."
+      }
+     ],
+     "default": "md5",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 20
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "router",
+ "q_type": 119,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

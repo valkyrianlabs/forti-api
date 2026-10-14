@@ -1,0 +1,351 @@
+{
+ "name": "domain-controller",
+ "category": "table",
+ "help": "Configure domain controller entries.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain controller entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ad-mode": {
+   "name": "ad-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set Active Directory mode.",
+   "options": [
+    {
+     "name": "none",
+     "help": "The server is not configured as an Active Directory Domain Server (AD DS)."
+    },
+    {
+     "name": "ds",
+     "help": "The server is configured as an Active Directory Domain Server (AD DS)."
+    },
+    {
+     "name": "lds",
+     "help": "The server is an Active Directory Lightweight Domain Server (AD LDS)."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "hostname": {
+   "name": "hostname",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hostname of the server to connect to.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name to sign in with. Must have proper permissions for service.",
+   "required": true,
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password for specified username.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "ip-address": {
+   "name": "ip-address",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Domain controller IPv4 address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ip6": {
+   "name": "ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Domain controller IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to be used for communication with the domain controller (default = 445).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 445,
+   "multiple_values": false
+  },
+  "source-ip-address": {
+   "name": "source-ip-address",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "FortiGate IPv4 address to be used for communication with the domain controller.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "FortiGate IPv6 address to be used for communication with the domain controller.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "source-port": {
+   "name": "source-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Source port to be used for communication with the domain controller.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "extra-server": {
+   "name": "extra-server",
+   "category": "table",
+   "help": "Extra servers.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Server ID.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 100,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip-address": {
+     "name": "ip-address",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Domain controller IP address.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port to be used for communication with the domain controller (default = 445).",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 445,
+     "multiple_values": false
+    },
+    "source-ip-address": {
+     "name": "source-ip-address",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "FortiGate IPv4 address to be used for communication with the domain controller.",
+     "required": true,
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "source-port": {
+     "name": "source-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Source port to be used for communication with the domain controller.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "domain-name": {
+   "name": "domain-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain DNS name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "replication-port": {
+   "name": "replication-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to be used for communication with the domain controller for replication service. Port number 0 indicates automatic discovery.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ldap-server": {
+   "name": "ldap-server",
+   "category": "table",
+   "help": "LDAP server name(s).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "LDAP server name.",
+     "required": true,
+     "datasource": [
+      "user.ldap.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "change-detection": {
+   "name": "change-detection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable detection of a configuration change in the Active Directory server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable detection of a configuration change in the Active Directory server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable detection of a configuration change in the Active Directory server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "change-detection-period": {
+   "name": "change-detection-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minutes to detect a configuration change in the Active Directory server (5 - 10080 minutes (7 days), default = 60).",
+   "min-value": 5,
+   "max-value": 10080,
+   "default": 60,
+   "multiple_values": false
+  },
+  "dns-srv-lookup": {
+   "name": "dns-srv-lookup",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DNS service lookup.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DNS service lookup."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DNS service lookup."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "adlds-dn": {
+   "name": "adlds-dn",
+   "category": "unitary",
+   "type": "string",
+   "help": "AD LDS distinguished name.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "adlds-ip-address": {
+   "name": "adlds-ip-address",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "AD LDS IPv4 address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "adlds-ip6": {
+   "name": "adlds-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "AD LDS IPv6 address.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "adlds-port": {
+   "name": "adlds-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number of AD LDS service (default = 389).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 389,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 26,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

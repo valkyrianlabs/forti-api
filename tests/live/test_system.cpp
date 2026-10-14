@@ -15,7 +15,7 @@ TEST(System, Wan1HasAnIpv4Address) {
 
 TEST(System, Wan1IsAPhysicalInterface) {
     auto wan1 = system::Interfaces::get("wan1");
-    EXPECT_EQ(*wan1.type, system::interface::type::physical);
+    EXPECT_EQ(*wan1.type, system::Interface::Type::physical);
     EXPECT_EQ(*wan1.vdom, "root");
 }
 
@@ -24,7 +24,7 @@ TEST(System, ApiUsersTrusthostsParse) {
         if (!user.trusthost) continue;
         for (const auto& host: *user.trusthost) {
             ASSERT_TRUE(host.type.has_value());
-            if (*host.type == system::api_user::trusthost::type::ipv4_trusthost) {
+            if (*host.type == system::ApiUser::TrusthostEntry::Type::ipv4_trusthost) {
                 EXPECT_TRUE(system::trusts(user, *host.ipv4_trusthost)) << *host.ipv4_trusthost;
             }
         }

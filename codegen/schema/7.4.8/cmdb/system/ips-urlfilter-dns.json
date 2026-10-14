@@ -1,0 +1,60 @@
+{
+ "name": "ips-urlfilter-dns",
+ "category": "table",
+ "help": "Configure IPS URL filter DNS servers.",
+ "mkey": "address",
+ "mkey_type": "ipv4-address",
+ "children": {
+  "address": {
+   "name": "address",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "DNS server IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using this DNS server for IPS URL filter DNS queries.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this DNS server for IPS URL filter DNS queries."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this DNS server for IPS URL filter DNS queries."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipv6-capability": {
+   "name": "ipv6-capability",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this server for IPv6 queries.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 20,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 470,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

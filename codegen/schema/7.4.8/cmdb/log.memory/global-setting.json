@@ -1,0 +1,51 @@
+{
+ "name": "global-setting",
+ "category": "complex",
+ "help": "Global settings for memory logging.",
+ "children": {
+  "max-size": {
+   "name": "max-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum amount of memory that can be used for memory logging in bytes.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 20109598,
+   "multiple_values": false
+  },
+  "full-first-warning-threshold": {
+   "name": "full-first-warning-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log full first warning threshold as a percent (1 - 98, default = 75).",
+   "min-value": 1,
+   "max-value": 98,
+   "default": 75,
+   "multiple_values": false
+  },
+  "full-second-warning-threshold": {
+   "name": "full-second-warning-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log full second warning threshold as a percent (2 - 99, default = 90).",
+   "min-value": 2,
+   "max-value": 99,
+   "default": 90,
+   "multiple_values": false
+  },
+  "full-final-warning-threshold": {
+   "name": "full-final-warning-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Log full final warning threshold as a percent (3 - 100, default = 95).",
+   "min-value": 3,
+   "max-value": 100,
+   "default": 95,
+   "multiple_values": false
+  }
+ },
+ "path": "log.memory",
+ "q_type": 225,
+ "access_group": "loggrp",
+ "object_range": "global"
+}

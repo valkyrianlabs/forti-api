@@ -1,0 +1,58 @@
+{
+ "name": "tos-based-priority",
+ "category": "table",
+ "help": "Configure Type of Service (ToS) based priority table to set network traffic priorities.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Item ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tos": {
+   "name": "tos",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Value of the ToS byte in the IP datagram header (0-15, 8: minimize delay, 4: maximize throughput, 2: maximize reliability, 1: minimize monetary cost, and 0: default service).",
+   "min-value": 0,
+   "max-value": 15,
+   "default": 0,
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "ToS based priority level to low, medium or high (these priorities match firewall traffic shaping priorities) (default = medium).",
+   "options": [
+    {
+     "name": "low",
+     "help": "Low priority."
+    },
+    {
+     "name": "medium",
+     "help": "Medium priority."
+    },
+    {
+     "name": "high",
+     "help": "High priority."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 207,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

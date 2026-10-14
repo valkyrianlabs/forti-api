@@ -7,9 +7,11 @@
 #define FORTI_API_MONITOR_HPP
 
 #include "client.hpp"
+#include "field.hpp"
 
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace fortiapi {
 
@@ -30,6 +32,28 @@ namespace fortiapi {
         static nlohmann::json post(std::string_view relative, const nlohmann::json& body, const Query& query = {},
                                    Client& client = default_client()) {
             return client.post(path(relative), body, query);
+        }
+    };
+
+    // A generated read-only monitor endpoint. Spec names the result type, the path (relative to
+    // monitor/) and whether `results` is a list. Result types come from response shapes recorded on
+    // a real device, so every attribute is a Field<T> and unknown attributes are ignored.
+    template<typename Spec>
+    struct MonitorGet {
+        using type = typename Spec::type;
+        using result_type = std::conditional_t<Spec::list, std::vector<type>, type>;
+
+        static constexpr std::string_view path = Spec::path;
+
+        static result_type get(const Query& query = {}, Client& client = default_client()) {
+            auto results = Monitor::get(path, query, client);
+            try {
+                return from_json<result_type>(results);
+            } catch (const detail::DecodeFailure& failure) {
+                throw DecodeError("monitor/" + std::string(path) + ": attribute " + failure.what());
+            } catch (const nlohmann::json::exception& error) {
+                throw DecodeError("monitor/" + std::string(path) + ": " + error.what());
+            }
         }
     };
 

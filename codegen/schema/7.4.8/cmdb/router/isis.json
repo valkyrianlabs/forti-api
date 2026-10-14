@@ -1,0 +1,1317 @@
+{
+ "name": "isis",
+ "category": "complex",
+ "help": "Configure IS-IS.",
+ "children": {
+  "is-type": {
+   "name": "is-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IS type.",
+   "options": [
+    {
+     "name": "level-1-2",
+     "help": "Level 1 and 2."
+    },
+    {
+     "name": "level-1",
+     "help": "Level 1 only."
+    },
+    {
+     "name": "level-2-only",
+     "help": "Level 2 only."
+    }
+   ],
+   "default": "level-1-2",
+   "multiple_values": false
+  },
+  "adv-passive-only": {
+   "name": "adv-passive-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IS-IS advertisement of passive interfaces only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Advertise passive interfaces only."
+    },
+    {
+     "name": "disable",
+     "help": "Advertise all IS-IS enabled interfaces."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "adv-passive-only6": {
+   "name": "adv-passive-only6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 IS-IS advertisement of passive interfaces only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Advertise passive interfaces only."
+    },
+    {
+     "name": "disable",
+     "help": "Advertise all IS-IS enabled interfaces."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-mode-l1": {
+   "name": "auth-mode-l1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Level 1 authentication mode.",
+   "options": [
+    {
+     "name": "password",
+     "help": "Password."
+    },
+    {
+     "name": "md5",
+     "help": "MD5."
+    }
+   ],
+   "default": "password",
+   "multiple_values": false
+  },
+  "auth-mode-l2": {
+   "name": "auth-mode-l2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Level 2 authentication mode.",
+   "options": [
+    {
+     "name": "password",
+     "help": "Password."
+    },
+    {
+     "name": "md5",
+     "help": "MD5."
+    }
+   ],
+   "default": "password",
+   "multiple_values": false
+  },
+  "auth-password-l1": {
+   "name": "auth-password-l1",
+   "category": "unitary",
+   "type": "password",
+   "help": "Authentication password for level 1 PDUs.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "auth-password-l2": {
+   "name": "auth-password-l2",
+   "category": "unitary",
+   "type": "password",
+   "help": "Authentication password for level 2 PDUs.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "auth-keychain-l1": {
+   "name": "auth-keychain-l1",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication key-chain for level 1 PDUs.",
+   "datasource": [
+    "router.key-chain.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-keychain-l2": {
+   "name": "auth-keychain-l2",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication key-chain for level 2 PDUs.",
+   "datasource": [
+    "router.key-chain.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-sendonly-l1": {
+   "name": "auth-sendonly-l1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable level 1 authentication send-only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable level 1 authentication send-only."
+    },
+    {
+     "name": "disable",
+     "help": "Disable level 1 authentication send-only."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-sendonly-l2": {
+   "name": "auth-sendonly-l2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable level 2 authentication send-only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable level 2 authentication send-only."
+    },
+    {
+     "name": "disable",
+     "help": "Disable level 2 authentication send-only."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ignore-lsp-errors": {
+   "name": "ignore-lsp-errors",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ignoring of LSP errors with bad checksums.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable ignoring of LSP errors with bad checksums."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ignoring of LSP errors with bad checksums."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "lsp-gen-interval-l1": {
+   "name": "lsp-gen-interval-l1",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum interval for level 1 LSP regenerating.",
+   "min-value": 1,
+   "max-value": 120,
+   "default": 30,
+   "multiple_values": false
+  },
+  "lsp-gen-interval-l2": {
+   "name": "lsp-gen-interval-l2",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum interval for level 2 LSP regenerating.",
+   "min-value": 1,
+   "max-value": 120,
+   "default": 30,
+   "multiple_values": false
+  },
+  "lsp-refresh-interval": {
+   "name": "lsp-refresh-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "LSP refresh time in seconds.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 900,
+   "multiple_values": false
+  },
+  "max-lsp-lifetime": {
+   "name": "max-lsp-lifetime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum LSP lifetime in seconds.",
+   "min-value": 350,
+   "max-value": 65535,
+   "default": 1200,
+   "multiple_values": false
+  },
+  "spf-interval-exp-l1": {
+   "name": "spf-interval-exp-l1",
+   "category": "unitary",
+   "type": "user",
+   "help": "Level 1 SPF calculation delay.",
+   "default": "",
+   "multiple_values": false
+  },
+  "spf-interval-exp-l2": {
+   "name": "spf-interval-exp-l2",
+   "category": "unitary",
+   "type": "user",
+   "help": "Level 2 SPF calculation delay.",
+   "default": "",
+   "multiple_values": false
+  },
+  "dynamic-hostname": {
+   "name": "dynamic-hostname",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dynamic hostname.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dynamic hostname."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dynamic hostname."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "adjacency-check": {
+   "name": "adjacency-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable adjacency check.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable adjacency check."
+    },
+    {
+     "name": "disable",
+     "help": "Disable adjacency check."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "adjacency-check6": {
+   "name": "adjacency-check6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 adjacency check.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPv6 adjacency check."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPv6 adjacency check."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "overload-bit": {
+   "name": "overload-bit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable signal other routers not to use us in SPF.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable overload bit."
+    },
+    {
+     "name": "disable",
+     "help": "Disable overload bit."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "overload-bit-suppress": {
+   "name": "overload-bit-suppress",
+   "category": "unitary",
+   "type": "option",
+   "help": "Suppress overload-bit for the specific prefixes.",
+   "options": [
+    {
+     "name": "external",
+     "help": "External."
+    },
+    {
+     "name": "interlevel",
+     "help": "Inter-level."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "overload-bit-on-startup": {
+   "name": "overload-bit-on-startup",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Overload-bit only temporarily after reboot.",
+   "min-value": 5,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "default-originate": {
+   "name": "default-originate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable distribution of default route information.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable distribution of default route information."
+    },
+    {
+     "name": "disable",
+     "help": "Disable distribution of default route information."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-originate6": {
+   "name": "default-originate6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable distribution of default IPv6 route information.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable distribution of default IPv6 route information."
+    },
+    {
+     "name": "disable",
+     "help": "Disable distribution of default IPv6 route information."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "metric-style": {
+   "name": "metric-style",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use old-style (ISO 10589) or new-style packet formats.",
+   "options": [
+    {
+     "name": "narrow",
+     "help": "Use old style of TLVs with narrow metric."
+    },
+    {
+     "name": "wide",
+     "help": "Use new style of TLVs to carry wider metric."
+    },
+    {
+     "name": "transition",
+     "help": "Send and accept both styles of TLVs during transition."
+    },
+    {
+     "name": "narrow-transition",
+     "help": "Narrow and accept both styles of TLVs during transition."
+    },
+    {
+     "name": "narrow-transition-l1",
+     "help": "Narrow-transition level-1 only."
+    },
+    {
+     "name": "narrow-transition-l2",
+     "help": "Narrow-transition level-2 only."
+    },
+    {
+     "name": "wide-l1",
+     "help": "Wide level-1 only."
+    },
+    {
+     "name": "wide-l2",
+     "help": "Wide level-2 only."
+    },
+    {
+     "name": "wide-transition",
+     "help": "Wide and accept both styles of TLVs during transition."
+    },
+    {
+     "name": "wide-transition-l1",
+     "help": "Wide-transition level-1 only."
+    },
+    {
+     "name": "wide-transition-l2",
+     "help": "Wide-transition level-2 only."
+    },
+    {
+     "name": "transition-l1",
+     "help": "Transition level-1 only."
+    },
+    {
+     "name": "transition-l2",
+     "help": "Transition level-2 only."
+    }
+   ],
+   "default": "narrow",
+   "multiple_values": false
+  },
+  "redistribute-l1": {
+   "name": "redistribute-l1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redistribution of level 1 routes into level 2.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable redistribution of level 1 routes into level 2."
+    },
+    {
+     "name": "disable",
+     "help": "Disable redistribution of level 1 routes into level 2."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "redistribute-l1-list": {
+   "name": "redistribute-l1-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access-list for route redistribution from l1 to l2.",
+   "datasource": [
+    "router.access-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "redistribute-l2": {
+   "name": "redistribute-l2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redistribution of level 2 routes into level 1.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable redistribution of level 2 routes into level 1."
+    },
+    {
+     "name": "disable",
+     "help": "Disable redistribution of  level 2 routes into level 1."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "redistribute-l2-list": {
+   "name": "redistribute-l2-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access-list for route redistribution from l2 to l1.",
+   "datasource": [
+    "router.access-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "redistribute6-l1": {
+   "name": "redistribute6-l1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redistribution of level 1 IPv6 routes into level 2.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable redistribution of level 1 IPv6 routes into level 2."
+    },
+    {
+     "name": "disable",
+     "help": "Disable redistribution of level 1 IPv6 routes into level 2."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "redistribute6-l1-list": {
+   "name": "redistribute6-l1-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access-list for IPv6 route redistribution from l1 to l2.",
+   "datasource": [
+    "router.access-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "redistribute6-l2": {
+   "name": "redistribute6-l2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redistribution of level 2 IPv6 routes into level 1.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable redistribution of level 2 IPv6 routes into level 1."
+    },
+    {
+     "name": "disable",
+     "help": "Disable redistribution of level 2 IPv6 routes into level 1."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "redistribute6-l2-list": {
+   "name": "redistribute6-l2-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access-list for IPv6 route redistribution from l2 to l1.",
+   "datasource": [
+    "router.access-list6.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "isis-net": {
+   "name": "isis-net",
+   "category": "table",
+   "help": "IS-IS net configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ISIS network ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "net": {
+     "name": "net",
+     "category": "unitary",
+     "type": "user",
+     "help": "IS-IS networks (format = xx.xxxx.  .xxxx.xx.).",
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "isis-interface": {
+   "name": "isis-interface",
+   "category": "table",
+   "help": "IS-IS interface configuration.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IS-IS interface name.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable interface for IS-IS.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable interface for IS-IS."
+      },
+      {
+       "name": "disable",
+       "help": "Disable interface for IS-IS."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "status6": {
+     "name": "status6",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable IPv6 interface for IS-IS.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable IPv6 interface for IS-IS."
+      },
+      {
+       "name": "disable",
+       "help": "Disable IPv6 interface for IS-IS."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "network-type": {
+     "name": "network-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "IS-IS interface's network type.",
+     "options": [
+      {
+       "name": "broadcast",
+       "help": "Broadcast."
+      },
+      {
+       "name": "point-to-point",
+       "help": "Point-to-point."
+      },
+      {
+       "name": "loopback",
+       "help": "Loopback."
+      }
+     ],
+     "default": "",
+     "multiple_values": false
+    },
+    "circuit-type": {
+     "name": "circuit-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "IS-IS interface's circuit type.",
+     "options": [
+      {
+       "name": "level-1-2",
+       "help": "Level 1 and 2."
+      },
+      {
+       "name": "level-1",
+       "help": "Level 1."
+      },
+      {
+       "name": "level-2",
+       "help": "Level 2."
+      }
+     ],
+     "default": "level-1-2",
+     "multiple_values": false
+    },
+    "csnp-interval-l1": {
+     "name": "csnp-interval-l1",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 1 CSNP interval.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 10,
+     "multiple_values": false
+    },
+    "csnp-interval-l2": {
+     "name": "csnp-interval-l2",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 2 CSNP interval.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 10,
+     "multiple_values": false
+    },
+    "hello-interval-l1": {
+     "name": "hello-interval-l1",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 1 hello interval.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 10,
+     "multiple_values": false
+    },
+    "hello-interval-l2": {
+     "name": "hello-interval-l2",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 2 hello interval.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 10,
+     "multiple_values": false
+    },
+    "hello-multiplier-l1": {
+     "name": "hello-multiplier-l1",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 1 multiplier for Hello holding time.",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 3,
+     "multiple_values": false
+    },
+    "hello-multiplier-l2": {
+     "name": "hello-multiplier-l2",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 2 multiplier for Hello holding time.",
+     "min-value": 2,
+     "max-value": 100,
+     "default": 3,
+     "multiple_values": false
+    },
+    "hello-padding": {
+     "name": "hello-padding",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable padding to IS-IS hello packets.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable padding to IS-IS hello packets."
+      },
+      {
+       "name": "disable",
+       "help": "Disable padding to IS-IS hello packets."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "lsp-interval": {
+     "name": "lsp-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "LSP transmission interval (milliseconds).",
+     "min-value": 1,
+     "max-value": 4294967295,
+     "default": 33,
+     "multiple_values": false
+    },
+    "lsp-retransmit-interval": {
+     "name": "lsp-retransmit-interval",
+     "category": "unitary",
+     "type": "integer",
+     "help": "LSP retransmission interval (sec).",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 5,
+     "multiple_values": false
+    },
+    "metric-l1": {
+     "name": "metric-l1",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 1 metric for interface.",
+     "min-value": 1,
+     "max-value": 63,
+     "default": 10,
+     "multiple_values": false
+    },
+    "metric-l2": {
+     "name": "metric-l2",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 2 metric for interface.",
+     "min-value": 1,
+     "max-value": 63,
+     "default": 10,
+     "multiple_values": false
+    },
+    "wide-metric-l1": {
+     "name": "wide-metric-l1",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 1 wide metric for interface.",
+     "min-value": 1,
+     "max-value": 16777214,
+     "default": 10,
+     "multiple_values": false
+    },
+    "wide-metric-l2": {
+     "name": "wide-metric-l2",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 2 wide metric for interface.",
+     "min-value": 1,
+     "max-value": 16777214,
+     "default": 10,
+     "multiple_values": false
+    },
+    "auth-password-l1": {
+     "name": "auth-password-l1",
+     "category": "unitary",
+     "type": "password",
+     "help": "Authentication password for level 1 PDUs.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "auth-password-l2": {
+     "name": "auth-password-l2",
+     "category": "unitary",
+     "type": "password",
+     "help": "Authentication password for level 2 PDUs.",
+     "size": 128,
+     "multiple_values": false
+    },
+    "auth-keychain-l1": {
+     "name": "auth-keychain-l1",
+     "category": "unitary",
+     "type": "string",
+     "help": "Authentication key-chain for level 1 PDUs.",
+     "datasource": [
+      "router.key-chain.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "auth-keychain-l2": {
+     "name": "auth-keychain-l2",
+     "category": "unitary",
+     "type": "string",
+     "help": "Authentication key-chain for level 2 PDUs.",
+     "datasource": [
+      "router.key-chain.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "auth-send-only-l1": {
+     "name": "auth-send-only-l1",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable authentication send-only for level 1 PDUs.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable authentication send-only for level 1 PDUs."
+      },
+      {
+       "name": "disable",
+       "help": "Disable authentication send-only for level 1 PDUs."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auth-send-only-l2": {
+     "name": "auth-send-only-l2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable authentication send-only for level 2 PDUs.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable authentication send-only for level 2 PDUs."
+      },
+      {
+       "name": "disable",
+       "help": "Disable authentication send-only for level 2 PDUs."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "auth-mode-l1": {
+     "name": "auth-mode-l1",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level 1 authentication mode.",
+     "options": [
+      {
+       "name": "md5",
+       "help": "MD5."
+      },
+      {
+       "name": "password",
+       "help": "Password."
+      }
+     ],
+     "default": "password",
+     "multiple_values": false
+    },
+    "auth-mode-l2": {
+     "name": "auth-mode-l2",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level 2 authentication mode.",
+     "options": [
+      {
+       "name": "md5",
+       "help": "MD5."
+      },
+      {
+       "name": "password",
+       "help": "Password."
+      }
+     ],
+     "default": "password",
+     "multiple_values": false
+    },
+    "priority-l1": {
+     "name": "priority-l1",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 1 priority.",
+     "min-value": 0,
+     "max-value": 127,
+     "default": 64,
+     "multiple_values": false
+    },
+    "priority-l2": {
+     "name": "priority-l2",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Level 2 priority.",
+     "min-value": 0,
+     "max-value": 127,
+     "default": 64,
+     "multiple_values": false
+    },
+    "mesh-group": {
+     "name": "mesh-group",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable IS-IS mesh group.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable IS-IS mesh group."
+      },
+      {
+       "name": "disable",
+       "help": "Disable IS-IS mesh group."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "mesh-group-id": {
+     "name": "mesh-group-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Mesh group ID <0-4294967295>, 0: mesh-group blocked.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "summary-address": {
+   "name": "summary-address",
+   "category": "table",
+   "help": "IS-IS summary addresses.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Summary address entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet-any",
+     "help": "Prefix.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level.",
+     "options": [
+      {
+       "name": "level-1-2",
+       "help": "Level 1 and 2."
+      },
+      {
+       "name": "level-1",
+       "help": "Level 1."
+      },
+      {
+       "name": "level-2",
+       "help": "Level 2."
+      }
+     ],
+     "default": "level-2",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "summary-address6": {
+   "name": "summary-address6",
+   "category": "table",
+   "help": "IS-IS IPv6 summary address.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Prefix entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "prefix6": {
+     "name": "prefix6",
+     "category": "unitary",
+     "type": "ipv6-prefix",
+     "help": "IPv6 prefix.",
+     "required": true,
+     "default": "::/0",
+     "multiple_values": false
+    },
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level.",
+     "options": [
+      {
+       "name": "level-1-2",
+       "help": "Level 1 and 2."
+      },
+      {
+       "name": "level-1",
+       "help": "Level 1."
+      },
+      {
+       "name": "level-2",
+       "help": "Level 2."
+      }
+     ],
+     "default": "level-2",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "redistribute": {
+   "name": "redistribute",
+   "category": "table",
+   "help": "IS-IS redistribute protocols.",
+   "readonly": true,
+   "mkey": "protocol",
+   "mkey_type": "string",
+   "children": {
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "string",
+     "help": "Protocol name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable."
+      },
+      {
+       "name": "disable",
+       "help": "Disable."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "metric": {
+     "name": "metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Metric.",
+     "min-value": 0,
+     "max-value": 4261412864,
+     "default": 0,
+     "multiple_values": false
+    },
+    "metric-type": {
+     "name": "metric-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Metric type.",
+     "options": [
+      {
+       "name": "external",
+       "help": "External."
+      },
+      {
+       "name": "internal",
+       "help": "Internal."
+      }
+     ],
+     "default": "internal",
+     "multiple_values": false
+    },
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level.",
+     "options": [
+      {
+       "name": "level-1-2",
+       "help": "Level 1 and 2."
+      },
+      {
+       "name": "level-1",
+       "help": "Level 1."
+      },
+      {
+       "name": "level-2",
+       "help": "Level 2."
+      }
+     ],
+     "default": "level-2",
+     "multiple_values": false
+    },
+    "routemap": {
+     "name": "routemap",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route map name.",
+     "datasource": [
+      "router.route-map.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "redistribute6": {
+   "name": "redistribute6",
+   "category": "table",
+   "help": "IS-IS IPv6 redistribution for routing protocols.",
+   "readonly": true,
+   "mkey": "protocol",
+   "mkey_type": "string",
+   "children": {
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "string",
+     "help": "Protocol name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable redistribution.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable redistribution."
+      },
+      {
+       "name": "disable",
+       "help": "Disable redistribution."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "metric": {
+     "name": "metric",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Metric.",
+     "min-value": 0,
+     "max-value": 4261412864,
+     "default": 0,
+     "multiple_values": false
+    },
+    "metric-type": {
+     "name": "metric-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Metric type.",
+     "options": [
+      {
+       "name": "external",
+       "help": "External metric type."
+      },
+      {
+       "name": "internal",
+       "help": "Internal metric type."
+      }
+     ],
+     "default": "internal",
+     "multiple_values": false
+    },
+    "level": {
+     "name": "level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Level.",
+     "options": [
+      {
+       "name": "level-1-2",
+       "help": "Level 1 and 2."
+      },
+      {
+       "name": "level-1",
+       "help": "Level 1."
+      },
+      {
+       "name": "level-2",
+       "help": "Level 2."
+      }
+     ],
+     "default": "level-2",
+     "multiple_values": false
+    },
+    "routemap": {
+     "name": "routemap",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route map name.",
+     "datasource": [
+      "router.route-map.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "router",
+ "q_type": 125,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

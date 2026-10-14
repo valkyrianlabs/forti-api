@@ -1,0 +1,47 @@
+{
+ "name": "auth-path",
+ "category": "table",
+ "help": "Configure authentication based routing.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the entry.",
+   "required": true,
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "device": {
+   "name": "device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Outgoing interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "gateway": {
+   "name": "gateway",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Gateway IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "router",
+ "q_type": 228,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

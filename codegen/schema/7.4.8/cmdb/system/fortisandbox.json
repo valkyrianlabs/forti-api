@@ -1,0 +1,184 @@
+{
+ "name": "fortisandbox",
+ "category": "complex",
+ "help": "Configure FortiSandbox.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiSandbox.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiSandbox."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiSandbox."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "forticloud": {
+   "name": "forticloud",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiSandbox Cloud.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiSandbox Cloud."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiSandbox Cloud."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "inline-scan": {
+   "name": "inline-scan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiSandbox inline scan.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiSandbox inline scan."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiSandbox inline scan."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server IP address or FQDN of the remote FortiSandbox.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source IP address for communications to FortiSandbox.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "enc-algorithm": {
+   "name": "enc-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure the level of SSL protection for secure communication with FortiSandbox.",
+   "options": [
+    {
+     "name": "default",
+     "help": "SSL communication with high and medium encryption algorithms."
+    },
+    {
+     "name": "high",
+     "help": "SSL communication with high encryption algorithms."
+    },
+    {
+     "name": "low",
+     "help": "SSL communication with low encryption algorithms."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).",
+   "options": [
+    {
+     "name": "default",
+     "help": "Follow system global setting."
+    },
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "email": {
+   "name": "email",
+   "category": "unitary",
+   "type": "string",
+   "help": "Notifier email address.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 488,
+ "access_group": "secfabgrp",
+ "object_range": "global"
+}

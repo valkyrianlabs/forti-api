@@ -1,0 +1,98 @@
+{
+ "name": "sit-tunnel",
+ "category": "table",
+ "help": "Configure IPv6 tunnel over IPv4.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tunnel name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "source": {
+   "name": "source",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address of the tunnel.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "destination": {
+   "name": "destination",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Destination IP address of the tunnel.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ip6": {
+   "name": "ip6",
+   "category": "unitary",
+   "type": "ipv6-prefix",
+   "help": "IPv6 address of the tunnel.",
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "use-sdwan": {
+   "name": "use-sdwan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of SD-WAN to reach remote gateway.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of SD-WAN to reach remote gateway."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use of SD-WAN to reach remote gateway."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-asic-offload": {
+   "name": "auto-asic-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable tunnel ASIC offloading.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable auto ASIC offloading."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ASIC offloading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 4,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 1,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

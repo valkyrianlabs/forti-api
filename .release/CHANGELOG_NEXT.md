@@ -24,3 +24,7 @@ One level of nested "  - " detail bullets is allowed. Consolidate; don't paste c
 - Remove the pre-generation API (FortiAPI, FortiAuth, FortiGate::/System:: accessors, types/**);
   port DNS category, threat feed, schedule, service and trusthost helpers onto generated types.
 - Add Monitor passthrough, feed_state() and per-command error reporting for push feeds.
+- Generate all 487 cmdb endpoints (generate_all from the discovery catalog) and typed read-only
+  monitor endpoints from sanitized GUI recon shapes (MonitorGet<Spec>); per-group headers and an
+  endpoint registry. Option constants are nested in their types.
+- Decode string-keyed maps; reserve preprocessor macro names in generated identifiers.

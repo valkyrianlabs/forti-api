@@ -1,0 +1,58 @@
+{
+ "name": "arp-table",
+ "category": "table",
+ "help": "Configure ARP table.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Unique integer ID of the entry.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip": {
+   "name": "ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "mac": {
+   "name": "mac",
+   "category": "unitary",
+   "type": "mac-address",
+   "help": "MAC address.",
+   "required": true,
+   "default": "00:00:00:00:00:00",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 2000,
+ "max_table_size_global": 2000,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 209,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

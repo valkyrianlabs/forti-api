@@ -1,0 +1,151 @@
+{
+ "name": "system",
+ "category": "complex",
+ "help": "Configure system-wide switch controller settings.",
+ "children": {
+  "parallel-process-override": {
+   "name": "parallel-process-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable parallel process override.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable maximum parallel process override."
+    },
+    {
+     "name": "enable",
+     "help": "Enable maximum parallel process override."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "parallel-process": {
+   "name": "parallel-process",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of parallel processes.",
+   "min-value": 1,
+   "max-value": 24,
+   "default": 1,
+   "multiple_values": false
+  },
+  "data-sync-interval": {
+   "name": "data-sync-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time interval between collection of switch data (30 - 1800 sec, default = 60, 0 = disable).",
+   "min-value": 30,
+   "max-value": 1800,
+   "default": 60,
+   "multiple_values": false
+  },
+  "iot-weight-threshold": {
+   "name": "iot-weight-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "MAC entry's confidence value. Value is re-queried when below this value (default = 1, 0 = disable).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "iot-scan-interval": {
+   "name": "iot-scan-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IoT scan interval (2 - 10080 mins, default = 60 mins, 0 = disable).",
+   "min-value": 2,
+   "max-value": 10080,
+   "default": 60,
+   "multiple_values": false
+  },
+  "iot-holdoff": {
+   "name": "iot-holdoff",
+   "category": "unitary",
+   "type": "integer",
+   "help": "MAC entry's creation time. Time must be greater than this value for an entry to be created (0 - 10080 mins, default = 5 mins).",
+   "min-value": 0,
+   "max-value": 10080,
+   "default": 5,
+   "multiple_values": false
+  },
+  "iot-mac-idle": {
+   "name": "iot-mac-idle",
+   "category": "unitary",
+   "type": "integer",
+   "help": "MAC entry's idle time. MAC entry is removed after this value (0 - 10080 mins, default = 1440 mins).",
+   "min-value": 0,
+   "max-value": 10080,
+   "default": 1440,
+   "multiple_values": false
+  },
+  "nac-periodic-interval": {
+   "name": "nac-periodic-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Periodic time interval to run NAC engine (5 - 180 sec, default = 60).",
+   "min-value": 5,
+   "max-value": 180,
+   "default": 60,
+   "multiple_values": false
+  },
+  "dynamic-periodic-interval": {
+   "name": "dynamic-periodic-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Periodic time interval to run Dynamic port policy engine (5 - 180 sec, default = 60).",
+   "min-value": 5,
+   "max-value": 180,
+   "default": 60,
+   "multiple_values": false
+  },
+  "tunnel-mode": {
+   "name": "tunnel-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Compatible/strict tunnel mode.",
+   "options": [
+    {
+     "name": "compatible",
+     "help": "Least restrictive. Supports the widest variety of hardware and software versions."
+    },
+    {
+     "name": "moderate",
+     "help": "Moderate level of security. Supports recent generations of hardware and latest software versions."
+    },
+    {
+     "name": "strict",
+     "help": "Highest level of security. Supports only the latest generation of hardware and latest software version."
+    }
+   ],
+   "default": "compatible",
+   "multiple_values": false
+  },
+  "caputp-echo-interval": {
+   "name": "caputp-echo-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Echo interval for the caputp echo requests from swtp.",
+   "min-value": 8,
+   "max-value": 600,
+   "default": 30,
+   "multiple_values": false
+  },
+  "caputp-max-retransmit": {
+   "name": "caputp-max-retransmit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum retransmission count for the caputp tunnel packets.",
+   "min-value": 0,
+   "max-value": 64,
+   "default": 5,
+   "multiple_values": false
+  }
+ },
+ "path": "switch-controller",
+ "q_type": 336,
+ "access_group": "wifi",
+ "object_range": "global"
+}

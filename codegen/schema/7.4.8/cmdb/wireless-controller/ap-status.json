@@ -1,0 +1,65 @@
+{
+ "name": "ap-status",
+ "category": "table",
+ "help": "Configure access point status (rogue | accepted | suppressed).",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "AP ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "bssid": {
+   "name": "bssid",
+   "category": "unitary",
+   "type": "mac-address",
+   "help": "Access Point's (AP's) BSSID.",
+   "default": "00:00:00:00:00:00",
+   "multiple_values": false
+  },
+  "ssid": {
+   "name": "ssid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Access Point's (AP's) SSID.",
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Access Point's (AP's) status: rogue, accepted, or suppressed.",
+   "options": [
+    {
+     "name": "rogue",
+     "help": "Rogue AP."
+    },
+    {
+     "name": "accepted",
+     "help": "Accepted AP."
+    },
+    {
+     "name": "suppressed",
+     "help": "Suppressed AP."
+    }
+   ],
+   "default": "rogue",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 284,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,100 @@
+{
+ "name": "decrypted-traffic-mirror",
+ "category": "table",
+ "help": "Configure decrypted traffic mirror.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dstmac": {
+   "name": "dstmac",
+   "category": "unitary",
+   "type": "mac-address",
+   "help": "Set destination MAC address for mirrored traffic.",
+   "default": "ff:ff:ff:ff:ff:ff",
+   "multiple_values": false
+  },
+  "traffic-type": {
+   "name": "traffic-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Types of decrypted traffic to be mirrored.",
+   "options": [
+    {
+     "name": "ssl",
+     "help": "Mirror decrypted SSL traffic."
+    },
+    {
+     "name": "ssh",
+     "help": "Mirror decrypted SSH traffic."
+    }
+   ],
+   "default": "ssl",
+   "multiple_values": true
+  },
+  "traffic-source": {
+   "name": "traffic-source",
+   "category": "unitary",
+   "type": "option",
+   "help": "Source of decrypted traffic to be mirrored.",
+   "options": [
+    {
+     "name": "client",
+     "help": "Mirror client side decrypted traffic."
+    },
+    {
+     "name": "server",
+     "help": "Mirror server side decrypted traffic."
+    },
+    {
+     "name": "both",
+     "help": "Mirror both client and server side decrypted traffic."
+    }
+   ],
+   "default": "client",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "table",
+   "help": "Decrypted traffic mirror interface.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Decrypted traffic mirror interface.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 550,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

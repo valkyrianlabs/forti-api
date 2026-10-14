@@ -1,0 +1,472 @@
+{
+ "name": "local",
+ "category": "table",
+ "help": "Local keys and certificates.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password as a PEM file.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comment.",
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "private-key": {
+   "name": "private-key",
+   "category": "unitary",
+   "type": "user",
+   "help": "PEM format key encrypted with a password.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "certificate": {
+   "name": "certificate",
+   "category": "unitary",
+   "type": "user",
+   "help": "PEM format certificate.",
+   "default": "",
+   "multiple_values": false
+  },
+  "csr": {
+   "name": "csr",
+   "category": "unitary",
+   "type": "user",
+   "help": "Certificate Signing Request.",
+   "default": "",
+   "multiple_values": false
+  },
+  "state": {
+   "name": "state",
+   "category": "unitary",
+   "type": "user",
+   "help": "Certificate Signing Request State.",
+   "readonly": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "scep-url": {
+   "name": "scep-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "SCEP server URL.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "range": {
+   "name": "range",
+   "category": "unitary",
+   "type": "option",
+   "help": "Either a global or VDOM IP address range for the certificate.",
+   "options": [
+    {
+     "name": "global",
+     "help": "Global range."
+    },
+    {
+     "name": "vdom",
+     "help": "VDOM IP address range."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "source": {
+   "name": "source",
+   "category": "unitary",
+   "type": "option",
+   "help": "Certificate source type.",
+   "options": [
+    {
+     "name": "factory",
+     "help": "Factory installed certificate."
+    },
+    {
+     "name": "user",
+     "help": "User generated certificate."
+    },
+    {
+     "name": "bundle",
+     "help": "Bundle file certificate."
+    }
+   ],
+   "default": "user",
+   "multiple_values": false
+  },
+  "auto-regenerate-days": {
+   "name": "auto-regenerate-days",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of days to wait before expiry of an updated local certificate is requested (0 = disabled).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "auto-regenerate-days-warning": {
+   "name": "auto-regenerate-days-warning",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of days to wait before an expiry warning message is generated (0 = disabled).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "scep-password": {
+   "name": "scep-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "SCEP server challenge password for auto-regeneration.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "ca-identifier": {
+   "name": "ca-identifier",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA identifier of the CA server for signing via SCEP.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "name-encoding": {
+   "name": "name-encoding",
+   "category": "unitary",
+   "type": "option",
+   "help": "Name encoding method for auto-regeneration.",
+   "options": [
+    {
+     "name": "printable",
+     "help": "Printable encoding (default)."
+    },
+    {
+     "name": "utf8",
+     "help": "UTF-8 encoding."
+    }
+   ],
+   "default": "printable",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address for communications to the SCEP server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ike-localid": {
+   "name": "ike-localid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local ID the FortiGate uses for authentication as a VPN client.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ike-localid-type": {
+   "name": "ike-localid-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IKE local ID type.",
+   "options": [
+    {
+     "name": "asn1dn",
+     "help": "ASN.1 distinguished name."
+    },
+    {
+     "name": "fqdn",
+     "help": "Fully qualified domain name."
+    }
+   ],
+   "default": "asn1dn",
+   "multiple_values": false
+  },
+  "enroll-protocol": {
+   "name": "enroll-protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Certificate enrollment protocol.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None (default)."
+    },
+    {
+     "name": "scep",
+     "help": "Simple Certificate Enrollment Protocol."
+    },
+    {
+     "name": "cmpv2",
+     "help": "Certificate Management Protocol Version 2."
+    },
+    {
+     "name": "acme2",
+     "help": "Automated Certificate Management Environment Version 2."
+    },
+    {
+     "name": "est",
+     "help": "Enrollment over Secure Transport."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "private-key-retain": {
+   "name": "private-key-retain",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable retention of private key during SCEP renewal (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Keep the existing private key during SCEP renewal."
+    },
+    {
+     "name": "disable",
+     "help": "Generate a new private key during SCEP renewal."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cmp-server": {
+   "name": "cmp-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address and port for CMP server (format = address:port).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "cmp-path": {
+   "name": "cmp-path",
+   "category": "unitary",
+   "type": "string",
+   "help": "Path location inside CMP server.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "cmp-server-cert": {
+   "name": "cmp-server-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "CMP server certificate.",
+   "datasource": [
+    "certificate.ca.name",
+    "certificate.remote.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "cmp-regeneration-method": {
+   "name": "cmp-regeneration-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "CMP auto-regeneration method.",
+   "options": [
+    {
+     "name": "keyupate",
+     "help": "Key Update."
+    },
+    {
+     "name": "renewal",
+     "help": "Renewal."
+    }
+   ],
+   "default": "keyupate",
+   "multiple_values": false
+  },
+  "acme-ca-url": {
+   "name": "acme-ca-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "The URL for the ACME CA server (Let's Encrypt is the default provider).",
+   "required": true,
+   "size": 255,
+   "default": "https://acme-v02.api.letsencrypt.org/directory",
+   "multiple_values": false
+  },
+  "acme-domain": {
+   "name": "acme-domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "A valid domain that resolves to this FortiGate unit.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "acme-email": {
+   "name": "acme-email",
+   "category": "unitary",
+   "type": "string",
+   "help": "Contact email address that is required by some CAs like LetsEncrypt.",
+   "required": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "acme-rsa-key-size": {
+   "name": "acme-rsa-key-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Length of the RSA private key of the generated cert (Minimum 2048 bits).",
+   "min-value": 2048,
+   "max-value": 4096,
+   "default": 2048,
+   "multiple_values": false
+  },
+  "acme-renew-window": {
+   "name": "acme-renew-window",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Beginning of the renewal window (in days before certificate expiration, 30 by default).",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 30,
+   "multiple_values": false
+  },
+  "est-server": {
+   "name": "est-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address and port for EST server (e.g. https://example.com:1234).",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "est-ca-id": {
+   "name": "est-ca-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA identifier of the CA server for signing via EST.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "est-http-username": {
+   "name": "est-http-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTP Authentication username for signing via EST.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "est-http-password": {
+   "name": "est-http-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "HTTP Authentication password for signing via EST.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "est-client-cert": {
+   "name": "est-client-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate used to authenticate this FortiGate to EST server.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "est-server-cert": {
+   "name": "est-server-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "EST server's certificate must be verifiable by this certificate to be authenticated.",
+   "datasource": [
+    "certificate.ca.name",
+    "certificate.remote.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "est-srp-username": {
+   "name": "est-srp-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "EST SRP authentication username.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "est-srp-password": {
+   "name": "est-srp-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "EST SRP authentication password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "est-regeneration-method": {
+   "name": "est-regeneration-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "EST behavioral options during re-enrollment.",
+   "options": [
+    {
+     "name": "create-new-key",
+     "help": "Create new private key during re-enrollment."
+    },
+    {
+     "name": "use-existing-key",
+     "help": "Reuse existing private key during re-enrollment."
+    }
+   ],
+   "default": "create-new-key",
+   "multiple_values": false
+  },
+  "details": {
+   "name": "details",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "Print local certificate detailed information.",
+   "children": {
+    "<certficate name>": {
+     "name": "<certficate name>",
+     "category": "info-read-only",
+     "type": "value",
+     "help": "Local certificate name."
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "certificate",
+ "q_type": 167,
+ "access_group": "vpngrp",
+ "object_range": "global"
+}

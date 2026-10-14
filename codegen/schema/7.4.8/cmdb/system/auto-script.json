@@ -1,0 +1,91 @@
+{
+ "name": "auto-script",
+ "category": "table",
+ "help": "Configure auto script.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Auto script name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "interval": {
+   "name": "interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Repeat interval in seconds.",
+   "min-value": 0,
+   "max-value": 31557600,
+   "default": 0,
+   "multiple_values": false
+  },
+  "repeat": {
+   "name": "repeat",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of times to repeat this script (0 = infinite).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "start": {
+   "name": "start",
+   "category": "unitary",
+   "type": "option",
+   "help": "Script starting mode.",
+   "options": [
+    {
+     "name": "manual",
+     "help": "Starting manually."
+    },
+    {
+     "name": "auto",
+     "help": "Starting automatically."
+    }
+   ],
+   "default": "manual",
+   "multiple_values": false
+  },
+  "script": {
+   "name": "script",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "List of FortiOS CLI commands to repeat.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "output-size": {
+   "name": "output-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of megabytes to limit script output to (10 - 1024, default = 10).",
+   "min-value": 10,
+   "max-value": 1024,
+   "default": 10,
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum running time for this script in seconds (0 = no timeout).",
+   "min-value": 0,
+   "max-value": 300,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 500,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

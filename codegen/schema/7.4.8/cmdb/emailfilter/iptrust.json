@@ -1,0 +1,124 @@
+{
+ "name": "iptrust",
+ "category": "table",
+ "help": "Configure AntiSpam IP trust.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "Spam filter trusted IP addresses.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable status.",
+     "required": true,
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable status."
+      },
+      {
+       "name": "disable",
+       "help": "Disable status."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Trusted IP entry ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "addr-type": {
+     "name": "addr-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Type of address.",
+     "required": true,
+     "options": [
+      {
+       "name": "ipv4",
+       "help": "IPv4 Address type."
+      },
+      {
+       "name": "ipv6",
+       "help": "IPv6 Address type."
+      }
+     ],
+     "default": "ipv4",
+     "multiple_values": false
+    },
+    "ip4-subnet": {
+     "name": "ip4-subnet",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "IPv4 network address or network address/subnet mask bits.",
+     "required": true,
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "ip6-subnet": {
+     "name": "ip6-subnet",
+     "category": "unitary",
+     "type": "ipv6-network",
+     "help": "IPv6 network address/subnet mask bits.",
+     "required": true,
+     "default": "::/128",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 20000,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "emailfilter",
+ "q_type": 158,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,81 @@
+{
+ "name": "server-group",
+ "category": "table",
+ "help": "Configure an ICAP server group consisting of multiple forward servers. Supports failover and load balancing.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Configure an ICAP server group consisting one or multiple forward servers. Supports failover and load balancing.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ldb-method": {
+   "name": "ldb-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Load balance method.",
+   "options": [
+    {
+     "name": "weighted",
+     "help": "Load balance traffic to forward servers based on assigned weights."
+    },
+    {
+     "name": "least-session",
+     "help": "Send new sessions to the server with lowest session count."
+    },
+    {
+     "name": "active-passive",
+     "help": "Send new sessions to active server with high weight."
+    }
+   ],
+   "default": "weighted",
+   "multiple_values": false
+  },
+  "server-list": {
+   "name": "server-list",
+   "category": "table",
+   "help": "Add ICAP servers to a list to form a server group. Optionally assign weights to each server.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "ICAP server name.",
+     "datasource": [
+      "icap.server.name"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "weight": {
+     "name": "weight",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Optionally assign a weight of the forwarding server for weighted load balancing (1 - 100, default = 10).",
+     "min-value": 1,
+     "max-value": 100,
+     "default": 10,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "icap",
+ "q_type": 461,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

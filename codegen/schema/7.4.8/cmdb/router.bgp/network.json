@@ -1,0 +1,87 @@
+{
+ "name": "network",
+ "category": "table",
+ "help": "BGP network table.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "prefix": {
+   "name": "prefix",
+   "category": "unitary",
+   "type": "ipv4-classnet",
+   "help": "Network prefix.",
+   "required": true,
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "network-import-check": {
+   "name": "network-import-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure insurance of BGP network route existence in IGP.",
+   "options": [
+    {
+     "name": "global",
+     "help": "Use global network sync value."
+    },
+    {
+     "name": "enable",
+     "help": "Enable network sync per prefix."
+    },
+    {
+     "name": "disable",
+     "help": "Disable network sync per prefix."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "backdoor": {
+   "name": "backdoor",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable route as backdoor.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "route-map": {
+   "name": "route-map",
+   "category": "unitary",
+   "type": "string",
+   "help": "Route map to modify generated route.",
+   "datasource": [
+    "router.route-map.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "router.bgp",
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,85 @@
+{
+ "name": "metadata-map",
+ "category": "table",
+ "help": "configure ips metadata-map",
+ "hidden": true,
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "id",
+   "required": true,
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "integer",
+   "help": "type",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "name",
+   "readonly": true,
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "values": {
+   "name": "values",
+   "category": "table",
+   "help": "Meta data values.",
+   "mkey": "subid",
+   "mkey_type": "integer",
+   "children": {
+    "subid": {
+     "name": "subid",
+     "category": "unitary",
+     "type": "integer",
+     "help": "subid",
+     "required": true,
+     "readonly": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "subname": {
+     "name": "subname",
+     "category": "unitary",
+     "type": "string",
+     "help": "subname",
+     "readonly": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "ips",
+ "q_type": 246,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

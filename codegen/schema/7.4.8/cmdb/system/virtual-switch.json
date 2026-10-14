@@ -1,0 +1,142 @@
+{
+ "name": "virtual-switch",
+ "category": "table",
+ "help": "Configure virtual hardware switch interfaces.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the virtual switch.",
+   "required": true,
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "physical-switch": {
+   "name": "physical-switch",
+   "category": "unitary",
+   "type": "string",
+   "help": "Physical switch parent.",
+   "required": true,
+   "datasource": [
+    "system.physical-switch.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "vlan": {
+   "name": "vlan",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VLAN.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "table",
+   "help": "Configure member ports.",
+   "required": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Physical interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "alias": {
+     "name": "alias",
+     "category": "unitary",
+     "type": "string",
+     "help": "Alias.",
+     "size": 25,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "span": {
+   "name": "span",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SPAN.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable SPAN."
+    },
+    {
+     "name": "enable",
+     "help": "Enable SPAN."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "span-source-port": {
+   "name": "span-source-port",
+   "category": "unitary",
+   "type": "string",
+   "help": "SPAN source port.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "span-dest-port": {
+   "name": "span-dest-port",
+   "category": "unitary",
+   "type": "string",
+   "help": "SPAN destination port.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "span-direction": {
+   "name": "span-direction",
+   "category": "unitary",
+   "type": "option",
+   "help": "SPAN direction.",
+   "options": [
+    {
+     "name": "rx",
+     "help": "SPAN receive direction only."
+    },
+    {
+     "name": "tx",
+     "help": "SPAN transmit direction only."
+    },
+    {
+     "name": "both",
+     "help": "SPAN both directions."
+    }
+   ],
+   "default": "both",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 232,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

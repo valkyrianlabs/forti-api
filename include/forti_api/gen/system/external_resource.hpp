@@ -15,6 +15,42 @@ namespace fortiapi::system {
 
 // Configure external resource.
 struct ExternalResource {
+    // Values of Status: Enable/disable user resource.
+    struct Status {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Type: User resource type.
+    struct Type {
+        static constexpr std::string_view category = "category";
+        static constexpr std::string_view domain = "domain";
+        static constexpr std::string_view malware = "malware";
+        static constexpr std::string_view address = "address";
+        static constexpr std::string_view mac_address = "mac-address";
+        static constexpr std::string_view data = "data";
+    };
+
+    // Values of UpdateMethod: External resource update method.
+    struct UpdateMethod {
+        static constexpr std::string_view feed = "feed";
+        static constexpr std::string_view push = "push";
+    };
+
+    // Values of ServerIdentityCheck: Certificate verification option.
+    struct ServerIdentityCheck {
+        static constexpr std::string_view none = "none";
+        static constexpr std::string_view basic = "basic";
+        static constexpr std::string_view full = "full";
+    };
+
+    // Values of InterfaceSelectMethod: Specify how to select outgoing interface to reach server.
+    struct InterfaceSelectMethod {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view sdwan = "sdwan";
+        static constexpr std::string_view specify = "specify";
+    };
+
     fortiapi::Field<std::string> name;  // External resource name. Required.
     fortiapi::Field<std::string> uuid;  // Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
     fortiapi::Field<std::string> status;  // Enable/disable user resource.
@@ -60,34 +96,6 @@ struct ExternalResourceSpec {
 };
 
 using ExternalResources = fortiapi::Table<ExternalResourceSpec>;
-
-// Allowed values of option attributes.
-namespace external_resource::status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace external_resource::type {
-    inline constexpr std::string_view category = "category";
-    inline constexpr std::string_view domain = "domain";
-    inline constexpr std::string_view malware = "malware";
-    inline constexpr std::string_view address = "address";
-    inline constexpr std::string_view mac_address = "mac-address";
-    inline constexpr std::string_view data = "data";
-}
-namespace external_resource::update_method {
-    inline constexpr std::string_view feed = "feed";
-    inline constexpr std::string_view push = "push";
-}
-namespace external_resource::server_identity_check {
-    inline constexpr std::string_view none = "none";
-    inline constexpr std::string_view basic = "basic";
-    inline constexpr std::string_view full = "full";
-}
-namespace external_resource::interface_select_method {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view sdwan = "sdwan";
-    inline constexpr std::string_view specify = "specify";
-}
 
 }  // namespace fortiapi::system
 

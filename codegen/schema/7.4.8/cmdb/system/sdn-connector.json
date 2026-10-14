@@ -1,0 +1,993 @@
+{
+ "name": "sdn-connector",
+ "category": "table",
+ "help": "Configure connection to SDN Connector.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN connector name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable connection to the remote SDN connector.",
+   "required": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable connection to this SDN Connector."
+    },
+    {
+     "name": "enable",
+     "help": "Enable connection to this SDN Connector."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of SDN connector.",
+   "required": true,
+   "options": [
+    {
+     "name": "aci",
+     "help": "Application Centric Infrastructure (ACI)."
+    },
+    {
+     "name": "alicloud",
+     "help": "AliCloud Service (ACS)."
+    },
+    {
+     "name": "aws",
+     "help": "Amazon Web Services (AWS)."
+    },
+    {
+     "name": "azure",
+     "help": "Microsoft Azure."
+    },
+    {
+     "name": "gcp",
+     "help": "Google Cloud Platform (GCP)."
+    },
+    {
+     "name": "nsx",
+     "help": "VMware NSX."
+    },
+    {
+     "name": "nuage",
+     "help": "Nuage VSP."
+    },
+    {
+     "name": "oci",
+     "help": "Oracle Cloud Infrastructure."
+    },
+    {
+     "name": "openstack",
+     "help": "OpenStack."
+    },
+    {
+     "name": "kubernetes",
+     "help": "Kubernetes."
+    },
+    {
+     "name": "vmware",
+     "help": "VMware vSphere (vCenter & ESXi)."
+    },
+    {
+     "name": "sepm",
+     "help": "Symantec Endpoint Protection Manager."
+    },
+    {
+     "name": "aci-direct",
+     "help": "Application Centric Infrastructure (ACI Direct Connection)."
+    },
+    {
+     "name": "ibm",
+     "help": "IBM Cloud Infrastructure."
+    },
+    {
+     "name": "nutanix",
+     "help": "Nutanix Prism Central."
+    },
+    {
+     "name": "sap",
+     "help": "SAP Control."
+    }
+   ],
+   "default": "aws",
+   "multiple_values": false
+  },
+  "proxy": {
+   "name": "proxy",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN proxy.",
+   "datasource": [
+    "system.sdn-proxy.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "use-metadata-iam": {
+   "name": "use-metadata-iam",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of IAM role from metadata to call API.",
+   "required": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable using IAM role to call API."
+    },
+    {
+     "name": "enable",
+     "help": "Enable using IAM role to call API."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ha-status": {
+   "name": "ha-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use for FortiGate HA service.",
+   "required": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use for FortiGate HA service."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use for FortiGate HA service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "verify-certificate": {
+   "name": "verify-certificate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable server certificate verification.",
+   "required": true,
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable server certificate verification."
+    },
+    {
+     "name": "enable",
+     "help": "Enable server certificate verification."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server address of the remote SDN connector.",
+   "required": true,
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-list": {
+   "name": "server-list",
+   "category": "table",
+   "help": "Server address list of the remote SDN connector.",
+   "required": true,
+   "member_table": true,
+   "mkey": "ip",
+   "mkey_type": "string",
+   "children": {
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv4 address.",
+     "required": true,
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "server-port": {
+   "name": "server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number of the remote SDN connector.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Username of the remote SDN connector as login credentials.",
+   "required": true,
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password_aes256",
+   "help": "Password of the remote SDN connector as login credentials.",
+   "required": true,
+   "multiple_values": false
+  },
+  "vcenter-server": {
+   "name": "vcenter-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "vCenter server address for NSX quarantine.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "vcenter-username": {
+   "name": "vcenter-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "vCenter server username for NSX quarantine.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "vcenter-password": {
+   "name": "vcenter-password",
+   "category": "unitary",
+   "type": "password_aes256",
+   "help": "vCenter server password for NSX quarantine.",
+   "multiple_values": false
+  },
+  "access-key": {
+   "name": "access-key",
+   "category": "unitary",
+   "type": "string",
+   "help": "AWS / ACS access key ID.",
+   "required": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "secret-key": {
+   "name": "secret-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "AWS / ACS secret access key.",
+   "required": true,
+   "size": 59,
+   "multiple_values": false
+  },
+  "region": {
+   "name": "region",
+   "category": "unitary",
+   "type": "string",
+   "help": "AWS / ACS region name.",
+   "required": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "vpc-id": {
+   "name": "vpc-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "AWS VPC ID.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "alt-resource-ip": {
+   "name": "alt-resource-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AWS alternative resource IP.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable AWS alternative resource IP."
+    },
+    {
+     "name": "enable",
+     "help": "Enable AWS alternative resource IP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "external-account-list": {
+   "name": "external-account-list",
+   "category": "table",
+   "help": "Configure AWS external account list.",
+   "mkey": "role-arn",
+   "mkey_type": "string",
+   "children": {
+    "role-arn": {
+     "name": "role-arn",
+     "category": "unitary",
+     "type": "string",
+     "help": "AWS role ARN to assume.",
+     "required": true,
+     "size": 2047,
+     "default": "",
+     "multiple_values": false
+    },
+    "external-id": {
+     "name": "external-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "AWS external ID.",
+     "size": 1399,
+     "default": "",
+     "multiple_values": false
+    },
+    "region-list": {
+     "name": "region-list",
+     "category": "table",
+     "help": "AWS region name list.",
+     "required": true,
+     "member_table": true,
+     "mkey": "region",
+     "mkey_type": "string",
+     "children": {
+      "region": {
+       "name": "region",
+       "category": "unitary",
+       "type": "string",
+       "help": "AWS region name.",
+       "required": true,
+       "size": 31,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "tenant-id": {
+   "name": "tenant-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tenant ID (directory ID).",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "client-id": {
+   "name": "client-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Azure client ID (application ID).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "client-secret": {
+   "name": "client-secret",
+   "category": "unitary",
+   "type": "password",
+   "help": "Azure client secret (application key).",
+   "size": 59,
+   "multiple_values": false
+  },
+  "subscription-id": {
+   "name": "subscription-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Azure subscription ID.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "resource-group": {
+   "name": "resource-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Azure resource group.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "login-endpoint": {
+   "name": "login-endpoint",
+   "category": "unitary",
+   "type": "string",
+   "help": "Azure Stack login endpoint.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "resource-url": {
+   "name": "resource-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "Azure Stack resource URL.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "azure-region": {
+   "name": "azure-region",
+   "category": "unitary",
+   "type": "option",
+   "help": "Azure server region.",
+   "options": [
+    {
+     "name": "global",
+     "help": "Global Azure Server."
+    },
+    {
+     "name": "china",
+     "help": "China Azure Server."
+    },
+    {
+     "name": "germany",
+     "help": "Germany Azure Server."
+    },
+    {
+     "name": "usgov",
+     "help": "US Government Azure Server."
+    },
+    {
+     "name": "local",
+     "help": "Azure Stack Local Server."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "nic": {
+   "name": "nic",
+   "category": "table",
+   "help": "Configure Azure network interface.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Network interface name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "peer-nic": {
+     "name": "peer-nic",
+     "category": "unitary",
+     "type": "string",
+     "help": "Peer network interface name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "ip": {
+     "name": "ip",
+     "category": "table",
+     "help": "Configure IP configuration.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "IP configuration name.",
+       "required": true,
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      },
+      "private-ip": {
+       "name": "private-ip",
+       "category": "unitary",
+       "type": "string",
+       "help": "Private IP address.",
+       "size": 39,
+       "default": "",
+       "multiple_values": false
+      },
+      "public-ip": {
+       "name": "public-ip",
+       "category": "unitary",
+       "type": "string",
+       "help": "Public IP name.",
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      },
+      "resource-group": {
+       "name": "resource-group",
+       "category": "unitary",
+       "type": "string",
+       "help": "Resource group of Azure public IP.",
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "route-table": {
+   "name": "route-table",
+   "category": "table",
+   "help": "Configure Azure route table.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route table name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "subscription-id": {
+     "name": "subscription-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "Subscription ID of Azure route table.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "resource-group": {
+     "name": "resource-group",
+     "category": "unitary",
+     "type": "string",
+     "help": "Resource group of Azure route table.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "route": {
+     "name": "route",
+     "category": "table",
+     "help": "Configure Azure route.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Route name.",
+       "required": true,
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      },
+      "next-hop": {
+       "name": "next-hop",
+       "category": "unitary",
+       "type": "string",
+       "help": "Next hop address.",
+       "required": true,
+       "size": 127,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "user-id": {
+   "name": "user-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "User ID.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "compartment-list": {
+   "name": "compartment-list",
+   "category": "table",
+   "help": "Configure OCI compartment list.",
+   "mkey": "compartment-id",
+   "mkey_type": "string",
+   "children": {
+    "compartment-id": {
+     "name": "compartment-id",
+     "category": "unitary",
+     "type": "string",
+     "help": "OCI compartment ID.",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "oci-region-list": {
+   "name": "oci-region-list",
+   "category": "table",
+   "help": "Configure OCI region list.",
+   "mkey": "region",
+   "mkey_type": "string",
+   "children": {
+    "region": {
+     "name": "region",
+     "category": "unitary",
+     "type": "string",
+     "help": "OCI region.",
+     "required": true,
+     "size": 31,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "oci-region-type": {
+   "name": "oci-region-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "OCI region type.",
+   "required": true,
+   "options": [
+    {
+     "name": "commercial",
+     "help": "Commercial region."
+    },
+    {
+     "name": "government",
+     "help": "Government region."
+    }
+   ],
+   "default": "commercial",
+   "multiple_values": false
+  },
+  "oci-cert": {
+   "name": "oci-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "OCI certificate.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "oci-fingerprint": {
+   "name": "oci-fingerprint",
+   "category": "unitary",
+   "type": "string",
+   "help": "OCI pubkey fingerprint.",
+   "readonly": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "external-ip": {
+   "name": "external-ip",
+   "category": "table",
+   "help": "Configure GCP external IP.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "External IP name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "route": {
+   "name": "route",
+   "category": "table",
+   "help": "Configure GCP route.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "gcp-project-list": {
+   "name": "gcp-project-list",
+   "category": "table",
+   "help": "Configure GCP project list.",
+   "mkey": "id",
+   "mkey_type": "string",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "string",
+     "help": "GCP project ID.",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    },
+    "gcp-zone-list": {
+     "name": "gcp-zone-list",
+     "category": "table",
+     "help": "Configure GCP zone list.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "GCP zone name.",
+       "required": true,
+       "size": 127,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "forwarding-rule": {
+   "name": "forwarding-rule",
+   "category": "table",
+   "help": "Configure GCP forwarding rule.",
+   "mkey": "rule-name",
+   "mkey_type": "string",
+   "children": {
+    "rule-name": {
+     "name": "rule-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Forwarding rule name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "target": {
+     "name": "target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Target instance name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "service-account": {
+   "name": "service-account",
+   "category": "unitary",
+   "type": "string",
+   "help": "GCP service account email.",
+   "required": true,
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "private-key": {
+   "name": "private-key",
+   "category": "unitary",
+   "type": "user",
+   "help": "Private key of GCP service account.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "secret-token": {
+   "name": "secret-token",
+   "category": "unitary",
+   "type": "user",
+   "help": "Secret token of Kubernetes service account.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "domain": {
+   "name": "domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "group-name": {
+   "name": "group-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Full path group name of computers.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-cert": {
+   "name": "server-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Trust servers that contain this certificate only.",
+   "datasource": [
+    "certificate.remote.name"
+   ],
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-ca-cert": {
+   "name": "server-ca-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Trust only those servers whose certificate is directly/indirectly signed by this certificate.",
+   "datasource": [
+    "certificate.remote.name",
+    "certificate.ca.name"
+   ],
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "api-key": {
+   "name": "api-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "IBM cloud API key or service ID API key.",
+   "required": true,
+   "size": 59,
+   "multiple_values": false
+  },
+  "compute-generation": {
+   "name": "compute-generation",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Compute generation for IBM cloud infrastructure.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 2,
+   "default": 2,
+   "multiple_values": false
+  },
+  "ibm-region": {
+   "name": "ibm-region",
+   "category": "unitary",
+   "type": "option",
+   "help": "IBM cloud region name.",
+   "required": true,
+   "options": [
+    {
+     "name": "dallas",
+     "help": "US South (Dallas) Public Endpoint."
+    },
+    {
+     "name": "washington-dc",
+     "help": "US East (Washington DC) Public Endpoint."
+    },
+    {
+     "name": "london",
+     "help": "United Kingdom (London) Public Endpoint."
+    },
+    {
+     "name": "frankfurt",
+     "help": "Germany (Frankfurt) Public Endpoint."
+    },
+    {
+     "name": "sydney",
+     "help": "Australia (Sydney) Public Endpoint."
+    },
+    {
+     "name": "tokyo",
+     "help": "Japan (Tokyo) Public Endpoint."
+    },
+    {
+     "name": "osaka",
+     "help": "Japan (Osaka) Public Endpoint."
+    },
+    {
+     "name": "toronto",
+     "help": "Canada (Toronto) Public Endpoint."
+    },
+    {
+     "name": "sao-paulo",
+     "help": "Brazil (Sao Paulo) Public Endpoint."
+    }
+   ],
+   "default": "dallas",
+   "multiple_values": false
+  },
+  "update-interval": {
+   "name": "update-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Dynamic object update interval (30 - 3600 sec, default = 60, 0 = disabled).",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 60,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 16,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 534,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

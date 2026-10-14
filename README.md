@@ -107,7 +107,7 @@ int main() {
 Every FortiOS attribute is a `fortiapi::Field<T>` that knows whether it is absent, read from the device,
 modified, or cleared (`clear()` resets it to the FortiOS default). An update sends exactly the modified
 and cleared attributes, so reading an object, changing one field and writing it back never touches
-anything else. Option attributes come with constants (`firewall::policy::action::deny`).
+anything else. Option attributes come with constants (`firewall::Policy::Action::deny`).
 
 Each table offers `list`, `find` (nullopt on 404), `get`, `contains`, `add`, `update`, `del` and `schema`;
 singletons (`system::GlobalSettings`) offer `get` and `update`. Every call takes an optional `Query`
@@ -133,9 +133,15 @@ Helpers on top of the generated endpoints:
 
 ## Coverage
 
-Generated from FortiOS 7.4.8 schemas: firewall policy, address, VIP, custom service, service category,
-recurring schedule; DNS filter profile; system external resource, API user, interface and global
-settings. More endpoints are a manifest entry away (`codegen/api.toml`, see [AGENTS.md](AGENTS.md)).
+Generated from FortiOS 7.4.8 schemas: every configuration (cmdb) endpoint the device reports, 487 on
+a FortiGate-60F, from firewall policies, addresses and VIPs to routing, VPN, users, logging, security
+profiles, switch and wireless controllers. Read-only monitor endpoints the web GUI uses have typed
+results generated from recorded response shapes; every other monitor call is available untyped
+through `fortiapi::Monitor`. The full list is in [docs/reference/endpoints.md](docs/reference/endpoints.md).
+
+Include an area header (`forti_api/firewall.hpp`, `forti_api/system.hpp`, ...), a whole group
+(`forti_api/gen/router.hpp`) or a single endpoint (`forti_api/gen/router/static.hpp`) to keep compile
+times down; `forti_api.hpp` includes everything.
 
 ---
 

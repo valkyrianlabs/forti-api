@@ -1,0 +1,691 @@
+{
+ "name": "modem",
+ "category": "complex",
+ "help": "Configure MODEM.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Modem support (equivalent to bringing an interface up or down).",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "pin-init": {
+   "name": "pin-init",
+   "category": "unitary",
+   "type": "string",
+   "help": "AT command to set the PIN (AT+PIN=<pin>).",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "network-init": {
+   "name": "network-init",
+   "category": "unitary",
+   "type": "string",
+   "help": "AT command to set the Network name/type (AT+COPS=<mode>,[<format>,<oper>[,<AcT>]]).",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "lockdown-lac": {
+   "name": "lockdown-lac",
+   "category": "unitary",
+   "type": "string",
+   "help": "Allow connection only to the specified Location Area Code (LAC).",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set MODEM operation mode to redundant or standalone.",
+   "required": true,
+   "options": [
+    {
+     "name": "standalone",
+     "help": "Standalone."
+    },
+    {
+     "name": "redundant",
+     "help": "Redundant for an interface."
+    }
+   ],
+   "default": "standalone",
+   "multiple_values": false
+  },
+  "auto-dial": {
+   "name": "auto-dial",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable auto-dial after a reboot or disconnection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dial-on-demand": {
+   "name": "dial-on-demand",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable to dial the modem when packets are routed to the modem interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "idle-timer": {
+   "name": "idle-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "MODEM connection idle time (1 - 9999 min, default = 5).",
+   "min-value": 1,
+   "max-value": 9999,
+   "default": 5,
+   "multiple_values": false
+  },
+  "redial": {
+   "name": "redial",
+   "category": "unitary",
+   "type": "option",
+   "help": "Redial limit (1 - 10 attempts, none = redial forever).",
+   "options": [
+    {
+     "name": "none",
+     "help": "Forever."
+    },
+    {
+     "name": "1",
+     "help": "One attempt."
+    },
+    {
+     "name": "2",
+     "help": "Two attempts."
+    },
+    {
+     "name": "3",
+     "help": "Three attempts."
+    },
+    {
+     "name": "4",
+     "help": "Four attempts."
+    },
+    {
+     "name": "5",
+     "help": "Five attempts."
+    },
+    {
+     "name": "6",
+     "help": "Six attempts."
+    },
+    {
+     "name": "7",
+     "help": "Seven attempts."
+    },
+    {
+     "name": "8",
+     "help": "Eight attempts."
+    },
+    {
+     "name": "9",
+     "help": "Nine attempts."
+    },
+    {
+     "name": "10",
+     "help": "Ten attempts."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "reset": {
+   "name": "reset",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of dial attempts before resetting modem (0 = never reset).",
+   "min-value": 0,
+   "max-value": 10,
+   "default": 0,
+   "multiple_values": false
+  },
+  "holddown-timer": {
+   "name": "holddown-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Hold down timer in seconds (1 - 60 sec).",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 60,
+   "multiple_values": false
+  },
+  "connect-timeout": {
+   "name": "connect-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Connection completion timeout (30 - 255 sec, default = 90).",
+   "min-value": 30,
+   "max-value": 255,
+   "default": 90,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of redundant interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "wireless-port": {
+   "name": "wireless-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Enter wireless port number: 0 for default, 1 for first port, and so on (0 - 4294967295).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "dont-send-CR1": {
+   "name": "dont-send-CR1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Do not send CR when connected (ISP1).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "phone1": {
+   "name": "phone1",
+   "category": "unitary",
+   "type": "string",
+   "help": "Phone number to connect to the dialup account (must not contain spaces, and should include standard special characters).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "dial-cmd1": {
+   "name": "dial-cmd1",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dial command (this is often an ATD or ATDT command).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "username1": {
+   "name": "username1",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name to access the specified dialup account.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "passwd1": {
+   "name": "passwd1",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password to access the specified dialup account.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "extra-init1": {
+   "name": "extra-init1",
+   "category": "unitary",
+   "type": "string",
+   "help": "Extra initialization string to ISP 1.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "peer-modem1": {
+   "name": "peer-modem1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify peer MODEM type for phone1.",
+   "options": [
+    {
+     "name": "generic",
+     "help": "All other modem type."
+    },
+    {
+     "name": "actiontec",
+     "help": "ActionTec modem."
+    },
+    {
+     "name": "ascend_TNT",
+     "help": "Ascend TNT modem."
+    }
+   ],
+   "default": "generic",
+   "multiple_values": false
+  },
+  "ppp-echo-request1": {
+   "name": "ppp-echo-request1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PPP echo-request to ISP 1.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "authtype1": {
+   "name": "authtype1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed authentication types for ISP 1.",
+   "options": [
+    {
+     "name": "pap",
+     "help": "PAP"
+    },
+    {
+     "name": "chap",
+     "help": "CHAP"
+    },
+    {
+     "name": "mschap",
+     "help": "MSCHAP"
+    },
+    {
+     "name": "mschapv2",
+     "help": "MSCHAPv2"
+    }
+   ],
+   "default": "pap chap mschap mschapv2",
+   "multiple_values": true
+  },
+  "dont-send-CR2": {
+   "name": "dont-send-CR2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Do not send CR when connected (ISP2).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "phone2": {
+   "name": "phone2",
+   "category": "unitary",
+   "type": "string",
+   "help": "Phone number to connect to the dialup account (must not contain spaces, and should include standard special characters).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "dial-cmd2": {
+   "name": "dial-cmd2",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dial command (this is often an ATD or ATDT command).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "username2": {
+   "name": "username2",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name to access the specified dialup account.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "passwd2": {
+   "name": "passwd2",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password to access the specified dialup account.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "extra-init2": {
+   "name": "extra-init2",
+   "category": "unitary",
+   "type": "string",
+   "help": "Extra initialization string to ISP 2.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "peer-modem2": {
+   "name": "peer-modem2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify peer MODEM type for phone2.",
+   "options": [
+    {
+     "name": "generic",
+     "help": "All other modem type."
+    },
+    {
+     "name": "actiontec",
+     "help": "ActionTec modem."
+    },
+    {
+     "name": "ascend_TNT",
+     "help": "Ascend TNT modem."
+    }
+   ],
+   "default": "generic",
+   "multiple_values": false
+  },
+  "ppp-echo-request2": {
+   "name": "ppp-echo-request2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PPP echo-request to ISP 2.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "authtype2": {
+   "name": "authtype2",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed authentication types for ISP 2.",
+   "options": [
+    {
+     "name": "pap",
+     "help": "PAP"
+    },
+    {
+     "name": "chap",
+     "help": "CHAP"
+    },
+    {
+     "name": "mschap",
+     "help": "MSCHAP"
+    },
+    {
+     "name": "mschapv2",
+     "help": "MSCHAPv2"
+    }
+   ],
+   "default": "pap chap mschap mschapv2",
+   "multiple_values": true
+  },
+  "dont-send-CR3": {
+   "name": "dont-send-CR3",
+   "category": "unitary",
+   "type": "option",
+   "help": "Do not send CR when connected (ISP3).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "phone3": {
+   "name": "phone3",
+   "category": "unitary",
+   "type": "string",
+   "help": "Phone number to connect to the dialup account (must not contain spaces, and should include standard special characters).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "dial-cmd3": {
+   "name": "dial-cmd3",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dial command (this is often an ATD or ATDT command).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "username3": {
+   "name": "username3",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name to access the specified dialup account.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "passwd3": {
+   "name": "passwd3",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password to access the specified dialup account.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "extra-init3": {
+   "name": "extra-init3",
+   "category": "unitary",
+   "type": "string",
+   "help": "Extra initialization string to ISP 3.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "peer-modem3": {
+   "name": "peer-modem3",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify peer MODEM type for phone3.",
+   "options": [
+    {
+     "name": "generic",
+     "help": "All other modem type."
+    },
+    {
+     "name": "actiontec",
+     "help": "ActionTec modem."
+    },
+    {
+     "name": "ascend_TNT",
+     "help": "Ascend TNT modem."
+    }
+   ],
+   "default": "generic",
+   "multiple_values": false
+  },
+  "ppp-echo-request3": {
+   "name": "ppp-echo-request3",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PPP echo-request to ISP 3.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "altmode": {
+   "name": "altmode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable altmode for installations using PPP in China.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "authtype3": {
+   "name": "authtype3",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed authentication types for ISP 3.",
+   "options": [
+    {
+     "name": "pap",
+     "help": "PAP"
+    },
+    {
+     "name": "chap",
+     "help": "CHAP"
+    },
+    {
+     "name": "mschap",
+     "help": "MSCHAP"
+    },
+    {
+     "name": "mschapv2",
+     "help": "MSCHAPv2"
+    }
+   ],
+   "default": "pap chap mschap mschapv2",
+   "multiple_values": true
+  },
+  "traffic-check": {
+   "name": "traffic-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable traffic-check.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "action": {
+   "name": "action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Dial up/stop MODEM.",
+   "options": [
+    {
+     "name": "dial",
+     "help": "Dial up number."
+    },
+    {
+     "name": "stop",
+     "help": "Stop dialup."
+    },
+    {
+     "name": "none",
+     "help": "No action."
+    }
+   ],
+   "default": "stop",
+   "multiple_values": false
+  },
+  "distance": {
+   "name": "distance",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Distance of learned routes (1 - 255, default = 1).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Priority of learned routes (1 - 65535, default = 1).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 101,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

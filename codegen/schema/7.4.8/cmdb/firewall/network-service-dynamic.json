@@ -1,0 +1,55 @@
+{
+ "name": "network-service-dynamic",
+ "category": "table",
+ "help": "Configure Dynamic Network Services.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dynamic Network Service name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "sdn": {
+   "name": "sdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN connector name.",
+   "required": true,
+   "datasource": [
+    "system.sdn-connector.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "filter": {
+   "name": "filter",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Match criteria filter.",
+   "required": true,
+   "size": 2047,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 349,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

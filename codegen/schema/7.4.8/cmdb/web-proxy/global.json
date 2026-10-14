@@ -1,0 +1,411 @@
+{
+ "name": "global",
+ "category": "complex",
+ "help": "Configure Web proxy global settings.",
+ "children": {
+  "ssl-cert": {
+   "name": "ssl-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "SSL certificate for SSL interception.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_Factory",
+   "multiple_values": false
+  },
+  "ssl-ca-cert": {
+   "name": "ssl-ca-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "SSL CA certificate for SSL interception.",
+   "datasource": [
+    "vpn.certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_CA_SSL",
+   "multiple_values": false
+  },
+  "fast-policy-match": {
+   "name": "fast-policy-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable fast matching algorithm for explicit and transparent proxy policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ldap-user-cache": {
+   "name": "ldap-user-cache",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable LDAP user cache for explicit and transparent proxy user.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "proxy-fqdn": {
+   "name": "proxy-fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fully Qualified Domain Name (FQDN) that clients connect to (default = default.fqdn) to connect to the explicit web proxy.",
+   "required": true,
+   "size": 255,
+   "default": "default.fqdn",
+   "multiple_values": false
+  },
+  "max-request-length": {
+   "name": "max-request-length",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum length of HTTP request line (2 - 64 Kbytes, default = 8).",
+   "min-value": 2,
+   "max-value": 64,
+   "default": 8,
+   "multiple_values": false
+  },
+  "max-message-length": {
+   "name": "max-message-length",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum length of HTTP message, not including body (16 - 256 Kbytes, default = 32).",
+   "min-value": 16,
+   "max-value": 256,
+   "default": 32,
+   "multiple_values": false
+  },
+  "strict-web-check": {
+   "name": "strict-web-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable strict web checking to block web sites that send incorrect headers that don't conform to HTTP 1.1.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable strict web checking."
+    },
+    {
+     "name": "disable",
+     "help": "Disable strict web checking."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "forward-proxy-auth": {
+   "name": "forward-proxy-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forwarding proxy authentication headers.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable forwarding proxy authentication headers."
+    },
+    {
+     "name": "disable",
+     "help": "Disable forwarding proxy authentication headers."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "forward-server-affinity-timeout": {
+   "name": "forward-server-affinity-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Period of time before the source IP's traffic is no longer assigned to the forwarding server (6 - 60 min, default = 30).",
+   "min-value": 6,
+   "max-value": 60,
+   "default": 30,
+   "multiple_values": false
+  },
+  "max-waf-body-cache-length": {
+   "name": "max-waf-body-cache-length",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum length of HTTP messages processed by Web Application Firewall (WAF) (1 - 1024 Kbytes, default = 1).",
+   "min-value": 1,
+   "max-value": 1024,
+   "default": 1,
+   "multiple_values": false
+  },
+  "webproxy-profile": {
+   "name": "webproxy-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the web proxy profile to apply when explicit proxy traffic is allowed by default and traffic is accepted that does not match an explicit proxy policy.",
+   "datasource": [
+    "web-proxy.profile.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "learn-client-ip": {
+   "name": "learn-client-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable learning the client's IP address from headers.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable learning the client's IP address from headers."
+    },
+    {
+     "name": "disable",
+     "help": "Disable learning the client's IP address from headers."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "always-learn-client-ip": {
+   "name": "always-learn-client-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable learning the client's IP address from headers for every request.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable learning the client's IP address from headers for every request."
+    },
+    {
+     "name": "disable",
+     "help": "Disable learning the client's IP address from headers for every request."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "learn-client-ip-from-header": {
+   "name": "learn-client-ip-from-header",
+   "category": "unitary",
+   "type": "option",
+   "help": "Learn client IP address from the specified headers.",
+   "options": [
+    {
+     "name": "true-client-ip",
+     "help": "Learn the client IP address from the True-Client-IP header."
+    },
+    {
+     "name": "x-real-ip",
+     "help": "Learn the client IP address from the X-Real-IP header."
+    },
+    {
+     "name": "x-forwarded-for",
+     "help": "Learn the client IP address from the X-Forwarded-For header."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "learn-client-ip-srcaddr": {
+   "name": "learn-client-ip-srcaddr",
+   "category": "table",
+   "help": "Source address name (srcaddr or srcaddr6 must be set).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "learn-client-ip-srcaddr6": {
+   "name": "learn-client-ip-srcaddr6",
+   "category": "table",
+   "help": "IPv6 Source address name (srcaddr or srcaddr6 must be set).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "src-affinity-exempt-addr": {
+   "name": "src-affinity-exempt-addr",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IPv4 source addresses to exempt proxy affinity.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 16
+  },
+  "src-affinity-exempt-addr6": {
+   "name": "src-affinity-exempt-addr6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 source addresses to exempt proxy affinity.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 16
+  },
+  "policy-category-deep-inspect": {
+   "name": "policy-category-deep-inspect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable deep inspection for application level category policy matching.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable deep inspection for application level category policy matching."
+    },
+    {
+     "name": "disable",
+     "help": "Disable deep inspection for application level category policy matching."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "log-policy-pending": {
+   "name": "log-policy-pending",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging sessions that are pending on policy matching.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging sessions that are pending on policy matching."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging sessions that are pending on policy matching."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-forward-server": {
+   "name": "log-forward-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forward server name logging in forward traffic log.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging forward server name in forward traffic log."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging forward server name in forward traffic log."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-app-id": {
+   "name": "log-app-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable always log application type in traffic log.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging application type in traffic log."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging application type in traffic log."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "proxy-transparent-cert-inspection": {
+   "name": "proxy-transparent-cert-inspection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable transparent proxy certificate inspection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable proxying certificate inspection in transparent mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable proxying certificate inspection in transparent mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "request-obs-fold": {
+   "name": "request-obs-fold",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action when HTTP/1.x request header contains obs-fold.",
+   "options": [
+    {
+     "name": "replace-with-sp",
+     "help": "Replace CRLF in obs-fold with SP in the request header for HTTP/1.x."
+    },
+    {
+     "name": "block",
+     "help": "Block HTTP/1.x request with obs-fold."
+    },
+    {
+     "name": "keep",
+     "help": "Keep obs-fold in the request header for HTTP/1.x. There are known security risks."
+    }
+   ],
+   "default": "keep",
+   "multiple_values": false
+  }
+ },
+ "path": "web-proxy",
+ "q_type": 339,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

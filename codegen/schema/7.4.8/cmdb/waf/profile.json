@@ -1,0 +1,2447 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure Web application firewall configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WAF Profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "external": {
+   "name": "external",
+   "category": "unitary",
+   "type": "option",
+   "help": "Disable/Enable external HTTP Inspection.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable external inspection."
+    },
+    {
+     "name": "enable",
+     "help": "Enable external inspection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "extended-log": {
+   "name": "extended-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable extended logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "signature": {
+   "name": "signature",
+   "category": "complex",
+   "help": "WAF signatures.",
+   "children": {
+    "main-class": {
+     "name": "main-class",
+     "category": "table",
+     "help": "Main signature class.",
+     "readonly": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Main signature class ID.",
+       "datasource": [
+        "waf.main-class.id"
+       ],
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Status.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        },
+        {
+         "name": "erase",
+         "help": "Erase credit card numbers."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "disabled-sub-class": {
+     "name": "disabled-sub-class",
+     "category": "table",
+     "help": "Disabled signature subclasses.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Signature subclass ID.",
+       "datasource": [
+        "waf.sub-class.id"
+       ],
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "disabled-signature": {
+     "name": "disabled-signature",
+     "category": "table",
+     "help": "Disabled signatures.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Signature ID.",
+       "datasource": [
+        "waf.signature.id"
+       ],
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "credit-card-detection-threshold": {
+     "name": "credit-card-detection-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "The minimum number of Credit cards to detect violation.",
+     "min-value": 0,
+     "max-value": 128,
+     "default": 3,
+     "multiple_values": false
+    },
+    "custom-signature": {
+     "name": "custom-signature",
+     "category": "table",
+     "help": "Custom signature.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Signature name.",
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Status.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        },
+        {
+         "name": "erase",
+         "help": "Erase credit card numbers."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      },
+      "direction": {
+       "name": "direction",
+       "category": "unitary",
+       "type": "option",
+       "help": "Traffic direction.",
+       "options": [
+        {
+         "name": "request",
+         "help": "Match HTTP request."
+        },
+        {
+         "name": "response",
+         "help": "Match HTTP response."
+        }
+       ],
+       "default": "request",
+       "multiple_values": false
+      },
+      "case-sensitivity": {
+       "name": "case-sensitivity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Case sensitivity in pattern.",
+       "options": [
+        {
+         "name": "disable",
+         "help": "Case insensitive in pattern."
+        },
+        {
+         "name": "enable",
+         "help": "Case sensitive in pattern."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "pattern": {
+       "name": "pattern",
+       "category": "unitary",
+       "type": "string",
+       "help": "Match pattern.",
+       "size": 511,
+       "default": "",
+       "multiple_values": false
+      },
+      "target": {
+       "name": "target",
+       "category": "unitary",
+       "type": "option",
+       "help": "Match HTTP target.",
+       "options": [
+        {
+         "name": "arg",
+         "help": "HTTP arguments."
+        },
+        {
+         "name": "arg-name",
+         "help": "Names of HTTP arguments."
+        },
+        {
+         "name": "req-body",
+         "help": "HTTP request body."
+        },
+        {
+         "name": "req-cookie",
+         "help": "HTTP request cookies."
+        },
+        {
+         "name": "req-cookie-name",
+         "help": "HTTP request cookie names."
+        },
+        {
+         "name": "req-filename",
+         "help": "HTTP request file name."
+        },
+        {
+         "name": "req-header",
+         "help": "HTTP request headers."
+        },
+        {
+         "name": "req-header-name",
+         "help": "HTTP request header names."
+        },
+        {
+         "name": "req-raw-uri",
+         "help": "Raw URI of HTTP request."
+        },
+        {
+         "name": "req-uri",
+         "help": "URI of HTTP request."
+        },
+        {
+         "name": "resp-body",
+         "help": "HTTP response body."
+        },
+        {
+         "name": "resp-hdr",
+         "help": "HTTP response headers."
+        },
+        {
+         "name": "resp-status",
+         "help": "HTTP response status."
+        }
+       ],
+       "default": "",
+       "multiple_values": true,
+       "max_num_values": 13
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "constraint": {
+   "name": "constraint",
+   "category": "complex",
+   "help": "WAF HTTP protocol restrictions.",
+   "children": {
+    "header-length": {
+     "name": "header-length",
+     "category": "complex",
+     "help": "HTTP header length in request.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "length": {
+       "name": "length",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Length of HTTP header in bytes (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 8192,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "content-length": {
+     "name": "content-length",
+     "category": "complex",
+     "help": "HTTP content length in request.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "length": {
+       "name": "length",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Length of HTTP content in bytes (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 67108864,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "param-length": {
+     "name": "param-length",
+     "category": "complex",
+     "help": "Maximum length of parameter in URL, HTTP POST request or HTTP body.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "length": {
+       "name": "length",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum length of parameter in URL, HTTP POST request or HTTP body in bytes (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 8192,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "line-length": {
+     "name": "line-length",
+     "category": "complex",
+     "help": "HTTP line length in request.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "length": {
+       "name": "length",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Length of HTTP line in bytes (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 1024,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "url-param-length": {
+     "name": "url-param-length",
+     "category": "complex",
+     "help": "Maximum length of parameter in URL.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "length": {
+       "name": "length",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum length of URL parameter in bytes (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 8192,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "version": {
+     "name": "version",
+     "category": "complex",
+     "help": "Enable/disable HTTP version check.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "method": {
+     "name": "method",
+     "category": "complex",
+     "help": "Enable/disable HTTP method check.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "hostname": {
+     "name": "hostname",
+     "category": "complex",
+     "help": "Enable/disable hostname check.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "malformed": {
+     "name": "malformed",
+     "category": "complex",
+     "help": "Enable/disable malformed HTTP request check.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "max-cookie": {
+     "name": "max-cookie",
+     "category": "complex",
+     "help": "Maximum number of cookies in HTTP request.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-cookie": {
+       "name": "max-cookie",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum number of cookies in HTTP request (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 16,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "max-header-line": {
+     "name": "max-header-line",
+     "category": "complex",
+     "help": "Maximum number of HTTP header line.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-header-line": {
+       "name": "max-header-line",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum number HTTP header lines (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 32,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "max-url-param": {
+     "name": "max-url-param",
+     "category": "complex",
+     "help": "Maximum number of parameters in URL.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-url-param": {
+       "name": "max-url-param",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum number of parameters in URL (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 16,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "max-range-segment": {
+     "name": "max-range-segment",
+     "category": "complex",
+     "help": "Maximum number of range segments in HTTP range line.",
+     "children": {
+      "status": {
+       "name": "status",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable the constraint.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-range-segment": {
+       "name": "max-range-segment",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Maximum number of range segments in HTTP range line (0 to 2147483647).",
+       "min-value": 0,
+       "max-value": 2147483647,
+       "default": 5,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action.",
+       "options": [
+        {
+         "name": "allow",
+         "help": "Allow."
+        },
+        {
+         "name": "block",
+         "help": "Block."
+        }
+       ],
+       "default": "allow",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable logging.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "severity": {
+       "name": "severity",
+       "category": "unitary",
+       "type": "option",
+       "help": "Severity.",
+       "options": [
+        {
+         "name": "high",
+         "help": "High severity."
+        },
+        {
+         "name": "medium",
+         "help": "Medium severity."
+        },
+        {
+         "name": "low",
+         "help": "Low severity."
+        }
+       ],
+       "default": "medium",
+       "multiple_values": false
+      }
+     }
+    },
+    "exception": {
+     "name": "exception",
+     "category": "table",
+     "help": "HTTP constraint exception.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Exception ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "pattern": {
+       "name": "pattern",
+       "category": "unitary",
+       "type": "string",
+       "help": "URL pattern.",
+       "required": true,
+       "size": 511,
+       "default": "",
+       "multiple_values": false
+      },
+      "regex": {
+       "name": "regex",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable regular expression based pattern match.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "address": {
+       "name": "address",
+       "category": "unitary",
+       "type": "string",
+       "help": "Host address.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "header-length": {
+       "name": "header-length",
+       "category": "unitary",
+       "type": "option",
+       "help": "HTTP header length in request.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "content-length": {
+       "name": "content-length",
+       "category": "unitary",
+       "type": "option",
+       "help": "HTTP content length in request.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "param-length": {
+       "name": "param-length",
+       "category": "unitary",
+       "type": "option",
+       "help": "Maximum length of parameter in URL, HTTP POST request or HTTP body.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "line-length": {
+       "name": "line-length",
+       "category": "unitary",
+       "type": "option",
+       "help": "HTTP line length in request.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "url-param-length": {
+       "name": "url-param-length",
+       "category": "unitary",
+       "type": "option",
+       "help": "Maximum length of parameter in URL.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "version": {
+       "name": "version",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable HTTP version check.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "method": {
+       "name": "method",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable HTTP method check.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "hostname": {
+       "name": "hostname",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable hostname check.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "malformed": {
+       "name": "malformed",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable malformed HTTP request check.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-cookie": {
+       "name": "max-cookie",
+       "category": "unitary",
+       "type": "option",
+       "help": "Maximum number of cookies in HTTP request.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-header-line": {
+       "name": "max-header-line",
+       "category": "unitary",
+       "type": "option",
+       "help": "Maximum number of HTTP header line.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-url-param": {
+       "name": "max-url-param",
+       "category": "unitary",
+       "type": "option",
+       "help": "Maximum number of parameters in URL.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "max-range-segment": {
+       "name": "max-range-segment",
+       "category": "unitary",
+       "type": "option",
+       "help": "Maximum number of range segments in HTTP range line.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "method": {
+   "name": "method",
+   "category": "complex",
+   "help": "Method restriction.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "log": {
+     "name": "log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "severity": {
+     "name": "severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Severity.",
+     "options": [
+      {
+       "name": "high",
+       "help": "High severity"
+      },
+      {
+       "name": "medium",
+       "help": "medium severity"
+      },
+      {
+       "name": "low",
+       "help": "low severity"
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "default-allowed-methods": {
+     "name": "default-allowed-methods",
+     "category": "unitary",
+     "type": "option",
+     "help": "Methods.",
+     "options": [
+      {
+       "name": "get",
+       "help": "HTTP GET method."
+      },
+      {
+       "name": "post",
+       "help": "HTTP POST method."
+      },
+      {
+       "name": "put",
+       "help": "HTTP PUT method."
+      },
+      {
+       "name": "head",
+       "help": "HTTP HEAD method."
+      },
+      {
+       "name": "connect",
+       "help": "HTTP CONNECT method."
+      },
+      {
+       "name": "trace",
+       "help": "HTTP TRACE method."
+      },
+      {
+       "name": "options",
+       "help": "HTTP OPTIONS method."
+      },
+      {
+       "name": "delete",
+       "help": "HTTP DELETE method."
+      },
+      {
+       "name": "others",
+       "help": "Other HTTP methods."
+      }
+     ],
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 9
+    },
+    "method-policy": {
+     "name": "method-policy",
+     "category": "table",
+     "help": "HTTP method policy.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "HTTP method policy ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "pattern": {
+       "name": "pattern",
+       "category": "unitary",
+       "type": "string",
+       "help": "URL pattern.",
+       "size": 511,
+       "default": "",
+       "multiple_values": false
+      },
+      "regex": {
+       "name": "regex",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable regular expression based pattern match.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "address": {
+       "name": "address",
+       "category": "unitary",
+       "type": "string",
+       "help": "Host address.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "allowed-methods": {
+       "name": "allowed-methods",
+       "category": "unitary",
+       "type": "option",
+       "help": "Allowed Methods.",
+       "options": [
+        {
+         "name": "get",
+         "help": "HTTP GET method."
+        },
+        {
+         "name": "post",
+         "help": "HTTP POST method."
+        },
+        {
+         "name": "put",
+         "help": "HTTP PUT method."
+        },
+        {
+         "name": "head",
+         "help": "HTTP HEAD method."
+        },
+        {
+         "name": "connect",
+         "help": "HTTP CONNECT method."
+        },
+        {
+         "name": "trace",
+         "help": "HTTP TRACE method."
+        },
+        {
+         "name": "options",
+         "help": "HTTP OPTIONS method."
+        },
+        {
+         "name": "delete",
+         "help": "HTTP DELETE method."
+        },
+        {
+         "name": "others",
+         "help": "Other HTTP methods."
+        }
+       ],
+       "default": "",
+       "multiple_values": true,
+       "max_num_values": 9
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "address-list": {
+   "name": "address-list",
+   "category": "complex",
+   "help": "Address block and allow lists.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "blocked-log": {
+     "name": "blocked-log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging on blocked addresses.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "severity": {
+     "name": "severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Severity.",
+     "options": [
+      {
+       "name": "high",
+       "help": "High severity."
+      },
+      {
+       "name": "medium",
+       "help": "Medium severity."
+      },
+      {
+       "name": "low",
+       "help": "Low severity."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "trusted-address": {
+     "name": "trusted-address",
+     "category": "table",
+     "help": "Trusted address.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "blocked-address": {
+     "name": "blocked-address",
+     "category": "table",
+     "help": "Blocked address.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Address name.",
+       "required": true,
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "url-access": {
+   "name": "url-access",
+   "category": "table",
+   "help": "URL access list.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "URL access ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "address": {
+     "name": "address",
+     "category": "unitary",
+     "type": "string",
+     "help": "Host address.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action.",
+     "options": [
+      {
+       "name": "bypass",
+       "help": "Allow the HTTP request, also bypass further WAF scanning."
+      },
+      {
+       "name": "permit",
+       "help": "Allow the HTTP request, and continue further WAF scanning."
+      },
+      {
+       "name": "block",
+       "help": "Block HTTP request."
+      }
+     ],
+     "default": "permit",
+     "multiple_values": false
+    },
+    "log": {
+     "name": "log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "severity": {
+     "name": "severity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Severity.",
+     "options": [
+      {
+       "name": "high",
+       "help": "High severity."
+      },
+      {
+       "name": "medium",
+       "help": "Medium severity."
+      },
+      {
+       "name": "low",
+       "help": "Low severity."
+      }
+     ],
+     "default": "medium",
+     "multiple_values": false
+    },
+    "access-pattern": {
+     "name": "access-pattern",
+     "category": "table",
+     "help": "URL access pattern.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "URL access pattern ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "srcaddr": {
+       "name": "srcaddr",
+       "category": "unitary",
+       "type": "string",
+       "help": "Source address.",
+       "datasource": [
+        "firewall.address.name",
+        "firewall.addrgrp.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "pattern": {
+       "name": "pattern",
+       "category": "unitary",
+       "type": "string",
+       "help": "URL pattern.",
+       "required": true,
+       "size": 511,
+       "default": "",
+       "multiple_values": false
+      },
+      "regex": {
+       "name": "regex",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable regular expression based pattern match.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "negate": {
+       "name": "negate",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable match negation.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable setting."
+        },
+        {
+         "name": "disable",
+         "help": "Disable setting."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 1023,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "waf",
+ "q_type": 502,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

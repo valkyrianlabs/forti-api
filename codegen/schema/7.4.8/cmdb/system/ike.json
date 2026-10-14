@@ -1,0 +1,1082 @@
+{
+ "name": "ike",
+ "category": "complex",
+ "help": "Configure IKE global attributes.",
+ "children": {
+  "embryonic-limit": {
+   "name": "embryonic-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of IPsec tunnels to negotiate simultaneously.",
+   "min-value": 50,
+   "max-value": 20000,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "dh-multiprocess": {
+   "name": "dh-multiprocess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable multiprocess Diffie-Hellman daemon for IKE.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable multiprocess Diffie-Hellman for IKE."
+    },
+    {
+     "name": "disable",
+     "help": "Disable multiprocess Diffie-Hellman for IKE."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dh-worker-count": {
+   "name": "dh-worker-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of Diffie-Hellman workers to start.",
+   "min-value": 1,
+   "max-value": 8,
+   "default": 0,
+   "multiple_values": false
+  },
+  "dh-mode": {
+   "name": "dh-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use software (CPU) or hardware (CPX) to perform Diffie-Hellman calculations.",
+   "options": [
+    {
+     "name": "software",
+     "help": "Prefer CPU to perform Diffie-Hellman calculations."
+    },
+    {
+     "name": "hardware",
+     "help": "Prefer CPX to perform Diffie-Hellman calculations."
+    }
+   ],
+   "default": "hardware",
+   "multiple_values": false
+  },
+  "dh-keypair-cache": {
+   "name": "dh-keypair-cache",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Diffie-Hellman key pair cache.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Diffie-Hellman key pair cache."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Diffie-Hellman key pair cache."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dh-keypair-count": {
+   "name": "dh-keypair-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of key pairs to pre-generate for each Diffie-Hellman group (per-worker).",
+   "min-value": 0,
+   "max-value": 50000,
+   "default": 10,
+   "multiple_values": false
+  },
+  "dh-keypair-throttle": {
+   "name": "dh-keypair-throttle",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Diffie-Hellman key pair cache CPU throttling.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Diffie-Hellman key pair cache CPU throttling."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Diffie-Hellman key pair cache CPU throttling."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "dh-group-1": {
+   "name": "dh-group-1",
+   "category": "complex",
+   "help": "Diffie-Hellman group 1 (MODP-768).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-2": {
+   "name": "dh-group-2",
+   "category": "complex",
+   "help": "Diffie-Hellman group 2 (MODP-1024).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-5": {
+   "name": "dh-group-5",
+   "category": "complex",
+   "help": "Diffie-Hellman group 5 (MODP-1536).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-14": {
+   "name": "dh-group-14",
+   "category": "complex",
+   "help": "Diffie-Hellman group 14 (MODP-2048).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-15": {
+   "name": "dh-group-15",
+   "category": "complex",
+   "help": "Diffie-Hellman group 15 (MODP-3072).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-16": {
+   "name": "dh-group-16",
+   "category": "complex",
+   "help": "Diffie-Hellman group 16 (MODP-4096).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-17": {
+   "name": "dh-group-17",
+   "category": "complex",
+   "help": "Diffie-Hellman group 17 (MODP-6144).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-18": {
+   "name": "dh-group-18",
+   "category": "complex",
+   "help": "Diffie-Hellman group 18 (MODP-8192).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-19": {
+   "name": "dh-group-19",
+   "category": "complex",
+   "help": "Diffie-Hellman group 19 (EC-P256).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-20": {
+   "name": "dh-group-20",
+   "category": "complex",
+   "help": "Diffie-Hellman group 20 (EC-P384).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-21": {
+   "name": "dh-group-21",
+   "category": "complex",
+   "help": "Diffie-Hellman group 21 (EC-P521).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-27": {
+   "name": "dh-group-27",
+   "category": "complex",
+   "help": "Diffie-Hellman group 27 (EC-P224BP).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-28": {
+   "name": "dh-group-28",
+   "category": "complex",
+   "help": "Diffie-Hellman group 28 (EC-P256BP).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-29": {
+   "name": "dh-group-29",
+   "category": "complex",
+   "help": "Diffie-Hellman group 29 (EC-P384BP).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-30": {
+   "name": "dh-group-30",
+   "category": "complex",
+   "help": "Diffie-Hellman group 30 (EC-P512BP).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-31": {
+   "name": "dh-group-31",
+   "category": "complex",
+   "help": "Diffie-Hellman group 31 (EC-X25519).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "dh-group-32": {
+   "name": "dh-group-32",
+   "category": "complex",
+   "help": "Diffie-Hellman group 32 (EC-X448).",
+   "children": {
+    "mode": {
+     "name": "mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Use software (CPU) or hardware (CPX) to perform calculations for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "software",
+       "help": "Prefer CPU to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "hardware",
+       "help": "Prefer CPX to perform Diffie-Hellman calculations."
+      },
+      {
+       "name": "global",
+       "help": "Use global dh-mode setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-cache": {
+     "name": "keypair-cache",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure custom key pair cache size for this Diffie-Hellman group.",
+     "options": [
+      {
+       "name": "global",
+       "help": "Use global Diffie-Hellman key pair cache setting."
+      },
+      {
+       "name": "custom",
+       "help": "Use custom Diffie-Hellman key pair cache setting."
+      }
+     ],
+     "default": "global",
+     "multiple_values": false
+    },
+    "keypair-count": {
+     "name": "keypair-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of key pairs to pre-generate for this Diffie-Hellman group (per-worker).",
+     "min-value": 0,
+     "max-value": 50000,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "path": "system",
+ "q_type": 556,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

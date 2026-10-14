@@ -1,0 +1,844 @@
+{
+ "name": "list",
+ "category": "table",
+ "help": "Configure application control lists.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "List name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "extended-log": {
+   "name": "extended-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable extended logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "other-application-action": {
+   "name": "other-application-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action for other applications.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Allow sessions matching an application in this application list."
+    },
+    {
+     "name": "block",
+     "help": "Block sessions matching an application in this application list."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "app-replacemsg": {
+   "name": "app-replacemsg",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable replacement messages for blocked applications.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable replacement messages for blocked applications."
+    },
+    {
+     "name": "enable",
+     "help": "Enable replacement messages for blocked applications."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "other-application-log": {
+   "name": "other-application-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging for other applications.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging for other applications."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging for other applications."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "enforce-default-app-port": {
+   "name": "enforce-default-app-port",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable default application port enforcement for allowed applications.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable default application port enforcement."
+    },
+    {
+     "name": "enable",
+     "help": "Enable default application port enforcement."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "force-inclusion-ssl-di-sigs": {
+   "name": "force-inclusion-ssl-di-sigs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forced inclusion of SSL deep inspection signatures.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable forced inclusion of signatures which normally require SSL deep inspection."
+    },
+    {
+     "name": "enable",
+     "help": "Enable forced inclusion of signatures which normally require SSL deep inspection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "unknown-application-action": {
+   "name": "unknown-application-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Pass or block traffic from unknown applications.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Pass or allow unknown applications."
+    },
+    {
+     "name": "block",
+     "help": "Drop or block unknown applications."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "unknown-application-log": {
+   "name": "unknown-application-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging for unknown applications.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging for unknown applications."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging for unknown applications."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "p2p-block-list": {
+   "name": "p2p-block-list",
+   "category": "unitary",
+   "type": "option",
+   "help": "P2P applications to be block listed.",
+   "options": [
+    {
+     "name": "skype",
+     "help": "Skype."
+    },
+    {
+     "name": "edonkey",
+     "help": "Edonkey."
+    },
+    {
+     "name": "bittorrent",
+     "help": "Bit torrent."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "deep-app-inspection": {
+   "name": "deep-app-inspection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable deep application inspection.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable deep application inspection."
+    },
+    {
+     "name": "enable",
+     "help": "Enable deep application inspection."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "options": {
+   "name": "options",
+   "category": "unitary",
+   "type": "option",
+   "help": "Basic application protocol signatures allowed by default.",
+   "options": [
+    {
+     "name": "allow-dns",
+     "help": "Allow DNS."
+    },
+    {
+     "name": "allow-icmp",
+     "help": "Allow ICMP."
+    },
+    {
+     "name": "allow-http",
+     "help": "Allow generic HTTP web browsing."
+    },
+    {
+     "name": "allow-ssl",
+     "help": "Allow generic SSL communication."
+    }
+   ],
+   "default": "allow-dns",
+   "multiple_values": true
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "Application list entries.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "risk": {
+     "name": "risk",
+     "category": "table",
+     "help": "Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical).",
+     "member_table": true,
+     "mkey": "level",
+     "mkey_type": "integer",
+     "children": {
+      "level": {
+       "name": "level",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical).",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "category": {
+     "name": "category",
+     "category": "table",
+     "help": "Category ID list.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Application category ID.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "application": {
+     "name": "application",
+     "category": "table",
+     "help": "ID of allowed applications.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Application IDs.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "protocols": {
+     "name": "protocols",
+     "category": "unitary",
+     "type": "user",
+     "help": "Application protocol filter.",
+     "default": "all",
+     "multiple_values": true
+    },
+    "vendor": {
+     "name": "vendor",
+     "category": "unitary",
+     "type": "user",
+     "help": "Application vendor filter.",
+     "default": "all",
+     "multiple_values": true
+    },
+    "technology": {
+     "name": "technology",
+     "category": "unitary",
+     "type": "user",
+     "help": "Application technology filter.",
+     "default": "all",
+     "multiple_values": true
+    },
+    "behavior": {
+     "name": "behavior",
+     "category": "unitary",
+     "type": "user",
+     "help": "Application behavior filter.",
+     "default": "all",
+     "multiple_values": true
+    },
+    "popularity": {
+     "name": "popularity",
+     "category": "unitary",
+     "type": "option",
+     "help": "Application popularity filter (1 - 5, from least to most popular).",
+     "options": [
+      {
+       "name": "1",
+       "help": "Popularity level 1."
+      },
+      {
+       "name": "2",
+       "help": "Popularity level 2."
+      },
+      {
+       "name": "3",
+       "help": "Popularity level 3."
+      },
+      {
+       "name": "4",
+       "help": "Popularity level 4."
+      },
+      {
+       "name": "5",
+       "help": "Popularity level 5."
+      }
+     ],
+     "default": "1 2 3 4 5",
+     "multiple_values": true
+    },
+    "exclusion": {
+     "name": "exclusion",
+     "category": "table",
+     "help": "ID of excluded applications.",
+     "member_table": true,
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Excluded application IDs.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "parameters": {
+     "name": "parameters",
+     "category": "table",
+     "help": "Application parameters.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Parameter tuple ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "members": {
+       "name": "members",
+       "category": "table",
+       "help": "Parameter tuple members.",
+       "mkey": "id",
+       "mkey_type": "integer",
+       "children": {
+        "id": {
+         "name": "id",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Parameter.",
+         "min-value": 0,
+         "max-value": 4294967295,
+         "default": 0,
+         "multiple_values": false
+        },
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "Parameter name.",
+         "required": true,
+         "size": 31,
+         "default": "",
+         "multiple_values": false
+        },
+        "value": {
+         "name": "value",
+         "category": "unitary",
+         "type": "string",
+         "help": "Parameter value.",
+         "required": true,
+         "size": 199,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 256
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Pass or block traffic, or reset connection for traffic from this application.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Pass or allow matching traffic."
+      },
+      {
+       "name": "block",
+       "help": "Block or drop matching traffic."
+      },
+      {
+       "name": "reset",
+       "help": "Reset sessions for matching traffic."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    },
+    "log": {
+     "name": "log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable logging for this application list.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable logging."
+      },
+      {
+       "name": "enable",
+       "help": "Enable logging."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "log-packet": {
+     "name": "log-packet",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable packet logging.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable packet logging."
+      },
+      {
+       "name": "enable",
+       "help": "Enable packet logging."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "rate-count": {
+     "name": "rate-count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Count of the rate.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "rate-duration": {
+     "name": "rate-duration",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Duration (sec) of the rate.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 60,
+     "multiple_values": false
+    },
+    "rate-mode": {
+     "name": "rate-mode",
+     "category": "unitary",
+     "type": "option",
+     "help": "Rate limit mode.",
+     "options": [
+      {
+       "name": "periodical",
+       "help": "Allow configured number of packets every rate-duration."
+      },
+      {
+       "name": "continuous",
+       "help": "Block packets once the rate is reached."
+      }
+     ],
+     "default": "continuous",
+     "multiple_values": false
+    },
+    "rate-track": {
+     "name": "rate-track",
+     "category": "unitary",
+     "type": "option",
+     "help": "Track the packet protocol field.",
+     "options": [
+      {
+       "name": "none",
+       "help": "none"
+      },
+      {
+       "name": "src-ip",
+       "help": "Source IP."
+      },
+      {
+       "name": "dest-ip",
+       "help": "Destination IP."
+      },
+      {
+       "name": "dhcp-client-mac",
+       "help": "DHCP client."
+      },
+      {
+       "name": "dns-domain",
+       "help": "DNS domain."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "session-ttl": {
+     "name": "session-ttl",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Session TTL (0 = default).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "shaper": {
+     "name": "shaper",
+     "category": "unitary",
+     "type": "string",
+     "help": "Traffic shaper.",
+     "datasource": [
+      "firewall.shaper.traffic-shaper.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "shaper-reverse": {
+     "name": "shaper-reverse",
+     "category": "unitary",
+     "type": "string",
+     "help": "Reverse traffic shaper.",
+     "datasource": [
+      "firewall.shaper.traffic-shaper.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "per-ip-shaper": {
+     "name": "per-ip-shaper",
+     "category": "unitary",
+     "type": "string",
+     "help": "Per-IP traffic shaper.",
+     "datasource": [
+      "firewall.shaper.per-ip-shaper.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "quarantine": {
+     "name": "quarantine",
+     "category": "unitary",
+     "type": "option",
+     "help": "Quarantine method.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Quarantine is disabled."
+      },
+      {
+       "name": "attacker",
+       "help": "Block all traffic sent from attacker's IP address. The attacker's IP address is also added to the banned user list. The target's address is not affected."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "quarantine-expiry": {
+     "name": "quarantine-expiry",
+     "category": "unitary",
+     "type": "user",
+     "help": "Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.",
+     "default": "5m",
+     "multiple_values": false
+    },
+    "quarantine-log": {
+     "name": "quarantine-log",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable quarantine logging.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable quarantine logging."
+      },
+      {
+       "name": "enable",
+       "help": "Enable quarantine logging."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "control-default-network-services": {
+   "name": "control-default-network-services",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable enforcement of protocols over selected ports.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable protocol enforcement over selected ports."
+    },
+    {
+     "name": "enable",
+     "help": "Enable protocol enforcement over selected ports."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default-network-services": {
+   "name": "default-network-services",
+   "category": "table",
+   "help": "Default network service entries.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Entry ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port number.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "services": {
+     "name": "services",
+     "category": "unitary",
+     "type": "option",
+     "help": "Network protocols.",
+     "options": [
+      {
+       "name": "http",
+       "help": "HTTP."
+      },
+      {
+       "name": "ssh",
+       "help": "SSH."
+      },
+      {
+       "name": "telnet",
+       "help": "TELNET."
+      },
+      {
+       "name": "ftp",
+       "help": "FTP."
+      },
+      {
+       "name": "dns",
+       "help": "DNS."
+      },
+      {
+       "name": "smtp",
+       "help": "SMTP."
+      },
+      {
+       "name": "pop3",
+       "help": "POP3."
+      },
+      {
+       "name": "imap",
+       "help": "IMAP."
+      },
+      {
+       "name": "snmp",
+       "help": "SNMP."
+      },
+      {
+       "name": "nntp",
+       "help": "NNTP."
+      },
+      {
+       "name": "https",
+       "help": "HTTPS."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "violation-action": {
+     "name": "violation-action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action for protocols not in the allowlist for selected port.",
+     "options": [
+      {
+       "name": "pass",
+       "help": "Allow protocols not in the allowlist for selected port."
+      },
+      {
+       "name": "monitor",
+       "help": "Monitor protocols not in the allowlist for selected port."
+      },
+      {
+       "name": "block",
+       "help": "Block protocols not in the allowlist for selected port."
+      }
+     ],
+     "default": "block",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "application",
+ "q_type": 371,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

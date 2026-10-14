@@ -1,0 +1,373 @@
+{
+ "name": "local",
+ "category": "table",
+ "help": "Configure local users.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local user name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "User ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing the local user to authenticate with the FortiGate unit.",
+   "required": true,
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable user."
+    },
+    {
+     "name": "disable",
+     "help": "Disable user."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication method.",
+   "required": true,
+   "options": [
+    {
+     "name": "password",
+     "help": "Password authentication."
+    },
+    {
+     "name": "radius",
+     "help": "RADIUS server authentication."
+    },
+    {
+     "name": "tacacs+",
+     "help": "TACACS+ server authentication."
+    },
+    {
+     "name": "ldap",
+     "help": "LDAP server authentication."
+    }
+   ],
+   "default": "password",
+   "multiple_values": false
+  },
+  "passwd": {
+   "name": "passwd",
+   "category": "unitary",
+   "type": "password",
+   "help": "User's password.",
+   "required": true,
+   "size": 128,
+   "multiple_values": false
+  },
+  "ldap-server": {
+   "name": "ldap-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of LDAP server with which the user must authenticate.",
+   "required": true,
+   "datasource": [
+    "user.ldap.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "radius-server": {
+   "name": "radius-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of RADIUS server with which the user must authenticate.",
+   "required": true,
+   "datasource": [
+    "user.radius.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "tacacs+-server": {
+   "name": "tacacs+-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of TACACS+ server with which the user must authenticate.",
+   "required": true,
+   "datasource": [
+    "user.tacacs+.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "two-factor": {
+   "name": "two-factor",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable two-factor authentication.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "disable"
+    },
+    {
+     "name": "fortitoken",
+     "help": "FortiToken"
+    },
+    {
+     "name": "fortitoken-cloud",
+     "help": "FortiToken Cloud Service."
+    },
+    {
+     "name": "email",
+     "help": "Email authentication code."
+    },
+    {
+     "name": "sms",
+     "help": "SMS authentication code."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "two-factor-authentication": {
+   "name": "two-factor-authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication method by FortiToken Cloud.",
+   "options": [
+    {
+     "name": "fortitoken",
+     "help": "FortiToken authentication."
+    },
+    {
+     "name": "email",
+     "help": "Email one time password."
+    },
+    {
+     "name": "sms",
+     "help": "SMS one time password."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "two-factor-notification": {
+   "name": "two-factor-notification",
+   "category": "unitary",
+   "type": "option",
+   "help": "Notification method for user activation by FortiToken Cloud.",
+   "options": [
+    {
+     "name": "email",
+     "help": "Email notification for activation code."
+    },
+    {
+     "name": "sms",
+     "help": "SMS notification for activation code."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "fortitoken": {
+   "name": "fortitoken",
+   "category": "unitary",
+   "type": "string",
+   "help": "Two-factor recipient's FortiToken serial number.",
+   "datasource": [
+    "user.fortitoken.serial-number"
+   ],
+   "size": 16,
+   "default": "",
+   "multiple_values": false
+  },
+  "email-to": {
+   "name": "email-to",
+   "category": "unitary",
+   "type": "string",
+   "help": "Two-factor recipient's email address.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "sms-server": {
+   "name": "sms-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Send SMS through FortiGuard or other external server.",
+   "options": [
+    {
+     "name": "fortiguard",
+     "help": "Send SMS by FortiGuard."
+    },
+    {
+     "name": "custom",
+     "help": "Send SMS by custom server."
+    }
+   ],
+   "default": "fortiguard",
+   "multiple_values": false
+  },
+  "sms-custom-server": {
+   "name": "sms-custom-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Two-factor recipient's SMS server.",
+   "datasource": [
+    "system.sms-server.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sms-phone": {
+   "name": "sms-phone",
+   "category": "unitary",
+   "type": "string",
+   "help": "Two-factor recipient's mobile phone number.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "passwd-policy": {
+   "name": "passwd-policy",
+   "category": "unitary",
+   "type": "string",
+   "help": "Password policy to apply to this user, as defined in config user password-policy.",
+   "datasource": [
+    "user.password-policy.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "passwd-time": {
+   "name": "passwd-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of the last password update.",
+   "default": "",
+   "multiple_values": false
+  },
+  "authtimeout": {
+   "name": "authtimeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in minutes before the authentication timeout for a user is reached.",
+   "min-value": 0,
+   "max-value": 1440,
+   "default": 0,
+   "multiple_values": false
+  },
+  "workstation": {
+   "name": "workstation",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the remote user workstation, if you want to limit the user to authenticate only from a particular workstation.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-concurrent-override": {
+   "name": "auth-concurrent-override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable overriding the policy-auth-concurrent under config system global.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable auth-concurrent-override."
+    },
+    {
+     "name": "disable",
+     "help": "Disable auth-concurrent-override."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auth-concurrent-value": {
+   "name": "auth-concurrent-value",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of concurrent logins permitted from the same user.",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ppk-secret": {
+   "name": "ppk-secret",
+   "category": "unitary",
+   "type": "password-3",
+   "help": "IKEv2 Postquantum Preshared Key (ASCII string or hexadecimal encoded with a leading 0x).",
+   "multiple_values": false
+  },
+  "ppk-identity": {
+   "name": "ppk-identity",
+   "category": "unitary",
+   "type": "string",
+   "help": "IKEv2 Postquantum Preshared Key Identity.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "qkd-profile": {
+   "name": "qkd-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Quantum Key Distribution (QKD) profile.",
+   "datasource": [
+    "vpn.qkd.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "username-sensitivity": {
+   "name": "username-sensitivity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable case and accent sensitivity when performing username matching (accents are stripped and case is ignored when disabled).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Ignore case and accents. Username at prompt not required to match case or accents."
+    },
+    {
+     "name": "enable",
+     "help": "Do not ignore case and accents. Username at prompt must be an exact match."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 500,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 21,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

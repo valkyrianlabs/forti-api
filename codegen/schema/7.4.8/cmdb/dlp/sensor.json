@@ -1,0 +1,132 @@
+{
+ "name": "sensor",
+ "category": "table",
+ "help": "Configure sensors used by DLP blocking.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table containing the sensor.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "match-type": {
+   "name": "match-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Logical relation between entries (default = match-any).",
+   "required": true,
+   "options": [
+    {
+     "name": "match-all",
+     "help": "Match all entries."
+    },
+    {
+     "name": "match-any",
+     "help": "Match any entries."
+    },
+    {
+     "name": "match-eval",
+     "help": "Match an expression evaluation."
+    }
+   ],
+   "default": "match-any",
+   "multiple_values": false
+  },
+  "eval": {
+   "name": "eval",
+   "category": "unitary",
+   "type": "string",
+   "help": "Expression to evaluate.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "entries": {
+   "name": "entries",
+   "category": "table",
+   "help": "DLP sensor entries.",
+   "required": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 1,
+     "max-value": 32,
+     "default": 0,
+     "multiple_values": false
+    },
+    "dictionary": {
+     "name": "dictionary",
+     "category": "unitary",
+     "type": "string",
+     "help": "Select a DLP dictionary or exact-data-match.",
+     "required": true,
+     "datasource": [
+      "dlp.dictionary.name",
+      "dlp.exact-data-match.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "count": {
+     "name": "count",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Count of dictionary matches to trigger sensor entry match (Dictionary might not be able to trigger more than once based on its 'repeat' option, 1 - 255, default = 1).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 255,
+     "default": 1,
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this entry.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable this entry."
+      },
+      {
+       "name": "disable",
+       "help": "Disable this entry."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "dlp",
+ "q_type": 251,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

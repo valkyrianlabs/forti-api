@@ -1,16 +1,11 @@
 //
-// Firewall: the generated endpoints plus value helpers for schedules and services.
+// Firewall: every generated firewall endpoint plus value helpers for schedules and services.
 //
 
 #ifndef FORTI_API_FIREWALL_HPP
 #define FORTI_API_FIREWALL_HPP
 
-#include "gen/firewall/address.hpp"
-#include "gen/firewall/policy.hpp"
-#include "gen/firewall/schedule/recurring.hpp"
-#include "gen/firewall/service/category.hpp"
-#include "gen/firewall/service/custom.hpp"
-#include "gen/firewall/vip.hpp"
+#include "gen/firewall.hpp"
 
 #include <cstdint>
 #include <format>

@@ -1,0 +1,274 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure file-filter profiles.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "feature-set": {
+   "name": "feature-set",
+   "category": "unitary",
+   "type": "option",
+   "help": "Flow/proxy feature set.",
+   "options": [
+    {
+     "name": "flow",
+     "help": "Flow feature set."
+    },
+    {
+     "name": "proxy",
+     "help": "Proxy feature set."
+    }
+   ],
+   "default": "flow",
+   "multiple_values": false
+  },
+  "replacemsg-group": {
+   "name": "replacemsg-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Replacement message group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "log": {
+   "name": "log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable file-filter logging.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "extended-log": {
+   "name": "extended-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable file-filter extended logging.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable extended logging."
+    },
+    {
+     "name": "enable",
+     "help": "Enable extended logging."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "scan-archive-contents": {
+   "name": "scan-archive-contents",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable archive contents scan.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable scanning archive contents."
+    },
+    {
+     "name": "enable",
+     "help": "Enable scanning archive contents."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "rules": {
+   "name": "rules",
+   "category": "table",
+   "help": "File filter rules.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "File-filter rule name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "comment": {
+     "name": "comment",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Comment.",
+     "size": 255,
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "option",
+     "help": "Protocols to apply rule to.",
+     "options": [
+      {
+       "name": "http",
+       "help": "Filter on HTTP."
+      },
+      {
+       "name": "ftp",
+       "help": "Filter on FTP."
+      },
+      {
+       "name": "smtp",
+       "help": "Filter on SMTP."
+      },
+      {
+       "name": "imap",
+       "help": "Filter on IMAP."
+      },
+      {
+       "name": "pop3",
+       "help": "Filter on POP3."
+      },
+      {
+       "name": "mapi",
+       "help": "Filter on MAPI. (Proxy mode only.)"
+      },
+      {
+       "name": "cifs",
+       "help": "Filter on CIFS."
+      },
+      {
+       "name": "ssh",
+       "help": "Filter on SFTP and SCP. (Proxy mode only.)"
+      }
+     ],
+     "default": "http ftp smtp imap pop3 mapi cifs ssh",
+     "multiple_values": true
+    },
+    "action": {
+     "name": "action",
+     "category": "unitary",
+     "type": "option",
+     "help": "Action taken for matched file.",
+     "options": [
+      {
+       "name": "log-only",
+       "help": "Allow the content and write a log message."
+      },
+      {
+       "name": "block",
+       "help": "Block the content and write a log message."
+      }
+     ],
+     "default": "log-only",
+     "multiple_values": false
+    },
+    "direction": {
+     "name": "direction",
+     "category": "unitary",
+     "type": "option",
+     "help": "Traffic direction (HTTP, FTP, SSH, CIFS, and MAPI only).",
+     "options": [
+      {
+       "name": "incoming",
+       "help": "Match files transmitted in the session's reply direction."
+      },
+      {
+       "name": "outgoing",
+       "help": "Match files transmitted in the session's originating direction."
+      },
+      {
+       "name": "any",
+       "help": "Match files transmitted in the session's originating and reply directions."
+      }
+     ],
+     "default": "any",
+     "multiple_values": false
+    },
+    "password-protected": {
+     "name": "password-protected",
+     "category": "unitary",
+     "type": "option",
+     "help": "Match password-protected files.",
+     "options": [
+      {
+       "name": "yes",
+       "help": "Match only password-protected files."
+      },
+      {
+       "name": "any",
+       "help": "Match any file."
+      }
+     ],
+     "default": "any",
+     "multiple_values": false
+    },
+    "file-type": {
+     "name": "file-type",
+     "category": "table",
+     "help": "Select file type.",
+     "required": true,
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "File type name.",
+       "datasource": [
+        "antivirus.filetype.name"
+       ],
+       "size": 39,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 100
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "file-filter",
+ "q_type": 444,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

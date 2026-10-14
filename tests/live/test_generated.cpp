@@ -82,8 +82,8 @@ TEST(Generated, UpdateChangesExactlyWhatWasSet) {
 TEST(Generated, ExternalResourceRoundTrip) {
     system::ExternalResource feed;
     feed.name = live::name("gen-feed");
-    feed.type = std::string(system::external_resource::type::domain);
-    feed.update_method = std::string(system::external_resource::update_method::push);
+    feed.type = std::string(system::ExternalResource::Type::domain);
+    feed.update_method = std::string(system::ExternalResource::UpdateMethod::push);
     feed.category = live::free_threat_feed_category();
     feed.comments = std::string(live::comment);
     live::Cleanup cleanup([&] { live::del_threat_feed(*feed.name); });

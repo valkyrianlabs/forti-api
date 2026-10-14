@@ -1,0 +1,85 @@
+{
+ "name": "auth-portal",
+ "category": "complex",
+ "help": "Configure firewall authentication portals.",
+ "children": {
+  "groups": {
+   "name": "groups",
+   "category": "table",
+   "help": "Firewall user groups permitted to authenticate through this portal. Separate group names with spaces.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Group name.",
+     "required": true,
+     "datasource": [
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "portal-addr": {
+   "name": "portal-addr",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address (or FQDN) of the authentication portal.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "portal-addr6": {
+   "name": "portal-addr6",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 address (or FQDN) of authentication portal.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "identity-based-route": {
+   "name": "identity-based-route",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the identity-based route that applies to this portal.",
+   "datasource": [
+    "firewall.identity-based-route.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "proxy-auth": {
+   "name": "proxy-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authentication by proxy daemon (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Users are authenticated by proxy daemon."
+    },
+    {
+     "name": "disable",
+     "help": "Users are not authenticated by proxy daemon."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "firewall",
+ "q_type": 479,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

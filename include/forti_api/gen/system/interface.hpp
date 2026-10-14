@@ -15,8 +15,784 @@ namespace fortiapi::system {
 
 // Configure interfaces.
 struct Interface {
+    // Values of Fortilink: Enable FortiLink to dedicate this interface to manage other Fortinet devices.
+    struct Fortilink {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerSourceIp: Source IP address used in FortiLink over L3 connections.
+    struct SwitchControllerSourceIp {
+        static constexpr std::string_view outbound = "outbound";
+        static constexpr std::string_view fixed = "fixed";
+    };
+
+    // Values of Mode: Addressing mode (static, DHCP, PPPoE).
+    struct Mode {
+        static constexpr std::string_view static_ = "static";
+        static constexpr std::string_view dhcp = "dhcp";
+        static constexpr std::string_view pppoe = "pppoe";
+        static constexpr std::string_view pppoa = "pppoa";
+    };
+
+    // Values of DhcpRelayInterfaceSelectMethod: Specify how to select outgoing interface to reach server.
+    struct DhcpRelayInterfaceSelectMethod {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view sdwan = "sdwan";
+        static constexpr std::string_view specify = "specify";
+    };
+
+    // Values of DhcpBroadcastFlag: Enable/disable setting of the broadcast flag in messages sent by the DHCP client (default = enable).
+    struct DhcpBroadcastFlag {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of DhcpRelayService: Enable/disable allowing this interface to act as a DHCP relay.
+    struct DhcpRelayService {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of DhcpRelayRequestAllServer: Enable/disable sending of DHCP requests to all servers.
+    struct DhcpRelayRequestAllServer {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of DhcpRelayAllowNoEndOption: Enable/disable relaying DHCP messages with no end option.
+    struct DhcpRelayAllowNoEndOption {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of DhcpRelayType: DHCP relay type (regular or IPsec).
+    struct DhcpRelayType {
+        static constexpr std::string_view regular = "regular";
+        static constexpr std::string_view ipsec = "ipsec";
+    };
+
+    // Values of DhcpSmartRelay: Enable/disable DHCP smart relay.
+    struct DhcpSmartRelay {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of DhcpRelayAgentOption: Enable/disable DHCP relay agent option.
+    struct DhcpRelayAgentOption {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DhcpClasslessRouteAddition: Enable/disable addition of classless static routes retrieved from DHCP server.
+    struct DhcpClasslessRouteAddition {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Allowaccess: Permitted types of management access to this interface.
+    struct Allowaccess {
+        static constexpr std::string_view ping = "ping";
+        static constexpr std::string_view https = "https";
+        static constexpr std::string_view ssh = "ssh";
+        static constexpr std::string_view snmp = "snmp";
+        static constexpr std::string_view http = "http";
+        static constexpr std::string_view telnet = "telnet";
+        static constexpr std::string_view fgfm = "fgfm";
+        static constexpr std::string_view radius_acct = "radius-acct";
+        static constexpr std::string_view probe_response = "probe-response";
+        static constexpr std::string_view fabric = "fabric";
+        static constexpr std::string_view ftm = "ftm";
+        static constexpr std::string_view speed_test = "speed-test";
+    };
+
+    // Values of Gwdetect: Enable/disable detect gateway alive for first.
+    struct Gwdetect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Detectprotocol: Protocols used to detect the server.
+    struct Detectprotocol {
+        static constexpr std::string_view ping = "ping";
+        static constexpr std::string_view tcp_echo = "tcp-echo";
+        static constexpr std::string_view udp_echo = "udp-echo";
+    };
+
+    // Values of FailDetect: Enable/disable fail detection features for this interface.
+    struct FailDetect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of FailDetectOption: Options for detecting that this interface has failed.
+    struct FailDetectOption {
+        static constexpr std::string_view detectserver = "detectserver";
+        static constexpr std::string_view link_down = "link-down";
+    };
+
+    // Values of FailAlertMethod: Select link-failed-signal or link-down method to alert about a failed link.
+    struct FailAlertMethod {
+        static constexpr std::string_view link_failed_signal = "link-failed-signal";
+        static constexpr std::string_view link_down = "link-down";
+    };
+
+    // Values of FailActionOnExtender: Action on FortiExtender when interface fail.
+    struct FailActionOnExtender {
+        static constexpr std::string_view soft_restart = "soft-restart";
+        static constexpr std::string_view hard_restart = "hard-restart";
+        static constexpr std::string_view reboot = "reboot";
+    };
+
+    // Values of PppoeEgressCos: CoS in VLAN tag for outgoing PPPoE/PPP packets.
+    struct PppoeEgressCos {
+        static constexpr std::string_view cos0 = "cos0";
+        static constexpr std::string_view cos1 = "cos1";
+        static constexpr std::string_view cos2 = "cos2";
+        static constexpr std::string_view cos3 = "cos3";
+        static constexpr std::string_view cos4 = "cos4";
+        static constexpr std::string_view cos5 = "cos5";
+        static constexpr std::string_view cos6 = "cos6";
+        static constexpr std::string_view cos7 = "cos7";
+    };
+
+    // Values of PppoeUnnumberedNegotiate: Enable/disable PPPoE unnumbered negotiation.
+    struct PppoeUnnumberedNegotiate {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Defaultgw: Enable to get the gateway IP from the DHCP or PPPoE server.
+    struct Defaultgw {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DnsServerOverride: Enable/disable use DNS acquired by DHCP or PPPoE.
+    struct DnsServerOverride {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DnsServerProtocol: DNS transport protocols.
+    struct DnsServerProtocol {
+        static constexpr std::string_view cleartext = "cleartext";
+        static constexpr std::string_view dot = "dot";
+        static constexpr std::string_view doh = "doh";
+    };
+
+    // Values of AuthType: PPP authentication type to use.
+    struct AuthType {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view pap = "pap";
+        static constexpr std::string_view chap = "chap";
+        static constexpr std::string_view mschapv1 = "mschapv1";
+        static constexpr std::string_view mschapv2 = "mschapv2";
+    };
+
+    // Values of PptpClient: Enable/disable PPTP client.
+    struct PptpClient {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PptpAuthType: PPTP authentication type.
+    struct PptpAuthType {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view pap = "pap";
+        static constexpr std::string_view chap = "chap";
+        static constexpr std::string_view mschapv1 = "mschapv1";
+        static constexpr std::string_view mschapv2 = "mschapv2";
+    };
+
+    // Values of Arpforward: Enable/disable ARP forwarding.
+    struct Arpforward {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ndiscforward: Enable/disable NDISC forwarding.
+    struct Ndiscforward {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of BroadcastForward: Enable/disable broadcast forwarding.
+    struct BroadcastForward {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Bfd: Bidirectional Forwarding Detection (BFD) settings.
+    struct Bfd {
+        static constexpr std::string_view global = "global";
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of L2forward: Enable/disable l2 forwarding.
+    struct L2forward {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of IcmpSendRedirect: Enable/disable sending of ICMP redirects.
+    struct IcmpSendRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of IcmpAcceptRedirect: Enable/disable ICMP accept redirect.
+    struct IcmpAcceptRedirect {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Vlanforward: Enable/disable traffic forwarding between VLANs on this interface.
+    struct Vlanforward {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Stpforward: Enable/disable STP forwarding.
+    struct Stpforward {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of StpforwardMode: Configure STP forwarding mode.
+    struct StpforwardMode {
+        static constexpr std::string_view rpl_all_ext_id = "rpl-all-ext-id";
+        static constexpr std::string_view rpl_bridge_ext_id = "rpl-bridge-ext-id";
+        static constexpr std::string_view rpl_nothing = "rpl-nothing";
+    };
+
+    // Values of IpsSnifferMode: Enable/disable the use of this interface as a one-armed sniffer.
+    struct IpsSnifferMode {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of IdentAccept: Enable/disable authentication for this interface.
+    struct IdentAccept {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Ipmac: Enable/disable IP/MAC binding.
+    struct Ipmac {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Subst: Enable to always send packets from this interface to a destination MAC address.
+    struct Subst {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Speed: Interface speed. The default setting and the options available depend on the interface hardware.
+    struct Speed {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view _10full = "10full";
+        static constexpr std::string_view _10half = "10half";
+        static constexpr std::string_view _100full = "100full";
+        static constexpr std::string_view _100half = "100half";
+        static constexpr std::string_view _1000full = "1000full";
+        static constexpr std::string_view _1000auto = "1000auto";
+    };
+
+    // Values of Status: Bring the interface up or shut the interface down.
+    struct Status {
+        static constexpr std::string_view up = "up";
+        static constexpr std::string_view down = "down";
+    };
+
+    // Values of NetbiosForward: Enable/disable NETBIOS forwarding.
+    struct NetbiosForward {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of Type: Interface type.
+    struct Type {
+        static constexpr std::string_view physical = "physical";
+        static constexpr std::string_view vlan = "vlan";
+        static constexpr std::string_view aggregate = "aggregate";
+        static constexpr std::string_view redundant = "redundant";
+        static constexpr std::string_view tunnel = "tunnel";
+        static constexpr std::string_view vdom_link = "vdom-link";
+        static constexpr std::string_view loopback = "loopback";
+        static constexpr std::string_view switch_ = "switch";
+        static constexpr std::string_view hard_switch = "hard-switch";
+        static constexpr std::string_view vap_switch = "vap-switch";
+        static constexpr std::string_view wl_mesh = "wl-mesh";
+        static constexpr std::string_view fext_wan = "fext-wan";
+        static constexpr std::string_view vxlan = "vxlan";
+        static constexpr std::string_view geneve = "geneve";
+        static constexpr std::string_view hdlc = "hdlc";
+        static constexpr std::string_view switch_vlan = "switch-vlan";
+        static constexpr std::string_view emac_vlan = "emac-vlan";
+        static constexpr std::string_view ssl = "ssl";
+        static constexpr std::string_view lan_extension = "lan-extension";
+    };
+
+    // Values of DedicatedTo: Configure interface for single purpose.
+    struct DedicatedTo {
+        static constexpr std::string_view none = "none";
+        static constexpr std::string_view management = "management";
+    };
+
+    // Values of Wccp: Enable/disable WCCP on this interface. Used for encapsulated WCCP communication between WCCP clients and servers.
+    struct Wccp {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of NetflowSampler: Enable/disable NetFlow on this interface and set the data that NetFlow collects (rx, tx, or both).
+    struct NetflowSampler {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view tx = "tx";
+        static constexpr std::string_view rx = "rx";
+        static constexpr std::string_view both = "both";
+    };
+
+    // Values of SflowSampler: Enable/disable sFlow on this interface.
+    struct SflowSampler {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DropOverlappedFragment: Enable/disable drop overlapped fragment packets.
+    struct DropOverlappedFragment {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DropFragment: Enable/disable drop fragment packets.
+    struct DropFragment {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SrcCheck: Enable/disable source IP check.
+    struct SrcCheck {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SampleDirection: Data that NetFlow collects (rx, tx, or both).
+    struct SampleDirection {
+        static constexpr std::string_view tx = "tx";
+        static constexpr std::string_view rx = "rx";
+        static constexpr std::string_view both = "both";
+    };
+
+    // Values of ExplicitWebProxy: Enable/disable the explicit web proxy on this interface.
+    struct ExplicitWebProxy {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ExplicitFtpProxy: Enable/disable the explicit FTP proxy on this interface.
+    struct ExplicitFtpProxy {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ProxyCaptivePortal: Enable/disable proxy captive portal on this interface.
+    struct ProxyCaptivePortal {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of External: Enable/disable identifying the interface as an external interface (which usually means it's connected to the Internet).
+    struct External {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of MtuOverride: Enable to set a custom MTU for this interface.
+    struct MtuOverride {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of VlanProtocol: Ethernet protocol of VLAN.
+    struct VlanProtocol {
+        static constexpr std::string_view _8021q = "8021q";
+        static constexpr std::string_view _8021ad = "8021ad";
+    };
+
+    // Values of Trunk: Enable/disable VLAN trunk.
+    struct Trunk {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of LacpMode: LACP mode.
+    struct LacpMode {
+        static constexpr std::string_view static_ = "static";
+        static constexpr std::string_view passive = "passive";
+        static constexpr std::string_view active = "active";
+    };
+
+    // Values of LacpHaSecondary: LACP HA secondary member.
+    struct LacpHaSecondary {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SystemIdType: Method in which system ID is generated.
+    struct SystemIdType {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view user = "user";
+    };
+
+    // Values of LacpSpeed: How often the interface sends LACP messages.
+    struct LacpSpeed {
+        static constexpr std::string_view slow = "slow";
+        static constexpr std::string_view fast = "fast";
+    };
+
+    // Values of MinLinksDown: Action to take when less than the configured minimum number of links are active.
+    struct MinLinksDown {
+        static constexpr std::string_view operational = "operational";
+        static constexpr std::string_view administrative = "administrative";
+    };
+
+    // Values of Algorithm: Frame distribution algorithm.
+    struct Algorithm {
+        static constexpr std::string_view L2 = "L2";
+        static constexpr std::string_view L3 = "L3";
+        static constexpr std::string_view L4 = "L4";
+        static constexpr std::string_view Source_MAC = "Source-MAC";
+    };
+
+    // Values of AggregateType: Type of aggregation.
+    struct AggregateType {
+        static constexpr std::string_view physical = "physical";
+        static constexpr std::string_view vxlan = "vxlan";
+    };
+
+    // Values of PriorityOverride: Enable/disable fail back to higher priority port once recovered.
+    struct PriorityOverride {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AtmProtocol: ATM protocol.
+    struct AtmProtocol {
+        static constexpr std::string_view none = "none";
+        static constexpr std::string_view ipoa = "ipoa";
+    };
+
+    // Values of MuxType: Multiplexer type.
+    struct MuxType {
+        static constexpr std::string_view llc_encaps = "llc-encaps";
+        static constexpr std::string_view vc_encaps = "vc-encaps";
+    };
+
+    // Values of PhyMode: DSL physical mode.
+    struct PhyMode {
+        static constexpr std::string_view vdsl = "vdsl";
+    };
+
+    // Values of TcMode: DSL transfer mode.
+    struct TcMode {
+        static constexpr std::string_view ptm = "ptm";
+    };
+
+    // Values of Vectoring: Enable/disable DSL vectoring.
+    struct Vectoring {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of L2tpClient: Enable/disable this interface as a Layer 2 Tunnelling Protocol (L2TP) client.
+    struct L2tpClient {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SecurityMode: Turn on captive portal authentication for this interface.
+    struct SecurityMode {
+        static constexpr std::string_view none = "none";
+        static constexpr std::string_view captive_portal = "captive-portal";
+        static constexpr std::string_view _802_1X = "802.1X";
+    };
+
+    // Values of SecurityMacAuthBypass: Enable/disable MAC authentication bypass.
+    struct SecurityMacAuthBypass {
+        static constexpr std::string_view mac_auth_only = "mac-auth-only";
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Security8021xMode: 802.1X mode.
+    struct Security8021xMode {
+        static constexpr std::string_view default_ = "default";
+        static constexpr std::string_view dynamic_vlan = "dynamic-vlan";
+        static constexpr std::string_view fallback = "fallback";
+        static constexpr std::string_view slave = "slave";
+    };
+
+    // Values of Security8021xMemberMode: 802.1X member mode.
+    struct Security8021xMemberMode {
+        static constexpr std::string_view switch_ = "switch";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Stp: Enable/disable STP.
+    struct Stp {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of StpHaSecondary: Control STP behavior on HA secondary.
+    struct StpHaSecondary {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view priority_adjust = "priority-adjust";
+    };
+
+    // Values of StpEdge: Enable/disable as STP edge port.
+    struct StpEdge {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of DeviceIdentification: Enable/disable passively gathering of device identity information about the devices on the network connected to this interface.
+    struct DeviceIdentification {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of DeviceUserIdentification: Enable/disable passive gathering of user identity information about users on this interface.
+    struct DeviceUserIdentification {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of LldpReception: Enable/disable Link Layer Discovery Protocol (LLDP) reception.
+    struct LldpReception {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view vdom = "vdom";
+    };
+
+    // Values of LldpTransmission: Enable/disable Link Layer Discovery Protocol (LLDP) transmission.
+    struct LldpTransmission {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view vdom = "vdom";
+    };
+
+    // Values of MonitorBandwidth: Enable monitoring bandwidth on this interface.
+    struct MonitorBandwidth {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of VrrpVirtualMac: Enable/disable use of virtual MAC for VRRP.
+    struct VrrpVirtualMac {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Role: Interface role.
+    struct Role {
+        static constexpr std::string_view lan = "lan";
+        static constexpr std::string_view wan = "wan";
+        static constexpr std::string_view dmz = "dmz";
+        static constexpr std::string_view undefined = "undefined";
+    };
+
+    // Values of SecondaryIP: Enable/disable adding a secondary IP to this interface.
+    struct SecondaryIP {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of PreserveSessionRoute: Enable/disable preservation of session route when dirty.
+    struct PreserveSessionRoute {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of AutoAuthExtensionDevice: Enable/disable automatic authorization of dedicated Fortinet extension device on this interface.
+    struct AutoAuthExtensionDevice {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ApDiscover: Enable/disable automatic registration of unknown FortiAP devices.
+    struct ApDiscover {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of FortilinkNeighborDetect: Protocol for FortiGate neighbor discovery.
+    struct FortilinkNeighborDetect {
+        static constexpr std::string_view lldp = "lldp";
+        static constexpr std::string_view fortilink = "fortilink";
+    };
+
+    // Values of IpManagedByFortiipam: Enable/disable automatic IP address assignment of this interface by FortiIPAM.
+    struct IpManagedByFortiipam {
+        static constexpr std::string_view inherit_global = "inherit-global";
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of ManagedSubnetworkSize: Number of IP addresses to be allocated by FortiIPAM and used by this FortiGate unit's DHCP server settings.
+    struct ManagedSubnetworkSize {
+        static constexpr std::string_view _32 = "32";
+        static constexpr std::string_view _64 = "64";
+        static constexpr std::string_view _128 = "128";
+        static constexpr std::string_view _256 = "256";
+        static constexpr std::string_view _512 = "512";
+        static constexpr std::string_view _1024 = "1024";
+        static constexpr std::string_view _2048 = "2048";
+        static constexpr std::string_view _4096 = "4096";
+        static constexpr std::string_view _8192 = "8192";
+        static constexpr std::string_view _16384 = "16384";
+        static constexpr std::string_view _32768 = "32768";
+        static constexpr std::string_view _65536 = "65536";
+    };
+
+    // Values of FortilinkSplitInterface: Enable/disable FortiLink split interface to connect member link to different FortiSwitch in stack for uplink redundancy.
+    struct FortilinkSplitInterface {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerAccessVlan: Block FortiSwitch port-to-port traffic.
+    struct SwitchControllerAccessVlan {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerRspanMode: Stop Layer2 MAC learning and interception of BPDUs and other packets on this interface.
+    struct SwitchControllerRspanMode {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SwitchControllerNetflowCollect: NetFlow collection and processing.
+    struct SwitchControllerNetflowCollect {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view enable = "enable";
+    };
+
+    // Values of SwitchControllerIgmpSnooping: Switch controller IGMP snooping.
+    struct SwitchControllerIgmpSnooping {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerIgmpSnoopingProxy: Switch controller IGMP snooping proxy.
+    struct SwitchControllerIgmpSnoopingProxy {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerIgmpSnoopingFastLeave: Switch controller IGMP snooping fast-leave.
+    struct SwitchControllerIgmpSnoopingFastLeave {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerDhcpSnooping: Switch controller DHCP snooping.
+    struct SwitchControllerDhcpSnooping {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerDhcpSnoopingVerifyMac: Switch controller DHCP snooping verify MAC.
+    struct SwitchControllerDhcpSnoopingVerifyMac {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerDhcpSnoopingOption82: Switch controller DHCP snooping option82.
+    struct SwitchControllerDhcpSnoopingOption82 {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerArpInspection: Enable/disable/Monitor FortiSwitch ARP inspection.
+    struct SwitchControllerArpInspection {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view monitor = "monitor";
+    };
+
+    // Values of SwitchControllerFeature: Interface's purpose when assigning traffic (read only).
+    struct SwitchControllerFeature {
+        static constexpr std::string_view none = "none";
+        static constexpr std::string_view default_vlan = "default-vlan";
+        static constexpr std::string_view quarantine = "quarantine";
+        static constexpr std::string_view rspan = "rspan";
+        static constexpr std::string_view voice = "voice";
+        static constexpr std::string_view video = "video";
+        static constexpr std::string_view nac = "nac";
+        static constexpr std::string_view nac_segment = "nac-segment";
+    };
+
+    // Values of SwitchControllerIotScanning: Enable/disable managed FortiSwitch IoT scanning.
+    struct SwitchControllerIotScanning {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerOffload: Enable/disable managed FortiSwitch routing offload.
+    struct SwitchControllerOffload {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of SwitchControllerOffloadGw: Enable/disable managed FortiSwitch routing offload gateway.
+    struct SwitchControllerOffloadGw {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of EapSupplicant: Enable/disable EAP-Supplicant.
+    struct EapSupplicant {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of EapMethod: EAP method.
+    struct EapMethod {
+        static constexpr std::string_view tls = "tls";
+        static constexpr std::string_view peap = "peap";
+    };
+
+    // Values of DefaultPurdueLevel: default purdue level of device detected on this interface.
+    struct DefaultPurdueLevel {
+        static constexpr std::string_view _1 = "1";
+        static constexpr std::string_view _1_5 = "1.5";
+        static constexpr std::string_view _2 = "2";
+        static constexpr std::string_view _2_5 = "2.5";
+        static constexpr std::string_view _3 = "3";
+        static constexpr std::string_view _3_5 = "3.5";
+        static constexpr std::string_view _4 = "4";
+        static constexpr std::string_view _5 = "5";
+        static constexpr std::string_view _5_5 = "5.5";
+    };
+
     // DHCP client options.
     struct ClientOptionsEntry {
+        // Values of Type: DHCP client option type.
+        struct Type {
+            static constexpr std::string_view hex = "hex";
+            static constexpr std::string_view string = "string";
+            static constexpr std::string_view ip = "ip";
+            static constexpr std::string_view fqdn = "fqdn";
+        };
+
         fortiapi::Field<std::uint32_t> id;  // ID. Required.
         fortiapi::Field<std::uint32_t> code;  // DHCP client option code. Required.
         fortiapi::Field<std::string> type;  // DHCP client option type.
@@ -45,6 +821,21 @@ struct Interface {
 
     // L2TP client settings.
     struct L2tpClientSettings {
+        // Values of AuthType: L2TP authentication type.
+        struct AuthType {
+            static constexpr std::string_view auto_ = "auto";
+            static constexpr std::string_view pap = "pap";
+            static constexpr std::string_view chap = "chap";
+            static constexpr std::string_view mschapv1 = "mschapv1";
+            static constexpr std::string_view mschapv2 = "mschapv2";
+        };
+
+        // Values of Defaultgw: Enable/disable default gateway.
+        struct Defaultgw {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
         fortiapi::Field<std::string> user;  // L2TP user name.
         fortiapi::Field<std::string> password;  // L2TP password.
         fortiapi::Field<std::string> peer_host;  // L2TP peer host address.
@@ -77,6 +868,36 @@ struct Interface {
 
     // VRRP configuration.
     struct VrrpEntry {
+        // Values of Version: VRRP version.
+        struct Version {
+            static constexpr std::string_view _2 = "2";
+            static constexpr std::string_view _3 = "3";
+        };
+
+        // Values of Preempt: Enable/disable preempt mode.
+        struct Preempt {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of AcceptMode: Enable/disable accept mode.
+        struct AcceptMode {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of IgnoreDefaultRoute: Enable/disable ignoring of default route when checking destination.
+        struct IgnoreDefaultRoute {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Status: Enable/disable this VRRP configuration.
+        struct Status {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
         // VRRP Proxy ARP configuration.
         struct ProxyArpEntry {
             fortiapi::Field<std::uint32_t> id;  // ID. Required.
@@ -135,6 +956,35 @@ struct Interface {
 
     // Second IP address of interface.
     struct SecondaryipEntry {
+        // Values of Allowaccess: Management access settings for the secondary IP address.
+        struct Allowaccess {
+            static constexpr std::string_view ping = "ping";
+            static constexpr std::string_view https = "https";
+            static constexpr std::string_view ssh = "ssh";
+            static constexpr std::string_view snmp = "snmp";
+            static constexpr std::string_view http = "http";
+            static constexpr std::string_view telnet = "telnet";
+            static constexpr std::string_view fgfm = "fgfm";
+            static constexpr std::string_view radius_acct = "radius-acct";
+            static constexpr std::string_view probe_response = "probe-response";
+            static constexpr std::string_view fabric = "fabric";
+            static constexpr std::string_view ftm = "ftm";
+            static constexpr std::string_view speed_test = "speed-test";
+        };
+
+        // Values of Gwdetect: Enable/disable detect gateway alive for first.
+        struct Gwdetect {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Detectprotocol: Protocols used to detect the server.
+        struct Detectprotocol {
+            static constexpr std::string_view ping = "ping";
+            static constexpr std::string_view tcp_echo = "tcp-echo";
+            static constexpr std::string_view udp_echo = "udp-echo";
+        };
+
         fortiapi::Field<std::uint32_t> id;  // ID.
         fortiapi::Field<std::string> ip;  // Secondary IP address of the interface.
         fortiapi::Field<std::string> secip_relay_ip;  // DHCP relay IP address.
@@ -187,6 +1037,128 @@ struct Interface {
 
     // IPv6 of interface.
     struct Ipv6 {
+        // Values of Ip6Mode: Addressing mode (static, DHCP, delegated).
+        struct Ip6Mode {
+            static constexpr std::string_view static_ = "static";
+            static constexpr std::string_view dhcp = "dhcp";
+            static constexpr std::string_view pppoe = "pppoe";
+            static constexpr std::string_view delegated = "delegated";
+        };
+
+        // Values of NdMode: Neighbor discovery mode.
+        struct NdMode {
+            static constexpr std::string_view basic = "basic";
+            static constexpr std::string_view SEND_compatible = "SEND-compatible";
+        };
+
+        // Values of Ip6DnsServerOverride: Enable/disable using the DNS server acquired by DHCP.
+        struct Ip6DnsServerOverride {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Ip6Allowaccess: Allow management access to the interface.
+        struct Ip6Allowaccess {
+            static constexpr std::string_view ping = "ping";
+            static constexpr std::string_view https = "https";
+            static constexpr std::string_view ssh = "ssh";
+            static constexpr std::string_view snmp = "snmp";
+            static constexpr std::string_view http = "http";
+            static constexpr std::string_view telnet = "telnet";
+            static constexpr std::string_view fgfm = "fgfm";
+            static constexpr std::string_view fabric = "fabric";
+        };
+
+        // Values of Ip6SendAdv: Enable/disable sending advertisements about the interface.
+        struct Ip6SendAdv {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Icmp6SendRedirect: Enable/disable sending of ICMPv6 redirects.
+        struct Icmp6SendRedirect {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Ip6ManageFlag: Enable/disable the managed flag.
+        struct Ip6ManageFlag {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Ip6OtherFlag: Enable/disable the other IPv6 flag.
+        struct Ip6OtherFlag {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of RaSendMtu: Enable/disable sending link MTU in RA packet.
+        struct RaSendMtu {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Autoconf: Enable/disable address auto config.
+        struct Autoconf {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of UniqueAutoconfAddr: Enable/disable unique auto config address.
+        struct UniqueAutoconfAddr {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Ip6PrefixMode: Assigning a prefix from DHCP or RA.
+        struct Ip6PrefixMode {
+            static constexpr std::string_view dhcp6 = "dhcp6";
+            static constexpr std::string_view ra = "ra";
+        };
+
+        // Values of Dhcp6RelayService: Enable/disable DHCPv6 relay.
+        struct Dhcp6RelayService {
+            static constexpr std::string_view disable = "disable";
+            static constexpr std::string_view enable = "enable";
+        };
+
+        // Values of Dhcp6RelayType: DHCPv6 relay type.
+        struct Dhcp6RelayType {
+            static constexpr std::string_view regular = "regular";
+        };
+
+        // Values of Dhcp6RelaySourceInterface: Enable/disable use of address on this interface as the source address of the relay message.
+        struct Dhcp6RelaySourceInterface {
+            static constexpr std::string_view disable = "disable";
+            static constexpr std::string_view enable = "enable";
+        };
+
+        // Values of Dhcp6ClientOptions: DHCPv6 client options.
+        struct Dhcp6ClientOptions {
+            static constexpr std::string_view rapid = "rapid";
+            static constexpr std::string_view iapd = "iapd";
+            static constexpr std::string_view iana = "iana";
+        };
+
+        // Values of Dhcp6PrefixDelegation: Enable/disable DHCPv6 prefix delegation.
+        struct Dhcp6PrefixDelegation {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of Dhcp6InformationRequest: Enable/disable DHCPv6 information request.
+        struct Dhcp6InformationRequest {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
+        // Values of VrrpVirtualMac6: Enable/disable virtual MAC for VRRP.
+        struct VrrpVirtualMac6 {
+            static constexpr std::string_view enable = "enable";
+            static constexpr std::string_view disable = "disable";
+        };
+
         // Extra IPv6 address prefixes of interface.
         struct Ip6ExtraAddrEntry {
             fortiapi::Field<std::string> prefix;  // IPv6 address prefix. Required.
@@ -199,6 +1171,18 @@ struct Interface {
 
         // Advertised prefix list.
         struct Ip6PrefixListEntry {
+            // Values of AutonomousFlag: Enable/disable the autonomous flag.
+            struct AutonomousFlag {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
+            // Values of OnlinkFlag: Enable/disable the onlink flag.
+            struct OnlinkFlag {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
             // DNS search list option.
             struct DnsslEntry {
                 fortiapi::Field<std::string> domain;  // Domain name. Required.
@@ -231,6 +1215,25 @@ struct Interface {
 
         // Advertised IPv6 delegated prefix list.
         struct Ip6DelegatedPrefixListEntry {
+            // Values of AutonomousFlag: Enable/disable the autonomous flag.
+            struct AutonomousFlag {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
+            // Values of OnlinkFlag: Enable/disable the onlink flag.
+            struct OnlinkFlag {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
+            // Values of RdnssService: Recursive DNS service option.
+            struct RdnssService {
+                static constexpr std::string_view delegated = "delegated";
+                static constexpr std::string_view default_ = "default";
+                static constexpr std::string_view specify = "specify";
+            };
+
             fortiapi::Field<std::uint32_t> prefix_id;  // Prefix ID. Required.
             fortiapi::Field<std::string> upstream_interface;  // Name of the interface that provides delegated information. Required. References: system.interface.name.
             fortiapi::Field<std::uint32_t> delegated_prefix_iaid;  // IAID of obtained delegated-prefix from the upstream interface. Required.
@@ -271,6 +1274,30 @@ struct Interface {
 
         // IPv6 VRRP configuration.
         struct Vrrp6Entry {
+            // Values of Preempt: Enable/disable preempt mode.
+            struct Preempt {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
+            // Values of AcceptMode: Enable/disable accept mode.
+            struct AcceptMode {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
+            // Values of IgnoreDefaultRoute: Enable/disable ignoring of default route when checking destination.
+            struct IgnoreDefaultRoute {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
+            // Values of Status: Enable/disable VRRP.
+            struct Status {
+                static constexpr std::string_view enable = "enable";
+                static constexpr std::string_view disable = "disable";
+            };
+
             fortiapi::Field<std::uint32_t> vrid;  // Virtual router identifier (1 - 255). Required.
             fortiapi::Field<std::uint32_t> vrgrp;  // VRRP group ID (1 - 65535).
             fortiapi::Field<std::string> vrip6;  // IPv6 address of the virtual router. Required.
@@ -874,731 +1901,6 @@ struct InterfaceSpec {
 };
 
 using Interfaces = fortiapi::Table<InterfaceSpec>;
-
-// Allowed values of option attributes.
-namespace interface::fortilink {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_source_ip {
-    inline constexpr std::string_view outbound = "outbound";
-    inline constexpr std::string_view fixed = "fixed";
-}
-namespace interface::mode {
-    inline constexpr std::string_view static_ = "static";
-    inline constexpr std::string_view dhcp = "dhcp";
-    inline constexpr std::string_view pppoe = "pppoe";
-    inline constexpr std::string_view pppoa = "pppoa";
-}
-namespace interface::dhcp_relay_interface_select_method {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view sdwan = "sdwan";
-    inline constexpr std::string_view specify = "specify";
-}
-namespace interface::dhcp_broadcast_flag {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::dhcp_relay_service {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::dhcp_relay_request_all_server {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::dhcp_relay_allow_no_end_option {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::dhcp_relay_type {
-    inline constexpr std::string_view regular = "regular";
-    inline constexpr std::string_view ipsec = "ipsec";
-}
-namespace interface::dhcp_smart_relay {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::dhcp_relay_agent_option {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::dhcp_classless_route_addition {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::allowaccess {
-    inline constexpr std::string_view ping = "ping";
-    inline constexpr std::string_view https = "https";
-    inline constexpr std::string_view ssh = "ssh";
-    inline constexpr std::string_view snmp = "snmp";
-    inline constexpr std::string_view http = "http";
-    inline constexpr std::string_view telnet = "telnet";
-    inline constexpr std::string_view fgfm = "fgfm";
-    inline constexpr std::string_view radius_acct = "radius-acct";
-    inline constexpr std::string_view probe_response = "probe-response";
-    inline constexpr std::string_view fabric = "fabric";
-    inline constexpr std::string_view ftm = "ftm";
-    inline constexpr std::string_view speed_test = "speed-test";
-}
-namespace interface::gwdetect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::detectprotocol {
-    inline constexpr std::string_view ping = "ping";
-    inline constexpr std::string_view tcp_echo = "tcp-echo";
-    inline constexpr std::string_view udp_echo = "udp-echo";
-}
-namespace interface::fail_detect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::fail_detect_option {
-    inline constexpr std::string_view detectserver = "detectserver";
-    inline constexpr std::string_view link_down = "link-down";
-}
-namespace interface::fail_alert_method {
-    inline constexpr std::string_view link_failed_signal = "link-failed-signal";
-    inline constexpr std::string_view link_down = "link-down";
-}
-namespace interface::fail_action_on_extender {
-    inline constexpr std::string_view soft_restart = "soft-restart";
-    inline constexpr std::string_view hard_restart = "hard-restart";
-    inline constexpr std::string_view reboot = "reboot";
-}
-namespace interface::pppoe_egress_cos {
-    inline constexpr std::string_view cos0 = "cos0";
-    inline constexpr std::string_view cos1 = "cos1";
-    inline constexpr std::string_view cos2 = "cos2";
-    inline constexpr std::string_view cos3 = "cos3";
-    inline constexpr std::string_view cos4 = "cos4";
-    inline constexpr std::string_view cos5 = "cos5";
-    inline constexpr std::string_view cos6 = "cos6";
-    inline constexpr std::string_view cos7 = "cos7";
-}
-namespace interface::pppoe_unnumbered_negotiate {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::defaultgw {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::dns_server_override {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::dns_server_protocol {
-    inline constexpr std::string_view cleartext = "cleartext";
-    inline constexpr std::string_view dot = "dot";
-    inline constexpr std::string_view doh = "doh";
-}
-namespace interface::auth_type {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view pap = "pap";
-    inline constexpr std::string_view chap = "chap";
-    inline constexpr std::string_view mschapv1 = "mschapv1";
-    inline constexpr std::string_view mschapv2 = "mschapv2";
-}
-namespace interface::pptp_client {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::pptp_auth_type {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view pap = "pap";
-    inline constexpr std::string_view chap = "chap";
-    inline constexpr std::string_view mschapv1 = "mschapv1";
-    inline constexpr std::string_view mschapv2 = "mschapv2";
-}
-namespace interface::arpforward {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ndiscforward {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::broadcast_forward {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::bfd {
-    inline constexpr std::string_view global = "global";
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::l2forward {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::icmp_send_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::icmp_accept_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::vlanforward {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::stpforward {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::stpforward_mode {
-    inline constexpr std::string_view rpl_all_ext_id = "rpl-all-ext-id";
-    inline constexpr std::string_view rpl_bridge_ext_id = "rpl-bridge-ext-id";
-    inline constexpr std::string_view rpl_nothing = "rpl-nothing";
-}
-namespace interface::ips_sniffer_mode {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ident_accept {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipmac {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::subst {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::speed {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view _10full = "10full";
-    inline constexpr std::string_view _10half = "10half";
-    inline constexpr std::string_view _100full = "100full";
-    inline constexpr std::string_view _100half = "100half";
-    inline constexpr std::string_view _1000full = "1000full";
-    inline constexpr std::string_view _1000auto = "1000auto";
-}
-namespace interface::status {
-    inline constexpr std::string_view up = "up";
-    inline constexpr std::string_view down = "down";
-}
-namespace interface::netbios_forward {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::type {
-    inline constexpr std::string_view physical = "physical";
-    inline constexpr std::string_view vlan = "vlan";
-    inline constexpr std::string_view aggregate = "aggregate";
-    inline constexpr std::string_view redundant = "redundant";
-    inline constexpr std::string_view tunnel = "tunnel";
-    inline constexpr std::string_view vdom_link = "vdom-link";
-    inline constexpr std::string_view loopback = "loopback";
-    inline constexpr std::string_view switch_ = "switch";
-    inline constexpr std::string_view hard_switch = "hard-switch";
-    inline constexpr std::string_view vap_switch = "vap-switch";
-    inline constexpr std::string_view wl_mesh = "wl-mesh";
-    inline constexpr std::string_view fext_wan = "fext-wan";
-    inline constexpr std::string_view vxlan = "vxlan";
-    inline constexpr std::string_view geneve = "geneve";
-    inline constexpr std::string_view hdlc = "hdlc";
-    inline constexpr std::string_view switch_vlan = "switch-vlan";
-    inline constexpr std::string_view emac_vlan = "emac-vlan";
-    inline constexpr std::string_view ssl = "ssl";
-    inline constexpr std::string_view lan_extension = "lan-extension";
-}
-namespace interface::dedicated_to {
-    inline constexpr std::string_view none = "none";
-    inline constexpr std::string_view management = "management";
-}
-namespace interface::wccp {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::netflow_sampler {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view tx = "tx";
-    inline constexpr std::string_view rx = "rx";
-    inline constexpr std::string_view both = "both";
-}
-namespace interface::sflow_sampler {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::drop_overlapped_fragment {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::drop_fragment {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::src_check {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::sample_direction {
-    inline constexpr std::string_view tx = "tx";
-    inline constexpr std::string_view rx = "rx";
-    inline constexpr std::string_view both = "both";
-}
-namespace interface::explicit_web_proxy {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::explicit_ftp_proxy {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::proxy_captive_portal {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::external {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::mtu_override {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::vlan_protocol {
-    inline constexpr std::string_view _8021q = "8021q";
-    inline constexpr std::string_view _8021ad = "8021ad";
-}
-namespace interface::trunk {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::lacp_mode {
-    inline constexpr std::string_view static_ = "static";
-    inline constexpr std::string_view passive = "passive";
-    inline constexpr std::string_view active = "active";
-}
-namespace interface::lacp_ha_secondary {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::system_id_type {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view user = "user";
-}
-namespace interface::lacp_speed {
-    inline constexpr std::string_view slow = "slow";
-    inline constexpr std::string_view fast = "fast";
-}
-namespace interface::min_links_down {
-    inline constexpr std::string_view operational = "operational";
-    inline constexpr std::string_view administrative = "administrative";
-}
-namespace interface::algorithm {
-    inline constexpr std::string_view L2 = "L2";
-    inline constexpr std::string_view L3 = "L3";
-    inline constexpr std::string_view L4 = "L4";
-    inline constexpr std::string_view Source_MAC = "Source-MAC";
-}
-namespace interface::aggregate_type {
-    inline constexpr std::string_view physical = "physical";
-    inline constexpr std::string_view vxlan = "vxlan";
-}
-namespace interface::priority_override {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::atm_protocol {
-    inline constexpr std::string_view none = "none";
-    inline constexpr std::string_view ipoa = "ipoa";
-}
-namespace interface::mux_type {
-    inline constexpr std::string_view llc_encaps = "llc-encaps";
-    inline constexpr std::string_view vc_encaps = "vc-encaps";
-}
-namespace interface::phy_mode {
-    inline constexpr std::string_view vdsl = "vdsl";
-}
-namespace interface::tc_mode {
-    inline constexpr std::string_view ptm = "ptm";
-}
-namespace interface::vectoring {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::l2tp_client {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::security_mode {
-    inline constexpr std::string_view none = "none";
-    inline constexpr std::string_view captive_portal = "captive-portal";
-    inline constexpr std::string_view _802_1X = "802.1X";
-}
-namespace interface::security_mac_auth_bypass {
-    inline constexpr std::string_view mac_auth_only = "mac-auth-only";
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::security_8021x_mode {
-    inline constexpr std::string_view default_ = "default";
-    inline constexpr std::string_view dynamic_vlan = "dynamic-vlan";
-    inline constexpr std::string_view fallback = "fallback";
-    inline constexpr std::string_view slave = "slave";
-}
-namespace interface::security_8021x_member_mode {
-    inline constexpr std::string_view switch_ = "switch";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::stp {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::stp_ha_secondary {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view priority_adjust = "priority-adjust";
-}
-namespace interface::stp_edge {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::device_identification {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::device_user_identification {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::lldp_reception {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view vdom = "vdom";
-}
-namespace interface::lldp_transmission {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view vdom = "vdom";
-}
-namespace interface::monitor_bandwidth {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::vrrp_virtual_mac {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::role {
-    inline constexpr std::string_view lan = "lan";
-    inline constexpr std::string_view wan = "wan";
-    inline constexpr std::string_view dmz = "dmz";
-    inline constexpr std::string_view undefined = "undefined";
-}
-namespace interface::secondary_IP {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::preserve_session_route {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::auto_auth_extension_device {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ap_discover {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::fortilink_neighbor_detect {
-    inline constexpr std::string_view lldp = "lldp";
-    inline constexpr std::string_view fortilink = "fortilink";
-}
-namespace interface::ip_managed_by_fortiipam {
-    inline constexpr std::string_view inherit_global = "inherit-global";
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::managed_subnetwork_size {
-    inline constexpr std::string_view _32 = "32";
-    inline constexpr std::string_view _64 = "64";
-    inline constexpr std::string_view _128 = "128";
-    inline constexpr std::string_view _256 = "256";
-    inline constexpr std::string_view _512 = "512";
-    inline constexpr std::string_view _1024 = "1024";
-    inline constexpr std::string_view _2048 = "2048";
-    inline constexpr std::string_view _4096 = "4096";
-    inline constexpr std::string_view _8192 = "8192";
-    inline constexpr std::string_view _16384 = "16384";
-    inline constexpr std::string_view _32768 = "32768";
-    inline constexpr std::string_view _65536 = "65536";
-}
-namespace interface::fortilink_split_interface {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_access_vlan {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_rspan_mode {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::switch_controller_netflow_collect {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::switch_controller_igmp_snooping {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_igmp_snooping_proxy {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_igmp_snooping_fast_leave {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_dhcp_snooping {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_dhcp_snooping_verify_mac {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_dhcp_snooping_option82 {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_arp_inspection {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view monitor = "monitor";
-}
-namespace interface::switch_controller_feature {
-    inline constexpr std::string_view none = "none";
-    inline constexpr std::string_view default_vlan = "default-vlan";
-    inline constexpr std::string_view quarantine = "quarantine";
-    inline constexpr std::string_view rspan = "rspan";
-    inline constexpr std::string_view voice = "voice";
-    inline constexpr std::string_view video = "video";
-    inline constexpr std::string_view nac = "nac";
-    inline constexpr std::string_view nac_segment = "nac-segment";
-}
-namespace interface::switch_controller_iot_scanning {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_offload {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::switch_controller_offload_gw {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::eap_supplicant {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::eap_method {
-    inline constexpr std::string_view tls = "tls";
-    inline constexpr std::string_view peap = "peap";
-}
-namespace interface::default_purdue_level {
-    inline constexpr std::string_view _1 = "1";
-    inline constexpr std::string_view _1_5 = "1.5";
-    inline constexpr std::string_view _2 = "2";
-    inline constexpr std::string_view _2_5 = "2.5";
-    inline constexpr std::string_view _3 = "3";
-    inline constexpr std::string_view _3_5 = "3.5";
-    inline constexpr std::string_view _4 = "4";
-    inline constexpr std::string_view _5 = "5";
-    inline constexpr std::string_view _5_5 = "5.5";
-}
-namespace interface::client_options::type {
-    inline constexpr std::string_view hex = "hex";
-    inline constexpr std::string_view string = "string";
-    inline constexpr std::string_view ip = "ip";
-    inline constexpr std::string_view fqdn = "fqdn";
-}
-namespace interface::l2tp_client_settings::auth_type {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view pap = "pap";
-    inline constexpr std::string_view chap = "chap";
-    inline constexpr std::string_view mschapv1 = "mschapv1";
-    inline constexpr std::string_view mschapv2 = "mschapv2";
-}
-namespace interface::l2tp_client_settings::defaultgw {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::vrrp::version {
-    inline constexpr std::string_view _2 = "2";
-    inline constexpr std::string_view _3 = "3";
-}
-namespace interface::vrrp::preempt {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::vrrp::accept_mode {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::vrrp::ignore_default_route {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::vrrp::status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::secondaryip::allowaccess {
-    inline constexpr std::string_view ping = "ping";
-    inline constexpr std::string_view https = "https";
-    inline constexpr std::string_view ssh = "ssh";
-    inline constexpr std::string_view snmp = "snmp";
-    inline constexpr std::string_view http = "http";
-    inline constexpr std::string_view telnet = "telnet";
-    inline constexpr std::string_view fgfm = "fgfm";
-    inline constexpr std::string_view radius_acct = "radius-acct";
-    inline constexpr std::string_view probe_response = "probe-response";
-    inline constexpr std::string_view fabric = "fabric";
-    inline constexpr std::string_view ftm = "ftm";
-    inline constexpr std::string_view speed_test = "speed-test";
-}
-namespace interface::secondaryip::gwdetect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::secondaryip::detectprotocol {
-    inline constexpr std::string_view ping = "ping";
-    inline constexpr std::string_view tcp_echo = "tcp-echo";
-    inline constexpr std::string_view udp_echo = "udp-echo";
-}
-namespace interface::ipv6::ip6_mode {
-    inline constexpr std::string_view static_ = "static";
-    inline constexpr std::string_view dhcp = "dhcp";
-    inline constexpr std::string_view pppoe = "pppoe";
-    inline constexpr std::string_view delegated = "delegated";
-}
-namespace interface::ipv6::nd_mode {
-    inline constexpr std::string_view basic = "basic";
-    inline constexpr std::string_view SEND_compatible = "SEND-compatible";
-}
-namespace interface::ipv6::ip6_dns_server_override {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_allowaccess {
-    inline constexpr std::string_view ping = "ping";
-    inline constexpr std::string_view https = "https";
-    inline constexpr std::string_view ssh = "ssh";
-    inline constexpr std::string_view snmp = "snmp";
-    inline constexpr std::string_view http = "http";
-    inline constexpr std::string_view telnet = "telnet";
-    inline constexpr std::string_view fgfm = "fgfm";
-    inline constexpr std::string_view fabric = "fabric";
-}
-namespace interface::ipv6::ip6_send_adv {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::icmp6_send_redirect {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_manage_flag {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_other_flag {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ra_send_mtu {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::autoconf {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::unique_autoconf_addr {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_prefix_mode {
-    inline constexpr std::string_view dhcp6 = "dhcp6";
-    inline constexpr std::string_view ra = "ra";
-}
-namespace interface::ipv6::dhcp6_relay_service {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::ipv6::dhcp6_relay_type {
-    inline constexpr std::string_view regular = "regular";
-}
-namespace interface::ipv6::dhcp6_relay_source_interface {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view enable = "enable";
-}
-namespace interface::ipv6::dhcp6_client_options {
-    inline constexpr std::string_view rapid = "rapid";
-    inline constexpr std::string_view iapd = "iapd";
-    inline constexpr std::string_view iana = "iana";
-}
-namespace interface::ipv6::dhcp6_prefix_delegation {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::dhcp6_information_request {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::vrrp_virtual_mac6 {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_prefix_list::autonomous_flag {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_prefix_list::onlink_flag {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_delegated_prefix_list::autonomous_flag {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_delegated_prefix_list::onlink_flag {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::ip6_delegated_prefix_list::rdnss_service {
-    inline constexpr std::string_view delegated = "delegated";
-    inline constexpr std::string_view default_ = "default";
-    inline constexpr std::string_view specify = "specify";
-}
-namespace interface::ipv6::vrrp6::preempt {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::vrrp6::accept_mode {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::vrrp6::ignore_default_route {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace interface::ipv6::vrrp6::status {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
 
 }  // namespace fortiapi::system
 

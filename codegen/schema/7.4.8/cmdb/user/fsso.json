@@ -1,0 +1,371 @@
+{
+ "name": "fsso",
+ "category": "table",
+ "help": "Configure Fortinet Single Sign On (FSSO) agents.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Server type.",
+   "options": [
+    {
+     "name": "default",
+     "help": "All other unspecified types of servers."
+    },
+    {
+     "name": "fortinac",
+     "help": "FortiNAC server."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name or IP address of the first FSSO collector agent.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the first FSSO collector agent.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8000,
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password of the first FSSO collector agent.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "server2": {
+   "name": "server2",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name or IP address of the second FSSO collector agent.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port2": {
+   "name": "port2",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the second FSSO collector agent.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8000,
+   "multiple_values": false
+  },
+  "password2": {
+   "name": "password2",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password of the second FSSO collector agent.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "server3": {
+   "name": "server3",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name or IP address of the third FSSO collector agent.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port3": {
+   "name": "port3",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the third FSSO collector agent.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8000,
+   "multiple_values": false
+  },
+  "password3": {
+   "name": "password3",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password of the third FSSO collector agent.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "server4": {
+   "name": "server4",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name or IP address of the fourth FSSO collector agent.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port4": {
+   "name": "port4",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the fourth FSSO collector agent.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8000,
+   "multiple_values": false
+  },
+  "password4": {
+   "name": "password4",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password of the fourth FSSO collector agent.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "server5": {
+   "name": "server5",
+   "category": "unitary",
+   "type": "string",
+   "help": "Domain name or IP address of the fifth FSSO collector agent.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port5": {
+   "name": "port5",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port of the fifth FSSO collector agent.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8000,
+   "multiple_values": false
+  },
+  "password5": {
+   "name": "password5",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password of the fifth FSSO collector agent.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "logon-timeout": {
+   "name": "logon-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval in minutes to keep logons after FSSO server down.",
+   "min-value": 1,
+   "max-value": 2880,
+   "default": 5,
+   "multiple_values": false
+  },
+  "ldap-server": {
+   "name": "ldap-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "LDAP server to get group information.",
+   "datasource": [
+    "user.ldap.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "group-poll-interval": {
+   "name": "group-poll-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval in minutes within to fetch groups from FSSO server, or unset to disable.",
+   "min-value": 1,
+   "max-value": 2880,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ldap-poll": {
+   "name": "ldap-poll",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic fetching of groups from LDAP server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic fetching of groups from LDAP server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic fetching of groups from LDAP server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ldap-poll-interval": {
+   "name": "ldap-poll-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval in minutes within to fetch groups from LDAP server.",
+   "min-value": 1,
+   "max-value": 2880,
+   "default": 180,
+   "multiple_values": false
+  },
+  "ldap-poll-filter": {
+   "name": "ldap-poll-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Filter used to fetch groups.",
+   "size": 2047,
+   "default": "(objectCategory=group)",
+   "multiple_values": false
+  },
+  "user-info-server": {
+   "name": "user-info-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "LDAP server to get user information.",
+   "datasource": [
+    "user.ldap.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssl": {
+   "name": "ssl",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of SSL.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of SSL."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of SSL."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sni": {
+   "name": "sni",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server Name Indication.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssl-server-host-ip-check": {
+   "name": "ssl-server-host-ip-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable server host/IP verification.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable server host/IP verification."
+    },
+    {
+     "name": "disable",
+     "help": "Disable server host/IP verification."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-trusted-cert": {
+   "name": "ssl-trusted-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Trusted server certificate or CA certificate.",
+   "datasource": [
+    "vpn.certificate.remote.name",
+    "vpn.certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP for communications to FSSO agent.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 source for communications to FSSO agent.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 5,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 159,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

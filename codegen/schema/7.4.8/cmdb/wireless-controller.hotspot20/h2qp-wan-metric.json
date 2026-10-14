@@ -1,0 +1,133 @@
+{
+ "name": "h2qp-wan-metric",
+ "category": "table",
+ "help": "Configure WAN metrics.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "WAN metric name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "link-status": {
+   "name": "link-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Link status.",
+   "options": [
+    {
+     "name": "up",
+     "help": "Link up."
+    },
+    {
+     "name": "down",
+     "help": "Link down."
+    },
+    {
+     "name": "in-test",
+     "help": "Link in test state."
+    }
+   ],
+   "default": "up",
+   "multiple_values": false
+  },
+  "symmetric-wan-link": {
+   "name": "symmetric-wan-link",
+   "category": "unitary",
+   "type": "option",
+   "help": "WAN link symmetry.",
+   "options": [
+    {
+     "name": "symmetric",
+     "help": "Symmetric WAN link (uplink and downlink speeds are the same)."
+    },
+    {
+     "name": "asymmetric",
+     "help": "Asymmetric WAN link (uplink and downlink speeds are not the same)."
+    }
+   ],
+   "default": "asymmetric",
+   "multiple_values": false
+  },
+  "link-at-capacity": {
+   "name": "link-at-capacity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Link at capacity.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Link at capacity (not allow additional mobile devices to associate)."
+    },
+    {
+     "name": "disable",
+     "help": "Link not at capacity (allow additional mobile devices to associate)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "uplink-speed": {
+   "name": "uplink-speed",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Uplink speed (in kilobits/s).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 2400,
+   "multiple_values": false
+  },
+  "downlink-speed": {
+   "name": "downlink-speed",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Downlink speed (in kilobits/s).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 2400,
+   "multiple_values": false
+  },
+  "uplink-load": {
+   "name": "uplink-load",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Uplink load.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "downlink-load": {
+   "name": "downlink-load",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Downlink load.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "load-measurement-duration": {
+   "name": "load-measurement-duration",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Load measurement duration (in tenths of a second).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 298,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

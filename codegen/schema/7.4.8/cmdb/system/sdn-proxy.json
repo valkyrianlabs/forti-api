@@ -1,0 +1,80 @@
+{
+ "name": "sdn-proxy",
+ "category": "table",
+ "help": "Configure SDN proxy.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN proxy name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of SDN proxy.",
+   "required": true,
+   "options": [
+    {
+     "name": "general",
+     "help": "General HTTP proxy."
+    },
+    {
+     "name": "fortimanager",
+     "help": "FortiManager SDN proxy."
+    }
+   ],
+   "default": "general",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server address of the SDN proxy.",
+   "required": true,
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-port": {
+   "name": "server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number of the SDN proxy.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN proxy username.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password_aes256",
+   "help": "SDN proxy password.",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 533,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

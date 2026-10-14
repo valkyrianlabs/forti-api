@@ -1,0 +1,389 @@
+{
+ "name": "snmp",
+ "category": "complex",
+ "help": "Configure SNMP.",
+ "children": {
+  "engine-id": {
+   "name": "engine-id",
+   "category": "unitary",
+   "type": "string",
+   "help": "AC SNMP engineID string (maximum 24 characters).",
+   "size": 23,
+   "default": "",
+   "multiple_values": false
+  },
+  "contact-info": {
+   "name": "contact-info",
+   "category": "unitary",
+   "type": "string",
+   "help": "Contact Information.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "trap-high-cpu-threshold": {
+   "name": "trap-high-cpu-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "CPU usage when trap is sent.",
+   "min-value": 10,
+   "max-value": 100,
+   "default": 80,
+   "multiple_values": false
+  },
+  "trap-high-mem-threshold": {
+   "name": "trap-high-mem-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Memory usage when trap is sent.",
+   "min-value": 10,
+   "max-value": 100,
+   "default": 80,
+   "multiple_values": false
+  },
+  "community": {
+   "name": "community",
+   "category": "table",
+   "help": "SNMP Community Configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Community ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Community name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this SNMP community.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "query-v1-status": {
+     "name": "query-v1-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v1 queries.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "query-v2c-status": {
+     "name": "query-v2c-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v2c queries.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "trap-v1-status": {
+     "name": "trap-v1-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v1 traps.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "trap-v2c-status": {
+     "name": "trap-v2c-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP v2c traps.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "hosts": {
+     "name": "hosts",
+     "category": "table",
+     "help": "Configure IPv4 SNMP managers (hosts).",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Host entry ID.",
+       "required": true,
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "ip": {
+       "name": "ip",
+       "category": "unitary",
+       "type": "user",
+       "help": "IPv4 address of the SNMP manager (host).",
+       "required": true,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 4
+    }
+   },
+   "max_table_size_vdom": 3,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "user": {
+   "name": "user",
+   "category": "table",
+   "help": "SNMP User Configuration.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "SNMP user name.",
+     "required": true,
+     "size": 32,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "SNMP user enable.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "queries": {
+     "name": "queries",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable SNMP queries for this user.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "trap-status": {
+     "name": "trap-status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable traps for this SNMP user.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "security-level": {
+     "name": "security-level",
+     "category": "unitary",
+     "type": "option",
+     "help": "Security level for message authentication and encryption.",
+     "options": [
+      {
+       "name": "no-auth-no-priv",
+       "help": "Message with no authentication and no privacy (encryption)."
+      },
+      {
+       "name": "auth-no-priv",
+       "help": "Message with authentication but no privacy (encryption)."
+      },
+      {
+       "name": "auth-priv",
+       "help": "Message with authentication and privacy (encryption)."
+      }
+     ],
+     "default": "no-auth-no-priv",
+     "multiple_values": false
+    },
+    "auth-proto": {
+     "name": "auth-proto",
+     "category": "unitary",
+     "type": "option",
+     "help": "Authentication protocol.",
+     "options": [
+      {
+       "name": "md5",
+       "help": "HMAC-MD5-96 authentication protocol."
+      },
+      {
+       "name": "sha",
+       "help": "HMAC-SHA-96 authentication protocol."
+      },
+      {
+       "name": "sha224",
+       "help": "HMAC-SHA224 authentication protocol."
+      },
+      {
+       "name": "sha256",
+       "help": "HMAC-SHA256 authentication protocol."
+      },
+      {
+       "name": "sha384",
+       "help": "HMAC-SHA384 authentication protocol."
+      },
+      {
+       "name": "sha512",
+       "help": "HMAC-SHA512 authentication protocol."
+      }
+     ],
+     "default": "sha",
+     "multiple_values": false
+    },
+    "auth-pwd": {
+     "name": "auth-pwd",
+     "category": "unitary",
+     "type": "password",
+     "help": "Password for authentication protocol.",
+     "required": true,
+     "size": 128,
+     "multiple_values": false
+    },
+    "priv-proto": {
+     "name": "priv-proto",
+     "category": "unitary",
+     "type": "option",
+     "help": "Privacy (encryption) protocol.",
+     "options": [
+      {
+       "name": "aes",
+       "help": "CFB128-AES-128 symmetric encryption protocol."
+      },
+      {
+       "name": "des",
+       "help": "CBC-DES symmetric encryption protocol."
+      },
+      {
+       "name": "aes256",
+       "help": "CFB128-AES-256 symmetric encryption protocol."
+      },
+      {
+       "name": "aes256cisco",
+       "help": "CFB128-AES-256 symmetric encryption protocol compatible with CISCO."
+      }
+     ],
+     "default": "aes",
+     "multiple_values": false
+    },
+    "priv-pwd": {
+     "name": "priv-pwd",
+     "category": "unitary",
+     "type": "password",
+     "help": "Password for privacy (encryption) protocol.",
+     "required": true,
+     "size": 128,
+     "multiple_values": false
+    },
+    "notify-hosts": {
+     "name": "notify-hosts",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Configure SNMP User Notify Hosts.",
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 4
+    }
+   },
+   "max_table_size_vdom": 4,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "wireless-controller",
+ "q_type": 307,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

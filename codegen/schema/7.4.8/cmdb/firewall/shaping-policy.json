@@ -1,0 +1,865 @@
+{
+ "name": "shaping-policy",
+ "category": "table",
+ "help": "Configure shaping policies.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Shaping policy ID (0 - 4294967295).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Shaping policy name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comments.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this traffic shaping policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable traffic shaping policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable traffic shaping policy."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ip-version": {
+   "name": "ip-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Apply this traffic shaping policy to IPv4 or IPv6 traffic.",
+   "options": [
+    {
+     "name": "4",
+     "help": "Use IPv4 addressing for Configuration Method."
+    },
+    {
+     "name": "6",
+     "help": "Use IPv6 addressing for Configuration Method."
+    }
+   ],
+   "default": "4",
+   "multiple_values": false
+  },
+  "traffic-type": {
+   "name": "traffic-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Traffic type.",
+   "options": [
+    {
+     "name": "forwarding",
+     "help": "Forwarding traffic."
+    },
+    {
+     "name": "local-in",
+     "help": "Local-in traffic."
+    },
+    {
+     "name": "local-out",
+     "help": "Local-out traffic."
+    }
+   ],
+   "default": "forwarding",
+   "multiple_values": false
+  },
+  "srcaddr": {
+   "name": "srcaddr",
+   "category": "table",
+   "help": "IPv4 source address and address group names.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr": {
+   "name": "dstaddr",
+   "category": "table",
+   "help": "IPv4 destination address and address group names.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr6": {
+   "name": "srcaddr6",
+   "category": "table",
+   "help": "IPv6 source address and address group names.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr6": {
+   "name": "dstaddr6",
+   "category": "table",
+   "help": "IPv6 destination address and address group names.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service": {
+   "name": "internet-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of Internet Services for this policy. If enabled, destination address and service are not used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of Internet Service in shaping-policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of Internet Service in shaping-policy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-name": {
+   "name": "internet-service-name",
+   "category": "table",
+   "help": "Internet Service ID.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-name.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-group": {
+   "name": "internet-service-group",
+   "category": "table",
+   "help": "Internet Service group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-custom": {
+   "name": "internet-service-custom",
+   "category": "table",
+   "help": "Custom Internet Service name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-custom-group": {
+   "name": "internet-service-custom-group",
+   "category": "table",
+   "help": "Custom Internet Service group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src": {
+   "name": "internet-service-src",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of Internet Services in source for this policy. If enabled, source address is not used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of Internet Service source in shaping-policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of Internet Service source in shaping-policy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-src-name": {
+   "name": "internet-service-src-name",
+   "category": "table",
+   "help": "Internet Service source name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-name.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src-group": {
+   "name": "internet-service-src-group",
+   "category": "table",
+   "help": "Internet Service source group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src-custom": {
+   "name": "internet-service-src-custom",
+   "category": "table",
+   "help": "Custom Internet Service source name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-src-custom-group": {
+   "name": "internet-service-src-custom-group",
+   "category": "table",
+   "help": "Custom Internet Service source group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "service": {
+   "name": "service",
+   "category": "table",
+   "help": "Service and service group names.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.service.custom.name",
+      "firewall.service.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "schedule": {
+   "name": "schedule",
+   "category": "unitary",
+   "type": "string",
+   "help": "Schedule name.",
+   "datasource": [
+    "firewall.schedule.onetime.name",
+    "firewall.schedule.recurring.name",
+    "firewall.schedule.group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "users": {
+   "name": "users",
+   "category": "table",
+   "help": "Apply this traffic shaping policy to individual users that have authenticated with the FortiGate.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "User name.",
+     "required": true,
+     "datasource": [
+      "user.local.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "groups": {
+   "name": "groups",
+   "category": "table",
+   "help": "Apply this traffic shaping policy to user groups that have authenticated with the FortiGate.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Group name.",
+     "required": true,
+     "datasource": [
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "application": {
+   "name": "application",
+   "category": "table",
+   "help": "IDs of one or more applications that this shaper applies application control traffic shaping to.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Application IDs.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "app-category": {
+   "name": "app-category",
+   "category": "table",
+   "help": "IDs of one or more application categories that this shaper applies application control traffic shaping to.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Category IDs.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "app-group": {
+   "name": "app-group",
+   "category": "table",
+   "help": "One or more application group names.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Application group name.",
+     "required": true,
+     "datasource": [
+      "application.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "url-category": {
+   "name": "url-category",
+   "category": "table",
+   "help": "IDs of one or more FortiGuard Web Filtering categories that this shaper applies traffic shaping to.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "URL category ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcintf": {
+   "name": "srcintf",
+   "category": "table",
+   "help": "One or more incoming (ingress) interfaces.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name",
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstintf": {
+   "name": "dstintf",
+   "category": "table",
+   "help": "One or more outgoing (egress) interfaces.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name",
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "tos-mask": {
+   "name": "tos-mask",
+   "category": "unitary",
+   "type": "user",
+   "help": "Non-zero bit positions are used for comparison while zero bit positions are ignored.",
+   "default": "",
+   "multiple_values": false
+  },
+  "tos": {
+   "name": "tos",
+   "category": "unitary",
+   "type": "user",
+   "help": "ToS (Type of Service) value used for comparison.",
+   "default": "",
+   "multiple_values": false
+  },
+  "tos-negate": {
+   "name": "tos-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable negated TOS match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TOS match negate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TOS match negate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "traffic-shaper": {
+   "name": "traffic-shaper",
+   "category": "unitary",
+   "type": "string",
+   "help": "Traffic shaper to apply to traffic forwarded by the firewall policy.",
+   "datasource": [
+    "firewall.shaper.traffic-shaper.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "traffic-shaper-reverse": {
+   "name": "traffic-shaper-reverse",
+   "category": "unitary",
+   "type": "string",
+   "help": "Traffic shaper to apply to response traffic received by the firewall policy.",
+   "datasource": [
+    "firewall.shaper.traffic-shaper.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "per-ip-shaper": {
+   "name": "per-ip-shaper",
+   "category": "unitary",
+   "type": "string",
+   "help": "Per-IP traffic shaper to apply with this policy.",
+   "datasource": [
+    "firewall.shaper.per-ip-shaper.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "class-id": {
+   "name": "class-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Traffic class ID.",
+   "datasource": [
+    "firewall.traffic-class.class-id"
+   ],
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "diffserv-forward": {
+   "name": "diffserv-forward",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to change packet's DiffServ values to the specified diffservcode-forward value.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting forward (original) traffic DiffServ."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting forward (original) traffic DiffServ."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "diffserv-reverse": {
+   "name": "diffserv-reverse",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to change packet's reverse (reply) DiffServ values to the specified diffservcode-rev value.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting reverse (reply) traffic DiffServ."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting reverse (reply) traffic DiffServ."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "diffservcode-forward": {
+   "name": "diffservcode-forward",
+   "category": "unitary",
+   "type": "user",
+   "help": "Change packet's DiffServ to this value.",
+   "default": "",
+   "multiple_values": false
+  },
+  "diffservcode-rev": {
+   "name": "diffservcode-rev",
+   "category": "unitary",
+   "type": "user",
+   "help": "Change packet's reverse (reply) DiffServ to this value.",
+   "default": "",
+   "multiple_values": false
+  },
+  "cos-mask": {
+   "name": "cos-mask",
+   "category": "unitary",
+   "type": "user",
+   "help": "VLAN CoS evaluated bits.",
+   "default": "",
+   "multiple_values": false
+  },
+  "cos": {
+   "name": "cos",
+   "category": "unitary",
+   "type": "user",
+   "help": "VLAN CoS bit pattern.",
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 202,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

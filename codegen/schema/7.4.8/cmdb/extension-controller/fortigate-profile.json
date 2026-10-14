@@ -1,0 +1,88 @@
+{
+ "name": "fortigate-profile",
+ "category": "table",
+ "help": "FortiGate connector profile configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate connector profile name.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "min-value": 0,
+   "max-value": 102400000,
+   "default": 32,
+   "multiple_values": false
+  },
+  "extension": {
+   "name": "extension",
+   "category": "unitary",
+   "type": "option",
+   "help": "Extension option.",
+   "readonly": true,
+   "options": [
+    {
+     "name": "lan-extension",
+     "help": "LAN extension."
+    }
+   ],
+   "default": "lan-extension",
+   "multiple_values": false
+  },
+  "lan-extension": {
+   "name": "lan-extension",
+   "category": "complex",
+   "help": "FortiGate connector LAN extension configuration.",
+   "required": true,
+   "children": {
+    "ipsec-tunnel": {
+     "name": "ipsec-tunnel",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec tunnel name.",
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "backhaul-interface": {
+     "name": "backhaul-interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec phase1 interface.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "backhaul-ip": {
+     "name": "backhaul-ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPsec phase1 IPv4/FQDN. Used to specify the external IP/FQDN when the FortiGate unit is behind a NAT device.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "extension-controller",
+ "q_type": 235,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

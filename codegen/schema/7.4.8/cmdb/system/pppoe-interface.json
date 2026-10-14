@@ -1,0 +1,257 @@
+{
+ "name": "pppoe-interface",
+ "category": "table",
+ "help": "Configure the PPPoE interfaces.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the PPPoE interface.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "dial-on-demand": {
+   "name": "dial-on-demand",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dial on demand to dial the PPPoE interface when packets are routed to the PPPoE interface.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable dial on demand."
+    },
+    {
+     "name": "disable",
+     "help": "Disable dial on demand."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv6": {
+   "name": "ipv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 Control Protocol (IPv6CP).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPv6CP."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPv6CP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "device": {
+   "name": "device",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name for the physical interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Enter the password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "pppoe-egress-cos": {
+   "name": "pppoe-egress-cos",
+   "category": "unitary",
+   "type": "option",
+   "help": "CoS in VLAN tag for outgoing PPPoE/PPP packets.",
+   "options": [
+    {
+     "name": "cos0",
+     "help": "CoS 0."
+    },
+    {
+     "name": "cos1",
+     "help": "CoS 1."
+    },
+    {
+     "name": "cos2",
+     "help": "CoS 2."
+    },
+    {
+     "name": "cos3",
+     "help": "CoS 3."
+    },
+    {
+     "name": "cos4",
+     "help": "CoS 4."
+    },
+    {
+     "name": "cos5",
+     "help": "CoS 5."
+    },
+    {
+     "name": "cos6",
+     "help": "CoS 6."
+    },
+    {
+     "name": "cos7",
+     "help": "CoS 7."
+    }
+   ],
+   "default": "cos0",
+   "multiple_values": false
+  },
+  "auth-type": {
+   "name": "auth-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "PPP authentication type to use.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Automatically choose the authentication method."
+    },
+    {
+     "name": "pap",
+     "help": "PAP authentication."
+    },
+    {
+     "name": "chap",
+     "help": "CHAP authentication."
+    },
+    {
+     "name": "mschapv1",
+     "help": "MS-CHAPv1 authentication."
+    },
+    {
+     "name": "mschapv2",
+     "help": "MS-CHAPv2 authentication."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "ipunnumbered": {
+   "name": "ipunnumbered",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "PPPoE unnumbered IP.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "pppoe-unnumbered-negotiate": {
+   "name": "pppoe-unnumbered-negotiate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PPPoE unnumbered negotiation.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable PPPoE unnumbered negotiation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable PPPoE unnumbered negotiation."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "idle-timeout": {
+   "name": "idle-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "PPPoE auto disconnect after idle timeout (0-4294967295 sec).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "disc-retry-timeout": {
+   "name": "disc-retry-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "PPPoE discovery init timeout value in (0-4294967295 sec).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 1,
+   "multiple_values": false
+  },
+  "padt-retry-timeout": {
+   "name": "padt-retry-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "PPPoE terminate timeout value in (0-4294967295 sec).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 1,
+   "multiple_values": false
+  },
+  "service-name": {
+   "name": "service-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "PPPoE service name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ac-name": {
+   "name": "ac-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "PPPoE AC name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "lcp-echo-interval": {
+   "name": "lcp-echo-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds between PPPoE Link Control Protocol (LCP) echo requests.",
+   "min-value": 0,
+   "max-value": 32767,
+   "default": 5,
+   "multiple_values": false
+  },
+  "lcp-max-echo-fails": {
+   "name": "lcp-max-echo-fails",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum missed LCP echo messages before disconnect.",
+   "min-value": 0,
+   "max-value": 32767,
+   "default": 3,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 528,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

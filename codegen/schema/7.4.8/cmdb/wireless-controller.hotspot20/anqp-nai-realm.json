@@ -1,0 +1,318 @@
+{
+ "name": "anqp-nai-realm",
+ "category": "table",
+ "help": "Configure network access identifier (NAI) realm.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "NAI realm list name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "nai-list": {
+   "name": "nai-list",
+   "category": "table",
+   "help": "NAI list.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "NAI realm name.",
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "encoding": {
+     "name": "encoding",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable format in accordance with IETF RFC 4282.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable format in accordance with IETF RFC 4282."
+      },
+      {
+       "name": "enable",
+       "help": "Enable format in accordance with IETF RFC 4282."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "nai-realm": {
+     "name": "nai-realm",
+     "category": "unitary",
+     "type": "string",
+     "help": "Configure NAI realms (delimited by a semi-colon character).",
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    },
+    "eap-method": {
+     "name": "eap-method",
+     "category": "table",
+     "help": "EAP Methods.",
+     "mkey": "index",
+     "mkey_type": "integer",
+     "children": {
+      "index": {
+       "name": "index",
+       "category": "unitary",
+       "type": "integer",
+       "help": "EAP method index.",
+       "min-value": 1,
+       "max-value": 5,
+       "default": 0,
+       "multiple_values": false
+      },
+      "method": {
+       "name": "method",
+       "category": "unitary",
+       "type": "option",
+       "help": "EAP method type.",
+       "options": [
+        {
+         "name": "eap-identity",
+         "help": "Identity."
+        },
+        {
+         "name": "eap-md5",
+         "help": "MD5."
+        },
+        {
+         "name": "eap-tls",
+         "help": "TLS."
+        },
+        {
+         "name": "eap-ttls",
+         "help": "TTLS."
+        },
+        {
+         "name": "eap-peap",
+         "help": "PEAP."
+        },
+        {
+         "name": "eap-sim",
+         "help": "SIM."
+        },
+        {
+         "name": "eap-aka",
+         "help": "AKA."
+        },
+        {
+         "name": "eap-aka-prime",
+         "help": "AKA'."
+        }
+       ],
+       "default": "eap-identity",
+       "multiple_values": false
+      },
+      "auth-param": {
+       "name": "auth-param",
+       "category": "table",
+       "type": "option",
+       "help": "EAP auth param.",
+       "mkey": "index",
+       "mkey_type": "integer",
+       "children": {
+        "index": {
+         "name": "index",
+         "category": "unitary",
+         "type": "integer",
+         "help": "Param index.",
+         "min-value": 1,
+         "max-value": 4,
+         "default": 0,
+         "multiple_values": false
+        },
+        "id": {
+         "name": "id",
+         "category": "unitary",
+         "type": "option",
+         "help": "ID of authentication parameter.",
+         "options": [
+          {
+           "name": "non-eap-inner-auth",
+           "help": "Non-EAP inner authentication type."
+          },
+          {
+           "name": "inner-auth-eap",
+           "help": "Inner authentication EAP method type."
+          },
+          {
+           "name": "credential",
+           "help": "Credential type."
+          },
+          {
+           "name": "tunneled-credential",
+           "help": "Tunneled EAP method credential type."
+          }
+         ],
+         "default": "inner-auth-eap",
+         "multiple_values": false
+        },
+        "val": {
+         "name": "val",
+         "category": "unitary",
+         "type": "option",
+         "help": "Value of authentication parameter.",
+         "options": [
+          {
+           "name": "eap-identity",
+           "help": "EAP Identity."
+          },
+          {
+           "name": "eap-md5",
+           "help": "EAP MD5."
+          },
+          {
+           "name": "eap-tls",
+           "help": "EAP TLS."
+          },
+          {
+           "name": "eap-ttls",
+           "help": "EAP TTLS."
+          },
+          {
+           "name": "eap-peap",
+           "help": "EAP PEAP."
+          },
+          {
+           "name": "eap-sim",
+           "help": "EAP SIM."
+          },
+          {
+           "name": "eap-aka",
+           "help": "EAP AKA."
+          },
+          {
+           "name": "eap-aka-prime",
+           "help": "EAP AKA'."
+          },
+          {
+           "name": "non-eap-pap",
+           "help": "Non EAP PAP."
+          },
+          {
+           "name": "non-eap-chap",
+           "help": "Non EAP CHAP."
+          },
+          {
+           "name": "non-eap-mschap",
+           "help": "Non EAP MSCHAP."
+          },
+          {
+           "name": "non-eap-mschapv2",
+           "help": "Non EAP MSCHAPV2."
+          },
+          {
+           "name": "cred-sim",
+           "help": "Credential SIM."
+          },
+          {
+           "name": "cred-usim",
+           "help": "Credential USIM."
+          },
+          {
+           "name": "cred-nfc",
+           "help": "Credential NFC secure element."
+          },
+          {
+           "name": "cred-hardware-token",
+           "help": "Credential hardware token."
+          },
+          {
+           "name": "cred-softoken",
+           "help": "Credential softoken."
+          },
+          {
+           "name": "cred-certificate",
+           "help": "Credential certificate."
+          },
+          {
+           "name": "cred-user-pwd",
+           "help": "Credential username password."
+          },
+          {
+           "name": "cred-none",
+           "help": "Credential none."
+          },
+          {
+           "name": "cred-vendor-specific",
+           "help": "Credential vendor specific."
+          },
+          {
+           "name": "tun-cred-sim",
+           "help": "Tunneled credential SIM."
+          },
+          {
+           "name": "tun-cred-usim",
+           "help": "Tunneled credential USIM."
+          },
+          {
+           "name": "tun-cred-nfc",
+           "help": "Tunneled credential NFC secure element."
+          },
+          {
+           "name": "tun-cred-hardware-token",
+           "help": "Tunneled credential hardware token."
+          },
+          {
+           "name": "tun-cred-softoken",
+           "help": "Tunneled credential softoken."
+          },
+          {
+           "name": "tun-cred-certificate",
+           "help": "Tunneled credential certificate."
+          },
+          {
+           "name": "tun-cred-user-pwd",
+           "help": "Tunneled credential username password."
+          },
+          {
+           "name": "tun-cred-anonymous",
+           "help": "Tunneled credential anonymous."
+          },
+          {
+           "name": "tun-cred-vendor-specific",
+           "help": "Tunneled credential vendor specific."
+          }
+         ],
+         "default": "eap-identity",
+         "multiple_values": false
+        }
+       },
+       "options": [],
+       "default": "",
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 294,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

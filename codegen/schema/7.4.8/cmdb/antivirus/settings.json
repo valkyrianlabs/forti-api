@@ -1,0 +1,97 @@
+{
+ "name": "settings",
+ "category": "complex",
+ "help": "Configure AntiVirus settings.",
+ "children": {
+  "machine-learning-detection": {
+   "name": "machine-learning-detection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use machine learning based malware detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable machine learning based malware detection."
+    },
+    {
+     "name": "monitor",
+     "help": "Enable machine learning based malware detection for monitoring only."
+    },
+    {
+     "name": "disable",
+     "help": "Disable machine learning based malware detection."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "use-extreme-db": {
+   "name": "use-extreme-db",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the use of Extreme AVDB.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable extreme AVDB."
+    },
+    {
+     "name": "disable",
+     "help": "Disable extreme AVDB."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "grayware": {
+   "name": "grayware",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable grayware detection when an AntiVirus profile is applied to traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable grayware detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable grayware detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "override-timeout": {
+   "name": "override-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Override the large file scan timeout value in seconds (30 - 3600). Zero is the default value and is used to disable this command. When disabled, the daemon adjusts the large file scan timeout based on the file size.",
+   "min-value": 30,
+   "max-value": 3600,
+   "default": 0,
+   "multiple_values": false
+  },
+  "cache-infected-result": {
+   "name": "cache-infected-result",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable cache of infected scan results (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable cache of infected scan results."
+    },
+    {
+     "name": "disable",
+     "help": "Disable cache of infected scan results."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "antivirus",
+ "q_type": 121,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

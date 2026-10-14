@@ -1,0 +1,51 @@
+{
+ "name": "peergrp",
+ "category": "table",
+ "help": "Configure peer groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Peer group name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "member": {
+   "name": "member",
+   "category": "table",
+   "help": "Peer group members.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Peer group member name.",
+     "required": true,
+     "datasource": [
+      "user.peer.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 50000
+  }
+ },
+ "max_table_size_vdom": 5000,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 127,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,35 @@
+{
+ "name": "signature",
+ "category": "table",
+ "help": "Hidden table for datasource.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "desc": {
+   "name": "desc",
+   "category": "unitary",
+   "type": "string",
+   "help": "Signature description.",
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Signature ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 4096,
+ "max_table_size_item": 0,
+ "path": "waf",
+ "q_type": 504,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

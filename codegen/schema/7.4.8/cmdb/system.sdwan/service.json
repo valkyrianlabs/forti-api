@@ -1,0 +1,1209 @@
+{
+ "name": "service",
+ "category": "table",
+ "help": "Create SD-WAN rules (also called services) to control how sessions are distributed to interfaces in the SD-WAN.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SD-WAN rule ID (1 - 4000).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 4000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "SD-WAN rule name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "addr-mode": {
+   "name": "addr-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address mode (IPv4 or IPv6).",
+   "options": [
+    {
+     "name": "ipv4",
+     "help": "IPv4 mode."
+    },
+    {
+     "name": "ipv6",
+     "help": "IPv6 mode."
+    }
+   ],
+   "default": "ipv4",
+   "multiple_values": false
+  },
+  "load-balance": {
+   "name": "load-balance",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable load-balance.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable load-balance."
+    },
+    {
+     "name": "disable",
+     "help": "Disable load-balance."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "input-device": {
+   "name": "input-device",
+   "category": "table",
+   "help": "Source interface name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "input-device-negate": {
+   "name": "input-device-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negation of input device match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negation of input device match."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negation of input device match."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "input-zone": {
+   "name": "input-zone",
+   "category": "table",
+   "help": "Source input-zone name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Zone.",
+     "datasource": [
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control how the SD-WAN rule sets the priority of interfaces in the SD-WAN.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Assign interfaces a priority based on quality."
+    },
+    {
+     "name": "manual",
+     "help": "Assign interfaces a priority manually."
+    },
+    {
+     "name": "priority",
+     "help": "Assign interfaces a priority based on the link-cost-factor quality of the interface."
+    },
+    {
+     "name": "sla",
+     "help": "Assign interfaces a priority based on selected SLA settings."
+    }
+   ],
+   "default": "manual",
+   "multiple_values": false
+  },
+  "zone-mode": {
+   "name": "zone-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable zone mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Traffic steered based on zone."
+    },
+    {
+     "name": "disable",
+     "help": "Traffic steered based on member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "minimum-sla-meet-members": {
+   "name": "minimum-sla-meet-members",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum number of members which meet SLA.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "hash-mode": {
+   "name": "hash-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Hash algorithm for selected priority members for load balance mode.",
+   "options": [
+    {
+     "name": "round-robin",
+     "help": "All traffic are distributed to selected interfaces in equal portions and circular order."
+    },
+    {
+     "name": "source-ip-based",
+     "help": "All traffic from a source IP is sent to the same interface."
+    },
+    {
+     "name": "source-dest-ip-based",
+     "help": "All traffic from a source IP to a destination IP is sent to the same interface."
+    },
+    {
+     "name": "inbandwidth",
+     "help": "All traffic are distributed to a selected interface with most available bandwidth for incoming traffic."
+    },
+    {
+     "name": "outbandwidth",
+     "help": "All traffic are distributed to a selected interface with most available bandwidth for outgoing traffic."
+    },
+    {
+     "name": "bibandwidth",
+     "help": "All traffic are distributed to a selected interface with most available bandwidth for both incoming and outgoing traffic."
+    }
+   ],
+   "default": "round-robin",
+   "multiple_values": false
+  },
+  "shortcut-priority": {
+   "name": "shortcut-priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "High priority of ADVPN shortcut for this service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable a high priority of ADVPN shortcut for this service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable a high priority of ADVPN shortcut for this service."
+    },
+    {
+     "name": "auto",
+     "help": "Auto enable a high priority of ADVPN shortcut for this service if ADVPN2.0 enabled."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "role": {
+   "name": "role",
+   "category": "unitary",
+   "type": "option",
+   "help": "Service role to work with neighbor.",
+   "options": [
+    {
+     "name": "standalone",
+     "help": "Standalone service."
+    },
+    {
+     "name": "primary",
+     "help": "Primary service for primary neighbor."
+    },
+    {
+     "name": "secondary",
+     "help": "Secondary service for secondary neighbor."
+    }
+   ],
+   "default": "standalone",
+   "multiple_values": false
+  },
+  "standalone-action": {
+   "name": "standalone-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable service when selected neighbor role is standalone while service role is not standalone.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable service when selected neighbor role is standalone."
+    },
+    {
+     "name": "disable",
+     "help": "Disable service when selected neighbor role is standalone."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "quality-link": {
+   "name": "quality-link",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Quality grade.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tos": {
+   "name": "tos",
+   "category": "unitary",
+   "type": "user",
+   "help": "Type of service bit pattern.",
+   "default": "",
+   "multiple_values": false
+  },
+  "tos-mask": {
+   "name": "tos-mask",
+   "category": "unitary",
+   "type": "user",
+   "help": "Type of service evaluated bits.",
+   "default": "",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Protocol number.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "start-port": {
+   "name": "start-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Start destination port number.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "end-port": {
+   "name": "end-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "End destination port number.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 65535,
+   "multiple_values": false
+  },
+  "start-src-port": {
+   "name": "start-src-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Start source port number.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "end-src-port": {
+   "name": "end-src-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "End source port number.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 65535,
+   "multiple_values": false
+  },
+  "dst": {
+   "name": "dst",
+   "category": "table",
+   "help": "Destination address name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address or address group name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dst-negate": {
+   "name": "dst-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negation of destination address match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable destination address negation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable destination address negation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "src": {
+   "name": "src",
+   "category": "table",
+   "help": "Source address name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address or address group name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dst6": {
+   "name": "dst6",
+   "category": "table",
+   "help": "Destination address6 name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address6 or address6 group name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "src6": {
+   "name": "src6",
+   "category": "table",
+   "help": "Source address6 name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address6 or address6 group name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "src-negate": {
+   "name": "src-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable negation of source address match.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable source address negation."
+    },
+    {
+     "name": "disable",
+     "help": "Disable source address negation."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "users": {
+   "name": "users",
+   "category": "table",
+   "help": "User name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "User name.",
+     "required": true,
+     "datasource": [
+      "user.local.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "groups": {
+   "name": "groups",
+   "category": "table",
+   "help": "User groups.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Group name.",
+     "datasource": [
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service": {
+   "name": "internet-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of Internet service for application-based load balancing.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable cloud service to support application-based load balancing."
+    },
+    {
+     "name": "disable",
+     "help": "Disable cloud service to support application-based load balancing."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-custom": {
+   "name": "internet-service-custom",
+   "category": "table",
+   "help": "Custom Internet service name list.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-custom-group": {
+   "name": "internet-service-custom-group",
+   "category": "table",
+   "help": "Custom Internet Service group list.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-name": {
+   "name": "internet-service-name",
+   "category": "table",
+   "help": "Internet service name list.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-name.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-group": {
+   "name": "internet-service-group",
+   "category": "table",
+   "help": "Internet Service group list.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-app-ctrl": {
+   "name": "internet-service-app-ctrl",
+   "category": "table",
+   "help": "Application control based Internet Service ID list.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Application control based Internet Service ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-app-ctrl-group": {
+   "name": "internet-service-app-ctrl-group",
+   "category": "table",
+   "help": "Application control based Internet Service group list.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Application control based Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "application.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-app-ctrl-category": {
+   "name": "internet-service-app-ctrl-category",
+   "category": "table",
+   "help": "IDs of one or more application control categories.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Application control category ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "health-check": {
+   "name": "health-check",
+   "category": "table",
+   "help": "Health check list.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Health check name.",
+     "required": true,
+     "datasource": [
+      "system.sdwan.health-check.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "link-cost-factor": {
+   "name": "link-cost-factor",
+   "category": "unitary",
+   "type": "option",
+   "help": "Link cost factor.",
+   "options": [
+    {
+     "name": "latency",
+     "help": "Select link based on latency."
+    },
+    {
+     "name": "jitter",
+     "help": "Select link based on jitter."
+    },
+    {
+     "name": "packet-loss",
+     "help": "Select link based on packet loss."
+    },
+    {
+     "name": "inbandwidth",
+     "help": "Select link based on available bandwidth of incoming traffic."
+    },
+    {
+     "name": "outbandwidth",
+     "help": "Select link based on available bandwidth of outgoing traffic."
+    },
+    {
+     "name": "bibandwidth",
+     "help": "Select link based on available bandwidth of bidirectional traffic."
+    },
+    {
+     "name": "custom-profile-1",
+     "help": "Select link based on customized profile."
+    }
+   ],
+   "default": "latency",
+   "multiple_values": false
+  },
+  "packet-loss-weight": {
+   "name": "packet-loss-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Coefficient of packet-loss in the formula of custom-profile-1.",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "latency-weight": {
+   "name": "latency-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Coefficient of latency in the formula of custom-profile-1.",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "jitter-weight": {
+   "name": "jitter-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Coefficient of jitter in the formula of custom-profile-1.",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "bandwidth-weight": {
+   "name": "bandwidth-weight",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Coefficient of reciprocal of available bidirectional bandwidth in the formula of custom-profile-1.",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "link-cost-threshold": {
+   "name": "link-cost-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Percentage threshold change of link cost values that will result in policy route regeneration (0 - 10000000, default = 10).",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 10,
+   "multiple_values": false
+  },
+  "hold-down-time": {
+   "name": "hold-down-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Waiting period in seconds when switching from the back-up member to the primary member (0 - 10000000, default = 0).",
+   "min-value": 0,
+   "max-value": 10000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "sla-stickiness": {
+   "name": "sla-stickiness",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SLA stickiness (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Traffic remains in the original session path if the path is within the SLA."
+    },
+    {
+     "name": "disable",
+     "help": "Traffic switches to the best path regardless of the SLA."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dscp-forward": {
+   "name": "dscp-forward",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable forward traffic DSCP tag.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of forward DSCP tag."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of forward DSCP tag."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dscp-reverse": {
+   "name": "dscp-reverse",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable reverse traffic DSCP tag.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of reverse DSCP tag."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of reverse DSCP tag."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dscp-forward-tag": {
+   "name": "dscp-forward-tag",
+   "category": "unitary",
+   "type": "user",
+   "help": "Forward traffic DSCP tag.",
+   "default": "",
+   "multiple_values": false
+  },
+  "dscp-reverse-tag": {
+   "name": "dscp-reverse-tag",
+   "category": "unitary",
+   "type": "user",
+   "help": "Reverse traffic DSCP tag.",
+   "default": "",
+   "multiple_values": false
+  },
+  "sla": {
+   "name": "sla",
+   "category": "table",
+   "help": "Service level agreement (SLA).",
+   "mkey": "health-check",
+   "mkey_type": "string",
+   "children": {
+    "health-check": {
+     "name": "health-check",
+     "category": "unitary",
+     "type": "string",
+     "help": "SD-WAN health-check.",
+     "required": true,
+     "datasource": [
+      "system.sdwan.health-check.name"
+     ],
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "SLA ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "priority-members": {
+   "name": "priority-members",
+   "category": "table",
+   "help": "Member sequence number list.",
+   "member_table": true,
+   "mkey": "seq-num",
+   "mkey_type": "integer",
+   "children": {
+    "seq-num": {
+     "name": "seq-num",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Member sequence number.",
+     "datasource": [
+      "system.sdwan.members.seq-num"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "priority-zone": {
+   "name": "priority-zone",
+   "category": "table",
+   "help": "Priority zone name list.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Priority zone name.",
+     "datasource": [
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SD-WAN service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SD-WAN service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SD-WAN service."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gateway": {
+   "name": "gateway",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SD-WAN service gateway.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SD-WAN service gateway."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SD-WAN service gateway."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "default": {
+   "name": "default",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of SD-WAN as default service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of SD-WAN as default service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of SD-WAN as default service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sla-compare-method": {
+   "name": "sla-compare-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method to compare SLA value for SLA mode.",
+   "options": [
+    {
+     "name": "order",
+     "help": "Compare SLA value based on the order of health-check."
+    },
+    {
+     "name": "number",
+     "help": "Compare SLA value based on the number of satisfied health-check.  Limits health-checks to only configured member interfaces."
+    }
+   ],
+   "default": "order",
+   "multiple_values": false
+  },
+  "tie-break": {
+   "name": "tie-break",
+   "category": "unitary",
+   "type": "option",
+   "help": "Method of selecting member if more than one meets the SLA.",
+   "options": [
+    {
+     "name": "zone",
+     "help": "Use the setting that is configured for the members' zone."
+    },
+    {
+     "name": "cfg-order",
+     "help": "Members that meet the SLA are selected in the order they are configured."
+    },
+    {
+     "name": "fib-best-match",
+     "help": "Members that meet the SLA are selected that match the longest prefix in the routing table."
+    },
+    {
+     "name": "input-device",
+     "help": "Members that meet the SLA are selected by matching the input device."
+    }
+   ],
+   "default": "zone",
+   "multiple_values": false
+  },
+  "use-shortcut-sla": {
+   "name": "use-shortcut-sla",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of ADVPN shortcut for quality comparison.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of ADVPN shortcut for quality comparison."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of ADVPN shortcut for quality comparison."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "passive-measurement": {
+   "name": "passive-measurement",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable passive measurement based on the service criteria.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable passive measurement of user traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Disable passive measurement of user traffic."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "agent-exclusive": {
+   "name": "agent-exclusive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set/unset the service as agent use exclusively.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Set the service as agent use exclusively."
+    },
+    {
+     "name": "disable",
+     "help": "Unset the service as agent use exclusively."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "shortcut": {
+   "name": "shortcut",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable shortcut for this service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of ADVPN shortcut for this service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of ADVPN shortcut for this service."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 4000,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system.sdwan",
+ "q_type": 494,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

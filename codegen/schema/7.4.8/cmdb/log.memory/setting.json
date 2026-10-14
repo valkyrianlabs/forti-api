@@ -1,0 +1,29 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Settings for memory buffer.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging to the FortiGate's memory.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging to memory."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging to memory."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "log.memory",
+ "q_type": 75,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

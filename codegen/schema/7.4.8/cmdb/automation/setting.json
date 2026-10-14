@@ -1,0 +1,39 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Automation setting configuration.",
+ "children": {
+  "max-concurrent-stitches": {
+   "name": "max-concurrent-stitches",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of automation stitches that are allowed to run concurrently.",
+   "min-value": 32,
+   "max-value": 256,
+   "default": 128,
+   "multiple_values": false
+  },
+  "fabric-sync": {
+   "name": "fabric-sync",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable synchronization of automation settings with security fabric.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Synchronize automation setting with security fabric."
+    },
+    {
+     "name": "disable",
+     "help": "Do not synchronize automation setting with security fabric."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "automation",
+ "q_type": 561,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

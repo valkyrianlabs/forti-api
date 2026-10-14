@@ -1,0 +1,591 @@
+{
+ "name": "user-activity",
+ "category": "table",
+ "help": "Configure CASB user activity.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "CASB user activity name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "size": 36,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "CASB user activity status.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "CASB user activity description.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "CASB user activity type.",
+   "options": [
+    {
+     "name": "built-in",
+     "help": "Built-in CASB user-activity."
+    },
+    {
+     "name": "customized",
+     "help": "User customized CASB user-activity."
+    }
+   ],
+   "default": "customized",
+   "multiple_values": false
+  },
+  "casb-name": {
+   "name": "casb-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "CASB user activity signature name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "application": {
+   "name": "application",
+   "category": "unitary",
+   "type": "string",
+   "help": "CASB SaaS application name.",
+   "required": true,
+   "datasource": [
+    "casb.saas-application.name"
+   ],
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "category": {
+   "name": "category",
+   "category": "unitary",
+   "type": "option",
+   "help": "CASB user activity category.",
+   "options": [
+    {
+     "name": "activity-control",
+     "help": "Activity control."
+    },
+    {
+     "name": "tenant-control",
+     "help": "Tenant control."
+    },
+    {
+     "name": "domain-control",
+     "help": "Domain control."
+    },
+    {
+     "name": "safe-search-control",
+     "help": "Safe search control."
+    },
+    {
+     "name": "other",
+     "help": "User customized category."
+    }
+   ],
+   "default": "activity-control",
+   "multiple_values": false
+  },
+  "match-strategy": {
+   "name": "match-strategy",
+   "category": "unitary",
+   "type": "option",
+   "help": "CASB user activity match strategy.",
+   "options": [
+    {
+     "name": "and",
+     "help": "Match user activity using a logical AND operator."
+    },
+    {
+     "name": "or",
+     "help": "Match user activity using a logical OR operator."
+    }
+   ],
+   "default": "or",
+   "multiple_values": false
+  },
+  "match": {
+   "name": "match",
+   "category": "table",
+   "help": "CASB user activity match rules.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "CASB user activity match rules ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "strategy": {
+     "name": "strategy",
+     "category": "unitary",
+     "type": "option",
+     "help": "CASB user activity rules strategy.",
+     "options": [
+      {
+       "name": "and",
+       "help": "Match user activity using a logical AND operator."
+      },
+      {
+       "name": "or",
+       "help": "Match user activity using a logical OR operator."
+      }
+     ],
+     "default": "and",
+     "multiple_values": false
+    },
+    "rules": {
+     "name": "rules",
+     "category": "table",
+     "help": "CASB user activity rules.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "CASB user activity rule ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "type": {
+       "name": "type",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB user activity rule type.",
+       "options": [
+        {
+         "name": "domains",
+         "help": "Domains."
+        },
+        {
+         "name": "host",
+         "help": "Host."
+        },
+        {
+         "name": "path",
+         "help": "Path."
+        },
+        {
+         "name": "header",
+         "help": "HTTP header."
+        },
+        {
+         "name": "header-value",
+         "help": "HTTP header and value."
+        },
+        {
+         "name": "method",
+         "help": "HTTP method."
+        }
+       ],
+       "default": "host",
+       "multiple_values": false
+      },
+      "domains": {
+       "name": "domains",
+       "category": "table",
+       "help": "CASB user activity domain list.",
+       "member_table": true,
+       "mkey": "domain",
+       "mkey_type": "string",
+       "children": {
+        "domain": {
+         "name": "domain",
+         "category": "unitary",
+         "type": "string",
+         "help": "Domain list separated by space.",
+         "required": true,
+         "size": 127,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      },
+      "methods": {
+       "name": "methods",
+       "category": "table",
+       "help": "CASB user activity method list.",
+       "member_table": true,
+       "mkey": "method",
+       "mkey_type": "string",
+       "children": {
+        "method": {
+         "name": "method",
+         "category": "unitary",
+         "type": "string",
+         "help": "User activity method.",
+         "size": 79,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      },
+      "match-pattern": {
+       "name": "match-pattern",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB user activity rule match pattern.",
+       "options": [
+        {
+         "name": "simple",
+         "help": "Exact string match pattern."
+        },
+        {
+         "name": "substr",
+         "help": "Sub-string pattern."
+        },
+        {
+         "name": "regexp",
+         "help": "Regular expression pattern."
+        }
+       ],
+       "default": "simple",
+       "multiple_values": false
+      },
+      "match-value": {
+       "name": "match-value",
+       "category": "unitary",
+       "type": "string",
+       "help": "CASB user activity rule match value.",
+       "size": 1023,
+       "default": "",
+       "multiple_values": false
+      },
+      "header-name": {
+       "name": "header-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "CASB user activity rule header name.",
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      },
+      "case-sensitive": {
+       "name": "case-sensitive",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB user activity match case sensitive.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable value case sensitive match."
+        },
+        {
+         "name": "disable",
+         "help": "Disable value case sensitive match."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "negate": {
+       "name": "negate",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable what the matching strategy must not be.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Matching strategy is negated."
+        },
+        {
+         "name": "disable",
+         "help": "Matching strategy is not negated."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "control-options": {
+   "name": "control-options",
+   "category": "table",
+   "help": "CASB control options.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "CASB control option name.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "CASB control option status.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "operations": {
+     "name": "operations",
+     "category": "table",
+     "help": "CASB control option operations.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "CASB control option operation name.",
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      },
+      "target": {
+       "name": "target",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB operation target.",
+       "options": [
+        {
+         "name": "header",
+         "help": "Header."
+        },
+        {
+         "name": "path",
+         "help": "Path."
+        }
+       ],
+       "default": "header",
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB operation action.",
+       "options": [
+        {
+         "name": "append",
+         "help": "Append the values after the target."
+        },
+        {
+         "name": "prepend",
+         "help": "Prepend the values before the target."
+        },
+        {
+         "name": "replace",
+         "help": "Replace the target by the value."
+        },
+        {
+         "name": "new",
+         "help": "Create a new header regardless if existing header is found or not."
+        },
+        {
+         "name": "new-on-not-found",
+         "help": "Create new header only if existing HTTP header is not found."
+        },
+        {
+         "name": "delete",
+         "help": "Delete the target."
+        }
+       ],
+       "default": "append",
+       "multiple_values": false
+      },
+      "direction": {
+       "name": "direction",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB operation direction.",
+       "options": [
+        {
+         "name": "request",
+         "help": "Request."
+        }
+       ],
+       "default": "request",
+       "multiple_values": false
+      },
+      "header-name": {
+       "name": "header-name",
+       "category": "unitary",
+       "type": "string",
+       "help": "CASB operation header name to search.",
+       "size": 255,
+       "default": "",
+       "multiple_values": false
+      },
+      "search-pattern": {
+       "name": "search-pattern",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB operation search pattern.",
+       "options": [
+        {
+         "name": "simple",
+         "help": "Exact string match pattern."
+        },
+        {
+         "name": "substr",
+         "help": "Sub-string pattern."
+        },
+        {
+         "name": "regexp",
+         "help": "Regular expression pattern."
+        }
+       ],
+       "default": "simple",
+       "multiple_values": false
+      },
+      "search-key": {
+       "name": "search-key",
+       "category": "unitary",
+       "type": "string",
+       "help": "CASB operation key to search.",
+       "size": 1023,
+       "default": "",
+       "multiple_values": false
+      },
+      "case-sensitive": {
+       "name": "case-sensitive",
+       "category": "unitary",
+       "type": "option",
+       "help": "CASB operation search case sensitive.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable case sensitive search."
+        },
+        {
+         "name": "disable",
+         "help": "Disable case sensitive search."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "value-from-input": {
+       "name": "value-from-input",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable value from user input.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable value from input."
+        },
+        {
+         "name": "disable",
+         "help": "Disable value from input."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "values": {
+       "name": "values",
+       "category": "table",
+       "help": "CASB operation new values.",
+       "required": true,
+       "member_table": true,
+       "mkey": "value",
+       "mkey_type": "string",
+       "children": {
+        "value": {
+         "name": "value",
+         "category": "unitary",
+         "type": "string",
+         "help": "Operation value.",
+         "size": 79,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 0
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 2048,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "casb",
+ "q_type": 50,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

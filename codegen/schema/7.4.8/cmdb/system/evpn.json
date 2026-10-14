@@ -1,0 +1,115 @@
+{
+ "name": "evpn",
+ "category": "table",
+ "help": "Configure EVPN instance.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ID.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "rd": {
+   "name": "rd",
+   "category": "unitary",
+   "type": "string",
+   "help": "Route Distinguisher: AA:NN|A.B.C.D:NN.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "import-rt": {
+   "name": "import-rt",
+   "category": "table",
+   "help": "List of import route targets.",
+   "member_table": true,
+   "mkey": "route-target",
+   "mkey_type": "string",
+   "children": {
+    "route-target": {
+     "name": "route-target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route target: AA:NN|A.B.C.D:NN.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "export-rt": {
+   "name": "export-rt",
+   "category": "table",
+   "help": "List of export route targets.",
+   "member_table": true,
+   "mkey": "route-target",
+   "mkey_type": "string",
+   "children": {
+    "route-target": {
+     "name": "route-target",
+     "category": "unitary",
+     "type": "string",
+     "help": "Route target: AA:NN|A.B.C.D:NN.",
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ip-local-learning": {
+   "name": "ip-local-learning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IP address local learning.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IP address local learning."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IP address local learning."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "arp-suppression": {
+   "name": "arp-suppression",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ARP suppression.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable ARP suppression."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ARP suppression."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 564,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,1240 @@
+{
+ "name": "replacemsg-group",
+ "category": "table",
+ "help": "Configure replacement message groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Group name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "group-type": {
+   "name": "group-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Group type.",
+   "required": true,
+   "options": [
+    {
+     "name": "default",
+     "help": "Per-vdom replacement messages."
+    },
+    {
+     "name": "utm",
+     "help": "For use with UTM settings in firewall policies."
+    },
+    {
+     "name": "auth",
+     "help": "For use with authentication pages in firewall policies."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "mail": {
+   "name": "mail",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "http": {
+   "name": "http",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "webproxy": {
+   "name": "webproxy",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ftp": {
+   "name": "ftp",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "fortiguard-wf": {
+   "name": "fortiguard-wf",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "spam": {
+   "name": "spam",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "alertmail": {
+   "name": "alertmail",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "admin": {
+   "name": "admin",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "auth": {
+   "name": "auth",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "sslvpn": {
+   "name": "sslvpn",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "nac-quar": {
+   "name": "nac-quar",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "traffic-quota": {
+   "name": "traffic-quota",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "utm": {
+   "name": "utm",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "custom-message": {
+   "name": "custom-message",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "icap": {
+   "name": "icap",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "automation": {
+   "name": "automation",
+   "category": "table",
+   "help": "Replacement message table entries.",
+   "mkey": "msg-type",
+   "mkey_type": "string",
+   "children": {
+    "msg-type": {
+     "name": "msg-type",
+     "category": "unitary",
+     "type": "string",
+     "help": "Message type.",
+     "required": true,
+     "size": 28,
+     "default": "",
+     "multiple_values": false
+    },
+    "buffer": {
+     "name": "buffer",
+     "category": "unitary",
+     "type": "var-string",
+     "help": "Message string.",
+     "size": 32768,
+     "multiple_values": false
+    },
+    "header": {
+     "name": "header",
+     "category": "unitary",
+     "type": "option",
+     "help": "Header flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No header type."
+      },
+      {
+       "name": "http",
+       "help": "HTTP"
+      },
+      {
+       "name": "8bit",
+       "help": "8 bit."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "format": {
+     "name": "format",
+     "category": "unitary",
+     "type": "option",
+     "help": "Format flag.",
+     "options": [
+      {
+       "name": "none",
+       "help": "No format type."
+      },
+      {
+       "name": "text",
+       "help": "Text format."
+      },
+      {
+       "name": "html",
+       "help": "HTML format."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 200,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 380,
+ "access_group": "sysgrp",
+ "object_range": "global-vdom"
+}

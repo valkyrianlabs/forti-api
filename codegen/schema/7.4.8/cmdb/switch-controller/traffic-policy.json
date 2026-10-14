@@ -1,0 +1,111 @@
+{
+ "name": "traffic-policy",
+ "category": "table",
+ "help": "Configure FortiSwitch traffic policy.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Traffic policy name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description of the traffic policy.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "policer-status": {
+   "name": "policer-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable policer config on the traffic policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable policer config on the traffic policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable policer config on the traffic policy."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "guaranteed-bandwidth": {
+   "name": "guaranteed-bandwidth",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Guaranteed bandwidth in kbps (max value = 524287000).",
+   "min-value": 0,
+   "max-value": 524287000,
+   "default": 10000,
+   "multiple_values": false
+  },
+  "guaranteed-burst": {
+   "name": "guaranteed-burst",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Guaranteed burst size in bytes (max value = 4294967295).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 45000,
+   "multiple_values": false
+  },
+  "maximum-burst": {
+   "name": "maximum-burst",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum burst size in bytes (max value = 4294967295).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 67500,
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure type of policy(ingress/egress).",
+   "readonly": true,
+   "options": [
+    {
+     "name": "ingress",
+     "help": "Ingress policy."
+    },
+    {
+     "name": "egress",
+     "help": "Egress policy."
+    }
+   ],
+   "default": "ingress",
+   "multiple_values": false
+  },
+  "cos-queue": {
+   "name": "cos-queue",
+   "category": "unitary",
+   "type": "integer",
+   "help": "COS queue(0 - 7), or unset to disable.",
+   "min-value": 0,
+   "max-value": 7,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "switch-controller",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,100 @@
+{
+ "name": "local-access",
+ "category": "table",
+ "help": "Configure allowaccess list for mgmt and internal interfaces on managed FortiSwitch units.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Policy name.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "mgmt-allowaccess": {
+   "name": "mgmt-allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed access on the switch management interface.",
+   "options": [
+    {
+     "name": "https",
+     "help": "HTTPS access."
+    },
+    {
+     "name": "ping",
+     "help": "PING access."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH access."
+    },
+    {
+     "name": "snmp",
+     "help": "SNMP access."
+    },
+    {
+     "name": "http",
+     "help": "HTTP access."
+    },
+    {
+     "name": "telnet",
+     "help": "TELNET access."
+    },
+    {
+     "name": "radius-acct",
+     "help": "RADIUS accounting access."
+    }
+   ],
+   "default": "https ping ssh",
+   "multiple_values": true
+  },
+  "internal-allowaccess": {
+   "name": "internal-allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed access on the switch internal interface.",
+   "options": [
+    {
+     "name": "https",
+     "help": "HTTPS access."
+    },
+    {
+     "name": "ping",
+     "help": "PING access."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH access."
+    },
+    {
+     "name": "snmp",
+     "help": "SNMP access."
+    },
+    {
+     "name": "http",
+     "help": "HTTP access."
+    },
+    {
+     "name": "telnet",
+     "help": "TELNET access."
+    },
+    {
+     "name": "radius-acct",
+     "help": "RADIUS accounting access."
+    }
+   ],
+   "default": "https ping ssh",
+   "multiple_values": true
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "switch-controller.security-policy",
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

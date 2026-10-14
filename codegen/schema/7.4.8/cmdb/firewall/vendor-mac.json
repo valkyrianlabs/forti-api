@@ -1,0 +1,60 @@
+{
+ "name": "vendor-mac",
+ "category": "table",
+ "help": "Show vendor and the MAC address they have.",
+ "readonly": true,
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Vendor ID.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Vendor name.",
+   "readonly": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "mac-number": {
+   "name": "mac-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Total number of MAC addresses.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "obsolete": {
+   "name": "obsolete",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Indicates whether the Vendor ID can be used.",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 366,
+ "access_group": "fwgrp",
+ "object_range": "global"
+}

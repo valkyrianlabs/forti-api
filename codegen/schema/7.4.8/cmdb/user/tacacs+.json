@@ -1,0 +1,189 @@
+{
+ "name": "tacacs+",
+ "category": "table",
+ "help": "Configure TACACS+ server entries.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "TACACS+ server entry name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Primary TACACS+ server CN domain name or IP address.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "secondary-server": {
+   "name": "secondary-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Secondary TACACS+ server CN domain name or IP address.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "tertiary-server": {
+   "name": "tertiary-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tertiary TACACS+ server CN domain name or IP address.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number of the TACACS+ server.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 49,
+   "multiple_values": false
+  },
+  "key": {
+   "name": "key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Key to access the primary server.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "secondary-key": {
+   "name": "secondary-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Key to access the secondary server.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "tertiary-key": {
+   "name": "tertiary-key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Key to access the tertiary server.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "status-ttl": {
+   "name": "status-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time for which server reachability is cached so that when a server is unreachable, it will not be retried for at least this period of time (0 = cache disabled, default = 300).",
+   "min-value": 0,
+   "max-value": 600,
+   "default": 300,
+   "multiple_values": false
+  },
+  "authen-type": {
+   "name": "authen-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed authentication protocols/methods.",
+   "options": [
+    {
+     "name": "mschap",
+     "help": "MSCHAP."
+    },
+    {
+     "name": "chap",
+     "help": "CHAP."
+    },
+    {
+     "name": "pap",
+     "help": "PAP."
+    },
+    {
+     "name": "ascii",
+     "help": "ASCII."
+    },
+    {
+     "name": "auto",
+     "help": "Use PAP, MSCHAP, and CHAP (in that order)."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "authorization": {
+   "name": "authorization",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TACACS+ authorization.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TACACS+ authorization."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TACACS+ authorization."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source IP address for communications to TACACS+ server.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 10,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 226,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

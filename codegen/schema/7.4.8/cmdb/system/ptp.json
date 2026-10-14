@@ -1,0 +1,160 @@
+{
+ "name": "ptp",
+ "category": "complex",
+ "help": "Configure system PTP information.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable setting the FortiGate system time by synchronizing with an PTP Server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable synchronization with PTP Server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable synchronization with PTP Server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Multicast transmission or hybrid transmission.",
+   "options": [
+    {
+     "name": "multicast",
+     "help": "Send PTP packets with multicast."
+    },
+    {
+     "name": "hybrid",
+     "help": "Send PTP packets with unicast and multicast."
+    }
+   ],
+   "default": "multicast",
+   "multiple_values": false
+  },
+  "delay-mechanism": {
+   "name": "delay-mechanism",
+   "category": "unitary",
+   "type": "option",
+   "help": "End to end delay detection or peer to peer delay detection.",
+   "options": [
+    {
+     "name": "E2E",
+     "help": "End to end delay detection."
+    },
+    {
+     "name": "P2P",
+     "help": "Peer to peer delay detection."
+    }
+   ],
+   "default": "E2E",
+   "multiple_values": false
+  },
+  "request-interval": {
+   "name": "request-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The delay request value is the logarithmic mean interval in seconds between the delay request messages sent by the slave to the master.",
+   "min-value": 1,
+   "max-value": 6,
+   "default": 1,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "PTP client will reply through this interface.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "server-mode": {
+   "name": "server-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGate PTP server mode. Your FortiGate becomes an PTP server for other devices on your network.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGate PTP server mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGate PTP server mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server-interface": {
+   "name": "server-interface",
+   "category": "table",
+   "help": "FortiGate interface(s) with PTP server mode enabled. Devices on your network can contact these interfaces for PTP services.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "server-interface-name": {
+     "name": "server-interface-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "delay-mechanism": {
+     "name": "delay-mechanism",
+     "category": "unitary",
+     "type": "option",
+     "help": "End to end delay detection or peer to peer delay detection.",
+     "options": [
+      {
+       "name": "E2E",
+       "help": "End to end delay detection."
+      },
+      {
+       "name": "P2P",
+       "help": "Peer to peer delay detection."
+      }
+     ],
+     "default": "E2E",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 262,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

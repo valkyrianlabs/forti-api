@@ -1,0 +1,105 @@
+{
+ "name": "session-ttl",
+ "category": "complex",
+ "help": "Configure global session TTL timers for this FortiGate.",
+ "children": {
+  "default": {
+   "name": "default",
+   "category": "unitary",
+   "type": "user",
+   "help": "Default timeout.",
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "table",
+   "help": "Session TTL port.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Table entry ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Protocol (0 - 255).",
+     "required": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    },
+    "start-port": {
+     "name": "start-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Start port number.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "end-port": {
+     "name": "end-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "End port number.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "timeout": {
+     "name": "timeout",
+     "category": "unitary",
+     "type": "user",
+     "help": "Session timeout (TTL).",
+     "default": "",
+     "multiple_values": false
+    },
+    "refresh-direction": {
+     "name": "refresh-direction",
+     "category": "unitary",
+     "type": "option",
+     "help": "Configure refresh direction.",
+     "options": [
+      {
+       "name": "both",
+       "help": "Refresh both directions."
+      },
+      {
+       "name": "outgoing",
+       "help": "Refresh outgoing direction (original)."
+      },
+      {
+       "name": "incoming",
+       "help": "Refresh incoming direction (reply)."
+      }
+     ],
+     "default": "both",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 512,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 16,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

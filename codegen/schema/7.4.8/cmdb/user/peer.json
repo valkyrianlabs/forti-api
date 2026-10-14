@@ -1,0 +1,193 @@
+{
+ "name": "peer",
+ "category": "table",
+ "help": "Configure peer users.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Peer name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mandatory-ca-verify": {
+   "name": "mandatory-ca-verify",
+   "category": "unitary",
+   "type": "option",
+   "help": "Determine what happens to the peer if the CA certificate is not installed. Disable to automatically consider the peer certificate as valid.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ca": {
+   "name": "ca",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the CA certificate.",
+   "datasource": [
+    "vpn.certificate.ca.name"
+   ],
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "subject": {
+   "name": "subject",
+   "category": "unitary",
+   "type": "string",
+   "help": "Peer certificate name constraints.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "cn": {
+   "name": "cn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Peer certificate common name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "cn-type": {
+   "name": "cn-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Peer certificate common name type.",
+   "options": [
+    {
+     "name": "string",
+     "help": "Normal string."
+    },
+    {
+     "name": "email",
+     "help": "Email address."
+    },
+    {
+     "name": "FQDN",
+     "help": "Fully Qualified Domain Name."
+    },
+    {
+     "name": "ipv4",
+     "help": "IPv4 address."
+    },
+    {
+     "name": "ipv6",
+     "help": "IPv6 address."
+    }
+   ],
+   "default": "string",
+   "multiple_values": false
+  },
+  "mfa-mode": {
+   "name": "mfa-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "MFA mode for remote peer authentication/authorization.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None."
+    },
+    {
+     "name": "password",
+     "help": "Specified username/password."
+    },
+    {
+     "name": "subject-identity",
+     "help": "Subject identity extracted from certificate."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "mfa-server": {
+   "name": "mfa-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of a remote authenticator. Performs client access right check.",
+   "datasource": [
+    "user.radius.name",
+    "user.ldap.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mfa-username": {
+   "name": "mfa-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Unified username for remote authentication.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mfa-password": {
+   "name": "mfa-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Unified password for remote authentication. This field may be left empty when RADIUS authentication is used, in which case the FortiGate will use the RADIUS username as a password. ",
+   "size": 128,
+   "multiple_values": false
+  },
+  "ocsp-override-server": {
+   "name": "ocsp-override-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Online Certificate Status Protocol (OCSP) server for certificate retrieval.",
+   "datasource": [
+    "vpn.certificate.ocsp-server.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "two-factor": {
+   "name": "two-factor",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable two-factor authentication, applying certificate and password-based authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable 2-factor authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable 2-factor authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "passwd": {
+   "name": "passwd",
+   "category": "unitary",
+   "type": "password",
+   "help": "Peer's password used for two-factor authentication.",
+   "size": 128,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 5000,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "user",
+ "q_type": 126,
+ "access_group": "authgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,1343 @@
+{
+ "name": "proxy-policy",
+ "category": "table",
+ "help": "Configure proxy policies.",
+ "mkey": "policyid",
+ "mkey_type": "integer",
+ "children": {
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "policyid": {
+   "name": "policyid",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Policy ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Policy name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "proxy": {
+   "name": "proxy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of explicit proxy.",
+   "required": true,
+   "options": [
+    {
+     "name": "explicit-web",
+     "help": "Explicit Web Proxy"
+    },
+    {
+     "name": "transparent-web",
+     "help": "Transparent Web Proxy"
+    },
+    {
+     "name": "ftp",
+     "help": "Explicit FTP Proxy"
+    },
+    {
+     "name": "ssh",
+     "help": "SSH Proxy"
+    },
+    {
+     "name": "ssh-tunnel",
+     "help": "SSH Tunnel"
+    },
+    {
+     "name": "access-proxy",
+     "help": "Access Proxy"
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "access-proxy": {
+   "name": "access-proxy",
+   "category": "table",
+   "help": "IPv4 access proxy.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Access Proxy name.",
+     "required": true,
+     "datasource": [
+      "firewall.access-proxy.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "access-proxy6": {
+   "name": "access-proxy6",
+   "category": "table",
+   "help": "IPv6 access proxy.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Access proxy name.",
+     "required": true,
+     "datasource": [
+      "firewall.access-proxy6.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcintf": {
+   "name": "srcintf",
+   "category": "table",
+   "help": "Source interface names.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name",
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstintf": {
+   "name": "dstintf",
+   "category": "table",
+   "help": "Destination interface names.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "datasource": [
+      "system.interface.name",
+      "system.zone.name",
+      "system.sdwan.zone.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr": {
+   "name": "srcaddr",
+   "category": "table",
+   "help": "Source address objects.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "firewall.proxy-address.name",
+      "firewall.proxy-addrgrp.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "poolname": {
+   "name": "poolname",
+   "category": "table",
+   "help": "Name of IP pool object.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP pool name.",
+     "required": true,
+     "datasource": [
+      "firewall.ippool.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr": {
+   "name": "dstaddr",
+   "category": "table",
+   "help": "Destination address objects.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name",
+      "firewall.proxy-address.name",
+      "firewall.proxy-addrgrp.name",
+      "firewall.vip.name",
+      "firewall.vipgrp.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ztna-ems-tag": {
+   "name": "ztna-ems-tag",
+   "category": "table",
+   "help": "ZTNA EMS Tag names.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "EMS Tag name.",
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ztna-tags-match-logic": {
+   "name": "ztna-tags-match-logic",
+   "category": "unitary",
+   "type": "option",
+   "help": "ZTNA tag matching logic.",
+   "options": [
+    {
+     "name": "or",
+     "help": "Match ZTNA tags using a logical OR operator."
+    },
+    {
+     "name": "and",
+     "help": "Match ZTNA tags using a logical AND operator."
+    }
+   ],
+   "default": "or",
+   "multiple_values": false
+  },
+  "device-ownership": {
+   "name": "device-ownership",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled, the ownership enforcement will be done at policy level.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable device ownership."
+    },
+    {
+     "name": "disable",
+     "help": "Disable device ownership."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service": {
+   "name": "internet-service",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of Internet Services for this policy. If enabled, destination address and service are not used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of Internet Services in policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of Internet Services in policy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-negate": {
+   "name": "internet-service-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled, Internet Services match against any internet service EXCEPT the selected Internet Service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negated Internet Service match."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negated Internet Service match."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-name": {
+   "name": "internet-service-name",
+   "category": "table",
+   "help": "Internet Service name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service name.",
+     "datasource": [
+      "firewall.internet-service-name.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-group": {
+   "name": "internet-service-group",
+   "category": "table",
+   "help": "Internet Service group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-custom": {
+   "name": "internet-service-custom",
+   "category": "table",
+   "help": "Custom Internet Service name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service-custom-group": {
+   "name": "internet-service-custom-group",
+   "category": "table",
+   "help": "Custom Internet Service group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service6": {
+   "name": "internet-service6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of Internet Services IPv6 for this policy. If enabled, destination IPv6 address and service are not used.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of IPv6 Internet Services in policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of IPv6 Internet Services in policy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service6-negate": {
+   "name": "internet-service6-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled, Internet Services match against any internet service IPv6 EXCEPT the selected Internet Service IPv6.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negated IPv6 Internet Service match."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negated IPv6 Internet Service match."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service6-name": {
+   "name": "internet-service6-name",
+   "category": "table",
+   "help": "Internet Service IPv6 name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service IPv6 name.",
+     "datasource": [
+      "firewall.internet-service-name.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service6-group": {
+   "name": "internet-service6-group",
+   "category": "table",
+   "help": "Internet Service IPv6 group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Internet Service IPv6 group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service6-custom": {
+   "name": "internet-service6-custom",
+   "category": "table",
+   "help": "Custom Internet Service IPv6 name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service IPv6 name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "internet-service6-custom-group": {
+   "name": "internet-service6-custom-group",
+   "category": "table",
+   "help": "Custom Internet Service IPv6 group name.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Custom Internet Service IPv6 group name.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service-custom-group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "service": {
+   "name": "service",
+   "category": "table",
+   "help": "Name of service objects.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Service name.",
+     "required": true,
+     "datasource": [
+      "firewall.service.custom.name",
+      "firewall.service.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "srcaddr-negate": {
+   "name": "srcaddr-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled, source addresses match against any address EXCEPT the specified source addresses.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable source address negate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable destination address negate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dstaddr-negate": {
+   "name": "dstaddr-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled, destination addresses match against any address EXCEPT the specified destination addresses.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable source address negate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable destination address negate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "service-negate": {
+   "name": "service-negate",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled, services match against any service EXCEPT the specified destination services.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable negated service match."
+    },
+    {
+     "name": "disable",
+     "help": "Disable negated service match."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "action": {
+   "name": "action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept or deny traffic matching the policy parameters.",
+   "options": [
+    {
+     "name": "accept",
+     "help": "Action accept."
+    },
+    {
+     "name": "deny",
+     "help": "Action deny."
+    },
+    {
+     "name": "redirect",
+     "help": "Action redirect."
+    }
+   ],
+   "default": "deny",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the active status of the policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "schedule": {
+   "name": "schedule",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of schedule object.",
+   "required": true,
+   "datasource": [
+    "firewall.schedule.onetime.name",
+    "firewall.schedule.recurring.name",
+    "firewall.schedule.group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "logtraffic": {
+   "name": "logtraffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging traffic through the policy.",
+   "options": [
+    {
+     "name": "all",
+     "help": "Log all sessions."
+    },
+    {
+     "name": "utm",
+     "help": "UTM event and matched application traffic log."
+    },
+    {
+     "name": "disable",
+     "help": "Disable traffic and application log."
+    }
+   ],
+   "default": "utm",
+   "multiple_values": false
+  },
+  "session-ttl": {
+   "name": "session-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TTL in seconds for sessions accepted by this policy (0 means use the system default session TTL).",
+   "min-value": 300,
+   "max-value": 2764800,
+   "default": 0,
+   "multiple_values": false
+  },
+  "srcaddr6": {
+   "name": "srcaddr6",
+   "category": "table",
+   "help": "IPv6 source address objects.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr6": {
+   "name": "dstaddr6",
+   "category": "table",
+   "help": "IPv6 destination address objects.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Address name.",
+     "required": true,
+     "datasource": [
+      "firewall.address6.name",
+      "firewall.addrgrp6.name",
+      "firewall.vip6.name",
+      "firewall.vipgrp6.name",
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "groups": {
+   "name": "groups",
+   "category": "table",
+   "help": "Names of group objects.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Group name.",
+     "required": true,
+     "datasource": [
+      "user.group.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "users": {
+   "name": "users",
+   "category": "table",
+   "help": "Names of user objects.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Group name.",
+     "required": true,
+     "datasource": [
+      "user.local.name",
+      "user.certificate.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "http-tunnel-auth": {
+   "name": "http-tunnel-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable HTTP tunnel authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssh-policy-redirect": {
+   "name": "ssh-policy-redirect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Redirect SSH traffic to matching transparent proxy policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSH policy redirect."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSH policy redirect."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "webproxy-forward-server": {
+   "name": "webproxy-forward-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Web proxy forward server name.",
+   "datasource": [
+    "web-proxy.forward-server.name",
+    "web-proxy.forward-server-group.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "webproxy-profile": {
+   "name": "webproxy-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of web proxy profile.",
+   "datasource": [
+    "web-proxy.profile.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "transparent": {
+   "name": "transparent",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to use the IP address of the client to connect to the server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of IP address of client to connect to server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of IP address of client to connect to server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "disclaimer": {
+   "name": "disclaimer",
+   "category": "unitary",
+   "type": "option",
+   "help": "Web proxy disclaimer setting: by domain, policy, or user.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable disclaimer."
+    },
+    {
+     "name": "domain",
+     "help": "Display disclaimer for domain"
+    },
+    {
+     "name": "policy",
+     "help": "Display disclaimer for policy"
+    },
+    {
+     "name": "user",
+     "help": "Display disclaimer for current user"
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "utm-status": {
+   "name": "utm-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable the use of UTM profiles/sensors/lists.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "profile-type": {
+   "name": "profile-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Determine whether the firewall policy allows security profile groups or single profiles only.",
+   "options": [
+    {
+     "name": "single",
+     "help": "Do not allow security profile groups."
+    },
+    {
+     "name": "group",
+     "help": "Allow security profile groups."
+    }
+   ],
+   "default": "single",
+   "multiple_values": false
+  },
+  "profile-group": {
+   "name": "profile-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of profile group.",
+   "datasource": [
+    "firewall.profile-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "profile-protocol-options": {
+   "name": "profile-protocol-options",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Protocol options profile.",
+   "datasource": [
+    "firewall.profile-protocol-options.name"
+   ],
+   "size": 35,
+   "default": "default",
+   "multiple_values": false
+  },
+  "ssl-ssh-profile": {
+   "name": "ssl-ssh-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing SSL SSH profile.",
+   "datasource": [
+    "firewall.ssl-ssh-profile.name"
+   ],
+   "size": 35,
+   "default": "no-inspection",
+   "multiple_values": false
+  },
+  "av-profile": {
+   "name": "av-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Antivirus profile.",
+   "datasource": [
+    "antivirus.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "webfilter-profile": {
+   "name": "webfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Web filter profile.",
+   "datasource": [
+    "webfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "emailfilter-profile": {
+   "name": "emailfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing email filter profile.",
+   "datasource": [
+    "emailfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dlp-profile": {
+   "name": "dlp-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing DLP profile.",
+   "datasource": [
+    "dlp.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "file-filter-profile": {
+   "name": "file-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing file-filter profile.",
+   "datasource": [
+    "file-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ips-sensor": {
+   "name": "ips-sensor",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing IPS sensor.",
+   "datasource": [
+    "ips.sensor.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "application-list": {
+   "name": "application-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Application list.",
+   "datasource": [
+    "application.list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ips-voip-filter": {
+   "name": "ips-voip-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing VoIP (ips) profile.",
+   "datasource": [
+    "voip.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sctp-filter-profile": {
+   "name": "sctp-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing SCTP filter profile.",
+   "datasource": [
+    "sctp-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "icap-profile": {
+   "name": "icap-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing ICAP profile.",
+   "datasource": [
+    "icap.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "cifs-profile": {
+   "name": "cifs-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing CIFS profile.",
+   "datasource": [
+    "cifs.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "videofilter-profile": {
+   "name": "videofilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing VideoFilter profile.",
+   "datasource": [
+    "videofilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "waf-profile": {
+   "name": "waf-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Web application firewall profile.",
+   "datasource": [
+    "waf.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssh-filter-profile": {
+   "name": "ssh-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing SSH filter profile.",
+   "datasource": [
+    "ssh-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "casb-profile": {
+   "name": "casb-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing CASB profile.",
+   "datasource": [
+    "casb.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "replacemsg-override-group": {
+   "name": "replacemsg-override-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication replacement message override group.",
+   "datasource": [
+    "system.replacemsg-group.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "logtraffic-start": {
+   "name": "logtraffic-start",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable policy log traffic start.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "block-notification": {
+   "name": "block-notification",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable block notification.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "redirect-url": {
+   "name": "redirect-url",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Redirect URL for further explicit web proxy processing.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "decrypted-traffic-mirror": {
+   "name": "decrypted-traffic-mirror",
+   "category": "unitary",
+   "type": "string",
+   "help": "Decrypted traffic mirror.",
+   "datasource": [
+    "firewall.decrypted-traffic-mirror.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "detect-https-in-http-request": {
+   "name": "detect-https-in-http-request",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable detection of HTTPS in HTTP request.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable detection of HTTPS in HTTP request."
+    },
+    {
+     "name": "disable",
+     "help": "Disable detection of HTTPS in HTTP request."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 5000,
+ "max_table_size_global": 5000,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 491,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

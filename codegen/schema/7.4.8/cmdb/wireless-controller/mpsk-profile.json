@@ -1,0 +1,296 @@
+{
+ "name": "mpsk-profile",
+ "category": "table",
+ "help": "Configure MPSK profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "MPSK profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mpsk-concurrent-clients": {
+   "name": "mpsk-concurrent-clients",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of concurrent clients that connect using the same passphrase in multiple PSK authentication (0 - 65535, default = 0, meaning no limitation).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "mpsk-external-server-auth": {
+   "name": "mpsk-external-server-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/Disable MPSK external server authentication (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable MPSK external server authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable MPSK external server authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mpsk-external-server": {
+   "name": "mpsk-external-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "RADIUS server to be used to authenticate MPSK users.",
+   "datasource": [
+    "user.radius.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "mpsk-type": {
+   "name": "mpsk-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select the security type of keys for this profile.",
+   "options": [
+    {
+     "name": "wpa2-personal",
+     "help": "WPA2 personal."
+    },
+    {
+     "name": "wpa3-sae",
+     "help": "WPA3 SAE."
+    },
+    {
+     "name": "wpa3-sae-transition",
+     "help": "WPA3 SAE transition."
+    }
+   ],
+   "default": "wpa2-personal",
+   "multiple_values": false
+  },
+  "mpsk-group": {
+   "name": "mpsk-group",
+   "category": "table",
+   "help": "List of multiple PSK groups.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "MPSK group name.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    },
+    "vlan-type": {
+     "name": "vlan-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "MPSK group VLAN options.",
+     "options": [
+      {
+       "name": "no-vlan",
+       "help": "No VLAN."
+      },
+      {
+       "name": "fixed-vlan",
+       "help": "Fixed VLAN ID."
+      }
+     ],
+     "default": "no-vlan",
+     "multiple_values": false
+    },
+    "vlan-id": {
+     "name": "vlan-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Optional VLAN ID.",
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "mpsk-key": {
+     "name": "mpsk-key",
+     "category": "table",
+     "help": "List of multiple PSK entries.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Pre-shared key name.",
+       "required": true,
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      },
+      "key-type": {
+       "name": "key-type",
+       "category": "unitary",
+       "type": "option",
+       "help": "Select the type of the key.",
+       "options": [
+        {
+         "name": "wpa2-personal",
+         "help": "WPA2 personal."
+        },
+        {
+         "name": "wpa3-sae",
+         "help": "WPA3 SAE."
+        }
+       ],
+       "default": "wpa2-personal",
+       "multiple_values": false
+      },
+      "mac": {
+       "name": "mac",
+       "category": "unitary",
+       "type": "mac-address",
+       "help": "MAC address.",
+       "default": "00:00:00:00:00:00",
+       "multiple_values": false
+      },
+      "passphrase": {
+       "name": "passphrase",
+       "category": "unitary",
+       "type": "password",
+       "help": "WPA Pre-shared key.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "sae-password": {
+       "name": "sae-password",
+       "category": "unitary",
+       "type": "password",
+       "help": "WPA3 SAE password.",
+       "size": 128,
+       "multiple_values": false
+      },
+      "sae-pk": {
+       "name": "sae-pk",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable WPA3 SAE-PK (default = disable).",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable WPA3 SAE-PK."
+        },
+        {
+         "name": "disable",
+         "help": "Disable WPA3 SAE-PK."
+        }
+       ],
+       "default": "disable",
+       "multiple_values": false
+      },
+      "sae-private-key": {
+       "name": "sae-private-key",
+       "category": "unitary",
+       "type": "string",
+       "help": "Private key used for WPA3 SAE-PK authentication.",
+       "size": 359,
+       "default": "",
+       "multiple_values": false
+      },
+      "concurrent-client-limit-type": {
+       "name": "concurrent-client-limit-type",
+       "category": "unitary",
+       "type": "option",
+       "help": "MPSK client limit type options.",
+       "options": [
+        {
+         "name": "default",
+         "help": "Using the value in profile configuration."
+        },
+        {
+         "name": "unlimited",
+         "help": "Unlimited."
+        },
+        {
+         "name": "specified",
+         "help": "Specified value."
+        }
+       ],
+       "default": "default",
+       "multiple_values": false
+      },
+      "concurrent-clients": {
+       "name": "concurrent-clients",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Number of clients that can connect using this pre-shared key (1 - 65535, default is 256).",
+       "min-value": 1,
+       "max-value": 65535,
+       "default": 256,
+       "multiple_values": false
+      },
+      "comment": {
+       "name": "comment",
+       "category": "unitary",
+       "type": "var-string",
+       "help": "Comment.",
+       "size": 255,
+       "multiple_values": false
+      },
+      "mpsk-schedules": {
+       "name": "mpsk-schedules",
+       "category": "table",
+       "help": "Firewall schedule for MPSK passphrase. The passphrase will be effective only when at least one schedule is valid.",
+       "member_table": true,
+       "mkey": "name",
+       "mkey_type": "string",
+       "children": {
+        "name": {
+         "name": "name",
+         "category": "unitary",
+         "type": "string",
+         "help": "Schedule name.",
+         "required": true,
+         "datasource": [
+          "firewall.schedule.group.name",
+          "firewall.schedule.recurring.name",
+          "firewall.schedule.onetime.name"
+         ],
+         "size": 35,
+         "default": "",
+         "multiple_values": false
+        }
+       },
+       "max_table_size_vdom": 0,
+       "max_table_size_global": 0,
+       "max_table_size_item": 16
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 2048,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 256,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 310,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

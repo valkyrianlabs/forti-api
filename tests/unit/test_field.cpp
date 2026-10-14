@@ -220,7 +220,7 @@ TEST(Generated, DnsProfileRoundTripsTheDeviceShape) {
                    {"dns-translation", json::array()}, {"external-ip-blocklist", json::array()}};
     auto profile = fortiapi::from_json<fortiapi::dnsfilter::Profile>(device);
     EXPECT_EQ(profile.ftgd_dns->filters->front().category.value(), 26u);
-    EXPECT_EQ(*profile.block_action, fortiapi::dnsfilter::profile::block_action::redirect);
+    EXPECT_EQ(*profile.block_action, fortiapi::dnsfilter::Profile::BlockAction::redirect);
 
     profile.comment = "managed";
     EXPECT_EQ(fortiapi::to_json(profile, Write::update), (json{{"comment", "managed"}}));
@@ -230,7 +230,29 @@ TEST(Generated, PolicyReferencesAreRefs) {
     fortiapi::firewall::Policy policy;
     policy.name = "forti-api-test-p";
     policy.srcintf = std::vector<fortiapi::Ref>{"lan"};
-    policy.action = std::string(fortiapi::firewall::policy::action::deny);
+    policy.action = std::string(fortiapi::firewall::Policy::Action::deny);
     EXPECT_EQ(fortiapi::to_json(policy, Write::create),
               (json{{"name", "forti-api-test-p"}, {"srcintf", {{{"name", "lan"}}}}, {"action", "deny"}}));
+}
+
+namespace {
+    struct Counter {
+        Field<std::int64_t> bytes;
+        template<typename Self, typename Visitor>
+        static void visit(Self& self, Visitor&& v) { v("bytes", self.bytes, R"(0)", fortiapi::none); }
+    };
+}
+
+TEST(Serialize, StringMapsRoundTrip) {
+    using Map = std::map<std::string, Counter>;
+    auto map = fortiapi::from_json<Map>(json{{"wan1", {{"bytes", 5}}}, {"lan", {{"bytes", 7}}}});
+    EXPECT_EQ(map.at("lan").bytes.value(), 7);
+    try {
+        fortiapi::from_json<Map>(json{{"wan1", {{"bytes", "x"}}}});
+        FAIL();
+    } catch (const fortiapi::detail::DecodeFailure& failure) {
+        EXPECT_EQ(failure.where, "[wan1].bytes");
+    }
+    auto vec = fortiapi::from_json<std::vector<Counter>>(json::array({json::object({{"bytes", 1}})}));
+    EXPECT_EQ(vec.at(0).bytes.value(), 1);
 }

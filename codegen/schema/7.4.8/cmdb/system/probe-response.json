@@ -1,0 +1,110 @@
+{
+ "name": "probe-response",
+ "category": "complex",
+ "help": "Configure system probe response.",
+ "children": {
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port number to response.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8008,
+   "multiple_values": false
+  },
+  "http-probe-value": {
+   "name": "http-probe-value",
+   "category": "unitary",
+   "type": "string",
+   "help": "Value to respond to the monitoring server.",
+   "size": 1024,
+   "default": "OK",
+   "multiple_values": false
+  },
+  "ttl-mode": {
+   "name": "ttl-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Mode for TWAMP packet TTL modification.",
+   "options": [
+    {
+     "name": "reinit",
+     "help": "Reinitialize TTL."
+    },
+    {
+     "name": "decrease",
+     "help": "Decrease TTL."
+    },
+    {
+     "name": "retain",
+     "help": "Retain TTL."
+    }
+   ],
+   "default": "retain",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "SLA response mode.",
+   "options": [
+    {
+     "name": "none",
+     "help": "Disable probe."
+    },
+    {
+     "name": "http-probe",
+     "help": "HTTP probe."
+    },
+    {
+     "name": "twamp",
+     "help": "Two way active measurement protocol."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "security-mode": {
+   "name": "security-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "TWAMP responder security mode.",
+   "options": [
+    {
+     "name": "none",
+     "help": "Unauthenticated mode."
+    },
+    {
+     "name": "authentication",
+     "help": "Authenticated mode."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "TWAMP responder password in authentication mode.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "timeout": {
+   "name": "timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "An inactivity timer for a twamp test session.",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 300,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 399,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

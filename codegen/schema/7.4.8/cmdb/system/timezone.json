@@ -1,0 +1,26 @@
+{
+ "name": "timezone",
+ "category": "table",
+ "help": "Show timezone.",
+ "readonly": true,
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Database name of a timezone.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 456,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

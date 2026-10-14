@@ -1,0 +1,384 @@
+{
+ "name": "global",
+ "category": "complex",
+ "help": "Configure wireless controller global settings.",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of the wireless controller.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "location": {
+   "name": "location",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description of the location of the wireless controller.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "acd-process-count": {
+   "name": "acd-process-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Configure the number cw_acd daemons for multi-core CPU support (default = 0).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "wpad-process-count": {
+   "name": "wpad-process-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wpad daemon process count for multi-core CPU support.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "image-download": {
+   "name": "image-download",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable WTP image download at join time.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WTP image download at join time."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WTP image download at join time."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "rolling-wtp-upgrade": {
+   "name": "rolling-wtp-upgrade",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable rolling WTP upgrade (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable rolling WTP upgrade."
+    },
+    {
+     "name": "disable",
+     "help": "Disable rolling WTP upgrade."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rolling-wtp-upgrade-threshold": {
+   "name": "rolling-wtp-upgrade-threshold",
+   "category": "unitary",
+   "type": "string",
+   "help": "Minimum signal level/threshold in dBm required for the managed WTP to be included in rolling WTP upgrade (-95 to -20, default = -80).",
+   "size": 7,
+   "default": "-80",
+   "multiple_values": false
+  },
+  "max-retransmit": {
+   "name": "max-retransmit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of tunnel packet retransmissions (0 - 64, default = 3).",
+   "min-value": 0,
+   "max-value": 64,
+   "default": 3,
+   "multiple_values": false
+  },
+  "control-message-offload": {
+   "name": "control-message-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure CAPWAP control message data channel offload.",
+   "options": [
+    {
+     "name": "ebp-frame",
+     "help": "Ekahau blink protocol (EBP) frames."
+    },
+    {
+     "name": "aeroscout-tag",
+     "help": "AeroScout tag."
+    },
+    {
+     "name": "ap-list",
+     "help": "Rogue AP list."
+    },
+    {
+     "name": "sta-list",
+     "help": "Rogue STA list."
+    },
+    {
+     "name": "sta-cap-list",
+     "help": "STA capability list."
+    },
+    {
+     "name": "stats",
+     "help": "WTP, radio, VAP, and STA statistics."
+    },
+    {
+     "name": "aeroscout-mu",
+     "help": "AeroScout Mobile Unit (MU) report."
+    },
+    {
+     "name": "sta-health",
+     "help": "STA health log."
+    },
+    {
+     "name": "spectral-analysis",
+     "help": "Spectral analysis report."
+    }
+   ],
+   "default": "ebp-frame aeroscout-tag ap-list sta-list sta-cap-list stats aeroscout-mu sta-health spectral-analysis",
+   "multiple_values": true
+  },
+  "data-ethernet-II": {
+   "name": "data-ethernet-II",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure the wireless controller to use Ethernet II or 802.3 frames with 802.3 data tunnel mode (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Use Ethernet II frames with 802.3 data tunnel mode."
+    },
+    {
+     "name": "disable",
+     "help": "Use 802.3 Ethernet frames with 802.3 data tunnel mode."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "link-aggregation": {
+   "name": "link-aggregation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable calculating the CAPWAP transmit hash to load balance sessions to link aggregation nodes (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable calculating the CAPWAP transmit hash."
+    },
+    {
+     "name": "disable",
+     "help": "Disable calculating the CAPWAP transmit hash."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "mesh-eth-type": {
+   "name": "mesh-eth-type",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Mesh Ethernet identifier included in backhaul packets (0 - 65535, default = 8755).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 8755,
+   "multiple_values": false
+  },
+  "fiapp-eth-type": {
+   "name": "fiapp-eth-type",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Ethernet type for Fortinet Inter-Access Point Protocol (IAPP), or IEEE 802.11f, packets (0 - 65535, default = 5252).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 5252,
+   "multiple_values": false
+  },
+  "discovery-mc-addr": {
+   "name": "discovery-mc-addr",
+   "category": "unitary",
+   "type": "ipv4-address-multicast",
+   "help": "Multicast IP address for AP discovery (default = 244.0.1.140).",
+   "default": "224.0.1.140",
+   "multiple_values": false
+  },
+  "max-clients": {
+   "name": "max-clients",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of clients that can connect simultaneously (default = 0, meaning no limitation).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "rogue-scan-mac-adjacency": {
+   "name": "rogue-scan-mac-adjacency",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum numerical difference between an AP's Ethernet and wireless MAC values to match for rogue detection (0 - 31, default = 7).",
+   "min-value": 0,
+   "max-value": 31,
+   "default": 7,
+   "multiple_values": false
+  },
+  "ipsec-base-ip": {
+   "name": "ipsec-base-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Base IP address for IPsec VPN tunnels between the access points and the wireless controller (default = 169.254.0.1).",
+   "default": "169.254.0.1",
+   "multiple_values": false
+  },
+  "wtp-share": {
+   "name": "wtp-share",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sharing of WTPs between VDOMs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "WTP can be shared between all VDOMs."
+    },
+    {
+     "name": "disable",
+     "help": "WTP can be used only in its own VDOM."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "tunnel-mode": {
+   "name": "tunnel-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Compatible/strict tunnel mode.",
+   "options": [
+    {
+     "name": "compatible",
+     "help": "Allow for backward compatible ciphers(3DES+SHA1+Strong list)."
+    },
+    {
+     "name": "strict",
+     "help": "Follow system level strong-crypto ciphers."
+    }
+   ],
+   "default": "compatible",
+   "multiple_values": false
+  },
+  "nac-interval": {
+   "name": "nac-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval in seconds between two WiFi network access control (NAC) checks (10 - 600, default = 120).",
+   "min-value": 10,
+   "max-value": 600,
+   "default": 120,
+   "multiple_values": false
+  },
+  "ap-log-server": {
+   "name": "ap-log-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable configuring FortiGate to redirect wireless event log messages or FortiAPs to send UTM log messages to a syslog server (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AP log server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AP log server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ap-log-server-ip": {
+   "name": "ap-log-server-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IP address that FortiGate or FortiAPs send log messages to.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ap-log-server-port": {
+   "name": "ap-log-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port that FortiGate or FortiAPs send log messages to.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "max-sta-cap": {
+   "name": "max-sta-cap",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of station cap stored on the controller (default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "max-sta-cap-wtp": {
+   "name": "max-sta-cap-wtp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of station cap's wtp info stored on the controller (1 - 16, default = 8).",
+   "min-value": 1,
+   "max-value": 8,
+   "default": 8,
+   "multiple_values": false
+  },
+  "max-rogue-ap": {
+   "name": "max-rogue-ap",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of rogue APs stored on the controller (default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "max-rogue-ap-wtp": {
+   "name": "max-rogue-ap-wtp",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of rogue AP's wtp info stored on the controller (1 - 16, default = 16).",
+   "min-value": 1,
+   "max-value": 16,
+   "default": 16,
+   "multiple_values": false
+  },
+  "max-rogue-sta": {
+   "name": "max-rogue-sta",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of rogue stations stored on the controller (default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "max-ble-device": {
+   "name": "max-ble-device",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of BLE devices stored on the controller (default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "path": "wireless-controller",
+ "q_type": 270,
+ "access_group": "wifi",
+ "object_range": "global"
+}

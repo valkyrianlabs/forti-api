@@ -35,6 +35,20 @@ CPP_KEYWORDS = {
     "visit", "fortiapi", "std", "self", "v",
 }
 
+# Preprocessor macros a consumer's translation unit may already define (C/C++ standard library,
+# POSIX/glibc, GNU predefines). A generated identifier with one of these names would be rewritten
+# by the preprocessor, so it gets a trailing underscore like a keyword.
+MACRO_NAMES = {
+    "NULL", "EOF", "BUFSIZ", "FILENAME_MAX", "FOPEN_MAX", "TMP_MAX", "SEEK_SET", "SEEK_CUR", "SEEK_END",
+    "CLOCKS_PER_SEC", "EXIT_SUCCESS", "EXIT_FAILURE", "RAND_MAX", "MB_CUR_MAX", "EDOM", "EILSEQ", "ERANGE",
+    "errno", "assert", "offsetof", "setjmp", "stdin", "stdout", "stderr", "linux", "unix", "i386",
+    "INFINITY", "NAN", "HUGE_VAL", "CHAR_BIT", "CHAR_MIN", "CHAR_MAX", "INT_MIN", "INT_MAX", "UINT_MAX",
+    "LONG_MIN", "LONG_MAX", "ULONG_MAX", "SHRT_MIN", "SHRT_MAX", "USHRT_MAX", "LLONG_MIN", "LLONG_MAX",
+    "SIGABRT", "SIGFPE", "SIGILL", "SIGINT", "SIGSEGV", "SIGTERM", "SIGHUP", "SIGKILL", "SIGPIPE",
+    "BIG_ENDIAN", "LITTLE_ENDIAN", "BYTE_ORDER", "PDP_ENDIAN", "TRUE", "FALSE", "DEBUG", "NDEBUG",
+    "PATH_MAX", "NAME_MAX", "PAGE_SIZE", "BSD", "major", "minor", "makedev",
+}
+
 STRING_TYPES = {
     "string", "var-string", "user", "uuid", "datetime", "mac-address", "key", "password", "password-2",
     "password-3", "password_aes256", "ipv4-address", "ipv4-address-any", "ipv4-address-multicast",
@@ -52,7 +66,7 @@ def identifier(name: str) -> str:
     out = re.sub(r"[^0-9A-Za-z_]", "_", name)
     if not out or out[0].isdigit():
         out = "_" + out
-    if out in CPP_KEYWORDS:
+    if out in CPP_KEYWORDS or out in MACRO_NAMES:
         out += "_"
     return out
 
@@ -120,7 +134,6 @@ class Endpoint:
 class Emitter:
     endpoint: Endpoint
     lines: list[str] = field(default_factory=list)
-    constants: list[tuple[list[str], list[tuple[str, str]]]] = field(default_factory=list)
 
     def emit(self, text: str = "", indent: int = 0) -> None:
         self.lines.append(("    " * indent + text) if text else "")
@@ -167,6 +180,7 @@ class Emitter:
         children = node.get("children") or {}
         members: list[tuple[str, str, str, str, str]] = []   # key, member, cpp type, reset, flags
         nested: list[tuple[str, dict, list[str]]] = []
+        option_structs: list[tuple[str, list[dict], str | None]] = []
         used_members: set[str] = set()
         used_types: set[str] = set()
 
@@ -183,12 +197,16 @@ class Emitter:
                 else:
                     entry = camel(key) + "Entry"
                     if entry in used_types or entry == name:
+                        entry = camel(key) + "TableEntry"
+                    if entry in used_types or entry == name:
                         raise GenerationError(f"{self.endpoint.path}: nested type {entry} collides in {name}")
                     used_types.add(entry)
                     nested.append((entry, child, scope))
                     cpp = f"std::vector<{entry}>"
             elif category == "complex":
                 sub = camel(key)
+                if sub in used_types or sub == name:
+                    sub += "Object"
                 if sub in used_types or sub == name:
                     raise GenerationError(f"{self.endpoint.path}: nested type {sub} collides in {name}")
                 used_types.add(sub)
@@ -197,13 +215,26 @@ class Emitter:
             else:
                 cpp = self.scalar_type(child)
                 if child.get("options"):
-                    self.add_constants(scope, child["options"])
+                    holder = camel(key)
+                    if holder in used_types or holder == name:
+                        holder += "Values"
+                    if holder in used_types or holder == name:
+                        raise GenerationError(f"{self.endpoint.path}: constants {holder} collide in {name}")
+                    used_types.add(holder)
+                    option_structs.append((holder, child["options"], child.get("help")))
             flags = "fortiapi::read_only" if child.get("readonly") or category == "info-read-only" else "fortiapi::none"
             members.append((key, member, cpp, self.reset_value(child, cpp), flags))
 
         if doc:
             self.emit(f"// {comment(doc)}", indent)
         self.emit(f"struct {name} {{", indent)
+        for holder, options, help_text in option_structs:
+            self.emit(f"// Values of {holder}: {comment(help_text or '')}".rstrip(": "), indent + 1)
+            self.emit(f"struct {holder} {{", indent + 1)
+            for constant, value in self.constant_names(options, holder):
+                self.emit(f"static constexpr std::string_view {constant} = {cpp_string(value)};", indent + 2)
+            self.emit("};", indent + 1)
+            self.emit()
         for sub_name, sub_node, sub_scope in nested:
             self.struct(sub_name, sub_node, indent + 1, sub_scope, sub_node.get("help"))
             self.emit()
@@ -228,17 +259,20 @@ class Emitter:
         self.emit("}", indent + 1)
         self.emit("};", indent)
 
-    def add_constants(self, scope: list[str], options: list[dict]) -> None:
+    @staticmethod
+    def constant_names(options: list[dict], holder: str) -> list[tuple[str, str]]:
         values, seen = [], set()
         for option in options:
             value = option["name"]
             name = identifier(value)
+            if name == holder:
+                name += "_"
             base, n = name, 2
             while name in seen:
                 name, n = f"{base}_{n}", n + 1
             seen.add(name)
             values.append((name, value))
-        self.constants.append((scope, values))
+        return values
 
     # -- header ------------------------------------------------------------------------------------
 
@@ -250,7 +284,6 @@ class Emitter:
 
         body = Emitter(ep)
         body.struct(ep.type_name, ep.schema, 0, [snake(ep.type_name)], ep.schema.get("help"))
-        self.constants = body.constants
 
         out = [
             f"// Generated by tools/fortios/fortios.py from {snapshot} (FortiOS {version}).",
@@ -293,18 +326,11 @@ class Emitter:
                 "",
                 f"using {ep.alias} = fortiapi::Singleton<{ep.type_name}Spec>;",
             ]
-        if self.constants:
-            out += ["", "// Allowed values of option attributes."]
-            for scope, values in self.constants:
-                out.append(f"namespace {'::'.join(scope)} {{")
-                for name, value in values:
-                    out.append(f"    inline constexpr std::string_view {name} = {cpp_string(value)};")
-                out.append("}")
         out += ["", f"}}  // namespace {ns}", "", f"#endif // {ep.guard}", ""]
         return "\n".join(out)
 
 
-def load_manifest() -> tuple[str, list[dict]]:
+def load_manifest() -> tuple[str, list[dict], bool]:
     data = tomllib.loads(MANIFEST.read_text())
     version = data.get("fortios_version")
     if not version:
@@ -313,7 +339,7 @@ def load_manifest() -> tuple[str, list[dict]]:
     paths = [e["path"] for e in entries]
     if len(paths) != len(set(paths)):
         raise GenerationError(f"{MANIFEST}: duplicate paths")
-    return version, entries
+    return version, entries, bool(data.get("generate_all", False))
 
 
 def snapshot_path(version: str, api_path: str) -> Path:
@@ -322,33 +348,209 @@ def snapshot_path(version: str, api_path: str) -> Path:
 
 
 def endpoints() -> tuple[str, list[Endpoint]]:
-    version, entries = load_manifest()
+    version, entries, generate_all = load_manifest()
+    by_path = {e["path"]: e for e in entries}
+    paths = set(by_path)
+    if generate_all:
+        catalog = ROOT / "codegen" / "catalog" / version / "cmdb.json"
+        paths |= set(json.loads(catalog.read_text()))
     out, names = [], {}
-    for entry in sorted(entries, key=lambda e: e["path"]):
-        api_path = entry["path"]
+    for api_path in sorted(paths):
+        entry = by_path.get(api_path, {"path": api_path})
         snap = snapshot_path(version, api_path)
         if not snap.exists():
             raise GenerationError(f"{api_path}: no schema snapshot at {snap.relative_to(ROOT)} (run `fortios.py pull`)")
         schema = json.loads(snap.read_text())
         collection, _, name = api_path.partition("/")
-        namespace = entry.get("namespace", collection).replace("-", "_").split(".")
+        raw_namespace = entry.get("namespace", collection).split(".")
+        namespace = [identifier(part.replace("-", "_").replace("+", "_")) for part in raw_namespace]
         type_name = entry.get("type", camel(name))
         is_table = schema.get("category") == "table"
         alias = entry.get("alias", plural(type_name) if is_table else type_name + "Settings")
         ep = Endpoint(api_path, namespace, type_name, alias, schema, snap)
-        for symbol in (type_name, alias, type_name + "Spec", snake(type_name)):
+        for symbol in (type_name, alias, type_name + "Spec"):
             qualified = "::".join(namespace + [symbol])
             if qualified in names:
-                raise GenerationError(f"{api_path}: {qualified} also generated by {names[qualified]}")
+                raise GenerationError(f"{api_path}: {qualified} also generated by {names[qualified]}; "
+                                      f"set type/alias in codegen/api.toml")
             names[qualified] = api_path
+        header = ep.header
+        if header in names:
+            raise GenerationError(f"{api_path}: header {header.relative_to(ROOT)} also generated by {names[header]}")
+        names[header] = api_path
         out.append(ep)
+    # A C++ namespace and a type cannot share a qualified name.
+    namespaces = {"::".join(ep.namespace[:i]) for ep in out for i in range(1, len(ep.namespace) + 1)}
+    for qualified, api_path in names.items():
+        if isinstance(qualified, str) and qualified in namespaces:
+            raise GenerationError(f"{api_path}: {qualified} is both a type and a namespace")
     return version, out
+
+
+# -- monitor endpoints (from the sanitized GUI recon catalog) -----------------------------------------
+
+@dataclass
+class MonitorEndpoint:
+    path: str                    # "system/available-interfaces" (relative to monitor/)
+    namespace: list[str]         # ["monitor", "system"]
+    alias: str                   # "AvailableInterfaces"
+    data: str                    # "AvailableInterfacesEntry" / "StatusResult"
+    is_list: bool
+    shape: object                # shape of `results` (element shape for lists)
+    query: list[str]
+
+    @property
+    def header(self) -> Path:
+        return GEN_DIR.joinpath("monitor", *[p.replace("-", "_") for p in self.path.split("/")]).with_suffix(".hpp")
+
+
+def monitor_endpoints(version: str) -> list[MonitorEndpoint]:
+    recon = ROOT / "codegen" / "catalog" / version / "gui-recon.json"
+    if not recon.exists():
+        return []
+    out = []
+    for key, entry in sorted(json.loads(recon.read_text())["endpoints"].items()):
+        method, _, target = key.partition(" ")
+        if method != "GET" or entry["decision"] != "read" or not target.startswith("monitor/") or "{" in target:
+            continue
+        response = entry.get("response")
+        if not isinstance(response, dict) or "results" not in response:
+            continue
+        path = target[len("monitor/"):]
+        segments = path.split("/")
+        group, rest = segments[0], segments[1:] or segments[:1]
+        alias = camel("-".join(rest))
+        results = response["results"]
+        is_list = isinstance(results, list)
+        element = results[0] if is_list and results else results
+        if is_list and not results:
+            element = None
+        typed = isinstance(element, dict) and "{key}" not in element
+        data = alias + ("Entry" if is_list else "Result") if typed else "nlohmann::json"
+        out.append(MonitorEndpoint(path, ["monitor", identifier(group.replace("-", "_"))], alias, data, is_list,
+                                   element, entry.get("query", [])))
+    return out
+
+
+class MonitorEmitter:
+    def __init__(self, ep: MonitorEndpoint) -> None:
+        self.ep, self.lines = ep, []
+
+    def emit(self, text: str = "", indent: int = 0) -> None:
+        self.lines.append(("    " * indent + text) if text else "")
+
+    def cpp_type(self, key: str, shape, indent: int, nested: list, used: set[str]) -> str:
+        if isinstance(shape, str):
+            return {"string": "std::string", "integer": "std::int64_t", "number": "double",
+                    "boolean": "bool"}.get(shape, "nlohmann::json")
+        if isinstance(shape, list):
+            if not shape or shape[0] is None:
+                return "std::vector<nlohmann::json>"
+            inner = shape[0]
+            if isinstance(inner, dict) and "{key}" not in inner:
+                return f"std::vector<{self.nested(camel(key) + 'Entry', inner, nested, used)}>"
+            return f"std::vector<{self.cpp_type(key, inner, indent, nested, used)}>"
+        if isinstance(shape, dict):
+            if "{key}" in shape:
+                inner = shape["{key}"]
+                if isinstance(inner, dict) and "{key}" not in inner:
+                    return f"std::map<std::string, {self.nested(camel(key) + 'Value', inner, nested, used)}>"
+                return f"std::map<std::string, {self.cpp_type(key, inner, indent, nested, used)}>"
+            return self.nested(camel(key), shape, nested, used)
+        return "nlohmann::json"
+
+    @staticmethod
+    def nested(name: str, shape: dict, nested: list, used: set[str]) -> str:
+        if name in used:
+            name += "Object"
+        used.add(name)
+        nested.append((name, shape))
+        return name
+
+    def struct(self, name: str, shape: dict, indent: int) -> None:
+        nested: list[tuple[str, dict]] = []
+        used: set[str] = {name}
+        members = []
+        for key, value in sorted(shape.items()):
+            member = member_name(key)
+            members.append((key, member, self.cpp_type(key, value, indent, nested, used)))
+        self.emit(f"struct {name} {{", indent)
+        for sub, sub_shape in nested:
+            self.struct(sub, sub_shape, indent + 1)
+            self.emit()
+        for key, member, cpp in members:
+            self.emit(f"fortiapi::Field<{cpp}> {member};", indent + 1)
+        self.emit()
+        self.emit("template<typename Self, typename Visitor>", indent + 1)
+        self.emit("static void visit(Self& self, Visitor&& v) {", indent + 1)
+        for key, member, _ in members:
+            self.emit(f"v({cpp_string(key)}, self.{member}, R\"(null)\", fortiapi::read_only);", indent + 2)
+        if not members:
+            self.emit("(void) self; (void) v;", indent + 2)
+        self.emit("}", indent + 1)
+        self.emit("};", indent)
+
+    def render(self, version: str) -> str:
+        ep = self.ep
+        guard = "FORTI_API_GEN_" + re.sub(r"[^0-9A-Za-z]", "_", str(ep.header.relative_to(GEN_DIR).with_suffix(""))).upper() + "_HPP"
+        depth = len(ep.header.relative_to(GEN_DIR).parts)
+        ns = "fortiapi::" + "::".join(ep.namespace)
+        data = ep.data
+        if data != "nlohmann::json":
+            self.emit(f"// Result of GET monitor/{ep.path}, from response shapes recorded on FortiOS {version}.")
+            self.struct(data, ep.shape, 0)
+        out = [
+            f"// Generated by tools/fortios/fortios.py from codegen/catalog/{version}/gui-recon.json (FortiOS {version}).",
+            "// Do not edit: the type follows response shapes recorded on a device; attributes it did not",
+            "// report are absent, unknown attributes are ignored.",
+            "",
+            f"#ifndef {guard}",
+            f"#define {guard}",
+            "",
+            f'#include "{"../" * depth}monitor.hpp"',
+            "",
+            "#include <cstdint>",
+            "#include <map>",
+            "#include <string>",
+            "#include <string_view>",
+            "#include <vector>",
+            "",
+            f"namespace {ns} {{",
+            "",
+        ]
+        if self.lines:
+            out += self.lines + [""]
+        query = f"  // query parameters seen: {', '.join(ep.query)}" if ep.query else ""
+        out += [
+            f"struct {ep.alias}Spec {{",
+            f"    using type = {data};",
+            f"    static constexpr std::string_view path = {cpp_string(ep.path)};",
+            f"    static constexpr bool list = {'true' if ep.is_list else 'false'};",
+            "};",
+            "",
+            f"using {ep.alias} = fortiapi::MonitorGet<{ep.alias}Spec>;{query}",
+            "",
+            f"}}  // namespace {ns}",
+            "",
+            f"#endif // {guard}",
+            "",
+        ]
+        return "\n".join(out)
 
 
 def render_all() -> dict[Path, str]:
     version, eps = endpoints()
     files = {ep.header: Emitter(ep).render(version) for ep in eps}
-    includes = sorted(f'#include "{p.relative_to(GEN_DIR).as_posix()}"' for p in files)
+    monitors = monitor_endpoints(version)
+    seen: dict[str, str] = {}
+    for mon in monitors:
+        for symbol in (mon.alias, mon.alias + "Spec") + ((mon.data,) if mon.data != "nlohmann::json" else ()):
+            qualified = "::".join(mon.namespace + [symbol])
+            if qualified in seen:
+                raise GenerationError(f"monitor/{mon.path}: {qualified} also generated by monitor/{seen[qualified]}")
+            seen[qualified] = mon.path
+        files[mon.header] = MonitorEmitter(mon).render(version)
+    includes = sorted(f'#include "{p.relative_to(GEN_DIR).as_posix()}"' for p in files if p.parent != GEN_DIR)
     files[GEN_DIR / "all.hpp"] = "\n".join([
         "// Generated by tools/fortios/fortios.py: every generated endpoint. Do not edit.",
         "",
@@ -360,11 +562,68 @@ def render_all() -> dict[Path, str]:
         "#endif // FORTI_API_GEN_ALL_HPP",
         "",
     ])
-    files[ENDPOINTS_DOC] = endpoints_doc(version, eps)
+    groups: dict[str, list[Path]] = {}
+    for ep in eps:
+        groups.setdefault(ep.path.split("/")[0].split(".")[0], []).append(ep.header)
+    for mon in monitors:
+        groups.setdefault("monitor", []).append(mon.header)
+    for group, headers in sorted(groups.items()):
+        guard = "FORTI_API_GEN_GROUP_" + re.sub(r"[^0-9A-Za-z]", "_", group).upper() + "_HPP"
+        files[GEN_DIR / f"{group}.hpp"] = "\n".join([
+            f"// Generated by tools/fortios/fortios.py: every generated {group} endpoint. Do not edit.",
+            "",
+            f"#ifndef {guard}",
+            f"#define {guard}",
+            "",
+            *sorted(f'#include "{h.relative_to(GEN_DIR).as_posix()}"' for h in headers),
+            "",
+            f"#endif // {guard}",
+            "",
+        ])
+    files[GEN_DIR / "registry.hpp"] = registry(eps, monitors)
+    files[ENDPOINTS_DOC] = endpoints_doc(version, eps, monitors)
     return files
 
 
-def endpoints_doc(version: str, eps: list[Endpoint]) -> str:
+def registry(eps: list[Endpoint], monitors: list["MonitorEndpoint"]) -> str:
+    calls = [f"    f.template operator()<fortiapi::{'::'.join(ep.namespace)}::{ep.alias}>();" for ep in eps]
+    monitor_calls = [f"    f.template operator()<fortiapi::{'::'.join(m.namespace)}::{m.alias}>();" for m in monitors]
+    return "\n".join([
+        "// Generated by tools/fortios/fortios.py: every generated endpoint, for introspection. Do not edit.",
+        "",
+        "#ifndef FORTI_API_GEN_REGISTRY_HPP",
+        "#define FORTI_API_GEN_REGISTRY_HPP",
+        "",
+        '#include "all.hpp"',
+        "",
+        "namespace fortiapi::gen {",
+        "",
+        "// Calls f.template operator()<Endpoint>() for every generated Table and Singleton, e.g.",
+        "//   for_each_endpoint([]<typename E>() { std::cout << E::path << \"\\n\"; });",
+        "template<typename F>",
+        "void for_each_endpoint(F&& f) {",
+        *calls,
+        "}",
+        "",
+        "inline constexpr std::size_t endpoint_count = " + str(len(eps)) + ";",
+        "",
+        "// Calls f.template operator()<Endpoint>() for every generated read-only monitor endpoint.",
+        "template<typename F>",
+        "void for_each_monitor(F&& f) {",
+        *monitor_calls,
+        *(["    (void) f;"] if not monitor_calls else []),
+        "}",
+        "",
+        "inline constexpr std::size_t monitor_count = " + str(len(monitors)) + ";",
+        "",
+        "}  // namespace fortiapi::gen",
+        "",
+        "#endif // FORTI_API_GEN_REGISTRY_HPP",
+        "",
+    ])
+
+
+def endpoints_doc(version: str, eps: list[Endpoint], monitors: list["MonitorEndpoint"]) -> str:
     rows = []
     for ep in eps:
         kind = "Table" if ep.is_table else "Singleton"
@@ -389,11 +648,27 @@ def endpoints_doc(version: str, eps: list[Endpoint]) -> str:
         f"Generated from FortiOS {version} schemas. Each header declares the object type, its option",
         "constants and the endpoint alias; `forti_api/gen/all.hpp` includes them all.",
         "",
+        f"{len(eps)} configuration endpoints ({sum(1 for e in eps if e.is_table)} tables, "
+        f"{sum(1 for e in eps if not e.is_table)} singletons) and {len(monitors)} monitor endpoints.",
+        "",
+        "## Configuration (cmdb)",
+        "",
         "| FortiOS path | Type | Endpoint | Header | Attributes |",
         "|---|---|---|---|---|",
         *rows,
         "",
-        "The monitor API (status, statistics, actions) is available untyped through `fortiapi::Monitor`.",
+        "## Monitor",
+        "",
+        "Read-only monitor endpoints with result types generated from response shapes recorded on a",
+        f"FortiOS {version} device. Every other monitor path, and every monitor action, is available untyped",
+        "through `fortiapi::Monitor`.",
+        "",
+        "| FortiOS path | Endpoint | Result | Header |",
+        "|---|---|---|---|",
+        *[f"| `monitor/{m.path}` | `fortiapi::{'::'.join(m.namespace)}::{m.alias}` | "
+          f"{('`std::vector<' + m.data + '>`') if m.is_list else ('`' + m.data + '`')} | "
+          f"`{m.header.relative_to(ROOT / 'include').as_posix()}` |" for m in monitors],
+        "",
         "New endpoints are added through the generator; see [Code generation](/development/code-generation).",
         "",
     ])

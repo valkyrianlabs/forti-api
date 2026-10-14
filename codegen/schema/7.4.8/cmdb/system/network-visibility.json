@@ -1,0 +1,103 @@
+{
+ "name": "network-visibility",
+ "category": "complex",
+ "help": "Configure network visibility settings.",
+ "children": {
+  "destination-visibility": {
+   "name": "destination-visibility",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of destination visibility.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of destination visibility."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of destination visibility."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "source-location": {
+   "name": "source-location",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of source geographical location visibility.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of source geographical location visibility."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of source geographical location visibility."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "destination-hostname-visibility": {
+   "name": "destination-hostname-visibility",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of destination hostname visibility.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of destination hostname visibility."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of destination hostname visibility."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "hostname-ttl": {
+   "name": "hostname-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TTL of hostname table entries (60 - 86400).",
+   "min-value": 60,
+   "max-value": 86400,
+   "default": 86400,
+   "multiple_values": false
+  },
+  "hostname-limit": {
+   "name": "hostname-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Limit of the number of hostname table entries (0 - 50000).",
+   "min-value": 0,
+   "max-value": 50000,
+   "default": 5000,
+   "multiple_values": false
+  },
+  "destination-location": {
+   "name": "destination-location",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of destination geographical location visibility.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable logging of destination geographical location visibility."
+    },
+    {
+     "name": "enable",
+     "help": "Enable logging of destination geographical location visibility."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 476,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

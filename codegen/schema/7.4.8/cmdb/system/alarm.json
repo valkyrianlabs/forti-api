@@ -1,0 +1,257 @@
+{
+ "name": "alarm",
+ "category": "complex",
+ "help": "Configure alarm.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable alarm.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable alarm."
+    },
+    {
+     "name": "disable",
+     "help": "Disable alarm."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "audible": {
+   "name": "audible",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable audible alarm.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable audible alarm."
+    },
+    {
+     "name": "disable",
+     "help": "Disable audible alarm."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "groups": {
+   "name": "groups",
+   "category": "table",
+   "help": "Alarm groups.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Group ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "period": {
+     "name": "period",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time period in seconds (0 = from start up).",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "admin-auth-failure-threshold": {
+     "name": "admin-auth-failure-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Admin authentication failure threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "admin-auth-lockout-threshold": {
+     "name": "admin-auth-lockout-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Admin authentication lockout threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "user-auth-failure-threshold": {
+     "name": "user-auth-failure-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "User authentication failure threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "user-auth-lockout-threshold": {
+     "name": "user-auth-lockout-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "User authentication lockout threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "replay-attempt-threshold": {
+     "name": "replay-attempt-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Replay attempt threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "self-test-failure-threshold": {
+     "name": "self-test-failure-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Self-test failure threshold.",
+     "min-value": 0,
+     "max-value": 1,
+     "default": 0,
+     "multiple_values": false
+    },
+    "log-full-warning-threshold": {
+     "name": "log-full-warning-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Log full warning threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "encryption-failure-threshold": {
+     "name": "encryption-failure-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Encryption failure threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "decryption-failure-threshold": {
+     "name": "decryption-failure-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Decryption failure threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    },
+    "fw-policy-violations": {
+     "name": "fw-policy-violations",
+     "category": "table",
+     "help": "Firewall policy violations.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Firewall policy violations ID.",
+       "min-value": 0,
+       "max-value": 4294967295,
+       "default": 0,
+       "multiple_values": false
+      },
+      "threshold": {
+       "name": "threshold",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Firewall policy violation threshold.",
+       "min-value": 0,
+       "max-value": 1024,
+       "default": 0,
+       "multiple_values": false
+      },
+      "src-ip": {
+       "name": "src-ip",
+       "category": "unitary",
+       "type": "ipv4-address",
+       "help": "Source IP (0=all).",
+       "default": "0.0.0.0",
+       "multiple_values": false
+      },
+      "dst-ip": {
+       "name": "dst-ip",
+       "category": "unitary",
+       "type": "ipv4-address",
+       "help": "Destination IP (0=all).",
+       "default": "0.0.0.0",
+       "multiple_values": false
+      },
+      "src-port": {
+       "name": "src-port",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Source port (0=all).",
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 0,
+       "multiple_values": false
+      },
+      "dst-port": {
+       "name": "dst-port",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Destination port (0=all).",
+       "min-value": 0,
+       "max-value": 65535,
+       "default": 0,
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    },
+    "fw-policy-id": {
+     "name": "fw-policy-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Firewall policy ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "fw-policy-id-threshold": {
+     "name": "fw-policy-id-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Firewall policy ID threshold.",
+     "min-value": 0,
+     "max-value": 1024,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 224,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

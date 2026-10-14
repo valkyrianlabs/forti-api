@@ -1,0 +1,105 @@
+{
+ "name": "qkd",
+ "category": "table",
+ "help": "Configure Quantum Key Distribution servers",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Quantum Key Distribution configuration name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv4, IPv6 or DNS address of the KME.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "port": {
+   "name": "port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to connect to on the KME.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "string",
+   "help": "Quantum Key Distribution ID assigned by the KME.",
+   "required": true,
+   "size": 291,
+   "default": "",
+   "multiple_values": false
+  },
+  "peer": {
+   "name": "peer",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authenticate Quantum Key Device's certificate with the peer/peergrp.",
+   "required": true,
+   "datasource": [
+    "user.peer.name",
+    "user.peergrp.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "certificate": {
+   "name": "certificate",
+   "category": "table",
+   "help": "Names of up to 4 certificates to offer to the KME.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate name.",
+     "required": true,
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "vpn",
+ "q_type": 549,
+ "access_group": "vpngrp",
+ "object_range": "vdom"
+}

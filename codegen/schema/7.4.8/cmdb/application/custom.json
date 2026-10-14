@@ -1,0 +1,96 @@
+{
+ "name": "custom",
+ "category": "table",
+ "help": "Configure custom application signatures.",
+ "mkey": "tag",
+ "mkey_type": "string",
+ "children": {
+  "tag": {
+   "name": "tag",
+   "category": "unitary",
+   "type": "string",
+   "help": "Signature tag.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Custom application category ID (use ? to view available options).",
+   "readonly": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comment.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "signature": {
+   "name": "signature",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "The text that makes up the actual custom application signature.",
+   "size": 4095,
+   "multiple_values": false
+  },
+  "category": {
+   "name": "category",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Custom application category ID (use ? to view available options).",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "user",
+   "help": "Custom application signature protocol.",
+   "default": "",
+   "multiple_values": false
+  },
+  "technology": {
+   "name": "technology",
+   "category": "unitary",
+   "type": "user",
+   "help": "Custom application signature technology.",
+   "default": "",
+   "multiple_values": false
+  },
+  "behavior": {
+   "name": "behavior",
+   "category": "unitary",
+   "type": "user",
+   "help": "Custom application signature behavior.",
+   "default": "",
+   "multiple_values": false
+  },
+  "vendor": {
+   "name": "vendor",
+   "category": "unitary",
+   "type": "user",
+   "help": "Custom application signature vendor.",
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 1000,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "application",
+ "q_type": 373,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

@@ -15,6 +15,67 @@ namespace fortiapi::firewall {
 
 // Configure custom services.
 struct Service {
+    // Values of Proxy: Enable/disable web proxy service.
+    struct Proxy {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
+    // Values of Protocol: Protocol type based on IANA numbers.
+    struct Protocol {
+        static constexpr std::string_view TCP_UDP_SCTP = "TCP/UDP/SCTP";
+        static constexpr std::string_view ICMP = "ICMP";
+        static constexpr std::string_view ICMP6 = "ICMP6";
+        static constexpr std::string_view IP = "IP";
+        static constexpr std::string_view HTTP = "HTTP";
+        static constexpr std::string_view FTP = "FTP";
+        static constexpr std::string_view CONNECT = "CONNECT";
+        static constexpr std::string_view SOCKS_TCP = "SOCKS-TCP";
+        static constexpr std::string_view SOCKS_UDP = "SOCKS-UDP";
+        static constexpr std::string_view ALL = "ALL";
+    };
+
+    // Values of Helper: Helper name.
+    struct Helper {
+        static constexpr std::string_view auto_ = "auto";
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view ftp = "ftp";
+        static constexpr std::string_view tftp = "tftp";
+        static constexpr std::string_view ras = "ras";
+        static constexpr std::string_view h323 = "h323";
+        static constexpr std::string_view tns = "tns";
+        static constexpr std::string_view mms = "mms";
+        static constexpr std::string_view sip = "sip";
+        static constexpr std::string_view pptp = "pptp";
+        static constexpr std::string_view rtsp = "rtsp";
+        static constexpr std::string_view dns_udp = "dns-udp";
+        static constexpr std::string_view dns_tcp = "dns-tcp";
+        static constexpr std::string_view pmap = "pmap";
+        static constexpr std::string_view rsh = "rsh";
+        static constexpr std::string_view dcerpc = "dcerpc";
+        static constexpr std::string_view mgcp = "mgcp";
+    };
+
+    // Values of CheckResetRange: Configure the type of ICMP error message verification.
+    struct CheckResetRange {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view strict = "strict";
+        static constexpr std::string_view default_ = "default";
+    };
+
+    // Values of AppServiceType: Application service type.
+    struct AppServiceType {
+        static constexpr std::string_view disable = "disable";
+        static constexpr std::string_view app_id = "app-id";
+        static constexpr std::string_view app_category = "app-category";
+    };
+
+    // Values of FabricObject: Security Fabric global object setting.
+    struct FabricObject {
+        static constexpr std::string_view enable = "enable";
+        static constexpr std::string_view disable = "disable";
+    };
+
     // Application category ID.
     struct AppCategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // Application category id.
@@ -102,57 +163,6 @@ struct ServiceSpec {
 };
 
 using Services = fortiapi::Table<ServiceSpec>;
-
-// Allowed values of option attributes.
-namespace service::proxy {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
-namespace service::protocol {
-    inline constexpr std::string_view TCP_UDP_SCTP = "TCP/UDP/SCTP";
-    inline constexpr std::string_view ICMP = "ICMP";
-    inline constexpr std::string_view ICMP6 = "ICMP6";
-    inline constexpr std::string_view IP = "IP";
-    inline constexpr std::string_view HTTP = "HTTP";
-    inline constexpr std::string_view FTP = "FTP";
-    inline constexpr std::string_view CONNECT = "CONNECT";
-    inline constexpr std::string_view SOCKS_TCP = "SOCKS-TCP";
-    inline constexpr std::string_view SOCKS_UDP = "SOCKS-UDP";
-    inline constexpr std::string_view ALL = "ALL";
-}
-namespace service::helper {
-    inline constexpr std::string_view auto_ = "auto";
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view ftp = "ftp";
-    inline constexpr std::string_view tftp = "tftp";
-    inline constexpr std::string_view ras = "ras";
-    inline constexpr std::string_view h323 = "h323";
-    inline constexpr std::string_view tns = "tns";
-    inline constexpr std::string_view mms = "mms";
-    inline constexpr std::string_view sip = "sip";
-    inline constexpr std::string_view pptp = "pptp";
-    inline constexpr std::string_view rtsp = "rtsp";
-    inline constexpr std::string_view dns_udp = "dns-udp";
-    inline constexpr std::string_view dns_tcp = "dns-tcp";
-    inline constexpr std::string_view pmap = "pmap";
-    inline constexpr std::string_view rsh = "rsh";
-    inline constexpr std::string_view dcerpc = "dcerpc";
-    inline constexpr std::string_view mgcp = "mgcp";
-}
-namespace service::check_reset_range {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view strict = "strict";
-    inline constexpr std::string_view default_ = "default";
-}
-namespace service::app_service_type {
-    inline constexpr std::string_view disable = "disable";
-    inline constexpr std::string_view app_id = "app-id";
-    inline constexpr std::string_view app_category = "app-category";
-}
-namespace service::fabric_object {
-    inline constexpr std::string_view enable = "enable";
-    inline constexpr std::string_view disable = "disable";
-}
 
 }  // namespace fortiapi::firewall
 

@@ -1,0 +1,150 @@
+{
+ "name": "lte-modem",
+ "category": "complex",
+ "help": "Configure USB LTE/WIMAX devices.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable USB LTE/WIMAX device.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable USB LTE/WIMA device."
+    },
+    {
+     "name": "disable",
+     "help": "Disable USB LTE/WIMA device."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "extra-init": {
+   "name": "extra-init",
+   "category": "unitary",
+   "type": "string",
+   "help": "Extra initialization string for USB LTE/WIMAX devices.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "pdptype": {
+   "name": "pdptype",
+   "category": "unitary",
+   "type": "option",
+   "help": "Packet Data Protocol (PDP) context type.",
+   "options": [
+    {
+     "name": "IPv4",
+     "help": "Only IPv4."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "authtype": {
+   "name": "authtype",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication type for PDP-IP packet data calls.",
+   "options": [
+    {
+     "name": "none",
+     "help": "Username and password not required."
+    },
+    {
+     "name": "pap",
+     "help": "Use PAP authentication."
+    },
+    {
+     "name": "chap",
+     "help": "Use CHAP authentication."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Authentication username for PDP-IP packet data calls.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "passwd": {
+   "name": "passwd",
+   "category": "unitary",
+   "type": "password",
+   "help": "Authentication password for PDP-IP packet data calls.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "apn": {
+   "name": "apn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Login APN string for PDP-IP packet data calls.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "modem-port": {
+   "name": "modem-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Modem port index (0 - 20).",
+   "min-value": 0,
+   "max-value": 20,
+   "default": 255,
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Modem operation mode.",
+   "options": [
+    {
+     "name": "standalone",
+     "help": "Standalone modem operation mode."
+    },
+    {
+     "name": "redundant",
+     "help": "Redundant modem operation mode where the modem is used as a backup interface."
+    }
+   ],
+   "default": "standalone",
+   "multiple_values": false
+  },
+  "holddown-timer": {
+   "name": "holddown-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Hold down timer (10 - 60 sec).",
+   "min-value": 10,
+   "max-value": 60,
+   "default": 30,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "The interface that the modem is acting as a redundant interface for.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 510,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

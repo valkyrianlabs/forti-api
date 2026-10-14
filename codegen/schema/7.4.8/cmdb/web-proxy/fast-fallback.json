@@ -1,0 +1,97 @@
+{
+ "name": "fast-fallback",
+ "category": "table",
+ "help": "Proxy destination connection fast-fallback.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Configure a name for the fast-fallback entry.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the fast-fallback entry.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Status of the entry."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Status of the entry."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "connection-mode": {
+   "name": "connection-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Connection mode for multiple destinations.",
+   "options": [
+    {
+     "name": "sequentially",
+     "help": "Connect the different destinations sequentially."
+    },
+    {
+     "name": "simultaneously",
+     "help": "Connect the different destinations simultaneously."
+    }
+   ],
+   "default": "sequentially",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Connection protocols for multiple destinations.",
+   "options": [
+    {
+     "name": "IPv4-first",
+     "help": "Connect IPv4 destinations first."
+    },
+    {
+     "name": "IPv6-first",
+     "help": "Connect IPv6 destinations first."
+    },
+    {
+     "name": "IPv4-only",
+     "help": "Connect IPv4 destinations only."
+    },
+    {
+     "name": "IPv6-only",
+     "help": "Connect IPv6 destinations only."
+    }
+   ],
+   "default": "IPv4-first",
+   "multiple_values": false
+  },
+  "connection-timeout": {
+   "name": "connection-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of milliseconds to wait before starting another connection (200 - 1800000, default = 200). For sequential connection-mode only.",
+   "min-value": 200,
+   "max-value": 1800000,
+   "default": 200,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "web-proxy",
+ "q_type": 344,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

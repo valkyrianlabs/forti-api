@@ -1,0 +1,138 @@
+{
+ "name": "netflow",
+ "category": "complex",
+ "help": "Configure NetFlow.",
+ "children": {
+  "active-flow-timeout": {
+   "name": "active-flow-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout to report active flows (60 - 3600 sec, default = 1800).",
+   "min-value": 60,
+   "max-value": 3600,
+   "default": 1800,
+   "multiple_values": false
+  },
+  "inactive-flow-timeout": {
+   "name": "inactive-flow-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout for periodic report of finished flows (10 - 600 sec, default = 15).",
+   "min-value": 10,
+   "max-value": 600,
+   "default": 15,
+   "multiple_values": false
+  },
+  "template-tx-timeout": {
+   "name": "template-tx-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Timeout for periodic template flowset transmission (60 - 86400 sec, default = 1800).",
+   "min-value": 60,
+   "max-value": 86400,
+   "default": 1800,
+   "multiple_values": false
+  },
+  "template-tx-counter": {
+   "name": "template-tx-counter",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Counter of flowset records before resending a template flowset record.",
+   "min-value": 10,
+   "max-value": 6000,
+   "default": 20,
+   "multiple_values": false
+  },
+  "collectors": {
+   "name": "collectors",
+   "category": "table",
+   "help": "Netflow collectors.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 6,
+     "default": 0,
+     "multiple_values": false
+    },
+    "collector-ip": {
+     "name": "collector-ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "Collector IP.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "collector-port": {
+     "name": "collector-port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "NetFlow collector port number.",
+     "min-value": 0,
+     "max-value": 65535,
+     "default": 2055,
+     "multiple_values": false
+    },
+    "source-ip": {
+     "name": "source-ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "Source IP address for communication with the NetFlow agent.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "interface-select-method": {
+     "name": "interface-select-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Specify how to select outgoing interface to reach server.",
+     "options": [
+      {
+       "name": "auto",
+       "help": "Set outgoing interface automatically."
+      },
+      {
+       "name": "sdwan",
+       "help": "Set outgoing interface by SD-WAN or policy routing rules."
+      },
+      {
+       "name": "specify",
+       "help": "Set outgoing interface manually."
+      }
+     ],
+     "default": "auto",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Specify outgoing interface to reach server.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 6,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 434,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

@@ -1,0 +1,32 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Configure router settings.",
+ "children": {
+  "show-filter": {
+   "name": "show-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Prefix-list as filter for showing routes.",
+   "datasource": [
+    "router.prefix-list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hostname": {
+   "name": "hostname",
+   "category": "unitary",
+   "type": "string",
+   "help": "Hostname for this virtual domain router.",
+   "size": 14,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "router",
+ "q_type": 388,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

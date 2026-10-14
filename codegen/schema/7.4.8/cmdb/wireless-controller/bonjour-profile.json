@@ -1,0 +1,145 @@
+{
+ "name": "bonjour-profile",
+ "category": "table",
+ "help": "Configure Bonjour profiles. Bonjour is Apple's zero configuration networking protocol. Bonjour profiles allow APs and FortiAPs to connnect to networks using Bonjour.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Bonjour profile name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "string",
+   "help": "Comment.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "policy-list": {
+   "name": "policy-list",
+   "category": "table",
+   "help": "Bonjour policy list.",
+   "mkey": "policy-id",
+   "mkey_type": "integer",
+   "children": {
+    "policy-id": {
+     "name": "policy-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Policy ID.",
+     "min-value": 1,
+     "max-value": 65535,
+     "default": 0,
+     "multiple_values": false
+    },
+    "description": {
+     "name": "description",
+     "category": "unitary",
+     "type": "string",
+     "help": "Description.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "from-vlan": {
+     "name": "from-vlan",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN ID from which the Bonjour service is advertised (0 - 4094, default = 0).",
+     "size": 63,
+     "default": "0",
+     "multiple_values": false
+    },
+    "to-vlan": {
+     "name": "to-vlan",
+     "category": "unitary",
+     "type": "string",
+     "help": "VLAN ID to which the Bonjour service is made available (0 - 4094, default = all).",
+     "size": 63,
+     "default": "all",
+     "multiple_values": false
+    },
+    "services": {
+     "name": "services",
+     "category": "unitary",
+     "type": "option",
+     "help": "Bonjour services for the VLAN connecting to the Bonjour network.",
+     "options": [
+      {
+       "name": "all",
+       "help": "All services."
+      },
+      {
+       "name": "airplay",
+       "help": "AirPlay."
+      },
+      {
+       "name": "afp",
+       "help": "AFP (Apple File Sharing)."
+      },
+      {
+       "name": "bit-torrent",
+       "help": "BitTorrent."
+      },
+      {
+       "name": "ftp",
+       "help": "FTP."
+      },
+      {
+       "name": "ichat",
+       "help": "iChat."
+      },
+      {
+       "name": "itunes",
+       "help": "iTunes."
+      },
+      {
+       "name": "printers",
+       "help": "Printers."
+      },
+      {
+       "name": "samba",
+       "help": "Samba."
+      },
+      {
+       "name": "scanners",
+       "help": "Scanners."
+      },
+      {
+       "name": "ssh",
+       "help": "SSH."
+      },
+      {
+       "name": "chromecast",
+       "help": "ChromeCast."
+      },
+      {
+       "name": "miracast",
+       "help": "Miracast."
+      }
+     ],
+     "default": "all",
+     "multiple_values": true
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 32
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller",
+ "q_type": 285,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

@@ -1,0 +1,160 @@
+{
+ "name": "crl",
+ "category": "table",
+ "help": "Certificate Revocation List as a PEM file.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "crl": {
+   "name": "crl",
+   "category": "unitary",
+   "type": "user",
+   "help": "Certificate Revocation List as a PEM file.",
+   "default": "",
+   "multiple_values": false
+  },
+  "range": {
+   "name": "range",
+   "category": "unitary",
+   "type": "option",
+   "help": "Either global or VDOM IP address range for the certificate.",
+   "options": [
+    {
+     "name": "global",
+     "help": "Global range."
+    },
+    {
+     "name": "vdom",
+     "help": "VDOM IP address range."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "source": {
+   "name": "source",
+   "category": "unitary",
+   "type": "option",
+   "help": "Certificate source type.",
+   "options": [
+    {
+     "name": "factory",
+     "help": "Factory installed certificate."
+    },
+    {
+     "name": "user",
+     "help": "User generated certificate."
+    },
+    {
+     "name": "bundle",
+     "help": "Bundle file certificate."
+    }
+   ],
+   "default": "user",
+   "multiple_values": false
+  },
+  "update-vdom": {
+   "name": "update-vdom",
+   "category": "unitary",
+   "type": "string",
+   "help": "VDOM for CRL update.",
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "root",
+   "multiple_values": false
+  },
+  "ldap-server": {
+   "name": "ldap-server",
+   "category": "unitary",
+   "type": "string",
+   "help": "LDAP server name for CRL auto-update.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ldap-username": {
+   "name": "ldap-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "LDAP server user name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ldap-password": {
+   "name": "ldap-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "LDAP server user password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "http-url": {
+   "name": "http-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTP server URL for CRL auto-update.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "scep-url": {
+   "name": "scep-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "SCEP server URL for CRL auto-update.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "scep-cert": {
+   "name": "scep-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Local certificate for SCEP communication for CRL auto-update.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_CA_SSL",
+   "multiple_values": false
+  },
+  "update-interval": {
+   "name": "update-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds before the FortiGate checks for an updated CRL. Set to 0 to update only when it expires.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address for communications to a HTTP or SCEP CA server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "certificate",
+ "q_type": 169,
+ "access_group": "vpngrp",
+ "object_range": "global"
+}

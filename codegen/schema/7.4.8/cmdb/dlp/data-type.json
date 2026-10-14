@@ -1,0 +1,144 @@
+{
+ "name": "data-type",
+ "category": "table",
+ "help": "Configure predefined data type used by DLP blocking.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of table containing the data type.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "pattern": {
+   "name": "pattern",
+   "category": "unitary",
+   "type": "string",
+   "help": "Regular expression pattern string without look around.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "verify": {
+   "name": "verify",
+   "category": "unitary",
+   "type": "string",
+   "help": "Regular expression pattern string used to verify the data type.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "verify2": {
+   "name": "verify2",
+   "category": "unitary",
+   "type": "string",
+   "help": "Extra regular expression pattern string used to verify the data type.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "match-around": {
+   "name": "match-around",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dictionary to check whether it has a match around (Only support match-any and basic types, no repeat supported).",
+   "datasource": [
+    "dlp.dictionary.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "look-back": {
+   "name": "look-back",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of characters required to save for verification (1 - 255, default = 1).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "look-ahead": {
+   "name": "look-ahead",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of characters to obtain in advance for verification (1 - 255, default = 1).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "match-back": {
+   "name": "match-back",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of characters in front for match-around (1 - 4096, default = 1).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 4096,
+   "default": 1,
+   "multiple_values": false
+  },
+  "match-ahead": {
+   "name": "match-ahead",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of characters behind for match-around (1 - 4096, default = 1).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 4096,
+   "default": 1,
+   "multiple_values": false
+  },
+  "transform": {
+   "name": "transform",
+   "category": "unitary",
+   "type": "string",
+   "help": "Template to transform user input to a pattern using capture group from 'pattern'.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "verify-transformed-pattern": {
+   "name": "verify-transformed-pattern",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification for transformed pattern.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification for transformed pattern."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification for transformed pattern."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Optional comments.",
+   "size": 255,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "dlp",
+ "q_type": 250,
+ "access_group": "utmgrp",
+ "object_range": "global-vdom"
+}

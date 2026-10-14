@@ -1,0 +1,279 @@
+{
+ "name": "device-upgrade",
+ "category": "table",
+ "help": "Independent upgrades for managed devices.",
+ "mkey": "serial",
+ "mkey_type": "string",
+ "children": {
+  "serial": {
+   "name": "serial",
+   "category": "unitary",
+   "type": "string",
+   "help": "Serial number of the node to include.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "timing": {
+   "name": "timing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Run immediately or at a scheduled time.",
+   "required": true,
+   "options": [
+    {
+     "name": "immediate",
+     "help": "Begin the upgrade immediately."
+    },
+    {
+     "name": "scheduled",
+     "help": "Begin the upgrade at a configured time."
+    }
+   ],
+   "default": "immediate",
+   "multiple_values": false
+  },
+  "maximum-minutes": {
+   "name": "maximum-minutes",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of minutes to allow for immediate upgrade preparation.",
+   "required": true,
+   "min-value": 5,
+   "max-value": 10080,
+   "default": 15,
+   "multiple_values": false
+  },
+  "time": {
+   "name": "time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Scheduled upgrade execution time in UTC (hh:mm yyyy/mm/dd UTC).",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "setup-time": {
+   "name": "setup-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Upgrade preparation start time in UTC (hh:mm yyyy/mm/dd UTC).",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "upgrade-path": {
+   "name": "upgrade-path",
+   "category": "unitary",
+   "type": "user",
+   "help": "Fortinet OS image versions to upgrade through in major-minor-patch format, such as 7-0-4.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "device-type": {
+   "name": "device-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Fortinet device type.",
+   "required": true,
+   "options": [
+    {
+     "name": "fortigate",
+     "help": "This device is a FortiGate."
+    },
+    {
+     "name": "fortiswitch",
+     "help": "This device is a FortiSwitch."
+    },
+    {
+     "name": "fortiap",
+     "help": "This device is a FortiAP."
+    },
+    {
+     "name": "fortiextender",
+     "help": "This device is a FortiExtender."
+    }
+   ],
+   "default": "fortigate",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Current status of the upgrade.",
+   "required": true,
+   "options": [
+    {
+     "name": "disabled",
+     "help": "No federated upgrade has been configured."
+    },
+    {
+     "name": "initialized",
+     "help": "The upgrade has been configured."
+    },
+    {
+     "name": "downloading",
+     "help": "The image is downloading in preparation for the upgrade."
+    },
+    {
+     "name": "device-disconnected",
+     "help": "The image downloads are complete, but one or more devices have disconnected."
+    },
+    {
+     "name": "ready",
+     "help": "The image download finished and the upgrade is pending."
+    },
+    {
+     "name": "coordinating",
+     "help": "The upgrade is coordinating with other running upgrades."
+    },
+    {
+     "name": "staging",
+     "help": "The upgrade is confirmed and images are being staged."
+    },
+    {
+     "name": "final-check",
+     "help": "The upgrade is ready and final checks are in progress."
+    },
+    {
+     "name": "upgrade-devices",
+     "help": "The upgrade is ready and devices are being rebooted."
+    },
+    {
+     "name": "cancelled",
+     "help": "The upgrade was cancelled due to the tree not being ready."
+    },
+    {
+     "name": "confirmed",
+     "help": "The upgrade was confirmed and reboots are running."
+    },
+    {
+     "name": "done",
+     "help": "The upgrade completed successfully."
+    },
+    {
+     "name": "failed",
+     "help": "The upgrade failed due to a local issue."
+    }
+   ],
+   "default": "disabled",
+   "multiple_values": false
+  },
+  "failure-reason": {
+   "name": "failure-reason",
+   "category": "unitary",
+   "type": "option",
+   "help": "Upgrade failure reason.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No failure."
+    },
+    {
+     "name": "internal",
+     "help": "An internal error occurred."
+    },
+    {
+     "name": "timeout",
+     "help": "The upgrade timed out."
+    },
+    {
+     "name": "device-type-unsupported",
+     "help": "The device type was not supported by the FortiGate."
+    },
+    {
+     "name": "download-failed",
+     "help": "The image could not be downloaded."
+    },
+    {
+     "name": "device-missing",
+     "help": "The device was disconnected from the FortiGate."
+    },
+    {
+     "name": "version-unavailable",
+     "help": "An image matching the device and version could not be found."
+    },
+    {
+     "name": "staging-failed",
+     "help": "The image could not be pushed to the device."
+    },
+    {
+     "name": "reboot-failed",
+     "help": "The device could not be rebooted."
+    },
+    {
+     "name": "device-not-reconnected",
+     "help": "The device did not reconnect after rebooting."
+    },
+    {
+     "name": "node-not-ready",
+     "help": "A device in the Security Fabric tree was not ready."
+    },
+    {
+     "name": "no-final-confirmation",
+     "help": "The coordinating FortiGate did not confirm the upgrade."
+    },
+    {
+     "name": "no-confirmation-query",
+     "help": "A downstream FortiGate did not initiate final confirmation."
+    },
+    {
+     "name": "config-error-log-nonempty",
+     "help": "Configuration errors encountered during the upgrade."
+    },
+    {
+     "name": "csf-tree-not-supported",
+     "help": "The Security Fabric is disabled on the root FortiGate"
+    },
+    {
+     "name": "node-failed",
+     "help": "A device in the Security Fabric tree failed."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "ha-reboot-controller": {
+   "name": "ha-reboot-controller",
+   "category": "unitary",
+   "type": "string",
+   "help": "Serial number of the FortiGate unit that will control the reboot process for the federated upgrade of the HA cluster.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "known-ha-members": {
+   "name": "known-ha-members",
+   "category": "table",
+   "help": "Known members of the HA cluster. If a member is missing at upgrade time, the upgrade will be cancelled.",
+   "required": true,
+   "mkey": "serial",
+   "mkey_type": "string",
+   "children": {
+    "serial": {
+     "name": "serial",
+     "category": "unitary",
+     "type": "string",
+     "help": "Serial number of HA member",
+     "required": true,
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 555,
+ "access_group": "secfabgrp",
+ "object_range": "global"
+}

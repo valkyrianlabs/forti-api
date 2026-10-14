@@ -1,0 +1,66 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Configure IP to MAC binding settings.",
+ "children": {
+  "bindthroughfw": {
+   "name": "bindthroughfw",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of IP/MAC binding to filter packets that would normally go through the firewall.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IP/MAC binding for packets that would normally go through the firewall."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IP/MAC binding for packets that would normally go through the firewall."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "bindtofw": {
+   "name": "bindtofw",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of IP/MAC binding to filter packets that would normally go to the firewall.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IP/MAC binding for packets that would normally go to the firewall."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IP/MAC binding for packets that would normally go to the firewall."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "undefinedhost": {
+   "name": "undefinedhost",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select action to take on packets with IP/MAC addresses not in the binding list (default = block).",
+   "required": true,
+   "options": [
+    {
+     "name": "allow",
+     "help": "Allow packets from MAC addresses not in the IP/MAC list."
+    },
+    {
+     "name": "block",
+     "help": "Block packets from MAC addresses not in the IP/MAC list."
+    }
+   ],
+   "default": "block",
+   "multiple_values": false
+  }
+ },
+ "path": "firewall.ipmacbinding",
+ "q_type": 56,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

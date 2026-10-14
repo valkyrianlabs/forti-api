@@ -1,0 +1,658 @@
+{
+ "name": "network-policy",
+ "category": "table",
+ "help": "Configure LLDP network policy.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "LLDP network policy name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "voice": {
+   "name": "voice",
+   "category": "complex",
+   "help": "Voice.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  },
+  "voice-signaling": {
+   "name": "voice-signaling",
+   "category": "complex",
+   "help": "Voice signaling.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  },
+  "guest": {
+   "name": "guest",
+   "category": "complex",
+   "help": "Guest.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  },
+  "guest-voice-signaling": {
+   "name": "guest-voice-signaling",
+   "category": "complex",
+   "help": "Guest Voice Signaling.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  },
+  "softphone": {
+   "name": "softphone",
+   "category": "complex",
+   "help": "Softphone.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  },
+  "video-conferencing": {
+   "name": "video-conferencing",
+   "category": "complex",
+   "help": "Video Conferencing.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  },
+  "streaming-video": {
+   "name": "streaming-video",
+   "category": "complex",
+   "help": "Streaming Video.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  },
+  "video-signaling": {
+   "name": "video-signaling",
+   "category": "complex",
+   "help": "Video Signaling.",
+   "children": {
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable advertising this policy.",
+     "options": [
+      {
+       "name": "disable",
+       "help": "Disable advertising this LLDP network policy."
+      },
+      {
+       "name": "enable",
+       "help": "Enable advertising this LLDP network policy."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "tag": {
+     "name": "tag",
+     "category": "unitary",
+     "type": "option",
+     "help": "Advertise tagged or untagged traffic.",
+     "options": [
+      {
+       "name": "none",
+       "help": "Advertise that untagged frames should be used."
+      },
+      {
+       "name": "dot1q",
+       "help": "Advertise that 802.1Q (VLAN) tagging should be used."
+      },
+      {
+       "name": "dot1p",
+       "help": "Advertise that 802.1P priority tagging (VLAN 0) should be used."
+      }
+     ],
+     "default": "none",
+     "multiple_values": false
+    },
+    "vlan": {
+     "name": "vlan",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1Q VLAN ID to advertise (1 - 4094).",
+     "required": true,
+     "min-value": 1,
+     "max-value": 4094,
+     "default": 0,
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "802.1P CoS/PCP to advertise (0 - 7; from lowest to highest priority).",
+     "min-value": 0,
+     "max-value": 7,
+     "default": 5,
+     "multiple_values": false
+    },
+    "dscp": {
+     "name": "dscp",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Differentiated Services Code Point (DSCP) value to advertise.",
+     "min-value": 0,
+     "max-value": 63,
+     "default": 46,
+     "multiple_values": false
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system.lldp",
+ "q_type": 204,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

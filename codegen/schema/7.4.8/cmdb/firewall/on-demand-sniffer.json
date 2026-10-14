@@ -1,0 +1,146 @@
+{
+ "name": "on-demand-sniffer",
+ "category": "table",
+ "help": "Configure on-demand packet sniffer.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "On-demand packet sniffer name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name that on-demand packet sniffer will take place.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "max-packet-count": {
+   "name": "max-packet-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of packets to capture per on-demand packet sniffer.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 4000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "hosts": {
+   "name": "hosts",
+   "category": "table",
+   "help": "IPv4 or IPv6 hosts to filter in this traffic sniffer.",
+   "member_table": true,
+   "mkey": "host",
+   "mkey_type": "string",
+   "children": {
+    "host": {
+     "name": "host",
+     "category": "unitary",
+     "type": "string",
+     "help": "IPv4 or IPv6 host.",
+     "required": true,
+     "size": 255,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ports": {
+   "name": "ports",
+   "category": "table",
+   "help": "Ports to filter for in this traffic sniffer.",
+   "member_table": true,
+   "mkey": "port",
+   "mkey_type": "integer",
+   "children": {
+    "port": {
+     "name": "port",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Port to filter in this traffic sniffer.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 65536,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "protocols": {
+   "name": "protocols",
+   "category": "table",
+   "help": "Protocols to filter in this traffic sniffer.",
+   "member_table": true,
+   "mkey": "protocol",
+   "mkey_type": "integer",
+   "children": {
+    "protocol": {
+     "name": "protocol",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Integer value for the protocol type as defined by IANA (0 - 255).",
+     "required": true,
+     "min-value": 0,
+     "max-value": 255,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "non-ip-packet": {
+   "name": "non-ip-packet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Include non-IP packets.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable non-IP packets to be included capture."
+    },
+    {
+     "name": "disable",
+     "help": "Disable non-IP packets to be included in capture."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "advanced-filter": {
+   "name": "advanced-filter",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Advanced freeform filter that will be used over existing filter settings if set. Can only be used by super admin.",
+   "size": 255,
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 6,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 383,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

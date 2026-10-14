@@ -1,0 +1,31 @@
+{
+ "name": "ips-urlfilter-cache-setting",
+ "category": "complex",
+ "help": "Configure IPS URL filter cache settings.",
+ "children": {
+  "dns-retry-interval": {
+   "name": "dns-retry-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Retry interval. Refresh DNS faster than TTL to capture multiple IPs for hosts. 0 means use DNS server's TTL only.",
+   "min-value": 0,
+   "max-value": 2147483,
+   "default": 0,
+   "multiple_values": false
+  },
+  "extended-ttl": {
+   "name": "extended-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Extend time to live beyond reported by DNS. Use of 0 means use DNS server's TTL.",
+   "min-value": 0,
+   "max-value": 2147483,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "path": "webfilter",
+ "q_type": 469,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

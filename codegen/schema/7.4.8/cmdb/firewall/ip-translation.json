@@ -1,0 +1,67 @@
+{
+ "name": "ip-translation",
+ "category": "table",
+ "help": "Configure firewall IP-translation.",
+ "mkey": "transid",
+ "mkey_type": "integer",
+ "children": {
+  "transid": {
+   "name": "transid",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IP translation ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IP translation type (option: SCTP).",
+   "options": [
+    {
+     "name": "SCTP",
+     "help": "SCTP"
+    }
+   ],
+   "default": "SCTP",
+   "multiple_values": false
+  },
+  "startip": {
+   "name": "startip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "First IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx, default: 0.0.0.0).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "endip": {
+   "name": "endip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Final IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx, default: 0.0.0.0).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "map-startip": {
+   "name": "map-startip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Address to be used as the starting point for translation in the range (format xxx.xxx.xxx.xxx, default: 0.0.0.0).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 484,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

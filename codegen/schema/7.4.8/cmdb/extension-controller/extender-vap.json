@@ -1,0 +1,332 @@
+{
+ "name": "extender-vap",
+ "category": "table",
+ "help": "FortiExtender wifi vap configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Wi-Fi VAP name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Wi-Fi VAP type local-vap / lan-extension-vap.",
+   "required": true,
+   "options": [
+    {
+     "name": "local-vap",
+     "help": "Local VAP."
+    },
+    {
+     "name": "lan-ext-vap",
+     "help": "Lan Extension VAP."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "ssid": {
+   "name": "ssid",
+   "category": "unitary",
+   "type": "string",
+   "help": "Wi-Fi SSID.",
+   "required": true,
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "max-clients": {
+   "name": "max-clients",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wi-Fi max clients (0 - 512), default = 0 (no limit) ",
+   "min-value": 0,
+   "max-value": 512,
+   "default": 0,
+   "multiple_values": false
+  },
+  "broadcast-ssid": {
+   "name": "broadcast-ssid",
+   "category": "unitary",
+   "type": "option",
+   "help": "Wi-Fi broadcast SSID enable / disable.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable broadcast SSID."
+    },
+    {
+     "name": "enable",
+     "help": "Enable broadcast SSID."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "security": {
+   "name": "security",
+   "category": "unitary",
+   "type": "option",
+   "help": "Wi-Fi security.",
+   "required": true,
+   "options": [
+    {
+     "name": "OPEN",
+     "help": "Wi-Fi security OPEN"
+    },
+    {
+     "name": "WPA2-Personal",
+     "help": "Wi-Fi security WPA2 Personal"
+    },
+    {
+     "name": "WPA-WPA2-Personal",
+     "help": "Wi-Fi security WPA-WPA2 Personal"
+    },
+    {
+     "name": "WPA3-SAE",
+     "help": "Wi-Fi security WPA3 SAE"
+    },
+    {
+     "name": "WPA3-SAE-Transition",
+     "help": "Wi-Fi security WPA3 SAE Transition"
+    },
+    {
+     "name": "WPA2-Enterprise",
+     "help": "Wi-Fi security WPA2 Enterprise"
+    },
+    {
+     "name": "WPA3-Enterprise-only",
+     "help": "Wi-Fi security WPA3 Enterprise only"
+    },
+    {
+     "name": "WPA3-Enterprise-transition",
+     "help": "Wi-Fi security WPA3 Enterprise Transition"
+    },
+    {
+     "name": "WPA3-Enterprise-192-bit",
+     "help": "Wi-Fi security WPA3 Enterprise 192-bit"
+    }
+   ],
+   "default": "WPA2-Personal",
+   "multiple_values": false
+  },
+  "dtim": {
+   "name": "dtim",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wi-Fi DTIM (1 - 255) default = 1.",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 1,
+   "multiple_values": false
+  },
+  "rts-threshold": {
+   "name": "rts-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wi-Fi RTS Threshold (256 - 2347), default = 2347 (RTS/CTS disabled).",
+   "min-value": 256,
+   "max-value": 2347,
+   "default": 2347,
+   "multiple_values": false
+  },
+  "pmf": {
+   "name": "pmf",
+   "category": "unitary",
+   "type": "option",
+   "help": "Wi-Fi pmf enable/disable, default = disable.",
+   "options": [
+    {
+     "name": "disabled",
+     "help": "Disable PMF (Protected Management Frames)."
+    },
+    {
+     "name": "optional",
+     "help": "Set PMF (Protected Management Frames) optional."
+    },
+    {
+     "name": "required",
+     "help": "Require PMF (Protected Management Frames)."
+    }
+   ],
+   "default": "disabled",
+   "multiple_values": false
+  },
+  "target-wake-time": {
+   "name": "target-wake-time",
+   "category": "unitary",
+   "type": "option",
+   "help": "Wi-Fi 802.11AX target wake time enable / disable, default = enable.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable target wake time."
+    },
+    {
+     "name": "enable",
+     "help": "Enable target wake time."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "bss-color-partial": {
+   "name": "bss-color-partial",
+   "category": "unitary",
+   "type": "option",
+   "help": "Wi-Fi 802.11AX bss color partial enable / disable, default = enable.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable bss color partial."
+    },
+    {
+     "name": "enable",
+     "help": "Enable bss color partial."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "mu-mimo": {
+   "name": "mu-mimo",
+   "category": "unitary",
+   "type": "option",
+   "help": "Wi-Fi multi-user MIMO enable / disable, default = enable.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable multi-user MIMO."
+    },
+    {
+     "name": "enable",
+     "help": "Enable multi-user MIMO."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "passphrase": {
+   "name": "passphrase",
+   "category": "unitary",
+   "type": "password",
+   "help": "Wi-Fi passphrase.",
+   "required": true,
+   "size": 59,
+   "multiple_values": false
+  },
+  "sae-password": {
+   "name": "sae-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Wi-Fi SAE Password.",
+   "required": true,
+   "size": 124,
+   "multiple_values": false
+  },
+  "auth-server-address": {
+   "name": "auth-server-address",
+   "category": "unitary",
+   "type": "string",
+   "help": "Wi-Fi Authentication Server Address (IPv4 format).",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-server-port": {
+   "name": "auth-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wi-Fi Authentication Server Port.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "auth-server-secret": {
+   "name": "auth-server-secret",
+   "category": "unitary",
+   "type": "string",
+   "help": "Wi-Fi Authentication Server Secret.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip-address": {
+   "name": "ip-address",
+   "category": "unitary",
+   "type": "ipv4-classnet-host",
+   "help": "Extender ip address.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "start-ip": {
+   "name": "start-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Start ip address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "end-ip": {
+   "name": "end-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "End ip address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "allowaccess": {
+   "name": "allowaccess",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control management access to the managed extender. Separate entries with a space.",
+   "options": [
+    {
+     "name": "ping",
+     "help": "PING access."
+    },
+    {
+     "name": "telnet",
+     "help": "TELNET access."
+    },
+    {
+     "name": "http",
+     "help": "HTTP access."
+    },
+    {
+     "name": "https",
+     "help": "HTTPS access."
+    },
+    {
+     "name": "ssh",
+     "help": "SSH access."
+    },
+    {
+     "name": "snmp",
+     "help": "SNMP access."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "extension-controller",
+ "q_type": 238,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

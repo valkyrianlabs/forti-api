@@ -1,0 +1,198 @@
+{
+ "name": "ca",
+ "category": "table",
+ "help": "CA certificate.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name.",
+   "required": true,
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "ca": {
+   "name": "ca",
+   "category": "unitary",
+   "type": "user",
+   "help": "CA certificate as a PEM file.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "range": {
+   "name": "range",
+   "category": "unitary",
+   "type": "option",
+   "help": "Either global or VDOM IP address range for the CA certificate.",
+   "options": [
+    {
+     "name": "global",
+     "help": "Global range."
+    },
+    {
+     "name": "vdom",
+     "help": "VDOM IP address range."
+    }
+   ],
+   "default": "global",
+   "multiple_values": false
+  },
+  "source": {
+   "name": "source",
+   "category": "unitary",
+   "type": "option",
+   "help": "CA certificate source type.",
+   "options": [
+    {
+     "name": "factory",
+     "help": "Factory installed certificate."
+    },
+    {
+     "name": "user",
+     "help": "User generated certificate."
+    },
+    {
+     "name": "bundle",
+     "help": "Bundle file certificate."
+    }
+   ],
+   "default": "user",
+   "multiple_values": false
+  },
+  "ssl-inspection-trusted": {
+   "name": "ssl-inspection-trusted",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this CA as a trusted CA for SSL inspection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Trusted CA for SSL inspection."
+    },
+    {
+     "name": "disable",
+     "help": "Untrusted CA for SSL inspection."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "scep-url": {
+   "name": "scep-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL of the SCEP server.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "est-url": {
+   "name": "est-url",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL of the EST server.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "auto-update-days": {
+   "name": "auto-update-days",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of days to wait before requesting an updated CA certificate (0 - 4294967295, 0 = disabled).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "auto-update-days-warning": {
+   "name": "auto-update-days-warning",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of days before an expiry-warning message is generated (0 - 4294967295, 0 = disabled).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address for communications to the SCEP server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "ca-identifier": {
+   "name": "ca-identifier",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA identifier of the SCEP server.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "obsolete": {
+   "name": "obsolete",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this CA as obsoleted.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Alive."
+    },
+    {
+     "name": "enable",
+     "help": "Obsolete."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fabric-ca": {
+   "name": "fabric-ca",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable synchronization of CA across Security Fabric.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable synchronization of CA across Security Fabric."
+    },
+    {
+     "name": "enable",
+     "help": "Enable synchronization of CA across Security Fabric."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "details": {
+   "name": "details",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "Print CA certificate detailed information.",
+   "children": {
+    "<CA certficate name>": {
+     "name": "<CA certficate name>",
+     "category": "info-read-only",
+     "type": "value",
+     "help": "CA certificate name."
+    }
+   }
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "certificate",
+ "q_type": 168,
+ "access_group": "vpngrp",
+ "object_range": "global"
+}

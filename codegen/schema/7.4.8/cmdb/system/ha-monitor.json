@@ -1,0 +1,49 @@
+{
+ "name": "ha-monitor",
+ "category": "complex",
+ "help": "Configure HA monitor.",
+ "children": {
+  "monitor-vlan": {
+   "name": "monitor-vlan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable monitor VLAN interfaces.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable monitor VLAN interfaces."
+    },
+    {
+     "name": "disable",
+     "help": "Disable monitor VLAN interfaces."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vlan-hb-interval": {
+   "name": "vlan-hb-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Configure heartbeat interval (seconds).",
+   "min-value": 1,
+   "max-value": 30,
+   "default": 5,
+   "multiple_values": false
+  },
+  "vlan-hb-lost-threshold": {
+   "name": "vlan-hb-lost-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "VLAN lost heartbeat threshold (1 - 60).",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 3,
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 501,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

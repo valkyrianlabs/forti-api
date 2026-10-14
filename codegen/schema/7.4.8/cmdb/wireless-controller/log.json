@@ -1,0 +1,533 @@
+{
+ "name": "log",
+ "category": "complex",
+ "help": "Configure wireless controller event log filters.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable wireless event logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable wireless event logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable wireless event logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "addrgrp-log": {
+   "name": "addrgrp-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log address group message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "ble-log": {
+   "name": "ble-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log BLE detection message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "clb-log": {
+   "name": "clb-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log client load balancing message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "dhcp-starv-log": {
+   "name": "dhcp-starv-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log DHCP starvation event message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "led-sched-log": {
+   "name": "led-sched-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log LED schedule event message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "radio-event-log": {
+   "name": "radio-event-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log radio event message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "rogue-event-log": {
+   "name": "rogue-event-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log rogue AP event message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "sta-event-log": {
+   "name": "sta-event-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log station event message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "sta-locate-log": {
+   "name": "sta-locate-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log station locate message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "wids-log": {
+   "name": "wids-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log WIDS message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "wtp-event-log": {
+   "name": "wtp-event-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log WTP event message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  },
+  "wtp-fips-event-log": {
+   "name": "wtp-fips-event-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log FAP fips event message.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "notification",
+   "multiple_values": false
+  }
+ },
+ "path": "wireless-controller",
+ "q_type": 275,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

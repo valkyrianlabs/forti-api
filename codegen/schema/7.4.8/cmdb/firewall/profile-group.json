@@ -1,0 +1,278 @@
+{
+ "name": "profile-group",
+ "category": "table",
+ "help": "Configure profile groups.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile group name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "profile-protocol-options": {
+   "name": "profile-protocol-options",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Protocol options profile.",
+   "datasource": [
+    "firewall.profile-protocol-options.name"
+   ],
+   "size": 35,
+   "default": "default",
+   "multiple_values": false
+  },
+  "ssl-ssh-profile": {
+   "name": "ssl-ssh-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing SSL SSH profile.",
+   "datasource": [
+    "firewall.ssl-ssh-profile.name"
+   ],
+   "size": 35,
+   "default": "certificate-inspection",
+   "multiple_values": false
+  },
+  "av-profile": {
+   "name": "av-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Antivirus profile.",
+   "datasource": [
+    "antivirus.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "webfilter-profile": {
+   "name": "webfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Web filter profile.",
+   "datasource": [
+    "webfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dnsfilter-profile": {
+   "name": "dnsfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing DNS filter profile.",
+   "datasource": [
+    "dnsfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "emailfilter-profile": {
+   "name": "emailfilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing email filter profile.",
+   "datasource": [
+    "emailfilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dlp-profile": {
+   "name": "dlp-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing DLP profile.",
+   "datasource": [
+    "dlp.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "file-filter-profile": {
+   "name": "file-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing file-filter profile.",
+   "datasource": [
+    "file-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ips-sensor": {
+   "name": "ips-sensor",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing IPS sensor.",
+   "datasource": [
+    "ips.sensor.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "application-list": {
+   "name": "application-list",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Application list.",
+   "datasource": [
+    "application.list.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "voip-profile": {
+   "name": "voip-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing VoIP (voipd) profile.",
+   "datasource": [
+    "voip.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ips-voip-filter": {
+   "name": "ips-voip-filter",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing VoIP (ips) profile.",
+   "datasource": [
+    "voip.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sctp-filter-profile": {
+   "name": "sctp-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing SCTP filter profile.",
+   "datasource": [
+    "sctp-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "diameter-filter-profile": {
+   "name": "diameter-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Diameter filter profile.",
+   "datasource": [
+    "diameter-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "virtual-patch-profile": {
+   "name": "virtual-patch-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing virtual-patch profile.",
+   "datasource": [
+    "virtual-patch.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "icap-profile": {
+   "name": "icap-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing ICAP profile.",
+   "datasource": [
+    "icap.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "cifs-profile": {
+   "name": "cifs-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing CIFS profile.",
+   "datasource": [
+    "cifs.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "videofilter-profile": {
+   "name": "videofilter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing VideoFilter profile.",
+   "datasource": [
+    "videofilter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "waf-profile": {
+   "name": "waf-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing Web application firewall profile.",
+   "datasource": [
+    "waf.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ssh-filter-profile": {
+   "name": "ssh-filter-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing SSH filter profile.",
+   "datasource": [
+    "ssh-filter.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "casb-profile": {
+   "name": "casb-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing CASB profile.",
+   "datasource": [
+    "casb.profile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 446,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

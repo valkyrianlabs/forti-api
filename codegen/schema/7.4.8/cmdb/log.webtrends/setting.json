@@ -1,0 +1,38 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Settings for WebTrends.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging to WebTrends.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging to WebTrends."
+    },
+    {
+     "name": "disable",
+     "help": "Disble logging to WebTrends."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "server": {
+   "name": "server",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address of the remote WebTrends server.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "path": "log.webtrends",
+ "q_type": 71,
+ "access_group": "loggrp",
+ "object_range": "global"
+}

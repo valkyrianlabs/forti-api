@@ -1,0 +1,345 @@
+{
+ "name": "ntp",
+ "category": "complex",
+ "help": "Configure system NTP information.",
+ "children": {
+  "ntpsync": {
+   "name": "ntpsync",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable setting the FortiGate system time by synchronizing with an NTP Server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable synchronization with NTP Server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable synchronization with NTP Server."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Use the FortiGuard NTP server or any other available NTP Server.",
+   "options": [
+    {
+     "name": "fortiguard",
+     "help": "Use the FortiGuard NTP server."
+    },
+    {
+     "name": "custom",
+     "help": "Use any other available NTP server."
+    }
+   ],
+   "default": "fortiguard",
+   "multiple_values": false
+  },
+  "syncinterval": {
+   "name": "syncinterval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "NTP synchronization interval (1 - 1440 min).",
+   "min-value": 1,
+   "max-value": 1440,
+   "default": 60,
+   "multiple_values": false
+  },
+  "ntpserver": {
+   "name": "ntpserver",
+   "category": "table",
+   "help": "Configure the FortiGate to connect to any available third-party NTP server.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "NTP server ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "server": {
+     "name": "server",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP address or hostname of the NTP Server.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "ntpv3": {
+     "name": "ntpv3",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to use NTPv3 instead of NTPv4.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable NTPv3."
+      },
+      {
+       "name": "disable",
+       "help": "Disable NTPv3 (use NTPv4)."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "authentication": {
+     "name": "authentication",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable authentication.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable authentication."
+      },
+      {
+       "name": "disable",
+       "help": "Disable authentication."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "key-type": {
+     "name": "key-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Select NTP authentication type.",
+     "options": [
+      {
+       "name": "MD5",
+       "help": "Enable MD5(NTPv3) authentication."
+      },
+      {
+       "name": "SHA1",
+       "help": "Enable SHA1(NTPv4) authentication."
+      },
+      {
+       "name": "SHA256",
+       "help": "Enable SHA256(NTPv4) authentication."
+      }
+     ],
+     "default": "MD5",
+     "multiple_values": false
+    },
+    "key": {
+     "name": "key",
+     "category": "unitary",
+     "type": "password",
+     "help": "Key for MD5(NTPv3)/SHA1(NTPv4)/SHA256(NTPv4) authentication.",
+     "required": true,
+     "size": 59,
+     "multiple_values": false
+    },
+    "key-id": {
+     "name": "key-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Key ID for authentication.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "ip-type": {
+     "name": "ip-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Choose to connect to IPv4 or/and IPv6 NTP server.",
+     "options": [
+      {
+       "name": "IPv6",
+       "help": "Enable look up for IPv6 NTP server."
+      },
+      {
+       "name": "IPv4",
+       "help": "Enable look up for IPv4 NTP server."
+      },
+      {
+       "name": "Both",
+       "help": "Enable look up for both IPv4 and IPv6 NTP server."
+      }
+     ],
+     "default": "Both",
+     "multiple_values": false
+    },
+    "interface-select-method": {
+     "name": "interface-select-method",
+     "category": "unitary",
+     "type": "option",
+     "help": "Specify how to select outgoing interface to reach server.",
+     "options": [
+      {
+       "name": "auto",
+       "help": "Set outgoing interface automatically."
+      },
+      {
+       "name": "sdwan",
+       "help": "Set outgoing interface by SD-WAN or policy routing rules."
+      },
+      {
+       "name": "specify",
+       "help": "Set outgoing interface manually."
+      }
+     ],
+     "default": "auto",
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Specify outgoing interface to reach server.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IP address for communication to the NTP server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "source-ip6": {
+   "name": "source-ip6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "Source IPv6 address for communication to the NTP server.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "server-mode": {
+   "name": "server-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGate NTP Server Mode. Your FortiGate becomes an NTP server for other devices on your network. The FortiGate relays NTP requests to its configured NTP server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGate NTP Server Mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGate NTP Server Mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "authentication": {
+   "name": "authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "key-type": {
+   "name": "key-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Key type for authentication (MD5, SHA1, SHA256).",
+   "options": [
+    {
+     "name": "MD5",
+     "help": "Use MD5 to authenticate the message."
+    },
+    {
+     "name": "SHA1",
+     "help": "Use SHA1 to authenticate the message."
+    },
+    {
+     "name": "SHA256",
+     "help": "Use SHA256 to authenticate the message."
+    }
+   ],
+   "default": "MD5",
+   "multiple_values": false
+  },
+  "key": {
+   "name": "key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Key for authentication.",
+   "required": true,
+   "size": 59,
+   "multiple_values": false
+  },
+  "key-id": {
+   "name": "key-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Key ID for authentication.",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "table",
+   "help": "FortiGate interface(s) with NTP server mode enabled. Devices on your network can contact these interfaces for NTP services.",
+   "member_table": true,
+   "mkey": "interface-name",
+   "mkey_type": "string",
+   "children": {
+    "interface-name": {
+     "name": "interface-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  }
+ },
+ "path": "system",
+ "q_type": 261,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

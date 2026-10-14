@@ -1,0 +1,226 @@
+{
+ "name": "mobile-tunnel",
+ "category": "table",
+ "help": "Configure Mobile tunnels, an implementation of Network Mobility (NEMO) extensions for Mobile IPv4 RFC5177.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tunnel name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this mobile tunnel.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable this mobile tunnel."
+    },
+    {
+     "name": "enable",
+     "help": "Enable this mobile tunnel."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "roaming-interface": {
+   "name": "roaming-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Select the associated interface name from available options.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "home-agent": {
+   "name": "home-agent",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address of the NEMO HA (Format: xxx.xxx.xxx.xxx).",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "home-address": {
+   "name": "home-address",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Home IP address (Format: xxx.xxx.xxx.xxx).",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "renew-interval": {
+   "name": "renew-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time before lifetime expiration to send NMMO HA re-registration (5 - 60, default = 60).",
+   "required": true,
+   "min-value": 5,
+   "max-value": 60,
+   "default": 60,
+   "multiple_values": false
+  },
+  "lifetime": {
+   "name": "lifetime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "NMMO HA registration request lifetime (180 - 65535 sec, default = 65535).",
+   "required": true,
+   "min-value": 180,
+   "max-value": 65535,
+   "default": 65535,
+   "multiple_values": false
+  },
+  "reg-interval": {
+   "name": "reg-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "NMMO HA registration interval (5 - 300, default = 5).",
+   "required": true,
+   "min-value": 5,
+   "max-value": 300,
+   "default": 5,
+   "multiple_values": false
+  },
+  "reg-retry": {
+   "name": "reg-retry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of NMMO HA registration retries (1 to 30, default = 3).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 30,
+   "default": 3,
+   "multiple_values": false
+  },
+  "n-mhae-spi": {
+   "name": "n-mhae-spi",
+   "category": "unitary",
+   "type": "integer",
+   "help": "NEMO authentication SPI (default: 256).",
+   "required": true,
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 256,
+   "multiple_values": false
+  },
+  "n-mhae-key-type": {
+   "name": "n-mhae-key-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "NEMO authentication key type (ASCII or base64).",
+   "required": true,
+   "options": [
+    {
+     "name": "ascii",
+     "help": "The authentication key is an ASCII string."
+    },
+    {
+     "name": "base64",
+     "help": "The authentication key is Base64 encoded."
+    }
+   ],
+   "default": "ascii",
+   "multiple_values": false
+  },
+  "n-mhae-key": {
+   "name": "n-mhae-key",
+   "category": "unitary",
+   "type": "password_aes256",
+   "help": "NEMO authentication key.",
+   "multiple_values": false
+  },
+  "hash-algorithm": {
+   "name": "hash-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Hash Algorithm (Keyed MD5).",
+   "required": true,
+   "options": [
+    {
+     "name": "hmac-md5",
+     "help": "Keyed MD5."
+    }
+   ],
+   "default": "hmac-md5",
+   "multiple_values": false
+  },
+  "tunnel-mode": {
+   "name": "tunnel-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "NEMO tunnel mode (GRE tunnel).",
+   "required": true,
+   "options": [
+    {
+     "name": "gre",
+     "help": "GRE tunnel."
+    }
+   ],
+   "default": "gre",
+   "multiple_values": false
+  },
+  "network": {
+   "name": "network",
+   "category": "table",
+   "help": "NEMO network configuration.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Network entry ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Select the associated interface name from available options.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Class IP and Netmask with correction (Format:xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx or xxx.xxx.xxx.xxx/x).",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 483,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

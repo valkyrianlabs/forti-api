@@ -1,0 +1,65 @@
+{
+ "name": "filter",
+ "category": "complex",
+ "help": "Settings for TACACS+ accounting events filter.",
+ "children": {
+  "login-audit": {
+   "name": "login-audit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TACACS+ accounting for login events audit.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TACACS+ accounting for login events audit."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TACACS+ accounting for login events audit."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "config-change-audit": {
+   "name": "config-change-audit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TACACS+ accounting for configuration change events audit.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TACACS+ accounting for configuration change events audit."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TACACS+ accounting for configuration change events audit."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "cli-cmd-audit": {
+   "name": "cli-cmd-audit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TACACS+ accounting for CLI commands audit.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TACACS+ accounting for CLI commands audit."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TACACS+ accounting for CLI commands audit."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "log.tacacs+accounting",
+ "q_type": 82,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,58 @@
+{
+ "name": "dscp-based-priority",
+ "category": "table",
+ "help": "Configure DSCP based priority table.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Item ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ds": {
+   "name": "ds",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DSCP(DiffServ) DS value (0 - 63).",
+   "min-value": 0,
+   "max-value": 63,
+   "default": 0,
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "DSCP based priority level.",
+   "options": [
+    {
+     "name": "low",
+     "help": "Low priority."
+    },
+    {
+     "name": "medium",
+     "help": "Medium priority."
+    },
+    {
+     "name": "high",
+     "help": "High priority."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 64,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 208,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

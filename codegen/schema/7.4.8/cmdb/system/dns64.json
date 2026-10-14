@@ -1,0 +1,56 @@
+{
+ "name": "dns64",
+ "category": "complex",
+ "help": "Configure DNS64.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable DNS64 (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable DNS64."
+    },
+    {
+     "name": "disable",
+     "help": "Disable DNS64."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dns64-prefix": {
+   "name": "dns64-prefix",
+   "category": "unitary",
+   "type": "ipv6-prefix",
+   "help": "DNS64 prefix must be ::/96 (default = 64:ff9b::/96).",
+   "required": true,
+   "default": "64:ff9b::/96",
+   "multiple_values": false
+  },
+  "always-synthesize-aaaa-record": {
+   "name": "always-synthesize-aaaa-record",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable AAAA record synthesis (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AAAA record synthesis."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AAAA record synthesis."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 436,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

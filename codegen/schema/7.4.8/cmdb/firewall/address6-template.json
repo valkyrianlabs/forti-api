@@ -1,0 +1,159 @@
+{
+ "name": "address6-template",
+ "category": "table",
+ "help": "Configure IPv6 address templates.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPv6 address template name.",
+   "required": true,
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "ip6": {
+   "name": "ip6",
+   "category": "unitary",
+   "type": "ipv6-network",
+   "help": "IPv6 address prefix.",
+   "required": true,
+   "default": "::/0",
+   "multiple_values": false
+  },
+  "subnet-segment-count": {
+   "name": "subnet-segment-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of IPv6 subnet segments.",
+   "required": true,
+   "min-value": 1,
+   "max-value": 6,
+   "default": 0,
+   "multiple_values": false
+  },
+  "subnet-segment": {
+   "name": "subnet-segment",
+   "category": "table",
+   "help": "IPv6 subnet segments.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Subnet segment ID.",
+     "required": true,
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Subnet segment name.",
+     "required": true,
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "bits": {
+     "name": "bits",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Number of bits.",
+     "required": true,
+     "min-value": 1,
+     "max-value": 16,
+     "default": 0,
+     "multiple_values": false
+    },
+    "exclusive": {
+     "name": "exclusive",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable exclusive value.",
+     "required": true,
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable exclusive value."
+      },
+      {
+       "name": "disable",
+       "help": "Disable exclusive value."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "values": {
+     "name": "values",
+     "category": "table",
+     "help": "Subnet segment values.",
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Subnet segment value name.",
+       "required": true,
+       "size": 63,
+       "default": "",
+       "multiple_values": false
+      },
+      "value": {
+       "name": "value",
+       "category": "unitary",
+       "type": "string",
+       "help": "Subnet segment value.",
+       "required": true,
+       "size": 35,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 536,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

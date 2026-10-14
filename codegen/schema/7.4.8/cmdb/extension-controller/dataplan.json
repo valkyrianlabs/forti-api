@@ -1,0 +1,281 @@
+{
+ "name": "dataplan",
+ "category": "table",
+ "help": "FortiExtender dataplan configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiExtender data plan name.",
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "modem-id": {
+   "name": "modem-id",
+   "category": "unitary",
+   "type": "option",
+   "help": "Dataplan's modem specifics, if any.",
+   "options": [
+    {
+     "name": "modem1",
+     "help": "Modem one."
+    },
+    {
+     "name": "modem2",
+     "help": "Modem two."
+    },
+    {
+     "name": "all",
+     "help": "All modems."
+    }
+   ],
+   "default": "all",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type preferences configuration.",
+   "required": true,
+   "options": [
+    {
+     "name": "carrier",
+     "help": "Assign by SIM carrier."
+    },
+    {
+     "name": "slot",
+     "help": "Assign to SIM slot 1 or 2."
+    },
+    {
+     "name": "iccid",
+     "help": "Assign to a specific SIM by ICCID."
+    },
+    {
+     "name": "generic",
+     "help": "Compatible with any SIM. Assigned if no other dataplan matches the chosen SIM."
+    }
+   ],
+   "default": "generic",
+   "multiple_values": false
+  },
+  "slot": {
+   "name": "slot",
+   "category": "unitary",
+   "type": "option",
+   "help": "SIM slot configuration.",
+   "required": true,
+   "options": [
+    {
+     "name": "sim1",
+     "help": "Sim slot one."
+    },
+    {
+     "name": "sim2",
+     "help": "Sim slot two."
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "iccid": {
+   "name": "iccid",
+   "category": "unitary",
+   "type": "string",
+   "help": "ICCID configuration.",
+   "required": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "carrier": {
+   "name": "carrier",
+   "category": "unitary",
+   "type": "string",
+   "help": "Carrier configuration.",
+   "required": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "apn": {
+   "name": "apn",
+   "category": "unitary",
+   "type": "string",
+   "help": "APN configuration.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "auth-type": {
+   "name": "auth-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Authentication type.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No authentication."
+    },
+    {
+     "name": "pap",
+     "help": "PAP."
+    },
+    {
+     "name": "chap",
+     "help": "CHAP."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Username.",
+   "required": true,
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Password.",
+   "required": true,
+   "size": 64,
+   "multiple_values": false
+  },
+  "pdn": {
+   "name": "pdn",
+   "category": "unitary",
+   "type": "option",
+   "help": "PDN type.",
+   "options": [
+    {
+     "name": "ipv4-only",
+     "help": "IPv4 only PDN activation."
+    },
+    {
+     "name": "ipv6-only",
+     "help": "IPv6 only PDN activation."
+    },
+    {
+     "name": "ipv4-ipv6",
+     "help": "Both IPv4 and IPv6 PDN activations."
+    }
+   ],
+   "default": "ipv4-only",
+   "multiple_values": false
+  },
+  "signal-threshold": {
+   "name": "signal-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Signal threshold. Specify the range between 50 - 100, where 50/100 means -50/-100 dBm.",
+   "min-value": 50,
+   "max-value": 100,
+   "default": 100,
+   "multiple_values": false
+  },
+  "signal-period": {
+   "name": "signal-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Signal period (600 to 18000 seconds).",
+   "min-value": 600,
+   "max-value": 18000,
+   "default": 3600,
+   "multiple_values": false
+  },
+  "capacity": {
+   "name": "capacity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Capacity in MB (0 - 102400000).",
+   "min-value": 0,
+   "max-value": 102400000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "monthly-fee": {
+   "name": "monthly-fee",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Monthly fee of dataplan (0 - 100000, in local currency).",
+   "min-value": 0,
+   "max-value": 1000000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "billing-date": {
+   "name": "billing-date",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Billing day of the month (1 - 31).",
+   "min-value": 1,
+   "max-value": 31,
+   "default": 1,
+   "multiple_values": false
+  },
+  "overage": {
+   "name": "overage",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dataplan overage detection.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable dataplan overage detection."
+    },
+    {
+     "name": "enable",
+     "help": "Enable dataplan overage detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "preferred-subnet": {
+   "name": "preferred-subnet",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Preferred subnet mask (0 - 32).",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "private-network": {
+   "name": "private-network",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dataplan private network support.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable dataplan private network support."
+    },
+    {
+     "name": "enable",
+     "help": "Enable dataplan private network support."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "extension-controller",
+ "q_type": 237,
+ "access_group": "sysgrp",
+ "object_range": "vdom"
+}

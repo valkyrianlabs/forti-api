@@ -1,0 +1,240 @@
+{
+ "name": "timers",
+ "category": "complex",
+ "help": "Configure CAPWAP timers.",
+ "children": {
+  "echo-interval": {
+   "name": "echo-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between echo requests sent by the managed WTP, AP, or FortiAP (1 - 255 sec, default = 30).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 30,
+   "multiple_values": false
+  },
+  "nat-session-keep-alive": {
+   "name": "nat-session-keep-alive",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximal time in seconds between control requests sent by the managed WTP, AP, or FortiAP (0 - 255 sec, default = 0).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "discovery-interval": {
+   "name": "discovery-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between discovery requests (2 - 180 sec, default = 5).",
+   "min-value": 2,
+   "max-value": 180,
+   "default": 5,
+   "multiple_values": false
+  },
+  "client-idle-timeout": {
+   "name": "client-idle-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time after which a client is considered idle and times out (20 - 3600 sec, default = 300, 0 for no timeout).",
+   "min-value": 20,
+   "max-value": 3600,
+   "default": 300,
+   "multiple_values": false
+  },
+  "client-idle-rehome-timeout": {
+   "name": "client-idle-rehome-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time after which a client is considered idle and disconnected from the home controller (2 - 3600 sec, default = 20, 0 for no timeout).",
+   "min-value": 2,
+   "max-value": 3600,
+   "default": 20,
+   "multiple_values": false
+  },
+  "auth-timeout": {
+   "name": "auth-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time after which a client is considered failed in RADIUS authentication and times out (5 - 30 sec, default = 5).",
+   "min-value": 5,
+   "max-value": 30,
+   "default": 5,
+   "multiple_values": false
+  },
+  "rogue-ap-log": {
+   "name": "rogue-ap-log",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between logging rogue AP messages if periodic rogue AP logging is configured (0 - 1440 min, default = 0).",
+   "min-value": 0,
+   "max-value": 1440,
+   "default": 0,
+   "multiple_values": false
+  },
+  "fake-ap-log": {
+   "name": "fake-ap-log",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between recording logs about fake APs if periodic fake AP logging is configured (1 - 1440 min, default = 1).",
+   "min-value": 1,
+   "max-value": 1440,
+   "default": 1,
+   "multiple_values": false
+  },
+  "sta-cap-cleanup": {
+   "name": "sta-cap-cleanup",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time period in minutes to keep station capability data after it is gone (default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "rogue-ap-cleanup": {
+   "name": "rogue-ap-cleanup",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time period in minutes to keep rogue AP after it is gone (default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "rogue-sta-cleanup": {
+   "name": "rogue-sta-cleanup",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time period in minutes to keep rogue station after it is gone (default = 0).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ble-device-cleanup": {
+   "name": "ble-device-cleanup",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time period in minutes to keep BLE device after it is gone (default = 60).",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 60,
+   "multiple_values": false
+  },
+  "sta-stats-interval": {
+   "name": "sta-stats-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between running client (station) reports (1 - 255 sec, default = 10).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 10,
+   "multiple_values": false
+  },
+  "vap-stats-interval": {
+   "name": "vap-stats-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between running Virtual Access Point (VAP) reports (1 - 255 sec, default = 15).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 15,
+   "multiple_values": false
+  },
+  "radio-stats-interval": {
+   "name": "radio-stats-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between running radio reports (1 - 255 sec, default = 15).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 15,
+   "multiple_values": false
+  },
+  "sta-capability-interval": {
+   "name": "sta-capability-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between running station capability reports (1 - 255 sec, default = 30).",
+   "min-value": 1,
+   "max-value": 255,
+   "default": 30,
+   "multiple_values": false
+  },
+  "sta-locate-timer": {
+   "name": "sta-locate-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between running client presence flushes to remove clients that are listed but no longer present (0 - 86400 sec, default = 1800).",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 1800,
+   "multiple_values": false
+  },
+  "ipsec-intf-cleanup": {
+   "name": "ipsec-intf-cleanup",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time period to keep IPsec VPN interfaces up after WTP sessions are disconnected (30 - 3600 sec, default = 120).",
+   "min-value": 30,
+   "max-value": 3600,
+   "default": 120,
+   "multiple_values": false
+  },
+  "ble-scan-report-intv": {
+   "name": "ble-scan-report-intv",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between running Bluetooth Low Energy (BLE) reports (10 - 3600 sec, default = 30).",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 30,
+   "multiple_values": false
+  },
+  "drma-interval": {
+   "name": "drma-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Dynamic radio mode assignment (DRMA) schedule interval in minutes (1 - 1440, default = 60).",
+   "min-value": 1,
+   "max-value": 1440,
+   "default": 60,
+   "multiple_values": false
+  },
+  "ap-reboot-wait-interval1": {
+   "name": "ap-reboot-wait-interval1",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in minutes to wait before AP reboots when there is no controller detected (5 - 65535, default = 0, 0 for no reboot).",
+   "min-value": 5,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ap-reboot-wait-time": {
+   "name": "ap-reboot-wait-time",
+   "category": "unitary",
+   "type": "string",
+   "help": "Time to reboot the AP when there is no controller detected and standalone SSIDs are pushed to the AP in the previous session, format hh:mm.",
+   "size": 7,
+   "default": "",
+   "multiple_values": false
+  },
+  "ap-reboot-wait-interval2": {
+   "name": "ap-reboot-wait-interval2",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in minutes to wait before AP reboots when there is no controller detected and standalone SSIDs are pushed to the AP in the previous session (5 - 65535, default = 0, 0 for no reboot).",
+   "min-value": 5,
+   "max-value": 65535,
+   "default": 0,
+   "multiple_values": false
+  }
+ },
+ "path": "wireless-controller",
+ "q_type": 271,
+ "access_group": "wifi",
+ "object_range": "global"
+}

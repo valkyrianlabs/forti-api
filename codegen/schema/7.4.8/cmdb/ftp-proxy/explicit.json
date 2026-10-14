@@ -1,0 +1,181 @@
+{
+ "name": "explicit",
+ "category": "complex",
+ "help": "Configure explicit FTP proxy settings.",
+ "children": {
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the explicit FTP proxy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the explicit FTP proxy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the explicit FTP proxy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "incoming-port": {
+   "name": "incoming-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Accept incoming FTP requests on one or more ports.",
+   "default": "",
+   "multiple_values": false
+  },
+  "incoming-ip": {
+   "name": "incoming-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Accept incoming FTP requests from this IP address. An interface must have this IP address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "outgoing-ip": {
+   "name": "outgoing-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Outgoing FTP requests will leave from this IP address. An interface must have this IP address.",
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 8
+  },
+  "sec-default-action": {
+   "name": "sec-default-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept or deny explicit FTP proxy sessions when no FTP proxy firewall policy exists.",
+   "options": [
+    {
+     "name": "accept",
+     "help": "Accept requests. All explicit FTP proxy traffic is accepted whether there is an explicit FTP proxy policy or not"
+    },
+    {
+     "name": "deny",
+     "help": "Deny requests unless there is a matching explicit FTP proxy policy."
+    }
+   ],
+   "default": "deny",
+   "multiple_values": false
+  },
+  "server-data-mode": {
+   "name": "server-data-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Determine mode of data session on FTP server side.",
+   "options": [
+    {
+     "name": "client",
+     "help": "Use the same transmission mode for client and server data sessions."
+    },
+    {
+     "name": "passive",
+     "help": "Use passive mode on server data session."
+    }
+   ],
+   "default": "client",
+   "multiple_values": false
+  },
+  "ssl": {
+   "name": "ssl",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the explicit FTPS proxy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable the explicit FTPS proxy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable the explicit FTPS proxy."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-cert": {
+   "name": "ssl-cert",
+   "category": "table",
+   "help": "List of certificate names to use for SSL connections to this server.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Certificate list.",
+     "datasource": [
+      "vpn.certificate.local.name"
+     ],
+     "size": 79,
+     "default": "Fortinet_SSL",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "ssl-dh-bits": {
+   "name": "ssl-dh-bits",
+   "category": "unitary",
+   "type": "option",
+   "help": "Bit-size of Diffie-Hellman (DH) prime used in DHE-RSA negotiation (default = 2048).",
+   "options": [
+    {
+     "name": "768",
+     "help": "768-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1024",
+     "help": "1024-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "1536",
+     "help": "1536-bit Diffie-Hellman prime."
+    },
+    {
+     "name": "2048",
+     "help": "2048-bit Diffie-Hellman prime."
+    }
+   ],
+   "default": "2048",
+   "multiple_values": false
+  },
+  "ssl-algorithm": {
+   "name": "ssl-algorithm",
+   "category": "unitary",
+   "type": "option",
+   "help": "Relative strength of encryption algorithms accepted in negotiation.",
+   "options": [
+    {
+     "name": "high",
+     "help": "High encryption. Allow only AES and ChaCha"
+    },
+    {
+     "name": "medium",
+     "help": "Medium encryption. Allow AES, ChaCha, 3DES, and RC4."
+    },
+    {
+     "name": "low",
+     "help": "Low encryption. Allow AES, ChaCha, 3DES, RC4, and DES."
+    }
+   ],
+   "default": "high",
+   "multiple_values": false
+  }
+ },
+ "path": "ftp-proxy",
+ "q_type": 340,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

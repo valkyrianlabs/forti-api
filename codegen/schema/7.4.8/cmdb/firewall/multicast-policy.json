@@ -1,0 +1,316 @@
+{
+ "name": "multicast-policy",
+ "category": "table",
+ "help": "Configure multicast NAT policies.",
+ "mkey": "id",
+ "mkey_type": "integer",
+ "children": {
+  "id": {
+   "name": "id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Policy ID ((0 - 4294967294).",
+   "min-value": 0,
+   "max-value": 4294967294,
+   "default": 0,
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Policy name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 1023,
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable this policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable this policy."
+    },
+    {
+     "name": "disable",
+     "help": "Disable this policy."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "srcintf": {
+   "name": "srcintf",
+   "category": "unitary",
+   "type": "string",
+   "help": "Source interface name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name",
+    "system.zone.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "dstintf": {
+   "name": "dstintf",
+   "category": "unitary",
+   "type": "string",
+   "help": "Destination interface name.",
+   "required": true,
+   "datasource": [
+    "system.interface.name",
+    "system.zone.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "srcaddr": {
+   "name": "srcaddr",
+   "category": "table",
+   "help": "Source address objects.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Source address objects.",
+     "required": true,
+     "datasource": [
+      "firewall.address.name",
+      "firewall.addrgrp.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dstaddr": {
+   "name": "dstaddr",
+   "category": "table",
+   "help": "Destination address objects.",
+   "required": true,
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Destination address objects.",
+     "required": true,
+     "datasource": [
+      "firewall.multicast-address.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "snat": {
+   "name": "snat",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable substitution of the outgoing interface IP address for the original source IP address (called source NAT or SNAT).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable source NAT."
+    },
+    {
+     "name": "disable",
+     "help": "Disable source NAT."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "snat-ip": {
+   "name": "snat-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address to be used as the source address for NATed traffic.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "dnat": {
+   "name": "dnat",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IPv4 DNAT address used for multicast destination addresses.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "action": {
+   "name": "action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Accept or deny traffic matching the policy.",
+   "options": [
+    {
+     "name": "accept",
+     "help": "Accept traffic matching the policy."
+    },
+    {
+     "name": "deny",
+     "help": "Deny or block traffic matching the policy."
+    }
+   ],
+   "default": "accept",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value for the protocol type as defined by IANA (0 - 255, default = 0).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 0,
+   "multiple_values": false
+  },
+  "start-port": {
+   "name": "start-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value for starting TCP/UDP/SCTP destination port in range (1 - 65535, default = 1).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1,
+   "multiple_values": false
+  },
+  "end-port": {
+   "name": "end-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Integer value for ending TCP/UDP/SCTP destination port in range (1 - 65535, default = 1).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 65535,
+   "multiple_values": false
+  },
+  "utm-status": {
+   "name": "utm-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to add an IPS security profile to the policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ips-sensor": {
+   "name": "ips-sensor",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of an existing IPS sensor.",
+   "datasource": [
+    "ips.sensor.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "logtraffic": {
+   "name": "logtraffic",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable or disable logging. Log all sessions or security profile sessions.",
+   "options": [
+    {
+     "name": "all",
+     "help": "Enable logging traffic accepted by this policy."
+    },
+    {
+     "name": "utm",
+     "help": "Log traffic that has a security profile applied to it."
+    },
+    {
+     "name": "disable",
+     "help": "Disable all logging for this policy."
+    }
+   ],
+   "default": "utm",
+   "multiple_values": false
+  },
+  "auto-asic-offload": {
+   "name": "auto-asic-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable offloading policy traffic for hardware acceleration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable hardware acceleration offloading."
+    },
+    {
+     "name": "disable",
+     "help": "Disable offloading for hardware acceleration."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "traffic-shaper": {
+   "name": "traffic-shaper",
+   "category": "unitary",
+   "type": "string",
+   "help": "Traffic shaper to apply to traffic forwarded by the multicast policy.",
+   "datasource": [
+    "firewall.shaper.traffic-shaper.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 59,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

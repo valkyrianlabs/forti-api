@@ -1,0 +1,323 @@
+{
+ "name": "ddns",
+ "category": "table",
+ "help": "Configure DDNS.",
+ "mkey": "ddnsid",
+ "mkey_type": "integer",
+ "children": {
+  "ddnsid": {
+   "name": "ddnsid",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DDNS ID.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ddns-server": {
+   "name": "ddns-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select a DDNS service provider.",
+   "required": true,
+   "options": [
+    {
+     "name": "dyndns.org",
+     "help": "members.dyndns.org and dnsalias.com"
+    },
+    {
+     "name": "dyns.net",
+     "help": "www.dyns.net"
+    },
+    {
+     "name": "tzo.com",
+     "help": "rh.tzo.com"
+    },
+    {
+     "name": "vavic.com",
+     "help": "Peanut Hull"
+    },
+    {
+     "name": "dipdns.net",
+     "help": "dipdnsserver.dipdns.com"
+    },
+    {
+     "name": "now.net.cn",
+     "help": "ip.todayisp.com"
+    },
+    {
+     "name": "dhs.org",
+     "help": "members.dhs.org"
+    },
+    {
+     "name": "easydns.com",
+     "help": "members.easydns.com"
+    },
+    {
+     "name": "genericDDNS",
+     "help": "Generic DDNS based on RFC2136."
+    },
+    {
+     "name": "FortiGuardDDNS",
+     "help": "FortiGuard DDNS service."
+    },
+    {
+     "name": "noip.com",
+     "help": "dynupdate.no-ip.com"
+    }
+   ],
+   "default": "",
+   "multiple_values": false
+  },
+  "addr-type": {
+   "name": "addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address type of interface address in DDNS update.",
+   "options": [
+    {
+     "name": "ipv4",
+     "help": "Use IPv4 address of the interface."
+    },
+    {
+     "name": "ipv6",
+     "help": "Use IPv6 address of the interface."
+    }
+   ],
+   "default": "ipv4",
+   "multiple_values": false
+  },
+  "server-type": {
+   "name": "server-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Address type of the DDNS server.",
+   "options": [
+    {
+     "name": "ipv4",
+     "help": "Use IPv4 addressing."
+    },
+    {
+     "name": "ipv6",
+     "help": "Use IPv6 addressing."
+    }
+   ],
+   "default": "ipv4",
+   "multiple_values": false
+  },
+  "ddns-server-addr": {
+   "name": "ddns-server-addr",
+   "category": "table",
+   "help": "Generic DDNS server IP/FQDN list.",
+   "member_table": true,
+   "mkey": "addr",
+   "mkey_type": "string",
+   "children": {
+    "addr": {
+     "name": "addr",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP address or FQDN of the server.",
+     "required": true,
+     "size": 256,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "ddns-zone": {
+   "name": "ddns-zone",
+   "category": "unitary",
+   "type": "string",
+   "help": "Zone of your domain name (for example, DDNS.com).",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "ddns-ttl": {
+   "name": "ddns-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time-to-live for DDNS packets.",
+   "min-value": 60,
+   "max-value": 86400,
+   "default": 300,
+   "multiple_values": false
+  },
+  "ddns-auth": {
+   "name": "ddns-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TSIG authentication for your DDNS server.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable DDNS authentication."
+    },
+    {
+     "name": "tsig",
+     "help": "Enable TSIG authentication based on RFC2845."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ddns-keyname": {
+   "name": "ddns-keyname",
+   "category": "unitary",
+   "type": "string",
+   "help": "DDNS update key name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "ddns-key": {
+   "name": "ddns-key",
+   "category": "unitary",
+   "type": "password_aes256",
+   "help": "DDNS update key (base 64 encoding).",
+   "multiple_values": false
+  },
+  "ddns-domain": {
+   "name": "ddns-domain",
+   "category": "unitary",
+   "type": "string",
+   "help": "Your fully qualified domain name. For example, yourname.ddns.com.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "ddns-username": {
+   "name": "ddns-username",
+   "category": "unitary",
+   "type": "string",
+   "help": "DDNS user name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "ddns-sn": {
+   "name": "ddns-sn",
+   "category": "unitary",
+   "type": "string",
+   "help": "DDNS Serial Number.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "ddns-password": {
+   "name": "ddns-password",
+   "category": "unitary",
+   "type": "password",
+   "help": "DDNS password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "use-public-ip": {
+   "name": "use-public-ip",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of public IP address.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of public IP address."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use of public IP address."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "update-interval": {
+   "name": "update-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DDNS update interval (60 - 2592000 sec, 0 means default).",
+   "min-value": 60,
+   "max-value": 2592000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "clear-text": {
+   "name": "clear-text",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of clear text connections.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of clear text connections."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use of clear text connections."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssl-certificate": {
+   "name": "ssl-certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of local certificate for SSL connections.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_Factory",
+   "multiple_values": false
+  },
+  "bound-ip": {
+   "name": "bound-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Bound IP address.",
+   "readonly": true,
+   "size": 46,
+   "default": "",
+   "multiple_values": false
+  },
+  "monitor-interface": {
+   "name": "monitor-interface",
+   "category": "table",
+   "help": "Monitored interface.",
+   "required": true,
+   "member_table": true,
+   "mkey": "interface-name",
+   "mkey_type": "string",
+   "children": {
+    "interface-name": {
+     "name": "interface-name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface name.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 16,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 465,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

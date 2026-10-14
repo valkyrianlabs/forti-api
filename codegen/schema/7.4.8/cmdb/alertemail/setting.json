@@ -1,0 +1,549 @@
+{
+ "name": "setting",
+ "category": "complex",
+ "help": "Configure alert email settings.",
+ "children": {
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name that appears in the From: field of alert emails (max. 63 characters).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "mailto1": {
+   "name": "mailto1",
+   "category": "unitary",
+   "type": "string",
+   "help": "Email address to send alert email to (usually a system administrator) (max. 63 characters).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "mailto2": {
+   "name": "mailto2",
+   "category": "unitary",
+   "type": "string",
+   "help": "Optional second email address to send alert email to (max. 63 characters).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "mailto3": {
+   "name": "mailto3",
+   "category": "unitary",
+   "type": "string",
+   "help": "Optional third email address to send alert email to (max. 63 characters).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "filter-mode": {
+   "name": "filter-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "How to filter log messages that are sent to alert emails.",
+   "options": [
+    {
+     "name": "category",
+     "help": "Filter based on category."
+    },
+    {
+     "name": "threshold",
+     "help": "Filter based on severity."
+    }
+   ],
+   "default": "category",
+   "multiple_values": false
+  },
+  "email-interval": {
+   "name": "email-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval between sending alert emails (1 - 99999 min, default = 5).",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 5,
+   "multiple_values": false
+  },
+  "IPS-logs": {
+   "name": "IPS-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPS logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPS logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPS logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "firewall-authentication-failure-logs": {
+   "name": "firewall-authentication-failure-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable firewall authentication failure logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable firewall authentication failure logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable firewall authentication failure logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "HA-logs": {
+   "name": "HA-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable HA logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable HA logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable HA logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "IPsec-errors-logs": {
+   "name": "IPsec-errors-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPsec error logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable IPsec error logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable IPsec error logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "FDS-update-logs": {
+   "name": "FDS-update-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGuard update logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard update logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard update logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "PPP-errors-logs": {
+   "name": "PPP-errors-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable PPP error logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable PPP error logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable PPP error logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sslvpn-authentication-errors-logs": {
+   "name": "sslvpn-authentication-errors-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN authentication error logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSL-VPN authentication error logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSL-VPN authentication error logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "antivirus-logs": {
+   "name": "antivirus-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable antivirus logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable antivirus logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable antivirus logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "webfilter-logs": {
+   "name": "webfilter-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable web filter logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable web filter logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable web filter logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "configuration-changes-logs": {
+   "name": "configuration-changes-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable configuration change logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable configuration change logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable configuration change logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "violation-traffic-logs": {
+   "name": "violation-traffic-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable violation traffic logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable violation traffic logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable violation traffic logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "admin-login-logs": {
+   "name": "admin-login-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable administrator login/logout logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable administrator login/logout logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable administrator login/logout logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "FDS-license-expiring-warning": {
+   "name": "FDS-license-expiring-warning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGuard license expiration warnings in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard license expiration warnings in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard license expiration warnings in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-disk-usage-warning": {
+   "name": "log-disk-usage-warning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable disk usage warnings in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable disk usage warnings in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable disk usage warnings in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fortiguard-log-quota-warning": {
+   "name": "fortiguard-log-quota-warning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiCloud log quota warnings in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiCloud log quota warnings in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiCloud log quota warnings in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "amc-interface-bypass-mode": {
+   "name": "amc-interface-bypass-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Fortinet Advanced Mezzanine Card (AMC) interface bypass mode logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable Fortinet Advanced Mezzanine Card (AMC) interface bypass mode logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable Fortinet Advanced Mezzanine Card (AMC) interface bypass mode logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "FIPS-CC-errors": {
+   "name": "FIPS-CC-errors",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FIPS and Common Criteria error logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FIPS and Common Criteria error logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FIPS and Common Criteria error logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "FSSO-disconnect-logs": {
+   "name": "FSSO-disconnect-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of FSSO collector agent disconnect.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging of FSSO collector agent disconnect."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging of FSSO collector agent disconnect."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ssh-logs": {
+   "name": "ssh-logs",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSH logs in alert email.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSH logs in alert email."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSH logs in alert email."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "local-disk-usage": {
+   "name": "local-disk-usage",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Disk usage percentage at which to send alert email (1 - 99 percent, default = 75).",
+   "min-value": 1,
+   "max-value": 99,
+   "default": 75,
+   "multiple_values": false
+  },
+  "emergency-interval": {
+   "name": "emergency-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Emergency alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 1,
+   "multiple_values": false
+  },
+  "alert-interval": {
+   "name": "alert-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Alert alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 2,
+   "multiple_values": false
+  },
+  "critical-interval": {
+   "name": "critical-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Critical alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 3,
+   "multiple_values": false
+  },
+  "error-interval": {
+   "name": "error-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Error alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 5,
+   "multiple_values": false
+  },
+  "warning-interval": {
+   "name": "warning-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Warning alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 10,
+   "multiple_values": false
+  },
+  "notification-interval": {
+   "name": "notification-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Notification alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 20,
+   "multiple_values": false
+  },
+  "information-interval": {
+   "name": "information-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Information alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 30,
+   "multiple_values": false
+  },
+  "debug-interval": {
+   "name": "debug-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Debug alert interval in minutes.",
+   "min-value": 1,
+   "max-value": 99999,
+   "default": 60,
+   "multiple_values": false
+  },
+  "severity": {
+   "name": "severity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Lowest severity level to log.",
+   "options": [
+    {
+     "name": "emergency",
+     "help": "Emergency level."
+    },
+    {
+     "name": "alert",
+     "help": "Alert level."
+    },
+    {
+     "name": "critical",
+     "help": "Critical level."
+    },
+    {
+     "name": "error",
+     "help": "Error level."
+    },
+    {
+     "name": "warning",
+     "help": "Warning level."
+    },
+    {
+     "name": "notification",
+     "help": "Notification level."
+    },
+    {
+     "name": "information",
+     "help": "Information level."
+    },
+    {
+     "name": "debug",
+     "help": "Debug level."
+    }
+   ],
+   "default": "alert",
+   "multiple_values": false
+  }
+ },
+ "path": "alertemail",
+ "q_type": 8,
+ "access_group": "loggrp",
+ "object_range": "vdom"
+}

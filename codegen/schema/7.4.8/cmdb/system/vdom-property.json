@@ -1,0 +1,191 @@
+{
+ "name": "vdom-property",
+ "category": "table",
+ "help": "Configure VDOM property.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "VDOM name.",
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "description": {
+   "name": "description",
+   "category": "unitary",
+   "type": "string",
+   "help": "Description.",
+   "size": 127,
+   "default": "",
+   "multiple_values": false
+  },
+  "snmp-index": {
+   "name": "snmp-index",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Permanent SNMP Index of the virtual domain (1 - 2147483647).",
+   "min-value": 1,
+   "max-value": 2147483647,
+   "default": 0,
+   "multiple_values": false
+  },
+  "session": {
+   "name": "session",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of sessions.",
+   "default": "",
+   "multiple_values": true
+  },
+  "ipsec-phase1": {
+   "name": "ipsec-phase1",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of VPN IPsec phase 1 tunnels.",
+   "default": "",
+   "multiple_values": true
+  },
+  "ipsec-phase2": {
+   "name": "ipsec-phase2",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of VPN IPsec phase 2 tunnels.",
+   "default": "",
+   "multiple_values": true
+  },
+  "ipsec-phase1-interface": {
+   "name": "ipsec-phase1-interface",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of VPN IPsec phase1 interface tunnels.",
+   "default": "",
+   "multiple_values": true
+  },
+  "ipsec-phase2-interface": {
+   "name": "ipsec-phase2-interface",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of VPN IPsec phase2 interface tunnels.",
+   "default": "",
+   "multiple_values": true
+  },
+  "dialup-tunnel": {
+   "name": "dialup-tunnel",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of dial-up tunnels.",
+   "default": "",
+   "multiple_values": true
+  },
+  "firewall-policy": {
+   "name": "firewall-policy",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of firewall policies (policy, DoS-policy4, DoS-policy6, multicast).",
+   "default": "",
+   "multiple_values": true
+  },
+  "firewall-address": {
+   "name": "firewall-address",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of firewall addresses (IPv4, IPv6, multicast).",
+   "default": "",
+   "multiple_values": true
+  },
+  "firewall-addrgrp": {
+   "name": "firewall-addrgrp",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of firewall address groups (IPv4, IPv6).",
+   "default": "",
+   "multiple_values": true
+  },
+  "custom-service": {
+   "name": "custom-service",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of firewall custom services.",
+   "default": "",
+   "multiple_values": true
+  },
+  "service-group": {
+   "name": "service-group",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of firewall service groups.",
+   "default": "",
+   "multiple_values": true
+  },
+  "onetime-schedule": {
+   "name": "onetime-schedule",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of firewall one-time schedules..",
+   "default": "",
+   "multiple_values": true
+  },
+  "recurring-schedule": {
+   "name": "recurring-schedule",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of firewall recurring schedules.",
+   "default": "",
+   "multiple_values": true
+  },
+  "user": {
+   "name": "user",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of local users.",
+   "default": "",
+   "multiple_values": true
+  },
+  "user-group": {
+   "name": "user-group",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of user groups.",
+   "default": "",
+   "multiple_values": true
+  },
+  "sslvpn": {
+   "name": "sslvpn",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of SSL-VPNs.",
+   "default": "",
+   "multiple_values": true
+  },
+  "proxy": {
+   "name": "proxy",
+   "category": "unitary",
+   "type": "user",
+   "help": "Maximum guaranteed number of concurrent proxy users.",
+   "default": "",
+   "multiple_values": true
+  },
+  "log-disk-quota": {
+   "name": "log-disk-quota",
+   "category": "unitary",
+   "type": "user",
+   "help": "Log disk quota in megabytes (MB). Range depends on how much disk space is available.",
+   "default": "",
+   "multiple_values": true
+  }
+ },
+ "max_table_size_vdom": 0,
+ "max_table_size_global": 10,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 259,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

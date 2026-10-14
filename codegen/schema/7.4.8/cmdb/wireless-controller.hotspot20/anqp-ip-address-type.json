@@ -1,0 +1,89 @@
+{
+ "name": "anqp-ip-address-type",
+ "category": "table",
+ "help": "Configure IP address type availability.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IP type name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "ipv6-address-type": {
+   "name": "ipv6-address-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv6 address type.",
+   "options": [
+    {
+     "name": "not-available",
+     "help": "Address type not available."
+    },
+    {
+     "name": "available",
+     "help": "Address type available."
+    },
+    {
+     "name": "not-known",
+     "help": "Availability of the address type not known."
+    }
+   ],
+   "default": "not-available",
+   "multiple_values": false
+  },
+  "ipv4-address-type": {
+   "name": "ipv4-address-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPv4 address type.",
+   "options": [
+    {
+     "name": "not-available",
+     "help": "Address type not available."
+    },
+    {
+     "name": "public",
+     "help": "Public IPv4 address available."
+    },
+    {
+     "name": "port-restricted",
+     "help": "Port-restricted IPv4 address available."
+    },
+    {
+     "name": "single-NATed-private",
+     "help": "Single NATed private IPv4 address available."
+    },
+    {
+     "name": "double-NATed-private",
+     "help": "Double NATed private IPv4 address available."
+    },
+    {
+     "name": "port-restricted-and-single-NATed",
+     "help": "Port-restricted IPv4 address and single NATed IPv4 address available."
+    },
+    {
+     "name": "port-restricted-and-double-NATed",
+     "help": "Port-restricted IPv4 address and double NATed IPv4 address available."
+    },
+    {
+     "name": "not-known",
+     "help": "Availability of the address type is not known."
+    }
+   ],
+   "default": "not-available",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 16,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "wireless-controller.hotspot20",
+ "q_type": 296,
+ "access_group": "wifi",
+ "object_range": "vdom"
+}

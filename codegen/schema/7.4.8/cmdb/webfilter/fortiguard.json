@@ -1,0 +1,179 @@
+{
+ "name": "fortiguard",
+ "category": "complex",
+ "help": "Configure FortiGuard Web Filter service.",
+ "children": {
+  "cache-mode": {
+   "name": "cache-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Cache entry expiration mode.",
+   "options": [
+    {
+     "name": "ttl",
+     "help": "Expire cache items by time-to-live."
+    },
+    {
+     "name": "db-ver",
+     "help": "Expire cache items when the server DB version changes."
+    }
+   ],
+   "default": "ttl",
+   "multiple_values": false
+  },
+  "cache-prefix-match": {
+   "name": "cache-prefix-match",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable prefix matching in the cache.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "cache-mem-permille": {
+   "name": "cache-mem-permille",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum permille of available memory allocated to caching (1 - 150).",
+   "min-value": 1,
+   "max-value": 150,
+   "default": 1,
+   "multiple_values": false
+  },
+  "ovrd-auth-port-http": {
+   "name": "ovrd-auth-port-http",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to use for FortiGuard Web Filter HTTP override authentication.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 8008,
+   "multiple_values": false
+  },
+  "ovrd-auth-port-https": {
+   "name": "ovrd-auth-port-https",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to use for FortiGuard Web Filter HTTPS override authentication in proxy mode.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 8010,
+   "multiple_values": false
+  },
+  "ovrd-auth-port-https-flow": {
+   "name": "ovrd-auth-port-https-flow",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to use for FortiGuard Web Filter HTTPS override authentication in flow mode.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 8015,
+   "multiple_values": false
+  },
+  "ovrd-auth-port-warning": {
+   "name": "ovrd-auth-port-warning",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port to use for FortiGuard Web Filter Warning override authentication.",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 8020,
+   "multiple_values": false
+  },
+  "ovrd-auth-https": {
+   "name": "ovrd-auth-https",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of HTTPS for override authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "warn-auth-https": {
+   "name": "warn-auth-https",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of HTTPS for warning and authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "close-ports": {
+   "name": "close-ports",
+   "category": "unitary",
+   "type": "option",
+   "help": "Close ports used for HTTP/HTTPS override authentication and disable user overrides.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "request-packet-size-limit": {
+   "name": "request-packet-size-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Limit size of URL request packets sent to FortiGuard server (0 for default).",
+   "min-value": 576,
+   "max-value": 10000,
+   "default": 0,
+   "multiple_values": false
+  },
+  "embed-image": {
+   "name": "embed-image",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable embedding images into replacement messages (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "path": "webfilter",
+ "q_type": 108,
+ "access_group": "utmgrp",
+ "object_range": "global"
+}

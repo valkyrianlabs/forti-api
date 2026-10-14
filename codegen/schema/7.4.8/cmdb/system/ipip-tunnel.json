@@ -1,0 +1,92 @@
+{
+ "name": "ipip-tunnel",
+ "category": "table",
+ "help": "Configure IP in IP Tunneling.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "IPIP Tunnel name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Interface name that is associated with the incoming traffic from available options.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "remote-gw": {
+   "name": "remote-gw",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address for the remote gateway.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "local-gw": {
+   "name": "local-gw",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "IPv4 address for the local gateway.",
+   "required": true,
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "use-sdwan": {
+   "name": "use-sdwan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of SD-WAN to reach remote gateway.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable use of SD-WAN to reach remote gateway."
+    },
+    {
+     "name": "enable",
+     "help": "Enable use of SD-WAN to reach remote gateway."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-asic-offload": {
+   "name": "auto-asic-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable tunnel ASIC offloading.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable auto ASIC offloading."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ASIC offloading."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 1024,
+ "max_table_size_global": 1024,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 177,
+ "access_group": "netgrp",
+ "object_range": "vdom"
+}

@@ -1,0 +1,1192 @@
+{
+ "name": "ha",
+ "category": "complex",
+ "help": "Configure HA.",
+ "children": {
+  "group-id": {
+   "name": "group-id",
+   "category": "unitary",
+   "type": "integer",
+   "help": "HA group ID  (0 - 1023;  or 0 - 7 when there are more than 2 vclusters). Must be the same for all members.",
+   "min-value": 0,
+   "max-value": 1023,
+   "default": 0,
+   "multiple_values": false
+  },
+  "group-name": {
+   "name": "group-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Cluster group name. Must be the same for all members.",
+   "size": 32,
+   "default": "",
+   "multiple_values": false
+  },
+  "mode": {
+   "name": "mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "HA mode. Must be the same for all members. FGSP requires standalone.",
+   "options": [
+    {
+     "name": "standalone",
+     "help": "Standalone mode."
+    },
+    {
+     "name": "a-a",
+     "help": "Active-active mode."
+    },
+    {
+     "name": "a-p",
+     "help": "Active-passive mode."
+    }
+   ],
+   "default": "standalone",
+   "multiple_values": false
+  },
+  "sync-packet-balance": {
+   "name": "sync-packet-balance",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable HA packet distribution to multiple CPUs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable HA packet distribution to multiple CPUs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable HA packet distribution to multiple CPUs."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "Cluster password. Must be the same for all members.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "key": {
+   "name": "key",
+   "category": "unitary",
+   "type": "password",
+   "help": "Key.",
+   "size": 16,
+   "multiple_values": false
+  },
+  "hbdev": {
+   "name": "hbdev",
+   "category": "unitary",
+   "type": "user",
+   "help": "Heartbeat interfaces. Must be the same for all members.",
+   "default": "",
+   "multiple_values": true
+  },
+  "session-sync-dev": {
+   "name": "session-sync-dev",
+   "category": "unitary",
+   "type": "user",
+   "help": "Offload session-sync process to kernel and sync sessions using connected interface(s) directly.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 8
+  },
+  "route-ttl": {
+   "name": "route-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "TTL for primary unit routes (5 - 3600 sec). Increase to maintain active routes during failover.",
+   "min-value": 5,
+   "max-value": 3600,
+   "default": 10,
+   "multiple_values": false
+  },
+  "route-wait": {
+   "name": "route-wait",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait before sending new routes to the cluster (0 - 3600 sec).",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 0,
+   "multiple_values": false
+  },
+  "route-hold": {
+   "name": "route-hold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait between routing table updates to the cluster (0 - 3600 sec).",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 10,
+   "multiple_values": false
+  },
+  "multicast-ttl": {
+   "name": "multicast-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "HA multicast TTL on primary (5 - 3600 sec).",
+   "min-value": 5,
+   "max-value": 3600,
+   "default": 600,
+   "multiple_values": false
+  },
+  "evpn-ttl": {
+   "name": "evpn-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "HA EVPN FDB TTL on primary box (5 - 3600 sec).",
+   "min-value": 5,
+   "max-value": 3600,
+   "default": 60,
+   "multiple_values": false
+  },
+  "load-balance-all": {
+   "name": "load-balance-all",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to load balance TCP sessions. Disable to load balance proxy sessions only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable load balance."
+    },
+    {
+     "name": "disable",
+     "help": "Disable load balance."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sync-config": {
+   "name": "sync-config",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable configuration synchronization.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable configuration synchronization."
+    },
+    {
+     "name": "disable",
+     "help": "Disable configuration synchronization."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "encryption": {
+   "name": "encryption",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable heartbeat message encryption.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable heartbeat message encryption."
+    },
+    {
+     "name": "disable",
+     "help": "Disable heartbeat message encryption."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "authentication": {
+   "name": "authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable heartbeat message authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable heartbeat message authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable heartbeat message authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "hb-interval": {
+   "name": "hb-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between sending heartbeat packets (1 - 20). Increase to reduce false positives.",
+   "min-value": 1,
+   "max-value": 20,
+   "default": 2,
+   "multiple_values": false
+  },
+  "hb-interval-in-milliseconds": {
+   "name": "hb-interval-in-milliseconds",
+   "category": "unitary",
+   "type": "option",
+   "help": "Units of heartbeat interval time between sending heartbeat packets. Default is 100ms.",
+   "options": [
+    {
+     "name": "100ms",
+     "help": "Each heartbeat interval is 100ms."
+    },
+    {
+     "name": "10ms",
+     "help": "Each heartbeat interval is 10ms."
+    }
+   ],
+   "default": "100ms",
+   "multiple_values": false
+  },
+  "hb-lost-threshold": {
+   "name": "hb-lost-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of lost heartbeats to signal a failure (1 - 60). Increase to reduce false positives.",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 6,
+   "multiple_values": false
+  },
+  "hello-holddown": {
+   "name": "hello-holddown",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait before changing from hello to work state (5 - 300 sec).",
+   "min-value": 5,
+   "max-value": 300,
+   "default": 20,
+   "multiple_values": false
+  },
+  "gratuitous-arps": {
+   "name": "gratuitous-arps",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable gratuitous ARPs. Disable if link-failed-signal enabled.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable gratuitous ARPs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable gratuitous ARPs."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "arps": {
+   "name": "arps",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of gratuitous ARPs (1 - 60). Lower to reduce traffic. Higher to reduce failover time.",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 5,
+   "multiple_values": false
+  },
+  "arps-interval": {
+   "name": "arps-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time between gratuitous ARPs  (1 - 20 sec). Lower to reduce failover time. Higher to reduce traffic.",
+   "min-value": 1,
+   "max-value": 20,
+   "default": 8,
+   "multiple_values": false
+  },
+  "session-pickup": {
+   "name": "session-pickup",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable session pickup. Enabling it can reduce session down time when fail over happens.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable session pickup."
+    },
+    {
+     "name": "disable",
+     "help": "Disable session pickup."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "session-pickup-connectionless": {
+   "name": "session-pickup-connectionless",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable UDP and ICMP session sync.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "session-pickup-expectation": {
+   "name": "session-pickup-expectation",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable session helper expectation session sync for FGSP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "session-pickup-nat": {
+   "name": "session-pickup-nat",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable NAT session sync for FGSP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "session-pickup-delay": {
+   "name": "session-pickup-delay",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to sync sessions longer than 30 sec. Only longer lived sessions need to be synced.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "link-failed-signal": {
+   "name": "link-failed-signal",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to shut down all interfaces for 1 sec after a failover. Use if gratuitous ARPs do not update network.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "upgrade-mode": {
+   "name": "upgrade-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "The mode to upgrade a cluster.",
+   "options": [
+    {
+     "name": "simultaneous",
+     "help": "Upgrade all HA members at the same time."
+    },
+    {
+     "name": "uninterruptible",
+     "help": "Upgrade HA cluster without blocking network traffic."
+    },
+    {
+     "name": "local-only",
+     "help": "Upgrade local member only."
+    },
+    {
+     "name": "secondary-only",
+     "help": "Upgrade secondary member only."
+    }
+   ],
+   "default": "uninterruptible",
+   "multiple_values": false
+  },
+  "uninterruptible-primary-wait": {
+   "name": "uninterruptible-primary-wait",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of minutes the primary HA unit waits before the secondary HA unit is considered upgraded and the system is started before starting its own upgrade (15 - 300, default = 30).",
+   "min-value": 15,
+   "max-value": 300,
+   "default": 30,
+   "multiple_values": false
+  },
+  "standalone-mgmt-vdom": {
+   "name": "standalone-mgmt-vdom",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable standalone management VDOM.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ha-mgmt-status": {
+   "name": "ha-mgmt-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to reserve interfaces to manage individual cluster units.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ha-mgmt-interfaces": {
+   "name": "ha-mgmt-interfaces",
+   "category": "table",
+   "help": "Reserve interfaces to manage individual cluster units.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Table ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "interface": {
+     "name": "interface",
+     "category": "unitary",
+     "type": "string",
+     "help": "Interface to reserve for HA management.",
+     "required": true,
+     "datasource": [
+      "system.interface.name"
+     ],
+     "size": 15,
+     "default": "",
+     "multiple_values": false
+    },
+    "dst": {
+     "name": "dst",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "Default route destination for reserved HA management interface.",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "gateway": {
+     "name": "gateway",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "Default route gateway for reserved HA management interface.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "gateway6": {
+     "name": "gateway6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "Default IPv6 gateway for reserved HA management interface.",
+     "default": "::",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 4,
+   "max_table_size_item": 0
+  },
+  "ha-eth-type": {
+   "name": "ha-eth-type",
+   "category": "unitary",
+   "type": "string",
+   "help": "HA heartbeat packet Ethertype (4-digit hex).",
+   "size": 4,
+   "default": "8890",
+   "multiple_values": false
+  },
+  "hc-eth-type": {
+   "name": "hc-eth-type",
+   "category": "unitary",
+   "type": "string",
+   "help": "Transparent mode HA heartbeat packet Ethertype (4-digit hex).",
+   "size": 4,
+   "default": "8891",
+   "multiple_values": false
+  },
+  "l2ep-eth-type": {
+   "name": "l2ep-eth-type",
+   "category": "unitary",
+   "type": "string",
+   "help": "Telnet session HA heartbeat packet Ethertype (4-digit hex).",
+   "size": 4,
+   "default": "8893",
+   "multiple_values": false
+  },
+  "ha-uptime-diff-margin": {
+   "name": "ha-uptime-diff-margin",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Normally you would only reduce this value for failover testing.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 300,
+   "multiple_values": false
+  },
+  "standalone-config-sync": {
+   "name": "standalone-config-sync",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FGSP configuration synchronization.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "logical-sn": {
+   "name": "logical-sn",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable usage of the logical serial number.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable usage of the logical serial number."
+    },
+    {
+     "name": "disable",
+     "help": "Disable usage of the logical serial number."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "schedule": {
+   "name": "schedule",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of A-A load balancing. Use none if you have external load balancers.",
+   "options": [
+    {
+     "name": "none",
+     "help": "None."
+    },
+    {
+     "name": "leastconnection",
+     "help": "Least connection."
+    },
+    {
+     "name": "round-robin",
+     "help": "Round robin."
+    },
+    {
+     "name": "weight-round-robin",
+     "help": "Weight round robin."
+    },
+    {
+     "name": "random",
+     "help": "Random."
+    },
+    {
+     "name": "ip",
+     "help": "IP."
+    },
+    {
+     "name": "ipport",
+     "help": "IP port."
+    }
+   ],
+   "default": "round-robin",
+   "multiple_values": false
+  },
+  "weight": {
+   "name": "weight",
+   "category": "unitary",
+   "type": "user",
+   "help": "Weight-round-robin weight for each cluster unit. Syntax <priority> <weight>.",
+   "default": "0 40",
+   "multiple_values": false
+  },
+  "cpu-threshold": {
+   "name": "cpu-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing CPU usage weight and high and low thresholds.",
+   "default": "",
+   "multiple_values": false
+  },
+  "memory-threshold": {
+   "name": "memory-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing memory usage weight and high and low thresholds.",
+   "default": "",
+   "multiple_values": false
+  },
+  "http-proxy-threshold": {
+   "name": "http-proxy-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing weight and high and low number of HTTP proxy sessions.",
+   "default": "",
+   "multiple_values": false
+  },
+  "ftp-proxy-threshold": {
+   "name": "ftp-proxy-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing weight and high and low number of FTP proxy sessions.",
+   "default": "",
+   "multiple_values": false
+  },
+  "imap-proxy-threshold": {
+   "name": "imap-proxy-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing weight and high and low number of IMAP proxy sessions.",
+   "default": "",
+   "multiple_values": false
+  },
+  "nntp-proxy-threshold": {
+   "name": "nntp-proxy-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing weight and high and low number of NNTP proxy sessions.",
+   "default": "",
+   "multiple_values": false
+  },
+  "pop3-proxy-threshold": {
+   "name": "pop3-proxy-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing weight and high and low number of POP3 proxy sessions.",
+   "default": "",
+   "multiple_values": false
+  },
+  "smtp-proxy-threshold": {
+   "name": "smtp-proxy-threshold",
+   "category": "unitary",
+   "type": "user",
+   "help": "Dynamic weighted load balancing weight and high and low number of SMTP proxy sessions.",
+   "default": "",
+   "multiple_values": false
+  },
+  "override": {
+   "name": "override",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable and increase the priority of the unit that should always be primary (master).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "priority": {
+   "name": "priority",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Increase the priority to select the primary unit (0 - 255).",
+   "min-value": 0,
+   "max-value": 255,
+   "default": 128,
+   "multiple_values": false
+  },
+  "override-wait-time": {
+   "name": "override-wait-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Delay negotiating if override is enabled (0 - 3600 sec). Reduces how often the cluster negotiates.",
+   "min-value": 0,
+   "max-value": 3600,
+   "default": 0,
+   "multiple_values": false
+  },
+  "monitor": {
+   "name": "monitor",
+   "category": "unitary",
+   "type": "user",
+   "help": "Interfaces to check for port monitoring (or link failure).",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 64
+  },
+  "pingserver-monitor-interface": {
+   "name": "pingserver-monitor-interface",
+   "category": "unitary",
+   "type": "user",
+   "help": "Interfaces to check for remote IP monitoring.",
+   "datasource": [
+    "system.interface.name"
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 64
+  },
+  "pingserver-failover-threshold": {
+   "name": "pingserver-failover-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Remote IP monitoring failover threshold (0 - 50).",
+   "min-value": 0,
+   "max-value": 50,
+   "default": 0,
+   "multiple_values": false
+  },
+  "pingserver-secondary-force-reset": {
+   "name": "pingserver-secondary-force-reset",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to force the cluster to negotiate after a remote IP monitoring failover.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable force reset of secondary member after PING server failure."
+    },
+    {
+     "name": "disable",
+     "help": "Disable force reset of secondary member after PING server failure."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "pingserver-flip-timeout": {
+   "name": "pingserver-flip-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait in minutes before renegotiating after a remote IP monitoring failover.",
+   "min-value": 6,
+   "max-value": 2147483647,
+   "default": 60,
+   "multiple_values": false
+  },
+  "vcluster-status": {
+   "name": "vcluster-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable virtual cluster for virtual clustering.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vcluster": {
+   "name": "vcluster",
+   "category": "table",
+   "help": "Virtual cluster table.",
+   "mkey": "vcluster-id",
+   "mkey_type": "integer",
+   "children": {
+    "vcluster-id": {
+     "name": "vcluster-id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 1,
+     "max-value": 30,
+     "default": 1,
+     "multiple_values": false
+    },
+    "override": {
+     "name": "override",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable and increase the priority of the unit that should always be primary (master).",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable setting."
+      },
+      {
+       "name": "disable",
+       "help": "Disable setting."
+      }
+     ],
+     "default": "disable",
+     "multiple_values": false
+    },
+    "priority": {
+     "name": "priority",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Increase the priority to select the primary unit (0 - 255).",
+     "min-value": 0,
+     "max-value": 255,
+     "default": 128,
+     "multiple_values": false
+    },
+    "override-wait-time": {
+     "name": "override-wait-time",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Delay negotiating if override is enabled (0 - 3600 sec). Reduces how often the cluster negotiates.",
+     "min-value": 0,
+     "max-value": 3600,
+     "default": 0,
+     "multiple_values": false
+    },
+    "monitor": {
+     "name": "monitor",
+     "category": "unitary",
+     "type": "user",
+     "help": "Interfaces to check for port monitoring (or link failure).",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 64
+    },
+    "pingserver-monitor-interface": {
+     "name": "pingserver-monitor-interface",
+     "category": "unitary",
+     "type": "user",
+     "help": "Interfaces to check for remote IP monitoring.",
+     "datasource": [
+      "system.interface.name"
+     ],
+     "default": "",
+     "multiple_values": true,
+     "max_num_values": 64
+    },
+    "pingserver-failover-threshold": {
+     "name": "pingserver-failover-threshold",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Remote IP monitoring failover threshold (0 - 50).",
+     "min-value": 0,
+     "max-value": 50,
+     "default": 0,
+     "multiple_values": false
+    },
+    "pingserver-secondary-force-reset": {
+     "name": "pingserver-secondary-force-reset",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable to force the cluster to negotiate after a remote IP monitoring failover.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable force reset of secondary member after PING server failure."
+      },
+      {
+       "name": "disable",
+       "help": "Disable force reset of secondary member after PING server failure."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "pingserver-flip-timeout": {
+     "name": "pingserver-flip-timeout",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Time to wait in minutes before renegotiating after a remote IP monitoring failover.",
+     "min-value": 6,
+     "max-value": 2147483647,
+     "default": 60,
+     "multiple_values": false
+    },
+    "vdom": {
+     "name": "vdom",
+     "category": "table",
+     "help": "Virtual domain(s) in the virtual cluster.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Virtual domain name.",
+       "required": true,
+       "datasource": [
+        "system.vdom.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 30,
+   "max_table_size_item": 0
+  },
+  "ha-direct": {
+   "name": "ha-direct",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using ha-mgmt interface for syslog, remote authentication (RADIUS), FortiAnalyzer, FortiSandbox, sFlow, and Netflow.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable using ha-mgmt interface for syslog, remote authentication (RADIUS), FortiAnalyzer, FortiSandbox, sFlow, and Netflow."
+    },
+    {
+     "name": "disable",
+     "help": "Disable using ha-mgmt interface for syslog, remote authentication (RADIUS), FortiAnalyzer, FortiSandbox, sFlow, and Netflow."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "memory-compatible-mode": {
+   "name": "memory-compatible-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable memory compatible mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "memory-based-failover": {
+   "name": "memory-based-failover",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable memory based failover.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "memory-failover-threshold": {
+   "name": "memory-failover-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Memory usage threshold to trigger memory based failover (0 means using conserve mode threshold in system.global).",
+   "min-value": 0,
+   "max-value": 95,
+   "default": 0,
+   "multiple_values": false
+  },
+  "memory-failover-monitor-period": {
+   "name": "memory-failover-monitor-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Duration of high memory usage before memory based failover is triggered in seconds (1 - 300, default = 60).",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 60,
+   "multiple_values": false
+  },
+  "memory-failover-sample-rate": {
+   "name": "memory-failover-sample-rate",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Rate at which memory usage is sampled in order to measure memory usage in seconds (1 - 60, default = 1).",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 1,
+   "multiple_values": false
+  },
+  "memory-failover-flip-timeout": {
+   "name": "memory-failover-flip-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait between subsequent memory based failovers in minutes (6 - 2147483647, default = 6).",
+   "min-value": 6,
+   "max-value": 2147483647,
+   "default": 6,
+   "multiple_values": false
+  },
+  "failover-hold-time": {
+   "name": "failover-hold-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time to wait before failover (0 - 300 sec, default = 0), to avoid flip.",
+   "min-value": 0,
+   "max-value": 300,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ipsec-phase2-proposal": {
+   "name": "ipsec-phase2-proposal",
+   "category": "unitary",
+   "type": "option",
+   "help": "IPsec phase2 proposal.",
+   "required": true,
+   "options": [
+    {
+     "name": "aes128-sha1",
+     "help": "aes128-sha1"
+    },
+    {
+     "name": "aes128-sha256",
+     "help": "aes128-sha256"
+    },
+    {
+     "name": "aes128-sha384",
+     "help": "aes128-sha384"
+    },
+    {
+     "name": "aes128-sha512",
+     "help": "aes128-sha512"
+    },
+    {
+     "name": "aes192-sha1",
+     "help": "aes192-sha1"
+    },
+    {
+     "name": "aes192-sha256",
+     "help": "aes192-sha256"
+    },
+    {
+     "name": "aes192-sha384",
+     "help": "aes192-sha384"
+    },
+    {
+     "name": "aes192-sha512",
+     "help": "aes192-sha512"
+    },
+    {
+     "name": "aes256-sha1",
+     "help": "aes256-sha1"
+    },
+    {
+     "name": "aes256-sha256",
+     "help": "aes256-sha256"
+    },
+    {
+     "name": "aes256-sha384",
+     "help": "aes256-sha384"
+    },
+    {
+     "name": "aes256-sha512",
+     "help": "aes256-sha512"
+    },
+    {
+     "name": "aes128gcm",
+     "help": "aes128gcm"
+    },
+    {
+     "name": "aes256gcm",
+     "help": "aes256gcm"
+    },
+    {
+     "name": "chacha20poly1305",
+     "help": "chacha20poly1305"
+    }
+   ],
+   "default": "",
+   "multiple_values": true,
+   "max_num_values": 4
+  },
+  "status": {
+   "name": "status",
+   "category": "info-read-only",
+   "type": "key",
+   "help": "list ha status information",
+   "children": {
+    "vcluster-id": {
+     "name": "vcluster-id",
+     "category": "info-read-only",
+     "type": "value",
+     "help": "<enter> to show all vcluster or input vcluster-id"
+    }
+   }
+  }
+ },
+ "path": "system",
+ "q_type": 5,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}
