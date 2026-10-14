@@ -170,7 +170,9 @@ TEST_P(DownloadTest, SinkReceivesTheBodyInsteadOfMemory) {
     EXPECT_TRUE(download.body.empty());
     EXPECT_EQ(download.bytes, binary_body().size());
     EXPECT_EQ(download.content_type, "application/octet-stream");
-    if (GetParam() > 0) EXPECT_EQ(calls, (binary_body().size() + GetParam() - 1) / GetParam());
+    if (GetParam() > 0) {
+        EXPECT_EQ(calls, (binary_body().size() + GetParam() - 1) / GetParam());
+    }
 }
 
 TEST_P(DownloadTest, SinkModeStillEnforcesTheLimit) {
