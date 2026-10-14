@@ -1,7 +1,9 @@
-- Replace Conan with Meson and system packages; drop conanfile.py and the Conan CI.
-- Vendor nlohmann/json 3.12.0, installed under /usr/include/forti_api/third_party.
-- Install forti-api.pc to /usr/share/pkgconfig (Requires: libcurl).
-- Make the live FortiGate test suite optional (-Dtests=auto|enabled|disabled).
-- Fix public headers that included "include/forti_api/..." and broke outside the source tree.
-- Drop stray semicolons after the nlohmann define macros (GCC 13 -Wpedantic).
-- Add firewall VIP types.
+<!--
+vl-release staged changelog: package-facing changes for the NEXT release.
+Maintained continuously while working; `vlr prepare` renders it into debian/changelog
+and resets this file to this template.
+
+Format: one "- " bullet per change (concise, technical). Indent continuation lines.
+Optional "## Section" headings group bullets; if used, every bullet must be under one.
+One level of nested "  - " detail bullets is allowed. Consolidate; don't paste commit logs.
+-->
