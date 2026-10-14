@@ -28,3 +28,5 @@ One level of nested "  - " detail bullets is allowed. Consolidate; don't paste c
   monitor endpoints from sanitized GUI recon shapes (MonitorGet<Spec>); per-group headers and an
   endpoint registry. Option constants are nested in their types.
 - Decode string-keyed maps; reserve preprocessor macro names in generated identifiers.
+- Curated names for common firewall tables; Table<Spec>::key exposes the key member.
+- Live suite: CRUD round-trips on 24 approved inert collections.

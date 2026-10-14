@@ -37,13 +37,15 @@ jobs:
       - name: Build (warnings are errors) and run the unit tests
         run: |
           meson setup build/ci -Dtests=enabled -Dlive_tests=true -Dwerror=true
-          meson compile -C build/ci
+          # A TU including every generated header needs ~1.5 GB with GCC; cap parallelism so the
+          # shared runner's container memory is never exhausted.
+          meson compile -C build/ci -j 4
           meson test -C build/ci --suite unit --print-errorlogs
 
       - name: Unit tests under AddressSanitizer + UndefinedBehaviorSanitizer
         run: |
           meson setup build/asan -Dtests=enabled -Db_sanitize=address,undefined -Db_lundef=false
-          meson compile -C build/asan
+          meson compile -C build/asan -j 4
           meson test -C build/asan --suite unit --print-errorlogs
 
       - name: Generated headers are up to date

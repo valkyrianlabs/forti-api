@@ -802,7 +802,7 @@ struct Vip6Spec {
     static constexpr auto key = &Vip6::name;
 };
 
-using Vip6s = fortiapi::Table<Vip6Spec>;
+using Vips6 = fortiapi::Table<Vip6Spec>;
 
 }  // namespace fortiapi::firewall
 

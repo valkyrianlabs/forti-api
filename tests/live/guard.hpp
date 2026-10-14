@@ -21,9 +21,33 @@ namespace live {
     inline constexpr std::string_view prefix = "forti-api-test-";
 
     // The only cmdb collections the live suite may write to, and only for forti-api-test-* objects.
-    inline constexpr std::array<std::string_view, 2> approved_collections{
+    // Every entry is inert unless something references it (no policies, routes, VIPs, users or
+    // admins); adding one is a reviewed change (AGENTS.md).
+    inline constexpr std::array<std::string_view, 24> approved_collections{
+            "cmdb/antivirus/profile",
+            "cmdb/application/list",
             "cmdb/dnsfilter/profile",
+            "cmdb/emailfilter/profile",
+            "cmdb/file-filter/profile",
+            "cmdb/firewall/address",
+            "cmdb/firewall/address6",
+            "cmdb/firewall/addrgrp",
+            "cmdb/firewall/addrgrp6",
+            "cmdb/firewall.schedule/group",
+            "cmdb/firewall.schedule/onetime",
+            "cmdb/firewall.schedule/recurring",
+            "cmdb/firewall.service/category",
+            "cmdb/firewall.service/custom",
+            "cmdb/firewall.service/group",
+            "cmdb/firewall.wildcard-fqdn/custom",
+            "cmdb/ips/sensor",
+            "cmdb/router/access-list",
+            "cmdb/router/aspath-list",
+            "cmdb/router/community-list",
+            "cmdb/router/prefix-list",
+            "cmdb/router/route-map",
             "cmdb/system/external-resource",
+            "cmdb/webfilter/profile",
     };
 
     // Monitor actions the live suite may call, only when every command names a forti-api-test-* object.

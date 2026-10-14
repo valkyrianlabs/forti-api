@@ -11,10 +11,10 @@
 #include <string_view>
 #include <vector>
 
-namespace fortiapi::firewall::schedule {
+namespace fortiapi::firewall {
 
 // Schedule group configuration.
-struct Group {
+struct ScheduleGroup {
     // Values of FabricObject: Security Fabric global object setting.
     struct FabricObject {
         static constexpr std::string_view enable = "enable";
@@ -35,14 +35,14 @@ struct Group {
     }
 };
 
-struct GroupSpec {
-    using type = Group;
+struct ScheduleGroupSpec {
+    using type = ScheduleGroup;
     static constexpr std::string_view path = "cmdb/firewall.schedule/group";
-    static constexpr auto key = &Group::name;
+    static constexpr auto key = &ScheduleGroup::name;
 };
 
-using Groups = fortiapi::Table<GroupSpec>;
+using ScheduleGroups = fortiapi::Table<ScheduleGroupSpec>;
 
-}  // namespace fortiapi::firewall::schedule
+}  // namespace fortiapi::firewall
 
 #endif // FORTI_API_GEN_FIREWALL_SCHEDULE_GROUP_HPP

@@ -59,9 +59,14 @@ outside `live::approved_collections` (cmdb) and `live::approved_monitor_actions`
 without the prefix, and `live::ConfigAudit` fails the run if the device's config-change log shows a
 REST change to any non-test object. Adding to either allowlist is a deliberate, reviewed change.
 
-Approved test resources today: `cmdb/dnsfilter/profile/forti-api-test-*`,
-`cmdb/system/external-resource/forti-api-test-*`, and push commands
-(`monitor/system/external-resource/dynamic`) naming only `forti-api-test-*` feeds.
+Approved test resources today (`live::approved_collections`; each is inert unless referenced, so
+no policies, routes, VIPs, users or admins): firewall addresses, address6, address groups (v4/v6),
+custom services, service groups and categories, one-time and recurring schedules and schedule
+groups, wildcard FQDNs; DNS filter, web filter, application, antivirus, IPS, email filter and file
+filter profiles; router access-lists, prefix-lists, route-maps, AS-path and community lists;
+external resources (threat feeds). Monitor: push commands (`monitor/system/external-resource/dynamic`)
+naming only `forti-api-test-*` feeds. Test objects use documentation addresses (RFC 5737, RFC 3849),
+port 65000 and schedules in 2037.
 
 Before writing anything new to the device, know exactly which objects the change touches. If an
 auth request fails repeatedly, stop: FortiOS locks the API out (HTTP 429) after a few failures.

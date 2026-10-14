@@ -14,7 +14,7 @@
 namespace fortiapi::firewall {
 
 // Configure IPv4 address groups.
-struct Addrgrp {
+struct AddressGroup {
     // Values of Type: Address group type.
     struct Type {
         static constexpr std::string_view default_ = "default";
@@ -90,13 +90,13 @@ struct Addrgrp {
     }
 };
 
-struct AddrgrpSpec {
-    using type = Addrgrp;
+struct AddressGroupSpec {
+    using type = AddressGroup;
     static constexpr std::string_view path = "cmdb/firewall/addrgrp";
-    static constexpr auto key = &Addrgrp::name;
+    static constexpr auto key = &AddressGroup::name;
 };
 
-using Addrgrps = fortiapi::Table<AddrgrpSpec>;
+using AddressGroups = fortiapi::Table<AddressGroupSpec>;
 
 }  // namespace fortiapi::firewall
 

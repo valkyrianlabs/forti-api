@@ -166,7 +166,7 @@ struct Address6Spec {
     static constexpr auto key = &Address6::name;
 };
 
-using Address6s = fortiapi::Table<Address6Spec>;
+using Addresses6 = fortiapi::Table<Address6Spec>;
 
 }  // namespace fortiapi::firewall
 

@@ -11,10 +11,10 @@
 #include <string_view>
 #include <vector>
 
-namespace fortiapi::firewall::wildcard_fqdn {
+namespace fortiapi::firewall {
 
 // Config global/VDOM Wildcard FQDN address.
-struct Custom {
+struct WildcardFqdn {
     fortiapi::Field<std::string> name;  // Address name.
     fortiapi::Field<std::string> uuid;  // Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
     fortiapi::Field<std::string> wildcard_fqdn;  // Wildcard FQDN.
@@ -31,14 +31,14 @@ struct Custom {
     }
 };
 
-struct CustomSpec {
-    using type = Custom;
+struct WildcardFqdnSpec {
+    using type = WildcardFqdn;
     static constexpr std::string_view path = "cmdb/firewall.wildcard-fqdn/custom";
-    static constexpr auto key = &Custom::name;
+    static constexpr auto key = &WildcardFqdn::name;
 };
 
-using Customs = fortiapi::Table<CustomSpec>;
+using WildcardFqdns = fortiapi::Table<WildcardFqdnSpec>;
 
-}  // namespace fortiapi::firewall::wildcard_fqdn
+}  // namespace fortiapi::firewall
 
 #endif // FORTI_API_GEN_FIREWALL_WILDCARD_FQDN_CUSTOM_HPP

@@ -52,3 +52,45 @@ alias = "GlobalSettings"
 
 [[cmdb]]
 path = "system/interface"
+
+[[cmdb]]
+path = "firewall/address6"
+alias = "Addresses6"
+
+[[cmdb]]
+path = "firewall/addrgrp"
+type = "AddressGroup"
+
+[[cmdb]]
+path = "firewall/addrgrp6"
+type = "AddressGroup6"
+alias = "AddressGroups6"
+
+[[cmdb]]
+path = "firewall.schedule/group"
+namespace = "firewall"
+type = "ScheduleGroup"
+
+[[cmdb]]
+path = "firewall.schedule/onetime"
+namespace = "firewall"
+type = "OnetimeSchedule"
+
+[[cmdb]]
+path = "firewall.service/group"
+namespace = "firewall"
+type = "ServiceGroup"
+
+[[cmdb]]
+path = "firewall.wildcard-fqdn/custom"
+namespace = "firewall"
+type = "WildcardFqdn"
+
+[[cmdb]]
+path = "firewall.wildcard-fqdn/group"
+namespace = "firewall"
+type = "WildcardFqdnGroup"
+
+[[cmdb]]
+path = "firewall/vip6"
+alias = "Vips6"
