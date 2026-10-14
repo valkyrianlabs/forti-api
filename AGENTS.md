@@ -19,9 +19,10 @@ write:
 1. **Never modify existing config.** No update, delete, rename or move of any object a test did
    not create in the same run: policies, addresses, services, schedules, VIPs, DNS filter and
    threat feed profiles, interfaces, admins, certificates, global settings. Reading existing
-   config is fine. Never attach test objects to real policies or profiles, and never call helpers
-   that sweep across existing objects (e.g. `DNSFilter::global_allow_category`,
-   `DNSFilter::block_category_in_profiles`) against the live device.
+   config is fine. Never attach test objects to real policies or profiles. Helpers that sweep
+   across existing objects (`DNSFilter::global_allow_category`, `block_category_in_profiles`, and
+   `ThreatFeed::del`, which uses the former) may only run when nothing real can match, e.g. a
+   threat-feed category no existing feed or profile uses (`live::free_threat_feed_category()`).
 2. **Everything written is visibly test content.** Names start with `forti-api-test-`; where the
    object has a comment or description field, set it to say it was created by the forti-api test
    suite.
