@@ -1,0 +1,2924 @@
+{
+ "alertemail/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 35,
+  "help": "Configure alert email settings."
+ },
+ "antivirus/exempt-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure a list of hashes to be exempt from AV scanning."
+ },
+ "antivirus/filetype": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Hidden AntiVirus file type table."
+ },
+ "antivirus/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 32,
+  "help": "Configure AntiVirus profiles."
+ },
+ "antivirus/quarantine": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 9,
+  "help": "Configure quarantine options."
+ },
+ "antivirus/settings": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 5,
+  "help": "Configure AntiVirus settings."
+ },
+ "application/custom": {
+  "category": "table",
+  "mkey": "tag",
+  "fields": 9,
+  "help": "Configure custom application signatures."
+ },
+ "application/group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 11,
+  "help": "Configure firewall application groups."
+ },
+ "application/list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 17,
+  "help": "Configure application control lists."
+ },
+ "application/name": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Configure application signatures."
+ },
+ "authentication/rule": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 18,
+  "help": "Configure Authentication Rules."
+ },
+ "authentication/scheme": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Configure Authentication Schemes."
+ },
+ "authentication/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 21,
+  "help": "Configure authentication setting."
+ },
+ "automation/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Automation setting configuration."
+ },
+ "casb/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure CASB profile."
+ },
+ "casb/saas-application": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure CASB SaaS application."
+ },
+ "casb/user-activity": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 11,
+  "help": "Configure CASB user activity."
+ },
+ "certificate/ca": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 14,
+  "help": "CA certificate."
+ },
+ "certificate/crl": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Certificate Revocation List as a PEM file."
+ },
+ "certificate/local": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 39,
+  "help": "Local keys and certificates."
+ },
+ "certificate/remote": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Remote certificate as a PEM file."
+ },
+ "cifs/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure CIFS profile."
+ },
+ "credential-store/domain-controller": {
+  "category": "table",
+  "mkey": "server-name",
+  "fields": 8,
+  "help": "Define known domain controller servers."
+ },
+ "diameter-filter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "Configure Diameter filter profiles."
+ },
+ "dlp/data-type": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "Configure predefined data type used by DLP blocking."
+ },
+ "dlp/dictionary": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure dictionaries used by DLP blocking."
+ },
+ "dlp/exact-data-match": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure exact-data-match template used by DLP scan."
+ },
+ "dlp/filepattern": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure file patterns used by DLP blocking."
+ },
+ "dlp/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 10,
+  "help": "Configure DLP profiles."
+ },
+ "dlp/sensitivity": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 1,
+  "help": "Create self-explanatory DLP sensitivity levels to be used when setting sensitivity under config fp-doc-source."
+ },
+ "dlp/sensor": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure sensors used by DLP blocking."
+ },
+ "dlp/settings": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 5,
+  "help": "Designate logical storage for DLP fingerprint database."
+ },
+ "dnsfilter/domain-filter": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure DNS domain filters."
+ },
+ "dnsfilter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 17,
+  "help": "Configure DNS domain filter profile."
+ },
+ "emailfilter/block-allow-list": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure anti-spam block/allow list."
+ },
+ "emailfilter/bword": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure AntiSpam banned word list."
+ },
+ "emailfilter/dnsbl": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure AntiSpam DNSBL/ORBL."
+ },
+ "emailfilter/fortishield": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure FortiGuard - AntiSpam."
+ },
+ "emailfilter/iptrust": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure AntiSpam IP trust."
+ },
+ "emailfilter/mheader": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure AntiSpam MIME header."
+ },
+ "emailfilter/options": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 1,
+  "help": "Configure AntiSpam options."
+ },
+ "emailfilter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 23,
+  "help": "Configure Email Filter profiles."
+ },
+ "endpoint-control/fctems": {
+  "category": "table",
+  "mkey": "ems-id",
+  "fields": 26,
+  "help": "Configure FortiClient Enterprise Management Server (EMS) entries."
+ },
+ "endpoint-control/fctems-override": {
+  "category": "table",
+  "mkey": "ems-id",
+  "fields": 26,
+  "help": "Configure FortiClient Enterprise Management Server (EMS) entries."
+ },
+ "endpoint-control/settings": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 1,
+  "help": "Configure endpoint control settings."
+ },
+ "extension-controller/dataplan": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 19,
+  "help": "FortiExtender dataplan configuration."
+ },
+ "extension-controller/extender": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 19,
+  "help": "Extender controller configuration."
+ },
+ "extension-controller/extender-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "FortiExtender extender profile configuration."
+ },
+ "extension-controller/extender-vap": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 21,
+  "help": "FortiExtender wifi vap configuration."
+ },
+ "extension-controller/fortigate": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "FortiGate controller configuration."
+ },
+ "extension-controller/fortigate-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "FortiGate connector profile configuration."
+ },
+ "file-filter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure file-filter profiles."
+ },
+ "firewall.ipmacbinding/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure IP to MAC binding settings."
+ },
+ "firewall.ipmacbinding/table": {
+  "category": "table",
+  "mkey": "seq-num",
+  "fields": 5,
+  "help": "Configure IP to MAC address pairs in the IP/MAC binding table."
+ },
+ "firewall.schedule/group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Schedule group configuration."
+ },
+ "firewall.schedule/onetime": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Onetime schedule configuration."
+ },
+ "firewall.schedule/recurring": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Recurring schedule configuration."
+ },
+ "firewall.service/category": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure service categories."
+ },
+ "firewall.service/custom": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 27,
+  "help": "Configure custom services."
+ },
+ "firewall.service/group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure service groups."
+ },
+ "firewall.shaper/per-ip-shaper": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 10,
+  "help": "Configure per-IP traffic shaper."
+ },
+ "firewall.shaper/traffic-shaper": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 19,
+  "help": "Configure shared traffic shaper."
+ },
+ "firewall.ssh/host-key": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "SSH proxy host public keys."
+ },
+ "firewall.ssh/local-ca": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "SSH proxy local CA."
+ },
+ "firewall.ssh/local-key": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "SSH proxy local keys."
+ },
+ "firewall.ssh/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 9,
+  "help": "SSH proxy settings."
+ },
+ "firewall.ssl/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 11,
+  "help": "SSL proxy settings."
+ },
+ "firewall.wildcard-fqdn/custom": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Config global/VDOM Wildcard FQDN address."
+ },
+ "firewall.wildcard-fqdn/group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Config global Wildcard FQDN address groups."
+ },
+ "firewall/access-proxy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 16,
+  "help": "Configure IPv4 access proxy."
+ },
+ "firewall/access-proxy-ssh-client-cert": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "Configure Access Proxy SSH client certificate."
+ },
+ "firewall/access-proxy-virtual-host": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure Access Proxy virtual hosts."
+ },
+ "firewall/access-proxy6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 16,
+  "help": "Configure IPv6 access proxy."
+ },
+ "firewall/address": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 43,
+  "help": "Configure IPv4 addresses."
+ },
+ "firewall/address6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 27,
+  "help": "Configure IPv6 firewall addresses."
+ },
+ "firewall/address6-template": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure IPv6 address templates."
+ },
+ "firewall/addrgrp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "Configure IPv4 address groups."
+ },
+ "firewall/addrgrp6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "Configure IPv6 address groups."
+ },
+ "firewall/auth-portal": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 5,
+  "help": "Configure firewall authentication portals."
+ },
+ "firewall/central-snat-map": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 21,
+  "help": "Configure IPv4 and IPv6 central SNAT policies."
+ },
+ "firewall/city": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 2,
+  "help": "Define city table."
+ },
+ "firewall/country": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 3,
+  "help": "Define country table."
+ },
+ "firewall/decrypted-traffic-mirror": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure decrypted traffic mirror."
+ },
+ "firewall/dnstranslation": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure DNS translation."
+ },
+ "firewall/global": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 1,
+  "help": "Global firewall settings."
+ },
+ "firewall/identity-based-route": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure identity based routing."
+ },
+ "firewall/interface-policy": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 24,
+  "help": "Configure IPv4 interface policies."
+ },
+ "firewall/interface-policy6": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 24,
+  "help": "Configure IPv6 interface policies."
+ },
+ "firewall/internet-service": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 12,
+  "help": "Show Internet Service application."
+ },
+ "firewall/internet-service-custom": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure custom Internet Services."
+ },
+ "firewall/internet-service-custom-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure custom Internet Service group."
+ },
+ "firewall/internet-service-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure group of Internet Service."
+ },
+ "firewall/internet-service-name": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Define internet service names."
+ },
+ "firewall/internet-service-reputation": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 2,
+  "help": "Show Internet Service reputation."
+ },
+ "firewall/ip-translation": {
+  "category": "table",
+  "mkey": "transid",
+  "fields": 5,
+  "help": "Configure firewall IP-translation."
+ },
+ "firewall/ippool": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 21,
+  "help": "Configure IPv4 IP pools."
+ },
+ "firewall/ippool6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure IPv6 IP pools."
+ },
+ "firewall/ldb-monitor": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Configure server load balancing health monitors."
+ },
+ "firewall/local-in-policy": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 21,
+  "help": "Configure user defined IPv4 local-in policies."
+ },
+ "firewall/local-in-policy6": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 20,
+  "help": "Configure user defined IPv6 local-in policies."
+ },
+ "firewall/multicast-address": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "Configure multicast addresses."
+ },
+ "firewall/multicast-address6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure IPv6 multicast address."
+ },
+ "firewall/multicast-policy": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 21,
+  "help": "Configure multicast NAT policies."
+ },
+ "firewall/multicast-policy6": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 17,
+  "help": "Configure IPv6 multicast NAT policies."
+ },
+ "firewall/network-service-dynamic": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure Dynamic Network Services."
+ },
+ "firewall/on-demand-sniffer": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure on-demand packet sniffer."
+ },
+ "firewall/policy": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 170,
+  "help": "Configure IPv4/IPv6 policies."
+ },
+ "firewall/profile-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 22,
+  "help": "Configure profile groups."
+ },
+ "firewall/profile-protocol-options": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 17,
+  "help": "Configure protocol options."
+ },
+ "firewall/proxy-address": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 21,
+  "help": "Configure web proxy address."
+ },
+ "firewall/proxy-addrgrp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure web proxy address group."
+ },
+ "firewall/proxy-policy": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 72,
+  "help": "Configure proxy policies."
+ },
+ "firewall/region": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 3,
+  "help": "Define region table."
+ },
+ "firewall/security-policy": {
+  "category": "table",
+  "mkey": "policyid",
+  "fields": 78,
+  "help": "Configure NGFW IPv4/IPv6 application policies."
+ },
+ "firewall/shaping-policy": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 44,
+  "help": "Configure shaping policies."
+ },
+ "firewall/shaping-profile": {
+  "category": "table",
+  "mkey": "profile-name",
+  "fields": 6,
+  "help": "Configure shaping profiles."
+ },
+ "firewall/sniffer": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 30,
+  "help": "Configure sniffer."
+ },
+ "firewall/ssl-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 14,
+  "help": "Configure SSL servers."
+ },
+ "firewall/ssl-ssh-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 29,
+  "help": "Configure SSL/SSH protocol options."
+ },
+ "firewall/traffic-class": {
+  "category": "table",
+  "mkey": "class-id",
+  "fields": 2,
+  "help": "Configure names for shaping classes."
+ },
+ "firewall/ttl-policy": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 8,
+  "help": "Configure TTL policies."
+ },
+ "firewall/vendor-mac": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Show vendor and the MAC address they have."
+ },
+ "firewall/vip": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 95,
+  "help": "Configure virtual IP for IPv4."
+ },
+ "firewall/vip6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 80,
+  "help": "Configure virtual IP for IPv6."
+ },
+ "firewall/vipgrp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure IPv4 virtual IP groups."
+ },
+ "firewall/vipgrp6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure IPv6 virtual IP groups."
+ },
+ "ftp-proxy/explicit": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Configure explicit FTP proxy settings."
+ },
+ "icap/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 30,
+  "help": "Configure ICAP profiles."
+ },
+ "icap/server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 11,
+  "help": "Configure ICAP servers."
+ },
+ "icap/server-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure an ICAP server group consisting of multiple forward servers. Supports failover and load balancing."
+ },
+ "ips/attr-map": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 3,
+  "help": "Configure ips attr-map"
+ },
+ "ips/custom": {
+  "category": "table",
+  "mkey": "tag",
+  "fields": 13,
+  "help": "Configure IPS custom signature."
+ },
+ "ips/decoder": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure IPS decoder."
+ },
+ "ips/global": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 18,
+  "help": "Configure IPS global parameter."
+ },
+ "ips/metadata-map": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "configure ips metadata-map"
+ },
+ "ips/rule": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 15,
+  "help": "Configure IPS rules."
+ },
+ "ips/rule-settings": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 1,
+  "help": "Configure IPS rule setting."
+ },
+ "ips/sensor": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure IPS sensor."
+ },
+ "ips/settings": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 5,
+  "help": "Configure IPS VDOM parameter."
+ },
+ "ips/view-map": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 5,
+  "help": "Configure IPS view-map."
+ },
+ "log.disk/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Configure filters for local disk logging. Use these filters to determine the log messages to record according to severity and type."
+ },
+ "log.disk/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 29,
+  "help": "Settings for local disk logging."
+ },
+ "log.fortianalyzer-cloud/override-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 1,
+  "help": "Override FortiAnalyzer Cloud settings."
+ },
+ "log.fortianalyzer-cloud/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 22,
+  "help": "Global FortiAnalyzer Cloud settings."
+ },
+ "log.fortianalyzer/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 11,
+  "help": "Filters for FortiAnalyzer."
+ },
+ "log.fortianalyzer/override-filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 11,
+  "help": "Override filters for FortiAnalyzer."
+ },
+ "log.fortianalyzer/override-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 28,
+  "help": "Override FortiAnalyzer settings."
+ },
+ "log.fortianalyzer/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 27,
+  "help": "Global FortiAnalyzer settings."
+ },
+ "log.fortiguard/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Filters for FortiCloud."
+ },
+ "log.fortiguard/override-filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Override filters for FortiCloud."
+ },
+ "log.fortiguard/override-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 9,
+  "help": "Override global FortiCloud logging settings for this VDOM."
+ },
+ "log.fortiguard/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 14,
+  "help": "Configure logging to FortiCloud."
+ },
+ "log.memory/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Filters for memory buffer."
+ },
+ "log.memory/global-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Global settings for memory logging."
+ },
+ "log.memory/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 1,
+  "help": "Settings for memory buffer."
+ },
+ "log.null-device/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Filters for null device logging."
+ },
+ "log.null-device/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 1,
+  "help": "Settings for null device logging."
+ },
+ "log.syslogd/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Filters for remote system server."
+ },
+ "log.syslogd/override-filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Override filters for remote system server."
+ },
+ "log.syslogd/override-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 15,
+  "help": "Override settings for remote syslog server."
+ },
+ "log.syslogd/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 15,
+  "help": "Global settings for remote syslog server."
+ },
+ "log.tacacs+accounting/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Settings for TACACS+ accounting events filter."
+ },
+ "log.tacacs+accounting/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 6,
+  "help": "Settings for TACACS+ accounting."
+ },
+ "log.webtrends/filter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Filters for WebTrends."
+ },
+ "log.webtrends/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Settings for WebTrends."
+ },
+ "log/custom-field": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 3,
+  "help": "Configure custom log fields."
+ },
+ "log/eventfilter": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 17,
+  "help": "Configure log event filters."
+ },
+ "log/gui-display": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure how log messages are displayed on the GUI."
+ },
+ "log/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 24,
+  "help": "Configure general log settings."
+ },
+ "log/threat-weight": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 11,
+  "help": "Configure threat weight settings."
+ },
+ "router.bgp/neighbor": {
+  "category": "table",
+  "mkey": "ip",
+  "fields": 157,
+  "help": "BGP neighbor table."
+ },
+ "router.bgp/neighbor-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 156,
+  "help": "BGP neighbor group table."
+ },
+ "router.bgp/neighbor-range": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "BGP neighbor range table."
+ },
+ "router.bgp/network": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 5,
+  "help": "BGP network table."
+ },
+ "router/access-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure access lists."
+ },
+ "router/access-list6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure IPv6 access lists."
+ },
+ "router/aspath-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure Autonomous System (AS) path lists."
+ },
+ "router/auth-path": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure authentication based routing."
+ },
+ "router/bfd": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure BFD."
+ },
+ "router/bfd6": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure IPv6 BFD."
+ },
+ "router/bgp": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 66,
+  "help": "Configure BGP."
+ },
+ "router/community-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure community lists."
+ },
+ "router/extcommunity-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure extended community lists."
+ },
+ "router/isis": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 41,
+  "help": "Configure IS-IS."
+ },
+ "router/key-chain": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure key-chain."
+ },
+ "router/multicast": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 5,
+  "help": "Configure router multicast."
+ },
+ "router/multicast-flow": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure multicast-flow."
+ },
+ "router/multicast6": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Configure IPv6 multicast."
+ },
+ "router/ospf": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 32,
+  "help": "Configure OSPF."
+ },
+ "router/ospf6": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 19,
+  "help": "Configure IPv6 OSPF."
+ },
+ "router/policy": {
+  "category": "table",
+  "mkey": "seq-num",
+  "fields": 23,
+  "help": "Configure IPv4 routing policies."
+ },
+ "router/policy6": {
+  "category": "table",
+  "mkey": "seq-num",
+  "fields": 23,
+  "help": "Configure IPv6 routing policies."
+ },
+ "router/prefix-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure IPv4 prefix lists."
+ },
+ "router/prefix-list6": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure IPv6 prefix lists."
+ },
+ "router/rip": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 15,
+  "help": "Configure RIP."
+ },
+ "router/ripng": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 15,
+  "help": "Configure RIPng."
+ },
+ "router/route-map": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure route maps."
+ },
+ "router/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure router settings."
+ },
+ "router/static": {
+  "category": "table",
+  "mkey": "seq-num",
+  "fields": 21,
+  "help": "Configure IPv4 static routing tables."
+ },
+ "router/static6": {
+  "category": "table",
+  "mkey": "seq-num",
+  "fields": 17,
+  "help": "Configure IPv6 static routing tables."
+ },
+ "rule/fmwp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 15,
+  "help": "Show FMWP signatures."
+ },
+ "rule/otdt": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Show OT detection signatures."
+ },
+ "rule/otvp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 15,
+  "help": "Show OT patch signatures."
+ },
+ "sctp-filter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure SCTP filter profiles."
+ },
+ "ssh-filter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure SSH filter profile."
+ },
+ "switch-controller.acl/group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure ACL groups to be applied on managed FortiSwitch ports."
+ },
+ "switch-controller.acl/ingress": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure ingress ACL policies to be applied on managed FortiSwitch ports."
+ },
+ "switch-controller.dsl/policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 10,
+  "help": "DSL policy."
+ },
+ "switch-controller.ptp/interface-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "PTP interface-policy configuration."
+ },
+ "switch-controller.ptp/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Global PTP profile."
+ },
+ "switch-controller.qos/dot1p-map": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 11,
+  "help": "Configure FortiSwitch QoS 802.1p."
+ },
+ "switch-controller.qos/ip-dscp-map": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure FortiSwitch QoS IP precedence/DSCP."
+ },
+ "switch-controller.qos/qos-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure FortiSwitch QoS policy."
+ },
+ "switch-controller.qos/queue-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure FortiSwitch QoS egress queue policy."
+ },
+ "switch-controller.security-policy/802-1X": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 21,
+  "help": "Configure 802.1x MAC Authentication Bypass (MAB) policies."
+ },
+ "switch-controller.security-policy/captive-portal": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Names of VLANs that use captive portal authentication."
+ },
+ "switch-controller.security-policy/local-access": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure allowaccess list for mgmt and internal interfaces on managed FortiSwitch units."
+ },
+ "switch-controller/custom-command": {
+  "category": "table",
+  "mkey": "command-name",
+  "fields": 3,
+  "help": "Configure the FortiGate switch controller to send custom commands to managed FortiSwitch devices."
+ },
+ "switch-controller/dynamic-port-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure Dynamic port policy to be applied on the managed FortiSwitch ports through DPP device."
+ },
+ "switch-controller/fortilink-settings": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure integrated FortiLink settings for FortiSwitch."
+ },
+ "switch-controller/global": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 26,
+  "help": "Configure FortiSwitch global settings."
+ },
+ "switch-controller/lldp-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 18,
+  "help": "Configure FortiSwitch LLDP profiles."
+ },
+ "switch-controller/location": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure FortiSwitch location services."
+ },
+ "switch-controller/mac-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure MAC policy to be applied on the managed FortiSwitch devices through NAC device."
+ },
+ "switch-controller/managed-switch": {
+  "category": "table",
+  "mkey": "switch-id",
+  "fields": 63,
+  "help": "Configure FortiSwitch devices that are managed by this FortiGate."
+ },
+ "switch-controller/storm-control-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure FortiSwitch storm control policy to be applied on managed-switch ports."
+ },
+ "switch-controller/switch-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure FortiSwitch switch groups."
+ },
+ "switch-controller/switch-interface-tag": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 1,
+  "help": "Configure switch object tags."
+ },
+ "switch-controller/switch-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure FortiSwitch switch profile."
+ },
+ "switch-controller/system": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 12,
+  "help": "Configure system-wide switch controller settings."
+ },
+ "switch-controller/traffic-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure FortiSwitch traffic policy."
+ },
+ "switch-controller/virtual-port-pool": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure virtual pool."
+ },
+ "switch-controller/vlan-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure VLAN policy to be applied on the managed FortiSwitch ports through dynamic-port-policy."
+ },
+ "system.3g-modem/custom": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 8,
+  "help": "3G MODEM custom."
+ },
+ "system.autoupdate/schedule": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Configure update schedule."
+ },
+ "system.autoupdate/tunneling": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 5,
+  "help": "Configure web proxy tunneling for the FDN."
+ },
+ "system.dhcp/server": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 52,
+  "help": "Configure DHCP servers."
+ },
+ "system.dhcp6/server": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 22,
+  "help": "Configure DHCPv6 servers."
+ },
+ "system.fabric-vpn/advertised-subnets": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 6,
+  "help": "Local advertised subnets."
+ },
+ "system.ipam/pools": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure IPAM pools."
+ },
+ "system.lldp/network-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 10,
+  "help": "Configure LLDP network policy."
+ },
+ "system.object-tagging/tags": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 1,
+  "help": "Tags."
+ },
+ "system.pcp-server/pools": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 19,
+  "help": "Configure PCP pools."
+ },
+ "system.replacemsg/admin": {
+  "category": "table",
+  "mkey": "msg-type",
+  "fields": 4,
+  "help": "Replacement messages."
+ },
+ "system.replacemsg/auth": {
+  "category": "table",
+  "mkey": "msg-type",
+  "fields": 4,
+  "help": "Replacement messages."
+ },
+ "system.replacemsg/http": {
+  "category": "table",
+  "mkey": "msg-type",
+  "fields": 4,
+  "help": "Replacement messages."
+ },
+ "system.replacemsg/mail": {
+  "category": "table",
+  "mkey": "msg-type",
+  "fields": 4,
+  "help": "Replacement messages."
+ },
+ "system.sdwan/health-check": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 46,
+  "help": "SD-WAN status checking or health checking. Identify a server on the Internet and determine how SD-WAN verifies that the FortiGate can communicate with it."
+ },
+ "system.sdwan/members": {
+  "category": "table",
+  "mkey": "seq-num",
+  "fields": 18,
+  "help": "FortiGate interfaces added to the SD-WAN."
+ },
+ "system.sdwan/service": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 63,
+  "help": "Create SD-WAN rules (also called services) to control how sessions are distributed to interfaces in the SD-WAN."
+ },
+ "system.sdwan/zone": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure SD-WAN zones."
+ },
+ "system.snmp/community": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 18,
+  "help": "SNMP community configuration."
+ },
+ "system.snmp/mib-view": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "SNMP Access Control MIB View configuration."
+ },
+ "system.snmp/sysinfo": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 12,
+  "help": "SNMP system info configuration."
+ },
+ "system.snmp/user": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 20,
+  "help": "SNMP user configuration."
+ },
+ "system/accprofile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 27,
+  "help": "Configure access profiles for system administrators."
+ },
+ "system/acme": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 7,
+  "help": "Configure ACME client."
+ },
+ "system/admin": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 53,
+  "help": "Configure admin users."
+ },
+ "system/alarm": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure alarm."
+ },
+ "system/api-user": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 10,
+  "help": "Configure API users."
+ },
+ "system/arp-table": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure ARP table."
+ },
+ "system/auto-install": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Configure USB auto installation."
+ },
+ "system/auto-script": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure auto script."
+ },
+ "system/automation-action": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 34,
+  "help": "Action for automation stitches."
+ },
+ "system/automation-condition": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Condition for automation stitches."
+ },
+ "system/automation-destination": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Automation destinations."
+ },
+ "system/automation-stitch": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Automation stitches."
+ },
+ "system/automation-trigger": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 21,
+  "help": "Trigger for automation stitches."
+ },
+ "system/central-management": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 22,
+  "help": "Configure central management."
+ },
+ "system/console": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure console."
+ },
+ "system/csf": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 26,
+  "help": "Add this FortiGate to a Security Fabric or set up a new Security Fabric on this FortiGate."
+ },
+ "system/custom-language": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure custom languages."
+ },
+ "system/datasource": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Define system datasource table."
+ },
+ "system/ddns": {
+  "category": "table",
+  "mkey": "ddnsid",
+  "fields": 20,
+  "help": "Configure DDNS."
+ },
+ "system/dedicated-mgmt": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 7,
+  "help": "Configure dedicated management."
+ },
+ "system/device-upgrade": {
+  "category": "table",
+  "mkey": "serial",
+  "fields": 11,
+  "help": "Independent upgrades for managed devices."
+ },
+ "system/dns": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 23,
+  "help": "Configure DNS."
+ },
+ "system/dns-database": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 17,
+  "help": "Configure DNS databases."
+ },
+ "system/dns-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure DNS servers."
+ },
+ "system/dns64": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure DNS64."
+ },
+ "system/dscp-based-priority": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 3,
+  "help": "Configure DSCP based priority table."
+ },
+ "system/email-server": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 13,
+  "help": "Configure the email server used by the FortiGate various things. For example, for sending email messages to users to support user authentication features."
+ },
+ "system/evpn": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 6,
+  "help": "Configure EVPN instance."
+ },
+ "system/external-resource": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 16,
+  "help": "Configure external resource."
+ },
+ "system/fabric-vpn": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 14,
+  "help": "Setup for self orchestrated fabric auto discovery VPN."
+ },
+ "system/federated-upgrade": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 9,
+  "help": "Coordinate federated upgrades within the Security Fabric."
+ },
+ "system/fips-cc": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure FIPS-CC mode."
+ },
+ "system/fortiguard": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 58,
+  "help": "Configure FortiGuard services."
+ },
+ "system/fortisandbox": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 10,
+  "help": "Configure FortiSandbox."
+ },
+ "system/fsso-polling": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Configure Fortinet Single Sign On (FSSO) server."
+ },
+ "system/ftm-push": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 7,
+  "help": "Configure FortiToken Mobile push services."
+ },
+ "system/geneve": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure GENEVE devices."
+ },
+ "system/geoip-country": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 2,
+  "help": "Define geoip country name-ID table."
+ },
+ "system/geoip-override": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure geographical location mapping for IP address(es) to override mappings from FortiGuard."
+ },
+ "system/global": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 230,
+  "help": "Configure global attributes."
+ },
+ "system/gre-tunnel": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 18,
+  "help": "Configure GRE tunnel."
+ },
+ "system/ha": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 71,
+  "help": "Configure HA."
+ },
+ "system/ha-monitor": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 3,
+  "help": "Configure HA monitor."
+ },
+ "system/ike": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 24,
+  "help": "Configure IKE global attributes."
+ },
+ "system/interface": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 232,
+  "help": "Configure interfaces."
+ },
+ "system/ipam": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 9,
+  "help": "Configure IP address management services."
+ },
+ "system/ipam/rules": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure IPAM allocation rules."
+ },
+ "system/ipip-tunnel": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure IP in IP Tunneling."
+ },
+ "system/ips": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure IPS system settings."
+ },
+ "system/ips-urlfilter-dns": {
+  "category": "table",
+  "mkey": "address",
+  "fields": 3,
+  "help": "Configure IPS URL filter DNS servers."
+ },
+ "system/ips-urlfilter-dns6": {
+  "category": "table",
+  "mkey": "address6",
+  "fields": 2,
+  "help": "Configure IPS URL filter IPv6 DNS servers."
+ },
+ "system/ipsec-aggregate": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure an aggregate of IPsec tunnels."
+ },
+ "system/ipv6-neighbor-cache": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure IPv6 neighbor cache table."
+ },
+ "system/ipv6-tunnel": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure IPv6/IPv4 in IPv6 tunnel."
+ },
+ "system/link-monitor": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 34,
+  "help": "Configure Link Health Monitor."
+ },
+ "system/lte-modem": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 11,
+  "help": "Configure USB LTE/WIMAX devices."
+ },
+ "system/mac-address-table": {
+  "category": "table",
+  "mkey": "mac",
+  "fields": 3,
+  "help": "Configure MAC address tables."
+ },
+ "system/mobile-tunnel": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 15,
+  "help": "Configure Mobile tunnels, an implementation of Network Mobility (NEMO) extensions for Mobile IPv4 RFC5177."
+ },
+ "system/modem": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 46,
+  "help": "Configure MODEM."
+ },
+ "system/netflow": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 5,
+  "help": "Configure NetFlow."
+ },
+ "system/network-visibility": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 6,
+  "help": "Configure network visibility settings."
+ },
+ "system/npu": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 8,
+  "help": "Configure NPU attributes."
+ },
+ "system/ntp": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 12,
+  "help": "Configure system NTP information."
+ },
+ "system/object-tagging": {
+  "category": "table",
+  "mkey": "category",
+  "fields": 7,
+  "help": "Configure object tagging."
+ },
+ "system/password-policy": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 12,
+  "help": "Configure password policy for locally defined administrator passwords and IPsec VPN pre-shared keys."
+ },
+ "system/password-policy-guest-admin": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 11,
+  "help": "Configure the password policy for guest administrators."
+ },
+ "system/physical-switch": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure physical switches."
+ },
+ "system/pppoe-interface": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 17,
+  "help": "Configure the PPPoE interfaces."
+ },
+ "system/probe-response": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 7,
+  "help": "Configure system probe response."
+ },
+ "system/proxy-arp": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure proxy-ARP."
+ },
+ "system/ptp": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 7,
+  "help": "Configure system PTP information."
+ },
+ "system/replacemsg-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 19,
+  "help": "Configure replacement message groups."
+ },
+ "system/replacemsg-image": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure replacement message images."
+ },
+ "system/resource-limits": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 18,
+  "help": "Configure resource limits."
+ },
+ "system/saml": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 18,
+  "help": "Global settings for SAML authentication."
+ },
+ "system/sdn-connector": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 52,
+  "help": "Configure connection to SDN Connector."
+ },
+ "system/sdn-proxy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure SDN proxy."
+ },
+ "system/sdwan": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 16,
+  "help": "Configure redundant Internet connections with multiple outbound links and health-check profiles."
+ },
+ "system/session-helper": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure session helper."
+ },
+ "system/session-ttl": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure global session TTL timers for this FortiGate."
+ },
+ "system/settings": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 137,
+  "help": "Configure VDOM settings."
+ },
+ "system/sflow": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 1,
+  "help": "Configure sFlow."
+ },
+ "system/sit-tunnel": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure IPv6 tunnel over IPv4."
+ },
+ "system/sms-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure SMS server for sending SMS messages to support user authentication."
+ },
+ "system/speed-test-schedule": {
+  "category": "table",
+  "mkey": "interface",
+  "fields": 16,
+  "help": "Speed test schedule for each interface."
+ },
+ "system/speed-test-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure speed test server list."
+ },
+ "system/speed-test-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure speed test setting."
+ },
+ "system/ssh-config": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 7,
+  "help": "Configure SSH config."
+ },
+ "system/sso-admin": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure SSO admin users."
+ },
+ "system/sso-forticloud-admin": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure FortiCloud SSO admin users."
+ },
+ "system/sso-fortigate-cloud-admin": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure FortiCloud SSO admin users."
+ },
+ "system/standalone-cluster": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 8,
+  "help": "Configure FortiGate Session Life Support Protocol (FGSP) cluster attributes."
+ },
+ "system/storage": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure logical storage."
+ },
+ "system/stp": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 6,
+  "help": "Configure Spanning Tree Protocol (STP)."
+ },
+ "system/switch-interface": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 10,
+  "help": "Configure software switch interfaces by grouping physical and WiFi interfaces."
+ },
+ "system/timezone": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 1,
+  "help": "Show timezone."
+ },
+ "system/tos-based-priority": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 3,
+  "help": "Configure Type of Service (ToS) based priority table to set network traffic priorities."
+ },
+ "system/vdom": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure virtual domain."
+ },
+ "system/vdom-dns": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 14,
+  "help": "Configure DNS servers for a non-management VDOM."
+ },
+ "system/vdom-exception": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Global configuration objects that can be configured independently across different ha peers for all VDOMs or for the defined VDOM scope."
+ },
+ "system/vdom-link": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure VDOM links."
+ },
+ "system/vdom-netflow": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure NetFlow per VDOM."
+ },
+ "system/vdom-property": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 21,
+  "help": "Configure VDOM property."
+ },
+ "system/vdom-radius-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure a RADIUS server to use as a RADIUS Single Sign On (RSSO) server for this VDOM."
+ },
+ "system/vdom-sflow": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure sFlow per VDOM to add or change the IP address and UDP port that FortiGate sFlow agents in this VDOM use to send sFlow datagrams to an sFlow collector."
+ },
+ "system/virtual-switch": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure virtual hardware switch interfaces."
+ },
+ "system/virtual-wire-pair": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure virtual wire pairs."
+ },
+ "system/vne-tunnel": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 11,
+  "help": "Configure virtual network enabler tunnel."
+ },
+ "system/vxlan": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 10,
+  "help": "Configure VXLAN devices."
+ },
+ "system/wccp": {
+  "category": "table",
+  "mkey": "service-id",
+  "fields": 23,
+  "help": "Configure WCCP."
+ },
+ "system/zone": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual interfaces in the zone."
+ },
+ "user/adgrp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure FSSO groups."
+ },
+ "user/certificate": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure certificate users."
+ },
+ "user/domain-controller": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 24,
+  "help": "Configure domain controller entries."
+ },
+ "user/exchange": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Configure MS Exchange server entries."
+ },
+ "user/external-identity-provider": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "Configure external identity provider."
+ },
+ "user/fortitoken": {
+  "category": "table",
+  "mkey": "serial-number",
+  "fields": 8,
+  "help": "Configure FortiToken."
+ },
+ "user/fsso": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 32,
+  "help": "Configure Fortinet Single Sign On (FSSO) agents."
+ },
+ "user/fsso-polling": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 13,
+  "help": "Configure FSSO active directory servers for polling mode."
+ },
+ "user/group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 24,
+  "help": "Configure user groups."
+ },
+ "user/krb-keytab": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure Kerberos keytab entries."
+ },
+ "user/ldap": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 40,
+  "help": "Configure LDAP server entries."
+ },
+ "user/local": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 26,
+  "help": "Configure local users."
+ },
+ "user/nac-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 25,
+  "help": "Configure NAC policy matching pattern to identify matching NAC devices."
+ },
+ "user/password-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "Configure user password policy."
+ },
+ "user/peer": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Configure peer users."
+ },
+ "user/peergrp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure peer groups."
+ },
+ "user/pop3": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "POP3 server entry configuration."
+ },
+ "user/quarantine": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Configure quarantine support."
+ },
+ "user/radius": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 60,
+  "help": "Configure RADIUS server entries."
+ },
+ "user/saml": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 18,
+  "help": "SAML server entry configuration."
+ },
+ "user/security-exempt-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure security exemption list."
+ },
+ "user/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 22,
+  "help": "Configure user authentication setting."
+ },
+ "user/tacacs+": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 14,
+  "help": "Configure TACACS+ server entries."
+ },
+ "videofilter/keyword": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 5,
+  "help": "Configure video filter keywords."
+ },
+ "videofilter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure VideoFilter profile."
+ },
+ "videofilter/youtube-key": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 2,
+  "help": "Configure YouTube API keys."
+ },
+ "virtual-patch/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure virtual-patch profile."
+ },
+ "voip/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure VoIP profiles."
+ },
+ "vpn.certificate/ca": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 14,
+  "help": "CA certificate."
+ },
+ "vpn.certificate/crl": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Certificate Revocation List as a PEM file."
+ },
+ "vpn.certificate/local": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 39,
+  "help": "Local keys and certificates."
+ },
+ "vpn.certificate/ocsp-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "OCSP server configuration."
+ },
+ "vpn.certificate/remote": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Remote certificate as a PEM file."
+ },
+ "vpn.certificate/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 32,
+  "help": "VPN certificate setting."
+ },
+ "vpn.ipsec/concentrator": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Concentrator configuration."
+ },
+ "vpn.ipsec/fec": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure Forward Error Correction (FEC) mapping profiles."
+ },
+ "vpn.ipsec/manualkey": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 11,
+  "help": "Configure IPsec manual keys."
+ },
+ "vpn.ipsec/manualkey-interface": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 15,
+  "help": "Configure IPsec manual keys."
+ },
+ "vpn.ipsec/phase1": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 149,
+  "help": "Configure VPN remote gateway."
+ },
+ "vpn.ipsec/phase1-interface": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 183,
+  "help": "Configure VPN remote gateway."
+ },
+ "vpn.ipsec/phase2": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 46,
+  "help": "Configure VPN autokey tunnel."
+ },
+ "vpn.ipsec/phase2-interface": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 46,
+  "help": "Configure VPN autokey tunnel."
+ },
+ "vpn.ssl.web/host-check-software": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "SSL-VPN host check software."
+ },
+ "vpn.ssl.web/portal": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 77,
+  "help": "Portal."
+ },
+ "vpn.ssl.web/realm": {
+  "category": "table",
+  "mkey": "url-path",
+  "fields": 9,
+  "help": "Realm."
+ },
+ "vpn.ssl.web/user-bookmark": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure SSL-VPN user bookmark."
+ },
+ "vpn.ssl.web/user-group-bookmark": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure SSL-VPN user group bookmark."
+ },
+ "vpn.ssl/client": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 17,
+  "help": "Client."
+ },
+ "vpn.ssl/settings": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 71,
+  "help": "Configure SSL-VPN."
+ },
+ "vpn/kmip-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "KMIP server entry configuration."
+ },
+ "vpn/l2tp": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 9,
+  "help": "Configure L2TP."
+ },
+ "vpn/pptp": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 6,
+  "help": "Configure PPTP."
+ },
+ "vpn/qkd": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure Quantum Key Distribution servers"
+ },
+ "waf/main-class": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 2,
+  "help": "Hidden table for datasource."
+ },
+ "waf/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "Configure Web application firewall configuration."
+ },
+ "waf/signature": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 2,
+  "help": "Hidden table for datasource."
+ },
+ "waf/sub-class": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 2,
+  "help": "Hidden table for datasource."
+ },
+ "web-proxy/debug-url": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure debug URL addresses."
+ },
+ "web-proxy/explicit": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 35,
+  "help": "Configure explicit Web proxy settings."
+ },
+ "web-proxy/fast-fallback": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Proxy destination connection fast-fallback."
+ },
+ "web-proxy/forward-server": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 13,
+  "help": "Configure forward-server addresses."
+ },
+ "web-proxy/forward-server-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 5,
+  "help": "Configure a forward server group consisting or multiple forward servers. Supports failover and load balancing."
+ },
+ "web-proxy/global": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 25,
+  "help": "Configure Web proxy global settings."
+ },
+ "web-proxy/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "Configure web proxy profiles."
+ },
+ "web-proxy/url-match": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Exempt URLs from web proxy forwarding and caching."
+ },
+ "web-proxy/wisp": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure Websense Integrated Services Protocol (WISP) servers."
+ },
+ "webfilter/content": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure Web filter banned word table."
+ },
+ "webfilter/content-header": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure content types used by Web filter."
+ },
+ "webfilter/fortiguard": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 12,
+  "help": "Configure FortiGuard Web Filter service."
+ },
+ "webfilter/ftgd-local-cat": {
+  "category": "table",
+  "mkey": "desc",
+  "fields": 3,
+  "help": "Configure FortiGuard Web Filter local categories."
+ },
+ "webfilter/ftgd-local-rating": {
+  "category": "table",
+  "mkey": "url",
+  "fields": 4,
+  "help": "Configure local FortiGuard Web Filter local ratings."
+ },
+ "webfilter/ips-urlfilter-cache-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 2,
+  "help": "Configure IPS URL filter cache settings."
+ },
+ "webfilter/ips-urlfilter-setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Configure IPS URL filter settings."
+ },
+ "webfilter/ips-urlfilter-setting6": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 4,
+  "help": "Configure IPS URL filter settings for IPv6."
+ },
+ "webfilter/override": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 11,
+  "help": "Configure FortiGuard Web Filter administrative overrides."
+ },
+ "webfilter/profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 35,
+  "help": "Configure Web filter profiles."
+ },
+ "webfilter/search-engine": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure web filter search engines."
+ },
+ "webfilter/urlfilter": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 7,
+  "help": "Configure URL filter lists."
+ },
+ "wireless-controller.hotspot20/anqp-3gpp-cellular": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure 3GPP public land mobile network (PLMN)."
+ },
+ "wireless-controller.hotspot20/anqp-ip-address-type": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure IP address type availability."
+ },
+ "wireless-controller.hotspot20/anqp-nai-realm": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure network access identifier (NAI) realm."
+ },
+ "wireless-controller.hotspot20/anqp-network-auth-type": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure network authentication type."
+ },
+ "wireless-controller.hotspot20/anqp-roaming-consortium": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure roaming consortium."
+ },
+ "wireless-controller.hotspot20/anqp-venue-name": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure venue name duple."
+ },
+ "wireless-controller.hotspot20/anqp-venue-url": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure venue URL."
+ },
+ "wireless-controller.hotspot20/h2qp-advice-of-charge": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure advice of charge."
+ },
+ "wireless-controller.hotspot20/h2qp-conn-capability": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 12,
+  "help": "Configure connection capability."
+ },
+ "wireless-controller.hotspot20/h2qp-operator-name": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure operator friendly name."
+ },
+ "wireless-controller.hotspot20/h2qp-osu-provider": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 7,
+  "help": "Configure online sign up (OSU) provider list."
+ },
+ "wireless-controller.hotspot20/h2qp-osu-provider-nai": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure online sign up (OSU) provider NAI list."
+ },
+ "wireless-controller.hotspot20/h2qp-terms-and-conditions": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure terms and conditions."
+ },
+ "wireless-controller.hotspot20/h2qp-wan-metric": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "Configure WAN metrics."
+ },
+ "wireless-controller.hotspot20/hs-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 38,
+  "help": "Configure hotspot profile."
+ },
+ "wireless-controller.hotspot20/icon": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 2,
+  "help": "Configure OSU provider icon."
+ },
+ "wireless-controller.hotspot20/qos-map": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure QoS map set."
+ },
+ "wireless-controller/access-control-list": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure WiFi bridge access control list."
+ },
+ "wireless-controller/ap-status": {
+  "category": "table",
+  "mkey": "id",
+  "fields": 4,
+  "help": "Configure access point status (rogue | accepted | suppressed)."
+ },
+ "wireless-controller/apcfg-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure AP local configuration profiles."
+ },
+ "wireless-controller/arrp-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 22,
+  "help": "Configure WiFi Automatic Radio Resource Provisioning (ARRP) profiles."
+ },
+ "wireless-controller/ble-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 18,
+  "help": "Configure Bluetooth Low Energy profile."
+ },
+ "wireless-controller/bonjour-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure Bonjour profiles. Bonjour is Apple's zero configuration networking protocol. Bonjour profiles allow APs and FortiAPs to connnect to networks using Bonjour."
+ },
+ "wireless-controller/global": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 29,
+  "help": "Configure wireless controller global settings."
+ },
+ "wireless-controller/inter-controller": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 7,
+  "help": "Configure inter wireless controller operation."
+ },
+ "wireless-controller/log": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 13,
+  "help": "Configure wireless controller event log filters."
+ },
+ "wireless-controller/mpsk-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 6,
+  "help": "Configure MPSK profile."
+ },
+ "wireless-controller/nac-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure WiFi network access control (NAC) profiles."
+ },
+ "wireless-controller/qos-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 23,
+  "help": "Configure WiFi quality of service (QoS) profiles."
+ },
+ "wireless-controller/region": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure FortiAP regions (for floor plans and maps)."
+ },
+ "wireless-controller/setting": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 15,
+  "help": "VDOM wireless controller configuration."
+ },
+ "wireless-controller/snmp": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 6,
+  "help": "Configure SNMP."
+ },
+ "wireless-controller/ssid-policy": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure WiFi SSID policies."
+ },
+ "wireless-controller/syslog-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure Wireless Termination Points (WTP) system log server profile."
+ },
+ "wireless-controller/timers": {
+  "category": "complex",
+  "mkey": null,
+  "fields": 23,
+  "help": "Configure CAPWAP timers."
+ },
+ "wireless-controller/utm-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 8,
+  "help": "Configure UTM (Unified Threat Management) profile."
+ },
+ "wireless-controller/vap": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 167,
+  "help": "Configure Virtual Access Points (VAPs)."
+ },
+ "wireless-controller/vap-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 3,
+  "help": "Configure virtual Access Point (VAP) groups."
+ },
+ "wireless-controller/wag-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 9,
+  "help": "Configure wireless access gateway (WAG) profiles used for tunnels on AP."
+ },
+ "wireless-controller/wids-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 50,
+  "help": "Configure wireless intrusion detection system (WIDS) profiles."
+ },
+ "wireless-controller/wtp": {
+  "category": "table",
+  "mkey": "wtp-id",
+  "fields": 44,
+  "help": "Configure Wireless Termination Points (WTPs), that is, FortiAPs or APs to be managed by FortiGate."
+ },
+ "wireless-controller/wtp-group": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 4,
+  "help": "Configure WTP groups."
+ },
+ "wireless-controller/wtp-profile": {
+  "category": "table",
+  "mkey": "name",
+  "fields": 50,
+  "help": "Configure WTP profiles or FortiAP profiles that define radio settings for manageable FortiAP platforms."
+ }
+}

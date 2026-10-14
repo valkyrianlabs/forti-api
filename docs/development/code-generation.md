@@ -28,6 +28,21 @@ tools/fortios/fortios.py check                            # fail if the headers 
 
 Generation is deterministic: the same manifest and snapshots always produce byte-identical headers.
 
+## Discovery
+
+The catalogs in `codegen/catalog/<version>/` record what a device offers; they contain paths and
+schema metadata only, never device data:
+
+- `cmdb.json` (`fortios.py crawl`): every configuration path, found from `codegen/seeds.txt`, the
+  cmdb paths the web GUI references, and the `datasource` references inside each schema, with its
+  category, key and attribute count. Every entry was confirmed by the device answering
+  `?action=schema`.
+- `gui-api.json` (`fortios.py mine`): the monitor, log and service paths the device's web GUI calls,
+  extracted statically from its JavaScript bundle (and the HTTP method where the call site shows
+  it). Only path strings are kept.
+
+Both are read-only against the device and converge: running them again finds nothing new.
+
 ## Adding an endpoint
 
 1. Add a `[[cmdb]]` entry to `codegen/api.toml` (`path`, and `namespace`, `type`, `alias` when the
