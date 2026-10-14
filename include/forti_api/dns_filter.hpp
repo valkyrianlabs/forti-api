@@ -14,16 +14,18 @@ class DNSFilter {
     inline static std::string api_endpoint = "/cmdb/dnsfilter/profile";
 
 public:
-    static void update(const DNSProfile& profile) {
+    static Response update(const DNSProfile& profile) {
         if (!contains(profile.name)) throw std::runtime_error("Can't update non-existent DNS Profile");
-        FortiAPI::put(std::format("{}/{}", api_endpoint, profile.name), profile);
+        return FortiAPI::put(std::format("{}/{}", api_endpoint, profile.name), profile);
     }
 
-    static void add(const std::string& name) { FortiAPI::post(api_endpoint, DNSProfile(name)); }
+    static Response add(const DNSProfile& profile) { return FortiAPI::post(api_endpoint, profile); }
 
-    static void del(const std::string& name) {
+    static Response add(const std::string& name) { return add(DNSProfile(name)); }
+
+    static Response del(const std::string& name) {
         if (!contains(name)) throw std::runtime_error("Can't delete non-existent item: " + name);
-        else FortiAPI::del(std::format("{}/{}", api_endpoint, name));
+        return FortiAPI::del(std::format("{}/{}", api_endpoint, name));
     }
 
     static bool contains(const std::string& name) {
@@ -42,8 +44,10 @@ public:
         return result;
     }
 
+    // Only profiles that reference the category are written; the others are left untouched.
     static void global_allow_category(unsigned int category) {
         for (auto& profile : get()) {
+            if (!profile.contains_category(category)) continue;
             profile.allow_category(category);
             update(profile);
         }

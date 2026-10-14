@@ -53,15 +53,20 @@ public:
 
     static void disable(const std::string& name) { set(name, false); }
 
-    static void add(const std::string& name, unsigned int category) {
-        PushThreatFeed threat_feed(name, category);
-        FortiAPI::post(external_resource, threat_feed);
-    }
+    static Response add(const PushThreatFeed& feed) { return FortiAPI::post(external_resource, feed); }
 
+    static Response add(const std::string& name, unsigned int category) { return add(PushThreatFeed(name, category)); }
+
+    // DNS filter profiles must stop referencing the feed's category before FortiOS allows the delete,
+    // unless another feed still provides that category.
     static void del(const std::string& name) {
         if (contains(name)) {
             auto category = get(name).category;
-            DNSFilter::global_allow_category(category);
+            auto feeds = get();
+            bool shared = std::any_of(feeds.begin(), feeds.end(), [&](const PushThreatFeed& feed) {
+                return feed.name != name && feed.category == category;
+            });
+            if (!shared) DNSFilter::global_allow_category(category);
             FortiAPI::del(std::format("{}/{}", external_resource, name));
         } else std::cerr << "Couldn't locate threat feed for deletion: " << name << std::endl;
     }
