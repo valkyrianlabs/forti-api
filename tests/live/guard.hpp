@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <array>
 #include <cstdint>
+#include <cstdlib>
 #include <string>
 #include <string_view>
 #include <thread>
@@ -77,10 +78,20 @@ namespace live {
         return out;
     }
 
+    // FORTI_API_LIVE_READ_ONLY=1: a read-only run (for example only the read-only tests, selected
+    // with --gtest_filter, while another run owns the test objects). The guard refuses every write and
+    // the suite skips its leftover purge.
+    inline bool read_only_requested() {
+        const char* value = std::getenv("FORTI_API_LIVE_READ_ONLY");
+        return value && std::string_view(value) == "1";
+    }
+
     // Wraps the real transport. GETs pass; a POST must create a forti-api-test-* object in an
     // approved collection; PUT/DELETE must target <approved collection>/<forti-api-test-*> exactly.
+    // A read-only guard refuses everything but GET.
     class GuardTransport final : public fortiapi::Transport {
         std::shared_ptr<fortiapi::Transport> inner_;
+        bool read_only_ = false;
 
         static std::string api_path(const std::string& url) {
             auto at = url.find("/api/v2/");
@@ -95,7 +106,8 @@ namespace live {
         }
 
     public:
-        explicit GuardTransport(std::shared_ptr<fortiapi::Transport> inner) : inner_(std::move(inner)) {}
+        explicit GuardTransport(std::shared_ptr<fortiapi::Transport> inner, bool read_only = false)
+                : inner_(std::move(inner)), read_only_(read_only) {}
 
         static void check(const fortiapi::HttpRequest& request) {
             if (request.method == fortiapi::Method::Get) return;
@@ -130,6 +142,9 @@ namespace live {
         }
 
         fortiapi::HttpResponse perform(const fortiapi::HttpRequest& request) override {
+            if (read_only_ && request.method != fortiapi::Method::Get)
+                throw GuardViolation("live guard: read-only run, refusing " +
+                                     std::string(fortiapi::to_string(request.method)) + " " + api_path(request.url));
             check(request);
             return inner_->perform(request);
         }
@@ -138,7 +153,8 @@ namespace live {
     // A client for the live suite: environment config, every request through the guard.
     inline std::shared_ptr<fortiapi::Client> guarded_client() {
         auto config = fortiapi::Config::from_env();
-        auto transport = std::make_shared<GuardTransport>(std::make_shared<fortiapi::CurlTransport>(config));
+        auto transport = std::make_shared<GuardTransport>(std::make_shared<fortiapi::CurlTransport>(config),
+                                                          read_only_requested());
         return std::make_shared<fortiapi::Client>(config, transport);
     }
 

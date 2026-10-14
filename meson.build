@@ -56,6 +56,7 @@ if get_option('live_tests')
     gtest_nomain_dep = dependency('gtest', main : false)
     test('fortigate', executable('liveTests',
                                  'tests/live/main.cpp',
+                                 'tests/live/test_backup.cpp',
                                  'tests/live/test_coverage.cpp',
                                  'tests/live/test_crud.cpp',
                                  'tests/live/test_dnsfilter.cpp',

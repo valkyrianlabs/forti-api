@@ -64,6 +64,16 @@ TEST(LiveGuard, NeverReachesTheTransportWhenRefusing) {
     EXPECT_TRUE(fake->requests.empty());
 }
 
+TEST(LiveGuard, ReadOnlyRunsRefuseEveryWrite) {
+    auto fake = std::make_shared<fortiapi::testing::FakeTransport>();
+    GuardTransport guard(fake, true);
+    EXPECT_THROW(guard.perform(req(Method::Post, "cmdb/dnsfilter/profile", R"({"name":"forti-api-test-a"})")), GuardViolation);
+    EXPECT_THROW(guard.perform(req(Method::Delete, "cmdb/dnsfilter/profile/forti-api-test-a")), GuardViolation);
+    EXPECT_TRUE(fake->requests.empty());
+    fake->reply(200, std::string("{}"));
+    EXPECT_NO_THROW(guard.perform(req(Method::Get, "monitor/system/status")));
+}
+
 TEST(ConfigAudit, FlagsRestChangesToNonTestObjectsSinceTheStart) {
     using fortiapi::testing::FakeTransport;
     auto fake = std::make_shared<FakeTransport>();
