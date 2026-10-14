@@ -5,7 +5,7 @@
 #ifndef FORTI_API_RESPONSE_H
 #define FORTI_API_RESPONSE_H
 
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 
 struct Response {
     unsigned int size{}, matched_count{}, next_idx{}, http_status{}, build{};

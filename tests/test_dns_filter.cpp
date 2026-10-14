@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "include/forti_api/dns_filter.hpp"
+#include <forti_api/dns_filter.hpp>
 
 TEST(TestDNSFilter, TestAddRemove) {
     std::string name = "test-123";

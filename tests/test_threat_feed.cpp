@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "include/forti_api/threat_feed.hpp"
+#include <forti_api/threat_feed.hpp>
 
 TEST(TestThreatFeed, TestGetAllFeeds) {
     auto feeds = ThreatFeed::get();

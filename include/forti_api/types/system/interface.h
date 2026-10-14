@@ -5,7 +5,7 @@
 #ifndef FORTI_API_INTERFACE_H
 #define FORTI_API_INTERFACE_H
 
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 #include "../response.h"
 
 struct SystemResponse {
@@ -13,13 +13,13 @@ struct SystemResponse {
     std::string http_method, revision, vdom, path, name, action, status, serial, version;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(SystemResponse, build, http_method, revision, vdom, path, name, action,
-            status, serial, version);
+            status, serial, version)
 };
 
 struct GeneralInterface {
     std::string name;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(GeneralInterface, name);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(GeneralInterface, name)
 };
 
 struct GeneralResponse : public Response {
@@ -34,7 +34,7 @@ struct IPV4Address {
     std::string ip, netmask;
     unsigned int cidr_netmask{};
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(IPV4Address, ip, netmask, cidr_netmask);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(IPV4Address, ip, netmask, cidr_netmask)
 };
 
 struct SystemInterface {
@@ -66,14 +66,14 @@ struct VirtualWANLink {
     std::vector<std::string> members{};
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(VirtualWANLink, name, vdom, status, type, link, icon, is_sdwan_zone,
-            valid_in_policy, members);
+            valid_in_policy, members)
 };
 
 struct InterfacesGeneralResponse : public SystemResponse {
     std::vector<nlohmann::json> results;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(InterfacesGeneralResponse, build, http_method, revision, vdom, path,
-            name, action, status, serial, version, results);
+            name, action, status, serial, version, results)
 };
 
 #endif //FORTI_API_INTERFACE_H

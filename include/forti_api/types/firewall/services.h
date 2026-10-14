@@ -5,9 +5,9 @@
 #ifndef FORTI_API_SERVICES_H
 #define FORTI_API_SERVICES_H
 
-#include "nlohmann/json.hpp"
-#include "include/forti_api/types/response.h"
-#include "include/forti_api/api.hpp"
+#include <nlohmann/json.hpp>
+#include "../response.h"
+#include "../../api.hpp"
 
 enum ServiceProtocol { TCP, UDP, SCTP };
 
@@ -19,7 +19,7 @@ struct ServiceCategory {
 
     ServiceCategory() = default;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(ServiceCategory, name, q_origin_key, comment, fabric_object);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(ServiceCategory, name, q_origin_key, comment, fabric_object)
 
     void del() { FortiAPI::del(std::format("{}/{}", endpoint, name)); }
 
@@ -30,7 +30,7 @@ struct ServiceCategoriesResponse : public Response {
     std::vector<ServiceCategory> results;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(ServiceCategoriesResponse, http_method, size, matched_count, next_idx,
-            revision, vdom, path, name, status, http_status, serial, version, build, results);
+            revision, vdom, path, name, status, http_status, serial, version, build, results)
 };
 
 struct FirewallService {
@@ -48,7 +48,7 @@ struct FirewallService {
             helper, iprange, fqdn, tcp_portrange, udp_portrange, sctp_portrange,
             session_ttl, check_reset_range, comment, app_service_type, fabric_object,
             uuid_idx, tcp_halfclose_timer, tcp_halfopen_timer, tcp_timewait_timer,
-            tcp_rst_timer, udp_idle_timer, color, app_category, application);
+            tcp_rst_timer, udp_idle_timer, color, app_category, application)
 
     void update(const std::string& vdom="root") {
         FortiAPI::put(std::format("{}/{}?vdom={}", endpoint, name, vdom), *this);

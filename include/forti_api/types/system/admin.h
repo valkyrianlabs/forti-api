@@ -5,7 +5,7 @@
 #ifndef FORTI_API_ADMIN_H
 #define FORTI_API_ADMIN_H
 
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 #include "../response.h"
 #include "../../api.hpp"
 

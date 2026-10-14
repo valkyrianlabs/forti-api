@@ -1,59 +1,228 @@
-name: C++ CI Push Main
+# Release forti-api with vl-release.
+#
+#   vlr cut patch|minor|major|X.Y.Z --push      (locally) -> pushes vX.Y.Z -> this workflow
+#
+# build ─▶ publish-apt ─▶ github-release ─▶ finalize
+#
+# Every job runs on the self-hosted VPS runner, every step in the disposable CI container
+# (ci/run-ci, rootless Podman). `vlr prepare` is deterministic, so later jobs re-run it and get
+# byte-identical documents; `finalize --record` proves it. Nothing is written back to main unless
+# every publication step succeeded.
+#
+# Configuration (ValkyrianLabs organization-level):
+#   secrets.NEXUS_USER, secrets.NEXUS_PASSWORD   Nexus upload credentials
+#   vars.NEXUS_APT_REPO                          Nexus APT upload URL (https://apt.valkyrianlabs.com)
+#   vars.RELEASE_PUBLISH_MODE   (optional)       `nexus` (default here) or `disabled`
+
+name: Release
 
 on:
-  release:
-    types: [ published ]
-    branches: [ main ]
   push:
-    branches: [main]
-  pull_request:
-    types: [ closed ]
-    branches:
-      - main
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Release tag (e.g. v1.0.0)
+        required: true
+        type: string
+      publish:
+        description: Publish, or rehearse everything without publishing
+        required: true
+        default: dry-run
+        type: choice
+        options: [dry-run, publish]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.event.inputs.ref || github.ref }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_REF: ${{ github.event.inputs.ref || github.ref }}
+  # Stock image for clean-install smoke tests (same digest as ci/Containerfile's base).
+  UBUNTU_IMAGE: docker.io/library/ubuntu:24.04@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55
 
 jobs:
-  build-and-publish-release:
+  build:
+    name: Prepare, build and validate
     runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
-    if: ${{ github.event_name == 'push' && github.event.pull_request == null }}
-
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    outputs:
+      version: ${{ steps.state.outputs.version }}
+      debian_version: ${{ steps.state.outputs.debian_version }}
+      publish: ${{ steps.mode.outputs.publish }}
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Authenticate with Artifactory
-        run: /home/gh-runner/artiAuth.sh
-
-      - name: Set PATH for pipx binaries
-        run: echo "PATH=$HOME/.local/bin:$PATH" >> $GITHUB_ENV
-
-      - name: Show ccache stats before build
-        run: ccache -s
-
-      - name: Get latest release tag
-        id: latest-tag
-        run: echo "::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)"
-
-      - name: Cache ccache and dependencies
-        uses: actions/cache@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
-          path: |
-            /home/gh-runner/.cache/ccache
-          key: ${{ runner.os }}-ccache-${{ steps.latest-tag.outputs.tag }}
-          restore-keys: |
-            ${{ runner.os }}-ccache-
-            ${{ runner.os }}-ccache-${{ steps.latest-tag.outputs.tag }}
+          ref: ${{ env.RELEASE_REF }}
+          fetch-depth: 0
 
-      - name: Install Package Dependencies
+      - name: Publication mode
+        id: mode
         run: |
-          conan install . --build=missing
+          if [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event.inputs.publish }}" = "publish" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Show ccache stats after build
-        run: ccache -s
+      - name: Release gate
+        run: vlr check --release --tag "${RELEASE_REF#refs/tags/}"
 
-      - name: Create Package
+      - name: Prepare release documents (work tree only)
+        run: vlr prepare --record release/meta/prepare.json
+
+      - name: Release state
+        id: state
+        run: vlr status --github-output
+
+      - name: Build artifacts from the prepared work tree
         run: |
-          cd /home/gh-runner/actions-runner/_work/forti-api/forti-api
-          conan create . -pr:a vps-release --build=missing -u
+          vlr build-deb
+          vlr checksums
+          vlr validate-artifacts
+          vlr artifacts
 
-      - name: Upload Packages to Artifactory
+      # Install the built .deb into a clean, stock Ubuntu 24.04 (container root, no host access) and
+      # build a consumer against it.
+      - name: Clean-install smoke test of the built package
+        shell: bash
         run: |
-          conan upload "*" -r fortigate --confirm
+          # shellcheck disable=SC2016  # expanded inside the container
+          ./ci/run-ci --image "$UBUNTU_IMAGE" --root bash -euo pipefail -c '
+            apt-get update
+            apt-get install -y --no-install-recommends ./release/libforti-api-dev_*_all.deb g++ pkgconf
+            g++ -std=c++23 -Wall -Wextra -Werror ci/consumer.cpp $(pkg-config --cflags --libs forti-api) -o /tmp/consumer
+            /tmp/consumer
+          '
+
+      # Read-only: plans against the live index and fails now if this version was already published
+      # with different bytes, before anything is published anywhere.
+      - name: Plan APT publication
+        run: vlr publish-deb --mode nexus --dry-run
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: forti-api-${{ steps.state.outputs.version }}
+          path: release
+          if-no-files-found: error
+
+  publish-apt:
+    name: Publish to the ValkyrianLabs APT repository
+    runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
+    needs: build
+    if: needs.build.outputs.publish == 'true'
+    environment: Production
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    # One APT publication at a time across tags; queued, never cancelled.
+    concurrency:
+      group: forti-api-apt-publish
+      cancel-in-progress: false
+    env:
+      RELEASE_PUBLISH_MODE: ${{ vars.RELEASE_PUBLISH_MODE || 'nexus' }}
+      NEXUS_APT_REPO: ${{ vars.NEXUS_APT_REPO }}
+      NEXUS_USER: ${{ secrets.NEXUS_USER }}
+      NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ env.RELEASE_REF }}
+          fetch-depth: 0
+
+      - name: Prepare release documents (deterministic re-run)
+        run: vlr prepare
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: forti-api-${{ needs.build.outputs.version }}
+          path: release
+
+      # Upload (or skip if identical bytes are already published), then poll the index until the
+      # package is listed with the expected sha256.
+      - name: Publish and verify
+        run: |
+          vlr checksums --verify
+          vlr publish-deb --require-enabled
+
+      # The published package installs from the APT repository into a clean, stock Ubuntu 24.04.
+      - name: Install from the APT repository
+        shell: bash
+        env:
+          DEBIAN_VERSION: ${{ needs.build.outputs.debian_version }}
+        run: |
+          # shellcheck disable=SC2016  # expanded inside the container
+          ./ci/run-ci --image "$UBUNTU_IMAGE" --root bash -euo pipefail -c '
+            apt-get update
+            apt-get install -y --no-install-recommends ca-certificates curl g++ pkgconf
+            install -d -m 0755 /etc/apt/keyrings
+            curl -fsSL https://apt.valkyrianlabs.com/pubkey.gpg -o /etc/apt/keyrings/valkyrianlabs.gpg
+            echo "deb [signed-by=/etc/apt/keyrings/valkyrianlabs.gpg] https://apt.valkyrianlabs.com stable main" \
+              > /etc/apt/sources.list.d/valkyrianlabs.list
+            apt-get update
+            apt-get install -y "libforti-api-dev=$DEBIAN_VERSION"
+            g++ -std=c++23 ci/consumer.cpp $(pkg-config --cflags --libs forti-api) -o /tmp/consumer
+            /tmp/consumer
+          '
+
+  github-release:
+    name: GitHub release
+    runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
+    needs: [build, publish-apt]
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ env.RELEASE_REF }}
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: forti-api-${{ needs.build.outputs.version }}
+          path: release
+
+      - name: Create or update the release (title/body from the prepared notes; assets immutable)
+        run: |
+          vlr prepare
+          vlr checksums --verify
+          vlr github-release
+
+  finalize:
+    name: Record the release on main
+    runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
+    needs: [build, publish-apt, github-release]
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ env.RELEASE_REF }}
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: forti-api-${{ needs.build.outputs.version }}
+          path: release
+
+      # Re-prepare (deterministic), prove it matches what was built and published, then commit the
+      # promoted history + cleared staging files onto main. A no-op if main already records it.
+      - name: Finalize
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          vlr prepare
+          vlr finalize --record release/meta/prepare.json

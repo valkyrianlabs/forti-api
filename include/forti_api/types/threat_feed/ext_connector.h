@@ -5,7 +5,7 @@
 #ifndef FORTI_API_EXT_CONNECTOR_H
 #define FORTI_API_EXT_CONNECTOR_H
 
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 #include "../response.h"
 
 struct PushThreatFeed {
@@ -43,7 +43,7 @@ struct ExternalResourcesResponse : public Response {
 struct Entry {
     std::string entry, valid;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(Entry, entry, valid);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(Entry, entry, valid)
 };
 
 struct ExternalResourceEntryList {
@@ -52,7 +52,7 @@ struct ExternalResourceEntryList {
     std::vector<Entry> entries;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(ExternalResourceEntryList, status, resource_file_status,
-            last_content_update_time, entries);
+            last_content_update_time, entries)
 };
 
 struct ExternalResourceEntryListResponse : public Response {

@@ -5,8 +5,8 @@
 #ifndef FORTI_API_POLICIES_H
 #define FORTI_API_POLICIES_H
 
-#include "nlohmann/json.hpp"
-#include "include/forti_api/types/response.h"
+#include <nlohmann/json.hpp>
+#include "../response.h"
 
 struct Module { std::string name, q_origin_key; };
 
