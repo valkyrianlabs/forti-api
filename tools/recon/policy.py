@@ -138,7 +138,9 @@ def shape(value, depth: int = 0):
         return [merged] if merged is not None else []
     if isinstance(value, bool):
         return "boolean"
-    if isinstance(value, (int, float)):
+    if isinstance(value, int):
+        return "integer"
+    if isinstance(value, float):
         return "number"
     if value is None:
         return "null"
@@ -157,4 +159,6 @@ def merge(a, b):
         return [merge(a[0] if a else None, b[0] if b else None)] if (a or b) else []
     kinds = set((a if isinstance(a, str) else type(a).__name__).split("|")) | \
         set((b if isinstance(b, str) else type(b).__name__).split("|"))
+    if kinds == {"integer", "number"}:   # integers seen next to floats: a float attribute
+        return "number"
     return "|".join(sorted(kinds))

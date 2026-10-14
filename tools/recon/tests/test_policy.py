@@ -76,9 +76,11 @@ class Sanitize(unittest.TestCase):
         text = repr(s)
         for secret in ("FGT60F", "10.0.0", "192.168", "aa:bb"):
             self.assertNotIn(secret, text)
-        self.assertEqual(s["by_ip"], {"{key}": {"bytes": "number"}})
-        self.assertEqual(s["results"], [{"ip": "string", "mac": "string", "n": "number", "up": "boolean"}])
+        self.assertEqual(s["by_ip"], {"{key}": {"bytes": "integer"}})
+        self.assertEqual(s["results"], [{"ip": "string", "mac": "string", "n": "integer", "up": "boolean"}])
         self.assertEqual(merge("number", "string"), "number|string")
+        self.assertEqual(merge("integer", "number"), "number")
+        self.assertEqual(shape({"load": 0.5}), {"load": "number"})
 
 
 if __name__ == "__main__":
