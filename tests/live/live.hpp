@@ -7,7 +7,17 @@
 #ifndef FORTI_API_TESTS_LIVE_HPP
 #define FORTI_API_TESTS_LIVE_HPP
 
-#include <forti_api.hpp>
+#include <forti_api/dnsfilter.hpp>
+#include <forti_api/firewall.hpp>
+#include <forti_api/system.hpp>
+#include <forti_api/threat_feed.hpp>
+#include <forti_api/gen/antivirus.hpp>
+#include <forti_api/gen/application.hpp>
+#include <forti_api/gen/emailfilter.hpp>
+#include <forti_api/gen/file-filter.hpp>
+#include <forti_api/gen/ips.hpp>
+#include <forti_api/gen/router.hpp>
+#include <forti_api/gen/webfilter.hpp>
 #include "guard.hpp"
 
 #include <set>

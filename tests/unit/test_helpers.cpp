@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 #include "fake_transport.hpp"
-#include <forti_api.hpp>
+#include <forti_api/dnsfilter.hpp>
+#include <forti_api/firewall.hpp>
+#include <forti_api/system.hpp>
+#include <forti_api/threat_feed.hpp>
 
 using namespace fortiapi;
 using nlohmann::json;
