@@ -235,3 +235,10 @@ Architectural requirements:
   and parses attribute names from `cfgattr`).
 - Release tooling (author note 2026-10-14): `valkyrianlabs/homebrew-tap` exists; phase 7 adds the
   vl-release `[homebrew]` + `[source_archive]` channel for a header-only formula, as vl-release does.
+- Phase 4 (discovery) results on the lab 60F / 7.4.8: the cmdb crawl (430 seeds + GUI cmdb refs +
+  datasource references) converges at 487 paths (353 tables, 125 singletons; 7,338 top-level
+  attributes); 24 seeds do not exist on this model (wanopt, ztna, report, ...). Bundle mining
+  (`fortios.py mine`, main.js + common.js + 405 lazy chunks) converges at 274 monitor paths (105 GET,
+  45 POST, 122 method not visible statically, 9 templated), 6 log and 6 service paths. Static
+  coverage is exhausted, which meets the author's condition for the read-only GUI recon: it is the
+  only remaining source for monitor methods, parameters and response shapes.

@@ -3,6 +3,7 @@
 
   fortios.py pull [PATH...]   fetch cmdb schema snapshots (default: every path in codegen/api.toml)
   fortios.py crawl            discover cmdb paths by following datasource references from seeds
+  fortios.py mine             catalog the API paths the device's web GUI uses (paths only, no code)
   fortios.py gen              regenerate include/forti_api/gen/** from the snapshots
   fortios.py check            fail if the generated headers differ from what gen would write
 
@@ -14,6 +15,8 @@ FORTIGATE_API_KEY, FORTIGATE_ADMIN_HTTPS_PORT, FORTIGATE_RESOLVE_IP, PATH_TO_FOR
 from __future__ import annotations
 
 import argparse
+import gzip
+import re
 import http.client
 import json
 import os
@@ -95,6 +98,17 @@ class FortiGate:
                 time.sleep(1)
         raise RuntimeError("unreachable")
 
+    def static(self, name: str) -> tuple[int, str]:
+        """A file of the web GUI bundle (/static/<name>), decompressed."""
+        headers = {"Authorization": f"Bearer {self.key}", "Accept-Encoding": "gzip"}
+        connection = self._connect()
+        connection.request("GET", f"/static/{name}", headers=headers)
+        response = connection.getresponse()
+        body = response.read()
+        if (response.getheader("Content-Encoding") or "").lower() == "gzip":
+            body = gzip.decompress(body)
+        return response.status, body.decode(errors="replace")
+
     def schema(self, api_path: str) -> dict | None:
         status, body = self.get(f"cmdb/{api_path}", {"action": "schema"})
         results = body.get("results") if isinstance(body, dict) else None
@@ -146,6 +160,10 @@ def cmd_crawl(args: argparse.Namespace) -> int:
     seeds = [e["path"] for e in entries]
     if seeds_file.exists():
         seeds += [s.strip() for s in seeds_file.read_text().splitlines() if s.strip() and not s.startswith("#")]
+    gui = ROOT / "codegen" / "catalog" / version / "gui-api.json"
+    if gui.exists():   # cmdb paths the web GUI uses (fortios.py mine)
+        seeds += [k[len("cmdb/"):] for k, v in json.loads(gui.read_text()).items()
+                  if v["kind"] == "cmdb" and not v["templated"] and "/" in k[len("cmdb/"):]]
     device = FortiGate()
     queue, seen, found = deque(seeds), set(), {}
     while queue and len(found) < args.limit:
@@ -168,6 +186,61 @@ def cmd_crawl(args: argparse.Namespace) -> int:
     catalog.parent.mkdir(parents=True, exist_ok=True)
     catalog.write_text(json.dumps(dict(sorted(found.items())), indent=1, ensure_ascii=False) + "\n")
     print(f"{len(found)} cmdb paths ({len(seen) - len(found)} probes were not paths) -> {catalog.relative_to(ROOT)}")
+    return 0
+
+
+API_CALL = re.compile(r"(?:\b(get|post|put|delete|fetch|request)\s*\(\s*)?[\"'`]/api/v2/(monitor|log|cmdb|service)/([^\"'`?]+)")
+
+
+def normalize_template(path: str) -> str:
+    """'system/os/${this.powerType}' -> 'system/os/{powerType}'; unresolvable segments -> '{...}'."""
+    def name(match: re.Match) -> str:
+        identifiers = re.findall(r"[A-Za-z_]\w*", match.group(1))
+        return "{" + (identifiers[-1] if identifiers else "...") + "}"
+    path = re.sub(r"\$\{+([^}]*)\}?", name, path)
+    path = re.sub(r"\{+", "{", path)
+    return re.sub(r"[^\w./{}-].*$", "", path).rstrip("/")
+
+
+def cmd_mine(args: argparse.Namespace) -> int:
+    """Statically extracts API paths from the GUI bundle. Only path strings and the HTTP method of
+    the call site (when visible) are kept; the bundle itself is never stored."""
+    version, _ = codegen.load_manifest()
+    device = FortiGate()
+    status, main = device.static("main.js")
+    if status != 200:
+        sys.exit(f"fortios.py: /static/main.js returned HTTP {status}")
+    sources = {"main.js": main}
+    for name in ("runtime.js", "common.js"):
+        status, text = device.static(name)
+        if status == 200:
+            sources[name] = text
+    chunks = sorted({int(i) for i in re.findall(r"\b\w\.e\((\d{2,6})\)", main)})
+    for chunk in chunks:
+        status, text = device.static(f"{chunk}.js")
+        if status == 200:
+            sources[f"{chunk}.js"] = text
+    found: dict[str, dict] = {}
+    for source, text in sources.items():
+        for method, kind, path in API_CALL.findall(text):
+            path = normalize_template(path)
+            if not path:
+                continue
+            entry = found.setdefault(f"{kind}/{path}", {"kind": kind, "methods": set(), "templated": "{" in path,
+                                                         "files": set()})
+            if method in ("get", "post", "put", "delete"):
+                entry["methods"].add(method.upper())
+            entry["files"].add(source)
+    catalog = {key: {"kind": v["kind"], "methods": sorted(v["methods"]), "templated": v["templated"],
+                     "seen_in": len(v["files"])} for key, v in sorted(found.items())}
+    out = ROOT / "codegen" / "catalog" / version / "gui-api.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(catalog, indent=1) + "\n")
+    kinds: dict[str, int] = {}
+    for v in catalog.values():
+        kinds[v["kind"]] = kinds.get(v["kind"], 0) + 1
+    print(f"{len(sources)} bundle files ({len(chunks)} lazy chunks): {len(catalog)} API paths {kinds} "
+          f"-> {out.relative_to(ROOT)}")
     return 0
 
 
@@ -196,13 +269,15 @@ def main() -> int:
     crawl = sub.add_parser("crawl", help="discover cmdb paths")
     crawl.add_argument("--limit", type=int, default=5000)
     crawl.add_argument("--snapshots", action="store_true", help="also write a snapshot per discovered path")
+    sub.add_parser("mine", help="catalog the API paths the web GUI uses")
     sub.add_parser("gen", help="regenerate headers")
     sub.add_parser("check", help="verify generated headers")
     args = parser.parse_args()
     if args.env_file:
         load_env_file(args.env_file)
     try:
-        return {"pull": cmd_pull, "crawl": cmd_crawl, "gen": cmd_gen, "check": cmd_check}[args.command](args)
+        return {"pull": cmd_pull, "crawl": cmd_crawl, "mine": cmd_mine, "gen": cmd_gen,
+                "check": cmd_check}[args.command](args)
     except codegen.GenerationError as error:
         print(f"error: {error}", file=sys.stderr)
         return 2

@@ -1,0 +1,2456 @@
+{
+ "cmdb/application/custom": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "cmdb/application/name": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "cmdb/authentication/rule": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/authentication/scheme": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/certificate/local": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/endpoint-control/fctems": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/endpoint-control/fctems-override": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/endpoint-control/settings": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/extension-controller/extender": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/extension-controller/fortigate": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/firewall": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/firewall/address": {
+  "kind": "cmdb",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/firewall/addrgrp": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "cmdb/firewall/on-demand-sniffer": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/firewall/vip": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/ips/attr-map": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/ips/metadata-map": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 4
+ },
+ "cmdb/log.fortianalyzer-cloud/override-setting": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/log.fortianalyzer-cloud/setting": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/log.fortianalyzer/override-setting": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/log.fortianalyzer/setting": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "cmdb/switch-controller.security-policy/captive-portal": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/switch-controller/managed-switch": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 3
+ },
+ "cmdb/switch-controller/managed-switch/{Z}/ports": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/switch-controller/managed-switch/{data}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/switch-controller/managed-switch/{n}": {
+  "kind": "cmdb",
+  "methods": [
+   "PUT"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/switch-controller/managed-switch/{n}/ports/{e}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/switch-controller/managed-switch/{r}/ports": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/switch-controller/managed-switch/{w}/ports/{L}": {
+  "kind": "cmdb",
+  "methods": [
+   "PUT"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/system.dhcp/server/{p}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/system.dhcp/server/{r}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/system.dhcp/server/{v}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/system/central-management": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/csf": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 3
+ },
+ "cmdb/system/csf/trusted-list/{O}": {
+  "kind": "cmdb",
+  "methods": [
+   "DELETE"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/system/global": {
+  "kind": "cmdb",
+  "methods": [
+   "GET",
+   "PUT"
+  ],
+  "templated": false,
+  "seen_in": 3
+ },
+ "cmdb/system/gre-tunnel": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/ha": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/interface": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "cmdb/system/ipam/rules": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/ntp": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/password-policy": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/password-policy-guest-admin": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/ptp": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/sdwan": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/system/sdwan/service/{c}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/system/settings": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 4
+ },
+ "cmdb/system/{N}/{G}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/user/quarantine": {
+  "kind": "cmdb",
+  "methods": [
+   "GET",
+   "PUT"
+  ],
+  "templated": false,
+  "seen_in": 3
+ },
+ "cmdb/vpn.ipsec/concentrator": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/wireless-controller/ap-status": {
+  "kind": "cmdb",
+  "methods": [
+   "GET",
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/wireless-controller/ap-status/{a}": {
+  "kind": "cmdb",
+  "methods": [
+   "DELETE",
+   "PUT"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/wireless-controller/nac-profile": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "cmdb/wireless-controller/region/{t}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/wireless-controller/wtp": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": false,
+  "seen_in": 3
+ },
+ "cmdb/wireless-controller/wtp-profile": {
+  "kind": "cmdb",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "cmdb/wireless-controller/wtp/{F}": {
+  "kind": "cmdb",
+  "methods": [
+   "PUT"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/{C}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/{cmdbPath}/{cmdbName}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/{join}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "cmdb/{s}/{t}": {
+  "kind": "cmdb",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "log/search/abort/{Rn}": {
+  "kind": "log",
+  "methods": [
+   "POST"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "log/{device}/dlp/archive-download/{epoch}": {
+  "kind": "log",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "log/{device}/ips/archive-download/{incidentserialno}": {
+  "kind": "log",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "log/{device}/ips/archive/{incidentserialno}": {
+  "kind": "log",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "log/{device}/virus/archive/{checksum}": {
+  "kind": "log",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/casb/saas-application/details": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/coverage/download": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/coverage/reset": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/endpoint-control/avatar/download": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/endpoint-control/ems/status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/endpoint-control/ems/status-summary": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/endpoint-control/record-list": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/extender-controller/extender": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/extension-controller/fortigate": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/extension-controller/lan-extension-vdom-status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/acl": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/acl6": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/address-dynamic": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/address-fqdns": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/address-fqdns6": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/address6-dynamic": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/central-snat-map": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/central-snat-map/clear-counters": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/dnat": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 10
+ },
+ "monitor/firewall/internet-service-basic": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/internet-service-match": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/internet-service-reputation": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/ippool": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/load-balance": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/multicast-policy": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/multicast-policy6": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/network-service-dynamic": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/per-ip-shaper": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/firewall/policy": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/firewall/policy-lookup": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/firewall/policy/update-global-label": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/firewall/proxy-policy": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 3
+ },
+ "monitor/firewall/proxy/sessions": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/security-policy": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/firewall/security-policy/update-global-label": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/firewall/session": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/session/close-all": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/session/close-multiple-offloadable-filters": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/sessions": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/shaper": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/firewall/uuid-type-lookup": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/firewall/ztna-firewall-policy/clear-counters": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/firewall/{sessionType}/close-multiple": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/adom/devices": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/adom/get-all": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/reports/delete": {
+  "kind": "monitor",
+  "methods": [
+   "DELETE"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/reports/download": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/reports/layout": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/reports/run": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/reports/save": {
+  "kind": "monitor",
+  "methods": [
+   "PUT"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/reports/schedule": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortianalyzer/reports/state": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/forticonverter": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiguard/answers": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiguard/wf-categories": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/fortiview/historical-statistics": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/fortiview/proxy-statistics": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/realtime-proxy-statistics": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/realtime-statistics": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/sandbox-analysis-request": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/sandbox-file-details": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/sandbox-pdf-report-request": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/sandbox-pdf-report-status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/sandbox-pdf-report/download": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/sandbox-pdf-reports-checksum": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/session/cancel": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/fortiview/statistics": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/geoip/geoip-query/select": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/ips/metadata": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/license/fortianalyzer-status": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/license/forticare-org-list": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/license/forticare-resellers": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/license/status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/log/av-archive/download/{checksum}": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/log/current-disk-usage": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 5
+ },
+ "monitor/log/device/state": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/log/feature-set": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/log/fortianalyzer": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/log/fortianalyzer-queue": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/log/forticloud-update-url": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/log/forticloud/connection": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/log/historic-daily-remote-logs/select": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 5
+ },
+ "monitor/log/hourly-disk-usage": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 5
+ },
+ "monitor/log/policy-archive/download/{sessionid}": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/network/debug-flow": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/network/dns/latency": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/network/lldp/neighbors": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/network/lldp/ports": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/network/reverse-ip-lookup": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticare": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticare/add-license": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticare/deregister-device": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticare/login": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticloud": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticloud/device-status": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticloud/login": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticloud/migrate": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/forticloud/register-device": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/registration/vdom/add-license": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/bgp/neighbors": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/bgp/neighbors-statistics": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/bgp/neighbors6": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/bgp/paths": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/bgp/paths-statistics": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/bgp/paths6": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/bgp/soft-reset-neighbor": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/lookup": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/ospf/neighbors": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/router/policy": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/router/policy6": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/switch-controller/detected-device": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/fsw-firmware": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/managed-switch": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/managed-switch/poe-reset": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/managed-switch/port-counts": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/managed-switch/port-stats": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/managed-switch/port-stats-reset": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/managed-switch/status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 3
+ },
+ "monitor/switch-controller/managed-switch/tx-rx": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/switch-controller/matched-devices": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/switch-controller/nac-device/stats": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/acme-certificate-status": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/acquired-dns": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/admin/exists-locked-out-admin-upon-update": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/admin/update-dashboard-template": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/admin/update-ignore-release-overview-version": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/available-certificates": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 8
+ },
+ "monitor/system/available-interfaces": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/botnet": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/botnet-domains/hits": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/botnet-domains/stat": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/botnet/stat": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/central-management/status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/certificate/download": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/certificate/download/{p}": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/system/change-password": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/cluster/state": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/cmdb-profiling": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config-sync/status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/backup": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/system/config/last-manual-save": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/pending-save": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/postpone-reload": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/reload": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/restore": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/restore-status": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/save": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/config/timeout": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/crash-log": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/critical-vulnerability": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/system/csf": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 3
+ },
+ "monitor/system/csf/send-sync-command": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/current-admins": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/debug": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/debug-logging": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/debug/download": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/dhcp": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/external-resource/entry-list": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 8
+ },
+ "monitor/system/external-resource/refresh": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 3
+ },
+ "monitor/system/firmware": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/firmware/upgrade": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/firmware/version-supports-safer-passwords": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/fortiguard/update": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/fortimanager/backup-action": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/fortimanager/backup-details": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/fortimanager/backup-summary": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/system/fortimanager/detect": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/global-search": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/ha-checksums": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/ha-history": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/ha-peer": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/ha-statistics": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/ha-table-checksums": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/interface-connected-admins-info": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/interface/dhcp-status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/interface/poe": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/interface/transceivers": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/ipam/list": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/ipam/utilization": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/link-monitor": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/navigation-favorites": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/os/{powerType}": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/system/password-policy-conform": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/performance/status": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/process/kill": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/resource/usage": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/system/running-processes": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/sandbox/connection": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/sandbox/stats": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/system/sandbox/status": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/sdn-connector/status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 20
+ },
+ "monitor/system/security-rating": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/security-rating/status": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/security-rating/trigger": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/sensor-info": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/time": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/traffic-history/enable-app-bandwidth-tracking": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/traffic-history/interface": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/traffic-history/top-applications": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/usb-device/eject": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/usb-log": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/vm-information": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/vmlicense/download": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/vmlicense/download-eval": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/vmlicense/upload": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/wan-lan-ip-conflict": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/system/{_}": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/user/banned": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 3
+ },
+ "monitor/user/banned/check": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/collected-email": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/device/iot-query": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/device/purdue-level": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/device/query": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/device/stats": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/firewall": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/firewall/count": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/firewall/deauth": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/fortitoken": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/user/info/query": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/info/thumbnail": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/info/thumbnail-file": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/proxy": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/proxy/count": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/user/query/abort": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/utm/antivirus/stats": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/utm/application-categories": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 7
+ },
+ "monitor/videofilter/fortiguard-categories": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/virtual-wan/health-check": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/virtual-wan/members": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/virtual-wan/sla-log": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn-certificate/cert-name-available": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn-certificate/local/create": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn-certificate/local/import": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn/fabric": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/vpn/ike/clear": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn/ipsec": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/vpn/ipsec/tunnel_reset_stats": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn/ipsec/tunnel_{o}": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/vpn/ssl": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn/ssl/delete": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/vpn/ssl/stats": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wanopt/history": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wanopt/history/reset": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wanopt/peer_stats": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wanopt/peer_stats/reset": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wanopt/webcache": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wanopt/webcache/reset": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/web-ui/api-stats": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/web-ui/extend-session": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/web-ui/navbar-dependencies": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/web-ui/next-gen-table": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/web-ui/object-urls": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/web-ui/state": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/webfilter/category-quota": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/webfilter/category-quota/reset": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/webfilter/fortiguard-categories": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 4
+ },
+ "monitor/wifi/ap-names": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/ap_platforms": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/ap_status": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/client": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 2
+ },
+ "monitor/wifi/client/disassociate": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/firmware": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/interfering_ap": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/managed_ap": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 6
+ },
+ "monitor/wifi/managed_ap/led-blink": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/managed_ap/restart": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/matched-devices": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/meta": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/nac-device/stats": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/region-image": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/rogue_ap": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/wifi/rogue_ap/clear_all": {
+  "kind": "monitor",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "monitor/{monitorPath}": {
+  "kind": "monitor",
+  "methods": [],
+  "templated": true,
+  "seen_in": 1
+ },
+ "monitor/{pathNameUrl}": {
+  "kind": "monitor",
+  "methods": [
+   "GET"
+  ],
+  "templated": true,
+  "seen_in": 1
+ },
+ "service/memory-diagnostics/heapdump": {
+  "kind": "service",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "service/mocking-request-interceptor/delete-mocks": {
+  "kind": "service",
+  "methods": [
+   "DELETE"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "service/mocking-request-interceptor/is-interceptor-active": {
+  "kind": "service",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "service/mocking-request-interceptor/upload": {
+  "kind": "service",
+  "methods": [
+   "POST"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "service/security-rating/results": {
+  "kind": "service",
+  "methods": [
+   "GET"
+  ],
+  "templated": false,
+  "seen_in": 1
+ },
+ "service/sniffer": {
+  "kind": "service",
+  "methods": [],
+  "templated": false,
+  "seen_in": 1
+ }
+}
