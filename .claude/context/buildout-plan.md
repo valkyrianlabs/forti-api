@@ -258,3 +258,30 @@ Architectural requirements:
   inert collections with hand-picked minimal fixtures; read-only decode coverage spans all 487 cmdb
   and every typed monitor endpoint. Curated names for common firewall tables (AddressGroups,
   Addresses6, ServiceGroups, OnetimeSchedules, ScheduleGroups, WildcardFqdns, Vips6).
+
+## 7. Status and cutting 1.0.0 (2026-10-14)
+
+Phases 1-6 merged or in review; phase 7 adds the Homebrew channel (formula template, source
+archive without the generator inputs, macOS install check in CI and release, tap publication with
+HOMEBREW_TAP_TOKEN), docs (13 pages, generated endpoint reference, published on release over OIDC)
+and the consolidated 1.0 release notes. Validated: formula installs and tests on macOS (local tap),
+deb + source archive + formula rehearsal in the CI container, docs OIDC dry-run accepted on main.
+
+The author cuts the release: from an up-to-date main, `vlr cut 1.0.0 --push`. Before the first
+release, check:
+- The `forti-api` docs set trusts this repository's release workflow on tag refs for OIDC (PR
+  tokens are refused by design; push-to-main tokens are accepted, sync run 91).
+- vars.RELEASE_PUBLISH_MODE is unset (defaults to nexus) or `nexus`; NEXUS_* org secrets reach the
+  Production environment.
+- HOMEBREW_TAP_TOKEN can push to valkyrianlabs/homebrew-tap; users may need
+  `brew trust valkyrianlabs/tap` on recent Homebrew.
+
+Compile budget (measured, GCC 13 in the CI container): a TU including everything (`forti_api.hpp`,
+`gen/all.hpp`, `gen/registry.hpp`) needs ~1.5 GB and ~19 s with `-g`; an area header ~2 s. Tests and
+helpers include only the area/group headers they use (only `test_coverage.cpp` takes the registry),
+and CI compiles with `-j 4`: unbounded parallel umbrella TUs exhausted the shared runner's 12 GB
+container in phase 6's first CI run.
+
+Later (not blocking 1.0): more FortiOS versions (`schema/<version>`), typed monitor *actions*
+(POST) once reviewed endpoint by endpoint, monitor endpoints with path parameters
+(`router/lookup`), Windows (`interface` is a member name; windows.h defines it).

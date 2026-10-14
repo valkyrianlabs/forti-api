@@ -65,3 +65,15 @@ repository_url = "https://apt.valkyrianlabs.com"
 suite = "stable"
 components = ["main"]
 architectures = ["amd64", "all"]   # Nexus lists Architecture: all packages in binary-all
+
+# The Homebrew formula installs from this reproducible archive of the prepared tree. The generator
+# inputs (schema snapshots, catalogs, tooling) are not needed to install the headers.
+[source_archive]
+name = "{package}-{version}.tar.gz"
+exclude = ["codegen", "tools", ".claude", ".agents"]
+
+[homebrew]
+formula = "packaging/homebrew/forti-api.rb"
+tap = "valkyrianlabs/homebrew-tap"
+tap_path = "Formula/forti-api.rb"
+source = "release-asset"

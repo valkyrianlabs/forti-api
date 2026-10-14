@@ -7,55 +7,66 @@ Format: the first line is "# <release title>" WITHOUT a version number (vlr adds
 Everything after the title is the Markdown release body. Describe the resulting behavior
 for users and operators; keep it representative of what actually ships.
 -->
-# Safer DNS filter and threat feed writes
+# The complete FortiOS SDK
 
-- `DNSFilter::add` no longer fails with HTTP 500 on firewalls without a domain filter table: new
-  profiles default to no domain filter instead of table 2, which FortiOS rejected after
-  half-creating the profile.
-- `DNSFilter::global_allow_category` and `ThreatFeed::del` only rewrite DNS filter profiles that
-  actually use the category, and `ThreatFeed::del` leaves profiles alone while another feed still
-  provides it.
-- `DNSFilter::add`, `update`, `del` and `ThreatFeed::add` return the FortiGate response, so callers
-  can check `status`.
+forti-api is rebuilt around the FortiGate's own schema: every configuration endpoint FortiOS 7.4.8
+reports is generated, writes change exactly what you changed, and the transport is careful about
+what it sends and repeats. This release breaks the previous API on purpose (migration table below).
 
-## New transport: `fortiapi::Client`
+## Every endpoint, generated
 
-- Connect and request timeouts, one kept-alive connection per client (TLS sessions reused), and the
-  system trust store unless a CA bundle is configured; the client certificate is optional.
-- Object names are percent-encoded (`10.0.0.0/24` stays one path segment) and a `Query` builder covers
-  `vdom`, `filter`, `format`, `start`/`count`, `datasource`, `with_meta`, `skip` and `action`.
-- FortiOS errors become `ApiError` (HTTP status, FortiOS error code, CLI messages); no output on
-  stdout/stderr, and the debug hook never sees the API key.
-- Reads retry on throttling and gateway errors; configuration changes are never retried once they may
-  have reached the device.
-- `FORTIGATE_HOST` + `FORTIGATE_RESOLVE_IP` connect to a pinned address while verifying TLS for the
-  hostname.
-
-## Generated endpoints
-
-FortiOS objects are now generated from the device's own schema (FortiOS 7.4.8): every attribute,
-with its documentation, as a `fortiapi::Field<T>`, and a `Table`/`Singleton` per endpoint:
+- All 487 configuration (cmdb) endpoints a FortiGate-60F reports on FortiOS 7.4.8: firewall,
+  system, router, VPN, user, log, security profiles, switch and wireless controllers and more,
+  each as a struct with every attribute documented, plus a `Table` (`list`, `find`, `get`,
+  `contains`, `add`, `update`, `del`, `schema`) or `Singleton` (`get`, `update`). Every one decodes
+  every object on a live device (35,000+ objects verified).
+- Typed read-only monitor endpoints for what the web GUI reads (`fortiapi::monitor::system::Time::get()`),
+  generated from recorded response shapes; every other monitor call goes through `fortiapi::Monitor`.
+- Option constants live in their type: `firewall::Policy::Action::deny`.
 
 ```cpp
-#include <forti_api/gen/firewall/address.hpp>
+#include <forti_api/firewall.hpp>
 using namespace fortiapi;
 
-auto address = firewall::Addresses::get("LAN 10.0.0.0/24");
+auto address = firewall::Addresses::get("LAN 10.0.0.0/24");   // keys are URL-encoded for you
 address.comment = "managed";
-firewall::Addresses::update(address);   // sends {"comment": "managed"} and nothing else
+firewall::Addresses::update(address);                         // sends {"comment": "managed"} only
 ```
 
-Fields know whether they are absent, read from the device, modified or cleared: an update sends only
-what you changed (`clear()` resets an attribute to its default), reads never mark anything changed,
-and option attributes come with constants (`firewall::Policy::Action::deny`). Generated so far:
-firewall policy, address, VIP, service, service category, recurring schedule, DNS filter profile,
-external resource, API user, interface and global settings.
+## Writes change exactly what you changed
 
-## Breaking: the pre-generation API is gone
+Every attribute is a `Field<T>` that knows whether it is absent, read from the device, modified or
+cleared. An update sends only modified and cleared attributes (`clear()` resets one to its FortiOS
+default); reads never mark anything changed; read-only attributes are never sent. A create sends
+only what you set and FortiOS fills in its own defaults.
 
-`FortiAPI`, `FortiAuth`, `FortiGate::Policies`/`Services`/`Schedules`, `DNSFilter`, `ThreatFeed`,
-`System::Interface`, `System::Admin` and the hand-written types are removed. Everything lives in
-`fortiapi::` on generated endpoints, with small helpers for the domain logic:
+## A careful transport: `fortiapi::Client`
+
+- Connect and request timeouts, one kept-alive connection per client, TLS verified against the
+  system trust store (or a configured CA), optional client certificate, `FORTIGATE_RESOLVE_IP` to
+  pin the address while verifying the hostname.
+- Object names are percent-encoded; a `Query` builder covers `vdom`, `filter`, `format`,
+  `start`/`count`, `datasource`, `with_meta`, `skip` and `action`.
+- Errors are exceptions: `ApiError` (HTTP status, FortiOS error code, CLI messages), `TransportError`,
+  `DecodeError` (naming the attribute that did not match). Nothing is printed.
+- Reads retry on throttling and gateway errors; configuration changes are never retried once they
+  may have reached the device.
+
+## Helpers
+
+DNS filter categories (`block_category`, `allow_category_everywhere`, ...), push threat feeds
+(`push_entries` reports rejected commands, `feed_state`, `delete_threat_feed` frees the category
+first), schedule days, service port ranges, API-user trusted hosts (IPv4/IPv6, CIDR) and live
+interface addresses.
+
+## Install
+
+- Debian/Ubuntu: `sudo apt install libforti-api-dev` from the ValkyrianLabs APT repository.
+- Homebrew (macOS and Linux): `brew install valkyrianlabs/tap/forti-api`.
+- Or vendor `include/` and `third_party/nlohmann/include/`; libcurl is the only system dependency.
+- Documentation is published with the release (docs set `forti-api`).
+
+## Migrating from 0.x
 
 | Before | Now |
 |---|---|
@@ -73,22 +84,7 @@ external resource, API user, interface and global settings.
 | `FirewallSchedule::set_days(...)` | `schedule.day = firewall::days({...})` |
 | `FirewallService::set_port_range(...)` | `service.tcp_portrange = firewall::port_ranges({...})` |
 
-Fixed on the way: schedule days are written as FortiOS day names (were ordinals), IPv6 trusted hosts
-get the IPv6 type, CIDR trusted hosts are accepted, and rejected threat-feed pushes raise an error
-instead of passing silently.
-
-## Every configuration endpoint, and typed monitor reads
-
-- All 487 configuration (cmdb) endpoints FortiOS 7.4.8 reports on a FortiGate-60F are generated: firewall,
-  system, router, VPN, user, log, security profiles, switch and wireless controllers and more. Each
-  decodes every object on a live device without loss (35,000+ objects verified).
-- Read-only monitor endpoints the web GUI uses are generated with typed results from recorded
-  response shapes (`fortiapi::monitor::system::Time::get()`); others remain available through
-  `fortiapi::Monitor`.
-- Option constants now live in their type: `firewall::Policy::Action::deny` (was
-  `firewall::policy::action::deny`).
-- Group headers (`forti_api/gen/router.hpp`) and `fortiapi::gen::for_each_endpoint` /
-  `for_each_monitor` for introspection.
-- Friendlier names for common firewall tables: `firewall::AddressGroups`, `Addresses6`,
-  `ServiceGroups`, `OnetimeSchedules`, `ScheduleGroups`, `WildcardFqdns`, `Vips6`.
-- Every endpoint type exposes its key member (`Table::key`).
+Fixed along the way: DNS filter profiles no longer reference a missing domain filter table (which
+made creation fail with HTTP 500 after half-creating the profile), category sweeps only write
+profiles that use the category, schedule days use FortiOS names, IPv6 trusted hosts get the IPv6
+type, and rejected threat-feed pushes raise an error instead of passing silently.

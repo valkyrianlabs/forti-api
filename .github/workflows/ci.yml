@@ -20,6 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  VL_RELEASE_TAG: v0.5.0
   # Stock image for clean-install smoke tests (same digest as ci/Containerfile's base).
   UBUNTU_IMAGE: docker.io/library/ubuntu:24.04@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55
 
@@ -96,6 +97,8 @@ jobs:
           if [ "${{ steps.state.outputs.phase }}" = unbumped ]; then vlr version bump minor; fi
           vlr prepare
           vlr build-deb
+          vlr source-archive
+          vlr homebrew formula
           vlr checksums
           vlr validate-artifacts
 
@@ -115,10 +118,12 @@ jobs:
           '
 
   macos:
-    name: Build (macOS, Homebrew)
+    name: Build and Homebrew formula (macOS)
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
 
       - name: Install Homebrew packages
         run: brew install meson ninja googletest
@@ -136,3 +141,14 @@ jobs:
           # shellcheck disable=SC2046  # pkg-config output is a list of flags
           c++ -std=c++23 -Wall -Wextra -Werror ci/consumer.cpp $(pkg-config --cflags --libs forti-api) -o consumer
           ./consumer
+
+      # vl-release from its pinned release tag (pure Python, no install needed).
+      - name: vl-release
+        run: |
+          git clone --quiet --depth 1 --branch "$VL_RELEASE_TAG" https://github.com/valkyrianlabs/vl-release.git "$RUNNER_TEMP/vl-release"
+          echo "$RUNNER_TEMP/vl-release/bin" >> "$GITHUB_PATH"
+
+      # Installs the formula from a throwaway local tap and runs its test block (ephemeral checkout:
+      # the script prepares the release documents).
+      - name: Homebrew formula
+        run: bash .github/scripts/homebrew-local-install.sh
