@@ -62,7 +62,9 @@ struct DNSFilterOptions {
 };
 
 struct DomainFilter {
-    unsigned int domain_filter_table = 2;
+    // 0 = none. A non-zero id must name an existing dnsfilter/domain-filter table: FortiOS creates the
+    // profile and then rejects the reference (HTTP 500, "entry not found in datasource").
+    unsigned int domain_filter_table = 0;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(DomainFilter, domain_filter_table)
 };

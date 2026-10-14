@@ -3,46 +3,48 @@
 //
 
 #include <gtest/gtest.h>
-#include <forti_api/dns_filter.hpp>
+#include "live.hpp"
 
-TEST(TestDNSFilter, TestAddRemove) {
-    std::string name = "test-123";
-    ASSERT_TRUE(!DNSFilter::contains(name));
-
-    DNSFilter::add(name);
-    ASSERT_TRUE(DNSFilter::contains(name));
-
-    DNSFilter::del(name);
-    ASSERT_TRUE(!DNSFilter::contains(name));
+TEST(TestDNSFilter, TestGetProfiles) {
+    auto profiles = DNSFilter::get();
+    ASSERT_FALSE(profiles.empty());
+    for (const auto& profile : profiles) ASSERT_FALSE(profile.name.empty());
 }
 
-TEST(TestDNSFilter, TestToggleFilters) {
-    std::string name = "test-456";
-    DNSFilter::add(name);
-    ASSERT_TRUE(DNSFilter::contains(name));
+TEST(TestDNSFilter, TestAddRemove) {
+    auto profile = live::dns_profile("dns-add-remove");
+    live::Cleanup cleanup([&] { live::del_dns_profile(profile.name); });
+    ASSERT_FALSE(DNSFilter::contains(profile.name));
 
-    auto profile = DNSFilter::get(name);
-    auto& filter = profile.ftgd_dns;
-    filter.allow(1);
-    filter.block(2);
-    filter.monitor(3);
-    DNSFilter::update(profile);
+    ASSERT_EQ(DNSFilter::add(profile).status, "success");
+    ASSERT_TRUE(DNSFilter::contains(profile.name));
+    ASSERT_EQ(DNSFilter::get(profile.name).comment, live::comment);
 
-    const auto& [match_found, index] = filter.find_category(1);
-    ASSERT_FALSE(match_found);
-
-    const auto& [match_found1, index1] = filter.find_category(2);
-    ASSERT_TRUE(match_found1);
-    ASSERT_TRUE(filter.filters[index1].action == "block");
-
-    const auto& [match_found2, index2] = filter.find_category(3);
-    ASSERT_TRUE(match_found2);
-    ASSERT_TRUE(filter.filters[index2].action == "monitor");
-
-    DNSFilter::del(profile.name);
+    ASSERT_EQ(DNSFilter::del(profile.name).status, "success");
     ASSERT_FALSE(DNSFilter::contains(profile.name));
 }
 
-TEST(TestDNSFilter, TestContains192) {
-    ASSERT_TRUE(DNSFilter::get("advanced").ftgd_dns.contains(193));
+TEST(TestDNSFilter, TestToggleFilters) {
+    auto profile = live::dns_profile("dns-toggle-filters");
+    live::Cleanup cleanup([&] { live::del_dns_profile(profile.name); });
+    ASSERT_EQ(DNSFilter::add(profile).status, "success");
+
+    auto created = DNSFilter::get(profile.name);
+    created.ftgd_dns.block(1);
+    created.ftgd_dns.block(2);
+    created.ftgd_dns.monitor(3);
+    created.ftgd_dns.allow(1);
+    ASSERT_EQ(DNSFilter::update(created).status, "success");
+
+    // Read back from the device, not the local copy.
+    auto stored = DNSFilter::get(profile.name).ftgd_dns;
+    ASSERT_FALSE(stored.contains(1));
+
+    const auto& [blocked_found, blocked] = stored.find_category(2);
+    ASSERT_TRUE(blocked_found);
+    ASSERT_EQ(stored.filters[blocked].action, "block");
+
+    const auto& [monitored_found, monitored] = stored.find_category(3);
+    ASSERT_TRUE(monitored_found);
+    ASSERT_EQ(stored.filters[monitored].action, "monitor");
 }
