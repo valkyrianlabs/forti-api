@@ -1,0 +1,650 @@
+{
+ "name": "address",
+ "category": "table",
+ "help": "Configure IPv4 addresses.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Address name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "subnet": {
+   "name": "subnet",
+   "category": "unitary",
+   "type": "ipv4-classnet-any",
+   "help": "IP address and subnet mask of address.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of address.",
+   "options": [
+    {
+     "name": "ipmask",
+     "help": "Standard IPv4 address with subnet mask."
+    },
+    {
+     "name": "iprange",
+     "help": "Range of IPv4 addresses between two specified addresses (inclusive)."
+    },
+    {
+     "name": "fqdn",
+     "help": "Fully Qualified Domain Name address."
+    },
+    {
+     "name": "geography",
+     "help": "IP addresses from a specified country."
+    },
+    {
+     "name": "wildcard",
+     "help": "Standard IPv4 using a wildcard subnet mask."
+    },
+    {
+     "name": "dynamic",
+     "help": "Dynamic address object."
+    },
+    {
+     "name": "interface-subnet",
+     "help": "IP and subnet of interface."
+    },
+    {
+     "name": "mac",
+     "help": "Range of MAC addresses."
+    },
+    {
+     "name": "route-tag",
+     "help": "route-tag addresses."
+    }
+   ],
+   "default": "ipmask",
+   "multiple_values": false
+  },
+  "route-tag": {
+   "name": "route-tag",
+   "category": "unitary",
+   "type": "integer",
+   "help": "route-tag address.",
+   "min-value": 1,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "sub-type": {
+   "name": "sub-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Sub-type of address.",
+   "options": [
+    {
+     "name": "sdn",
+     "help": "SDN address."
+    },
+    {
+     "name": "clearpass-spt",
+     "help": "ClearPass SPT (System Posture Token) address."
+    },
+    {
+     "name": "fsso",
+     "help": "FSSO address."
+    },
+    {
+     "name": "ems-tag",
+     "help": "FortiClient EMS tag."
+    },
+    {
+     "name": "fortivoice-tag",
+     "help": "FortiVoice tag."
+    },
+    {
+     "name": "fortinac-tag",
+     "help": "FortiNAC tag."
+    },
+    {
+     "name": "fortipolicy-tag",
+     "help": "FortiPolicy tag."
+    },
+    {
+     "name": "swc-tag",
+     "help": "Switch Controller NAC policy tag."
+    },
+    {
+     "name": "device-identification",
+     "help": "Device address."
+    }
+   ],
+   "default": "sdn",
+   "multiple_values": false
+  },
+  "clearpass-spt": {
+   "name": "clearpass-spt",
+   "category": "unitary",
+   "type": "option",
+   "help": "SPT (System Posture Token) value.",
+   "options": [
+    {
+     "name": "unknown",
+     "help": "UNKNOWN."
+    },
+    {
+     "name": "healthy",
+     "help": "HEALTHY."
+    },
+    {
+     "name": "quarantine",
+     "help": "QUARANTINE."
+    },
+    {
+     "name": "checkup",
+     "help": "CHECKUP."
+    },
+    {
+     "name": "transient",
+     "help": "TRANSIENT."
+    },
+    {
+     "name": "infected",
+     "help": "INFECTED."
+    }
+   ],
+   "default": "unknown",
+   "multiple_values": false
+  },
+  "macaddr": {
+   "name": "macaddr",
+   "category": "table",
+   "help": "Multiple MAC address ranges.",
+   "member_table": true,
+   "mkey": "macaddr",
+   "mkey_type": "string",
+   "children": {
+    "macaddr": {
+     "name": "macaddr",
+     "category": "unitary",
+     "type": "string",
+     "help": "MAC address ranges <start>[-<end>] separated by space.",
+     "required": true,
+     "size": 127,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "start-ip": {
+   "name": "start-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "First IP address (inclusive) in the range for the address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "end-ip": {
+   "name": "end-ip",
+   "category": "unitary",
+   "type": "ipv4-address-any",
+   "help": "Final IP address (inclusive) in the range for the address.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "fqdn": {
+   "name": "fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fully Qualified Domain Name address.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "country": {
+   "name": "country",
+   "category": "unitary",
+   "type": "string",
+   "help": "IP addresses associated to a specific country.",
+   "size": 2,
+   "default": "",
+   "multiple_values": false
+  },
+  "wildcard-fqdn": {
+   "name": "wildcard-fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fully Qualified Domain Name with wildcard characters.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "cache-ttl": {
+   "name": "cache-ttl",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Defines the minimal TTL of individual IP addresses in FQDN cache measured in seconds.",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "wildcard": {
+   "name": "wildcard",
+   "category": "unitary",
+   "type": "ipv4-classnet-any",
+   "help": "IP address and wildcard netmask.",
+   "default": "0.0.0.0 0.0.0.0",
+   "multiple_values": false
+  },
+  "sdn": {
+   "name": "sdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN.",
+   "datasource": [
+    "system.sdn-connector.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "fsso-group": {
+   "name": "fsso-group",
+   "category": "table",
+   "help": "FSSO group(s).",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "FSSO group name.",
+     "datasource": [
+      "user.adgrp.name"
+     ],
+     "size": 511,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Name of interface whose IP address is to be used.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "tenant": {
+   "name": "tenant",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tenant.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "organization": {
+   "name": "organization",
+   "category": "unitary",
+   "type": "string",
+   "help": "Organization domain name (Syntax: organization/domain).",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "epg-name": {
+   "name": "epg-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Endpoint group name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "subnet-name": {
+   "name": "subnet-name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Subnet name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "sdn-tag": {
+   "name": "sdn-tag",
+   "category": "unitary",
+   "type": "string",
+   "help": "SDN Tag.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "policy-group": {
+   "name": "policy-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Policy group name.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "obj-tag": {
+   "name": "obj-tag",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tag of dynamic address object.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "obj-type": {
+   "name": "obj-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Object type.",
+   "options": [
+    {
+     "name": "ip",
+     "help": "IP address."
+    },
+    {
+     "name": "mac",
+     "help": "MAC address"
+    }
+   ],
+   "default": "ip",
+   "multiple_values": false
+  },
+  "tag-detection-level": {
+   "name": "tag-detection-level",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tag detection level of dynamic address object.",
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  },
+  "tag-type": {
+   "name": "tag-type",
+   "category": "unitary",
+   "type": "string",
+   "help": "Tag type of dynamic address object.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "hw-vendor": {
+   "name": "hw-vendor",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dynamic address matching hardware vendor.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "hw-model": {
+   "name": "hw-model",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dynamic address matching hardware model.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "os": {
+   "name": "os",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dynamic address matching operating system.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "sw-version": {
+   "name": "sw-version",
+   "category": "unitary",
+   "type": "string",
+   "help": "Dynamic address matching software version.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "associated-interface": {
+   "name": "associated-interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Network interface associated with address.",
+   "datasource": [
+    "system.interface.name",
+    "system.zone.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Color of icon on the GUI.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "filter": {
+   "name": "filter",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Match criteria filter.",
+   "required": true,
+   "size": 2047,
+   "multiple_values": false
+  },
+  "sdn-addr-type": {
+   "name": "sdn-addr-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of addresses to collect.",
+   "options": [
+    {
+     "name": "private",
+     "help": "Collect private addresses only."
+    },
+    {
+     "name": "public",
+     "help": "Collect public addresses only."
+    },
+    {
+     "name": "all",
+     "help": "Collect both public and private addresses."
+    }
+   ],
+   "default": "private",
+   "multiple_values": false
+  },
+  "node-ip-only": {
+   "name": "node-ip-only",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable collection of node addresses only in Kubernetes.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable collection of node addresses only in Kubernetes."
+    },
+    {
+     "name": "disable",
+     "help": "Disable collection of node addresses only in Kubernetes."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "obj-id": {
+   "name": "obj-id",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Object ID for NSX.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "list": {
+   "name": "list",
+   "category": "table",
+   "help": "IP address list.",
+   "mkey": "ip",
+   "mkey_type": "string",
+   "children": {
+    "ip": {
+     "name": "ip",
+     "category": "unitary",
+     "type": "string",
+     "help": "IP.",
+     "required": true,
+     "size": 35,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "tagging": {
+   "name": "tagging",
+   "category": "table",
+   "help": "Config object tagging.",
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tagging entry name.",
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "category": {
+     "name": "category",
+     "category": "unitary",
+     "type": "string",
+     "help": "Tag category.",
+     "datasource": [
+      "system.object-tagging.category"
+     ],
+     "size": 63,
+     "default": "",
+     "multiple_values": false
+    },
+    "tags": {
+     "name": "tags",
+     "category": "table",
+     "help": "Tags.",
+     "member_table": true,
+     "mkey": "name",
+     "mkey_type": "string",
+     "children": {
+      "name": {
+       "name": "name",
+       "category": "unitary",
+       "type": "string",
+       "help": "Tag name.",
+       "datasource": [
+        "system.object-tagging.tags.name"
+       ],
+       "size": 79,
+       "default": "",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "allow-routing": {
+   "name": "allow-routing",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of this address in the static route configuration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of this address in the static route configuration."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of this address in the static route configuration."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 5000,
+ "max_table_size_global": 5000,
+ "max_table_size_item": 0,
+ "path": "firewall",
+ "q_type": 32,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

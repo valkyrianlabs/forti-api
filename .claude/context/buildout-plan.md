@@ -221,3 +221,17 @@ Architectural requirements:
   presence-only; cleared fields serialize the schema's reset value.
 - §2.1 retries: mutations are not retried after anything may have reached the device
   (requirement 2), replacing "idempotent 5xx retried".
+- §2.2: no generated create defaults. Writes are sparse, so a create sends only what the caller set
+  and FortiOS applies its own defaults; `T::defaults()` would only reintroduce the leak §2.2 removes.
+- §2 layout: generator inputs live in `codegen/` (`api.toml`, `schema/<version>/cmdb/...`,
+  `catalog/<version>/`), the tool in `tools/fortios/` (`fortios.py` CLI + `codegen.py`), output in
+  `include/forti_api/gen/<path>.hpp` + `gen/all.hpp`. Option constants live in a snake_case
+  namespace beside the type (`fortiapi::firewall::policy::action::deny`), table entries are
+  `<Field>Entry` structs, `{name}`-only member tables are `std::vector<fortiapi::Ref>`.
+- Device quirks the runtime absorbs (found live on 7.4.8): unset integers arrive as `""` (decoded as
+  absent), some numbers arrive as numeric text, log endpoints answer with deflate streams libcurl
+  cannot decode (client asks for gzip only), config-change log entries appear 5-8 s late and edits
+  right after a create are folded into the Add record (the live audit polls until the log settles
+  and parses attribute names from `cfgattr`).
+- Release tooling (author note 2026-10-14): `valkyrianlabs/homebrew-tap` exists; phase 7 adds the
+  vl-release `[homebrew]` + `[source_archive]` channel for a header-only formula, as vl-release does.

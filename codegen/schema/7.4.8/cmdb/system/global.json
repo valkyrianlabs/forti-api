@@ -1,0 +1,3605 @@
+{
+ "name": "global",
+ "category": "complex",
+ "help": "Configure global attributes.",
+ "children": {
+  "language": {
+   "name": "language",
+   "category": "unitary",
+   "type": "option",
+   "help": "GUI display language.",
+   "options": [
+    {
+     "name": "english",
+     "help": "English."
+    },
+    {
+     "name": "french",
+     "help": "French."
+    },
+    {
+     "name": "spanish",
+     "help": "Spanish."
+    },
+    {
+     "name": "portuguese",
+     "help": "Portuguese."
+    },
+    {
+     "name": "japanese",
+     "help": "Japanese."
+    },
+    {
+     "name": "trach",
+     "help": "Traditional Chinese."
+    },
+    {
+     "name": "simch",
+     "help": "Simplified Chinese."
+    },
+    {
+     "name": "korean",
+     "help": "Korean."
+    }
+   ],
+   "default": "english",
+   "multiple_values": false
+  },
+  "gui-ipv6": {
+   "name": "gui-ipv6",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 settings on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-replacement-message-groups": {
+   "name": "gui-replacement-message-groups",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable replacement message groups on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-local-out": {
+   "name": "gui-local-out",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Local-out traffic on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-certificates": {
+   "name": "gui-certificates",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the System > Certificate GUI page, allowing you to add and configure certificates from the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-custom-language": {
+   "name": "gui-custom-language",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable custom languages in GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-wireless-opensecurity": {
+   "name": "gui-wireless-opensecurity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable wireless open security option on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-app-detection-sdwan": {
+   "name": "gui-app-detection-sdwan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Allow app-detection based SD-WAN.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-display-hostname": {
+   "name": "gui-display-hostname",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable displaying the FortiGate's hostname on the GUI login page.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-fortigate-cloud-sandbox": {
+   "name": "gui-fortigate-cloud-sandbox",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable displaying FortiGate Cloud Sandbox on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-firmware-upgrade-warning": {
+   "name": "gui-firmware-upgrade-warning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the firmware upgrade warning on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-forticare-registration-setup-warning": {
+   "name": "gui-forticare-registration-setup-warning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the FortiCare registration setup warning on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-auto-upgrade-setup-warning": {
+   "name": "gui-auto-upgrade-setup-warning",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the automatic patch upgrade setup prompt on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-workflow-management": {
+   "name": "gui-workflow-management",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Workflow management features on the GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-cdn-usage": {
+   "name": "gui-cdn-usage",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Load GUI static files from a CDN.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Display the feature in GUI."
+    },
+    {
+     "name": "disable",
+     "help": "Do not display the feature in GUI."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "admin-https-ssl-versions": {
+   "name": "admin-https-ssl-versions",
+   "category": "unitary",
+   "type": "option",
+   "help": "Allowed TLS versions for web administration.",
+   "options": [
+    {
+     "name": "tlsv1-1",
+     "help": "TLS 1.1."
+    },
+    {
+     "name": "tlsv1-2",
+     "help": "TLS 1.2."
+    },
+    {
+     "name": "tlsv1-3",
+     "help": "TLS 1.3."
+    }
+   ],
+   "default": "tlsv1-2 tlsv1-3",
+   "multiple_values": true
+  },
+  "admin-https-ssl-ciphersuites": {
+   "name": "admin-https-ssl-ciphersuites",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more TLS 1.3 ciphersuites to enable. Does not affect ciphers in TLS 1.2 and below. At least one must be enabled. To disable all, remove TLS1.3 from admin-https-ssl-versions.",
+   "options": [
+    {
+     "name": "TLS-AES-128-GCM-SHA256",
+     "help": "Enable TLS-AES-128-GCM-SHA256 in TLS 1.3."
+    },
+    {
+     "name": "TLS-AES-256-GCM-SHA384",
+     "help": "Enable TLS-AES-256-GCM-SHA384 in TLS 1.3."
+    },
+    {
+     "name": "TLS-CHACHA20-POLY1305-SHA256",
+     "help": "Enable TLS-CHACHA20-POLY1305-SHA256 in TLS 1.3."
+    },
+    {
+     "name": "TLS-AES-128-CCM-SHA256",
+     "help": "Enable TLS-AES-128-CCM-SHA256 in TLS 1.3."
+    },
+    {
+     "name": "TLS-AES-128-CCM-8-SHA256",
+     "help": "Enable TLS-AES-128-CCM-8-SHA256 in TLS 1.3."
+    }
+   ],
+   "default": "TLS-AES-128-GCM-SHA256 TLS-AES-256-GCM-SHA384 TLS-CHACHA20-POLY1305-SHA256",
+   "multiple_values": true
+  },
+  "admin-https-ssl-banned-ciphers": {
+   "name": "admin-https-ssl-banned-ciphers",
+   "category": "unitary",
+   "type": "option",
+   "help": "Select one or more cipher technologies that cannot be used in GUI HTTPS negotiations. Only applies to TLS 1.2 and below.",
+   "options": [
+    {
+     "name": "RSA",
+     "help": "Ban the use of cipher suites using RSA key."
+    },
+    {
+     "name": "DHE",
+     "help": "Ban the use of cipher suites using authenticated ephemeral DH key agreement."
+    },
+    {
+     "name": "ECDHE",
+     "help": "Ban the use of cipher suites using authenticated ephemeral ECDH key agreement."
+    },
+    {
+     "name": "DSS",
+     "help": "Ban the use of cipher suites using DSS authentication."
+    },
+    {
+     "name": "ECDSA",
+     "help": "Ban the use of cipher suites using ECDSA authentication."
+    },
+    {
+     "name": "AES",
+     "help": "Ban the use of cipher suites using either 128 or 256 bit AES."
+    },
+    {
+     "name": "AESGCM",
+     "help": "Ban the use of cipher suites using AES in Galois Counter Mode (GCM)."
+    },
+    {
+     "name": "CAMELLIA",
+     "help": "Ban the use of cipher suites using either 128 or 256 bit CAMELLIA."
+    },
+    {
+     "name": "3DES",
+     "help": "Ban the use of cipher suites using triple DES."
+    },
+    {
+     "name": "SHA1",
+     "help": "Ban the use of cipher suites using HMAC-SHA1."
+    },
+    {
+     "name": "SHA256",
+     "help": "Ban the use of cipher suites using HMAC-SHA256."
+    },
+    {
+     "name": "SHA384",
+     "help": "Ban the use of cipher suites using HMAC-SHA384."
+    },
+    {
+     "name": "STATIC",
+     "help": "Ban the use of cipher suites using static keys."
+    },
+    {
+     "name": "CHACHA20",
+     "help": "Ban the use of cipher suites using ChaCha20."
+    },
+    {
+     "name": "ARIA",
+     "help": "Ban the use of cipher suites using ARIA."
+    },
+    {
+     "name": "AESCCM",
+     "help": "Ban the use of cipher suites using AESCCM."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "admintimeout": {
+   "name": "admintimeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of minutes before an idle administrator session times out (1 - 480 minutes (8 hours), default = 5). A shorter idle timeout is more secure.",
+   "min-value": 1,
+   "max-value": 480,
+   "default": 5,
+   "multiple_values": false
+  },
+  "admin-console-timeout": {
+   "name": "admin-console-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Console login timeout that overrides the admin timeout value (15 - 300 seconds, default = 0, which disables the timeout).",
+   "min-value": 15,
+   "max-value": 300,
+   "default": 0,
+   "multiple_values": false
+  },
+  "admin-concurrent": {
+   "name": "admin-concurrent",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable concurrent administrator logins. Use policy-auth-concurrent for firewall authenticated users.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable admin concurrent login."
+    },
+    {
+     "name": "disable",
+     "help": "Disable admin concurrent login."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "admin-lockout-threshold": {
+   "name": "admin-lockout-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of failed login attempts before an administrator account is locked out for the admin-lockout-duration.",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 3,
+   "multiple_values": false
+  },
+  "admin-lockout-duration": {
+   "name": "admin-lockout-duration",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Amount of time in seconds that an administrator account is locked out after reaching the admin-lockout-threshold for repeated failed login attempts.",
+   "min-value": 1,
+   "max-value": 2147483647,
+   "default": 60,
+   "multiple_values": false
+  },
+  "refresh": {
+   "name": "refresh",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Statistics refresh interval second(s) in GUI.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 0,
+   "multiple_values": false
+  },
+  "interval": {
+   "name": "interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Dead gateway detection interval.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 5,
+   "multiple_values": false
+  },
+  "failtime": {
+   "name": "failtime",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Fail-time for server lost.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": 5,
+   "multiple_values": false
+  },
+  "purdue-level": {
+   "name": "purdue-level",
+   "category": "unitary",
+   "type": "option",
+   "help": "Purdue Level of this FortiGate.",
+   "options": [
+    {
+     "name": "1",
+     "help": "Level 1 - Basic Control"
+    },
+    {
+     "name": "1.5",
+     "help": "Level 1.5"
+    },
+    {
+     "name": "2",
+     "help": "Level 2 - Area Supervisory Control"
+    },
+    {
+     "name": "2.5",
+     "help": "Level 2.5"
+    },
+    {
+     "name": "3",
+     "help": "Level 3 - Operations & Control"
+    },
+    {
+     "name": "3.5",
+     "help": "Level 3.5"
+    },
+    {
+     "name": "4",
+     "help": "Level 4 - Business Planning & Logistics"
+    },
+    {
+     "name": "5",
+     "help": "Level 5 - Enterprise Network"
+    },
+    {
+     "name": "5.5",
+     "help": "Level 5.5"
+    }
+   ],
+   "default": "3",
+   "multiple_values": false
+  },
+  "daily-restart": {
+   "name": "daily-restart",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable daily restart of FortiGate unit. Use the restart-time option to set the time of day for the restart.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable daily reboot of the FortiGate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable daily reboot of the FortiGate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "restart-time": {
+   "name": "restart-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "Daily restart time (hh:mm).",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "wad-restart-mode": {
+   "name": "wad-restart-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "WAD worker restart mode (default = none).",
+   "options": [
+    {
+     "name": "none",
+     "help": "Disable restart of WAD workers."
+    },
+    {
+     "name": "time",
+     "help": "Enable daily restart of WAD workers."
+    },
+    {
+     "name": "memory",
+     "help": "Enable restart of WAD workers based on memory usage."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "wad-restart-start-time": {
+   "name": "wad-restart-start-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "WAD workers daily restart time (hh:mm).",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "wad-restart-end-time": {
+   "name": "wad-restart-end-time",
+   "category": "unitary",
+   "type": "user",
+   "help": "WAD workers daily restart end time (hh:mm).",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "radius-port": {
+   "name": "radius-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "RADIUS service port number.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1812,
+   "multiple_values": false
+  },
+  "speedtestd-server-port": {
+   "name": "speedtestd-server-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Speedtest server port number.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 5201,
+   "multiple_values": false
+  },
+  "speedtestd-ctrl-port": {
+   "name": "speedtestd-ctrl-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Speedtest server controller port number.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 5200,
+   "multiple_values": false
+  },
+  "admin-login-max": {
+   "name": "admin-login-max",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of administrators who can be logged in at the same time (1 - 100, default = 100).",
+   "min-value": 1,
+   "max-value": 100,
+   "default": 100,
+   "multiple_values": false
+  },
+  "remoteauthtimeout": {
+   "name": "remoteauthtimeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds that the FortiGate waits for responses from remote RADIUS, LDAP, or TACACS+ authentication servers. (1-300 sec, default = 5).",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 5,
+   "multiple_values": false
+  },
+  "ldapconntimeout": {
+   "name": "ldapconntimeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Global timeout for connections with remote LDAP servers in milliseconds (1 - 300000, default 500).",
+   "min-value": 1,
+   "max-value": 300000,
+   "default": 500,
+   "multiple_values": false
+  },
+  "batch-cmdb": {
+   "name": "batch-cmdb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable batch mode, allowing you to enter a series of CLI commands that will execute as a group once they are loaded.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable batch mode to execute in CMDB server."
+    },
+    {
+     "name": "disable",
+     "help": "Disable batch mode to execute in CMDB server."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "multi-factor-authentication": {
+   "name": "multi-factor-authentication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enforce all login methods to require an additional authentication factor (default = optional).",
+   "options": [
+    {
+     "name": "optional",
+     "help": "Do not enforce all login methods to require an additional authentication factor (controlled by user settings)."
+    },
+    {
+     "name": "mandatory",
+     "help": "Enforce all login methods to require an additional authentication factor."
+    }
+   ],
+   "default": "optional",
+   "multiple_values": false
+  },
+  "ssl-min-proto-version": {
+   "name": "ssl-min-proto-version",
+   "category": "unitary",
+   "type": "option",
+   "help": "Minimum supported protocol version for SSL/TLS connections (default = TLSv1.2).",
+   "options": [
+    {
+     "name": "SSLv3",
+     "help": "SSLv3."
+    },
+    {
+     "name": "TLSv1",
+     "help": "TLSv1."
+    },
+    {
+     "name": "TLSv1-1",
+     "help": "TLSv1.1."
+    },
+    {
+     "name": "TLSv1-2",
+     "help": "TLSv1.2."
+    },
+    {
+     "name": "TLSv1-3",
+     "help": "TLSv1.3."
+    }
+   ],
+   "default": "TLSv1-2",
+   "multiple_values": false
+  },
+  "autorun-log-fsck": {
+   "name": "autorun-log-fsck",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic log partition check after ungraceful shutdown.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic log partition check after ungraceful shutdown."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic log partition check after ungraceful shutdown."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "timezone": {
+   "name": "timezone",
+   "category": "unitary",
+   "type": "string",
+   "help": "Timezone database name. Enter ? to view the list of timezone.",
+   "required": true,
+   "datasource": [
+    "system.timezone.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "traffic-priority": {
+   "name": "traffic-priority",
+   "category": "unitary",
+   "type": "option",
+   "help": "Choose Type of Service (ToS) or Differentiated Services Code Point (DSCP) for traffic prioritization in traffic shaping.",
+   "required": true,
+   "options": [
+    {
+     "name": "tos",
+     "help": "IP TOS."
+    },
+    {
+     "name": "dscp",
+     "help": "DSCP (DiffServ) DS."
+    }
+   ],
+   "default": "tos",
+   "multiple_values": false
+  },
+  "traffic-priority-level": {
+   "name": "traffic-priority-level",
+   "category": "unitary",
+   "type": "option",
+   "help": "Default system-wide level of priority for traffic prioritization.",
+   "required": true,
+   "options": [
+    {
+     "name": "low",
+     "help": "Low priority."
+    },
+    {
+     "name": "medium",
+     "help": "Medium priority."
+    },
+    {
+     "name": "high",
+     "help": "High priority."
+    }
+   ],
+   "default": "medium",
+   "multiple_values": false
+  },
+  "quic-congestion-control-algo": {
+   "name": "quic-congestion-control-algo",
+   "category": "unitary",
+   "type": "option",
+   "help": "QUIC congestion control algorithm (default = cubic).",
+   "options": [
+    {
+     "name": "cubic",
+     "help": "Cubic."
+    },
+    {
+     "name": "bbr",
+     "help": "BBR."
+    },
+    {
+     "name": "bbr2",
+     "help": "BBR2."
+    },
+    {
+     "name": "reno",
+     "help": "Reno."
+    }
+   ],
+   "default": "cubic",
+   "multiple_values": false
+  },
+  "quic-max-datagram-size": {
+   "name": "quic-max-datagram-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum transmit datagram size (1200 - 1500, default = 1500).",
+   "min-value": 1200,
+   "max-value": 1500,
+   "default": 1500,
+   "multiple_values": false
+  },
+  "quic-udp-payload-size-shaping-per-cid": {
+   "name": "quic-udp-payload-size-shaping-per-cid",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable UDP payload size shaping per connection ID (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable UDP payload size shaping per connection ID."
+    },
+    {
+     "name": "disable",
+     "help": "Disable UDP payload size shaping per connection ID."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "quic-ack-thresold": {
+   "name": "quic-ack-thresold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of unacknowledged packets before sending ACK (2 - 5, default = 3).",
+   "min-value": 2,
+   "max-value": 5,
+   "default": 3,
+   "multiple_values": false
+  },
+  "quic-pmtud": {
+   "name": "quic-pmtud",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable path MTU discovery (default = enable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable path MTU discovery."
+    },
+    {
+     "name": "disable",
+     "help": "Disable path MTU discovery."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "quic-tls-handshake-timeout": {
+   "name": "quic-tls-handshake-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time-to-live (TTL) for TLS handshake in seconds (1 - 60, default = 5).",
+   "min-value": 1,
+   "max-value": 60,
+   "default": 5,
+   "multiple_values": false
+  },
+  "anti-replay": {
+   "name": "anti-replay",
+   "category": "unitary",
+   "type": "option",
+   "help": "Level of checking for packet replay and TCP sequence checking.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable anti-replay check."
+    },
+    {
+     "name": "loose",
+     "help": "Loose anti-replay check."
+    },
+    {
+     "name": "strict",
+     "help": "Strict anti-replay check."
+    }
+   ],
+   "default": "strict",
+   "multiple_values": false
+  },
+  "send-pmtu-icmp": {
+   "name": "send-pmtu-icmp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending of path maximum transmission unit (PMTU) - ICMP destination unreachable packet and to support PMTUD protocol on your network to reduce fragmentation of packets.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sending of PMTU ICMP destination unreachable packet."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sending of PMTU ICMP destination unreachable packet."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "honor-df": {
+   "name": "honor-df",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable honoring of Don't-Fragment (DF) flag.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable honoring of Don't-Fragment flag."
+    },
+    {
+     "name": "disable",
+     "help": "Disable honoring of Don't-Fragment flag."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "pmtu-discovery": {
+   "name": "pmtu-discovery",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable path MTU discovery.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable path MTU discovery."
+    },
+    {
+     "name": "disable",
+     "help": "Disable path MTU discovery."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "virtual-switch-vlan": {
+   "name": "virtual-switch-vlan",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable virtual switch VLAN.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable virtual switch VLAN."
+    },
+    {
+     "name": "disable",
+     "help": "Disable virtual switch VLAN."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "revision-image-auto-backup": {
+   "name": "revision-image-auto-backup",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable back-up of the latest image revision after the firmware is upgraded.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable revision image backup automatically when upgrading image."
+    },
+    {
+     "name": "disable",
+     "help": "Disable revision image backup automatically when upgrading image."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "revision-backup-on-logout": {
+   "name": "revision-backup-on-logout",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable back-up of the latest configuration revision when an administrator logs out of the CLI or GUI.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable revision config backup automatically when logout."
+    },
+    {
+     "name": "disable",
+     "help": "Disable revision config backup automatically when logout."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "management-vdom": {
+   "name": "management-vdom",
+   "category": "unitary",
+   "type": "string",
+   "help": "Management virtual domain name.",
+   "datasource": [
+    "system.vdom.name"
+   ],
+   "size": 31,
+   "default": "root",
+   "multiple_values": false
+  },
+  "hostname": {
+   "name": "hostname",
+   "category": "unitary",
+   "type": "string",
+   "help": "FortiGate unit's hostname. Most models will truncate names longer than 24 characters. Some models support hostnames up to 35 characters.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "alias": {
+   "name": "alias",
+   "category": "unitary",
+   "type": "string",
+   "help": "Alias for your FortiGate unit.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "strong-crypto": {
+   "name": "strong-crypto",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to use strong encryption and only allow strong ciphers and digest for HTTPS/SSH/TLS/SSL functions.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable strong crypto for HTTPS/SSH/TLS/SSL."
+    },
+    {
+     "name": "disable",
+     "help": "Disable strong crypto for HTTPS/SSH/TLS/SSL."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ssl-static-key-ciphers": {
+   "name": "ssl-static-key-ciphers",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable static key ciphers in SSL/TLS connections (e.g. AES128-SHA, AES256-SHA, AES128-SHA256, AES256-SHA256).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable static key ciphers in SSL/TLS connections."
+    },
+    {
+     "name": "disable",
+     "help": "Disable static key ciphers in SSL/TLS connections."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "snat-route-change": {
+   "name": "snat-route-change",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the ability to change the source NAT route.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SNAT route change."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SNAT route change."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "speedtest-server": {
+   "name": "speedtest-server",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable speed test server.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable speed test server service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable speed test server service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cli-audit-log": {
+   "name": "cli-audit-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable CLI audit log.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable CLI audit log."
+    },
+    {
+     "name": "disable",
+     "help": "Disable CLI audit log."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "dh-params": {
+   "name": "dh-params",
+   "category": "unitary",
+   "type": "option",
+   "help": "Number of bits to use in the Diffie-Hellman exchange for HTTPS/SSH protocols.",
+   "options": [
+    {
+     "name": "1024",
+     "help": "1024 bits."
+    },
+    {
+     "name": "1536",
+     "help": "1536 bits."
+    },
+    {
+     "name": "2048",
+     "help": "2048 bits."
+    },
+    {
+     "name": "3072",
+     "help": "3072 bits."
+    },
+    {
+     "name": "4096",
+     "help": "4096 bits."
+    },
+    {
+     "name": "6144",
+     "help": "6144 bits."
+    },
+    {
+     "name": "8192",
+     "help": "8192 bits."
+    }
+   ],
+   "default": "2048",
+   "multiple_values": false
+  },
+  "fds-statistics": {
+   "name": "fds-statistics",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending IPS, Application Control, and AntiVirus data to FortiGuard. This data is used to improve FortiGuard services and is not shared with external parties and is protected by Fortinet's privacy policy.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard statistics."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard statistics."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fds-statistics-period": {
+   "name": "fds-statistics-period",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiGuard statistics collection period in minutes. (1 - 1440 min (1 min to 24 hours), default = 60).",
+   "min-value": 1,
+   "max-value": 1440,
+   "default": 60,
+   "multiple_values": false
+  },
+  "tcp-option": {
+   "name": "tcp-option",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable SACK, timestamp and MSS TCP options.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TCP option."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TCP option."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "lldp-transmission": {
+   "name": "lldp-transmission",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Link Layer Discovery Protocol (LLDP) transmission.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable transmission of Link Layer Discovery Protocol (LLDP)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable transmission of Link Layer Discovery Protocol (LLDP)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "lldp-reception": {
+   "name": "lldp-reception",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Link Layer Discovery Protocol (LLDP) reception.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable reception of Link Layer Discovery Protocol (LLDP)."
+    },
+    {
+     "name": "disable",
+     "help": "Disable reception of Link Layer Discovery Protocol (LLDP)."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "proxy-auth-timeout": {
+   "name": "proxy-auth-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Authentication timeout in minutes for authenticated users (1 - 300 min, default = 10).",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 10,
+   "multiple_values": false
+  },
+  "proxy-keep-alive-mode": {
+   "name": "proxy-keep-alive-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Control if users must re-authenticate after a session is closed, traffic has been idle, or from the point at which the user was authenticated.",
+   "options": [
+    {
+     "name": "session",
+     "help": "Proxy keep-alive timeout begins at the closure of the session."
+    },
+    {
+     "name": "traffic",
+     "help": "Proxy keep-alive timeout begins after traffic has not been received."
+    },
+    {
+     "name": "re-authentication",
+     "help": "Proxy keep-alive timeout begins when the user was authenticated."
+    }
+   ],
+   "default": "session",
+   "multiple_values": false
+  },
+  "proxy-re-authentication-time": {
+   "name": "proxy-re-authentication-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "The time limit that users must re-authenticate if proxy-keep-alive-mode is set to re-authenticate (1  - 86400 sec, default=30s.",
+   "min-value": 1,
+   "max-value": 86400,
+   "default": 30,
+   "multiple_values": false
+  },
+  "proxy-auth-lifetime": {
+   "name": "proxy-auth-lifetime",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable authenticated users lifetime control. This is a cap on the total time a proxy user can be authenticated for after which re-authentication will take place.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable authenticated users lifetime control."
+    },
+    {
+     "name": "disable",
+     "help": "Disable authenticated users lifetime control."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "proxy-auth-lifetime-timeout": {
+   "name": "proxy-auth-lifetime-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Lifetime timeout in minutes for authenticated users (5  - 65535 min, default=480 (8 hours)).",
+   "min-value": 5,
+   "max-value": 65535,
+   "default": 480,
+   "multiple_values": false
+  },
+  "proxy-resource-mode": {
+   "name": "proxy-resource-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of the maximum memory usage on the FortiGate unit's proxy processing of resources, such as block lists, allow lists, and external resources.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of the maximum memory usage."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of the maximum memory usage."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "proxy-cert-use-mgmt-vdom": {
+   "name": "proxy-cert-use-mgmt-vdom",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable using management VDOM to send requests.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sys-perf-log-interval": {
+   "name": "sys-perf-log-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in minutes between updates of performance statistics logging. (1 - 15 min, default = 5, 0 = disabled).",
+   "min-value": 0,
+   "max-value": 15,
+   "default": 5,
+   "multiple_values": false
+  },
+  "check-protocol-header": {
+   "name": "check-protocol-header",
+   "category": "unitary",
+   "type": "option",
+   "help": "Level of checking performed on protocol headers. Strict checking is more thorough but may affect performance. Loose checking is OK in most cases.",
+   "options": [
+    {
+     "name": "loose",
+     "help": "Check protocol header loosely."
+    },
+    {
+     "name": "strict",
+     "help": "Check protocol header strictly."
+    }
+   ],
+   "default": "loose",
+   "multiple_values": false
+  },
+  "vip-arp-range": {
+   "name": "vip-arp-range",
+   "category": "unitary",
+   "type": "option",
+   "help": "Controls the number of ARPs that the FortiGate sends for a Virtual IP (VIP) address range.",
+   "options": [
+    {
+     "name": "unlimited",
+     "help": "Send ARPs for all addresses in VIP range."
+    },
+    {
+     "name": "restricted",
+     "help": "Send ARPs for the first 8192 addresses in VIP range."
+    }
+   ],
+   "default": "restricted",
+   "multiple_values": false
+  },
+  "reset-sessionless-tcp": {
+   "name": "reset-sessionless-tcp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to perform if the FortiGate receives a TCP packet but cannot find a corresponding session in its session table. NAT/Route mode only.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable reset session-less TCP."
+    },
+    {
+     "name": "disable",
+     "help": "Disable reset session-less TCP."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "allow-traffic-redirect": {
+   "name": "allow-traffic-redirect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Disable to prevent traffic with same local ingress and egress interface from being forwarded without policy check.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable allow traffic redirect."
+    },
+    {
+     "name": "disable",
+     "help": "Disable allow traffic redirect."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipv6-allow-traffic-redirect": {
+   "name": "ipv6-allow-traffic-redirect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Disable to prevent IPv6 traffic with same local ingress and egress interface from being forwarded without policy check.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable allow traffic IPv6 redirect."
+    },
+    {
+     "name": "disable",
+     "help": "Disable allow traffic IPv6 redirect."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "strict-dirty-session-check": {
+   "name": "strict-dirty-session-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to check the session against the original policy when revalidating. This can prevent dropping of redirected sessions when web-filtering and authentication are enabled together. If this option is enabled, the FortiGate unit deletes a session if a routing or policy change causes the session to no longer match the policy that originally allowed the session.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable strict dirty-session check."
+    },
+    {
+     "name": "disable",
+     "help": "Disable strict dirty-session check."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "tcp-halfclose-timer": {
+   "name": "tcp-halfclose-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds the FortiGate unit should wait to close a session after one peer has sent a FIN packet but the other has not responded (1 - 86400 sec (1 day), default = 120).",
+   "min-value": 1,
+   "max-value": 86400,
+   "default": 120,
+   "multiple_values": false
+  },
+  "tcp-halfopen-timer": {
+   "name": "tcp-halfopen-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds the FortiGate unit should wait to close a session after one peer has sent an open session packet but the other has not responded (1 - 86400 sec (1 day), default = 10).",
+   "min-value": 1,
+   "max-value": 86400,
+   "default": 10,
+   "multiple_values": false
+  },
+  "tcp-timewait-timer": {
+   "name": "tcp-timewait-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Length of the TCP TIME-WAIT state in seconds (1 - 300 sec, default = 1).",
+   "min-value": 0,
+   "max-value": 300,
+   "default": 1,
+   "multiple_values": false
+  },
+  "tcp-rst-timer": {
+   "name": "tcp-rst-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Length of the TCP CLOSE state in seconds (5 - 300 sec, default = 5).",
+   "min-value": 5,
+   "max-value": 300,
+   "default": 5,
+   "multiple_values": false
+  },
+  "udp-idle-timer": {
+   "name": "udp-idle-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "UDP connection session timeout. This command can be useful in managing CPU and memory resources (1 - 86400 seconds (1 day), default = 60).",
+   "min-value": 1,
+   "max-value": 86400,
+   "default": 180,
+   "multiple_values": false
+  },
+  "block-session-timer": {
+   "name": "block-session-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Duration in seconds for blocked sessions (1 - 300 sec  (5 minutes), default = 30).",
+   "min-value": 1,
+   "max-value": 300,
+   "default": 30,
+   "multiple_values": false
+  },
+  "ip-src-port-range": {
+   "name": "ip-src-port-range",
+   "category": "unitary",
+   "type": "user",
+   "help": "IP source port range used for traffic originating from the FortiGate unit.",
+   "required": true,
+   "default": "1024-25000",
+   "multiple_values": false
+  },
+  "pre-login-banner": {
+   "name": "pre-login-banner",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable displaying the administrator access disclaimer message on the login page before an administrator logs in.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable pre-login banner."
+    },
+    {
+     "name": "disable",
+     "help": "Disable pre-login banner."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "post-login-banner": {
+   "name": "post-login-banner",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable displaying the administrator access disclaimer message after an administrator successfully logs in.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable post-login banner."
+    },
+    {
+     "name": "enable",
+     "help": "Enable post-login banner."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "tftp": {
+   "name": "tftp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TFTP.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TFTP."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TFTP."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "av-failopen": {
+   "name": "av-failopen",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set the action to take if the FortiGate is running low on memory or the proxy connection limit has been reached.",
+   "options": [
+    {
+     "name": "pass",
+     "help": "Bypass the antivirus system when memory is low. Antivirus scanning resumes when the low memory condition is resolved."
+    },
+    {
+     "name": "off",
+     "help": "Stop accepting new AV sessions when entering conserve mode, but continue to process current active sessions."
+    },
+    {
+     "name": "one-shot",
+     "help": "Bypass the antivirus system when memory is low."
+    }
+   ],
+   "default": "pass",
+   "multiple_values": false
+  },
+  "av-failopen-session": {
+   "name": "av-failopen-session",
+   "category": "unitary",
+   "type": "option",
+   "help": "When enabled and a proxy for a protocol runs out of room in its session table, that protocol goes into failopen mode and enacts the action specified by av-failopen.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable AV fail open session option."
+    },
+    {
+     "name": "disable",
+     "help": "Disable AV fail open session option."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "memory-use-threshold-extreme": {
+   "name": "memory-use-threshold-extreme",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold at which memory usage is considered extreme (new sessions are dropped) (% of total RAM, default = 95).",
+   "min-value": 70,
+   "max-value": 97,
+   "default": 95,
+   "multiple_values": false
+  },
+  "memory-use-threshold-red": {
+   "name": "memory-use-threshold-red",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold at which memory usage forces the FortiGate to enter conserve mode (% of total RAM, default = 88).",
+   "min-value": 70,
+   "max-value": 97,
+   "default": 88,
+   "multiple_values": false
+  },
+  "memory-use-threshold-green": {
+   "name": "memory-use-threshold-green",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold at which memory usage forces the FortiGate to exit conserve mode (% of total RAM, default = 82).",
+   "min-value": 70,
+   "max-value": 97,
+   "default": 82,
+   "multiple_values": false
+  },
+  "ip-fragment-mem-thresholds": {
+   "name": "ip-fragment-mem-thresholds",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum memory (MB) used to reassemble IPv4/IPv6 fragments.",
+   "min-value": 32,
+   "max-value": 2047,
+   "default": 32,
+   "multiple_values": false
+  },
+  "cpu-use-threshold": {
+   "name": "cpu-use-threshold",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Threshold at which CPU usage is reported (% of total CPU, default = 90).",
+   "min-value": 50,
+   "max-value": 99,
+   "default": 90,
+   "multiple_values": false
+  },
+  "log-single-cpu-high": {
+   "name": "log-single-cpu-high",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging the event of a single CPU core reaching CPU usage threshold.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging the event of a single CPU core reaching CPU usage threshold."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging the event of a single CPU core reaching CPU usage threshold."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "check-reset-range": {
+   "name": "check-reset-range",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure ICMP error message verification. You can either apply strict RST range checking or disable it.",
+   "options": [
+    {
+     "name": "strict",
+     "help": "Check RST range strictly."
+    },
+    {
+     "name": "disable",
+     "help": "Disable RST range check."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "vdom-mode": {
+   "name": "vdom-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable support for multiple virtual domains (VDOMs).",
+   "options": [
+    {
+     "name": "no-vdom",
+     "help": "Disable multiple VDOMs mode."
+    },
+    {
+     "name": "multi-vdom",
+     "help": "Enable multiple VDOMs mode."
+    }
+   ],
+   "default": "no-vdom",
+   "multiple_values": false
+  },
+  "long-vdom-name": {
+   "name": "long-vdom-name",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable long VDOM name support.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable long VDOM name support."
+    },
+    {
+     "name": "disable",
+     "help": "Disable long VDOM name support."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "edit-vdom-prompt": {
+   "name": "edit-vdom-prompt",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable edit new VDOM prompt.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable edit new VDOM prompt."
+    },
+    {
+     "name": "disable",
+     "help": "Disable edit new VDOM prompt."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "admin-port": {
+   "name": "admin-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative access port for HTTP. (1 - 65535, default = 80).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 80,
+   "multiple_values": false
+  },
+  "admin-sport": {
+   "name": "admin-sport",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative access port for HTTPS. (1 - 65535, default = 443).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 443,
+   "multiple_values": false
+  },
+  "admin-host": {
+   "name": "admin-host",
+   "category": "unitary",
+   "type": "string",
+   "help": "Administrative host for HTTP and HTTPS. When set, will be used in lieu of the client's Host header for any redirection.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "admin-https-redirect": {
+   "name": "admin-https-redirect",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable redirection of HTTP administration access to HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable redirecting HTTP administration access to HTTPS."
+    },
+    {
+     "name": "disable",
+     "help": "Disable redirecting HTTP administration access to HTTPS."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "admin-hsts-max-age": {
+   "name": "admin-hsts-max-age",
+   "category": "unitary",
+   "type": "integer",
+   "help": "HTTPS Strict-Transport-Security header max-age in seconds. A value of 0 will reset any HSTS records in the browser.When admin-https-redirect is disabled the header max-age will be 0.",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 63072000,
+   "multiple_values": false
+  },
+  "admin-ssh-password": {
+   "name": "admin-ssh-password",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable password authentication for SSH admin access.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable password authentication for SSH admin access."
+    },
+    {
+     "name": "disable",
+     "help": "Disable password authentication for SSH admin access."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "admin-restrict-local": {
+   "name": "admin-restrict-local",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable local admin authentication restriction when remote authenticator is up and running (default = disable).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable local admin authentication restriction."
+    },
+    {
+     "name": "disable",
+     "help": "Disable local admin authentication restriction."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "admin-ssh-port": {
+   "name": "admin-ssh-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative access port for SSH. (1 - 65535, default = 22).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 22,
+   "multiple_values": false
+  },
+  "admin-ssh-grace-time": {
+   "name": "admin-ssh-grace-time",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum time in seconds permitted between making an SSH connection to the FortiGate unit and authenticating (10 - 3600 sec (1 hour), default 120).",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 120,
+   "multiple_values": false
+  },
+  "admin-ssh-v1": {
+   "name": "admin-ssh-v1",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSH v1 compatibility.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSH v1 compatibility."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSH v1 compatibility."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "admin-telnet": {
+   "name": "admin-telnet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable TELNET service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TELNET service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TELNET service."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "admin-telnet-port": {
+   "name": "admin-telnet-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Administrative access port for TELNET. (1 - 65535, default = 23).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 23,
+   "multiple_values": false
+  },
+  "admin-forticloud-sso-login": {
+   "name": "admin-forticloud-sso-login",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiCloud admin login via SSO.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiCloud admin login via SSO."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiCloud admin login via SSO."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "admin-forticloud-sso-default-profile": {
+   "name": "admin-forticloud-sso-default-profile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Override access profile.",
+   "datasource": [
+    "system.accprofile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "default-service-source-port": {
+   "name": "default-service-source-port",
+   "category": "unitary",
+   "type": "user",
+   "help": "Default service source port range (default = 1 - 65535).",
+   "default": "",
+   "multiple_values": false
+  },
+  "admin-reset-button": {
+   "name": "admin-reset-button",
+   "category": "unitary",
+   "type": "option",
+   "help": "Press the reset button can reset to factory default.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "press the reset button can reset to factory default"
+    },
+    {
+     "name": "disable",
+     "help": "press the reset button cannot reset to factory default"
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "admin-server-cert": {
+   "name": "admin-server-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server certificate that the FortiGate uses for HTTPS administrative connections.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_GUI_Server",
+   "multiple_values": false
+  },
+  "admin-https-pki-required": {
+   "name": "admin-https-pki-required",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable admin login method. Enable to force administrators to provide a valid certificate to log in if PKI is enabled. Disable to allow administrators to log in with a certificate or password.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Admin users must provide a valid certificate when PKI is enabled for HTTPS admin access."
+    },
+    {
+     "name": "disable",
+     "help": "Admin users can login by providing a valid certificate or password."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "wifi-certificate": {
+   "name": "wifi-certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "Certificate to use for WiFi authentication.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_Wifi",
+   "multiple_values": false
+  },
+  "dhcp-lease-backup-interval": {
+   "name": "dhcp-lease-backup-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DHCP leases backup interval in seconds (10 - 3600, default = 60).",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 60,
+   "multiple_values": false
+  },
+  "wifi-ca-certificate": {
+   "name": "wifi-ca-certificate",
+   "category": "unitary",
+   "type": "string",
+   "help": "CA certificate that verifies the WiFi certificate.",
+   "datasource": [
+    "certificate.ca.name"
+   ],
+   "size": 79,
+   "default": "Fortinet_Wifi_CA",
+   "multiple_values": false
+  },
+  "auth-http-port": {
+   "name": "auth-http-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "User authentication HTTP port. (1 - 65535, default = 1000).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1000,
+   "multiple_values": false
+  },
+  "auth-https-port": {
+   "name": "auth-https-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "User authentication HTTPS port. (1 - 65535, default = 1003).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 1003,
+   "multiple_values": false
+  },
+  "auth-ike-saml-port": {
+   "name": "auth-ike-saml-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "User IKE SAML authentication port (0 - 65535, default = 1001).",
+   "min-value": 0,
+   "max-value": 65535,
+   "default": 1001,
+   "multiple_values": false
+  },
+  "auth-keepalive": {
+   "name": "auth-keepalive",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable to prevent user authentication sessions from timing out when idle.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of keep alive to extend authentication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of keep alive to extend authentication."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "policy-auth-concurrent": {
+   "name": "policy-auth-concurrent",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of concurrent firewall use logins from the same user (1 - 100, default = 0 means no limit).",
+   "min-value": 0,
+   "max-value": 100,
+   "default": 0,
+   "multiple_values": false
+  },
+  "auth-session-limit": {
+   "name": "auth-session-limit",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take when the number of allowed user authenticated sessions is reached.",
+   "options": [
+    {
+     "name": "block-new",
+     "help": "Block new user authentication attempts."
+    },
+    {
+     "name": "logout-inactive",
+     "help": "Logout the most inactive user authenticated sessions."
+    }
+   ],
+   "default": "block-new",
+   "multiple_values": false
+  },
+  "auth-cert": {
+   "name": "auth-cert",
+   "category": "unitary",
+   "type": "string",
+   "help": "Server certificate that the FortiGate uses for HTTPS firewall authentication connections.",
+   "datasource": [
+    "certificate.local.name"
+   ],
+   "size": 35,
+   "default": "Fortinet_Factory",
+   "multiple_values": false
+  },
+  "clt-cert-req": {
+   "name": "clt-cert-req",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable requiring administrators to have a client certificate to log into the GUI using HTTPS.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable require client certificate for GUI login."
+    },
+    {
+     "name": "disable",
+     "help": "Disable require client certificate for GUI login."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fortiservice-port": {
+   "name": "fortiservice-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiService port (1 - 65535, default = 8013). Used by FortiClient endpoint compliance. Older versions of FortiClient used a different port.",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 8013,
+   "multiple_values": false
+  },
+  "cfg-save": {
+   "name": "cfg-save",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configuration file save mode for CLI changes.",
+   "options": [
+    {
+     "name": "automatic",
+     "help": "Automatically save config."
+    },
+    {
+     "name": "manual",
+     "help": "Manually save config."
+    },
+    {
+     "name": "revert",
+     "help": "Manually save config and revert the config when timeout."
+    }
+   ],
+   "default": "automatic",
+   "multiple_values": false
+  },
+  "cfg-revert-timeout": {
+   "name": "cfg-revert-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time-out for reverting to the last saved configuration. (10 - 4294967295 seconds, default = 600).",
+   "min-value": 10,
+   "max-value": 4294967295,
+   "default": 600,
+   "multiple_values": false
+  },
+  "reboot-upon-config-restore": {
+   "name": "reboot-upon-config-restore",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable reboot of system upon restoring configuration.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable reboot of system upon restoring configuration."
+    },
+    {
+     "name": "disable",
+     "help": "Disable reboot of system upon restoring configuration."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "admin-scp": {
+   "name": "admin-scp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SCP support for system configuration backup, restore, and firmware file upload.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SCP support for system configuration backup, restore, and firmware file upload."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SCP support for system configuration backup, restore, and firmware file upload."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "security-rating-run-on-schedule": {
+   "name": "security-rating-run-on-schedule",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable scheduled runs of Security Rating.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable scheduled runs of Security Rating."
+    },
+    {
+     "name": "disable",
+     "help": "Disable scheduled runs of Security Rating."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "wireless-controller": {
+   "name": "wireless-controller",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the wireless controller feature to use the FortiGate unit to manage FortiAPs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable wireless controller."
+    },
+    {
+     "name": "disable",
+     "help": "Disable wireless controller."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "wireless-controller-port": {
+   "name": "wireless-controller-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Port used for the control channel in wireless controller mode (wireless-mode is ac). The data channel port is the control channel port number plus one (1024 - 49150, default = 5246).",
+   "min-value": 1024,
+   "max-value": 49150,
+   "default": 5246,
+   "multiple_values": false
+  },
+  "fortiextender-data-port": {
+   "name": "fortiextender-data-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiExtender data port (1024 - 49150, default = 25246).",
+   "min-value": 1024,
+   "max-value": 49150,
+   "default": 25246,
+   "multiple_values": false
+  },
+  "fortiextender": {
+   "name": "fortiextender",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiExtender.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable FortiExtender controller."
+    },
+    {
+     "name": "enable",
+     "help": "Enable FortiExtender controller."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "extender-controller-reserved-network": {
+   "name": "extender-controller-reserved-network",
+   "category": "unitary",
+   "type": "ipv4-classnet-host",
+   "help": "Configure reserved network subnet for managed LAN extension FortiExtender units. This is available when the FortiExtender daemon is running.",
+   "default": "10.252.0.1 255.255.0.0",
+   "multiple_values": false
+  },
+  "fortiextender-discovery-lockdown": {
+   "name": "fortiextender-discovery-lockdown",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiExtender CAPWAP lockdown.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Unlock down new FortiExtender device discovery."
+    },
+    {
+     "name": "enable",
+     "help": "Lock down new FortiExtender device discovery."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fortiextender-vlan-mode": {
+   "name": "fortiextender-vlan-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiExtender VLAN mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiExtender VLAN mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiExtender VLAN mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "fortiextender-provision-on-authorization": {
+   "name": "fortiextender-provision-on-authorization",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic provisioning of latest FortiExtender firmware on authorization.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiExtender firmware provision on authorization."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiExtender firmware provision on authorization."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "switch-controller": {
+   "name": "switch-controller",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable switch controller feature. Switch controller allows you to manage FortiSwitch from the FortiGate itself.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable switch controller feature."
+    },
+    {
+     "name": "enable",
+     "help": "Enable switch controller feature."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "switch-controller-reserved-network": {
+   "name": "switch-controller-reserved-network",
+   "category": "unitary",
+   "type": "ipv4-classnet-host",
+   "help": "Configure reserved network subnet for managed switches. This is available when the switch controller is enabled.",
+   "default": "10.255.0.1 255.255.0.0",
+   "multiple_values": false
+  },
+  "dnsproxy-worker-count": {
+   "name": "dnsproxy-worker-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "DNS proxy worker count. For a FortiGate with multiple logical CPUs, you can set the DNS process number from 1 to the number of logical CPUs.",
+   "min-value": 1,
+   "max-value": 8,
+   "default": 1,
+   "multiple_values": false
+  },
+  "url-filter-count": {
+   "name": "url-filter-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "URL filter daemon count.",
+   "min-value": 1,
+   "max-value": 1,
+   "default": 1,
+   "multiple_values": false
+  },
+  "proxy-worker-count": {
+   "name": "proxy-worker-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Proxy worker count.",
+   "min-value": 1,
+   "max-value": 8,
+   "default": 0,
+   "multiple_values": false
+  },
+  "scanunit-count": {
+   "name": "scanunit-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of scanunits. The range and the default depend on the number of CPUs. Only available on FortiGate units with multiple CPUs.",
+   "min-value": 2,
+   "max-value": 8,
+   "default": 0,
+   "multiple_values": false
+  },
+  "proxy-hardware-acceleration": {
+   "name": "proxy-hardware-acceleration",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable email proxy hardware acceleration.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable email proxy hardware acceleration."
+    },
+    {
+     "name": "enable",
+     "help": "Enable email proxy hardware acceleration."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fgd-alert-subscription": {
+   "name": "fgd-alert-subscription",
+   "category": "unitary",
+   "type": "option",
+   "help": "Type of alert to retrieve from FortiGuard.",
+   "options": [
+    {
+     "name": "advisory",
+     "help": "Retrieve FortiGuard advisories, report and news alerts."
+    },
+    {
+     "name": "latest-threat",
+     "help": "Retrieve latest FortiGuard threats alerts."
+    },
+    {
+     "name": "latest-virus",
+     "help": "Retrieve latest FortiGuard virus alerts."
+    },
+    {
+     "name": "latest-attack",
+     "help": "Retrieve latest FortiGuard attack alerts."
+    },
+    {
+     "name": "new-antivirus-db",
+     "help": "Retrieve FortiGuard AV database release alerts."
+    },
+    {
+     "name": "new-attack-db",
+     "help": "Retrieve FortiGuard IPS database release alerts."
+    }
+   ],
+   "default": "",
+   "multiple_values": true
+  },
+  "ipsec-hmac-offload": {
+   "name": "ipsec-hmac-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable offloading (hardware acceleration) of HMAC processing for IPsec VPN.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable offload IPsec HMAC processing to hardware if possible."
+    },
+    {
+     "name": "disable",
+     "help": "Disable offload IPsec HMAC processing to hardware."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipv6-accept-dad": {
+   "name": "ipv6-accept-dad",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Enable/disable acceptance of IPv6 Duplicate Address Detection (DAD).",
+   "min-value": 0,
+   "max-value": 2,
+   "default": 1,
+   "multiple_values": false
+  },
+  "ipv6-allow-anycast-probe": {
+   "name": "ipv6-allow-anycast-probe",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 address probe through Anycast.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable probing of IPv6 address space through Anycast"
+    },
+    {
+     "name": "disable",
+     "help": "Disable probing of IPv6 address space through Anycast"
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv6-allow-multicast-probe": {
+   "name": "ipv6-allow-multicast-probe",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable IPv6 address probe through Multicast.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable probing of IPv6 address space through Multicast."
+    },
+    {
+     "name": "disable",
+     "help": "Disable probing of IPv6 address space through Multicast."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ipv6-allow-local-in-silent-drop": {
+   "name": "ipv6-allow-local-in-silent-drop",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable silent drop of IPv6 local-in traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable silent drop of IPv6 local-in traffic."
+    },
+    {
+     "name": "disable",
+     "help": "Disable silent drop of IPv6 local-in traffic."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "csr-ca-attribute": {
+   "name": "csr-ca-attribute",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable the CA attribute in certificates. Some CA servers reject CSRs that have the CA attribute.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable CA attribute in CSR."
+    },
+    {
+     "name": "disable",
+     "help": "Disable CA attribute in CSR."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "wimax-4g-usb": {
+   "name": "wimax-4g-usb",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable comparability with WiMAX 4G USB devices.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable WiMax 4G."
+    },
+    {
+     "name": "disable",
+     "help": "Disable WiMax 4G."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "cert-chain-max": {
+   "name": "cert-chain-max",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of certificates that can be traversed in a certificate chain.",
+   "min-value": 1,
+   "max-value": 2147483647,
+   "default": 8,
+   "multiple_values": false
+  },
+  "sslvpn-max-worker-count": {
+   "name": "sslvpn-max-worker-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of SSL-VPN processes. Upper limit for this value is the number of CPUs and depends on the model. Default value of zero means the SSLVPN daemon decides the number of worker processes.",
+   "min-value": 0,
+   "max-value": 8,
+   "default": 0,
+   "multiple_values": false
+  },
+  "vpn-ems-sn-check": {
+   "name": "vpn-ems-sn-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable verification of EMS serial number in SSL-VPN connection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable verification of EMS serial number in SSL-VPN connection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable verification of EMS serial number in SSL-VPN connection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sslvpn-web-mode": {
+   "name": "sslvpn-web-mode",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable SSL-VPN web mode.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable SSL-VPN web mode."
+    },
+    {
+     "name": "disable",
+     "help": "Disable SSL-VPN web mode."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "two-factor-ftk-expiry": {
+   "name": "two-factor-ftk-expiry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiToken authentication session timeout (60 - 600 sec (10 minutes), default = 60).",
+   "min-value": 60,
+   "max-value": 600,
+   "default": 60,
+   "multiple_values": false
+  },
+  "two-factor-email-expiry": {
+   "name": "two-factor-email-expiry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Email-based two-factor authentication session timeout (30 - 300 seconds (5 minutes), default = 60).",
+   "min-value": 30,
+   "max-value": 300,
+   "default": 60,
+   "multiple_values": false
+  },
+  "two-factor-sms-expiry": {
+   "name": "two-factor-sms-expiry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "SMS-based two-factor authentication session timeout (30 - 300 sec, default = 60).",
+   "min-value": 30,
+   "max-value": 300,
+   "default": 60,
+   "multiple_values": false
+  },
+  "two-factor-fac-expiry": {
+   "name": "two-factor-fac-expiry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiAuthenticator token authentication session timeout (10 - 3600 seconds (1 hour), default = 60).",
+   "min-value": 10,
+   "max-value": 3600,
+   "default": 60,
+   "multiple_values": false
+  },
+  "two-factor-ftm-expiry": {
+   "name": "two-factor-ftm-expiry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "FortiToken Mobile session timeout (1 - 168 hours (7 days), default = 72).",
+   "min-value": 1,
+   "max-value": 168,
+   "default": 72,
+   "multiple_values": false
+  },
+  "wad-worker-count": {
+   "name": "wad-worker-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of explicit proxy WAN optimization daemon (WAD) processes. By default WAN optimization, explicit proxy, and web caching is handled by all of the CPU cores in a FortiGate unit.",
+   "min-value": 0,
+   "max-value": 2,
+   "default": 0,
+   "multiple_values": false
+  },
+  "wad-csvc-cs-count": {
+   "name": "wad-csvc-cs-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of concurrent WAD-cache-service object-cache processes.",
+   "min-value": 1,
+   "max-value": 1,
+   "default": 1,
+   "multiple_values": false
+  },
+  "wad-csvc-db-count": {
+   "name": "wad-csvc-db-count",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of concurrent WAD-cache-service byte-cache processes.",
+   "min-value": 0,
+   "max-value": 8,
+   "default": 0,
+   "multiple_values": false
+  },
+  "wad-source-affinity": {
+   "name": "wad-source-affinity",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable dispatching traffic to WAD workers based on source affinity.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable dispatching traffic to WAD workers based on source affinity."
+    },
+    {
+     "name": "enable",
+     "help": "Enable dispatching traffic to WAD workers based on source affinity."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "wad-memory-change-granularity": {
+   "name": "wad-memory-change-granularity",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Minimum percentage change in system memory usage detected by the wad daemon prior to adjusting TCP window size for any active connection.",
+   "min-value": 5,
+   "max-value": 25,
+   "default": 10,
+   "multiple_values": false
+  },
+  "login-timestamp": {
+   "name": "login-timestamp",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable login time recording.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable login time recording."
+    },
+    {
+     "name": "disable",
+     "help": "Disable login time recording."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "ip-conflict-detection": {
+   "name": "ip-conflict-detection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of IPv4 address conflict detection.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging of IPv4 address conflict detection."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging of IPv4 address conflict detection."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "miglogd-children": {
+   "name": "miglogd-children",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of logging (miglogd) processes to be allowed to run. Higher number can reduce performance; lower number can slow log processing time. ",
+   "min-value": 0,
+   "max-value": 15,
+   "default": 0,
+   "multiple_values": false
+  },
+  "special-file-23-support": {
+   "name": "special-file-23-support",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable detection of those special format files when using Data Loss Prevention.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable detection of those special format files when using Data Loss Prevention."
+    },
+    {
+     "name": "enable",
+     "help": "Enable detection of those special format files when using Data Loss Prevention."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-uuid-address": {
+   "name": "log-uuid-address",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable insertion of address UUIDs to traffic logs.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable insertion of address UUID to traffic logs."
+    },
+    {
+     "name": "disable",
+     "help": "Disable insertion of address UUID to traffic logs."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "log-ssl-connection": {
+   "name": "log-ssl-connection",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of SSL connection events.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging of SSL connection events."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging of SSL connection events."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "gui-rest-api-cache": {
+   "name": "gui-rest-api-cache",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable REST API result caching on FortiGate.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable REST API result caching on FortiGate."
+    },
+    {
+     "name": "disable",
+     "help": "Disable REST API result caching on FortiGate."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "rest-api-key-url-query": {
+   "name": "rest-api-key-url-query",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable support for passing REST API keys through URL query parameters.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable support for passing REST API keys through URL query parameters."
+    },
+    {
+     "name": "disable",
+     "help": "Disable support for passing REST API keys through URL query parameters."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "arp-max-entry": {
+   "name": "arp-max-entry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of dynamically learned MAC addresses that can be added to the ARP table (131072 - 2147483647, default = 131072).",
+   "min-value": 131072,
+   "max-value": 2147483647,
+   "default": 131072,
+   "multiple_values": false
+  },
+  "ha-affinity": {
+   "name": "ha-affinity",
+   "category": "unitary",
+   "type": "string",
+   "help": "Affinity setting for HA daemons (hexadecimal value up to 256 bits in the format of xxxxxxxxxxxxxxxx).",
+   "size": 79,
+   "default": "1",
+   "multiple_values": false
+  },
+  "bfd-affinity": {
+   "name": "bfd-affinity",
+   "category": "unitary",
+   "type": "string",
+   "help": "Affinity setting for BFD daemon (hexadecimal value up to 256 bits in the format of xxxxxxxxxxxxxxxx).",
+   "size": 79,
+   "default": "1",
+   "multiple_values": false
+  },
+  "cmdbsvr-affinity": {
+   "name": "cmdbsvr-affinity",
+   "category": "unitary",
+   "type": "string",
+   "help": "Affinity setting for cmdbsvr (hexadecimal value up to 256 bits in the format of xxxxxxxxxxxxxxxx).",
+   "size": 79,
+   "default": "1",
+   "multiple_values": false
+  },
+  "ndp-max-entry": {
+   "name": "ndp-max-entry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of NDP table entries (set to 65,536 or higher; if set to 0, kernel holds 65,536 entries).",
+   "min-value": 65536,
+   "max-value": 2147483647,
+   "default": 0,
+   "multiple_values": false
+  },
+  "br-fdb-max-entry": {
+   "name": "br-fdb-max-entry",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of bridge forwarding database (FDB) entries.",
+   "min-value": 8192,
+   "max-value": 2147483647,
+   "default": 8192,
+   "multiple_values": false
+  },
+  "max-route-cache-size": {
+   "name": "max-route-cache-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of IP route cache entries (0 - 2147483647).",
+   "min-value": 0,
+   "max-value": 2147483647,
+   "default": 0,
+   "multiple_values": false
+  },
+  "ipsec-asic-offload": {
+   "name": "ipsec-asic-offload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable ASIC offloading (hardware acceleration) for IPsec VPN traffic. Hardware acceleration can offload IPsec VPN sessions and accelerate encryption and decryption.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable ASIC offload for IPsec VPN."
+    },
+    {
+     "name": "disable",
+     "help": "Disable ASIC offload for IPsec VPN."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipsec-round-robin": {
+   "name": "ipsec-round-robin",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable round-robin redistribution to multiple CPUs for IPsec VPN traffic.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable round-robin redistribution for IPsec VPN."
+    },
+    {
+     "name": "disable",
+     "help": "Disable round-robin redistribution for IPsec VPN."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "device-idle-timeout": {
+   "name": "device-idle-timeout",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time in seconds that a device must be idle to automatically log the device user out. (30 - 31536000 sec (30 sec to 1 year), default = 300).",
+   "min-value": 30,
+   "max-value": 31536000,
+   "default": 300,
+   "multiple_values": false
+  },
+  "user-device-store-max-devices": {
+   "name": "user-device-store-max-devices",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of devices allowed in user device store.",
+   "min-value": 10054,
+   "max-value": 28727,
+   "default": 20109,
+   "multiple_values": false
+  },
+  "user-device-store-max-users": {
+   "name": "user-device-store-max-users",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of users allowed in user device store.",
+   "min-value": 10054,
+   "max-value": 28727,
+   "default": 20109,
+   "multiple_values": false
+  },
+  "user-device-store-max-unified-mem": {
+   "name": "user-device-store-max-unified-mem",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum unified memory allowed in user device store.",
+   "min-value": 20109598,
+   "max-value": 201095987,
+   "default": 100547993,
+   "multiple_values": false
+  },
+  "gui-device-latitude": {
+   "name": "gui-device-latitude",
+   "category": "unitary",
+   "type": "string",
+   "help": "Add the latitude of the location of this FortiGate to position it on the Threat Map.",
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  },
+  "gui-device-longitude": {
+   "name": "gui-device-longitude",
+   "category": "unitary",
+   "type": "string",
+   "help": "Add the longitude of the location of this FortiGate to position it on the Threat Map.",
+   "size": 19,
+   "default": "",
+   "multiple_values": false
+  },
+  "private-data-encryption": {
+   "name": "private-data-encryption",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable private data encryption using an AES 128-bit key or passpharse.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable private data encryption using an AES 128-bit key."
+    },
+    {
+     "name": "enable",
+     "help": "Enable private data encryption using an AES 128-bit key."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "auto-auth-extension-device": {
+   "name": "auto-auth-extension-device",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable automatic authorization of dedicated Fortinet extension devices.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable automatic authorization of dedicated Fortinet extension device globally."
+    },
+    {
+     "name": "disable",
+     "help": "Disable automatic authorization of dedicated Fortinet extension device globally."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "gui-theme": {
+   "name": "gui-theme",
+   "category": "unitary",
+   "type": "option",
+   "help": "Color scheme for the administration GUI.",
+   "options": [
+    {
+     "name": "jade",
+     "help": "Jade theme."
+    },
+    {
+     "name": "neutrino",
+     "help": "Neutrino theme."
+    },
+    {
+     "name": "mariner",
+     "help": "Mariner theme."
+    },
+    {
+     "name": "graphite",
+     "help": "Graphite theme."
+    },
+    {
+     "name": "melongene",
+     "help": "Melongene theme."
+    },
+    {
+     "name": "jet-stream",
+     "help": "Jet Stream theme."
+    },
+    {
+     "name": "security-fabric",
+     "help": "Security Fabric theme."
+    },
+    {
+     "name": "retro",
+     "help": "FortiOS v3 Retro theme."
+    },
+    {
+     "name": "dark-matter",
+     "help": "Dark Matter theme."
+    },
+    {
+     "name": "onyx",
+     "help": "Onyx theme."
+    },
+    {
+     "name": "eclipse",
+     "help": "Eclipse theme."
+    }
+   ],
+   "default": "jade",
+   "multiple_values": false
+  },
+  "gui-date-format": {
+   "name": "gui-date-format",
+   "category": "unitary",
+   "type": "option",
+   "help": "Default date format used throughout GUI.",
+   "options": [
+    {
+     "name": "yyyy/MM/dd",
+     "help": "Year/Month/Day."
+    },
+    {
+     "name": "dd/MM/yyyy",
+     "help": "Day/Month/Year."
+    },
+    {
+     "name": "MM/dd/yyyy",
+     "help": "Month/Day/Year."
+    },
+    {
+     "name": "yyyy-MM-dd",
+     "help": "Year-Month-Day."
+    },
+    {
+     "name": "dd-MM-yyyy",
+     "help": "Day-Month-Year."
+    },
+    {
+     "name": "MM-dd-yyyy",
+     "help": "Month-Day-Year."
+    }
+   ],
+   "default": "yyyy/MM/dd",
+   "multiple_values": false
+  },
+  "gui-date-time-source": {
+   "name": "gui-date-time-source",
+   "category": "unitary",
+   "type": "option",
+   "help": "Source from which the FortiGate GUI uses to display date and time entries.",
+   "options": [
+    {
+     "name": "system",
+     "help": "Use this FortiGate unit's configured timezone."
+    },
+    {
+     "name": "browser",
+     "help": "Use the web browser's timezone."
+    }
+   ],
+   "default": "system",
+   "multiple_values": false
+  },
+  "igmp-state-limit": {
+   "name": "igmp-state-limit",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of IGMP memberships (96 - 64000, default = 3200).",
+   "min-value": 96,
+   "max-value": 128000,
+   "default": 3200,
+   "multiple_values": false
+  },
+  "cloud-communication": {
+   "name": "cloud-communication",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable all cloud communication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Allow cloud communication."
+    },
+    {
+     "name": "disable",
+     "help": "Disable all cloud-related settings."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "ipsec-ha-seqjump-rate": {
+   "name": "ipsec-ha-seqjump-rate",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ESP jump ahead rate (1G - 10G pps equivalent).",
+   "min-value": 1,
+   "max-value": 10,
+   "default": 10,
+   "multiple_values": false
+  },
+  "fortitoken-cloud": {
+   "name": "fortitoken-cloud",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiToken Cloud service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiToken Cloud service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiToken Cloud service."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fortitoken-cloud-push-status": {
+   "name": "fortitoken-cloud-push-status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FTM push service of FortiToken Cloud.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FTM push service of FortiToken Cloud."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FTM push service of FortiToken Cloud."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "fortitoken-cloud-region": {
+   "name": "fortitoken-cloud-region",
+   "category": "unitary",
+   "type": "string",
+   "help": "Region domain of FortiToken Cloud(unset to non-region).",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "fortitoken-cloud-sync-interval": {
+   "name": "fortitoken-cloud-sync-interval",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Interval in which to clean up remote users in FortiToken Cloud (0 - 336 hours (14 days), default = 24, disable = 0).",
+   "min-value": 0,
+   "max-value": 336,
+   "default": 24,
+   "multiple_values": false
+  },
+  "faz-disk-buffer-size": {
+   "name": "faz-disk-buffer-size",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum disk buffer size to temporarily store logs destined for FortiAnalyzer. To be used in the event that FortiAnalyzer is unavailable.",
+   "min-value": 0,
+   "max-value": 214748364,
+   "default": 0,
+   "multiple_values": false
+  },
+  "irq-time-accounting": {
+   "name": "irq-time-accounting",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure CPU IRQ time accounting mode.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Automatically switch CPU accounting mode."
+    },
+    {
+     "name": "force",
+     "help": "Force the use of CPU IRQ time accounting mode."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "management-ip": {
+   "name": "management-ip",
+   "category": "unitary",
+   "type": "string",
+   "help": "Management IP address of this FortiGate. Used to log into this FortiGate from another FortiGate in the Security Fabric.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "management-port": {
+   "name": "management-port",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Overriding port for management connection (Overrides admin port).",
+   "min-value": 1,
+   "max-value": 65535,
+   "default": 443,
+   "multiple_values": false
+  },
+  "management-port-use-admin-sport": {
+   "name": "management-port-use-admin-sport",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable use of the admin-sport setting for the management port. If disabled, FortiGate will allow user to specify management-port.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable use of the admin-sport setting for the management port."
+    },
+    {
+     "name": "disable",
+     "help": "Disable use of the admin-sport setting for the management port."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "forticonverter-integration": {
+   "name": "forticonverter-integration",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiConverter integration service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiConverter integration service."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiConverter integration service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "forticonverter-config-upload": {
+   "name": "forticonverter-config-upload",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable config upload to FortiConverter.",
+   "options": [
+    {
+     "name": "once",
+     "help": "Enable one-time config upload to FortiConverter."
+    },
+    {
+     "name": "disable",
+     "help": "Disable config upload to FortiConverter."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "internet-service-database": {
+   "name": "internet-service-database",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure which Internet Service database size to download from FortiGuard and use.",
+   "options": [
+    {
+     "name": "mini",
+     "help": "Small sized Internet Service database with very limited IP addresses."
+    },
+    {
+     "name": "standard",
+     "help": "Medium sized Internet Service database with most IP addresses."
+    },
+    {
+     "name": "full",
+     "help": "Full sized Internet Service database with all IP addresses."
+    },
+    {
+     "name": "on-demand",
+     "help": "Internet Service database with customer selected IP addresses."
+    }
+   ],
+   "default": "standard",
+   "multiple_values": false
+  },
+  "internet-service-download-list": {
+   "name": "internet-service-download-list",
+   "category": "table",
+   "help": "Configure which on-demand Internet Service IDs are to be downloaded.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Internet Service ID.",
+     "required": true,
+     "datasource": [
+      "firewall.internet-service.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 256,
+   "max_table_size_global": 512,
+   "max_table_size_item": 0
+  },
+  "early-tcp-npu-session": {
+   "name": "early-tcp-npu-session",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable early TCP NPU session.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable early TCP NPU session in order to guarantee packet order of 3-way handshake."
+    },
+    {
+     "name": "disable",
+     "help": "Disable early TCP NPU session in order to guarantee packet order of 3-way handshake."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "npu-neighbor-update": {
+   "name": "npu-neighbor-update",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable sending of ARP/ICMP6 probing packets to update neighbors for offloaded sessions.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable sending of ARP/ICMP6 probing packets to update neighbors for offloaded sessions."
+    },
+    {
+     "name": "disable",
+     "help": "Disable sending of ARP/ICMP6 probing packets to update neighbors for offloaded sessions."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "delay-tcp-npu-session": {
+   "name": "delay-tcp-npu-session",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable TCP NPU session delay to guarantee packet order of 3-way handshake.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable TCP NPU session delay in order to guarantee packet order of 3-way handshake."
+    },
+    {
+     "name": "disable",
+     "help": "Disable TCP NPU session delay in order to guarantee packet order of 3-way handshake."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "interface-subnet-usage": {
+   "name": "interface-subnet-usage",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable allowing use of interface-subnet setting in firewall addresses (default = enable).",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disallow use of the interface-subnet setting in firewall addresses. Use in conjunction with the FortiGate REST API and when a large number of firewall addresses exist in the configuration."
+    },
+    {
+     "name": "enable",
+     "help": "Allow use of the interface-subnet setting in firewall addresses."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "sflowd-max-children-num": {
+   "name": "sflowd-max-children-num",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Maximum number of sflowd child processes allowed to run.",
+   "min-value": 0,
+   "max-value": 6,
+   "default": 6,
+   "multiple_values": false
+  },
+  "fortigslb-integration": {
+   "name": "fortigslb-integration",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable integration with the FortiGSLB cloud service.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable VIP and ZTNA server integration with the FortiGSLB cloud service."
+    },
+    {
+     "name": "enable",
+     "help": "Enable VIP and ZTNA server integration with the FortiGSLB cloud service."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "path": "system",
+ "q_type": 11,
+ "access_group": "sysgrp",
+ "object_range": "global"
+}

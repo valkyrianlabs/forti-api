@@ -77,8 +77,16 @@ TEST(ConfigAudit, FlagsRestChangesToNonTestObjectsSinceTheStart) {
 
     live::ConfigAudit audit;
     audit.settle = std::chrono::milliseconds(0);
+    audit.poll = std::chrono::milliseconds(0);
     audit.begin(client);
     auto found = audit.violations(client);
     ASSERT_EQ(found.size(), 1u);
     EXPECT_EQ(found[0], "Edit dnsfilter.profile default by api_admin");
+}
+
+TEST(ConfigAudit, AttributeNamesAreTopLevelOnly) {
+    EXPECT_EQ(live::attribute_names("comment[a->b]comment[b->]"), (std::vector<std::string>{"comment"}));
+    EXPECT_EQ(live::attribute_names("comment[x]ftgd-dns[filters:2[category[3]]filters:1[category[2]action[block]]]"),
+              (std::vector<std::string>{"comment", "ftgd-dns"}));
+    EXPECT_TRUE(live::attribute_names("").empty());
 }

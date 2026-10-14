@@ -1,0 +1,50 @@
+# Which FortiOS endpoints forti-api generates (tools/fortios/fortios.py gen).
+#
+# Each [[cmdb]] path gets include/forti_api/gen/<path>.hpp with a struct, a Spec and a Table (or
+# Singleton) alias. Defaults: namespace from the path ("firewall.service/custom" -> firewall::service),
+# type = CamelCase of the last segment, alias = plural of the type (tables) or <Type>Settings
+# (singletons). Override with namespace / type / alias.
+fortios_version = "7.4.8"
+
+[[cmdb]]
+path = "dnsfilter/profile"
+
+[[cmdb]]
+path = "firewall/address"
+
+[[cmdb]]
+path = "firewall/policy"
+
+[[cmdb]]
+path = "firewall/vip"
+
+[[cmdb]]
+path = "firewall.schedule/recurring"
+namespace = "firewall"
+type = "RecurringSchedule"
+
+[[cmdb]]
+path = "firewall.service/category"
+namespace = "firewall"
+type = "ServiceCategory"
+alias = "ServiceCategories"
+
+[[cmdb]]
+path = "firewall.service/custom"
+namespace = "firewall"
+type = "Service"
+
+[[cmdb]]
+path = "system/api-user"
+type = "ApiUser"
+
+[[cmdb]]
+path = "system/external-resource"
+
+[[cmdb]]
+path = "system/global"
+type = "Global"
+alias = "GlobalSettings"
+
+[[cmdb]]
+path = "system/interface"

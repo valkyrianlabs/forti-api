@@ -101,3 +101,12 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   pre-generation accessors and go with them in phase 3.
 - New finding, fixed in phase 1: FortiOS answers `log/*` with `Content-Encoding: deflate` streams
   that libcurl fails to decode (CURLE_WRITE_ERROR); the client requests gzip only.
+- **Phase 2 (generator, PR "Phase 2"):** the model findings are resolved *for generated types* by
+  construction: no member defaults (sparse `Field<T>` writes), explicit serialization without the
+  64-field macro limit (VIP: 95, policy: 170, interface: 232 attributes), schema-exact types
+  (`dns-translation` is a table of entries, not strings), no I/O in types, `fortiapi::` namespaces,
+  one `Table`/`Singleton` template instead of per-type accessors and envelopes. Decode errors name the
+  endpoint and attribute path (`cmdb/firewall.service/custom: attribute icmptype: ...`). The old
+  hand-written types and accessors still exist until phase 3 deletes them.
+- Found in phase 2: `endpoint.hpp` first kept a reference into a temporary reply (caught by the unit
+  tests; CI now also runs the unit suite under ASan/UBSan).

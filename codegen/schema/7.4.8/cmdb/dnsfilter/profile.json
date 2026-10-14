@@ -1,0 +1,474 @@
+{
+ "name": "profile",
+ "category": "table",
+ "help": "Configure DNS domain filter profile.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Profile name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "domain-filter": {
+   "name": "domain-filter",
+   "category": "complex",
+   "help": "Domain filter settings.",
+   "children": {
+    "domain-filter-table": {
+     "name": "domain-filter-table",
+     "category": "unitary",
+     "type": "integer",
+     "help": "DNS domain filter table ID.",
+     "datasource": [
+      "dnsfilter.domain-filter.id"
+     ],
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   }
+  },
+  "ftgd-dns": {
+   "name": "ftgd-dns",
+   "category": "complex",
+   "help": "FortiGuard DNS Filter settings.",
+   "children": {
+    "options": {
+     "name": "options",
+     "category": "unitary",
+     "type": "option",
+     "help": "FortiGuard DNS filter options.",
+     "options": [
+      {
+       "name": "error-allow",
+       "help": "Allow all domains when FortiGuard DNS servers fail."
+      },
+      {
+       "name": "ftgd-disable",
+       "help": "Disable FortiGuard DNS domain rating."
+      }
+     ],
+     "default": "",
+     "multiple_values": true
+    },
+    "filters": {
+     "name": "filters",
+     "category": "table",
+     "help": "FortiGuard DNS domain filters.",
+     "mkey": "id",
+     "mkey_type": "integer",
+     "children": {
+      "id": {
+       "name": "id",
+       "category": "unitary",
+       "type": "integer",
+       "help": "ID number.",
+       "min-value": 0,
+       "max-value": 255,
+       "default": 0,
+       "multiple_values": false
+      },
+      "category": {
+       "name": "category",
+       "category": "unitary",
+       "type": "integer",
+       "help": "Category number.",
+       "min-value": 0,
+       "max-value": 255,
+       "default": 0,
+       "multiple_values": false
+      },
+      "action": {
+       "name": "action",
+       "category": "unitary",
+       "type": "option",
+       "help": "Action to take for DNS requests matching the category.",
+       "options": [
+        {
+         "name": "block",
+         "help": "Block DNS requests matching the category."
+        },
+        {
+         "name": "monitor",
+         "help": "Allow DNS requests matching the category and log the result."
+        }
+       ],
+       "default": "monitor",
+       "multiple_values": false
+      },
+      "log": {
+       "name": "log",
+       "category": "unitary",
+       "type": "option",
+       "help": "Enable/disable DNS filter logging for this DNS profile.",
+       "options": [
+        {
+         "name": "enable",
+         "help": "Enable DNS filter logging."
+        },
+        {
+         "name": "disable",
+         "help": "Disable DNS filter logging."
+        }
+       ],
+       "default": "enable",
+       "multiple_values": false
+      }
+     },
+     "max_table_size_vdom": 0,
+     "max_table_size_global": 0,
+     "max_table_size_item": 0
+    }
+   }
+  },
+  "log-all-domain": {
+   "name": "log-all-domain",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable logging of all domains visited (detailed DNS logging).",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable logging of all domains visited."
+    },
+    {
+     "name": "disable",
+     "help": "Disable logging of all domains visited."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "sdns-ftgd-err-log": {
+   "name": "sdns-ftgd-err-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable FortiGuard SDNS rating error logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable FortiGuard SDNS rating error logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable FortiGuard SDNS rating error logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "sdns-domain-log": {
+   "name": "sdns-domain-log",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable domain filtering and botnet domain logging.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable domain filtering and botnet domain logging."
+    },
+    {
+     "name": "disable",
+     "help": "Disable domain filtering and botnet domain logging."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "block-action": {
+   "name": "block-action",
+   "category": "unitary",
+   "type": "option",
+   "help": "Action to take for blocked domains.",
+   "options": [
+    {
+     "name": "block",
+     "help": "Return NXDOMAIN for blocked domains."
+    },
+    {
+     "name": "redirect",
+     "help": "Redirect blocked domains to SDNS portal."
+    },
+    {
+     "name": "block-sevrfail",
+     "help": "Return SERVFAIL for blocked domains."
+    }
+   ],
+   "default": "redirect",
+   "multiple_values": false
+  },
+  "redirect-portal": {
+   "name": "redirect-portal",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "IPv4 address of the SDNS redirect portal.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "redirect-portal6": {
+   "name": "redirect-portal6",
+   "category": "unitary",
+   "type": "ipv6-address",
+   "help": "IPv6 address of the SDNS redirect portal.",
+   "default": "::",
+   "multiple_values": false
+  },
+  "block-botnet": {
+   "name": "block-botnet",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable blocking botnet C&C DNS lookups.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable blocking botnet C&C DNS lookups."
+    },
+    {
+     "name": "enable",
+     "help": "Enable blocking botnet C&C DNS lookups."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "safe-search": {
+   "name": "safe-search",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable Google, Bing, YouTube, Qwant, DuckDuckGo safe search.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable Google, Bing, YouTube, Qwant, DuckDuckGo safe search."
+    },
+    {
+     "name": "enable",
+     "help": "Enable Google, Bing, YouTube, Qwant, DuckDuckGo safe search."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "youtube-restrict": {
+   "name": "youtube-restrict",
+   "category": "unitary",
+   "type": "option",
+   "help": "Set safe search for YouTube restriction level.",
+   "options": [
+    {
+     "name": "strict",
+     "help": "Enable strict safe seach for YouTube."
+    },
+    {
+     "name": "moderate",
+     "help": "Enable moderate safe search for YouTube."
+    },
+    {
+     "name": "none",
+     "help": "Disable safe search for YouTube."
+    }
+   ],
+   "default": "strict",
+   "multiple_values": false
+  },
+  "external-ip-blocklist": {
+   "name": "external-ip-blocklist",
+   "category": "table",
+   "help": "One or more external IP block lists.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "External domain block list name.",
+     "datasource": [
+      "system.external-resource.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "dns-translation": {
+   "name": "dns-translation",
+   "category": "table",
+   "help": "DNS translation settings.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "addr-type": {
+     "name": "addr-type",
+     "category": "unitary",
+     "type": "option",
+     "help": "DNS translation type (IPv4 or IPv6).",
+     "required": true,
+     "options": [
+      {
+       "name": "ipv4",
+       "help": "IPv4 address type."
+      },
+      {
+       "name": "ipv6",
+       "help": "IPv6 address type."
+      }
+     ],
+     "default": "ipv4",
+     "multiple_values": false
+    },
+    "src": {
+     "name": "src",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IPv4 address or subnet on the internal network to compare with the resolved address in DNS query replies. If the resolved address matches, the resolved address is substituted with dst.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "dst": {
+     "name": "dst",
+     "category": "unitary",
+     "type": "ipv4-address",
+     "help": "IPv4 address or subnet on the external network to substitute for the resolved address in DNS query replies. Can be single IP address or subnet on the external network, but number of addresses must equal number of mapped IP addresses in src.",
+     "default": "0.0.0.0",
+     "multiple_values": false
+    },
+    "netmask": {
+     "name": "netmask",
+     "category": "unitary",
+     "type": "ipv4-netmask",
+     "help": "If src and dst are subnets rather than single IP addresses, enter the netmask for both src and dst.",
+     "default": "255.255.255.255",
+     "multiple_values": false
+    },
+    "status": {
+     "name": "status",
+     "category": "unitary",
+     "type": "option",
+     "help": "Enable/disable this DNS translation entry.",
+     "options": [
+      {
+       "name": "enable",
+       "help": "Enable this DNS translation."
+      },
+      {
+       "name": "disable",
+       "help": "Disable this DNS translation."
+      }
+     ],
+     "default": "enable",
+     "multiple_values": false
+    },
+    "src6": {
+     "name": "src6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 address or subnet on the internal network to compare with the resolved address in DNS query replies. If the resolved address matches, the resolved address is substituted with dst6.",
+     "default": "::",
+     "multiple_values": false
+    },
+    "dst6": {
+     "name": "dst6",
+     "category": "unitary",
+     "type": "ipv6-address",
+     "help": "IPv6 address or subnet on the external network to substitute for the resolved address in DNS query replies. Can be single IP address or subnet on the external network, but number of addresses must equal number of mapped IP addresses in src6.",
+     "default": "::",
+     "multiple_values": false
+    },
+    "prefix": {
+     "name": "prefix",
+     "category": "unitary",
+     "type": "integer",
+     "help": "If src6 and dst6 are subnets rather than single IP addresses, enter the prefix for both src6 and dst6 (1 - 128, default = 128).",
+     "min-value": 1,
+     "max-value": 128,
+     "default": 128,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "transparent-dns-database": {
+   "name": "transparent-dns-database",
+   "category": "table",
+   "help": "Transparent DNS database zones.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "DNS database zone name.",
+     "datasource": [
+      "system.dns-database.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "strip-ech": {
+   "name": "strip-ech",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable removal of the encrypted client hello service parameter from supporting DNS RRs.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable removal of the encrypted client hello service parameter from supporting DNS RRs."
+    },
+    {
+     "name": "enable",
+     "help": "Enable removal of the encrypted client hello service parameter from supporting DNS RRs."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 32,
+ "max_table_size_global": 32,
+ "max_table_size_item": 0,
+ "path": "dnsfilter",
+ "q_type": 511,
+ "access_group": "utmgrp",
+ "object_range": "vdom"
+}

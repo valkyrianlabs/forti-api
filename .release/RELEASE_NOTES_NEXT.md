@@ -30,3 +30,23 @@ for users and operators; keep it representative of what actually ships.
   have reached the device.
 - `FORTIGATE_HOST` + `FORTIGATE_RESOLVE_IP` connect to a pinned address while verifying TLS for the
   hostname.
+
+## Generated endpoints
+
+FortiOS objects are now generated from the device's own schema (FortiOS 7.4.8): every attribute,
+with its documentation, as a `fortiapi::Field<T>`, and a `Table`/`Singleton` per endpoint:
+
+```cpp
+#include <forti_api/gen/firewall/address.hpp>
+using namespace fortiapi;
+
+auto address = firewall::Addresses::get("LAN 10.0.0.0/24");
+address.comment = "managed";
+firewall::Addresses::update(address);   // sends {"comment": "managed"} and nothing else
+```
+
+Fields know whether they are absent, read from the device, modified or cleared: an update sends only
+what you changed (`clear()` resets an attribute to its default), reads never mark anything changed,
+and option attributes come with constants (`firewall::policy::action::deny`). Generated so far:
+firewall policy, address, VIP, service, service category, recurring schedule, DNS filter profile,
+external resource, API user, interface and global settings.

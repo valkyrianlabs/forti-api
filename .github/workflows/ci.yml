@@ -40,6 +40,18 @@ jobs:
           meson compile -C build/ci
           meson test -C build/ci --suite unit --print-errorlogs
 
+      - name: Unit tests under AddressSanitizer + UndefinedBehaviorSanitizer
+        run: |
+          meson setup build/asan -Dtests=enabled -Db_sanitize=address,undefined -Db_lundef=false
+          meson compile -C build/asan
+          meson test -C build/asan --suite unit --print-errorlogs
+
+      - name: Generated headers are up to date
+        run: python3 tools/fortios/fortios.py check
+
+      - name: Public headers compile standalone
+        run: ci/check-headers.sh include/forti_api/client.hpp include/forti_api/field.hpp include/forti_api/endpoint.hpp include/forti_api/gen
+
   package:
     name: Release contract and Debian rehearsal
     runs-on: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && fromJSON('["ubuntu-latest"]') || fromJSON('["self-hosted","Linux","X64","ubuntu-latest-lts"]') }}

@@ -1,0 +1,182 @@
+{
+ "name": "api-user",
+ "category": "table",
+ "help": "Configure API users.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "User name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "api-key": {
+   "name": "api-key",
+   "category": "unitary",
+   "type": "password-2",
+   "help": "Admin user password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "accprofile": {
+   "name": "accprofile",
+   "category": "unitary",
+   "type": "string",
+   "help": "Admin user access profile.",
+   "required": true,
+   "datasource": [
+    "system.accprofile.name"
+   ],
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "vdom": {
+   "name": "vdom",
+   "category": "table",
+   "help": "Virtual domains.",
+   "member_table": true,
+   "mkey": "name",
+   "mkey_type": "string",
+   "children": {
+    "name": {
+     "name": "name",
+     "category": "unitary",
+     "type": "string",
+     "help": "Virtual domain name.",
+     "required": true,
+     "datasource": [
+      "system.vdom.name"
+     ],
+     "size": 79,
+     "default": "",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "schedule": {
+   "name": "schedule",
+   "category": "unitary",
+   "type": "string",
+   "help": "Schedule name.",
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "cors-allow-origin": {
+   "name": "cors-allow-origin",
+   "category": "unitary",
+   "type": "string",
+   "help": "Value for Access-Control-Allow-Origin on API responses. Avoid using '*' if possible.",
+   "size": 269,
+   "default": "",
+   "multiple_values": false
+  },
+  "peer-auth": {
+   "name": "peer-auth",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable peer authentication.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable peer."
+    },
+    {
+     "name": "disable",
+     "help": "Disable peer."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "peer-group": {
+   "name": "peer-group",
+   "category": "unitary",
+   "type": "string",
+   "help": "Peer group name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "trusthost": {
+   "name": "trusthost",
+   "category": "table",
+   "help": "Trusthost.",
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "ID.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    },
+    "type": {
+     "name": "type",
+     "category": "unitary",
+     "type": "option",
+     "help": "Trusthost type.",
+     "options": [
+      {
+       "name": "ipv4-trusthost",
+       "help": "IPv4 trusthost."
+      },
+      {
+       "name": "ipv6-trusthost",
+       "help": "IPv6 trusthost."
+      }
+     ],
+     "default": "ipv4-trusthost",
+     "multiple_values": false
+    },
+    "ipv4-trusthost": {
+     "name": "ipv4-trusthost",
+     "category": "unitary",
+     "type": "ipv4-classnet",
+     "help": "IPv4 trusted host address.",
+     "default": "0.0.0.0 0.0.0.0",
+     "multiple_values": false
+    },
+    "ipv6-trusthost": {
+     "name": "ipv6-trusthost",
+     "category": "unitary",
+     "type": "ipv6-prefix",
+     "help": "IPv6 trusted host address.",
+     "default": "::/0",
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 531,
+ "access_group": "sysgrp",
+ "object_range": "both"
+}

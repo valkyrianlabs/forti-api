@@ -101,14 +101,37 @@ namespace live {
         return std::make_shared<fortiapi::Client>(config, transport);
     }
 
+    // Top-level attribute names in a FortiOS cfgattr record:
+    //   "comment[a->b]ftgd-dns[filters:2[category[3]]]" -> {"comment", "ftgd-dns"}
+    inline std::vector<std::string> attribute_names(std::string_view cfgattr) {
+        std::vector<std::string> names;
+        int depth = 0;
+        std::string current;
+        for (char c: cfgattr) {
+            if (c == '[') {
+                if (depth++ == 0 && !current.empty()) {
+                    if (std::find(names.begin(), names.end(), current) == names.end()) names.push_back(current);
+                    current.clear();
+                }
+            } else if (c == ']') {
+                if (depth > 0) --depth;
+            } else if (depth == 0) current += c;
+        }
+        return names;
+    }
+
     // Independent verification: every configuration change made through the REST API since `begin()`
     // must concern a forti-api-test-* object, according to the device's own event log.
     class ConfigAudit {
         std::int64_t since_ns_ = 0;
 
     public:
-        // Time for the last changes to reach the memory log before it is read.
-        std::chrono::milliseconds settle{1000};
+        // FortiOS writes config changes to the memory log several seconds late (measured: 5-8 s on
+        // 7.4.8, edits shortly after a create folded into the Add record). changes() waits at least
+        // `settle`, then polls until two consecutive reads agree, up to `patience`.
+        std::chrono::milliseconds settle{10000};
+        std::chrono::milliseconds poll{3000};
+        std::chrono::milliseconds patience{45000};
 
     private:
 
@@ -123,14 +146,36 @@ namespace live {
             if (since_ns_ == 0) throw std::runtime_error("config audit: the event log reply has no device time");
         }
 
+        // Every configuration change made through the REST API since begin(), oldest first, as the
+        // device logged it (action, cfgpath, cfgobj, cfgattr, user, ...).
+        std::vector<nlohmann::json> changes(fortiapi::Client& client) const {
+            auto read = [&] {
+                std::vector<nlohmann::json> found;
+                for (const auto& entry: events(client, 1000).value("results", nlohmann::json::array())) {
+                    if (entry.value("eventtime", std::int64_t{0}) < since_ns_) continue;
+                    if (!entry.value("ui", std::string()).starts_with("RESTAPI")) continue;
+                    if (!entry.contains("cfgpath")) continue;
+                    found.push_back(entry);
+                }
+                std::reverse(found.begin(), found.end());
+                return found;
+            };
+            auto deadline = std::chrono::steady_clock::now() + patience;
+            std::this_thread::sleep_for(settle);
+            auto found = read();
+            while (poll.count() > 0 && std::chrono::steady_clock::now() < deadline) {
+                std::this_thread::sleep_for(poll);
+                auto again = read();
+                if (again == found) break;
+                found = std::move(again);
+            }
+            return found;
+        }
+
         // Returns a description of each change that touched something other than a test object.
         std::vector<std::string> violations(fortiapi::Client& client) const {
-            std::this_thread::sleep_for(settle);
             std::vector<std::string> found;
-            for (const auto& entry: events(client, 1000).value("results", nlohmann::json::array())) {
-                if (entry.value("eventtime", std::int64_t{0}) < since_ns_) continue;
-                if (!entry.value("ui", std::string()).starts_with("RESTAPI")) continue;
-                if (!entry.contains("cfgpath")) continue;
+            for (const auto& entry: changes(client)) {
                 auto object = entry.value("cfgobj", std::string());
                 if (object.starts_with(prefix)) continue;
                 found.push_back(entry.value("action", std::string("?")) + " " + entry.value("cfgpath", std::string()) +

@@ -13,6 +13,22 @@ set -a; . ./.env; set +a; meson test -C build --suite live -v  # the live FortiG
 
 Agent context: `.claude/context/audit.md` and `.claude/context/buildout-plan.md`.
 
+## Generated code
+
+`include/forti_api/gen/**` is generated; never edit it by hand. The inputs are `codegen/api.toml`
+(which FortiOS paths, C++ names) and the schema snapshots in `codegen/schema/<version>/`, pulled from
+a device with `GET cmdb/<path>?action=schema`:
+
+```sh
+tools/fortios/fortios.py --env-file .env pull [PATH...]   # refresh snapshots (read-only)
+tools/fortios/fortios.py gen                              # regenerate headers
+tools/fortios/fortios.py check                            # what CI runs
+```
+
+The behavior lives in hand-written headers: `client.hpp` (transport), `field.hpp` (`Field<T>` with
+absent / populated / modified / cleared states; updates send only modified and cleared attributes)
+and `endpoint.hpp` (`Table<Spec>`, `Singleton<Spec>`).
+
 ## The live FortiGate: the one rule
 
 The test suite runs against a real FortiGate: the maintainer's home lab firewall, carrying real
