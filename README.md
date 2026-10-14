@@ -17,15 +17,62 @@ Most of the codebase consists of structured types. The HTTP layer is intentional
 
 ## Installation
 
-Forti-API is header-only and can be vendored directly:
+Forti-API is header-only. [nlohmann/json](third_party/nlohmann/README.md) 3.12.0 ships with it;
+libcurl is the only system dependency.
+
+### Debian/Ubuntu (APT)
+
+`libforti-api-dev` is published to the ValkyrianLabs APT repository:
 
 ```bash
-git clone https://github.com/valkyrianlabs/forti-api.git
+sudo install -d -m 0755 /etc/apt/keyrings
+sudo curl -fsSL https://apt.valkyrianlabs.com/pubkey.gpg \
+  -o /etc/apt/keyrings/valkyrianlabs.gpg
+sudo chmod 0644 /etc/apt/keyrings/valkyrianlabs.gpg
+
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/valkyrianlabs.gpg] https://apt.valkyrianlabs.com stable main" | \
+  sudo tee /etc/apt/sources.list.d/valkyrianlabs.list > /dev/null
+
+sudo apt update
+sudo apt install -y libforti-api-dev
 ```
 
-Add the `include/` directory to your project's include path.
+The headers install to `/usr/include/forti_api`, the bundled nlohmann/json to
+`/usr/include/forti_api/third_party` (never clashing with a system nlohmann-json), and
+`forti-api.pc` to `/usr/share/pkgconfig`:
 
-> Conan packaging is currently being refreshed and will return in a future release.
+```bash
+c++ -std=c++23 app.cpp $(pkg-config --cflags --libs forti-api)
+```
+
+### Vendoring
+
+Copy `include/` and `third_party/nlohmann/include/` into your project, add both to the include
+path and link libcurl (`-lcurl`). Meson projects can instead use forti-api as a subproject
+(`dependency('forti-api')`).
+
+### Building from source
+
+```bash
+# Ubuntu: sudo apt install meson ninja-build g++ pkgconf libcurl4-openssl-dev [libgtest-dev]
+# macOS:  brew install meson ninja [googletest]      (libcurl comes with the SDK)
+meson setup build
+meson install -C build
+```
+
+### Tests
+
+The GoogleTest suite (built when gtest is found; `-Dtests=enabled|disabled` to force) runs
+against a **live FortiGate** and creates and deletes temporary DNS filter profiles and an
+external threat feed. Tests never touch existing config and always clean up after themselves (the
+rules are in [AGENTS.md](AGENTS.md)); CI compiles the suite but never runs it.
+`tools/gen-certs.sh <gateway IP>...` creates the CA, client and FortiGate admin certificates in
+`.certs/`; configure `.env` from `.env.example`, then:
+
+```bash
+set -a; . ./.env; set +a
+meson test -C build -v
+```
 
 ---
 

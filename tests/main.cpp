@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "include/forti_api/api.hpp"
+#include <forti_api/api.hpp>
 
 
 class GlobalEnv : public ::testing::Environment {

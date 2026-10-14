@@ -1,9 +1,10 @@
-build
+build/
+release/
 
 *.iml
 *.xml
-
 .idea
+.DS_Store
 
 .env
 .certs

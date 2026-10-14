@@ -177,7 +177,7 @@ class FortiAPI {
         return size * nmemb;
     }
 
-    static int curl_debug_callback(CURL *handle, curl_infotype type, char *data, size_t size, void *userptr) {
+    static int curl_debug_callback(CURL *, curl_infotype type, char *data, size_t size, void *) {
         switch (type) {
             case CURLINFO_TEXT:
                 std::cerr << "== Info: " << std::string(data, size);

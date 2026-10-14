@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "include/forti_api/system.hpp"
+#include <forti_api/system.hpp>
 #include <regex>
 
 bool validate_ip_addr(const std::string& ip) {

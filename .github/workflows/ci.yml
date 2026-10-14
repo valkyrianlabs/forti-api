@@ -1,0 +1,103 @@
+# Builds on Linux (the self-hosted VPS runner, inside ci/run-ci) and macOS (Homebrew), and rehearses
+# the Debian release with vl-release. The GoogleTest suite is compiled but not run: it needs a live
+# FortiGate (see .env.example).
+#
+# Every Linux run step executes in the disposable CI container (ci/run-ci, rootless Podman,
+# ci/Containerfile): no host sudo, host packages or Docker. Pull requests from forks run on
+# GitHub-hosted runners, never on the self-hosted one.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Stock image for clean-install smoke tests (same digest as ci/Containerfile's base).
+  UBUNTU_IMAGE: docker.io/library/ubuntu:24.04@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55
+
+jobs:
+  linux:
+    name: Build (Ubuntu 24.04)
+    runs-on: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && fromJSON('["ubuntu-latest"]') || fromJSON('["self-hosted","Linux","X64","ubuntu-latest-lts"]') }}
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Build (warnings are errors)
+        run: |
+          meson setup build/ci -Dtests=enabled -Dwerror=true
+          meson compile -C build/ci
+
+  package:
+    name: Release contract and Debian rehearsal
+    runs-on: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository && fromJSON('["ubuntu-latest"]') || fromJSON('["self-hosted","Linux","X64","ubuntu-latest-lts"]') }}
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Repository contract
+        id: state
+        run: |
+          vlr check
+          vlr install-skill --check
+          vlr status --github-output
+
+      # A full local release in this ephemeral checkout; nothing is published.
+      - name: Release rehearsal
+        if: steps.state.outputs.phase == 'pending' || steps.state.outputs.phase == 'prepared'
+        run: |
+          vlr prepare
+          vlr build-deb
+          vlr checksums
+          vlr validate-artifacts
+
+      # Install the built .deb into a clean, stock Ubuntu 24.04 (container root, no host access) and
+      # build a consumer against it.
+      - name: Clean-install smoke test of the built package
+        if: steps.state.outputs.phase == 'pending' || steps.state.outputs.phase == 'prepared'
+        shell: bash
+        run: |
+          # shellcheck disable=SC2016  # expanded inside the container
+          ./ci/run-ci --image "$UBUNTU_IMAGE" --root bash -euo pipefail -c '
+            apt-get update
+            apt-get install -y --no-install-recommends ./release/libforti-api-dev_*_all.deb g++ pkgconf
+            test ! -e /usr/include/nlohmann
+            g++ -std=c++23 -Wall -Wextra -Werror ci/consumer.cpp $(pkg-config --cflags --libs forti-api) -o /tmp/consumer
+            /tmp/consumer
+          '
+
+  macos:
+    name: Build (macOS, Homebrew)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Install Homebrew packages
+        run: brew install meson ninja googletest
+
+      - name: Build and install
+        run: |
+          meson setup build -Dtests=enabled -Dwerror=true --prefix "$RUNNER_TEMP/prefix"
+          meson compile -C build
+          meson install -C build
+
+      - name: Build a consumer against the installed headers
+        run: |
+          export PKG_CONFIG_PATH="$RUNNER_TEMP/prefix/share/pkgconfig"
+          # shellcheck disable=SC2046  # pkg-config output is a list of flags
+          c++ -std=c++23 -Wall -Wextra -Werror ci/consumer.cpp $(pkg-config --cflags --libs forti-api) -o consumer
+          ./consumer

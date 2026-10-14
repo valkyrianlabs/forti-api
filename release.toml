@@ -1,0 +1,63 @@
+# vl-release repository contract: https://github.com/valkyrianlabs/vl-release
+# `vlr help config` documents every key. Release CI (.github/workflows/release.yml) only calls `vlr` commands.
+schema_version = 1
+
+[tool]
+requires = ">=0.4,<1"
+
+[project]
+name = "forti-api"
+package = "forti-api"
+repository = "valkyrianlabs/forti-api"
+
+[version]
+canonical = "VERSION"
+targets = [{ kind = "meson", path = "meson.build" }]
+
+[release]
+branch = "main"
+
+[debian]
+distribution = "unstable"
+urgency = "medium"
+maintainer = "Cooper Larson <cooper@valkyrianlabs.com>"
+# build-deb copies the work tree, not a Git commit: never let the live-test credentials
+# (.env, .certs/*.p12) or local tooling state into the build tree.
+build_excludes = [".env", ".certs", ".idea", ".claude", ".DS_Store"]
+
+[[debian.packages]]
+name = "libforti-api-dev"
+architecture = "all"
+required_paths = [
+  "usr/include/forti_api.hpp",
+  "usr/include/forti_api/api.hpp",
+  "usr/include/forti_api/firewall.hpp",
+  "usr/include/forti_api/types/response.h",
+  "usr/include/forti_api/third_party/nlohmann/json.hpp",
+  "usr/include/forti_api/third_party/nlohmann/LICENSE.MIT",
+  "usr/share/pkgconfig/forti-api.pc",
+  "usr/share/doc/libforti-api-dev/copyright",
+]
+# The vendored nlohmann/json must never land where nlohmann-json3-dev installs; nothing compiled,
+# nothing architecture-specific, and no test credentials.
+forbidden_paths = [
+  "usr/include/nlohmann/*",
+  "usr/lib/*",
+  "usr/bin/*",
+  "*.p12",
+  "*.cer",
+  "*/.env",
+]
+identical_files = [
+  { member = "usr/include/forti_api/api.hpp", source = "include/forti_api/api.hpp" },
+  { member = "usr/include/forti_api/third_party/nlohmann/json.hpp", source = "third_party/nlohmann/include/nlohmann/json.hpp" },
+]
+
+# The ValkyrianLabs APT repository (Nexus). Upload URL and credentials come from the org-level
+# NEXUS_APT_REPO variable and NEXUS_USER / NEXUS_PASSWORD secrets; RELEASE_PUBLISH_MODE=nexus enables
+# uploads (.github/workflows/release.yml).
+[publish.apt]
+repository_url = "https://apt.valkyrianlabs.com"
+suite = "stable"
+components = ["main"]
+architectures = ["amd64", "all"]   # Nexus lists Architecture: all packages in binary-all

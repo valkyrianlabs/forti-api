@@ -5,7 +5,7 @@
 #ifndef FORTI_API_SCHEDULES_H
 #define FORTI_API_SCHEDULES_H
 
-#include "nlohmann/json.hpp"
+#include <nlohmann/json.hpp>
 #include "../response.h"
 #include "../colors.h"
 
@@ -30,7 +30,7 @@ struct FirewallSchedule {
         add(vdom);
     }
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(FirewallSchedule, name, q_origin_key, start, end, day, fabric_object, color);
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(FirewallSchedule, name, q_origin_key, start, end, day, fabric_object, color)
 
     void update(const std::string& vdom="root") {
         FortiAPI::put(std::format("{}/{}?vdom={}", endpoint, name, vdom), *this);
@@ -87,7 +87,7 @@ struct FirewallSchedulesResponse : public Response {
     std::vector<FirewallSchedule> results;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE_WITH_DEFAULT(FirewallSchedulesResponse, http_method, size, matched_count, next_idx,
-            revision, vdom, path, name, status, http_status, serial, version, build, results);
+            revision, vdom, path, name, status, http_status, serial, version, build, results)
 };
 
 #endif //FORTI_API_SCHEDULES_H
