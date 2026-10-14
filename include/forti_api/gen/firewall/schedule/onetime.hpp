@@ -11,10 +11,10 @@
 #include <string_view>
 #include <vector>
 
-namespace fortiapi::firewall::schedule {
+namespace fortiapi::firewall {
 
 // Onetime schedule configuration.
-struct Onetime {
+struct OnetimeSchedule {
     // Values of FabricObject: Security Fabric global object setting.
     struct FabricObject {
         static constexpr std::string_view enable = "enable";
@@ -43,14 +43,14 @@ struct Onetime {
     }
 };
 
-struct OnetimeSpec {
-    using type = Onetime;
+struct OnetimeScheduleSpec {
+    using type = OnetimeSchedule;
     static constexpr std::string_view path = "cmdb/firewall.schedule/onetime";
-    static constexpr auto key = &Onetime::name;
+    static constexpr auto key = &OnetimeSchedule::name;
 };
 
-using Onetimes = fortiapi::Table<OnetimeSpec>;
+using OnetimeSchedules = fortiapi::Table<OnetimeScheduleSpec>;
 
-}  // namespace fortiapi::firewall::schedule
+}  // namespace fortiapi::firewall
 
 #endif // FORTI_API_GEN_FIREWALL_SCHEDULE_ONETIME_HPP

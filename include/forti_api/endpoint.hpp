@@ -90,6 +90,7 @@ namespace fortiapi {
         using key_type = typename detail::member_traits<std::remove_cv_t<decltype(Spec::key)>>::field::value_type;
 
         static constexpr std::string_view path = Spec::path;
+        static constexpr auto key = Spec::key;   // the key member (mkey)
 
         static std::vector<type> list(const Query& query = {}, Client& client = default_client()) {
             auto body = client.get(path, query);

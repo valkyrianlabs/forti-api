@@ -89,3 +89,6 @@ instead of passing silently.
   `firewall::policy::action::deny`).
 - Group headers (`forti_api/gen/router.hpp`) and `fortiapi::gen::for_each_endpoint` /
   `for_each_monitor` for introspection.
+- Friendlier names for common firewall tables: `firewall::AddressGroups`, `Addresses6`,
+  `ServiceGroups`, `OnetimeSchedules`, `ScheduleGroups`, `WildcardFqdns`, `Vips6`.
+- Every endpoint type exposes its key member (`Table::key`).

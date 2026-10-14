@@ -14,7 +14,7 @@
 namespace fortiapi::firewall {
 
 // Configure IPv6 address groups.
-struct Addrgrp6 {
+struct AddressGroup6 {
     // Values of Exclude: Enable/disable address6 exclusion.
     struct Exclude {
         static constexpr std::string_view enable = "enable";
@@ -65,13 +65,13 @@ struct Addrgrp6 {
     }
 };
 
-struct Addrgrp6Spec {
-    using type = Addrgrp6;
+struct AddressGroup6Spec {
+    using type = AddressGroup6;
     static constexpr std::string_view path = "cmdb/firewall/addrgrp6";
-    static constexpr auto key = &Addrgrp6::name;
+    static constexpr auto key = &AddressGroup6::name;
 };
 
-using Addrgrp6s = fortiapi::Table<Addrgrp6Spec>;
+using AddressGroups6 = fortiapi::Table<AddressGroup6Spec>;
 
 }  // namespace fortiapi::firewall
 

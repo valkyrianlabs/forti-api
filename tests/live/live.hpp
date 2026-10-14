@@ -62,22 +62,54 @@ namespace live {
         throw std::runtime_error("No unused threat feed category (192-221) available for the test suite");
     }
 
-    inline void del_dns_profile(const std::string& profile_name) {
-        if (is_test_object(profile_name) && fortiapi::dnsfilter::Profiles::contains(profile_name))
-            fortiapi::dnsfilter::Profiles::del(profile_name);
+    // Deletes a forti-api-test-* object if it exists; anything else is left alone.
+    template<typename Endpoint>
+    void del_test(const std::string& object_name) {
+        if (is_test_object(object_name) && Endpoint::contains(object_name)) Endpoint::del(object_name);
     }
+
+    inline void del_dns_profile(const std::string& profile_name) { del_test<fortiapi::dnsfilter::Profiles>(profile_name); }
 
     inline void del_threat_feed(const std::string& feed_name) {
         if (is_test_object(feed_name) && fortiapi::system::ExternalResources::contains(feed_name))
             fortiapi::system::delete_threat_feed(feed_name);
     }
 
-    // Removes forti-api-test-* objects an aborted earlier run left behind; nothing else.
+    template<typename Endpoint>
+    void purge() {
+        for (const auto& object: Endpoint::list(fortiapi::Query().format({"name"})))
+            if (object.name) del_test<Endpoint>(*object.name);
+    }
+
+    // Removes forti-api-test-* objects an aborted earlier run left behind, in dependency order
+    // (groups and route-maps before what they reference); nothing else.
     inline void purge_leftovers() {
-        for (const auto& feed: fortiapi::system::ExternalResources::list(fortiapi::Query().format({"name"})))
+        using namespace fortiapi;
+        purge<firewall::AddressGroups>();
+        purge<firewall::AddressGroups6>();
+        purge<firewall::ServiceGroups>();
+        purge<firewall::ScheduleGroups>();
+        purge<router::RouteMaps>();
+        for (const auto& feed: system::ExternalResources::list(Query().format({"name"})))
             del_threat_feed(feed.name.value_or(""));
-        for (const auto& profile: fortiapi::dnsfilter::Profiles::list(fortiapi::Query().format({"name"})))
-            del_dns_profile(profile.name.value_or(""));
+        purge<dnsfilter::Profiles>();
+        purge<webfilter::Profiles>();
+        purge<application::Lists>();
+        purge<antivirus::Profiles>();
+        purge<ips::Sensors>();
+        purge<emailfilter::Profiles>();
+        purge<file_filter::Profiles>();
+        purge<firewall::Addresses>();
+        purge<firewall::Addresses6>();
+        purge<firewall::Services>();
+        purge<firewall::ServiceCategories>();
+        purge<firewall::OnetimeSchedules>();
+        purge<firewall::RecurringSchedules>();
+        purge<firewall::WildcardFqdns>();
+        purge<router::AccessLists>();
+        purge<router::PrefixLists>();
+        purge<router::AspathLists>();
+        purge<router::CommunityLists>();
     }
 
 }  // namespace live

@@ -11,10 +11,10 @@
 #include <string_view>
 #include <vector>
 
-namespace fortiapi::firewall::service {
+namespace fortiapi::firewall {
 
 // Configure service groups.
-struct Group {
+struct ServiceGroup {
     // Values of Proxy: Enable/disable web proxy service group.
     struct Proxy {
         static constexpr std::string_view enable = "enable";
@@ -47,14 +47,14 @@ struct Group {
     }
 };
 
-struct GroupSpec {
-    using type = Group;
+struct ServiceGroupSpec {
+    using type = ServiceGroup;
     static constexpr std::string_view path = "cmdb/firewall.service/group";
-    static constexpr auto key = &Group::name;
+    static constexpr auto key = &ServiceGroup::name;
 };
 
-using Groups = fortiapi::Table<GroupSpec>;
+using ServiceGroups = fortiapi::Table<ServiceGroupSpec>;
 
-}  // namespace fortiapi::firewall::service
+}  // namespace fortiapi::firewall
 
 #endif // FORTI_API_GEN_FIREWALL_SERVICE_GROUP_HPP

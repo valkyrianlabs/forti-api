@@ -32,4 +32,9 @@ enforced in code:
 - After the run, an audit reads the device's configuration-change log and fails the suite if any
   change through the REST API touched another object.
 
+Coverage: every generated configuration endpoint and every typed monitor endpoint is listed and
+decoded read-only; create, read, update and delete round-trips run on 24 approved collections
+(addresses, services, schedules, security profiles, routing lists, threat feeds), all inert unless
+something references them.
+
 The full rules are in the repository's `AGENTS.md`.

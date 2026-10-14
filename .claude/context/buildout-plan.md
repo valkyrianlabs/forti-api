@@ -253,3 +253,8 @@ Architectural requirements:
   cmdb/system/admin/..., monitor/system/debug); 27 monitor GETs learned and 24 reviewed into
   tools/recon/reviewed-gets.txt (4 kept out: FortiGuard/FortiSandbox outbound). Pass 2: 2,587 reads,
   44 monitor endpoints with shapes.
+- Phase 6 (live coverage): instead of auto-generating CRUD tests for every table (most need real
+  references or have live effects on creation), the live suite round-trips a reviewed set of 24
+  inert collections with hand-picked minimal fixtures; read-only decode coverage spans all 487 cmdb
+  and every typed monitor endpoint. Curated names for common firewall tables (AddressGroups,
+  Addresses6, ServiceGroups, OnetimeSchedules, ScheduleGroups, WildcardFqdns, Vips6).

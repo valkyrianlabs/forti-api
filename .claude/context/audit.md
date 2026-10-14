@@ -123,3 +123,5 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   35,240 objects, 0 decode failures); 42+ typed monitor endpoints decoded live (2 need parameters or a
   GUI session). Every public header compiles standalone (~540 headers). The umbrella header costs
   ~3.6 s of parsing; area/group/single headers are documented as the faster path.
+- **Phase 6 (live coverage):** 24 CRUD round-trips (create, read, update comment, delete) pass on
+  the lab device under the guard; the config-log audit confirms only forti-api-test-* objects change.

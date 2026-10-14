@@ -34,7 +34,8 @@ TEST(LiveGuard, RefusesRealObjects) {
 
 TEST(LiveGuard, RefusesUnapprovedCollections) {
     EXPECT_THROW(GuardTransport::check(req(Method::Post, "cmdb/firewall/policy", R"({"name":"forti-api-test-p"})")), GuardViolation);
-    EXPECT_THROW(GuardTransport::check(req(Method::Delete, "cmdb/firewall/address/forti-api-test-a")), GuardViolation);
+    EXPECT_THROW(GuardTransport::check(req(Method::Delete, "cmdb/router/static/forti-api-test-a")), GuardViolation);
+    EXPECT_THROW(GuardTransport::check(req(Method::Put, "cmdb/firewall/vip/forti-api-test-v")), GuardViolation);
     EXPECT_THROW(GuardTransport::check(req(Method::Post, "monitor/system/external-resource/refresh", R"({"name":"forti-api-test-x"})")), GuardViolation);
 }
 

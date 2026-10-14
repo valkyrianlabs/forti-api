@@ -11,10 +11,10 @@
 #include <string_view>
 #include <vector>
 
-namespace fortiapi::firewall::wildcard_fqdn {
+namespace fortiapi::firewall {
 
 // Config global Wildcard FQDN address groups.
-struct Group {
+struct WildcardFqdnGroup {
     fortiapi::Field<std::string> name;  // Address group name.
     fortiapi::Field<std::string> uuid;  // Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
     fortiapi::Field<std::vector<fortiapi::Ref>> member;  // Address group members. Required.
@@ -31,14 +31,14 @@ struct Group {
     }
 };
 
-struct GroupSpec {
-    using type = Group;
+struct WildcardFqdnGroupSpec {
+    using type = WildcardFqdnGroup;
     static constexpr std::string_view path = "cmdb/firewall.wildcard-fqdn/group";
-    static constexpr auto key = &Group::name;
+    static constexpr auto key = &WildcardFqdnGroup::name;
 };
 
-using Groups = fortiapi::Table<GroupSpec>;
+using WildcardFqdnGroups = fortiapi::Table<WildcardFqdnGroupSpec>;
 
-}  // namespace fortiapi::firewall::wildcard_fqdn
+}  // namespace fortiapi::firewall
 
 #endif // FORTI_API_GEN_FIREWALL_WILDCARD_FQDN_GROUP_HPP
