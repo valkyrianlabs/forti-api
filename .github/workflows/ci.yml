@@ -73,16 +73,15 @@ jobs:
           vlr install-skill --check
           vlr status --github-output
 
-      # Published by release.yml (docs set slug: forti-api). PRs from this repository also send a
-      # dry-run sync over GitHub OIDC: it checks the endpoint, the slug and the trust configuration
-      # without writing anything. Fork PRs only validate.
+      # Published by release.yml (docs set slug: forti-api). Pushes to main also send a dry-run sync
+      # over GitHub OIDC (endpoint, slug and trust, no writes); the docs set does not accept OIDC
+      # tokens from pull_request events, so PRs validate only.
       - name: Docs package
         env:
           VL_DOCS_ENDPOINT: ${{ vars.VL_DOCS_ENDPOINT }}
-          SAME_REPO: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         run: |
           pmdocs validate --source forti-api
-          if [ "$SAME_REPO" = true ] && [ -n "$VL_DOCS_ENDPOINT" ]; then
+          if [ "${{ github.event_name }}" = push ] && [ -n "$VL_DOCS_ENDPOINT" ]; then
             pmdocs push --endpoint "$VL_DOCS_ENDPOINT" --source forti-api --github-oidc --dry-run
           fi
 
