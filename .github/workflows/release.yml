@@ -2,8 +2,8 @@
 #
 #   vlr cut patch|minor|major|X.Y.Z --push      (locally) -> pushes vX.Y.Z -> this workflow
 #
-# build ─▶ publish-apt ─▶ github-release ─▶ finalize
-#                     └──▶ docs (independent of finalize: a docs failure never fails the release)
+# build ─▶ homebrew-check ─▶ publish-apt ─▶ github-release ─▶ homebrew-tap ─▶ finalize
+#                                       └──▶ docs (independent of finalize)
 #
 # Every job runs on the self-hosted VPS runner, every step in the disposable CI container
 # (ci/run-ci, rootless Podman). `vlr prepare` is deterministic, so later jobs re-run it and get
@@ -13,6 +13,7 @@
 # Configuration (ValkyrianLabs organization-level):
 #   secrets.NEXUS_USER, secrets.NEXUS_PASSWORD   Nexus upload credentials
 #   vars.NEXUS_APT_REPO                          Nexus APT upload URL (https://apt.valkyrianlabs.com)
+#   secrets.HOMEBREW_TAP_TOKEN                   push access to valkyrianlabs/homebrew-tap
 #   vars.RELEASE_PUBLISH_MODE   (optional)       `nexus` (default here) or `disabled`
 #   vars.VL_DOCS_ENDPOINT                        pmdocs sync endpoint; the forti-api docs set must
 #                                                trust this repository's release workflow for OIDC
@@ -44,6 +45,7 @@ concurrency:
 
 env:
   RELEASE_REF: ${{ github.event.inputs.ref || github.ref }}
+  VL_RELEASE_TAG: v0.5.0
   # Stock image for clean-install smoke tests (same digest as ci/Containerfile's base).
   UBUNTU_IMAGE: docker.io/library/ubuntu:24.04@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55
 
@@ -88,6 +90,8 @@ jobs:
       - name: Build artifacts from the prepared work tree
         run: |
           vlr build-deb
+          vlr source-archive
+          vlr homebrew formula
           vlr checksums
           vlr validate-artifacts
           vlr artifacts
@@ -116,10 +120,30 @@ jobs:
           path: release
           if-no-files-found: error
 
+  homebrew-check:
+    name: Homebrew formula install (macOS)
+    runs-on: macos-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ env.RELEASE_REF }}
+          fetch-depth: 0
+
+      - name: vl-release
+        run: |
+          git clone --quiet --depth 1 --branch "$VL_RELEASE_TAG" https://github.com/valkyrianlabs/vl-release.git "$RUNNER_TEMP/vl-release"
+          echo "$RUNNER_TEMP/vl-release/bin" >> "$GITHUB_PATH"
+
+      - name: Install the release formula from a local tap and run its test block
+        run: |
+          brew install meson ninja
+          bash .github/scripts/homebrew-local-install.sh
+
   publish-apt:
     name: Publish to the ValkyrianLabs APT repository
     runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
-    needs: build
+    needs: [build, homebrew-check]
     if: needs.build.outputs.publish == 'true'
     environment: Production
     defaults:
@@ -237,10 +261,43 @@ jobs:
           vlr checksums --verify
           vlr github-release
 
+  homebrew-tap:
+    name: Homebrew tap
+    runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
+    needs: [build, github-release]
+    environment: Production
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ env.RELEASE_REF }}
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: forti-api-${{ needs.build.outputs.version }}
+          path: release
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          repository: valkyrianlabs/homebrew-tap
+          ref: main
+          path: homebrew-tap
+          token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+      # Downloads the formula's url (the GitHub release asset) and checks its sha256 before
+      # committing; refuses to change a formula version that is already published.
+      - name: Publish the formula
+        run: |
+          vlr prepare
+          vlr homebrew publish --tap-dir homebrew-tap
+
   finalize:
     name: Record the release on main
     runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
-    needs: [build, publish-apt, github-release]
+    needs: [build, publish-apt, github-release, homebrew-tap]
     permissions:
       contents: write
     defaults:

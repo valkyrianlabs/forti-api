@@ -45,6 +45,15 @@ The headers install to `/usr/include/forti_api`, the bundled nlohmann/json to
 c++ -std=c++23 app.cpp $(pkg-config --cflags --libs forti-api)
 ```
 
+### macOS and Linux (Homebrew)
+
+```bash
+brew install valkyrianlabs/tap/forti-api
+```
+
+Recent Homebrew versions ask you to trust a third-party tap first (`brew trust valkyrianlabs/tap`).
+The formula installs the headers and `forti-api.pc`; libcurl comes from the system.
+
 ### Vendoring
 
 Copy `include/` and `third_party/nlohmann/include/` into your project, add both to the include
