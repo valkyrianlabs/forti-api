@@ -110,3 +110,12 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   hand-written types and accessors still exist until phase 3 deletes them.
 - Found in phase 2: `endpoint.hpp` first kept a reference into a temporary reply (caught by the unit
   tests; CI now also runs the unit suite under ASan/UBSan).
+- **Phase 3 (migration, PR "Phase 3"):** the old API is gone: `api.hpp` (`FortiAPI`, `FortiAuth`, runtime
+  key rewriting, namespace-scope regexes), `types/**` (including the uncompilable `vip.h` and the
+  inaccurate 39-name `Color` enum), the per-type accessors and `XResponse` envelopes, `main.cpp`. The
+  domain helpers are free functions over generated types: DNS category actions, push threat feeds,
+  schedule days (now FortiOS names, not ordinals), port ranges, trusthosts (IPv6 type and CIDR
+  formats fixed), interface addresses via `Monitor`. Every model row of the audit is resolved.
+- Found in phase 3: the push API (`monitor/system/external-resource/dynamic`) reports per-command
+  errors under a top-level "success" (now `ApiError`); a new push feed needs ~6 s to load before it
+  accepts pushes, and pushed entries appear ~6 s later (`feed_state()` exposes both).

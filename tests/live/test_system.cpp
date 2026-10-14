@@ -1,25 +1,32 @@
-//
-// Created by Cooper Larson on 8/28/24.
-//
-
+// System reads (read-only): interfaces, global settings, API users.
 #include <gtest/gtest.h>
-#include <forti_api/system.hpp>
+#include "live.hpp"
+
 #include <regex>
 
-bool validate_ip_addr(const std::string& ip) {
-    std::regex ipv4_regex(R"(^(\d{1,3}\.){3}\d{1,3}$)");
-    return std::regex_match(ip, ipv4_regex);
+using namespace fortiapi;
+
+TEST(System, Wan1HasAnIpv4Address) {
+    auto addresses = system::interface_addresses("wan1");
+    ASSERT_FALSE(addresses.empty());
+    EXPECT_TRUE(std::regex_match(addresses.front().ip, std::regex(R"(^(\d{1,3}\.){3}\d{1,3}$)"))) << addresses.front().ip;
+    EXPECT_GT(addresses.front().prefix_length, 0u);
 }
 
-TEST(TestSystem, TestGetWan1IP) {
-    auto ip = System::Interface::get_wan_ip();
-    ASSERT_TRUE(validate_ip_addr(ip)) << "Invalid IP: " << ip;
+TEST(System, Wan1IsAPhysicalInterface) {
+    auto wan1 = system::Interfaces::get("wan1");
+    EXPECT_EQ(*wan1.type, system::interface::type::physical);
+    EXPECT_EQ(*wan1.vdom, "root");
 }
 
-TEST(TestSystem, TestGetPhysicalInterface) {
-    auto interface = System::Interface::get_physical_interface("wan1");
-    ASSERT_TRUE(interface.name == "wan1") << "Unexpected interface name: " << interface.name;
-    ASSERT_TRUE(interface.vdom == "root") << "Default interface vdom !== root";
-    ASSERT_TRUE(!interface.ipv4_addresses.empty());
-    ASSERT_TRUE(interface.type == "physical");
+TEST(System, ApiUsersTrusthostsParse) {
+    for (const auto& user: system::ApiUsers::list()) {
+        if (!user.trusthost) continue;
+        for (const auto& host: *user.trusthost) {
+            ASSERT_TRUE(host.type.has_value());
+            if (*host.type == system::api_user::trusthost::type::ipv4_trusthost) {
+                EXPECT_TRUE(system::trusts(user, *host.ipv4_trusthost)) << *host.ipv4_trusthost;
+            }
+        }
+    }
 }

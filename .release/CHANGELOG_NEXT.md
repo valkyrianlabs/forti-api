@@ -21,3 +21,6 @@ One level of nested "  - " detail bullets is allowed. Consolidate; don't paste c
   include/forti_api/gen): Field<T> with absent/populated/modified/cleared states, Table<Spec> and
   Singleton<Spec>, option constants, decode errors naming the attribute path.
 - Treat unset integers reported as "" as absent; accept numbers sent as text.
+- Remove the pre-generation API (FortiAPI, FortiAuth, FortiGate::/System:: accessors, types/**);
+  port DNS category, threat feed, schedule, service and trusthost helpers onto generated types.
+- Add Monitor passthrough, feed_state() and per-command error reporting for push feeds.

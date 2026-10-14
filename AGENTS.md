@@ -55,9 +55,13 @@ write:
 
 These are enforced, not just documented: the live suite's client goes through
 `live::GuardTransport` (`tests/live/guard.hpp`), which refuses before sending any POST/PUT/DELETE
-outside `live::approved_collections` or without the prefix, and `live::ConfigAudit` fails the run if
-the device's config-change log shows a REST change to any non-test object. Adding a collection to
-the allowlist is a deliberate, reviewed change.
+outside `live::approved_collections` (cmdb) and `live::approved_monitor_actions` (monitor) or
+without the prefix, and `live::ConfigAudit` fails the run if the device's config-change log shows a
+REST change to any non-test object. Adding to either allowlist is a deliberate, reviewed change.
+
+Approved test resources today: `cmdb/dnsfilter/profile/forti-api-test-*`,
+`cmdb/system/external-resource/forti-api-test-*`, and push commands
+(`monitor/system/external-resource/dynamic`) naming only `forti-api-test-*` feeds.
 
 Before writing anything new to the device, know exactly which objects the change touches. If an
 auth request fails repeatedly, stop: FortiOS locks the API out (HTTP 429) after a few failures.

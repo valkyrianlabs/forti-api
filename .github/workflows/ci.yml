@@ -50,7 +50,7 @@ jobs:
         run: python3 tools/fortios/fortios.py check
 
       - name: Public headers compile standalone
-        run: ci/check-headers.sh include/forti_api/client.hpp include/forti_api/field.hpp include/forti_api/endpoint.hpp include/forti_api/gen
+        run: ci/check-headers.sh
 
   package:
     name: Release contract and Debian rehearsal

@@ -32,8 +32,8 @@ import('pkgconfig').generate(
 # Targets opt out of implicit include directories: on case-insensitive filesystems (macOS) the
 # source root's VERSION file would otherwise shadow the standard <version> header.
 
-# Compile check of the umbrella header; never installed.
-executable('forti-api', 'main.cpp', dependencies : forti_api_dep, implicit_include_directories : false)
+# Examples double as a compile check of the umbrella header; never installed.
+executable('inventory', 'examples/inventory.cpp', dependencies : forti_api_dep, implicit_include_directories : false)
 
 # Unit tests: network-free (a scripted transport), run by CI.
 gtest_dep = dependency('gtest', main : true, required : get_option('tests'))
@@ -43,6 +43,7 @@ if gtest_dep.found()
                             'tests/unit/test_live_guard.cpp',
                             'tests/unit/test_field.cpp',
                             'tests/unit/test_endpoint.cpp',
+                            'tests/unit/test_helpers.cpp',
                             dependencies : [forti_api_dep, gtest_dep],
                             implicit_include_directories : false),
          suite : 'unit')
@@ -54,10 +55,10 @@ if get_option('live_tests')
     gtest_nomain_dep = dependency('gtest', main : false)
     test('fortigate', executable('liveTests',
                                  'tests/live/main.cpp',
-                                 'tests/live/test_dns_filter.cpp',
+                                 'tests/live/test_dnsfilter.cpp',
+                                 'tests/live/test_generated.cpp',
                                  'tests/live/test_system.cpp',
                                  'tests/live/test_threat_feed.cpp',
-                                 'tests/live/test_generated.cpp',
                                  dependencies : [forti_api_dep, gtest_nomain_dep],
                                  implicit_include_directories : false),
          suite : 'live', timeout : 300, is_parallel : false)

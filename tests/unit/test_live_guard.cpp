@@ -38,6 +38,15 @@ TEST(LiveGuard, RefusesUnapprovedCollections) {
     EXPECT_THROW(GuardTransport::check(req(Method::Post, "monitor/system/external-resource/refresh", R"({"name":"forti-api-test-x"})")), GuardViolation);
 }
 
+TEST(LiveGuard, AllowsPushCommandsOnlyForTestFeeds) {
+    auto push = [](const std::string& body) { return req(Method::Post, "monitor/system/external-resource/dynamic", body); };
+    EXPECT_NO_THROW(GuardTransport::check(push(R"({"commands":[{"name":"forti-api-test-f","command":"snapshot","entries":[]}]})")));
+    EXPECT_THROW(GuardTransport::check(push(R"({"commands":[{"name":"real-feed","command":"snapshot"}]})")), GuardViolation);
+    EXPECT_THROW(GuardTransport::check(push(R"({"commands":[{"name":"forti-api-test-f"},{"name":"real-feed"}]})")), GuardViolation);
+    EXPECT_THROW(GuardTransport::check(push(R"({"commands":[]})")), GuardViolation);
+    EXPECT_THROW(GuardTransport::check(push("not json")), GuardViolation);
+}
+
 TEST(LiveGuard, RefusesTricksInTheKey) {
     // Child paths and whole-collection writes are not "<collection>/<test object>".
     EXPECT_THROW(GuardTransport::check(req(Method::Put, "cmdb/dnsfilter/profile")), GuardViolation);

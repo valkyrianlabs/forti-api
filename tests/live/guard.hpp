@@ -26,6 +26,11 @@ namespace live {
             "cmdb/system/external-resource",
     };
 
+    // Monitor actions the live suite may call, only when every command names a forti-api-test-* object.
+    inline constexpr std::array<std::string_view, 1> approved_monitor_actions{
+            "monitor/system/external-resource/dynamic",   // push entries into a test threat feed
+    };
+
     class GuardViolation : public std::logic_error {
     public:
         using std::logic_error::logic_error;
@@ -72,6 +77,18 @@ namespace live {
             if (request.method == fortiapi::Method::Get) return;
             auto path = api_path(request.url);
             auto method = std::string(fortiapi::to_string(request.method));
+
+            if (request.method == fortiapi::Method::Post &&
+                std::find(approved_monitor_actions.begin(), approved_monitor_actions.end(), path) != approved_monitor_actions.end()) {
+                auto body = nlohmann::json::parse(request.body, nullptr, false);
+                auto commands = body.is_object() ? body.value("commands", nlohmann::json()) : nlohmann::json();
+                bool all_test = commands.is_array() && !commands.empty() &&
+                                std::all_of(commands.begin(), commands.end(), [](const nlohmann::json& c) {
+                                    return c.is_object() && c.value("name", std::string()).starts_with(prefix);
+                                });
+                if (all_test) return;
+                throw GuardViolation("live guard: refusing POST " + path + " for non-test objects");
+            }
 
             if (request.method == fortiapi::Method::Post) {
                 auto body = nlohmann::json::parse(request.body, nullptr, false);

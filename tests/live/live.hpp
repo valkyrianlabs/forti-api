@@ -1,15 +1,15 @@
 //
 // Live-FortiGate test support. The suite runs against a real firewall (AGENTS.md): it never modifies
 // existing config, names everything it writes forti-api-test-*, and removes it again even when an
-// assertion fails.
+// assertion fails. guard.hpp enforces the first two before any request is sent.
 //
 
 #ifndef FORTI_API_TESTS_LIVE_HPP
 #define FORTI_API_TESTS_LIVE_HPP
 
-#include <forti_api/dns_filter.hpp>
+#include <forti_api.hpp>
 #include "guard.hpp"
-#include <forti_api/threat_feed.hpp>
+
 #include <set>
 #include <string>
 #include <string_view>
@@ -34,42 +34,50 @@ namespace live {
         ~Cleanup() { try { f(); } catch (...) {} }
     };
 
-    inline DNSProfile dns_profile(std::string_view suffix) {
-        DNSProfile profile(name(suffix));
-        profile.comment = comment;
+    inline fortiapi::dnsfilter::Profile dns_profile(std::string_view suffix) {
+        fortiapi::dnsfilter::Profile profile;
+        profile.name = name(suffix);
+        profile.comment = std::string(comment);
         return profile;
     }
 
-    inline PushThreatFeed threat_feed(std::string_view suffix, unsigned int category) {
-        PushThreatFeed feed(name(suffix), category);
-        feed.comments = comment;
+    inline fortiapi::system::ExternalResource threat_feed(std::string_view suffix, std::uint32_t category) {
+        auto feed = fortiapi::system::push_threat_feed(name(suffix), category);
+        feed.comments = std::string(comment);
         return feed;
     }
 
     // A remote threat-feed category (192-221) that no existing feed provides and no DNS filter profile
-    // references, so deleting a test feed can never touch a real profile.
-    inline unsigned int free_threat_feed_category() {
-        std::set<unsigned int> used;
-        for (const auto& feed : ThreatFeed::get()) used.insert(feed.category);
-        for (auto& profile : DNSFilter::get())
-            for (const auto& filter : profile.ftgd_dns.filters) used.insert(filter.category);
-        for (unsigned int category = 221; category >= 192; --category)
+    // lists, so category sweeps can never match a real profile.
+    inline std::uint32_t free_threat_feed_category() {
+        std::set<std::uint32_t> used;
+        for (const auto& feed: fortiapi::system::ExternalResources::list())
+            if (feed.category) used.insert(*feed.category);
+        for (const auto& profile: fortiapi::dnsfilter::Profiles::list())
+            if (profile.ftgd_dns && profile.ftgd_dns->filters)
+                for (const auto& filter: *profile.ftgd_dns->filters)
+                    if (filter.category) used.insert(*filter.category);
+        for (std::uint32_t category = 221; category >= 192; --category)
             if (!used.contains(category)) return category;
         throw std::runtime_error("No unused threat feed category (192-221) available for the test suite");
     }
 
     inline void del_dns_profile(const std::string& profile_name) {
-        if (is_test_object(profile_name) && DNSFilter::contains(profile_name)) DNSFilter::del(profile_name);
+        if (is_test_object(profile_name) && fortiapi::dnsfilter::Profiles::contains(profile_name))
+            fortiapi::dnsfilter::Profiles::del(profile_name);
     }
 
     inline void del_threat_feed(const std::string& feed_name) {
-        if (is_test_object(feed_name) && ThreatFeed::contains(feed_name)) ThreatFeed::del(feed_name);
+        if (is_test_object(feed_name) && fortiapi::system::ExternalResources::contains(feed_name))
+            fortiapi::system::delete_threat_feed(feed_name);
     }
 
     // Removes forti-api-test-* objects an aborted earlier run left behind; nothing else.
     inline void purge_leftovers() {
-        for (const auto& feed : ThreatFeed::get()) del_threat_feed(feed.name);
-        for (const auto& profile : DNSFilter::get()) del_dns_profile(profile.name);
+        for (const auto& feed: fortiapi::system::ExternalResources::list(fortiapi::Query().format({"name"})))
+            del_threat_feed(feed.name.value_or(""));
+        for (const auto& profile: fortiapi::dnsfilter::Profiles::list(fortiapi::Query().format({"name"})))
+            del_dns_profile(profile.name.value_or(""));
     }
 
 }  // namespace live

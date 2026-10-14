@@ -1,99 +1,54 @@
 //
-// Created by Cooper Larson on 8/31/24.
+// Firewall: the generated endpoints plus value helpers for schedules and services.
 //
 
 #ifndef FORTI_API_FIREWALL_HPP
 #define FORTI_API_FIREWALL_HPP
 
-#include <utility>
+#include "gen/firewall/address.hpp"
+#include "gen/firewall/policy.hpp"
+#include "gen/firewall/schedule/recurring.hpp"
+#include "gen/firewall/service/category.hpp"
+#include "gen/firewall/service/custom.hpp"
+#include "gen/firewall/vip.hpp"
 
-#include "api.hpp"
-#include "types/firewall/policies.h"
-#include "types/firewall/services.h"
-#include "types/firewall/schedules.h"
+#include <cstdint>
+#include <format>
+#include <initializer_list>
+#include <string>
 
+namespace fortiapi::firewall {
 
-namespace FortiGate {
+    enum class Weekday { sunday, monday, tuesday, wednesday, thursday, friday, saturday };
 
-    class Policies {
-        inline static std::string endpoint = "/cmdb/firewall/policy";
-
-    public:
-        static std::vector<FirewallPolicy> get() { return FortiAPI::get<FirewallPoliciesResponse>(endpoint).results; }
-
-        static FirewallPolicy get(const std::string& name) {
-            auto policies = get();
-            for (const auto& policy : policies) if (policy.name == name) return policy;
-            throw std::runtime_error("Unable to locate firewall policy: " + name);
+    // The value of RecurringSchedule::day: "monday wednesday friday".
+    inline std::string days(std::initializer_list<Weekday> weekdays) {
+        static constexpr std::string_view names[] = {"sunday", "monday", "tuesday", "wednesday", "thursday",
+                                                      "friday", "saturday"};
+        std::string out;
+        for (auto day: weekdays) {
+            if (!out.empty()) out += ' ';
+            out += names[static_cast<int>(day)];
         }
+        return out;
+    }
 
-        static void update(const FirewallPolicy& policy) {
-            FortiAPI::put(std::format("{}/{}", endpoint, policy.policyid), policy);
-        }
+    // One destination port range of a custom service; high == 0 means a single port.
+    struct PortRange {
+        std::uint16_t low = 0;
+        std::uint16_t high = 0;
     };
 
-    class Services {
-    public:
-        static std::vector<FirewallService> get() {
-            return FortiAPI::get<FirewallServicesResponse>(FirewallService::endpoint).results;
+    // The value of Service::tcp_portrange / udp_portrange / sctp_portrange: "80 443 8000-8080".
+    inline std::string port_ranges(std::initializer_list<PortRange> ranges) {
+        std::string out;
+        for (const auto& range: ranges) {
+            if (!out.empty()) out += ' ';
+            out += range.high > range.low ? std::format("{}-{}", range.low, range.high) : std::to_string(range.low);
         }
+        return out;
+    }
 
-        static FirewallService get(const std::string& name, const std::string& vdom="root") {
-            auto results = FortiAPI::get<FirewallServicesResponse>(std::format("{}/{}?vdom={}", FirewallService::endpoint, name, vdom)).results;
-            if (results.empty()) throw std::runtime_error("Unable to locate firewall service: " + name);
-            else if (results.size() > 1) throw std::runtime_error("Get of firewall service " + name + " returned multiple results");
-            return results[0];
-        }
-
-        static void update(const FirewallService& service, const std::string& vdom="root") {
-            FortiAPI::put(std::format("{}/{}?vdom={}", FirewallService::endpoint, service.name, vdom), service);
-        }
-
-        static void add(const FirewallService& service, const std::string& vdom="root") {
-            FortiAPI::post(std::format("{}?vdom={}", FirewallService::endpoint, vdom), service);
-        }
-
-        static std::vector<ServiceCategory> get_categories() {
-            return FortiAPI::get<ServiceCategoriesResponse>(ServiceCategory::endpoint).results;
-        }
-
-        static void add_category(ServiceCategory category) { category.add(); }
-
-        static void add_category(const std::string& name, const std::string& comment="") {
-            ServiceCategory{name, comment}.add();
-        }
-
-        static void delete_category(ServiceCategory category) { category.del(); }
-
-        static void delete_category(const std::string& name) {
-            for (auto category : get_categories()) {
-                if (category.name == name) category.del();
-                return;
-            }
-            throw std::runtime_error("Unable to locate category for deletion: " + name);
-        }
-    };
-
-    class Schedules {
-    public:
-        static std::vector<FirewallSchedule> get(const std::string& vdom="root") {
-            return FortiAPI::get<FirewallSchedulesResponse>(std::format("{}?vdom={}", FirewallSchedule::endpoint, vdom)).results;
-        }
-
-        static FirewallSchedule get(const std::string& name, const std::string& vdom="root") {
-            auto endpoint = std::format("{}/{}?vdom={}", FirewallSchedule::endpoint, name, vdom);
-            auto results = FortiAPI::get<FirewallSchedulesResponse>(endpoint).results;
-            if (results.empty()) throw std::runtime_error("Unable to locate firewall schedule: " + name);
-            else if (results.size() > 1) throw std::runtime_error("Get of firewall schedule " + name + " returned multiple results");
-            return results[0];
-        }
-
-        static FirewallSchedule new_schedule(const std::string& name, const std::string& vdom="root") {
-            return FirewallSchedule(name, vdom);
-        }
-    };
-
-}
-
+}  // namespace fortiapi::firewall
 
 #endif //FORTI_API_FIREWALL_HPP
