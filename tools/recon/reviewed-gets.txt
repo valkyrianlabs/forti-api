@@ -2,3 +2,28 @@
 # to those the bundle catalog confirms (codegen/catalog/<version>/gui-api.json). One path per line,
 # relative to monitor/, followed by the reason it was judged safe. The unsafe-word check in
 # policy.py still applies to every entry.
+firewall/address-dynamic            resolved members of dynamic addresses (list)
+firewall/address-fqdns              resolved FQDN addresses (list)
+firewall/address-fqdns6             resolved FQDN addresses, IPv6 (list)
+firewall/address6-dynamic           resolved members of dynamic IPv6 addresses (list)
+firewall/internet-service-basic     internet service database summary (list)
+firewall/local-in                   local-in policy view (list)
+firewall/policy                     policy usage statistics (counters)
+firewall/security-policy            security policy usage statistics (counters)
+fortiguard/app-categories           application category list (static data)
+fortiguard/static-links             documentation links (static data)
+log/forticloud-report-list          report list (list)
+log/local-report-list               report list (list)
+router/policy                       policy route view (list)
+router/statistics                   routing table statistics (counters)
+system/3g-modem                     modem status (status)
+system/automation-action/stats      automation action counters (counters)
+system/automation-stitch/stats      automation stitch counters (counters)
+system/available-interfaces/meta    interface list metadata (metadata)
+system/modem                        modem status (status)
+system/navigation-favorites         the GUI's saved navigation shortcuts (list)
+system/usb-log                      USB log status (status)
+system/vdom-link                    VDOM link view (list)
+system/wan-lan-ip-conflict          address conflict check result (status)
+# Not admitted: fortiguard/answers, fortiguard/prefix-links (fetch from FortiGuard), system/firmware
+# (queries FortiGuard for images), system/sandbox/connection (probes the FortiSandbox connection).
