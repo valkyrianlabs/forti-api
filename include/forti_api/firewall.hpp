@@ -32,7 +32,6 @@ namespace FortiGate {
         }
     };
 
-
     class Services {
     public:
         static std::vector<FirewallService> get() {
