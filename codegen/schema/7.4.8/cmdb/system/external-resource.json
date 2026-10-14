@@ -1,0 +1,233 @@
+{
+ "name": "external-resource",
+ "category": "table",
+ "help": "Configure external resource.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "External resource name.",
+   "required": true,
+   "size": 35,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "status": {
+   "name": "status",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable user resource.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable user resource."
+    },
+    {
+     "name": "disable",
+     "help": "Disable user resource."
+    }
+   ],
+   "default": "enable",
+   "multiple_values": false
+  },
+  "type": {
+   "name": "type",
+   "category": "unitary",
+   "type": "option",
+   "help": "User resource type.",
+   "options": [
+    {
+     "name": "category",
+     "help": "FortiGuard category."
+    },
+    {
+     "name": "domain",
+     "help": "Domain Name."
+    },
+    {
+     "name": "malware",
+     "help": "Malware hash."
+    },
+    {
+     "name": "address",
+     "help": "Firewall IP address."
+    },
+    {
+     "name": "mac-address",
+     "help": "Firewall MAC address."
+    },
+    {
+     "name": "data",
+     "help": "Data file."
+    }
+   ],
+   "default": "category",
+   "multiple_values": false
+  },
+  "update-method": {
+   "name": "update-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "External resource update method.",
+   "options": [
+    {
+     "name": "feed",
+     "help": "FortiGate unit will pull update from the external resource."
+    },
+    {
+     "name": "push",
+     "help": "External Resource update is pushed to the FortiGate unit through the FortiGate unit's RESTAPI/CLI."
+    }
+   ],
+   "default": "feed",
+   "multiple_values": false
+  },
+  "category": {
+   "name": "category",
+   "category": "unitary",
+   "type": "integer",
+   "help": "User resource category.",
+   "min-value": 192,
+   "max-value": 221,
+   "default": 0,
+   "multiple_values": false
+  },
+  "username": {
+   "name": "username",
+   "category": "unitary",
+   "type": "string",
+   "help": "HTTP basic authentication user name.",
+   "size": 64,
+   "default": "",
+   "multiple_values": false
+  },
+  "password": {
+   "name": "password",
+   "category": "unitary",
+   "type": "password",
+   "help": "HTTP basic authentication password.",
+   "size": 128,
+   "multiple_values": false
+  },
+  "comments": {
+   "name": "comments",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "resource": {
+   "name": "resource",
+   "category": "unitary",
+   "type": "string",
+   "help": "URL of external resource.",
+   "required": true,
+   "size": 511,
+   "default": "",
+   "multiple_values": false
+  },
+  "user-agent": {
+   "name": "user-agent",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "HTTP User-Agent header (default = 'curl/7.58.0').",
+   "size": 255,
+   "multiple_values": false
+  },
+  "server-identity-check": {
+   "name": "server-identity-check",
+   "category": "unitary",
+   "type": "option",
+   "help": "Certificate verification option.",
+   "options": [
+    {
+     "name": "none",
+     "help": "No certificate verification."
+    },
+    {
+     "name": "basic",
+     "help": "Check server certifcate only."
+    },
+    {
+     "name": "full",
+     "help": "Check server certificate and verify the domain matches in the server certificate."
+    }
+   ],
+   "default": "none",
+   "multiple_values": false
+  },
+  "refresh-rate": {
+   "name": "refresh-rate",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Time interval to refresh external resource (1 - 43200 min, default = 5 min).",
+   "required": true,
+   "min-value": 1,
+   "max-value": 43200,
+   "default": 5,
+   "multiple_values": false
+  },
+  "source-ip": {
+   "name": "source-ip",
+   "category": "unitary",
+   "type": "ipv4-address",
+   "help": "Source IPv4 address used to communicate with server.",
+   "default": "0.0.0.0",
+   "multiple_values": false
+  },
+  "interface-select-method": {
+   "name": "interface-select-method",
+   "category": "unitary",
+   "type": "option",
+   "help": "Specify how to select outgoing interface to reach server.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Set outgoing interface automatically."
+    },
+    {
+     "name": "sdwan",
+     "help": "Set outgoing interface by SD-WAN or policy routing rules."
+    },
+    {
+     "name": "specify",
+     "help": "Set outgoing interface manually."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "interface": {
+   "name": "interface",
+   "category": "unitary",
+   "type": "string",
+   "help": "Specify outgoing interface to reach server.",
+   "required": true,
+   "datasource": [
+    "system.interface.name"
+   ],
+   "size": 15,
+   "default": "",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 512,
+ "max_table_size_item": 0,
+ "path": "system",
+ "q_type": 535,
+ "access_group": "sysgrp",
+ "object_range": "global-vdom"
+}

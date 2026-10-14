@@ -1,0 +1,51 @@
+{
+ "name": "category",
+ "category": "table",
+ "help": "Configure service categories.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Service category name.",
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 200,
+ "max_table_size_global": 200,
+ "max_table_size_item": 0,
+ "path": "firewall.service",
+ "q_type": 36,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

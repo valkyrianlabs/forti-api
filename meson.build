@@ -41,6 +41,8 @@ if gtest_dep.found()
     test('unit', executable('unitTests',
                             'tests/unit/test_client.cpp',
                             'tests/unit/test_live_guard.cpp',
+                            'tests/unit/test_field.cpp',
+                            'tests/unit/test_endpoint.cpp',
                             dependencies : [forti_api_dep, gtest_dep],
                             implicit_include_directories : false),
          suite : 'unit')
@@ -55,6 +57,7 @@ if get_option('live_tests')
                                  'tests/live/test_dns_filter.cpp',
                                  'tests/live/test_system.cpp',
                                  'tests/live/test_threat_feed.cpp',
+                                 'tests/live/test_generated.cpp',
                                  dependencies : [forti_api_dep, gtest_nomain_dep],
                                  implicit_include_directories : false),
          suite : 'live', timeout : 300, is_parallel : false)

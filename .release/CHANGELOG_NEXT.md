@@ -17,3 +17,7 @@ One level of nested "  - " detail bullets is allowed. Consolidate; don't paste c
 - Request gzip only: FortiOS sends log/* replies as deflate streams libcurl cannot decode.
 - Split tests: network-free unit suite (run in CI) and an opt-in live suite (-Dlive_tests=true)
   behind a guard transport and a config-change-log audit.
+- Generate endpoint headers from FortiOS cmdb schema snapshots (tools/fortios, codegen/api.toml,
+  include/forti_api/gen): Field<T> with absent/populated/modified/cleared states, Table<Spec> and
+  Singleton<Spec>, option constants, decode errors naming the attribute path.
+- Treat unset integers reported as "" as absent; accept numbers sent as text.

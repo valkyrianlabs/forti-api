@@ -1,0 +1,114 @@
+{
+ "name": "recurring",
+ "category": "table",
+ "help": "Recurring schedule configuration.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Recurring schedule name.",
+   "required": true,
+   "size": 31,
+   "default": "",
+   "multiple_values": false
+  },
+  "start": {
+   "name": "start",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of day to start the schedule, format hh:mm.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "end": {
+   "name": "end",
+   "category": "unitary",
+   "type": "user",
+   "help": "Time of day to end the schedule, format hh:mm.",
+   "required": true,
+   "default": "",
+   "multiple_values": false
+  },
+  "day": {
+   "name": "day",
+   "category": "unitary",
+   "type": "option",
+   "help": "One or more days of the week on which the schedule is valid. Separate the names of the days with a space.",
+   "options": [
+    {
+     "name": "sunday",
+     "help": "Sunday."
+    },
+    {
+     "name": "monday",
+     "help": "Monday."
+    },
+    {
+     "name": "tuesday",
+     "help": "Tuesday."
+    },
+    {
+     "name": "wednesday",
+     "help": "Wednesday."
+    },
+    {
+     "name": "thursday",
+     "help": "Thursday."
+    },
+    {
+     "name": "friday",
+     "help": "Friday."
+    },
+    {
+     "name": "saturday",
+     "help": "Saturday."
+    },
+    {
+     "name": "none",
+     "help": "None."
+    }
+   ],
+   "default": "none",
+   "multiple_values": true
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Color of icon on the GUI.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 256,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall.schedule",
+ "q_type": 40,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}

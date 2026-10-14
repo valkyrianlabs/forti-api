@@ -1,0 +1,446 @@
+{
+ "name": "custom",
+ "category": "table",
+ "help": "Configure custom services.",
+ "mkey": "name",
+ "mkey_type": "string",
+ "children": {
+  "name": {
+   "name": "name",
+   "category": "unitary",
+   "type": "string",
+   "help": "Custom service name.",
+   "size": 79,
+   "default": "",
+   "multiple_values": false
+  },
+  "uuid": {
+   "name": "uuid",
+   "category": "unitary",
+   "type": "uuid",
+   "help": "Universally Unique Identifier (UUID; automatically assigned but can be manually reset).",
+   "default": "00000000-0000-0000-0000-000000000000",
+   "multiple_values": false
+  },
+  "proxy": {
+   "name": "proxy",
+   "category": "unitary",
+   "type": "option",
+   "help": "Enable/disable web proxy service.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Enable setting."
+    },
+    {
+     "name": "disable",
+     "help": "Disable setting."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "category": {
+   "name": "category",
+   "category": "unitary",
+   "type": "string",
+   "help": "Service category.",
+   "datasource": [
+    "firewall.service.category.name"
+   ],
+   "size": 63,
+   "default": "",
+   "multiple_values": false
+  },
+  "protocol": {
+   "name": "protocol",
+   "category": "unitary",
+   "type": "option",
+   "help": "Protocol type based on IANA numbers.",
+   "options": [
+    {
+     "name": "TCP/UDP/SCTP",
+     "help": "TCP, UDP and SCTP."
+    },
+    {
+     "name": "ICMP",
+     "help": "ICMP."
+    },
+    {
+     "name": "ICMP6",
+     "help": "ICMP6."
+    },
+    {
+     "name": "IP",
+     "help": "IP."
+    },
+    {
+     "name": "HTTP",
+     "help": "HTTP - for web proxy."
+    },
+    {
+     "name": "FTP",
+     "help": "FTP - for web proxy."
+    },
+    {
+     "name": "CONNECT",
+     "help": "Connect - for web proxy."
+    },
+    {
+     "name": "SOCKS-TCP",
+     "help": "Socks TCP - for web proxy."
+    },
+    {
+     "name": "SOCKS-UDP",
+     "help": "Socks UDP - for web proxy."
+    },
+    {
+     "name": "ALL",
+     "help": "All - for web proxy."
+    }
+   ],
+   "default": "TCP/UDP/SCTP",
+   "multiple_values": false
+  },
+  "helper": {
+   "name": "helper",
+   "category": "unitary",
+   "type": "option",
+   "help": "Helper name.",
+   "options": [
+    {
+     "name": "auto",
+     "help": "Automatically select helper based on protocol and port."
+    },
+    {
+     "name": "disable",
+     "help": "Disable helper."
+    },
+    {
+     "name": "ftp",
+     "help": "FTP."
+    },
+    {
+     "name": "tftp",
+     "help": "TFTP."
+    },
+    {
+     "name": "ras",
+     "help": "RAS."
+    },
+    {
+     "name": "h323",
+     "help": "H323."
+    },
+    {
+     "name": "tns",
+     "help": "TNS."
+    },
+    {
+     "name": "mms",
+     "help": "MMS."
+    },
+    {
+     "name": "sip",
+     "help": "SIP."
+    },
+    {
+     "name": "pptp",
+     "help": "PPTP."
+    },
+    {
+     "name": "rtsp",
+     "help": "RTSP."
+    },
+    {
+     "name": "dns-udp",
+     "help": "DNS UDP."
+    },
+    {
+     "name": "dns-tcp",
+     "help": "DNS TCP."
+    },
+    {
+     "name": "pmap",
+     "help": "PMAP."
+    },
+    {
+     "name": "rsh",
+     "help": "RSH."
+    },
+    {
+     "name": "dcerpc",
+     "help": "DCERPC."
+    },
+    {
+     "name": "mgcp",
+     "help": "MGCP."
+    }
+   ],
+   "default": "auto",
+   "multiple_values": false
+  },
+  "iprange": {
+   "name": "iprange",
+   "category": "unitary",
+   "type": "user",
+   "help": "Start and end of the IP range associated with service.",
+   "default": "",
+   "multiple_values": false
+  },
+  "fqdn": {
+   "name": "fqdn",
+   "category": "unitary",
+   "type": "string",
+   "help": "Fully qualified domain name.",
+   "size": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "protocol-number": {
+   "name": "protocol-number",
+   "category": "unitary",
+   "type": "integer",
+   "help": "IP protocol number.",
+   "min-value": 0,
+   "max-value": 254,
+   "default": 0,
+   "multiple_values": false
+  },
+  "icmptype": {
+   "name": "icmptype",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ICMP type.",
+   "min-value": 0,
+   "max-value": 4294967295,
+   "default": "",
+   "multiple_values": false
+  },
+  "icmpcode": {
+   "name": "icmpcode",
+   "category": "unitary",
+   "type": "integer",
+   "help": "ICMP code.",
+   "min-value": 0,
+   "max-value": 255,
+   "default": "",
+   "multiple_values": false
+  },
+  "tcp-portrange": {
+   "name": "tcp-portrange",
+   "category": "unitary",
+   "type": "user",
+   "help": "Multiple TCP port ranges.",
+   "default": "",
+   "multiple_values": false
+  },
+  "udp-portrange": {
+   "name": "udp-portrange",
+   "category": "unitary",
+   "type": "user",
+   "help": "Multiple UDP port ranges.",
+   "default": "",
+   "multiple_values": false
+  },
+  "sctp-portrange": {
+   "name": "sctp-portrange",
+   "category": "unitary",
+   "type": "user",
+   "help": "Multiple SCTP port ranges.",
+   "default": "",
+   "multiple_values": false
+  },
+  "tcp-halfclose-timer": {
+   "name": "tcp-halfclose-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wait time to close a TCP session waiting for an unanswered FIN packet (1 - 86400 sec, 0 = default).",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tcp-halfopen-timer": {
+   "name": "tcp-halfopen-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Wait time to close a TCP session waiting for an unanswered open session packet (1 - 86400 sec, 0 = default).",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tcp-timewait-timer": {
+   "name": "tcp-timewait-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Set the length of the TCP TIME-WAIT state in seconds (1 - 300 sec, 0 = default).",
+   "min-value": 0,
+   "max-value": 300,
+   "default": 0,
+   "multiple_values": false
+  },
+  "tcp-rst-timer": {
+   "name": "tcp-rst-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Set the length of the TCP CLOSE state in seconds (5 - 300 sec, 0 = default).",
+   "min-value": 5,
+   "max-value": 300,
+   "default": 0,
+   "multiple_values": false
+  },
+  "udp-idle-timer": {
+   "name": "udp-idle-timer",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Number of seconds before an idle UDP connection times out (0 - 86400 sec, 0 = default).",
+   "min-value": 0,
+   "max-value": 86400,
+   "default": 0,
+   "multiple_values": false
+  },
+  "session-ttl": {
+   "name": "session-ttl",
+   "category": "unitary",
+   "type": "user",
+   "help": "Session TTL (300 - 2764800, 0 = default).",
+   "default": "",
+   "multiple_values": false
+  },
+  "check-reset-range": {
+   "name": "check-reset-range",
+   "category": "unitary",
+   "type": "option",
+   "help": "Configure the type of ICMP error message verification.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable RST range check."
+    },
+    {
+     "name": "strict",
+     "help": "Check RST range strictly."
+    },
+    {
+     "name": "default",
+     "help": "Using system default setting."
+    }
+   ],
+   "default": "default",
+   "multiple_values": false
+  },
+  "comment": {
+   "name": "comment",
+   "category": "unitary",
+   "type": "var-string",
+   "help": "Comment.",
+   "size": 255,
+   "multiple_values": false
+  },
+  "color": {
+   "name": "color",
+   "category": "unitary",
+   "type": "integer",
+   "help": "Color of icon on the GUI.",
+   "min-value": 0,
+   "max-value": 32,
+   "default": 0,
+   "multiple_values": false
+  },
+  "app-service-type": {
+   "name": "app-service-type",
+   "category": "unitary",
+   "type": "option",
+   "help": "Application service type.",
+   "options": [
+    {
+     "name": "disable",
+     "help": "Disable application type."
+    },
+    {
+     "name": "app-id",
+     "help": "Application ID."
+    },
+    {
+     "name": "app-category",
+     "help": "Applicatin category."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  },
+  "app-category": {
+   "name": "app-category",
+   "category": "table",
+   "help": "Application category ID.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Application category id.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "application": {
+   "name": "application",
+   "category": "table",
+   "help": "Application ID.",
+   "member_table": true,
+   "mkey": "id",
+   "mkey_type": "integer",
+   "children": {
+    "id": {
+     "name": "id",
+     "category": "unitary",
+     "type": "integer",
+     "help": "Application id.",
+     "min-value": 0,
+     "max-value": 4294967295,
+     "default": 0,
+     "multiple_values": false
+    }
+   },
+   "max_table_size_vdom": 0,
+   "max_table_size_global": 0,
+   "max_table_size_item": 0
+  },
+  "fabric-object": {
+   "name": "fabric-object",
+   "category": "unitary",
+   "type": "option",
+   "help": "Security Fabric global object setting.",
+   "options": [
+    {
+     "name": "enable",
+     "help": "Object is set as a security fabric-wide global object."
+    },
+    {
+     "name": "disable",
+     "help": "Object is local to this security fabric member."
+    }
+   ],
+   "default": "disable",
+   "multiple_values": false
+  }
+ },
+ "max_table_size_vdom": 1024,
+ "max_table_size_global": 0,
+ "max_table_size_item": 0,
+ "path": "firewall.service",
+ "q_type": 37,
+ "access_group": "fwgrp",
+ "object_range": "vdom"
+}
