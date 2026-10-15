@@ -66,13 +66,21 @@ namespace fortiapi {
     }
 
     // `base` is a literal API path ("cmdb/firewall/policy"); each key is one encoded path segment.
+    // A key that is exactly "." or ".." is sent as "%2E" / "%2E%2E": as a literal dot segment it would
+    // address the table or its parent instead of an object (RFC 3986 dot-segment removal). Dots inside
+    // a key ("10.0.0.0/24") stay readable.
     template<typename... Keys>
     std::string path(std::string_view base, const Keys&... keys) {
         std::string out(base);
         auto append = [&out](const auto& key) {
             out += '/';
             if constexpr (std::is_arithmetic_v<std::decay_t<decltype(key)>>) out += std::to_string(key);
-            else out += encode(std::string_view(key));
+            else {
+                std::string_view text(key);
+                if (text == ".") out += "%2E";
+                else if (text == "..") out += "%2E%2E";
+                else out += encode(text);
+            }
         };
         (append(keys), ...);
         return out;
@@ -225,6 +233,10 @@ namespace fortiapi {
         unsigned retries = 2;               // extra attempts for safe-to-retry failures
         std::chrono::milliseconds retry_backoff{500};
         std::function<void(const Exchange&)> on_exchange;
+        // Deepest nesting of objects and arrays accepted in a JSON reply; a deeper 2xx reply is a
+        // DecodeError. FortiOS replies nest well under 10 levels; the limit protects consumers that
+        // copy, dump or walk replies recursively from a hostile or broken peer.
+        std::size_t max_reply_depth = 256;
 
         // FORTIGATE_HOST (or FORTIGATE_GATEWAY_IP), FORTIGATE_ADMIN_HTTPS_PORT, FORTIGATE_API_KEY,
         // PATH_TO_FORTIGATE_CA_CERT, PATH_TO_FORTIGATE_SSL_CERT, FORTIGATE_SSL_CERT_PASS,
@@ -353,6 +365,29 @@ namespace fortiapi {
             response.headers.emplace_back(std::string(line.substr(0, colon)), std::string(value));
             return 0;
         }
+
+        // Parses a reply body. nlohmann's parser is iterative, but copying, dumping or comparing the
+        // resulting value recurses once per level, so a hostile body thousands of levels deep would
+        // overflow the stack later. The parser callback sees each object or array open with the number
+        // of enclosing containers, and parsing stops at the first one past `max_depth`: `too_deep` is
+        // set and the result is discarded, as it is for invalid JSON.
+        inline nlohmann::json parse_reply(std::string_view body, std::size_t max_depth, bool& too_deep) {
+            struct TooDeep {};
+            too_deep = false;
+            nlohmann::json::parser_callback_t limit =
+                    [max_depth](int depth, nlohmann::json::parse_event_t event, nlohmann::json&) {
+                        bool opens = event == nlohmann::json::parse_event_t::object_start ||
+                                     event == nlohmann::json::parse_event_t::array_start;
+                        if (opens && static_cast<std::size_t>(depth) >= max_depth) throw TooDeep{};
+                        return true;
+                    };
+            try {
+                return nlohmann::json::parse(body, limit, false);
+            } catch (const TooDeep&) {
+                too_deep = true;
+                return nlohmann::json(nlohmann::json::value_t::discarded);
+            }
+        }
     }  // namespace detail
 
     // Sends one HTTP request. Throws TransportError when no response arrived.
@@ -370,7 +405,8 @@ namespace fortiapi {
     };
 
     // libcurl transport: one easy handle per client (kept alive between requests, TLS sessions
-    // reused), serialized by a mutex.
+    // reused), serialized by a mutex. Reads share the kept-alive connection; each write (POST, PUT,
+    // DELETE) gets a new connection that is closed after it, so libcurl can never re-send it.
     class CurlTransport final : public Transport {
         struct GlobalInit {
             GlobalInit() { curl_global_init(CURL_GLOBAL_DEFAULT); }
@@ -434,15 +470,20 @@ namespace fortiapi {
             HttpResponse response;
             Transfer transfer{response, detail::BodyWriter(request, response)};
             char error[CURL_ERROR_SIZE] = {};
+            bool mutation = request.method != Method::Get;
             curl_slist* list = nullptr;
-            for (const auto& header: request.headers) {
+            auto add = [&list](const std::string& header) {
                 curl_slist* next = curl_slist_append(list, header.c_str());
                 if (!next) {
                     curl_slist_free_all(list);
                     throw TransportError("fortiapi: out of memory building headers", CURLE_OUT_OF_MEMORY, true);
                 }
                 list = next;
-            }
+            };
+            for (const auto& header: request.headers) add(header);
+            // No "Expect: 100-continue" on writes (libcurl adds it to bodies over 1 MiB): a 417 reply to
+            // it makes libcurl send the request again.
+            if (mutation) add("Expect:");
             Slist headers(list);
 
             curl_easy_setopt(curl, CURLOPT_URL, request.url.c_str());
@@ -467,6 +508,24 @@ namespace fortiapi {
                 curl_easy_setopt(curl, CURLOPT_KEYPASSWD, config_.client_cert_password.c_str());
             }
             if (resolve_) curl_easy_setopt(curl, CURLOPT_RESOLVE, resolve_.get());
+            // The path is the SDK's (path() encodes keys): never let libcurl remove dot segments.
+            curl_easy_setopt(curl, CURLOPT_PATH_AS_IS, 1L);
+
+            // A write is never sent twice. libcurl re-sends a request on its own in two cases
+            // (Curl_retry_request, lib/transfer.c, 8.5 through 8.7 at least): nothing came back on a
+            // *reused* connection (taken for a stale keep-alive connection), or an HTTP/2 stream was
+            // refused or answered HTTP_1_1_REQUIRED, which can happen on a new connection too. So a
+            // write never takes a connection from the pool (FRESH_CONNECT: bits.reuse stays false),
+            // never returns one to it (FORBID_REUSE: no write leaves a half-used connection behind),
+            // and speaks HTTP/1.1 (no stream-level retries). A dropped reply then ends the transfer
+            // with CURLE_GOT_NOTHING or a receive error, a TransportError with before_send() false,
+            // and Client never retries it. The cost is one TCP + TLS handshake per write; reads keep
+            // the kept-alive connection.
+            if (mutation) {
+                curl_easy_setopt(curl, CURLOPT_FRESH_CONNECT, 1L);
+                curl_easy_setopt(curl, CURLOPT_FORBID_REUSE, 1L);
+                curl_easy_setopt(curl, CURLOPT_HTTP_VERSION, static_cast<long>(CURL_HTTP_VERSION_1_1));
+            }
 
             switch (request.method) {
                 case Method::Get:
@@ -609,7 +668,9 @@ namespace fortiapi {
         [[nodiscard]] const Config& config() const { return config_; }
 
         // Sends a request and returns the parsed reply, including FortiOS error envelopes. Throws
-        // TransportError when no reply arrived and DecodeError for a successful non-JSON reply.
+        // TransportError when no reply arrived and DecodeError for a successful reply that is not JSON
+        // or nests deeper than Config::max_reply_depth. An error reply (HTTP >= 400) that is not
+        // usable JSON, for either reason, is returned as {"raw": body}.
         //
         // Retries: GET on transport errors and HTTP 429/502/503/504. POST/PUT/DELETE only when the
         // connection failed before the request was sent, never once it may have reached the device.
@@ -618,11 +679,17 @@ namespace fortiapi {
             HttpResponse response = send(make_request(method, api_path, query, body, "application/json"), true);
             Result result{response.status, nullptr};
             if (!response.body.empty()) {
-                result.body = nlohmann::json::parse(response.body, nullptr, false);
+                bool too_deep = false;
+                result.body = detail::parse_reply(response.body, config_.max_reply_depth, too_deep);
                 if (result.body.is_discarded()) {
-                    if (response.status >= 200 && response.status < 300)
+                    if (response.status >= 200 && response.status < 300) {
+                        if (too_deep)
+                            throw DecodeError(std::format("{} {}: HTTP {} with JSON nested deeper than {} levels",
+                                                          to_string(method), api_path, response.status,
+                                                          config_.max_reply_depth));
                         throw DecodeError(std::format("{} {}: HTTP {} with a non-JSON body", to_string(method),
                                                       api_path, response.status));
+                    }
                     result.body = {{"raw", response.body}};
                 }
             }
@@ -633,9 +700,10 @@ namespace fortiapi {
         // backup), with the same transport, authentication, TLS, timeouts and retry policy as exchange().
         // A transport error after part of the body reached the sink is not retried.
         //
-        // HTTP outside 2xx throws ApiError (its body parsed when it is JSON, else {"raw": ...}); a body
-        // over options.max_bytes throws SizeLimitError. The on_exchange record of a 2xx reply never
-        // carries the body: downloads can be secrets.
+        // HTTP outside 2xx throws ApiError (its body parsed when it is JSON within
+        // Config::max_reply_depth, else {"raw": ...}); a body over options.max_bytes throws
+        // SizeLimitError. The on_exchange record of a 2xx reply never carries the body: downloads can
+        // be secrets.
         Download download(Method method, std::string_view api_path, const Query& query, const nlohmann::json* body,
                           DownloadOptions options = {}) {
             HttpRequest request = make_request(method, api_path, query, body, "*/*");
@@ -661,7 +729,8 @@ namespace fortiapi {
             if (response.status < 200 || response.status >= 300) {
                 nlohmann::json error = nullptr;
                 if (!response.body.empty()) {
-                    error = nlohmann::json::parse(response.body, nullptr, false);
+                    bool too_deep = false;
+                    error = detail::parse_reply(response.body, config_.max_reply_depth, too_deep);
                     if (error.is_discarded()) error = {{"raw", response.body}};
                 }
                 throw ApiError(method, std::string(api_path), response.status, std::move(error));

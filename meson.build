@@ -12,6 +12,13 @@ forti_api_dep = declare_dependency(
     dependencies : curl_dep)
 meson.override_dependency('forti-api', forti_api_dep)
 
+# Everything below is for a standalone build. As a Meson subproject (consumers use forti_api_dep or
+# dependency('forti-api')), forti-api builds no example or tests and installs nothing: no headers
+# and no .pc next to the consumer's files.
+if meson.is_subproject()
+    subdir_done()
+endif
+
 # The vendored nlohmann/json installs under forti_api/third_party so it never collides with a
 # system nlohmann-json (/usr/include/nlohmann); forti-api.pc adds that directory to the include path.
 install_headers('include/forti_api.hpp')
@@ -41,6 +48,7 @@ if gtest_dep.found()
     test('unit', executable('unitTests',
                             'tests/unit/test_client.cpp',
                             'tests/unit/test_download.cpp',
+                            'tests/unit/test_transport.cpp',
                             'tests/unit/test_live_guard.cpp',
                             'tests/unit/test_field.cpp',
                             'tests/unit/test_endpoint.cpp',

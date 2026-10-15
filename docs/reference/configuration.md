@@ -26,6 +26,7 @@ with `fortiapi::set_default_client()`, or pass a `fortiapi::Client` to any call.
 | | `timeout` | 30 s | Whole-request timeout |
 | | `retries`, `retry_backoff` | 2, 500 ms | Read retries (see [Errors and retries](/guides/errors-and-retries)) |
 | | `on_exchange` | none | Callback receiving every request and reply, without credentials |
+| | `max_reply_depth` | 256 | Deepest nesting of objects and arrays accepted in a JSON reply (see [Errors and retries](/guides/errors-and-retries)) |
 
 TLS is always verified (peer and host name). `resolve_ip` helps when the certificate is issued for a
 name that does not resolve to the FortiGate from where the client runs (split-horizon DNS).

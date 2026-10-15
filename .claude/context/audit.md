@@ -134,3 +134,14 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   retry policy, bounded by `DownloadOptions::max_bytes` or streamed to a sink; on_exchange records
   omit successful download bodies. `Transport` gained defaulted fields only (source-compatible).
   The live backup test runs read-only (`FORTI_API_LIVE_READ_ONLY=1`) and keeps the backup in memory.
+- **Write safety (post-1.0, gaps G11-G14 from forti-cli/forti-mcp):** (G12) libcurl's
+  `Curl_retry_request` re-sent a write when a *reused* keep-alive connection returned nothing (seen by
+  forti-cli's integration suite: two POSTs, two policies). CurlTransport now gives every non-GET a
+  fresh connection that is not pooled afterwards (`FRESH_CONNECT`, `FORBID_REUSE`), HTTP/1.1 (the
+  HTTP/2 REFUSED_STREAM / HTTP_1_1_REQUIRED re-sends also apply to new connections) and no
+  `Expect: 100-continue` (its 417 path re-sends). Verified against the libcurl 8.5.0 and 8.7.1
+  sources and a loopback server (`tests/unit/test_transport.cpp`): one write on the wire,
+  `TransportError{before_send=false}`, reads still on one connection. (G13) `path()` encodes keys
+  "." / ".." and the transport sets `PATH_AS_IS`. (G14) `Config::max_reply_depth` (256) rejects
+  deeper 2xx replies with `DecodeError` via a parser callback. (G11) the example, tests and installs
+  are skipped when `meson.is_subproject()`.

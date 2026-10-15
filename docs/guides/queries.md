@@ -40,3 +40,9 @@ Object keys are always URL-encoded, so names with spaces or slashes work as-is:
 ```cpp
 auto subnet = firewall::Addresses::get("LAN 10.0.0.0/24");
 ```
+
+Each key is exactly one path segment. Dots inside a key stay readable (`10.0.0.0%2F24`), but a key
+that is exactly `.` or `..` is sent as `%2E` or `%2E%2E`: left literal, it would be a dot segment
+and address the table itself or its parent, so `Addresses::del("..")` could reach far more than one
+object. The transport sends paths exactly as built (libcurl never removes dot segments). Build paths
+for `Client` calls with `fortiapi::path(base, keys...)` to get the same encoding.

@@ -14,6 +14,11 @@ namespace {
         Client client(Config config = test_config()) { return Client(std::move(config), fake); }
     };
 
+    // {"results":[[...]]} with `levels` levels of objects and arrays in total.
+    std::string nested(std::size_t levels) {
+        return R"({"results":)" + std::string(levels - 1, '[') + std::string(levels - 1, ']') + "}";
+    }
+
 }  // namespace
 
 TEST(Encoding, KeepsUnreservedAndEscapesTheRest) {
@@ -27,6 +32,21 @@ TEST(Encoding, PathEncodesEachKeyAsOneSegment) {
     EXPECT_EQ(path("cmdb/firewall/address", "LAN 10.0.0.0/24"), "cmdb/firewall/address/LAN%2010.0.0.0%2F24");
     EXPECT_EQ(path("cmdb/firewall/policy", 42), "cmdb/firewall/policy/42");
     EXPECT_EQ(path("cmdb/system/api-user", "admin", "trusthost", 1), "cmdb/system/api-user/admin/trusthost/1");
+}
+
+// A key "." or ".." would be a dot segment (the table itself, or its parent); only whole segments are
+// affected, and encode() keeps '.' everywhere.
+TEST(Encoding, DotKeysAreNeverDotSegments) {
+    EXPECT_EQ(path("cmdb/firewall/address", "."), "cmdb/firewall/address/%2E");
+    EXPECT_EQ(path("cmdb/firewall/address", ".."), "cmdb/firewall/address/%2E%2E");
+    EXPECT_EQ(path("cmdb/firewall/address", std::string("..")), "cmdb/firewall/address/%2E%2E");
+    EXPECT_EQ(path("cmdb/system/api-user", "..", "trusthost", "."), "cmdb/system/api-user/%2E%2E/trusthost/%2E");
+    EXPECT_EQ(path("cmdb/firewall/address", "..."), "cmdb/firewall/address/...");
+    EXPECT_EQ(path("cmdb/firewall/address", ".hidden"), "cmdb/firewall/address/.hidden");
+    EXPECT_EQ(path("cmdb/firewall/address", "../x"), "cmdb/firewall/address/..%2Fx");
+    EXPECT_EQ(path("cmdb/firewall/address", "10.0.0.0/24"), "cmdb/firewall/address/10.0.0.0%2F24");
+    EXPECT_EQ(encode("."), ".");
+    EXPECT_EQ(encode(".."), "..");
 }
 
 TEST(QueryTest, EncodesParametersInOrder) {
@@ -100,6 +120,43 @@ TEST_F(ClientTest, SuccessHttpWithErrorStatusIsNotOk) {
 TEST_F(ClientTest, NonJsonSuccessIsDecodeError) {
     fake->reply(200, std::string("<html>login</html>"));
     EXPECT_THROW(client().get("monitor/system/status"), DecodeError);
+}
+
+// A hostile or broken peer cannot hand back a value deep enough to overflow the stack when the caller
+// copies or dumps it (nlohmann recurses per level there, not while parsing).
+TEST_F(ClientTest, DeeplyNestedSuccessIsDecodeError) {
+    fake->reply(200, nested(5000));
+    try {
+        client().get("monitor/system/status");
+        FAIL() << "expected DecodeError";
+    } catch (const DecodeError& error) {
+        EXPECT_STREQ(error.what(), "GET monitor/system/status: HTTP 200 with JSON nested deeper than 256 levels");
+    }
+}
+
+TEST_F(ClientTest, NestingUpToTheLimitIsAccepted) {
+    EXPECT_EQ(Config().max_reply_depth, 256u);
+    fake->reply(200, nested(256)).reply(200, nested(257));
+    auto body = client().get("monitor/x");
+    EXPECT_TRUE(body["results"].is_array());
+    EXPECT_THROW(client().get("monitor/x"), DecodeError);
+}
+
+TEST_F(ClientTest, TheNestingLimitIsConfigurable) {
+    auto config = test_config();
+    config.max_reply_depth = 3;
+    fake->reply(200, std::string(R"({"results":[{"name":"a"}]})"))
+        .reply(200, std::string(R"({"results":[{"members":[]}]})"));
+    EXPECT_EQ(client(config).get("cmdb/x")["results"][0]["name"], "a");
+    EXPECT_THROW(client(config).get("cmdb/x"), DecodeError);
+}
+
+TEST_F(ClientTest, DeeplyNestedErrorKeepsTheRawBody) {
+    fake->reply(500, nested(5000));
+    auto result = client().exchange(Method::Post, "cmdb/firewall/address");
+    EXPECT_EQ(result.http_status, 500);
+    EXPECT_EQ(result.body["raw"], nested(5000));
+    EXPECT_FALSE(result.ok());
 }
 
 TEST_F(ClientTest, NonJsonErrorKeepsTheRawBody) {
