@@ -124,6 +124,15 @@ TEST_F(EndpointTest, DeleteUsesTheEncodedKey) {
     EXPECT_EQ(url(0), base + "cmdb/firewall/address/a%2Fb");
 }
 
+// "." and ".." name one object, never the table or its parent.
+TEST_F(EndpointTest, DotKeysAddressOneObject) {
+    fake->reply(200, write_reply(".")).reply(404, envelope(json::array(), 404));
+    firewall::Addresses::del(".", {}, client);
+    EXPECT_FALSE(firewall::Addresses::contains("..", {}, client));
+    EXPECT_EQ(url(0), base + "cmdb/firewall/address/%2E");
+    EXPECT_EQ(url(1), base + "cmdb/firewall/address/%2E%2E");
+}
+
 TEST_F(EndpointTest, SingletonGetAndUpdate) {
     fake->reply(200, envelope(json::object({{"hostname", "fw"}, {"admin-sport", 8443}})));
     auto global = system::GlobalSettings::get({}, client);

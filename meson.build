@@ -41,6 +41,7 @@ if gtest_dep.found()
     test('unit', executable('unitTests',
                             'tests/unit/test_client.cpp',
                             'tests/unit/test_download.cpp',
+                            'tests/unit/test_transport.cpp',
                             'tests/unit/test_live_guard.cpp',
                             'tests/unit/test_field.cpp',
                             'tests/unit/test_endpoint.cpp',

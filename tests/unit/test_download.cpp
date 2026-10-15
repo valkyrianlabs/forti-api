@@ -128,6 +128,18 @@ TEST_P(DownloadTest, HttpErrorWithNonJsonBodyKeepsTheRawBody) {
     }
 }
 
+TEST_P(DownloadTest, ADeeplyNestedJsonErrorKeepsTheRawBody) {
+    std::string deep = std::string(5000, '[') + std::string(5000, ']');
+    fake->reply(400, deep);
+    try {
+        client().download("monitor/system/config/backup");
+        FAIL() << "expected ApiError";
+    } catch (const ApiError& error) {
+        EXPECT_EQ(error.http_status(), 400);
+        EXPECT_EQ(error.body()["raw"], deep);
+    }
+}
+
 TEST_P(DownloadTest, AJsonErrorEnvelopeWithHttp200IsReturnedRaw) {
     fake->reply(HttpResponse{200, R"({"status":"error"})", {{"Content-Type", "application/json"}}});
     auto download = client().download("monitor/x");
