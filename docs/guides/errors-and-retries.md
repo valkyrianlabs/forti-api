@@ -16,7 +16,7 @@ or stderr.
 |---|---|---|
 | `fortiapi::ApiError` | The device answered with an error (HTTP 400 or above, or an error envelope) | `http_status()`, `fortios_error()` (for example `-3`, entry not found), `body()` with the CLI messages, `not_found()` |
 | `fortiapi::TransportError` | No reply: DNS, connect, TLS, timeout | `code()` (libcurl code), `before_send()` |
-| `fortiapi::DecodeError` | A reply that does not match the expected shape | names the endpoint and attribute path |
+| `fortiapi::DecodeError` | A reply that does not match the expected shape, is not JSON, or nests deeper than `Config::max_reply_depth` | names the endpoint and attribute path |
 | `fortiapi::SizeLimitError` | A download exceeded `DownloadOptions::max_bytes` ([Downloads](/guides/downloads)) | `limit()`; never retried |
 
 ```cpp
@@ -38,8 +38,33 @@ try {
   backoff (`Config::retries`, `Config::retry_backoff`).
 - Writes (POST, PUT, DELETE) are retried only when the connection failed before anything was sent
   (DNS, connect or TLS handshake). Once a write may have reached the device it is never repeated.
+  When the connection drops after a write was sent and before the reply, the call throws a
+  `TransportError` whose `before_send()` is false: the outcome is unknown, so read the object back
+  before deciding what to do.
 - HTTP 401 is never retried: FortiOS locks the API out (HTTP 429) after repeated authentication
   failures.
+
+## Writes never reuse a connection
+
+Reads share one kept-alive connection per client. Each write opens a new connection and closes it
+afterwards. libcurl, on its own, sends a request again when a *reused* keep-alive connection turns
+out to be dead (nothing came back), which for a write that did reach the device means it runs twice:
+two policies created, a delete reported as "not found". On a new connection libcurl never repeats a
+request, and writes use HTTP/1.1 without `Expect: 100-continue`, which rules out libcurl's other,
+protocol-level re-sends.
+
+The cost is one TCP and TLS handshake per write, a few milliseconds on a LAN (TLS session resumption
+keeps it cheap). Reads are unaffected, and the read after a write goes back to the kept-alive
+connection.
+
+## Reply nesting limit
+
+A JSON reply nested deeper than `Config::max_reply_depth` levels of objects and arrays (default
+256) is refused with a `DecodeError` before anything is built from it; FortiOS replies nest well
+under 10 levels. The limit protects callers that copy, compare or print replies, operations that
+recurse once per level and would overflow the stack on a hostile body thousands of levels deep. An
+error reply (HTTP 400 or above) that is too deep is treated like one that is not JSON: `ApiError`
+and `exchange()` keep it as `{"raw": "<body>"}`.
 
 ## Partial creates
 

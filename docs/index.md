@@ -31,8 +31,9 @@ firewall::Addresses::update(address);   // sends {"comment": "managed by forti-a
   generated from recorded response shapes; everything else through `fortiapi::Monitor`.
 - **Exact writes**: fields know whether they are absent, read from the device, modified or
   cleared. An update sends only modified and cleared attributes.
-- **A careful transport**: timeouts, one kept-alive connection per client, URL-encoded object
-  names, typed errors, reads retried on throttling and configuration changes never retried.
+- **A careful transport**: timeouts, one kept-alive connection per client for reads, URL-encoded
+  object names, typed errors, reads retried on throttling and configuration changes never sent
+  twice.
 - **Raw downloads**: non-JSON replies such as configuration backups, with a size limit and
   optional streaming.
 - **Domain helpers**: DNS filter categories, push threat feeds, schedule days, service port

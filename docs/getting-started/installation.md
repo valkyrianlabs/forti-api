@@ -52,7 +52,9 @@ system. Build with `c++ -std=c++23 app.cpp $(pkg-config --cflags --libs forti-ap
 
 Copy `include/` and `third_party/nlohmann/include/` from the repository into your project, add
 both to the include path and link libcurl (`-lcurl`). Meson projects can also use forti-api as a
-subproject: `dependency('forti-api')` resolves to it.
+subproject: `dependency('forti-api')` resolves to it. As a subproject, forti-api builds no example
+or tests and installs nothing, so `meson install` of your project does not install forti-api's
+headers or `forti-api.pc`.
 
 ## From source
 

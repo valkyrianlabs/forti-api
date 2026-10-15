@@ -7,7 +7,7 @@ Format: the first line is "# <release title>" WITHOUT a version number (vlr adds
 Everything after the title is the Markdown release body. Describe the resulting behavior
 for users and operators; keep it representative of what actually ships.
 -->
-# Raw downloads and configuration backups
+# Raw downloads, configuration backups and write safety
 
 forti-api can now fetch endpoints that answer with a file instead of JSON, most importantly the
 FortiOS configuration backup, so tools can take a backup before a critical change.
@@ -36,3 +36,29 @@ owner-only permissions, never log them, and never put them in shared temporary d
 
 Validated against FortiOS 7.4.8: `GET monitor/system/config/backup?scope=global` returns the
 configuration as `application/octet-stream`.
+
+## Writes are never sent twice
+
+libcurl re-sends a request on its own when a reused keep-alive connection turns out to be dead.
+For a write that had already reached the FortiGate, that meant running it twice: a second firewall
+policy with a new id, a delete reported as "not found", a monitor action executed twice. forti-api
+now gives every write (POST, PUT, DELETE) its own new connection, which libcurl never re-sends on,
+and closes it afterwards. When the connection drops before the reply, the call throws
+`TransportError` with `before_send() == false`: the write may or may not have happened, and it is
+never repeated. Each write pays one TCP and TLS handshake (a few milliseconds on a LAN); reads keep
+sharing one kept-alive connection.
+
+## Safer object keys and replies
+
+- A key that is exactly `.` or `..` is sent as `%2E` / `%2E%2E`, and paths go out exactly as built.
+  Before, libcurl removed such dot segments, so `Addresses::del("..")` addressed a different path
+  than the object named.
+- JSON replies nested deeper than `Config::max_reply_depth` (256 by default) are refused with a
+  `DecodeError`, so a hostile or broken peer cannot make later copies or dumps of the reply
+  overflow the stack.
+
+## Meson subprojects
+
+Used as a Meson subproject, forti-api no longer builds its example and tests and no longer installs
+its headers and `forti-api.pc` alongside your project. `dependency('forti-api')` and
+`forti_api_dep` work as before.

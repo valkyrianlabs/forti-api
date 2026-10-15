@@ -20,8 +20,9 @@ set -a; . ./.env; set +a; meson test -C build --suite live -v     # against a re
 The unit suite uses a scripted transport and needs no device: transport behavior (encoding,
 errors, the retry policy, raw downloads with limits and sinks), field states and serialization, the endpoint templates and the helpers.
 CI runs it on Linux and macOS and under AddressSanitizer and UndefinedBehaviorSanitizer. The
-libcurl transport's header and body handling is tested against a one-shot HTTP server on
-127.0.0.1, without any other network access.
+libcurl transport is tested against local HTTP servers on 127.0.0.1, without any other network
+access: header and body handling, connection reuse for reads, a connection that drops after a write
+arrived (the write must reach the server exactly once), and paths sent verbatim.
 
 ## Live tests
 
