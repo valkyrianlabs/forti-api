@@ -37,6 +37,13 @@ sudo apt update
 sudo apt install -y libforti-api-dev
 ```
 
+The packages depend on `valkyrianlabs-archive-keyring`, which installs the repository key at
+`/usr/share/keyrings/valkyrianlabs.gpg` and keeps it current through normal upgrades (for example when its
+expiry changes). When the key downloaded above is unmodified, the package replaces it with a symlink to the
+packaged key, so the source line above keeps working and you never need to download the key again. Removing
+the package turns the symlink back into a plain copy. Signing key fingerprint:
+`494D 71A1 EEDD F87B D48E  5048 6D64 CB7B DFC3 0EC6`.
+
 The headers install to `/usr/include/forti_api`, the bundled nlohmann/json to
 `/usr/include/forti_api/third_party` (never clashing with a system nlohmann-json), and
 `forti-api.pc` to `/usr/share/pkgconfig`:
