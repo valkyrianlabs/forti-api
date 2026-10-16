@@ -48,3 +48,37 @@ TLS is always verified (peer and host name). There is no option to turn verifica
 
 `resolve_ip` helps when the certificate is issued for a name that does not resolve to the FortiGate
 from where the client runs (split-horizon DNS).
+
+## Trust on first use
+
+A FortiGate with a self-signed or factory certificate fails verification until you say what to trust.
+`fortiapi::probe_tls(config)` (`forti_api/tls.hpp`) shows you the certificate first, so a person can
+decide:
+
+```cpp
+#include <forti_api/tls.hpp>
+
+fortiapi::TlsProbe probe = fortiapi::probe_tls(config);
+if (!probe.trusted) {
+    // probe.chain[0] is the device's certificate (PEM): show its fingerprint and names, and when the
+    // person accepts it, save it and set config.ca_bundle to that file.
+}
+```
+
+`probe_tls` connects, completes the TLS handshake and stops. It never sends an HTTP request and never
+uses the API key or the client certificate. The first handshake verifies exactly as every request
+does. Only when that handshake rejects the certificate does a second one run with verification off,
+to collect the chain for inspection. That connection carries no data and is closed at once.
+Connection failures (DNS, connect, timeout) throw `TransportError`, as requests do.
+
+| Field | Meaning |
+|---|---|
+| `trusted` | the chain verified for `host` against the CA bundle (or the system trust store) |
+| `verify_code`, `verify_error` | libcurl's code and message for the rejected handshake |
+| `chain` | the certificates as presented, PEM, the device's own first |
+| `local_ip` | this side's address of the connection: what the device sees before any NAT, for example for a trusted host |
+| `peer_ip` | the address connected to: the host's, or `resolve_ip` |
+
+A pinned device certificate works as the CA bundle on its own: libcurl accepts a trust anchor that is
+not a root. The host name is still verified, so `host` must be a name the certificate carries. A
+factory certificate names the serial number: use it as `host` and the address as `resolve_ip`.

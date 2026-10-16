@@ -8,6 +8,7 @@
 #define FORTI_API_HPP
 
 #include "forti_api/client.hpp"
+#include "forti_api/tls.hpp"
 #include "forti_api/endpoint.hpp"
 #include "forti_api/field.hpp"
 #include "forti_api/monitor.hpp"

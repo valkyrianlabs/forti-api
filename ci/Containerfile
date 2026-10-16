@@ -18,7 +18,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # this container may use it, and container root is an unprivileged subordinate uid on the host.
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      ca-certificates curl git gnupg sudo \
+      ca-certificates curl git gnupg openssl sudo \
       build-essential meson ninja-build pkgconf libcurl4-openssl-dev libgtest-dev \
       dpkg-dev debhelper \
  && echo 'ALL ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ci \
