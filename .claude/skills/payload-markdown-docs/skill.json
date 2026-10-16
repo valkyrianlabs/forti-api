@@ -1,0 +1,10 @@
+{
+  "docsRoot": "./docs",
+  "name": "payload-markdown-docs",
+  "package": "payload-markdown-docs",
+  "packageManager": "npm",
+  "sha256": "303dc98128487895475d7bc29cf435a59cedf48706cdd875aeefdc4404f0025e",
+  "source_sha256": "dad473cd6b1d1d195d986c1bc5f08d7d17a6bf1f107f742d07199cf8acc027bb",
+  "variant": "claude",
+  "version": "1.2.0"
+}

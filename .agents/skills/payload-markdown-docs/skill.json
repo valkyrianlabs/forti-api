@@ -1,0 +1,10 @@
+{
+  "docsRoot": "./docs",
+  "name": "payload-markdown-docs",
+  "package": "payload-markdown-docs",
+  "packageManager": "npm",
+  "sha256": "8e0e8db868f1dc501eb2fa86b89ca479b3503616185d1635fe1a470016832b73",
+  "source_sha256": "0d756d8839eeddef956364b308b1408e4a9c2bbd635bd1173723b9eb221b6827",
+  "variant": "codex",
+  "version": "1.2.0"
+}
