@@ -129,6 +129,7 @@ namespace {
     Config config_for(unsigned short port) {
         Config config;
         config.host = "localhost";
+        config.resolve_ip = "127.0.0.1";   // localhost may resolve to ::1 first (Linux), and s_server listens on both
         config.port = port;
         config.connect_timeout = std::chrono::milliseconds(3000);
         config.api_key = "never-sent";
