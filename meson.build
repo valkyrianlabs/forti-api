@@ -53,6 +53,7 @@ if gtest_dep.found()
                             'tests/unit/test_field.cpp',
                             'tests/unit/test_endpoint.cpp',
                             'tests/unit/test_helpers.cpp',
+                            'tests/unit/test_tls.cpp',
                             dependencies : [forti_api_dep, gtest_dep],
                             implicit_include_directories : false),
          suite : 'unit')
