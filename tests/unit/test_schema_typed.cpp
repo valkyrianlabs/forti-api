@@ -1,7 +1,11 @@
-// fortiapi::schema against the typed models it describes, endpoint by endpoint. Compiled
-// SCHEMA_SHARDS times with -DSCHEMA_SHARD=k: each translation unit instantiates the typed models of the
-// endpoints whose path hashes to shard k (the whole registry in one TU needs several GB of compiler
-// memory). For every endpoint:
+// fortiapi::schema against the typed models it describes, endpoint by endpoint. Instantiating a typed
+// model is what the runtime schema exists to avoid, so this TU is built in one of two ways:
+//   -DSCHEMA_SAMPLE                            the unit suite: a fixed sample of endpoints that covers
+//                                              every attribute kind, key type and result shape
+//   -DSCHEMA_SHARD=k -DSCHEMA_SHARDS=n         -Dexhaustive_tests=true: every endpoint, the ones whose
+//                                              path hashes to shard k (all of them in one TU would
+//                                              need ~6 GB of compiler memory)
+// For every endpoint selected:
 //   - the tables describe the generated struct exactly: keys in visit() order, C++ types, reset values,
 //     read-only flags, nested types, the endpoint kind, the table key and its type;
 //   - on generated inputs (valid values, numbers as text, empty strings, wrong types, invalid nested
@@ -11,17 +15,41 @@
 // The typed side of create_body / update_body is what a program writes with the typed API: decode
 // each attribute with from_json<V>, assign it, clear the cleared ones, and to_json the object.
 #include <gtest/gtest.h>
-#include <forti_api/gen/registry.hpp>
 #include <forti_api/schema.hpp>
 
+#ifdef SCHEMA_SAMPLE
+#include <forti_api/gen/emailfilter/options.hpp>
+#include <forti_api/gen/extension-controller/fortigate_profile.hpp>
+#include <forti_api/gen/firewall/address.hpp>
+#include <forti_api/gen/firewall/vendor_mac.hpp>
+#include <forti_api/gen/ips/decoder.hpp>
+#include <forti_api/gen/ips/rule_settings.hpp>
+#include <forti_api/gen/monitor/endpoint_control/ems/status_summary.hpp>
+#include <forti_api/gen/monitor/firewall/address6_dynamic.hpp>
+#include <forti_api/gen/monitor/firewall/address_dynamic.hpp>
+#include <forti_api/gen/monitor/firewall/local_in.hpp>
+#include <forti_api/gen/monitor/system/available_certificates.hpp>
+#include <forti_api/gen/monitor/system/available_interfaces/meta.hpp>
+#include <forti_api/gen/monitor/system/csf.hpp>
+#include <forti_api/gen/monitor/system/wan_lan_ip_conflict.hpp>
+#include <forti_api/gen/monitor/utm/application_categories.hpp>
+#include <forti_api/gen/monitor/web_ui/extend_session.hpp>
+#include <forti_api/gen/monitor/web_ui/navbar_dependencies.hpp>
+#include <forti_api/gen/monitor/web_ui/object_urls.hpp>
+#else
+#include <forti_api/gen/registry.hpp>
+#endif
+
+#include <algorithm>
+#include <iterator>
 #include <map>
 #include <set>
 #include <string>
 #include <type_traits>
 #include <vector>
 
-#ifndef SCHEMA_SHARD
-#error "SCHEMA_SHARD and SCHEMA_SHARDS must be defined"
+#if !defined(SCHEMA_SAMPLE) && !defined(SCHEMA_SHARD)
+#error "define SCHEMA_SAMPLE, or SCHEMA_SHARD and SCHEMA_SHARDS"
 #endif
 
 using nlohmann::json;
@@ -30,6 +58,42 @@ using fortiapi::detail::Visitable;
 
 namespace {
 
+#ifdef SCHEMA_SAMPLE
+    // The smallest endpoints that together cover every kind the tables describe (string and numeric
+    // table keys, a singleton, nested objects, tables of entries and of references, read-only attributes
+    // and tables, booleans, int64, lists of strings and of JSON, JSON values, maps of strings and of
+    // objects, monitor results that are objects, lists and JSON), plus firewall/address as a typical
+    // object. Only their headers are included, so this TU stays cheap.
+    template<typename F>
+    void for_each_endpoint(F&& f) {
+        f.template operator()<fortiapi::firewall::Addresses>();
+        f.template operator()<fortiapi::ips::RuleSettingses>();
+        f.template operator()<fortiapi::emailfilter::OptionsSettings>();
+        f.template operator()<fortiapi::extension_controller::FortigateProfiles>();
+        f.template operator()<fortiapi::ips::Decoders>();
+        f.template operator()<fortiapi::firewall::VendorMacs>();
+    }
+
+    template<typename F>
+    void for_each_monitor(F&& f) {
+        f.template operator()<fortiapi::monitor::system::WanLanIpConflict>();
+        f.template operator()<fortiapi::monitor::web_ui::ExtendSession>();
+        f.template operator()<fortiapi::monitor::system::AvailableInterfacesMeta>();
+        f.template operator()<fortiapi::monitor::web_ui::ObjectUrls>();
+        f.template operator()<fortiapi::monitor::system::AvailableCertificates>();
+        f.template operator()<fortiapi::monitor::web_ui::NavbarDependencies>();
+        f.template operator()<fortiapi::monitor::firewall::LocalIn>();
+        f.template operator()<fortiapi::monitor::utm::ApplicationCategories>();
+        f.template operator()<fortiapi::monitor::firewall::AddressDynamic>();
+        f.template operator()<fortiapi::monitor::endpoint_control::EmsStatusSummary>();
+        f.template operator()<fortiapi::monitor::firewall::Address6Dynamic>();
+        f.template operator()<fortiapi::monitor::system::Csf>();
+    }
+
+    constexpr std::size_t sample_size = 18;
+    constexpr bool selected(std::string_view) { return true; }
+#define SCHEMA_TEST Sample
+#else
     constexpr unsigned fnv1a(std::string_view text) {
         unsigned hash = 2166136261u;
         for (char c: text) {
@@ -39,7 +103,13 @@ namespace {
         return hash;
     }
 
-    constexpr bool in_shard(std::string_view path) { return fnv1a(path) % SCHEMA_SHARDS == SCHEMA_SHARD; }
+    constexpr bool selected(std::string_view path) { return fnv1a(path) % SCHEMA_SHARDS == SCHEMA_SHARD; }
+#define SCHEMA_CONCAT2(a, b) a##b
+#define SCHEMA_CONCAT(a, b) SCHEMA_CONCAT2(a, b)
+#define SCHEMA_TEST SCHEMA_CONCAT(Shard, SCHEMA_SHARD)
+    using fortiapi::gen::for_each_endpoint;
+    using fortiapi::gen::for_each_monitor;
+#endif
 
     template<typename T> struct is_vector : std::false_type {};
     template<typename T> struct is_vector<std::vector<T>> : std::true_type {};
@@ -432,20 +502,19 @@ namespace {
         }
     }
 
+#ifndef SCHEMA_SAMPLE
     // The registry path of a descriptor: Table::path, or the monitor Spec::path (relative to monitor/).
     std::string_view registry_path(const schema::Endpoint& ep) {
         return ep.kind == schema::EndpointKind::monitor ? ep.path.substr(std::string_view("monitor/").size()) : ep.path;
     }
+#endif
 
 }  // namespace
 
-#define SCHEMA_CONCAT2(a, b) a##b
-#define SCHEMA_CONCAT(a, b) SCHEMA_CONCAT2(a, b)
-
-TEST(SchemaDifferential, SCHEMA_CONCAT(Shard, SCHEMA_SHARD)) {
+TEST(SchemaDifferential, SCHEMA_TEST) {
     std::size_t endpoints = 0, inputs_checked = 0;
-    fortiapi::gen::for_each_endpoint([&]<typename E>() {
-        if constexpr (in_shard(E::path)) {
+    for_each_endpoint([&]<typename E>() {
+        if constexpr (selected(E::path)) {
             SCOPED_TRACE(std::string(E::path));
             const schema::Endpoint* ep = schema::find(E::path);
             ASSERT_NE(ep, nullptr) << "no descriptor for " << E::path;
@@ -453,8 +522,8 @@ TEST(SchemaDifferential, SCHEMA_CONCAT(Shard, SCHEMA_SHARD)) {
             check_cmdb<E>(*ep, inputs_checked);
         }
     });
-    fortiapi::gen::for_each_monitor([&]<typename M>() {
-        if constexpr (in_shard(M::path)) {
+    for_each_monitor([&]<typename M>() {
+        if constexpr (selected(M::path)) {
             std::string path = fortiapi::Monitor::path(M::path);
             SCOPED_TRACE(path);
             const schema::Endpoint* ep = schema::find(path);
@@ -463,12 +532,15 @@ TEST(SchemaDifferential, SCHEMA_CONCAT(Shard, SCHEMA_SHARD)) {
             check_monitor<M>(*ep, inputs_checked);
         }
     });
+#ifdef SCHEMA_SAMPLE
+    EXPECT_EQ(endpoints, sample_size);
+#else
     // Every descriptor in this shard was matched by a typed endpoint, and nothing is described twice.
     std::size_t described = 0;
-    for (const auto& ep: schema::endpoints()) described += in_shard(registry_path(ep));
+    for (const auto& ep: schema::endpoints()) described += selected(registry_path(ep));
     EXPECT_EQ(described, endpoints);
-    if (SCHEMA_SHARD == 0)
-        EXPECT_EQ(schema::endpoints().size(), fortiapi::gen::endpoint_count + fortiapi::gen::monitor_count);
-    std::cout << "shard " << SCHEMA_SHARD << "/" << SCHEMA_SHARDS << ": " << endpoints << " endpoints, "
-              << inputs_checked << " inputs\n";
+    EXPECT_EQ(schema::endpoints().size(), fortiapi::gen::endpoint_count + fortiapi::gen::monitor_count);
+#endif
+    std::cout << ::testing::UnitTest::GetInstance()->current_test_info()->name() << ": " << endpoints
+              << " endpoints, " << inputs_checked << " inputs\n";
 }

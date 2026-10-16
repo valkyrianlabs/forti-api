@@ -79,7 +79,7 @@ meson test -C build --suite unit
 The live suite runs against a real FortiGate and is opt-in (`-Dlive_tests=true`, suite `live`).
 It only ever writes `forti-api-test-*` objects in an allowlist of collections (enforced in the
 transport before a request is sent), always cleans up, and checks the device's config-change log
-afterwards; the rules are in [AGENTS.md](AGENTS.md). CI compiles it but never runs it. Configure
+afterwards; the rules are in [AGENTS.md](AGENTS.md). CI never runs it (an on-demand workflow compiles it). Configure
 `.env` from `.env.example` (`tools/gen-certs.sh <gateway IP>...` creates test certificates), then:
 
 ```bash

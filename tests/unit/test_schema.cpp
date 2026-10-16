@@ -1,6 +1,6 @@
 // fortiapi::schema on its own: the tables' metadata and lookups, and the documented behavior of
 // decode / create_body / update_body / diff / key_of / object_path / check_values on real endpoints.
-// This TU includes no typed model (test_schema_shard.cpp compares the two, endpoint by endpoint).
+// This TU includes no typed model (test_schema_typed.cpp compares the two, endpoint by endpoint).
 #include <gtest/gtest.h>
 #include <forti_api/schema.hpp>
 

@@ -1,0 +1,38 @@
+# The expensive build, on demand and weekly, never on pull requests or pushes: it compiles the typed
+# model of every generated endpoint. It builds the live FortiGate suite (compiled only, never run: CI has
+# no device; AGENTS.md) and the full comparison of the runtime schema with every typed model, and runs
+# the unit suite, which then includes that comparison (10 shards). CI's unit suite compares a sample.
+#
+# One build in the job, on the self-hosted VPS runner inside the CI container (ci/run-ci). The shards
+# peak at ~2.3 GB each with GCC, hence the larger per-job budget for ci/build-jobs.
+name: Exhaustive build
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * 1"   # Mondays, 05:17 UTC
+
+permissions:
+  contents: read
+
+concurrency:
+  group: exhaustive-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exhaustive:
+    name: Live suite and full schema comparison (Ubuntu 24.04)
+    runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Build every typed model and run the unit suite
+        run: |
+          meson setup build/exhaustive -Dtests=enabled -Dlive_tests=true -Dexhaustive_tests=true -Dwerror=true \
+            --buildtype=debug -Ddebug=false
+          meson compile -C build/exhaustive -j "$(ci/build-jobs 2400)"
+          test "$(ninja -C build/exhaustive -n | tail -n 1)" = "ninja: no work to do."
+          meson test -C build/exhaustive --no-rebuild --suite unit --print-errorlogs

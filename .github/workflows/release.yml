@@ -3,7 +3,7 @@
 #   vlr cut patch|minor|major|X.Y.Z --push      (locally) -> pushes vX.Y.Z -> this workflow
 #
 # build ─▶ homebrew-check ─▶ publish-apt ─▶ github-release ─▶ homebrew-tap ─▶ finalize
-#                                       └──▶ docs (independent of finalize)
+# tests ───────────────────┘             └──▶ docs (independent of finalize)
 #
 # Every job runs on the self-hosted VPS runner, every step in the disposable CI container
 # (ci/run-ci, rootless Podman). `vlr prepare` is deterministic, so later jobs re-run it and get
@@ -120,6 +120,25 @@ jobs:
           path: release
           if-no-files-found: error
 
+  # The release build of the unit suite: -O3, tested as built (one build in this job). The package itself
+  # is headers, built tests-disabled.
+  tests:
+    name: Unit tests at -O3
+    runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
+    defaults:
+      run:
+        shell: bash ./ci/run-ci bash -euo pipefail {0}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      - name: Build -O3 and run the unit tests
+        run: |
+          meson setup build/release --buildtype=release -Dtests=enabled -Dlive_tests=false
+          meson compile -C build/release -j "$(ci/build-jobs)"
+          meson test -C build/release --no-rebuild --suite unit --print-errorlogs
+
   homebrew-check:
     name: Homebrew formula install (macOS)
     runs-on: macos-latest
@@ -143,7 +162,7 @@ jobs:
   publish-apt:
     name: Publish to the ValkyrianLabs APT repository
     runs-on: [self-hosted, Linux, X64, ubuntu-latest-lts]
-    needs: [build, homebrew-check]
+    needs: [build, tests, homebrew-check]
     if: needs.build.outputs.publish == 'true'
     environment: Production
     defaults:

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Prints how many compile jobs this machine can run at once: every core, unless memory runs out
+# first (1 GiB is kept back for everything else).
+#   ci/build-jobs          the default build: the largest TU (GCC 13, -O0 with ASan) peaks at ~1.15 GB
+#   ci/build-jobs MB       another budget per job, e.g. 2400 for -Dexhaustive_tests / -Dlive_tests,
+#                          whose shards of typed models peak at ~2.3 GB (GCC 13, -O0)
+# Linux reads the container's cgroup limit (ci/run-ci sets one), falling back to MemTotal; macOS
+# reads hw.memsize.
+set -euo pipefail
+per_job=$((${1:-1200} * 1024 * 1024))
+if [ "$(uname)" = Darwin ]; then
+  cores=$(sysctl -n hw.ncpu)
+  memory=$(sysctl -n hw.memsize)
+else
+  cores=$(nproc)
+  memory=$(cat /sys/fs/cgroup/memory.max 2>/dev/null || echo max)
+  if [ "$memory" = max ]; then memory=$(( $(awk '/^MemTotal:/ {print $2}' /proc/meminfo) * 1024 )); fi
+fi
+reserve=$((1024 * 1024 * 1024))   # the linker, meson, dpkg and test runners alongside the compilers
+jobs=$(((memory - reserve) / per_job))
+if [ "$jobs" -gt "$cores" ]; then jobs=$cores; fi
+if [ "$jobs" -lt 1 ]; then jobs=1; fi
+echo "$jobs"
+echo "build-jobs: $cores cores, $((memory / 1024 / 1024 / 1024)) GiB -> $jobs jobs" >&2

@@ -160,7 +160,34 @@ reap pod
 name="ci-${GITHUB_RUN_ID:-local}-${GITHUB_JOB:-job}-$$"
 name="${name//[^a-zA-Z0-9_.-]/-}"
 pod=""
-limits=(--memory "${CI_MEMORY:-12g}" --pids-limit 16384 --label "ci.run-ci.pid=$$")
+# Memory: CI_MEMORY, else what the cgroups above this runner really allow. A runner usually sits in
+# a slice with MemoryHigh/MemoryMax (a shared CI pool), and a container sized past that slice's
+# MemoryHigh is not OOM-killed: the kernel throttles the whole slice with reclaim instead, and without
+# swap it can only evict file pages, so compilers and the runner itself thrash in the kernel. So the
+# container gets the tightest memory.high/memory.max on the way to the root, minus 1 GiB for the
+# runner and podman, capped at three quarters of the host's RAM (at least 2 GiB).
+tightest_cgroup_limit() {
+  local path dir value min=""
+  path="$(awk -F: '/^0::/ {print $3}' /proc/self/cgroup 2>/dev/null || true)"
+  dir="/sys/fs/cgroup${path}"
+  while [ -n "$path" ] && [ -d "$dir" ]; do
+    for value in "$(cat "$dir/memory.high" 2>/dev/null || echo max)" "$(cat "$dir/memory.max" 2>/dev/null || echo max)"; do
+      if [ "$value" != max ] && { [ -z "$min" ] || [ "$value" -lt "$min" ]; }; then min="$value"; fi
+    done
+    [ "$dir" = /sys/fs/cgroup ] && break
+    dir="$(dirname "$dir")"
+  done
+  echo "$min"
+}
+host_memory="$(awk '/^MemTotal:/ {print int($2 * 1024 * 0.75)}' /proc/meminfo 2>/dev/null || echo 12884901888)"
+default_memory="$host_memory"
+cgroup_memory="$(tightest_cgroup_limit)"
+if [ -n "$cgroup_memory" ]; then
+  cgroup_memory=$((cgroup_memory - 1073741824))
+  if [ "$cgroup_memory" -lt "$default_memory" ]; then default_memory="$cgroup_memory"; fi
+fi
+if [ "$default_memory" -lt 2147483648 ]; then default_memory=2147483648; fi
+limits=(--memory "${CI_MEMORY:-${default_memory}b}" --pids-limit 16384 --label "ci.run-ci.pid=$$")
 
 # shellcheck disable=SC2317 # trap handler
 cleanup() {

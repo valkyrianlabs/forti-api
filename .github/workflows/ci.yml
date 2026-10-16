@@ -34,24 +34,22 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      # The live suite is compiled but never run here (AGENTS.md): only the network-free unit suite.
-      - name: Build (warnings are errors) and run the unit tests
+      # One build per job: the network-free unit suite at -O0 without debug info, under AddressSanitizer
+      # and UndefinedBehaviorSanitizer, on every core memory allows (ci/build-jobs). The live suite is
+      # never built here (exhaustive.yml builds it on demand); the release workflow tests an -O3 build.
+      # The tests run what was built: the check fails if anything would still compile.
+      - name: Build (warnings are errors, ASan/UBSan) and run the unit tests
         run: |
-          meson setup build/ci -Dtests=enabled -Dlive_tests=true -Dwerror=true
-          # A TU including every generated header needs ~1.5 GB with GCC; cap parallelism so the
-          # shared runner's container memory is never exhausted.
-          meson compile -C build/ci -j 4
-          meson test -C build/ci --suite unit --print-errorlogs
-
-      - name: Unit tests under AddressSanitizer + UndefinedBehaviorSanitizer
-        run: |
-          meson setup build/asan -Dtests=enabled -Db_sanitize=address,undefined -Db_lundef=false
-          meson compile -C build/asan -j 4
-          meson test -C build/asan --suite unit --print-errorlogs
+          meson setup build/ci -Dtests=enabled -Dlive_tests=false -Dwerror=true -Db_sanitize=address,undefined \
+            -Db_lundef=false --buildtype=debug -Ddebug=false
+          meson compile -C build/ci -j "$(ci/build-jobs)"
+          test "$(ninja -C build/ci -n | tail -n 1)" = "ninja: no work to do."
+          meson test -C build/ci --no-rebuild --suite unit --print-errorlogs
 
       - name: Generated headers are up to date
         run: python3 tools/fortios/fortios.py check
 
+      # The hand-written headers; the generated ones are covered by the check above and the build.
       - name: Public headers compile standalone
         run: ci/check-headers.sh
 
@@ -118,22 +116,23 @@ jobs:
           '
 
   macos:
-    name: Build and Homebrew formula (macOS)
+    name: Build and tests (macOS)
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        with:
-          fetch-depth: 0
 
       - name: Install Homebrew packages
         run: brew install meson ninja googletest
 
-      - name: Build and install
+      # One build: the unit suite at -O0 without debug info (Apple clang), tested and installed as built.
+      - name: Build, test and install
         run: |
-          meson setup build -Dtests=enabled -Dlive_tests=true -Dwerror=true --prefix "$RUNNER_TEMP/prefix"
-          meson compile -C build
-          meson test -C build --suite unit --print-errorlogs
-          meson install -C build
+          meson setup build -Dtests=enabled -Dlive_tests=false -Dwerror=true --buildtype=debug -Ddebug=false \
+            --prefix "$RUNNER_TEMP/prefix"
+          meson compile -C build -j "$(ci/build-jobs)"
+          test "$(ninja -C build -n | tail -n 1)" = "ninja: no work to do."
+          meson test -C build --no-rebuild --suite unit --print-errorlogs
+          meson install -C build --no-rebuild
 
       - name: Build a consumer against the installed headers
         run: |
@@ -141,6 +140,18 @@ jobs:
           # shellcheck disable=SC2046  # pkg-config output is a list of flags
           c++ -std=c++23 -Wall -Wextra -Werror ci/consumer.cpp $(pkg-config --cflags --libs forti-api) -o consumer
           ./consumer
+
+  # The formula's own build (headers and the example, no tests), in its own job: one build per job.
+  homebrew:
+    name: Homebrew formula (macOS)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - name: Install Homebrew packages
+        run: brew install meson ninja
 
       # vl-release from its pinned release tag (pure Python, no install needed).
       - name: vl-release
