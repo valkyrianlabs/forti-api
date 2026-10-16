@@ -129,6 +129,12 @@ Non-JSON replies come back as raw bytes with a size limit (64 MiB by default) or
 `Monitor::download("system/config/backup", Query().set("scope", "global"))` returns the configuration
 backup, a secret to store with owner-only permissions and never log ([docs/guides/downloads.md](docs/guides/downloads.md)).
 
+For endpoints chosen at run time (a CLI, an MCP server), `forti_api/schema.hpp` describes every
+generated endpoint as data and decodes, validates and builds request bodies for any of them in plain
+functions, with the typed models' exact behavior and without compiling them
+([docs/guides/runtime-schema.md](docs/guides/runtime-schema.md)):
+`schema::create_body(*schema::find("cmdb/firewall/address")->type, object)`.
+
 Helpers on top of the generated endpoints:
 
 - **DNS filter** (`forti_api/dnsfilter.hpp`): `block_category`, `monitor_category`, `allow_category`,
