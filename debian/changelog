@@ -1,3 +1,13 @@
+forti-api (1.0.2-1) unstable; urgency=medium
+
+  * Documentation: the docs package (docs set forti-api) is rewritten in
+    Payload Markdown directives (TOCs, tabs, steps, callouts, cards, badges,
+    buttons), with new summary tables for endpoint operations, install
+    locations, retries, download calls and filter expressions. The headers and
+    the package contents are unchanged.
+
+ -- Cooper Larson <cooper@valkyrianlabs.com>  Fri, 16 Oct 2026 02:01:43 +0000
+
 forti-api (1.0.1-1) unstable; urgency=medium
 
   * Add Client::download and Monitor::download: raw (non-JSON) reply bodies,
