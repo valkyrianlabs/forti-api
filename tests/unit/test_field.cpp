@@ -256,3 +256,28 @@ TEST(Serialize, StringMapsRoundTrip) {
     auto vec = fortiapi::from_json<std::vector<Counter>>(json::array({json::object({{"bytes", 1}})}));
     EXPECT_EQ(vec.at(0).bytes.value(), 1);
 }
+
+// Numbers FortiOS sends as text. Floating point avoids std::from_chars (Xcode 16's libc++ lacks it,
+// forti-api G16) but accepts exactly what it would: the whole text, no surrounding blanks.
+TEST(ParseNumber, IntegersAndFloatingPointFromText) {
+    using fortiapi::detail::parse_number;
+    std::uint32_t u = 0;
+    EXPECT_TRUE(parse_number("4294967295", u));
+    EXPECT_EQ(u, 4294967295u);
+    EXPECT_FALSE(parse_number("4294967296", u));   // out of range
+    EXPECT_FALSE(parse_number("-1", u));
+    EXPECT_FALSE(parse_number("5 ", u));
+    std::int64_t i = 0;
+    EXPECT_TRUE(parse_number("-42", i));
+    EXPECT_EQ(i, -42);
+
+    double d = 0;
+    EXPECT_TRUE(parse_number("0.5", d));
+    EXPECT_DOUBLE_EQ(d, 0.5);
+    EXPECT_TRUE(parse_number("-1.25e3", d));
+    EXPECT_DOUBLE_EQ(d, -1250.0);
+    EXPECT_TRUE(parse_number("7", d));
+    EXPECT_DOUBLE_EQ(d, 7.0);
+    for (const char* bad: {"", " 1", "1 ", "\t2", "abc", "1.5x", "0x10", "nan", "1,5", "[1]", "\"1\""})
+        EXPECT_FALSE(parse_number(bad, d)) << bad;
+}

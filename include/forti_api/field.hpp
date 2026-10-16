@@ -121,6 +121,28 @@ namespace fortiapi {
 
     namespace detail {
 
+        // All of `text` as a number of type T. Integers go through std::from_chars. Floating point
+        // goes through the JSON number grammar instead: floating-point from_chars needs Xcode 26's
+        // libc++, so it would break every build on macOS 15 and older (forti-api G16), and strtod
+        // depends on the C locale. FortiOS sends numbers as text only now and then, so the cost of
+        // the JSON parser on that path does not matter.
+        template<typename T>
+        [[nodiscard]] bool parse_number(std::string_view text, T& value) {
+            if constexpr (std::is_integral_v<T>) {
+                auto [end, ec] = std::from_chars(text.data(), text.data() + text.size(), value);
+                return ec == std::errc() && end == text.data() + text.size();
+            } else {
+                static_assert(std::is_floating_point_v<T>);
+                // The grammar allows surrounding whitespace; from_chars (and so this function) does not.
+                auto blank = [](char c) { return c == ' ' || c == '\t' || c == '\n' || c == '\r'; };
+                if (text.empty() || blank(text.front()) || blank(text.back())) return false;
+                nlohmann::json parsed = nlohmann::json::parse(text, nullptr, false);
+                if (!parsed.is_number()) return false;
+                value = parsed.get<T>();
+                return true;
+            }
+        }
+
         template<typename T>
         concept Visitable = requires(T& object) {
             T::visit(object, [](std::string_view, auto&, std::string_view, unsigned) {});
@@ -276,8 +298,7 @@ namespace fortiapi {
                 if (json.is_string()) {   // numbers FortiOS sends as text ("5")
                     const auto& text = json.get_ref<const std::string&>();
                     T number{};
-                    auto [end, ec] = std::from_chars(text.data(), text.data() + text.size(), number);
-                    if (ec != std::errc() || end != text.data() + text.size())
+                    if (!parse_number(text, number))
                         throw nlohmann::json::type_error::create(302, "expected a number", &json);
                     return number;
                 }

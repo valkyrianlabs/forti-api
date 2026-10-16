@@ -101,8 +101,7 @@ namespace fortiapi::schema {
             if (json.is_string()) {   // numbers FortiOS sends as text ("5")
                 const auto& text = json.get_ref<const std::string&>();
                 T value{};
-                auto [end, ec] = std::from_chars(text.data(), text.data() + text.size(), value);
-                if (ec != std::errc() || end != text.data() + text.size())
+                if (!fortiapi::detail::parse_number(text, value))
                     throw nlohmann::json::type_error::create(302, "expected a number", &json);
                 return value;
             }
