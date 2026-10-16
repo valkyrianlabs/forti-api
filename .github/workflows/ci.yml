@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  VL_RELEASE_TAG: v0.5.0
+  VL_RELEASE_TAG: v0.5.1
   # Stock image for clean-install smoke tests (same digest as ci/Containerfile's base).
   UBUNTU_IMAGE: docker.io/library/ubuntu:24.04@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55
 
