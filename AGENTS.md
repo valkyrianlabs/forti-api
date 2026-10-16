@@ -50,7 +50,8 @@ write:
    assertion fails (a fixture `TearDown` or RAII guard, not cleanup after the last `ASSERT_*`,
    which a failed assertion skips). A suite may also delete leftovers from an aborted earlier run,
    but only objects carrying the `forti-api-test-` prefix.
-4. **No live tests in CI.** CI compiles the live suite but never runs it. Only tests that need no
+4. **No live tests in CI.** CI never runs the live suite and does not build it; the on-demand
+   "Exhaustive build" workflow (`.github/workflows/exhaustive.yml`) compiles it, never runs it. Only tests that need no
    network (mocked HTTP, serialization round-trips) may run in CI.
 
 These are enforced, not just documented: the live suite's client goes through

@@ -42,10 +42,36 @@ import('pkgconfig').generate(
 # Examples double as a compile check of the umbrella header; never installed.
 executable('inventory', 'examples/inventory.cpp', dependencies : forti_api_dep, implicit_include_directories : false)
 
+# Instantiating the typed model of every generated endpoint is what the runtime schema avoids: one TU
+# over all of them needs ~6 GB of compiler memory with GCC. Tests that need every model (the full
+# schema comparison, the live coverage test) are opt-in and compiled once per shard, each covering the
+# endpoints whose path hashes to it. Such TUs are generated-type glue: no debug info, no sanitizer
+# instrumentation (both multiply their cost); every hand-written TU is instrumented as configured.
+test_shards = 10
+typed_args = ['-g0', '-fno-sanitize=all']
+
 # Unit tests: network-free (a scripted transport), run by CI.
 gtest_dep = dependency('gtest', main : true, required : get_option('tests'))
 if gtest_dep.found()
-    test('unit', executable('unitTests',
+    # fortiapi::schema against the typed models: a sample of endpoints covering every attribute kind,
+    # or (exhaustive_tests) every endpoint, one test per shard so they run in parallel.
+    if get_option('exhaustive_tests')
+        typed_variants = []
+        foreach k : range(test_shards)
+            typed_variants += [['-DSCHEMA_SHARD=@0@'.format(k), '-DSCHEMA_SHARDS=@0@'.format(test_shards)]]
+        endforeach
+    else
+        typed_variants = [['-DSCHEMA_SAMPLE']]
+    endif
+    schema_typed = []
+    foreach variant : typed_variants
+        schema_typed += static_library('schema-typed@0@'.format(schema_typed.length()), 'tests/unit/test_schema_typed.cpp',
+                                       cpp_args : typed_args + variant,
+                                       dependencies : [forti_api_dep, gtest_dep],
+                                       implicit_include_directories : false)
+    endforeach
+
+    unit_tests = executable('unitTests',
                             'tests/unit/test_client.cpp',
                             'tests/unit/test_download.cpp',
                             'tests/unit/test_transport.cpp',
@@ -54,24 +80,43 @@ if gtest_dep.found()
                             'tests/unit/test_endpoint.cpp',
                             'tests/unit/test_helpers.cpp',
                             'tests/unit/test_tls.cpp',
+                            'tests/unit/test_schema.cpp',
+                            link_whole : schema_typed,
                             dependencies : [forti_api_dep, gtest_dep],
-                            implicit_include_directories : false),
-         suite : 'unit')
+                            implicit_include_directories : false)
+    if get_option('exhaustive_tests')
+        test('unit', unit_tests, args : ['--gtest_filter=-SchemaDifferential.*'], suite : 'unit')
+        foreach k : range(test_shards)
+            test('schema-differential-@0@'.format(k), unit_tests,
+                 args : ['--gtest_filter=SchemaDifferential.Shard@0@'.format(k)], suite : 'unit', timeout : 300)
+        endforeach
+    else
+        test('unit', unit_tests, suite : 'unit', timeout : 120)
+    endif
 endif
 
 # Live tests run against a real FortiGate (AGENTS.md, .env.example): opt-in, and in their own suite so
-# `meson test --suite unit` never touches a device. CI compiles them but never runs them.
+# `meson test --suite unit` never touches a device. CI never builds them; the on-demand "Exhaustive build"
+# workflow compiles them (and never runs them).
 if get_option('live_tests')
     gtest_nomain_dep = dependency('gtest', main : false)
+    coverage_shards = []
+    foreach k : range(test_shards)
+        coverage_shards += static_library('coverage-shard@0@'.format(k), 'tests/live/test_coverage.cpp',
+                                          cpp_args : typed_args + ['-DCOVERAGE_SHARD=@0@'.format(k),
+                                                                   '-DCOVERAGE_SHARDS=@0@'.format(test_shards)],
+                                          dependencies : [forti_api_dep, gtest_nomain_dep],
+                                          implicit_include_directories : false)
+    endforeach
     test('fortigate', executable('liveTests',
                                  'tests/live/main.cpp',
                                  'tests/live/test_backup.cpp',
-                                 'tests/live/test_coverage.cpp',
                                  'tests/live/test_crud.cpp',
                                  'tests/live/test_dnsfilter.cpp',
                                  'tests/live/test_generated.cpp',
                                  'tests/live/test_system.cpp',
                                  'tests/live/test_threat_feed.cpp',
+                                 link_whole : coverage_shards,
                                  dependencies : [forti_api_dep, gtest_nomain_dep],
                                  implicit_include_directories : false),
          suite : 'live', timeout : 300, is_parallel : false)

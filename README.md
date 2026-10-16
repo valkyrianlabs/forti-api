@@ -79,7 +79,7 @@ meson test -C build --suite unit
 The live suite runs against a real FortiGate and is opt-in (`-Dlive_tests=true`, suite `live`).
 It only ever writes `forti-api-test-*` objects in an allowlist of collections (enforced in the
 transport before a request is sent), always cleans up, and checks the device's config-change log
-afterwards; the rules are in [AGENTS.md](AGENTS.md). CI compiles it but never runs it. Configure
+afterwards; the rules are in [AGENTS.md](AGENTS.md). CI never runs it (an on-demand workflow compiles it). Configure
 `.env` from `.env.example` (`tools/gen-certs.sh <gateway IP>...` creates test certificates), then:
 
 ```bash
@@ -128,6 +128,12 @@ The monitor API (status, statistics, actions) is available as `Monitor::get("sys
 Non-JSON replies come back as raw bytes with a size limit (64 MiB by default) or streamed to a sink:
 `Monitor::download("system/config/backup", Query().set("scope", "global"))` returns the configuration
 backup, a secret to store with owner-only permissions and never log ([docs/guides/downloads.md](docs/guides/downloads.md)).
+
+For endpoints chosen at run time (a CLI, an MCP server), `forti_api/schema.hpp` describes every
+generated endpoint as data and decodes, validates and builds request bodies for any of them in plain
+functions, with the typed models' exact behavior and without compiling them
+([docs/guides/runtime-schema.md](docs/guides/runtime-schema.md)):
+`schema::create_body(*schema::find("cmdb/firewall/address")->type, object)`.
 
 Helpers on top of the generated endpoints:
 

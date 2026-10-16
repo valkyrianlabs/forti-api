@@ -2,3 +2,5 @@ option('tests', type : 'feature', value : 'auto',
        description : 'Build the network-free unit tests (GoogleTest)')
 option('live_tests', type : 'boolean', value : false,
        description : 'Build the live FortiGate test suite (suite "live"; never run in CI)')
+option('exhaustive_tests', type : 'boolean', value : false,
+       description : 'Compare the runtime schema with the typed model of every endpoint (10 shards, ~2 GB of compiler memory each) instead of a sample')

@@ -127,6 +127,10 @@ Create an API administrator, configure the connection, then read, change and cre
 `Field<T>` states, changing, clearing and creating objects, nested objects and tables.
 :::
 
+:::card[Runtime schema]{href="/guides/runtime-schema"}
+Every endpoint as data: decode, validate and build request bodies for endpoints chosen at run time.
+:::
+
 :::card[Queries]{href="/guides/queries"}
 VDOMs, filters, field selection, paging and how object keys are encoded.
 :::

@@ -84,6 +84,11 @@ defaults do not read well).
   serialization in `field.hpp` is driven by it.
 - A `...Spec` and a `Table` or `Singleton` alias.
 - Option constants in a namespace beside the type.
+- `gen/schema.hpp`: every type and endpoint as constexpr tables for the
+  [runtime schema](/guides/runtime-schema): attributes in `visit()` order with their C++ type, reset
+  value and flags, and the schema's options, ranges, sizes, references and help. It is built from the
+  same traversal as the structs and includes none of them.
 
 Behavior lives in hand-written headers: `client.hpp` (transport), `field.hpp` (field states and
-serialization), `endpoint.hpp` (`Table`, `Singleton`), `monitor.hpp`, and the helper headers.
+serialization), `endpoint.hpp` (`Table`, `Singleton`), `monitor.hpp`, `schema.hpp` (the runtime
+schema), and the helper headers.

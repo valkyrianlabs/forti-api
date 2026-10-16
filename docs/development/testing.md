@@ -52,10 +52,29 @@ The unit suite uses a scripted transport and needs no device: transport behavior
 errors, the retry policy, raw downloads with limits and sinks), field states and serialization, the
 endpoint templates and the helpers.
 
-CI runs it on Linux and macOS and under AddressSanitizer and UndefinedBehaviorSanitizer. The
-libcurl transport is tested against local HTTP servers on 127.0.0.1, without any other network
-access: header and body handling, connection reuse for reads, a connection that drops after a write
-arrived (the write must reach the server exactly once), and paths sent verbatim.
+CI builds it once per job and runs it: on Linux under AddressSanitizer and
+UndefinedBehaviorSanitizer and on macOS, both at -O0. The release workflow runs it on an -O3 build.
+The libcurl transport is tested against local HTTP servers on
+127.0.0.1, without any other network access: header and body handling, connection reuse for reads,
+a connection that drops after a write arrived (the write must reach the server exactly once), and
+paths sent verbatim.
+
+The runtime schema is checked against the typed models endpoint by endpoint
+(`tests/unit/test_schema_typed.cpp`): the tables must describe each generated struct exactly, and on
+generated inputs decoding, request bodies, keys and paths must give the same results and the same
+errors. The unit suite compares a sample of endpoints that covers every attribute kind, key type and
+result shape. `-Dexhaustive_tests=true` compares every endpoint:
+
+```bash
+meson setup build -Dtests=enabled -Dexhaustive_tests=true -Dlive_tests=true
+```
+
+:::callout[Builds that compile every model]{variant="info"}
+The full schema comparison and the live coverage test instantiate the typed model of every endpoint.
+One translation unit over all of them needs about 6 GB of compiler memory with GCC, so both are
+compiled once per shard (10 shards, about 2 GB each), without debug info or sanitizer
+instrumentation. CI never builds them; the "Exhaustive build" workflow does, on demand and weekly.
+:::
 
 ## Live tests
 

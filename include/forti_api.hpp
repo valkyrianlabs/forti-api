@@ -1,7 +1,8 @@
 //
 // forti-api: header-only C++23 client for the FortiOS v2 REST API. Everything in one include;
 // include the area headers (forti_api/firewall.hpp, ...) or single generated endpoints
-// (forti_api/gen/...) to keep compile times down.
+// (forti_api/gen/...) to keep compile times down. The runtime schema, for endpoints chosen at run time,
+// is separate and includes no model: forti_api/schema.hpp.
 //
 
 #ifndef FORTI_API_HPP
