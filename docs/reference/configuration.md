@@ -77,6 +77,7 @@ Connection failures (DNS, connect, timeout) throw `TransportError`, as requests 
 | `verify_code`, `verify_error` | libcurl's code and message for the rejected handshake |
 | `chain` | the certificates as presented, PEM, the device's own first |
 | `local_ip` | this side's address of the connection: what the device sees before any NAT, for example for a trusted host |
+| `peer_ip` | the address connected to: the host's, or `resolve_ip` |
 
 A pinned device certificate works as the CA bundle on its own: libcurl accepts a trust anchor that is
 not a root. The host name is still verified, so `host` must be a name the certificate carries. A

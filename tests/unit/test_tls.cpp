@@ -156,6 +156,7 @@ TEST(Tls, ProbeShowsAnUntrustedCertificateAndTrustsItOncePinned) {
     };
     EXPECT_EQ(normalize(untrusted.chain[0]), normalize(slurp(server.cert)));
     EXPECT_EQ(untrusted.local_ip, "127.0.0.1");
+    EXPECT_EQ(untrusted.peer_ip, "127.0.0.1");
 
     // The presented certificate pinned as the CA bundle: trusted, for the names it carries.
     fs::path pinned = server.dir / "pinned.pem";

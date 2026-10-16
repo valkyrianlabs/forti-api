@@ -34,6 +34,7 @@ namespace fortiapi {
         std::string verify_error;        // its message ("" when trusted)
         std::vector<std::string> chain;  // the certificates as presented, PEM, the device's own first
         std::string local_ip;            // this side's address of the connection, as the device sees it before any NAT
+        std::string peer_ip;             // the address connected to (the host's, or resolve_ip)
     };
 
     namespace detail {
@@ -106,6 +107,8 @@ namespace fortiapi {
                 if (curl_easy_getinfo(curl, CURLINFO_CERTINFO, &info) == CURLE_OK) probe.chain = detail::pem_chain(info);
                 char* local = nullptr;
                 if (curl_easy_getinfo(curl, CURLINFO_LOCAL_IP, &local) == CURLE_OK && local) probe.local_ip = local;
+                char* peer = nullptr;
+                if (curl_easy_getinfo(curl, CURLINFO_PRIMARY_IP, &peer) == CURLE_OK && peer) probe.peer_ip = peer;
             }
             return code;
         };
