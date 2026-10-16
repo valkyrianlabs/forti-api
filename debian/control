@@ -19,6 +19,7 @@ Multi-Arch: foreign
 Depends:
  libcurl4-openssl-dev | libcurl-dev,
  ${misc:Depends},
+ valkyrianlabs-archive-keyring,
 Description: header-only C++23 client for the FortiGate REST API
  forti-api is a header-only C++23 SDK for the FortiGate REST API (FortiOS v2),
  built around strongly typed domain models with intrusive nlohmann::json
