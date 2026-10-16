@@ -9,6 +9,13 @@
 #include <span>
 #include <string_view>
 
+// Hidden: these thousands of inline tables point at each other. With default visibility each is a
+// weak exported symbol, and in an executable every one of those pointers becomes a symbol bind that
+// the dynamic loader resolves at each start (about 20 ms on macOS, forti-api G15).
+#if defined(__GNUC__)
+#pragma GCC visibility push(hidden)
+#endif
+
 namespace fortiapi::gen::schema_tables {
 
 using fortiapi::schema::EndpointKind;
@@ -19882,6 +19889,10 @@ inline constexpr fortiapi::schema::Endpoint endpoints[] = {
 };
 
 }  // namespace fortiapi::gen::schema_tables
+
+#if defined(__GNUC__)
+#pragma GCC visibility pop
+#endif
 
 namespace fortiapi::gen {
 
