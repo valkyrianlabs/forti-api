@@ -12,6 +12,9 @@ tags:
 FortiOS threat feeds are external resources (`system::ExternalResources`). A push feed receives
 its entries through the monitor API instead of downloading them. `#include <forti_api/threat_feed.hpp>`.
 
+:::toc[On this page]{depth="2" theme="compact"}
+:::
+
 ## Create a push feed
 
 ```cpp
@@ -22,8 +25,10 @@ feed.comments = "Managed by forti-api";
 system::ExternalResources::add(feed);
 ```
 
+:::callout[Wait for the feed to load]{variant="note"}
 FortiOS loads a new feed asynchronously (a few seconds); until then pushes are rejected.
 `system::feed_state(name).loaded` tells when it is ready.
+:::
 
 ## Push entries
 
@@ -65,3 +70,9 @@ then deletes the feed:
 ```cpp
 system::delete_threat_feed("blocklist");
 ```
+
+:::callout[Deleting a feed can change DNS filter profiles]{variant="warning"}
+Unless another feed provides the same category, `delete_threat_feed` uses
+[`dnsfilter::allow_category_everywhere`](/guides/dns-filter#allowing-a-category-everywhere), so every
+DNS filter profile that lists the category is updated to allow it.
+:::

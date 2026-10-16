@@ -12,6 +12,11 @@ tags:
 forti-api reports problems as exceptions derived from `fortiapi::Error` and never writes to stdout
 or stderr.
 
+:::toc[On this page]{depth="2" theme="compact"}
+:::
+
+## Exceptions
+
 | Exception | When | Details |
 |---|---|---|
 | `fortiapi::ApiError` | The device answered with an error (HTTP 400 or above, or an error envelope) | `http_status()`, `fortios_error()` (for example `-3`, entry not found), `body()` with the CLI messages, `not_found()` |
@@ -34,15 +39,25 @@ try {
 
 ## Retries
 
-- Reads (GET) are retried on transport errors and on HTTP 429, 502, 503 and 504, with exponential
-  backoff (`Config::retries`, `Config::retry_backoff`).
-- Writes (POST, PUT, DELETE) are retried only when the connection failed before anything was sent
-  (DNS, connect or TLS handshake). Once a write may have reached the device it is never repeated.
-  When the connection drops after a write was sent and before the reply, the call throws a
-  `TransportError` whose `before_send()` is false: the outcome is unknown, so read the object back
-  before deciding what to do.
-- HTTP 401 is never retried: FortiOS locks the API out (HTTP 429) after repeated authentication
-  failures.
+| Request | Retried on | Not retried |
+|---|---|---|
+| Reads (GET) | transport errors; HTTP 429, 502, 503 and 504 | every other HTTP status, including 401 |
+| Writes (POST, PUT, DELETE) | a connection that failed before anything was sent (DNS, connect or TLS handshake) | any HTTP reply, and any failure once the write may have reached the device |
+
+Reads are retried with exponential backoff (`Config::retries`, `Config::retry_backoff`). Writes are
+retried only when the connection failed before anything was sent; once a write may have reached the
+device it is never repeated.
+
+:::callout[A write whose outcome is unknown]{variant="warning"}
+When the connection drops after a write was sent and before the reply, the call throws a
+`TransportError` whose `before_send()` is false: the outcome is unknown, so read the object back
+before deciding what to do.
+:::
+
+:::callout[Authentication failures are never retried]{variant="danger"}
+HTTP 401 is never retried: FortiOS locks the API out (HTTP 429) after repeated authentication
+failures.
+:::
 
 ## Writes never reuse a connection
 
@@ -68,13 +83,18 @@ and `exchange()` keep it as `{"raw": "<body>"}`.
 
 ## Partial creates
 
+:::callout[The object may exist after a failed create]{variant="warning"}
 FortiOS creates are not transactional. When an attribute is rejected after the object was created,
 the request fails with an `ApiError` and the object still exists on the device. forti-api does not
 clean up behind your back; check with `contains()` and delete it if that is what you want.
+:::
 
 ## Tracing
 
 `Config::on_exchange` receives every request and reply (method, URL, bodies, status, timing). The
-API key travels in a header that is not part of the record. For `Client::download`, the record of a
-successful reply has an empty response body, because downloads such as configuration backups are
-secrets.
+API key travels in a header that is not part of the record.
+
+:::callout[Downloads are not traced]{variant="note"}
+For `Client::download`, the record of a successful reply has an empty response body, because
+downloads such as configuration backups are secrets.
+:::

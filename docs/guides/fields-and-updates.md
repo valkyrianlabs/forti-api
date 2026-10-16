@@ -18,6 +18,9 @@ Every attribute of a generated object is a `fortiapi::Field<T>` with one of four
 | modified | set by you (assignment or `edit()`) | yes, its value | yes, its value |
 | cleared | reset by you with `clear()` | yes, the FortiOS default | yes, the FortiOS default |
 
+:::toc[On this page]{depth="2" theme="compact"}
+:::
+
 ## Reading
 
 Reads never change a field's state:
@@ -30,8 +33,10 @@ std::cout << policy.name.value_or("(unnamed)") << "\n";
 bool denies = policy.action == std::string(firewall::Policy::Action::deny);
 ```
 
+:::callout[Check before dereferencing]{variant="note"}
 `value()` and `*field` throw `std::logic_error` when the field has no value; check with
 `has_value()` or `operator bool` first, or use `value_or()`.
+:::
 
 ## Changing
 
@@ -73,14 +78,22 @@ firewall::Addresses::add(host);
 When the device assigns the key (a firewall policy created with `policyid` 0 or unset), `add` stores
 the assigned key in the object.
 
+:::callout[Creates are not transactional]{variant="warning"}
+When FortiOS rejects an attribute after it created the object, `add` throws an `ApiError` and the
+object still exists on the device. See [Partial creates](/guides/errors-and-retries#partial-creates).
+:::
+
 ## Nested objects and tables
 
 - A nested object (for example `dnsfilter::Profile::ftgd_dns`) is updated attribute by attribute:
   `profile.ftgd_dns.edit().options = "error-allow"` sends only `ftgd-dns.options`.
-- A table (for example `ftgd_dns.filters` or `srcintf`) is always sent whole, because FortiOS
-  replaces tables. Edit the list you read and send it back.
 - References to other objects by name (`srcintf`, `srcaddr`, `service`, ...) are
   `std::vector<fortiapi::Ref>`; a `Ref` converts from a string.
+
+:::callout[Tables are sent whole]{variant="warning"}
+A table (for example `ftgd_dns.filters` or `srcintf`) is always sent whole, because FortiOS
+replaces tables. Edit the list you read and send it back.
+:::
 
 ## Read-only attributes
 

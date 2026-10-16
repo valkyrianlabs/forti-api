@@ -9,13 +9,28 @@ tags:
 
 # Quick start
 
-## 1. Create an API administrator
+Create a REST API administrator on the FortiGate, point forti-api at it, and read, change and create
+objects.
+
+:::toc[On this page]{depth="2" theme="compact"}
+:::
+
+## Connect and make your first calls
+
+:::steps{
+  variant="cards"
+  layout="stack"
+  numbered
+  stepTheme="cyan"
+}
+
+### Create an API administrator
 
 On the FortiGate, create a REST API administrator (System, Administrators, Create New, REST API
 Admin), give it an access profile with the permissions you need, restrict its trusted hosts to the
 machines that will call the API, and copy the generated API key.
 
-## 2. Configure the connection
+### Configure the connection
 
 The default client reads its configuration from the environment:
 
@@ -37,7 +52,7 @@ config.api_key = api_key;
 fortiapi::set_default_client(std::make_shared<fortiapi::Client>(config));
 ```
 
-## 3. Read, change, create
+### Read, change, create
 
 ```cpp
 #include <forti_api/firewall.hpp>
@@ -62,6 +77,31 @@ int main() try {
     return 1;
 }
 ```
+
+:::
+
+:::callout[Repeated authentication failures lock the API]{variant="warning"}
+If requests keep failing to authenticate, stop and fix the key or trusted hosts: FortiOS locks the
+API out (HTTP 429) after repeated authentication failures, and forti-api never retries HTTP 401.
+:::
+
+## Endpoint operations
+
+Each generated endpoint is a `Table` (objects addressed by a key) or a `Singleton` (an object that
+exists exactly once, such as `system/global`):
+
+| Operation | `Table` | `Singleton` | Result |
+|---|---|---|---|
+| `list(query)` | yes | | every object, decoded |
+| `find(key, query)` | yes | | the object, or `std::nullopt` when it does not exist |
+| `get(key, query)` / `get(query)` | yes | yes | the object; a `Table` throws `ApiError` (`not_found()`) when it does not exist |
+| `contains(key, query)` | yes | | whether the object exists |
+| `add(object, query)` | yes | | creates the object; see [Fields and updates](/guides/fields-and-updates#creating) |
+| `update(object, query)` | yes | yes | sends only modified and cleared attributes; `std::nullopt` when there is nothing to send |
+| `del(key, query)` | yes | | deletes the object |
+| `schema()` | yes | yes | the endpoint's FortiOS schema (`?action=schema`) |
+
+## Several devices
 
 Every call accepts an optional `Query` and `Client` as trailing arguments, so the same code works
 against several devices:

@@ -15,6 +15,11 @@ FortiOS configuration text. `Client::download` returns any reply body as raw byt
 without decoding it. It uses the client's transport, authentication, TLS verification, timeouts,
 retry policy and error handling.
 
+:::toc[On this page]{depth="2" theme="compact"}
+:::
+
+## Downloading
+
 ```cpp
 #include <forti_api/monitor.hpp>
 using namespace fortiapi;
@@ -27,11 +32,19 @@ Download backup = Monitor::download("system/config/backup", Query().set("scope",
 // backup.bytes                its size
 ```
 
-`Monitor::download(relative, query, options, client)` prefixes `monitor/` like `Monitor::get`;
-`Client::download(api_path, query, options)` takes a full API path. A second overload,
-`Client::download(method, api_path, query, body, options)`, sends any method with an optional JSON
-body. POST, PUT and DELETE follow the write retry policy: they are never repeated once they may have
+`Monitor::download` prefixes `monitor/` like `Monitor::get`; the two `Client::download` overloads
+take a full API path, and the second sends any method with an optional JSON body:
+
+| Call | Path | Method |
+|---|---|---|
+| `Monitor::download(relative, query, options, client)` | relative to `monitor/` | GET |
+| `Client::download(api_path, query, options)` | full API path | GET |
+| `Client::download(method, api_path, query, body, options)` | full API path | any, with an optional JSON body |
+
+:::callout[Writes are never repeated]{variant="note"}
+POST, PUT and DELETE follow the write retry policy: they are never repeated once they may have
 reached the device.
+:::
 
 ## Limits and streaming
 
@@ -48,7 +61,10 @@ struct DownloadOptions {
   HTTP compression.
 - `sink`, when set, receives the body of a successful reply in chunks as it arrives, and
   `Download::body` stays empty (`bytes` still counts it). Error replies never reach the sink.
-  After any exception the sink may hold part of the body, which the caller must discard.
+
+:::callout[Discard partial output]{variant="warning"}
+After any exception the sink may hold part of the body, which the caller must discard.
+:::
 
 ## Errors and retries
 
@@ -65,8 +81,10 @@ struct DownloadOptions {
 
 ## Handling configuration backups
 
+:::callout[A backup is a credential]{variant="danger"}
 A configuration backup holds the device's whole configuration: password hashes, pre-shared keys,
 private keys, API tokens and the network layout. Treat it as a credential.
+:::
 
 - Store backups with restrictive permissions (owner read/write only, `0600`), created that way
   rather than tightened afterwards.

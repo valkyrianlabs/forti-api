@@ -9,6 +9,12 @@ tags:
 
 # System and firewall helpers
 
+Live interface addresses, the monitor API, API-user trusted hosts, schedule days and service port
+ranges.
+
+:::toc[On this page]{depth="2" theme="compact"}
+:::
+
 ## Interface addresses
 
 The configured address of a DHCP interface is `0.0.0.0`; the monitor API reports what it holds
@@ -43,7 +49,9 @@ auto status = fortiapi::Monitor::get("system/status");
 std::cout << status.value("hostname", "") << "\n";
 ```
 
+:::callout[Monitor actions are writes]{variant="note"}
 `Monitor::post(path, body)` calls monitor actions; like every write, it is never retried.
+:::
 
 ## API-user trusted hosts
 

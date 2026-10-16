@@ -9,8 +9,19 @@ tags:
 
 # Code generation
 
-`include/forti_api/gen/**` is generated and checked in, so users never need the generator. Its
-inputs are:
+`include/forti_api/gen/**` is generated and checked in, so users never need the generator.
+
+:::toc[On this page]{depth="2" theme="compact"}
+:::
+
+:::callout[Never edit generated headers]{variant="warning"}
+Change the inputs and run `fortios.py gen` instead; `fortios.py check` fails CI when the checked-in
+headers are out of date. The same goes for `docs/reference/endpoints.md`, which `gen` writes too.
+:::
+
+## Inputs and tool
+
+The inputs are:
 
 - `codegen/api.toml`: which FortiOS paths are generated and their C++ names
   (namespace, type and endpoint alias overrides).
@@ -41,14 +52,28 @@ schema metadata only, never device data:
   extracted statically from its JavaScript bundle (and the HTTP method where the call site shows
   it). Only path strings are kept.
 
+:::callout[Read-only against the device]{variant="info"}
 Both are read-only against the device and converge: running them again finds nothing new.
+:::
 
 ## Adding an endpoint
 
-1. Add a `[[cmdb]]` entry to `codegen/api.toml` (`path`, and `namespace`, `type`, `alias` when the
-   defaults do not read well).
-2. `fortios.py pull <path>` to fetch its schema snapshot.
-3. `fortios.py gen`, then build and run the tests.
+:::steps
+
+### Add it to the manifest
+
+Add a `[[cmdb]]` entry to `codegen/api.toml` (`path`, and `namespace`, `type`, `alias` when the
+defaults do not read well).
+
+### Pull its schema
+
+`fortios.py pull <path>` fetches its schema snapshot.
+
+### Generate and test
+
+`fortios.py gen`, then build and run the tests.
+
+:::
 
 ## What the generator produces
 
