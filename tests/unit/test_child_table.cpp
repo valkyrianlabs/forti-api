@@ -42,15 +42,25 @@ namespace {
         [[nodiscard]] json body(std::size_t i) const { return json::parse(fake->requests.at(i).body); }
     };
 
-    // A write reply on a child path, shaped as FortiOS 7.4.8 answers child requests (seen on GETs of
-    // cmdb/system.dhcp/server/1/reserved-address[/<id>]): `mkey` is the PARENT's key, as text, and the
-    // entry's key is `child_mkey`.
-    json write_reply(const char* method, json child_mkey, json parent_mkey = "1") {
-        json reply = {{"http_method", method}, {"status", "success"}, {"http_status", 200}, {"revision", "abc"},
-                      {"path", "system.dhcp"}, {"name", "server"}, {"mkey", std::move(parent_mkey)},
+    // Write replies on a child path, shaped as FortiOS 7.4.8 answers them (observed live on
+    // router/access-list rule and firewall/addrgrp member, tests/live/test_child_table.cpp). `mkey`
+    // means something different per method: the new entry's key on POST (no child_mkey), the parent's
+    // key on PUT, the entry's key on DELETE; PUT and DELETE also report the entry key as text in
+    // `child_mkey`.
+    json write_reply(const char* method, json mkey, json child_mkey = nullptr) {
+        json reply = {{"http_method", method}, {"status", "success"}, {"http_status", 200}, {"action", ""},
+                      {"revision", "def"}, {"old_revision", "abc"}, {"revision_changed", true},
+                      {"path", "system.dhcp"}, {"name", "server"}, {"mkey", std::move(mkey)},
                       {"child_path", "reserved-address"}, {"vdom", "root"}};
         if (!child_mkey.is_null()) reply["child_mkey"] = std::move(child_mkey);
         return reply;
+    }
+
+    json post_reply(json entry_key) { return write_reply("POST", std::move(entry_key)); }
+    json put_reply(json parent_key, json entry_key) { return write_reply("PUT", std::move(parent_key), std::move(entry_key)); }
+    json delete_reply(json entry_key) {
+        auto text = entry_key.is_string() ? entry_key : json(entry_key.dump());
+        return write_reply("DELETE", std::move(entry_key), std::move(text));
     }
 
     json reservation(std::uint32_t id, const char* ip, const char* mac, const char* description) {
@@ -59,7 +69,11 @@ namespace {
                 {"remote-id", ""}, {"description", description}};
     }
 
-    json not_found() { return {{"status", "error"}, {"http_status", 404}, {"error", -3}}; }
+    // A 404 on a child path (7.4.8): no FortiOS error code; `child_path` only when the parent exists.
+    json not_found() {
+        return {{"http_method", "GET"}, {"status", "error"}, {"http_status", 404}, {"path", "system.dhcp"},
+                {"name", "server"}, {"mkey", "1"}, {"child_path", "reserved-address"}};
+    }
 
     const std::string base = "https://fortigate.test:8443/api/v2/";
 
@@ -154,7 +168,7 @@ TEST_F(ChildTableTest, FindAndContainsTreat404AsAbsent) {
 }
 
 TEST_F(ChildTableTest, AddPostsOneEntryToTheChildTable) {
-    fake->reply(200, write_reply("POST", 12));
+    fake->reply(200, post_reply(12));
     Reservation entry;
     entry.id = 0u;   // the device assigns the next id
     entry.ip = "192.0.2.12";
@@ -166,46 +180,69 @@ TEST_F(ChildTableTest, AddPostsOneEntryToTheChildTable) {
     EXPECT_EQ(url(0), base + "cmdb/system.dhcp/server/1/reserved-address");
     EXPECT_EQ(body(0), (json{{"id", 0}, {"ip", "192.0.2.12"}, {"mac", "00:00:5e:00:53:0c"},
                              {"description", "forti-vlan-mac"}}));
-    EXPECT_EQ(reply.revision, "abc");
-    EXPECT_EQ(reply.mkey, "1");
+    EXPECT_EQ(reply.http_method, "POST");
+    EXPECT_EQ(reply.revision, "def");
+    EXPECT_EQ(reply.old_revision, "abc");
+    EXPECT_TRUE(reply.revision_changed);
+    EXPECT_EQ(reply.mkey, 12);   // the new entry's key, on a child POST
     EXPECT_EQ(reply.child_path, "reserved-address");
-    EXPECT_EQ(reply.child_mkey, 12);
+    EXPECT_TRUE(reply.child_mkey.is_null());
     EXPECT_EQ(*entry.id, 12u);
     EXPECT_FALSE(dirty(entry));
     EXPECT_EQ(fake->requests.size(), 1u);
 }
 
 TEST_F(ChildTableTest, AddReadsAnEntryKeyReportedAsText) {
-    fake->reply(200, write_reply("POST", "13"));
+    fake->reply(200, post_reply("13"));
     Reservation entry;
     entry.ip = "192.0.2.13";
     Reservations::add(1, entry, {}, client);
     EXPECT_EQ(*entry.id, 13u);
 }
 
-// `mkey` in a child reply is the parent's key: taking it would give the entry the parent's id, and a
-// later update or delete would address another entry.
-TEST_F(ChildTableTest, AddNeverTakesTheParentsKey) {
-    fake->reply(200, write_reply("POST", nullptr, 3))
-        .reply(200, write_reply("POST", "not a number"))
-        .reply(200, write_reply("POST", -1))
-        .reply(200, write_reply("POST", 4294967296ull));
+TEST_F(ChildTableTest, AddPrefersChildMkey) {
+    fake->reply(200, write_reply("POST", "1", 14));
     Reservation entry;
-    entry.id = 0u;
-    entry.ip = "192.0.2.12";
-    Reservations::add(3, entry, {}, client);
-    EXPECT_EQ(*entry.id, 0u);
-    EXPECT_FALSE(dirty(entry));
-    for (int i = 0; i < 3; ++i) {
-        Reservation unreported;
-        unreported.ip = "192.0.2.12";
-        Reservations::add(1, unreported, {}, client);
-        EXPECT_FALSE(unreported.id.has_value());
+    entry.ip = "192.0.2.14";
+    Reservations::add(1, entry, {}, client);
+    EXPECT_EQ(*entry.id, 14u);
+}
+
+// `mkey` names the parent in PUT, GET and error replies: it is taken only from a reply that says it
+// answers a POST to this child table, so the entry never gets the parent's id (a later update or
+// delete would address another entry). Unusable keys leave the entry's key alone.
+TEST_F(ChildTableTest, AddTakesMkeyOnlyFromAChildPostReply) {
+    json not_a_child = post_reply(3);
+    not_a_child.erase("child_path");
+    json other_child = post_reply(3);
+    other_child["child_path"] = "ip-range";
+    json no_method = post_reply(3);
+    no_method.erase("http_method");
+    fake->reply(200, not_a_child)
+        .reply(200, other_child)
+        .reply(200, no_method)
+        .reply(200, write_reply("PUT", 3))
+        .reply(200, post_reply("not a number"))
+        .reply(200, post_reply(-1))
+        .reply(200, post_reply(4294967296ull))
+        .reply(200, post_reply(nullptr));
+    for (int i = 0; i < 8; ++i) {
+        Reservation entry;
+        entry.id = 0u;
+        entry.ip = "192.0.2.12";
+        Reservations::add(3, entry, {}, client);
+        EXPECT_EQ(*entry.id, 0u) << i;
+        EXPECT_FALSE(dirty(entry));
     }
+    fake->reply(200, post_reply(nullptr));
+    Reservation unreported;
+    unreported.ip = "192.0.2.12";
+    Reservations::add(1, unreported, {}, client);
+    EXPECT_FALSE(unreported.id.has_value());
 }
 
 TEST_F(ChildTableTest, AddKeepsAKeyTheCallerSet) {
-    fake->reply(200, write_reply("POST", 9));   // whatever the reply reports, id 5 stays
+    fake->reply(200, post_reply(9));   // whatever the reply reports, id 5 stays
     Reservation entry;
     entry.id = 5u;
     entry.ip = "192.0.2.5";
@@ -213,6 +250,24 @@ TEST_F(ChildTableTest, AddKeepsAKeyTheCallerSet) {
     Reservations::add(1, entry, {}, client);
     EXPECT_EQ(*entry.id, 5u);
     EXPECT_EQ(body(0)["id"], 5);
+}
+
+// An existing key: FortiOS refuses the POST (error -5) and keeps the entry as it was.
+TEST_F(ChildTableTest, AddOfAnExistingEntryThrows) {
+    fake->reply(500, json{{"http_method", "POST"}, {"status", "error"}, {"http_status", 500}, {"error", -5},
+                          {"cli_error", json::array()}, {"revision", "abc"}, {"revision_changed", false},
+                          {"mkey", 1}, {"child_path", "reserved-address"}});
+    Reservation entry;
+    entry.id = 5u;
+    entry.ip = "192.0.2.5";
+    try {
+        Reservations::add(1, entry, {}, client);
+        FAIL();
+    } catch (const ApiError& error) {
+        EXPECT_EQ(error.http_status(), 500);
+        EXPECT_EQ(error.fortios_error(), -5);
+    }
+    EXPECT_TRUE(dirty(entry));
 }
 
 TEST_F(ChildTableTest, AddIsNeverResent) {
@@ -231,9 +286,11 @@ TEST_F(ChildTableTest, UpdatePutsOnlyTheEntrysChanges) {
     entry.ip = "192.0.2.27";
     entry.description.clear();
 
-    fake->reply(200, write_reply("PUT", 7));
+    fake->reply(200, put_reply("1", "7"));
     auto reply = Reservations::update(1, entry, Query().vdom("root"), client);
     ASSERT_TRUE(reply.has_value());
+    EXPECT_EQ(reply->mkey, "1");   // the parent, on a child PUT
+    EXPECT_EQ(reply->child_mkey, "7");
     EXPECT_EQ(method(1), Method::Put);
     EXPECT_EQ(url(1), base + "cmdb/system.dhcp/server/1/reserved-address/7?vdom=root");
     EXPECT_EQ(body(1), (json{{"ip", "192.0.2.27"}, {"description", ""}}));   // no id, mac, type, ...
@@ -271,9 +328,11 @@ TEST_F(ChildTableTest, FailedUpdateLeavesTheEntryDirty) {
 }
 
 TEST_F(ChildTableTest, DeleteRemovesOneEntry) {
-    fake->reply(200, write_reply("DELETE", 7));
+    fake->reply(200, delete_reply(7));
     auto reply = Reservations::del(1, 7, {}, client);
     EXPECT_EQ(reply.status, "success");
+    EXPECT_EQ(reply.mkey, 7);   // the entry, on a child DELETE
+    EXPECT_EQ(reply.child_mkey, "7");
     EXPECT_EQ(method(0), Method::Delete);
     EXPECT_EQ(url(0), base + "cmdb/system.dhcp/server/1/reserved-address/7");
     EXPECT_TRUE(fake->requests[0].body.empty());
@@ -286,16 +345,16 @@ TEST_F(ChildTableTest, DeleteOfAMissingEntryThrowsNotFound) {
         FAIL();
     } catch (const ApiError& error) {
         EXPECT_TRUE(error.not_found());
-        EXPECT_EQ(error.fortios_error(), -3);
+        EXPECT_EQ(error.fortios_error(), 0);   // child 404s carry no FortiOS error code
         EXPECT_EQ(error.path(), "cmdb/system.dhcp/server/1/reserved-address/99");
     }
 }
 
 // Both keys are one encoded path segment each, string or number.
 TEST_F(ChildTableTest, KeysAreEncoded) {
-    fake->reply(200, write_reply("DELETE", "LAN 10.0.0.0/24"))
+    fake->reply(200, delete_reply("LAN 10.0.0.0/24"))
         .reply(200, envelope(json::array({json{{"name", "a/b"}, {"category", "c"}}})))
-        .reply(200, write_reply("POST", "LAN 10.0.0.0/24"));
+        .reply(200, post_reply("LAN 10.0.0.0/24"));
     SourceAddresses::del(5, "LAN 10.0.0.0/24", {}, client);
     EXPECT_EQ(*Tags::get("office?x=1", "a/b", {}, client).name, "a/b");
     Ref ref("LAN 10.0.0.0/24");
@@ -310,9 +369,9 @@ TEST_F(ChildTableTest, KeysAreEncoded) {
 
 // "." and ".." name one object, never the table or its parent (G13), as parent or entry key.
 TEST_F(ChildTableTest, DotKeysAddressOneObject) {
-    fake->reply(200, write_reply("DELETE", "."))
+    fake->reply(200, delete_reply("."))
         .reply(404, not_found())
-        .reply(200, write_reply("DELETE", ".."));
+        .reply(200, delete_reply(".."));
     Tags::del("..", ".", {}, client);
     EXPECT_FALSE(Tags::contains(".", "..", {}, client));
     SourceAddresses::del(1, "..", {}, client);

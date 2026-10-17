@@ -39,10 +39,21 @@ namespace fortiapi {
     struct Reply {
         long http_status = 0;
         std::string status, revision, vdom, path, name, serial, version;
+        std::string http_method;   // "POST", "PUT", "DELETE", as the device echoes it
+        // The table's configuration revision before the write (FortiOS 7.4.8 keeps one revision per
+        // cmdb table, e.g. router.access-list, shared by all its objects) and whether the write changed
+        // it. A failed write reports `revision` without `old_revision`, and revision_changed false.
+        std::string old_revision;
+        bool revision_changed = false;
         nlohmann::json mkey;   // the created object's key (string or number), when reported
         long build = 0;
-        // Requests to a child table (ChildTable): the table attribute and the entry's key. There
-        // FortiOS reports the parent object's key as `mkey`, and the entry's key as `child_mkey`.
+        // Requests to a child table (ChildTable): the table attribute and the entry's key. What
+        // `mkey` names depends on the method (FortiOS 7.4.8, observed live):
+        //   POST    mkey = the new entry's key (a number for numeric keys); no child_mkey
+        //   PUT     mkey = the parent's key;   child_mkey = the entry's key, as text
+        //   DELETE  mkey = the entry's key;    child_mkey = the entry's key, as text
+        //   GET     mkey = the parent's key;   child_mkey = the entry's key
+        //   errors  mkey = the parent's key;   no child_mkey
         std::string child_path;
         nlohmann::json child_mkey;
 
@@ -61,6 +72,10 @@ namespace fortiapi {
             reply.serial = text("serial");
             reply.version = text("version");
             reply.build = body.value("build", 0L);
+            reply.http_method = text("http_method");
+            reply.old_revision = text("old_revision");
+            if (auto it = body.find("revision_changed"); it != body.end() && it->is_boolean())
+                reply.revision_changed = it->get<bool>();
             if (auto it = body.find("mkey"); it != body.end()) reply.mkey = *it;
             reply.child_path = text("child_path");
             if (auto it = body.find("child_mkey"); it != body.end()) reply.child_mkey = *it;
@@ -291,10 +306,13 @@ namespace fortiapi {
         }
 
         // POST every known attribute of one new entry. On success the entry is clean. A numeric key
-        // left to the device (absent or 0) takes the entry key the reply reports (`child_mkey`; never
-        // `mkey`, which is the parent's key); a key the caller set is never overwritten. When the reply
-        // reports no entry key, the key stays as it was: list() the entries to find it. As with
-        // Table::add, nothing is retried.
+        // left to the device (absent or 0) takes the entry key the reply reports; a key the caller set
+        // is never overwritten. FortiOS 7.4.8 reports the new entry's key as `mkey` of a child POST
+        // reply (Reply), so that is taken only from a reply that names this child table and the POST;
+        // `child_mkey` wins when a reply carries it. When the reply reports no entry key, the key stays
+        // as it was: list() the entries to find it. Adding an entry whose key exists fails (HTTP 500,
+        // FortiOS error -5) and changes nothing: a POST never overwrites. As with Table::add, nothing
+        // is retried.
         static Reply add(const parent_key_type& parent_key, type& entry, const Query& query = {},
                          Client& client = default_client()) {
             Reply reply = Reply::from(client.post(path(parent_key), to_json(entry, Write::create), query));
@@ -302,15 +320,20 @@ namespace fortiapi {
                 auto& entry_key = entry.*type::mkey;
                 bool device_assigned = !entry_key.has_value() || entry_key.value() == key_type{};
                 if (device_assigned) {
-                    if (auto assigned = reported_key(reply.child_mkey)) entry_key.load(*assigned);
+                    auto assigned = reported_key(reply.child_mkey);
+                    if (!assigned && reply.http_method == "POST" && reply.child_path == attribute())
+                        assigned = reported_key(reply.mkey);
+                    if (assigned) entry_key.load(*assigned);
                 }
             }
             mark_clean(entry);
             return reply;
         }
 
-        // PUT only the entry's modified and cleared attributes to the entry's own path. Sends nothing
-        // (and returns nullopt) when the entry has no changes. Requires the entry's key member.
+        // PUT only the entry's modified and cleared attributes to the entry's own path; the entry's
+        // other attributes, the other entries and the parent's other attributes keep their values.
+        // Sends nothing (and returns nullopt) when the entry has no changes. Requires the entry's key
+        // member. A PUT never creates: a missing entry or parent is ApiError (not_found()).
         static std::optional<Reply> update(const parent_key_type& parent_key, type& entry, const Query& query = {},
                                            Client& client = default_client()) {
             const auto& entry_key = entry.*type::mkey;
@@ -322,6 +345,7 @@ namespace fortiapi {
             return reply;
         }
 
+        // Removes one entry. A missing entry or parent is ApiError (not_found()).
         static Reply del(const parent_key_type& parent_key, const key_type& entry_key, const Query& query = {},
                          Client& client = default_client()) {
             return Reply::from(client.del(path(parent_key, entry_key), query));

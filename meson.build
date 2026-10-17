@@ -112,6 +112,7 @@ if get_option('live_tests')
     test('fortigate', executable('liveTests',
                                  'tests/live/main.cpp',
                                  'tests/live/test_backup.cpp',
+                                 'tests/live/test_child_table.cpp',
                                  'tests/live/test_crud.cpp',
                                  'tests/live/test_dnsfilter.cpp',
                                  'tests/live/test_generated.cpp',

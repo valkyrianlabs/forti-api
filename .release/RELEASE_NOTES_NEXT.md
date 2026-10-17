@@ -36,8 +36,16 @@ Reservations::del(1, 7);               // DELETE cmdb/system.dhcp/server/1/reser
 - It works for every table attribute of a generated table: every generated `...Entry` struct now
   names its key member (`static constexpr auto mkey = &Entry::id;`, from the schema's mkey), and so
   does `fortiapi::Ref` (`name`).
-- `Reply` gains `child_path` and `child_mkey`. On child paths FortiOS reports the parent's key as
-  `mkey` and the entry's as `child_mkey`; `ChildTable::add` takes a device-assigned key only from
-  `child_mkey` and never overwrites a key the caller set.
+- Adding an entry whose key exists fails (HTTP 500, FortiOS error -5) and changes nothing; a PUT
+  never creates a missing entry.
+- `Reply` gains `child_path` and `child_mkey`, and for every write `http_method`, `old_revision` and
+  `revision_changed`. On child paths `mkey` names a different key per method: the new entry on POST,
+  the parent on PUT, the entry on DELETE (PUT and DELETE also report the entry as `child_mkey`).
+  `ChildTable::add` stores a device-assigned key from `child_mkey`, or from `mkey` of a child POST
+  reply, and never overwrites a key the caller set.
 
-The path shapes and replies were checked read-only against FortiOS 7.4.8.
+Validated live on FortiOS 7.4.8 (address-group members and access-list rules), including concurrent
+writers: adds and entry updates from separate clients never lose each other's changes, while a PUT of
+the parent that includes the table still replaces it silently. A GET's `revision` compared with a
+write's `old_revision` shows that something else wrote to the table in between. See the child tables
+guide.
