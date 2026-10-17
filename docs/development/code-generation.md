@@ -79,7 +79,10 @@ defaults do not read well).
 
 - A struct per object with every attribute as `fortiapi::Field<T>`, documented from the schema;
   nested objects as nested structs, table rows as `...Entry` structs, name references as
-  `std::vector<fortiapi::Ref>`.
+  `std::vector<fortiapi::Ref>`. Each `...Entry` names its key, the table's mkey from the schema
+  (`static constexpr auto mkey = &ReservedAddressEntry::id;`), which is how
+  [child tables](/guides/child-tables) address one entry; `mkey` is reserved, so an attribute of that
+  name would become `mkey_`.
 - A static `visit()` listing every attribute's FortiOS key, member, reset value and flags; the
   serialization in `field.hpp` is driven by it.
 - A `...Spec` and a `Table` or `Singleton` alias.

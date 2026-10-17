@@ -35,6 +35,8 @@ struct Iptrust {
         fortiapi::Field<std::string> ip4_subnet;  // IPv4 network address or network address/subnet mask bits. Required.
         fortiapi::Field<std::string> ip6_subnet;  // IPv6 network address/subnet mask bits. Required.
 
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("status", self.status, R"("enable")", fortiapi::none);

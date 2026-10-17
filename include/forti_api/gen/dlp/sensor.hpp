@@ -35,6 +35,8 @@ struct Sensor {
         fortiapi::Field<std::uint32_t> count;  // Count of dictionary matches to trigger sensor entry match (Dictionary might not be able to trigger more than once based on its 'repeat' option, 1 - 255, default = 1). Required.
         fortiapi::Field<std::string> status;  // Enable/disable this entry.
 
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

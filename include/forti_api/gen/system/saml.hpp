@@ -59,6 +59,8 @@ struct Saml {
             fortiapi::Field<std::string> name;  // Name. Required.
             fortiapi::Field<std::string> type;  // Type. Required.
 
+            static constexpr auto mkey = &AssertionAttributesEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -78,6 +80,8 @@ struct Saml {
         fortiapi::Field<std::string> idp_single_sign_on_url;  // IDP single sign-on URL. Read-only.
         fortiapi::Field<std::string> idp_single_logout_url;  // IDP single logout URL. Read-only.
         fortiapi::Field<std::vector<AssertionAttributesEntry>> assertion_attributes;  // Customized SAML attributes to send along with assertion.
+
+        static constexpr auto mkey = &ServiceProvidersEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

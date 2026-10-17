@@ -12,6 +12,7 @@
 //
 // Generated structs describe themselves with one static `visit(self, visitor)` that calls
 // `visitor(key, field, reset_json, flags)` per attribute; the functions below do everything else.
+// A table entry struct also names its key member (`static constexpr auto mkey = &Entry::id;`).
 //
 
 #ifndef FORTI_API_FIELD_HPP
@@ -333,6 +334,8 @@ namespace fortiapi {
         Ref() = default;
         Ref(std::string ref) { name = std::move(ref); }       // NOLINT: implicit by design
         Ref(const char* ref) { name = std::string(ref); }    // NOLINT
+
+        static constexpr auto mkey = &Ref::name;   // the entry key, as in generated table entries
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) { v("name", self.name, R"("")", none); }

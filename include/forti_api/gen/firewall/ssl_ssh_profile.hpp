@@ -1028,6 +1028,8 @@ struct SslSshProfile {
         fortiapi::Field<std::string> wildcard_fqdn;  // Exempt servers by wildcard FQDN. References: firewall.wildcard-fqdn.custom.name, firewall.wildcard-fqdn.group.name.
         fortiapi::Field<std::string> regex;  // Exempt servers by regular expression.
 
+        static constexpr auto mkey = &SslExemptEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -1044,6 +1046,8 @@ struct SslSshProfile {
     struct EchOuterSniEntry {
         fortiapi::Field<std::string> name;  // ClientHelloOuter SNI name. Required.
         fortiapi::Field<std::string> sni;  // ClientHelloOuter SNI to be blocked. Required.
+
+        static constexpr auto mkey = &EchOuterSniEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -1104,6 +1108,8 @@ struct SslSshProfile {
         fortiapi::Field<std::string> imaps_client_certificate;  // Action based on received client certificate during the IMAPS handshake.
         fortiapi::Field<std::string> ftps_client_certificate;  // Action based on received client certificate during the FTPS handshake.
         fortiapi::Field<std::string> ssl_other_client_certificate;  // Action based on received client certificate during an SSL protocol handshake.
+
+        static constexpr auto mkey = &SslServerEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

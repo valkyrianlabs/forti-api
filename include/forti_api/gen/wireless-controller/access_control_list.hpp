@@ -32,6 +32,8 @@ struct AccessControlList {
         fortiapi::Field<std::uint32_t> protocol;  // Protocol type as defined by IANA (0 - 255, default = 255, meaning any).
         fortiapi::Field<std::string> action;  // Policy action (allow | deny).
 
+        static constexpr auto mkey = &Layer3Ipv4RulesEntry::rule_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("rule-id", self.rule_id, R"(0)", fortiapi::none);
@@ -61,6 +63,8 @@ struct AccessControlList {
         fortiapi::Field<std::uint32_t> dstport;  // Destination port (0 - 65535, default = 0, meaning any).
         fortiapi::Field<std::uint32_t> protocol;  // Protocol type as defined by IANA (0 - 255, default = 255, meaning any).
         fortiapi::Field<std::string> action;  // Policy action (allow | deny).
+
+        static constexpr auto mkey = &Layer3Ipv6RulesEntry::rule_id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

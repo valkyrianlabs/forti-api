@@ -48,6 +48,8 @@ struct Profile {
         struct RuleEntry {
             fortiapi::Field<std::uint32_t> id;  // Rule IDs. Required.
 
+            static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -57,6 +59,8 @@ struct Profile {
         // Device MAC addresses.
         struct DeviceEntry {
             fortiapi::Field<std::string> mac;  // Device MAC address.
+
+            static constexpr auto mkey = &DeviceEntry::mac;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -68,6 +72,8 @@ struct Profile {
         fortiapi::Field<std::string> status;  // Enable/disable exemption.
         fortiapi::Field<std::vector<RuleEntry>> rule;  // Patch signature rule IDs.
         fortiapi::Field<std::vector<DeviceEntry>> device;  // Device MAC addresses.
+
+        static constexpr auto mkey = &ExemptionEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

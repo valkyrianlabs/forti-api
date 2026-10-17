@@ -28,6 +28,8 @@ struct IpsecAggregate {
     struct MemberEntry {
         fortiapi::Field<std::string> tunnel_name;  // Tunnel name. Required. References: vpn.ipsec.phase1-interface.name.
 
+        static constexpr auto mkey = &MemberEntry::tunnel_name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("tunnel-name", self.tunnel_name, R"("")", fortiapi::none);

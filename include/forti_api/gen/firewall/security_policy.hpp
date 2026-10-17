@@ -152,6 +152,8 @@ struct SecurityPolicy {
     struct ApplicationEntry {
         fortiapi::Field<std::uint32_t> id;  // Application IDs. Required.
 
+        static constexpr auto mkey = &ApplicationEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -161,6 +163,8 @@ struct SecurityPolicy {
     // Application category ID list.
     struct AppCategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // Category IDs. Required.
+
+        static constexpr auto mkey = &AppCategoryEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

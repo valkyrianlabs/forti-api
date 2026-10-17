@@ -38,6 +38,8 @@ struct Alarm {
             fortiapi::Field<std::uint32_t> src_port;  // Source port (0=all).
             fortiapi::Field<std::uint32_t> dst_port;  // Destination port (0=all).
 
+            static constexpr auto mkey = &FwPolicyViolationsEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -63,6 +65,8 @@ struct Alarm {
         fortiapi::Field<std::vector<FwPolicyViolationsEntry>> fw_policy_violations;  // Firewall policy violations.
         fortiapi::Field<std::uint32_t> fw_policy_id;  // Firewall policy ID.
         fortiapi::Field<std::uint32_t> fw_policy_id_threshold;  // Firewall policy ID threshold.
+
+        static constexpr auto mkey = &GroupsEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

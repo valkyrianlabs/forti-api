@@ -102,6 +102,8 @@ struct HealthCheck {
     struct MembersEntry {
         fortiapi::Field<std::uint32_t> seq_num;  // Member sequence number. Required. References: system.sdwan.members.seq-num.
 
+        static constexpr auto mkey = &MembersEntry::seq_num;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("seq-num", self.seq_num, R"(0)", fortiapi::none);
@@ -126,6 +128,8 @@ struct HealthCheck {
         fortiapi::Field<std::string> mos_threshold;  // Minimum Mean Opinion Score for SLA to be marked as pass. (1.0 - 5.0, default = 3.6).
         fortiapi::Field<std::uint32_t> priority_in_sla;  // Value to be distributed into routing table when in-sla (0 - 65535, default = 0).
         fortiapi::Field<std::uint32_t> priority_out_sla;  // Value to be distributed into routing table when out-sla (0 - 65535, default = 0).
+
+        static constexpr auto mkey = &SlaEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

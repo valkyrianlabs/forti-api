@@ -114,6 +114,8 @@ struct Community {
         fortiapi::Field<std::string> ha_direct;  // Enable/disable direct management of HA cluster members.
         fortiapi::Field<std::string> host_type;  // Control whether the SNMP manager sends SNMP queries, receives SNMP traps, or both. No traps will be sent when IP type is subnet.
 
+        static constexpr auto mkey = &HostsEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -144,6 +146,8 @@ struct Community {
         fortiapi::Field<std::string> ipv6;  // SNMP manager IPv6 address prefix. Required.
         fortiapi::Field<std::string> ha_direct;  // Enable/disable direct management of HA cluster members.
         fortiapi::Field<std::string> host_type;  // Control whether the SNMP manager sends SNMP queries, receives SNMP traps, or both.
+
+        static constexpr auto mkey = &Hosts6Entry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -13,6 +13,10 @@
 //   auto body = fortiapi::schema::create_body(*ep->type, R"({"name": "web", "subnet": "192.0.2.10/32"})"_json);
 //   client.post(ep->path, body);
 //
+// Child tables (ChildTable<Spec, &Type::attribute>) have runtime counterparts too: child_table()
+// finds the attribute, child_path() addresses its entries, created_entry_key() reads the key of an
+// entry a POST created, by the same rule as ChildTable::add.
+//
 // decode() reproduces fortiapi::from_json<T> exactly (results and errors); create_body() and
 // update_body() produce the bodies Table::add and Table::update send for the same attributes.
 // Including this header pulls in no generated model.
@@ -22,6 +26,7 @@
 #define FORTI_API_SCHEMA_HPP
 
 #include "client.hpp"
+#include "endpoint.hpp"
 #include "field.hpp"
 #include "gen/schema.hpp"
 #include "schema_types.hpp"
@@ -311,6 +316,83 @@ namespace fortiapi::schema {
             case Kind::int64: return fortiapi::path(endpoint.path, detail::number<std::int64_t>(key));
             default: return fortiapi::path(endpoint.path, key.is_string() ? key.get<std::string>() : key.dump());
         }
+    }
+
+    // ---- Child tables ----
+
+    // A table attribute of a table endpoint's objects whose entries name a key: what
+    // ChildTable<Spec, &Type::attribute> addresses (reserved-address of cmdb/system.dhcp/server,
+    // srcaddr of cmdb/firewall/policy). nullptr for anything else: an unknown attribute, a scalar or
+    // a list of scalars, entries without a key, or an endpoint that is not a table.
+    inline const Field* child_table(const Endpoint& endpoint, std::string_view attribute) {
+        if (endpoint.kind != EndpointKind::table || !endpoint.type) return nullptr;
+        const Field* field = endpoint.type->field(attribute);
+        if (!field || !field->is_table() || !field->item->type) return nullptr;
+        const Type& entry = *field->item->type;
+        return !entry.key.empty() && entry.field(entry.key) ? field : nullptr;
+    }
+
+    namespace detail {
+
+        // `f` called with `key` as the C++ key type of `kind` would hold it: a number for numeric keys
+        // (numbers sent as text are accepted, as decode() does), else the text.
+        template<typename F>
+        std::string with_key(Kind kind, const nlohmann::json& key, F&& f) {
+            switch (kind) {
+                case Kind::uint32: return f(number<std::uint32_t>(key));
+                case Kind::int64: return f(number<std::int64_t>(key));
+                default: return f(key.is_string() ? key.get<std::string>() : key.dump());
+            }
+        }
+
+        inline const Field& entry_key(const Field& attribute) {
+            const Type& entry = *attribute.item->type;
+            return *entry.field(entry.key);
+        }
+
+    }  // namespace detail
+
+    // ChildTable::path for the runtime schema: <endpoint path>/<parent key>/<attribute>, and with
+    // `entry_key` /<entry key>. Each key is one encoded path segment ("." / ".." escaped), converted
+    // as object_path() converts the endpoint's key and by the entry key's Kind. `attribute` must be
+    // child_table(endpoint, ...) (fortiapi::Error otherwise); a numeric key that is not a number
+    // throws like decode().
+    inline std::string child_path(const Endpoint& endpoint, const Field& attribute, const nlohmann::json& parent_key,
+                                  const nlohmann::json* entry_key = nullptr) {
+        if (child_table(endpoint, attribute.name) != &attribute)
+            throw Error(std::string(endpoint.path) + ": " + std::string(attribute.name) + " is not a child table");
+        return detail::with_key(endpoint.key_kind, parent_key, [&](const auto& parent) {
+            if (!entry_key) return fortiapi::path(endpoint.path, parent, attribute.name);
+            return detail::with_key(detail::entry_key(attribute).kind, *entry_key, [&](const auto& entry) {
+                return fortiapi::path(endpoint.path, parent, attribute.name, entry);
+            });
+        });
+    }
+
+    // The key of the entry a POST to the child table `attribute` created, as `reply` reports it, by
+    // the rule ChildTable::add uses (one definition: fortiapi::detail::created_entry_key): child_mkey,
+    // else mkey of a reply echoing the POST with this attribute as child_path (FortiOS 7.4.8 reports a
+    // new entry's key as mkey and sends no child_mkey; on other replies mkey can be the parent's).
+    // Numeric keys come back as numbers (text such as "12" converted; out of range: nullopt), names
+    // as text. nullopt when the reply names no entry. `attribute` must be a child_table().
+    inline std::optional<nlohmann::json> created_entry_key(const Field& attribute, const Reply& reply) {
+        if (!attribute.is_table() || !attribute.item->type || attribute.item->type->key.empty() ||
+            !attribute.item->type->field(attribute.item->type->key))
+            throw Error(std::string(attribute.name) + " is not a child table");
+        Kind kind = detail::entry_key(attribute).kind;
+        return fortiapi::detail::created_entry_key(reply, attribute.name, [kind](const nlohmann::json& value) -> std::optional<nlohmann::json> {
+            switch (kind) {
+                case Kind::uint32:
+                    if (auto key = fortiapi::detail::reported_number<std::uint32_t>(value)) return nlohmann::json(*key);
+                    return std::nullopt;
+                case Kind::int64:
+                    if (auto key = fortiapi::detail::reported_number<std::int64_t>(value)) return nlohmann::json(*key);
+                    return std::nullopt;
+                default:
+                    if (value.is_string() && !value.get_ref<const std::string&>().empty()) return value;
+                    return std::nullopt;
+            }
+        });
     }
 
     // Advisory checks against the FortiOS schema metadata, which the device enforces and the typed

@@ -40,6 +40,8 @@ struct BonjourProfile {
         fortiapi::Field<std::string> to_vlan;  // VLAN ID to which the Bonjour service is made available (0 - 4094, default = all).
         fortiapi::Field<std::string> services;  // Bonjour services for the VLAN connecting to the Bonjour network.
 
+        static constexpr auto mkey = &PolicyListEntry::policy_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("policy-id", self.policy_id, R"(0)", fortiapi::none);

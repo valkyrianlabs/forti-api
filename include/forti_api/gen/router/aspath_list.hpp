@@ -27,6 +27,8 @@ struct AspathList {
         fortiapi::Field<std::string> action;  // Permit or deny route-based operations, based on the route's AS_PATH attribute. Required.
         fortiapi::Field<std::string> regexp;  // Regular-expression to match the Border Gateway Protocol (BGP) AS paths. Required.
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

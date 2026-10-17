@@ -40,6 +40,8 @@ struct NacPolicy {
     struct SeverityEntry {
         fortiapi::Field<std::uint32_t> severity_num;  // Enter multiple severity levels, where 0 = Info, 1 = Low, ..., 4 = Critical Required.
 
+        static constexpr auto mkey = &SeverityEntry::severity_num;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("severity-num", self.severity_num, R"(0)", fortiapi::none);

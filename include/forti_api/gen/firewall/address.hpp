@@ -86,6 +86,8 @@ struct Address {
     struct MacaddrEntry {
         fortiapi::Field<std::string> macaddr;  // MAC address ranges <start>[-<end>] separated by space. Required.
 
+        static constexpr auto mkey = &MacaddrEntry::macaddr;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("macaddr", self.macaddr, R"("")", fortiapi::none);
@@ -95,6 +97,8 @@ struct Address {
     // IP address list.
     struct ListEntry {
         fortiapi::Field<std::string> ip;  // IP. Required.
+
+        static constexpr auto mkey = &ListEntry::ip;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -107,6 +111,8 @@ struct Address {
         fortiapi::Field<std::string> name;  // Tagging entry name.
         fortiapi::Field<std::string> category;  // Tag category. References: system.object-tagging.category.
         fortiapi::Field<std::vector<fortiapi::Ref>> tags;  // Tags.
+
+        static constexpr auto mkey = &TaggingEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

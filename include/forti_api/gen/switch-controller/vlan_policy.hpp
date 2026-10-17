@@ -32,6 +32,8 @@ struct VlanPolicy {
     struct AllowedVlansEntry {
         fortiapi::Field<std::string> vlan_name;  // VLAN name. Required. References: system.interface.name.
 
+        static constexpr auto mkey = &AllowedVlansEntry::vlan_name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("vlan-name", self.vlan_name, R"("")", fortiapi::none);
@@ -41,6 +43,8 @@ struct VlanPolicy {
     // Untagged VLANs to be applied when using this VLAN policy.
     struct UntaggedVlansEntry {
         fortiapi::Field<std::string> vlan_name;  // VLAN name. Required. References: system.interface.name.
+
+        static constexpr auto mkey = &UntaggedVlansEntry::vlan_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -738,6 +738,8 @@ struct ProfileProtocolOptions {
             fortiapi::Field<std::string> principal;  // Service principal. For example, host/cifsserver.example.com@example.com. Required.
             fortiapi::Field<std::string> keytab;  // Base64 encoded keytab file containing credential of the server. Required.
 
+            static constexpr auto mkey = &ServerKeytabEntry::principal;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("principal", self.principal, R"("")", fortiapi::none);

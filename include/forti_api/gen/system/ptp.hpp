@@ -51,6 +51,8 @@ struct Ptp {
         fortiapi::Field<std::string> server_interface_name;  // Interface name. Required. References: system.interface.name.
         fortiapi::Field<std::string> delay_mechanism;  // End to end delay detection or peer to peer delay detection.
 
+        static constexpr auto mkey = &ServerInterfaceEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

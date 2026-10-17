@@ -41,6 +41,8 @@ struct ExtcommunityList {
         fortiapi::Field<std::string> type;  // Type of extended community. Required.
         fortiapi::Field<std::string> match;  // Extended community specifications for matching a reserved extended community. Required.
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

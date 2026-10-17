@@ -21,6 +21,8 @@ struct QosMap {
         fortiapi::Field<std::uint32_t> dscp;  // DSCP value.
         fortiapi::Field<std::uint32_t> up;  // User priority.
 
+        static constexpr auto mkey = &DscpExceptEntry::index;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("index", self.index, R"(0)", fortiapi::none);
@@ -35,6 +37,8 @@ struct QosMap {
         fortiapi::Field<std::uint32_t> up;  // User priority. Required.
         fortiapi::Field<std::uint32_t> low;  // DSCP low value.
         fortiapi::Field<std::uint32_t> high;  // DSCP high value.
+
+        static constexpr auto mkey = &DscpRangeEntry::index;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

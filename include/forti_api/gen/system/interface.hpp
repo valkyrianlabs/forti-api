@@ -799,6 +799,8 @@ struct Interface {
         fortiapi::Field<std::string> value;  // DHCP client option value.
         fortiapi::Field<std::string> ip;  // DHCP option IPs.
 
+        static constexpr auto mkey = &ClientOptionsEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -812,6 +814,8 @@ struct Interface {
     // Physical interfaces that belong to the aggregate or redundant interface.
     struct MemberEntry {
         fortiapi::Field<std::string> interface_name;  // Physical interface name. References: system.interface.name.
+
+        static constexpr auto mkey = &MemberEntry::interface_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -903,6 +907,8 @@ struct Interface {
             fortiapi::Field<std::uint32_t> id;  // ID. Required.
             fortiapi::Field<std::string> ip;  // Set IP addresses of proxy ARP.
 
+            static constexpr auto mkey = &ProxyArpEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -924,6 +930,8 @@ struct Interface {
         fortiapi::Field<std::string> ignore_default_route;  // Enable/disable ignoring of default route when checking destination.
         fortiapi::Field<std::string> status;  // Enable/disable this VRRP configuration.
         fortiapi::Field<std::vector<ProxyArpEntry>> proxy_arp;  // VRRP Proxy ARP configuration.
+
+        static constexpr auto mkey = &VrrpEntry::vrid;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -995,6 +1003,8 @@ struct Interface {
         fortiapi::Field<std::string> detectprotocol;  // Protocols used to detect the server.
         fortiapi::Field<std::uint32_t> ha_priority;  // HA election priority for the PING server.
 
+        static constexpr auto mkey = &SecondaryipEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -1014,6 +1024,8 @@ struct Interface {
         fortiapi::Field<std::string> name;  // DHCP server name.
         fortiapi::Field<std::string> server_ip;  // IP address for DHCP server.
 
+        static constexpr auto mkey = &DhcpSnoopingServerListEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("default")", fortiapi::none);
@@ -1026,6 +1038,8 @@ struct Interface {
         fortiapi::Field<std::string> name;  // Tagging entry name.
         fortiapi::Field<std::string> category;  // Tag category. References: system.object-tagging.category.
         fortiapi::Field<std::vector<fortiapi::Ref>> tags;  // Tags.
+
+        static constexpr auto mkey = &TaggingEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -1163,6 +1177,8 @@ struct Interface {
         struct Ip6ExtraAddrEntry {
             fortiapi::Field<std::string> prefix;  // IPv6 address prefix. Required.
 
+            static constexpr auto mkey = &Ip6ExtraAddrEntry::prefix;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("prefix", self.prefix, R"("::/0")", fortiapi::none);
@@ -1187,6 +1203,8 @@ struct Interface {
             struct DnsslEntry {
                 fortiapi::Field<std::string> domain;  // Domain name. Required.
 
+                static constexpr auto mkey = &DnsslEntry::domain;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("domain", self.domain, R"("")", fortiapi::none);
@@ -1200,6 +1218,8 @@ struct Interface {
             fortiapi::Field<std::uint32_t> preferred_life_time;  // Preferred life time (sec).
             fortiapi::Field<std::string> rdnss;  // Recursive DNS server option.
             fortiapi::Field<std::vector<DnsslEntry>> dnssl;  // DNS search list option.
+
+            static constexpr auto mkey = &Ip6PrefixListEntry::prefix;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -1243,6 +1263,8 @@ struct Interface {
             fortiapi::Field<std::string> rdnss_service;  // Recursive DNS service option.
             fortiapi::Field<std::string> rdnss;  // Recursive DNS server option.
 
+            static constexpr auto mkey = &Ip6DelegatedPrefixListEntry::prefix_id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("prefix-id", self.prefix_id, R"(0)", fortiapi::none);
@@ -1262,6 +1284,8 @@ struct Interface {
             fortiapi::Field<std::string> prefix_hint;  // DHCPv6 prefix that will be used as a hint to the upstream DHCPv6 server.
             fortiapi::Field<std::uint32_t> prefix_hint_plt;  // DHCPv6 prefix hint preferred life time (sec), 0 means unlimited lease time.
             fortiapi::Field<std::uint32_t> prefix_hint_vlt;  // DHCPv6 prefix hint valid life time (sec).
+
+            static constexpr auto mkey = &Dhcp6IapdListEntry::iaid;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -1309,6 +1333,8 @@ struct Interface {
             fortiapi::Field<std::string> vrdst6;  // Monitor the route to this destination.
             fortiapi::Field<std::string> ignore_default_route;  // Enable/disable ignoring of default route when checking destination.
             fortiapi::Field<std::string> status;  // Enable/disable VRRP.
+
+            static constexpr auto mkey = &Vrrp6Entry::vrid;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {

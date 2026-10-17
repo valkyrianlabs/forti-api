@@ -44,6 +44,8 @@ struct Pools {
     struct ClientSubnetEntry {
         fortiapi::Field<std::string> subnet;  // Client subnets. Required.
 
+        static constexpr auto mkey = &ClientSubnetEntry::subnet;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("subnet", self.subnet, R"("")", fortiapi::none);
@@ -54,6 +56,8 @@ struct Pools {
     struct ThirdPartySubnetEntry {
         fortiapi::Field<std::string> subnet;  // Third party subnets. Required.
 
+        static constexpr auto mkey = &ThirdPartySubnetEntry::subnet;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("subnet", self.subnet, R"("")", fortiapi::none);
@@ -63,6 +67,8 @@ struct Pools {
     // Internal interface name.
     struct IntlIntfEntry {
         fortiapi::Field<std::string> interface_name;  // Interface name. Required. References: system.interface.name.
+
+        static constexpr auto mkey = &IntlIntfEntry::interface_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

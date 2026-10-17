@@ -49,6 +49,8 @@ struct Policy6 {
     struct SrcEntry {
         fortiapi::Field<std::string> addr6;  // IPv6 address prefix.
 
+        static constexpr auto mkey = &SrcEntry::addr6;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("addr6", self.addr6, R"("")", fortiapi::none);
@@ -59,6 +61,8 @@ struct Policy6 {
     struct DstEntry {
         fortiapi::Field<std::string> addr6;  // IPv6 address prefix.
 
+        static constexpr auto mkey = &DstEntry::addr6;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("addr6", self.addr6, R"("")", fortiapi::none);
@@ -68,6 +72,8 @@ struct Policy6 {
     // Destination Internet Service ID.
     struct InternetServiceIdEntry {
         fortiapi::Field<std::uint32_t> id;  // Destination Internet Service ID. Required. References: firewall.internet-service.id.
+
+        static constexpr auto mkey = &InternetServiceIdEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

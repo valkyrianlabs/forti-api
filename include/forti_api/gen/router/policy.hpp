@@ -49,6 +49,8 @@ struct Policy {
     struct SrcEntry {
         fortiapi::Field<std::string> subnet;  // IP and mask.
 
+        static constexpr auto mkey = &SrcEntry::subnet;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("subnet", self.subnet, R"("")", fortiapi::none);
@@ -59,6 +61,8 @@ struct Policy {
     struct DstEntry {
         fortiapi::Field<std::string> subnet;  // IP and mask.
 
+        static constexpr auto mkey = &DstEntry::subnet;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("subnet", self.subnet, R"("")", fortiapi::none);
@@ -68,6 +72,8 @@ struct Policy {
     // Destination Internet Service ID.
     struct InternetServiceIdEntry {
         fortiapi::Field<std::uint32_t> id;  // Destination Internet Service ID. Required. References: firewall.internet-service.id.
+
+        static constexpr auto mkey = &InternetServiceIdEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

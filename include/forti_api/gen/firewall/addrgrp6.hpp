@@ -33,6 +33,8 @@ struct AddressGroup6 {
         fortiapi::Field<std::string> category;  // Tag category. References: system.object-tagging.category.
         fortiapi::Field<std::vector<fortiapi::Ref>> tags;  // Tags.
 
+        static constexpr auto mkey = &TaggingEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

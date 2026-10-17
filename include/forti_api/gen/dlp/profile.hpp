@@ -137,6 +137,8 @@ struct Profile {
         fortiapi::Field<std::string> action;  // Action to take with content that this DLP profile matches.
         fortiapi::Field<std::string> expiry;  // Quarantine duration in days, hours, minutes (format = dddhhmm).
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

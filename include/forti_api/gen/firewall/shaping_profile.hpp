@@ -50,6 +50,8 @@ struct ShapingProfile {
         fortiapi::Field<std::uint32_t> min;  // Average queue size in packets at which RED drop becomes a possibility.
         fortiapi::Field<std::uint32_t> max;  // Average queue size in packets at which RED drop probability is maximal.
 
+        static constexpr auto mkey = &ShapingEntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

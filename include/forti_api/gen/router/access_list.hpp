@@ -35,6 +35,8 @@ struct AccessList {
         fortiapi::Field<std::string> wildcard;  // Wildcard to define Cisco-style wildcard filter criteria.
         fortiapi::Field<std::string> exact_match;  // Enable/disable exact match.
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

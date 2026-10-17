@@ -27,6 +27,8 @@ struct ExactDataMatch {
         fortiapi::Field<std::string> type;  // Data-type for this column. Required. References: dlp.data-type.name.
         fortiapi::Field<std::string> optional;  // Enable/disable optional match. Required.
 
+        static constexpr auto mkey = &ColumnsEntry::index;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("index", self.index, R"(0)", fortiapi::none);

@@ -93,6 +93,8 @@ struct Urlfilter {
         fortiapi::Field<std::string> referrer_host;  // Referrer host name.
         fortiapi::Field<std::string> dns_address_family;  // Resolve IPv4 address, IPv6 address, or both from DNS server.
 
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

@@ -22,6 +22,8 @@ struct IdentityBasedRoute {
         fortiapi::Field<std::string> device;  // Outgoing interface for the rule. Required. References: system.interface.name.
         fortiapi::Field<std::vector<fortiapi::Ref>> groups;  // Select one or more group(s) from available groups that are allowed to use this route. Separate group names with a space. Required.
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

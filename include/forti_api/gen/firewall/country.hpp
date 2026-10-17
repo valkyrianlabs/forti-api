@@ -19,6 +19,8 @@ struct Country {
     struct RegionEntry {
         fortiapi::Field<std::uint32_t> id;  // Region ID. Required.
 
+        static constexpr auto mkey = &RegionEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

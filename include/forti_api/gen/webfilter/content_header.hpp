@@ -28,6 +28,8 @@ struct ContentHeader {
         fortiapi::Field<std::string> action;  // Action to take for this content type. Required.
         fortiapi::Field<std::string> category;  // Categories that this content type applies to. Required.
 
+        static constexpr auto mkey = &EntriesEntry::pattern;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("pattern", self.pattern, R"("")", fortiapi::none);

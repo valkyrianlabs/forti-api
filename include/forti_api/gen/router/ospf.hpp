@@ -148,6 +148,8 @@ struct Ospf {
             fortiapi::Field<std::string> substitute;  // Substitute prefix.
             fortiapi::Field<std::string> substitute_status;  // Enable/disable substitute status.
 
+            static constexpr auto mkey = &RangeEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -172,6 +174,8 @@ struct Ospf {
                 fortiapi::Field<std::uint32_t> id;  // Key ID (1 - 255). Required.
                 fortiapi::Field<std::string> key_string;  // Password for the key. Required.
 
+                static constexpr auto mkey = &Md5KeysEntry::id;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("id", self.id, R"(0)", fortiapi::none);
@@ -189,6 +193,8 @@ struct Ospf {
             fortiapi::Field<std::uint32_t> transmit_delay;  // Transmit delay.
             fortiapi::Field<std::string> peer;  // Peer IP. Required.
             fortiapi::Field<std::vector<Md5KeysEntry>> md5_keys;  // MD5 key.
+
+            static constexpr auto mkey = &VirtualLinkEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -217,6 +223,8 @@ struct Ospf {
             fortiapi::Field<std::string> list;  // Access-list or prefix-list name. Required. References: router.access-list.name, router.prefix-list.name.
             fortiapi::Field<std::string> direction;  // Direction. Required.
 
+            static constexpr auto mkey = &FilterListEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -240,6 +248,8 @@ struct Ospf {
         fortiapi::Field<std::vector<RangeEntry>> range;  // OSPF area range configuration.
         fortiapi::Field<std::vector<VirtualLinkEntry>> virtual_link;  // OSPF virtual link configuration.
         fortiapi::Field<std::vector<FilterListEntry>> filter_list;  // OSPF area filter-list configuration.
+
+        static constexpr auto mkey = &AreaEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -309,6 +319,8 @@ struct Ospf {
             fortiapi::Field<std::uint32_t> id;  // Key ID (1 - 255). Required.
             fortiapi::Field<std::string> key_string;  // Password for the key. Required.
 
+            static constexpr auto mkey = &Md5KeysEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -339,6 +351,8 @@ struct Ospf {
         fortiapi::Field<std::string> status;  // Enable/disable status.
         fortiapi::Field<std::uint32_t> resync_timeout;  // Graceful restart neighbor resynchronization timeout.
         fortiapi::Field<std::vector<Md5KeysEntry>> md5_keys;  // MD5 key.
+
+        static constexpr auto mkey = &OspfInterfaceEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -375,6 +389,8 @@ struct Ospf {
         fortiapi::Field<std::string> area;  // Attach the network to area. Required.
         fortiapi::Field<std::string> comments;  // Comment.
 
+        static constexpr auto mkey = &NetworkEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -391,6 +407,8 @@ struct Ospf {
         fortiapi::Field<std::uint32_t> poll_interval;  // Poll interval time in seconds.
         fortiapi::Field<std::uint32_t> cost;  // Cost of the interface, value range from 0 to 65535, 0 means auto-cost.
         fortiapi::Field<std::uint32_t> priority;  // Priority.
+
+        static constexpr auto mkey = &NeighborEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -415,6 +433,8 @@ struct Ospf {
         fortiapi::Field<std::uint32_t> tag;  // Tag value.
         fortiapi::Field<std::string> advertise;  // Enable/disable advertise status.
 
+        static constexpr auto mkey = &SummaryAddressEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -436,6 +456,8 @@ struct Ospf {
         fortiapi::Field<std::uint32_t> id;  // Distribute list entry ID.
         fortiapi::Field<std::string> access_list;  // Access list name. Required. References: router.access-list.name.
         fortiapi::Field<std::string> protocol;  // Protocol type. Required.
+
+        static constexpr auto mkey = &DistributeListEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -465,6 +487,8 @@ struct Ospf {
         fortiapi::Field<std::string> routemap;  // Route map name. References: router.route-map.name.
         fortiapi::Field<std::string> metric_type;  // Metric type.
         fortiapi::Field<std::uint32_t> tag;  // Tag value.
+
+        static constexpr auto mkey = &RedistributeEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

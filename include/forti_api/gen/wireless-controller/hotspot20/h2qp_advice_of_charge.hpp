@@ -32,6 +32,8 @@ struct H2qpAdviceOfCharge {
             fortiapi::Field<std::string> currency;  // Currency code. Required.
             fortiapi::Field<std::string> info_file;  // Info file. Required.
 
+            static constexpr auto mkey = &PlanInfoEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -46,6 +48,8 @@ struct H2qpAdviceOfCharge {
         fortiapi::Field<std::string> nai_realm_encoding;  // NAI realm encoding.
         fortiapi::Field<std::string> nai_realm;  // NAI realm list name.
         fortiapi::Field<std::vector<PlanInfoEntry>> plan_info;  // Plan info.
+
+        static constexpr auto mkey = &AocListEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

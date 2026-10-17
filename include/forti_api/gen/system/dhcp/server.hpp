@@ -138,6 +138,8 @@ struct Server {
         struct VciStringEntry {
             fortiapi::Field<std::string> vci_string;  // VCI strings. Required.
 
+            static constexpr auto mkey = &VciStringEntry::vci_string;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("vci-string", self.vci_string, R"("")", fortiapi::none);
@@ -147,6 +149,8 @@ struct Server {
         // One or more UCI strings in quotes separated by spaces.
         struct UciStringEntry {
             fortiapi::Field<std::string> uci_string;  // UCI strings. Required.
+
+            static constexpr auto mkey = &UciStringEntry::uci_string;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -162,6 +166,8 @@ struct Server {
         fortiapi::Field<std::string> uci_match;  // Enable/disable user class identifier (UCI) matching. When enabled only DHCP requests with a matching UCI are served with this range.
         fortiapi::Field<std::vector<UciStringEntry>> uci_string;  // One or more UCI strings in quotes separated by spaces.
         fortiapi::Field<std::uint32_t> lease_time;  // Lease time in seconds, 0 means default lease time.
+
+        static constexpr auto mkey = &IpRangeEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -179,6 +185,8 @@ struct Server {
     // One or more hostnames or IP addresses of the TFTP servers in quotes separated by spaces.
     struct TftpServerEntry {
         fortiapi::Field<std::string> tftp_server;  // TFTP server. Required.
+
+        static constexpr auto mkey = &TftpServerEntry::tftp_server;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -212,6 +220,8 @@ struct Server {
         struct VciStringEntry {
             fortiapi::Field<std::string> vci_string;  // VCI strings. Required.
 
+            static constexpr auto mkey = &VciStringEntry::vci_string;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("vci-string", self.vci_string, R"("")", fortiapi::none);
@@ -221,6 +231,8 @@ struct Server {
         // One or more UCI strings in quotes separated by spaces.
         struct UciStringEntry {
             fortiapi::Field<std::string> uci_string;  // UCI strings. Required.
+
+            static constexpr auto mkey = &UciStringEntry::uci_string;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -237,6 +249,8 @@ struct Server {
         fortiapi::Field<std::vector<VciStringEntry>> vci_string;  // One or more VCI strings in quotes separated by spaces.
         fortiapi::Field<std::string> uci_match;  // Enable/disable user class identifier (UCI) matching. When enabled only DHCP requests with a matching UCI are served with this option.
         fortiapi::Field<std::vector<UciStringEntry>> uci_string;  // One or more UCI strings in quotes separated by spaces.
+
+        static constexpr auto mkey = &OptionsEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -255,6 +269,8 @@ struct Server {
     // One or more VCI strings in quotes separated by spaces.
     struct VciStringEntry {
         fortiapi::Field<std::string> vci_string;  // VCI strings. Required.
+
+        static constexpr auto mkey = &VciStringEntry::vci_string;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -280,6 +296,8 @@ struct Server {
         struct VciStringEntry {
             fortiapi::Field<std::string> vci_string;  // VCI strings. Required.
 
+            static constexpr auto mkey = &VciStringEntry::vci_string;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("vci-string", self.vci_string, R"("")", fortiapi::none);
@@ -289,6 +307,8 @@ struct Server {
         // One or more UCI strings in quotes separated by spaces.
         struct UciStringEntry {
             fortiapi::Field<std::string> uci_string;  // UCI strings. Required.
+
+            static constexpr auto mkey = &UciStringEntry::uci_string;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -304,6 +324,8 @@ struct Server {
         fortiapi::Field<std::string> uci_match;  // Enable/disable user class identifier (UCI) matching. When enabled only DHCP requests with a matching UCI are served with this range.
         fortiapi::Field<std::vector<UciStringEntry>> uci_string;  // One or more UCI strings in quotes separated by spaces.
         fortiapi::Field<std::uint32_t> lease_time;  // Lease time in seconds, 0 means default lease time.
+
+        static constexpr auto mkey = &ExcludeRangeEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -355,6 +377,8 @@ struct Server {
         fortiapi::Field<std::string> remote_id_type;  // DHCP option type.
         fortiapi::Field<std::string> remote_id;  // Option 82 remote-ID of the client that will get the reserved IP address.
         fortiapi::Field<std::string> description;  // Description.
+
+        static constexpr auto mkey = &ReservedAddressEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

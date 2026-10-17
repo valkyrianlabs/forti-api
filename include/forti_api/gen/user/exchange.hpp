@@ -64,6 +64,8 @@ struct Exchange {
     struct KdcIpEntry {
         fortiapi::Field<std::string> ipv4;  // KDC IPv4 addresses for Kerberos authentication. Required.
 
+        static constexpr auto mkey = &KdcIpEntry::ipv4;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("ipv4", self.ipv4, R"("")", fortiapi::none);

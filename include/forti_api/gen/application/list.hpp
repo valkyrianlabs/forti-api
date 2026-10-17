@@ -151,6 +151,8 @@ struct List {
         struct RiskEntry {
             fortiapi::Field<std::uint32_t> level;  // Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical). Required.
 
+            static constexpr auto mkey = &RiskEntry::level;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("level", self.level, R"(0)", fortiapi::none);
@@ -160,6 +162,8 @@ struct List {
         // Category ID list.
         struct CategoryEntry {
             fortiapi::Field<std::uint32_t> id;  // Application category ID. Required.
+
+            static constexpr auto mkey = &CategoryEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -171,6 +175,8 @@ struct List {
         struct ApplicationEntry {
             fortiapi::Field<std::uint32_t> id;  // Application IDs. Required.
 
+            static constexpr auto mkey = &ApplicationEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -180,6 +186,8 @@ struct List {
         // ID of excluded applications.
         struct ExclusionEntry {
             fortiapi::Field<std::uint32_t> id;  // Excluded application IDs. Required.
+
+            static constexpr auto mkey = &ExclusionEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -195,6 +203,8 @@ struct List {
                 fortiapi::Field<std::string> name;  // Parameter name. Required.
                 fortiapi::Field<std::string> value;  // Parameter value. Required.
 
+                static constexpr auto mkey = &MembersEntry::id;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("id", self.id, R"(0)", fortiapi::none);
@@ -205,6 +215,8 @@ struct List {
 
             fortiapi::Field<std::uint32_t> id;  // Parameter tuple ID.
             fortiapi::Field<std::vector<MembersEntry>> members;  // Parameter tuple members.
+
+            static constexpr auto mkey = &ParametersEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -238,6 +250,8 @@ struct List {
         fortiapi::Field<std::string> quarantine;  // Quarantine method.
         fortiapi::Field<std::string> quarantine_expiry;  // Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.
         fortiapi::Field<std::string> quarantine_log;  // Enable/disable quarantine logging.
+
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -297,6 +311,8 @@ struct List {
         fortiapi::Field<std::uint32_t> port;  // Port number. Required.
         fortiapi::Field<std::string> services;  // Network protocols.
         fortiapi::Field<std::string> violation_action;  // Action for protocols not in the allowlist for selected port.
+
+        static constexpr auto mkey = &DefaultNetworkServicesEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

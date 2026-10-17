@@ -20,6 +20,8 @@ struct Pools {
         fortiapi::Field<std::uint32_t> ID;  // Exclude ID. Required.
         fortiapi::Field<std::string> exclude_subnet;  // Configure subnet to exclude from the IPAM pool. Required.
 
+        static constexpr auto mkey = &ExcludeEntry::ID;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("ID", self.ID, R"(0)", fortiapi::none);

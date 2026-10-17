@@ -188,6 +188,8 @@ struct Bgp {
     struct ConfederationPeersEntry {
         fortiapi::Field<std::string> peer;  // Peer ID.
 
+        static constexpr auto mkey = &ConfederationPeersEntry::peer;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("peer", self.peer, R"("")", fortiapi::none);
@@ -212,6 +214,8 @@ struct Bgp {
         fortiapi::Field<std::string> prefix;  // Aggregate prefix. Required.
         fortiapi::Field<std::string> as_set;  // Enable/disable generate AS set path information.
         fortiapi::Field<std::string> summary_only;  // Enable/disable filter more specific routes from updates.
+
+        static constexpr auto mkey = &AggregateAddressEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -240,6 +244,8 @@ struct Bgp {
         fortiapi::Field<std::string> prefix6;  // Aggregate IPv6 prefix. Required.
         fortiapi::Field<std::string> as_set;  // Enable/disable generate AS set path information.
         fortiapi::Field<std::string> summary_only;  // Enable/disable filter more specific routes from updates.
+
+        static constexpr auto mkey = &AggregateAddress6Entry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -758,6 +764,8 @@ struct Bgp {
             fortiapi::Field<std::vector<fortiapi::Ref>> condition_routemap;  // List of conditional route maps. Required.
             fortiapi::Field<std::string> condition_type;  // Type of condition.
 
+            static constexpr auto mkey = &ConditionalAdvertiseEntry::advertise_routemap;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("advertise-routemap", self.advertise_routemap, R"("")", fortiapi::none);
@@ -777,6 +785,8 @@ struct Bgp {
             fortiapi::Field<std::string> advertise_routemap;  // Name of advertising route map. Required. References: router.route-map.name.
             fortiapi::Field<std::vector<fortiapi::Ref>> condition_routemap;  // List of conditional route maps. Required.
             fortiapi::Field<std::string> condition_type;  // Type of condition.
+
+            static constexpr auto mkey = &ConditionalAdvertise6Entry::advertise_routemap;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -943,6 +953,8 @@ struct Bgp {
         fortiapi::Field<std::string> auth_options;  // Key-chain name for TCP authentication options. References: router.key-chain.name.
         fortiapi::Field<std::vector<ConditionalAdvertiseEntry>> conditional_advertise;  // Conditional advertisement.
         fortiapi::Field<std::vector<ConditionalAdvertise6Entry>> conditional_advertise6;  // IPv6 conditional advertisement.
+
+        static constexpr auto mkey = &NeighborEntry::ip;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -1759,6 +1771,8 @@ struct Bgp {
         fortiapi::Field<std::string> password;  // Password used in MD5 authentication.
         fortiapi::Field<std::string> auth_options;  // Key-chain name for TCP authentication options. References: router.key-chain.name.
 
+        static constexpr auto mkey = &NeighborGroupEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -1927,6 +1941,8 @@ struct Bgp {
         fortiapi::Field<std::uint32_t> max_neighbor_num;  // Maximum number of neighbors.
         fortiapi::Field<std::string> neighbor_group;  // Neighbor group name. Required. References: router.bgp.neighbor-group.name.
 
+        static constexpr auto mkey = &NeighborRangeEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -1942,6 +1958,8 @@ struct Bgp {
         fortiapi::Field<std::string> prefix6;  // IPv6 prefix. Required.
         fortiapi::Field<std::uint32_t> max_neighbor_num;  // Maximum number of neighbors.
         fortiapi::Field<std::string> neighbor_group;  // Neighbor group name. Required. References: router.bgp.neighbor-group.name.
+
+        static constexpr auto mkey = &NeighborRange6Entry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -1972,6 +1990,8 @@ struct Bgp {
         fortiapi::Field<std::string> network_import_check;  // Configure insurance of BGP network route existence in IGP.
         fortiapi::Field<std::string> backdoor;  // Enable/disable route as backdoor.
         fortiapi::Field<std::string> route_map;  // Route map to modify generated route. References: router.route-map.name.
+
+        static constexpr auto mkey = &NetworkEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -2004,6 +2024,8 @@ struct Bgp {
         fortiapi::Field<std::string> backdoor;  // Enable/disable route as backdoor.
         fortiapi::Field<std::string> route_map;  // Route map to modify generated route. References: router.route-map.name.
 
+        static constexpr auto mkey = &Network6Entry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -2026,6 +2048,8 @@ struct Bgp {
         fortiapi::Field<std::string> status;  // Status.
         fortiapi::Field<std::string> route_map;  // Route map name. References: router.route-map.name.
 
+        static constexpr auto mkey = &RedistributeEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -2046,6 +2070,8 @@ struct Bgp {
         fortiapi::Field<std::string> status;  // Status.
         fortiapi::Field<std::string> route_map;  // Route map name. References: router.route-map.name.
 
+        static constexpr auto mkey = &Redistribute6Entry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -2060,6 +2086,8 @@ struct Bgp {
         fortiapi::Field<std::string> neighbour_prefix;  // Neighbor address prefix. Required.
         fortiapi::Field<std::string> route_list;  // Access list of routes to apply new distance to. References: router.access-list.name.
         fortiapi::Field<std::uint32_t> distance;  // Administrative distance to apply (1 - 255). Required.
+
+        static constexpr auto mkey = &AdminDistanceEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -2083,6 +2111,8 @@ struct Bgp {
         struct ExportRtEntry {
             fortiapi::Field<std::string> route_target;  // Attribute: AA:NN|A.B.C.D:NN.
 
+            static constexpr auto mkey = &ExportRtEntry::route_target;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("route-target", self.route_target, R"("")", fortiapi::none);
@@ -2092,6 +2122,8 @@ struct Bgp {
         // List of import route target.
         struct ImportRtEntry {
             fortiapi::Field<std::string> route_target;  // Attribute: AA:NN|A.B.C.D:NN
+
+            static constexpr auto mkey = &ImportRtEntry::route_target;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -2104,6 +2136,8 @@ struct Bgp {
             fortiapi::Field<std::string> vrf;  // Target VRF ID (0 - 251).
             fortiapi::Field<std::string> route_map;  // Route map of VRF leaking. Required. References: router.route-map.name.
             fortiapi::Field<std::string> interface;  // Interface which is used to leak routes to target VRF. Required. References: system.interface.name.
+
+            static constexpr auto mkey = &LeakTargetEntry::vrf;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -2120,6 +2154,8 @@ struct Bgp {
         fortiapi::Field<std::vector<ImportRtEntry>> import_rt;  // List of import route target.
         fortiapi::Field<std::string> import_route_map;  // Import route map. References: router.route-map.name.
         fortiapi::Field<std::vector<LeakTargetEntry>> leak_target;  // Target VRF table.
+
+        static constexpr auto mkey = &VrfEntry::vrf;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -2146,6 +2182,8 @@ struct Bgp {
         struct ExportRtEntry {
             fortiapi::Field<std::string> route_target;  // Attribute: AA:NN|A.B.C.D:NN.
 
+            static constexpr auto mkey = &ExportRtEntry::route_target;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("route-target", self.route_target, R"("")", fortiapi::none);
@@ -2155,6 +2193,8 @@ struct Bgp {
         // List of import route target.
         struct ImportRtEntry {
             fortiapi::Field<std::string> route_target;  // Attribute: AA:NN|A.B.C.D:NN
+
+            static constexpr auto mkey = &ImportRtEntry::route_target;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -2167,6 +2207,8 @@ struct Bgp {
             fortiapi::Field<std::string> vrf;  // Target VRF ID (0 - 251).
             fortiapi::Field<std::string> route_map;  // Route map of VRF leaking. Required. References: router.route-map.name.
             fortiapi::Field<std::string> interface;  // Interface which is used to leak routes to target VRF. Required. References: system.interface.name.
+
+            static constexpr auto mkey = &LeakTargetEntry::vrf;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -2183,6 +2225,8 @@ struct Bgp {
         fortiapi::Field<std::vector<ImportRtEntry>> import_rt;  // List of import route target.
         fortiapi::Field<std::string> import_route_map;  // Import route map. References: router.route-map.name.
         fortiapi::Field<std::vector<LeakTargetEntry>> leak_target;  // Target VRF table.
+
+        static constexpr auto mkey = &Vrf6Entry::vrf;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

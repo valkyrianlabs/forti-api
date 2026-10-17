@@ -45,6 +45,8 @@ struct VdomDns {
     struct ServerHostnameEntry {
         fortiapi::Field<std::string> hostname;  // DNS server host name list separated by space (maximum 4 domains). Required.
 
+        static constexpr auto mkey = &ServerHostnameEntry::hostname;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("hostname", self.hostname, R"("")", fortiapi::none);

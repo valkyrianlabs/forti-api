@@ -85,6 +85,8 @@ struct UserActivity {
             struct DomainsEntry {
                 fortiapi::Field<std::string> domain;  // Domain list separated by space. Required.
 
+                static constexpr auto mkey = &DomainsEntry::domain;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("domain", self.domain, R"("")", fortiapi::none);
@@ -94,6 +96,8 @@ struct UserActivity {
             // CASB user activity method list.
             struct MethodsEntry {
                 fortiapi::Field<std::string> method;  // User activity method.
+
+                static constexpr auto mkey = &MethodsEntry::method;  // the entry key
 
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
@@ -110,6 +114,8 @@ struct UserActivity {
             fortiapi::Field<std::string> header_name;  // CASB user activity rule header name.
             fortiapi::Field<std::string> case_sensitive;  // CASB user activity match case sensitive.
             fortiapi::Field<std::string> negate;  // Enable/disable what the matching strategy must not be.
+
+            static constexpr auto mkey = &RulesEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -128,6 +134,8 @@ struct UserActivity {
         fortiapi::Field<std::uint32_t> id;  // CASB user activity match rules ID.
         fortiapi::Field<std::string> strategy;  // CASB user activity rules strategy.
         fortiapi::Field<std::vector<RulesEntry>> rules;  // CASB user activity rules.
+
+        static constexpr auto mkey = &MatchEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -191,6 +199,8 @@ struct UserActivity {
             struct ValuesEntry {
                 fortiapi::Field<std::string> value;  // Operation value.
 
+                static constexpr auto mkey = &ValuesEntry::value;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("value", self.value, R"("")", fortiapi::none);
@@ -207,6 +217,8 @@ struct UserActivity {
             fortiapi::Field<std::string> case_sensitive;  // CASB operation search case sensitive.
             fortiapi::Field<std::string> value_from_input;  // Enable/disable value from user input.
             fortiapi::Field<std::vector<ValuesEntry>> values;  // CASB operation new values. Required.
+
+            static constexpr auto mkey = &OperationsEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -226,6 +238,8 @@ struct UserActivity {
         fortiapi::Field<std::string> name;  // CASB control option name.
         fortiapi::Field<std::string> status;  // CASB control option status.
         fortiapi::Field<std::vector<OperationsEntry>> operations;  // CASB control option operations.
+
+        static constexpr auto mkey = &ControlOptionsEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -59,6 +59,8 @@ struct Server {
         fortiapi::Field<std::string> end_prefix;  // End of prefix range. Required.
         fortiapi::Field<std::uint32_t> prefix_length;  // Prefix length. Required.
 
+        static constexpr auto mkey = &PrefixRangeEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -73,6 +75,8 @@ struct Server {
         fortiapi::Field<std::uint32_t> id;  // ID. Required.
         fortiapi::Field<std::string> start_ip;  // Start of IP range. Required.
         fortiapi::Field<std::string> end_ip;  // End of IP range. Required.
+
+        static constexpr auto mkey = &IpRangeEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

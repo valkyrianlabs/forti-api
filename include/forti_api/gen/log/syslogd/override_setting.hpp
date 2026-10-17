@@ -102,6 +102,8 @@ struct OverrideSetting {
         fortiapi::Field<std::string> name;  // Field name [A-Za-z0-9_]. Required.
         fortiapi::Field<std::string> custom;  // Field custom name [A-Za-z0-9_]. Required.
 
+        static constexpr auto mkey = &CustomFieldNameEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

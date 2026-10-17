@@ -131,6 +131,8 @@ struct Ospf6 {
             fortiapi::Field<std::string> auth_key;  // Authentication key.
             fortiapi::Field<std::string> enc_key;  // Encryption key.
 
+            static constexpr auto mkey = &IpsecKeysEntry::spi;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("spi", self.spi, R"(0)", fortiapi::none);
@@ -150,6 +152,8 @@ struct Ospf6 {
             fortiapi::Field<std::uint32_t> id;  // Range entry ID.
             fortiapi::Field<std::string> prefix6;  // IPv6 prefix. Required.
             fortiapi::Field<std::string> advertise;  // Enable/disable advertise status.
+
+            static constexpr auto mkey = &RangeEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -194,6 +198,8 @@ struct Ospf6 {
                 fortiapi::Field<std::string> auth_key;  // Authentication key.
                 fortiapi::Field<std::string> enc_key;  // Encryption key.
 
+                static constexpr auto mkey = &IpsecKeysEntry::spi;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("spi", self.spi, R"(0)", fortiapi::none);
@@ -213,6 +219,8 @@ struct Ospf6 {
             fortiapi::Field<std::string> ipsec_auth_alg;  // Authentication algorithm.
             fortiapi::Field<std::string> ipsec_enc_alg;  // Encryption algorithm.
             fortiapi::Field<std::vector<IpsecKeysEntry>> ipsec_keys;  // IPsec authentication and encryption keys.
+
+            static constexpr auto mkey = &VirtualLinkEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -246,6 +254,8 @@ struct Ospf6 {
         fortiapi::Field<std::vector<IpsecKeysEntry>> ipsec_keys;  // IPsec authentication and encryption keys.
         fortiapi::Field<std::vector<RangeEntry>> range;  // OSPF6 area range configuration.
         fortiapi::Field<std::vector<VirtualLinkEntry>> virtual_link;  // OSPF6 virtual link configuration.
+
+        static constexpr auto mkey = &AreaEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -331,6 +341,8 @@ struct Ospf6 {
             fortiapi::Field<std::string> auth_key;  // Authentication key.
             fortiapi::Field<std::string> enc_key;  // Encryption key.
 
+            static constexpr auto mkey = &IpsecKeysEntry::spi;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("spi", self.spi, R"(0)", fortiapi::none);
@@ -345,6 +357,8 @@ struct Ospf6 {
             fortiapi::Field<std::uint32_t> poll_interval;  // Poll interval time in seconds.
             fortiapi::Field<std::uint32_t> cost;  // Cost of the interface, value range from 0 to 65535, 0 means auto-cost.
             fortiapi::Field<std::uint32_t> priority;  // Priority.
+
+            static constexpr auto mkey = &NeighborEntry::ip6;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -375,6 +389,8 @@ struct Ospf6 {
         fortiapi::Field<std::string> ipsec_enc_alg;  // Encryption algorithm.
         fortiapi::Field<std::vector<IpsecKeysEntry>> ipsec_keys;  // IPsec authentication and encryption keys.
         fortiapi::Field<std::vector<NeighborEntry>> neighbor;  // OSPFv3 neighbors are used when OSPFv3 runs on non-broadcast media.
+
+        static constexpr auto mkey = &Ospf6InterfaceEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -421,6 +437,8 @@ struct Ospf6 {
         fortiapi::Field<std::string> routemap;  // Route map name. References: router.route-map.name.
         fortiapi::Field<std::string> metric_type;  // Metric type.
 
+        static constexpr auto mkey = &RedistributeEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -443,6 +461,8 @@ struct Ospf6 {
         fortiapi::Field<std::string> prefix6;  // IPv6 prefix. Required.
         fortiapi::Field<std::string> advertise;  // Enable/disable advertise status.
         fortiapi::Field<std::uint32_t> tag;  // Tag value.
+
+        static constexpr auto mkey = &SummaryAddressEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

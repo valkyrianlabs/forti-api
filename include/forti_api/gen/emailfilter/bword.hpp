@@ -63,6 +63,8 @@ struct Bword {
         fortiapi::Field<std::string> language;  // Language for the banned word. Required.
         fortiapi::Field<std::uint32_t> score;  // Score value.
 
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("status", self.status, R"("enable")", fortiapi::none);

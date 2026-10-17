@@ -589,6 +589,8 @@ struct WtpProfile {
         fortiapi::Field<std::uint32_t> id;  // ID.
         fortiapi::Field<std::string> mac;  // A WiFi device with this MAC address is denied access to this WTP, FortiAP or AP.
 
+        static constexpr auto mkey = &DenyMacListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -600,6 +602,8 @@ struct WtpProfile {
     struct SplitTunnelingAclEntry {
         fortiapi::Field<std::uint32_t> id;  // ID.
         fortiapi::Field<std::string> dest_ip;  // Destination IP and mask for the split-tunneling subnet. Required.
+
+        static constexpr auto mkey = &SplitTunnelingAclEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -888,6 +892,8 @@ struct WtpProfile {
         // Selected list of wireless radio channels.
         struct ChannelEntry {
             fortiapi::Field<std::string> chan;  // Channel number. Required.
+
+            static constexpr auto mkey = &ChannelEntry::chan;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -1338,6 +1344,8 @@ struct WtpProfile {
         struct ChannelEntry {
             fortiapi::Field<std::string> chan;  // Channel number. Required.
 
+            static constexpr auto mkey = &ChannelEntry::chan;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("chan", self.chan, R"("")", fortiapi::none);
@@ -1787,6 +1795,8 @@ struct WtpProfile {
         struct ChannelEntry {
             fortiapi::Field<std::string> chan;  // Channel number. Required.
 
+            static constexpr auto mkey = &ChannelEntry::chan;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("chan", self.chan, R"("")", fortiapi::none);
@@ -2235,6 +2245,8 @@ struct WtpProfile {
         // Selected list of wireless radio channels.
         struct ChannelEntry {
             fortiapi::Field<std::string> chan;  // Channel number. Required.
+
+            static constexpr auto mkey = &ChannelEntry::chan;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {

@@ -21,6 +21,8 @@ struct AnqpVenueUrl {
         fortiapi::Field<std::uint32_t> number;  // Venue number. Required.
         fortiapi::Field<std::string> value;  // Venue URL value. Required.
 
+        static constexpr auto mkey = &ValueListEntry::index;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("index", self.index, R"(0)", fortiapi::none);

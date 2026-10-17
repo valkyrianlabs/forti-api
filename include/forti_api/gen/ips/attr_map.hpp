@@ -19,6 +19,8 @@ struct AttrMap {
     struct ChildrenEntry {
         fortiapi::Field<std::uint32_t> map_id;  // Child attribute map ID.
 
+        static constexpr auto mkey = &ChildrenEntry::map_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("map-id", self.map_id, R"(0)", fortiapi::none);

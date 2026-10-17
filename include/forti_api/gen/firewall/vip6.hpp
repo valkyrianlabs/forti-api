@@ -340,6 +340,8 @@ struct Vip6 {
     struct SrcFilterEntry {
         fortiapi::Field<std::string> range;  // Source-filter range. Required.
 
+        static constexpr auto mkey = &SrcFilterEntry::range;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("range", self.range, R"("")", fortiapi::none);
@@ -416,6 +418,8 @@ struct Vip6 {
         fortiapi::Field<std::uint32_t> max_connections;  // Max number of active connections that can directed to the real server. When reached, sessions are sent to other real servers.
         fortiapi::Field<std::vector<fortiapi::Ref>> monitor;  // Name of the health check monitor to use when polling to determine a virtual server's connectivity status.
         fortiapi::Field<std::string> client_ip;  // Only clients in this IP range can connect to this real server.
+
+        static constexpr auto mkey = &RealserversEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -524,6 +528,8 @@ struct Vip6 {
         fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
         fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
 
+        static constexpr auto mkey = &SslCipherSuitesEntry::priority;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("priority", self.priority, R"(0)", fortiapi::none);
@@ -621,6 +627,8 @@ struct Vip6 {
         fortiapi::Field<std::uint32_t> priority;  // SSL/TLS cipher suites priority.
         fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
         fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
+
+        static constexpr auto mkey = &SslServerCipherSuitesEntry::priority;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

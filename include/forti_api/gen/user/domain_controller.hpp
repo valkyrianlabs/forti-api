@@ -49,6 +49,8 @@ struct DomainController {
         fortiapi::Field<std::string> source_ip_address;  // FortiGate IPv4 address to be used for communication with the domain controller. Required.
         fortiapi::Field<std::uint32_t> source_port;  // Source port to be used for communication with the domain controller.
 
+        static constexpr auto mkey = &ExtraServerEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

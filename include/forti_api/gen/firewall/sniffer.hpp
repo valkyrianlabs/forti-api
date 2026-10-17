@@ -142,6 +142,8 @@ struct Sniffer {
         fortiapi::Field<std::uint32_t> threshold;  // Anomaly threshold. Number of detected instances (packets per second or concurrent session number) that triggers the anomaly action.
         fortiapi::Field<std::uint32_t> threshold_default_;  // Number of detected instances (packets per second or concurrent session number) which triggers action (1 - 2147483647, default = 1000). Note that each anomaly has a different threshold value assigned to it. Read-only.
 
+        static constexpr auto mkey = &AnomalyEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

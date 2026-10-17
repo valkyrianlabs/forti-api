@@ -12,6 +12,8 @@
 #include <array>
 #include <cstdint>
 #include <cstdlib>
+#include <functional>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <thread>
@@ -86,9 +88,56 @@ namespace live {
         return value && std::string_view(value) == "1";
     }
 
-    // Wraps the real transport. GETs pass; a POST must create a forti-api-test-* object in an
-    // approved collection; PUT/DELETE must target <approved collection>/<forti-api-test-*> exactly.
-    // A read-only guard refuses everything but GET.
+    // A cmdb path below an approved collection, split into decoded segments:
+    //   cmdb/firewall/addrgrp/forti-api-test-g/member/forti-api-test-a
+    //     -> collection "cmdb/firewall/addrgrp", rest {"forti-api-test-g", "member", "forti-api-test-a"}
+    // Splitting happens before decoding, so an encoded "/" (%2F) stays inside its key.
+    struct ApprovedPath {
+        std::string_view collection;
+        std::vector<std::string> rest;
+    };
+
+    inline std::optional<ApprovedPath> approved_path(std::string_view path) {
+        for (auto collection: approved_collections) {
+            if (path == collection) return ApprovedPath{collection, {}};
+            if (!path.starts_with(collection) || path.size() <= collection.size() || path[collection.size()] != '/')
+                continue;
+            ApprovedPath found{collection, {}};
+            auto tail = path.substr(collection.size() + 1);
+            while (true) {
+                auto slash = tail.find('/');
+                found.rest.push_back(decode(tail.substr(0, slash)));
+                if (slash == std::string_view::npos) break;
+                tail.remove_prefix(slash + 1);
+            }
+            return found;
+        }
+        return std::nullopt;
+    }
+
+    // A FortiOS attribute name as it appears in a child path ("member", "reserved-address").
+    inline bool attribute_segment(std::string_view segment) {
+        return !segment.empty() && std::all_of(segment.begin(), segment.end(), [](char c) {
+            return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '-';
+        }) && segment.front() != '-';
+    }
+
+    // A numeric entry key ("0", "17"): the id of an entry in an id-keyed child table.
+    inline bool numeric_segment(std::string_view segment) {
+        return !segment.empty() && segment.size() <= 10 &&
+               std::all_of(segment.begin(), segment.end(), [](char c) { return c >= '0' && c <= '9'; });
+    }
+
+    // Wraps the real transport. GETs pass; every other request must stay inside a forti-api-test-*
+    // object of an approved collection:
+    //   POST   <collection>                              body "name" forti-api-test-*
+    //   PUT    <collection>/<test object>                DELETE likewise
+    //   POST   <collection>/<test object>/<attribute>    one child-table entry: body "name"
+    //                                                    forti-api-test-*, or no "name" and a numeric "id"
+    //   PUT    <collection>/<test object>/<attribute>/<entry>    DELETE likewise; the entry key is
+    //                                                    forti-api-test-* or numeric (an id-keyed entry)
+    // Everything else, including writes to a whole child table (PUT/DELETE <test object>/<attribute>)
+    // and deeper paths, is refused. A read-only guard refuses everything but GET.
     class GuardTransport final : public fortiapi::Transport {
         std::shared_ptr<fortiapi::Transport> inner_;
         bool read_only_ = false;
@@ -100,9 +149,13 @@ namespace live {
             return path.substr(0, path.find('?'));
         }
 
-        static bool approved(std::string_view collection) {
-            return std::find(approved_collections.begin(), approved_collections.end(), collection) !=
-                   approved_collections.end();
+        // The body of a POST that creates one child-table entry names a test entry or a numeric id.
+        static bool test_entry_body(const nlohmann::json& body) {
+            if (!body.is_object()) return false;
+            if (auto it = body.find("name"); it != body.end())
+                return it->is_string() && it->get_ref<const std::string&>().starts_with(prefix);
+            auto id = body.find("id");
+            return id != body.end() && (id->is_number_unsigned() || (id->is_number_integer() && id->get<std::int64_t>() >= 0));
         }
 
     public:
@@ -126,18 +179,27 @@ namespace live {
                 throw GuardViolation("live guard: refusing POST " + path + " for non-test objects");
             }
 
-            if (request.method == fortiapi::Method::Post) {
-                auto body = nlohmann::json::parse(request.body, nullptr, false);
-                std::string name = body.is_object() && body.contains("name") && body["name"].is_string()
-                                   ? body["name"].get<std::string>() : "";
-                if (approved(path) && name.starts_with(prefix)) return;
-                throw GuardViolation("live guard: refusing POST " + path + " (name '" + name + "')");
+            auto target = approved_path(path);
+            const bool post = request.method == fortiapi::Method::Post;
+            if (target && (post || request.method == fortiapi::Method::Put || request.method == fortiapi::Method::Delete)) {
+                const auto& rest = target->rest;
+                bool test_parent = !rest.empty() && rest[0].starts_with(prefix);
+                if (post && rest.empty()) {
+                    auto body = nlohmann::json::parse(request.body, nullptr, false);
+                    std::string name = body.is_object() && body.contains("name") && body["name"].is_string()
+                                       ? body["name"].get<std::string>() : "";
+                    if (name.starts_with(prefix)) return;
+                    throw GuardViolation("live guard: refusing POST " + path + " (name '" + name + "')");
+                }
+                if (!post && rest.size() == 1 && test_parent) return;
+                if (post && rest.size() == 2 && test_parent && attribute_segment(rest[1])) {
+                    if (test_entry_body(nlohmann::json::parse(request.body, nullptr, false))) return;
+                    throw GuardViolation("live guard: refusing POST " + path + " (entry is neither forti-api-test-* nor numeric)");
+                }
+                if (!post && rest.size() == 3 && test_parent && attribute_segment(rest[1]) &&
+                    (rest[2].starts_with(prefix) || numeric_segment(rest[2])))
+                    return;
             }
-
-            auto slash = path.rfind('/');
-            auto collection = slash == std::string::npos ? "" : path.substr(0, slash);
-            auto key = slash == std::string::npos ? "" : decode(path.substr(slash + 1));
-            if (approved(collection) && key.starts_with(prefix)) return;
             throw GuardViolation("live guard: refusing " + method + " " + path);
         }
 
@@ -150,9 +212,11 @@ namespace live {
         }
     };
 
-    // A client for the live suite: environment config, every request through the guard.
-    inline std::shared_ptr<fortiapi::Client> guarded_client() {
+    // A client for the live suite: environment config, every request through the guard. Each call
+    // makes a separate client with its own connection (the concurrency tests use two).
+    inline std::shared_ptr<fortiapi::Client> guarded_client(std::function<void(const fortiapi::Exchange&)> on_exchange = {}) {
         auto config = fortiapi::Config::from_env();
+        config.on_exchange = std::move(on_exchange);
         auto transport = std::make_shared<GuardTransport>(std::make_shared<fortiapi::CurlTransport>(config),
                                                           read_only_requested());
         return std::make_shared<fortiapi::Client>(config, transport);

@@ -60,6 +60,8 @@ struct IpDscpMap {
         fortiapi::Field<std::string> ip_precedence;  // IP Precedence.
         fortiapi::Field<std::string> value;  // Raw values of DSCP (0 - 63).
 
+        static constexpr auto mkey = &MapEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

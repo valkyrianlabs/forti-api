@@ -63,6 +63,8 @@ struct Ipam {
             fortiapi::Field<std::uint32_t> ID;  // Exclude ID. Required.
             fortiapi::Field<std::string> exclude_subnet;  // Configure subnet to exclude from the IPAM pool. Required.
 
+            static constexpr auto mkey = &ExcludeEntry::ID;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("ID", self.ID, R"(0)", fortiapi::none);
@@ -74,6 +76,8 @@ struct Ipam {
         fortiapi::Field<std::string> description;  // Description.
         fortiapi::Field<std::string> subnet;  // Configure IPAM pool subnet, Class A - Class B subnet. Required.
         fortiapi::Field<std::vector<ExcludeEntry>> exclude;  // Configure pool exclude subnets.
+
+        static constexpr auto mkey = &PoolsEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -108,6 +112,8 @@ struct Ipam {
         fortiapi::Field<std::string> role;  // Configure role of interface to match.
         fortiapi::Field<std::vector<fortiapi::Ref>> pool;  // Configure name of IPAM pool to use. Required.
         fortiapi::Field<std::string> dhcp;  // Enable/disable DHCP server for matching IPAM interfaces.
+
+        static constexpr auto mkey = &RulesEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

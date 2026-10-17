@@ -29,6 +29,8 @@ struct Profile {
         fortiapi::Field<std::string> action;  // Action taken when PPID is matched.
         fortiapi::Field<std::string> comment;  // Comment.
 
+        static constexpr auto mkey = &PpidFiltersEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

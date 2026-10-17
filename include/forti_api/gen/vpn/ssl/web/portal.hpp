@@ -482,6 +482,8 @@ struct Portal {
                 fortiapi::Field<std::string> name;  // Name.
                 fortiapi::Field<std::string> value;  // Value.
 
+                static constexpr auto mkey = &FormDataEntry::name;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("name", self.name, R"("")", fortiapi::none);
@@ -517,6 +519,8 @@ struct Portal {
             fortiapi::Field<std::uint32_t> width;  // Screen width (range from 0 - 65535, default = 0).
             fortiapi::Field<std::uint32_t> height;  // Screen height (range from 0 - 65535, default = 0).
             fortiapi::Field<std::string> vnc_keyboard_layout;  // Keyboard layout.
+
+            static constexpr auto mkey = &BookmarksEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -554,6 +558,8 @@ struct Portal {
         fortiapi::Field<std::string> name;  // Bookmark group name.
         fortiapi::Field<std::vector<BookmarksEntry>> bookmarks;  // Bookmark table.
 
+        static constexpr auto mkey = &BookmarkGroupEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -567,6 +573,8 @@ struct Portal {
         struct MacAddrListEntry {
             fortiapi::Field<std::string> addr;  // Client MAC address.
 
+            static constexpr auto mkey = &MacAddrListEntry::addr;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("addr", self.addr, R"("00:00:00:00:00:00")", fortiapi::none);
@@ -576,6 +584,8 @@ struct Portal {
         fortiapi::Field<std::string> name;  // Client MAC address check rule name.
         fortiapi::Field<std::uint32_t> mac_addr_mask;  // Client MAC address mask.
         fortiapi::Field<std::vector<MacAddrListEntry>> mac_addr_list;  // Client MAC address list. Required.
+
+        static constexpr auto mkey = &MacAddrCheckRuleEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -600,6 +610,8 @@ struct Portal {
         fortiapi::Field<std::uint32_t> tolerance;  // OS patch level tolerance.
         fortiapi::Field<std::string> latest_patch_level;  // Latest OS patch level.
 
+        static constexpr auto mkey = &OsCheckListEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -618,6 +630,8 @@ struct Portal {
         fortiapi::Field<std::string> dns_server2;  // DNS server 2.
         fortiapi::Field<std::string> ipv6_dns_server1;  // IPv6 DNS server 1.
         fortiapi::Field<std::string> ipv6_dns_server2;  // IPv6 DNS server 2.
+
+        static constexpr auto mkey = &SplitDnsEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -649,6 +663,8 @@ struct Portal {
         struct FormDataEntry {
             fortiapi::Field<std::string> name;  // Name.
             fortiapi::Field<std::string> value;  // Value.
+
+            static constexpr auto mkey = &FormDataEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {

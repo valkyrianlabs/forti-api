@@ -52,6 +52,8 @@ struct QueuePolicy {
         fortiapi::Field<std::string> ecn;  // Enable/disable ECN packet marking to drop eligible packets.
         fortiapi::Field<std::uint32_t> weight;  // Weight of weighted round robin scheduling.
 
+        static constexpr auto mkey = &CosQueueEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

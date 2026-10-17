@@ -69,6 +69,8 @@ struct Profile {
             fortiapi::Field<std::string> action;  // CASB access rule action.
             fortiapi::Field<std::string> bypass;  // CASB bypass options.
 
+            static constexpr auto mkey = &AccessRuleEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -85,6 +87,8 @@ struct Profile {
                 struct UserInputEntry {
                     fortiapi::Field<std::string> value;  // user input value.
 
+                    static constexpr auto mkey = &UserInputEntry::value;  // the entry key
+
                     template<typename Self, typename Visitor>
                     static void visit(Self& self, Visitor&& v) {
                         v("value", self.value, R"("")", fortiapi::none);
@@ -93,6 +97,8 @@ struct Profile {
 
                 fortiapi::Field<std::string> name;  // CASB custom control option name. Required.
                 fortiapi::Field<std::vector<UserInputEntry>> user_input;  // CASB custom control user input.
+
+                static constexpr auto mkey = &OptionEntry::name;  // the entry key
 
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
@@ -103,6 +109,8 @@ struct Profile {
 
             fortiapi::Field<std::string> name;  // CASB custom control user activity name. References: casb.user-activity.name.
             fortiapi::Field<std::vector<OptionEntry>> option;  // CASB custom control option.
+
+            static constexpr auto mkey = &CustomControlEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -122,6 +130,8 @@ struct Profile {
         fortiapi::Field<std::string> log;  // Enable/disable log settings.
         fortiapi::Field<std::vector<AccessRuleEntry>> access_rule;  // CASB profile access rule.
         fortiapi::Field<std::vector<CustomControlEntry>> custom_control;  // CASB profile custom control.
+
+        static constexpr auto mkey = &SaasApplicationEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

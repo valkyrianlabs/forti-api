@@ -33,6 +33,8 @@ struct Multicast6 {
         fortiapi::Field<std::uint32_t> hello_interval;  // Interval between sending PIM hello messages in seconds (1 - 65535, default = 30).
         fortiapi::Field<std::uint32_t> hello_holdtime;  // Time before old neighbor information expires in seconds (1 - 65535, default = 105).
 
+        static constexpr auto mkey = &InterfaceEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -47,6 +49,8 @@ struct Multicast6 {
         struct RpAddressEntry {
             fortiapi::Field<std::uint32_t> id;  // ID of the entry.
             fortiapi::Field<std::string> ip6_address;  // RP router IPv6 address. Required.
+
+            static constexpr auto mkey = &RpAddressEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {

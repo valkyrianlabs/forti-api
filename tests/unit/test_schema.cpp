@@ -199,6 +199,57 @@ TEST(Schema, KeysAndPaths) {
     EXPECT_EQ(schema::key_of(endpoint("cmdb/system/global"), json{{"hostname", "fw"}}), std::nullopt);
 }
 
+TEST(Schema, ChildTables) {
+    const auto& server = endpoint("cmdb/system.dhcp/server");
+    const auto* reservations = schema::child_table(server, "reserved-address");
+    ASSERT_NE(reservations, nullptr);
+    EXPECT_EQ(reservations->name, "reserved-address");
+    EXPECT_EQ(reservations->item->type->key, "id");
+    EXPECT_NE(schema::child_table(server, "ip-range"), nullptr);
+    EXPECT_EQ(schema::child_table(server, "dns-service"), nullptr);     // an option, not a table
+    EXPECT_EQ(schema::child_table(server, "no-such"), nullptr);
+    EXPECT_EQ(schema::child_table(endpoint("cmdb/system/global"), "admin-sport"), nullptr);   // not a table endpoint
+    EXPECT_EQ(schema::child_table(endpoint("cmdb/firewall/policy"), "srcaddr")->item->type->key, "name");
+
+    EXPECT_EQ(schema::child_path(server, *reservations, 1), "cmdb/system.dhcp/server/1/reserved-address");
+    json entry = "21";
+    EXPECT_EQ(schema::child_path(server, *reservations, "1", &entry), "cmdb/system.dhcp/server/1/reserved-address/21");
+    const auto& address = endpoint("cmdb/firewall/address");
+    json dots = "..";
+    EXPECT_EQ(schema::child_path(address, *schema::child_table(address, "tagging"), "10.0.0.0/24", &dots),
+              "cmdb/firewall/address/10.0.0.0%2F24/tagging/%2E%2E");
+
+    // Every table attribute of a table with keyed entries is a child table (one level).
+    std::size_t tables = 0;
+    for (const auto& ep: schema::endpoints()) {
+        if (ep.kind != schema::EndpointKind::table || !ep.type) continue;
+        for (const auto& field: ep.type->fields) {
+            bool keyed = field.is_table() && field.item->type && !field.item->type->key.empty();
+            EXPECT_EQ(schema::child_table(ep, field.name) == &field, keyed) << ep.path << " " << field.name;
+            tables += keyed;
+        }
+    }
+    EXPECT_GT(tables, 300u);
+}
+
+TEST(Schema, CreatedEntryKey) {
+    const auto& server = endpoint("cmdb/system.dhcp/server");
+    const auto& reservations = *schema::child_table(server, "reserved-address");
+    auto reply = [](const char* method, json mkey, json child_mkey = nullptr, const char* child_path = "reserved-address") {
+        json body = {{"http_method", method}, {"status", "success"}, {"http_status", 200}, {"mkey", std::move(mkey)}};
+        if (child_path) body["child_path"] = child_path;
+        if (!child_mkey.is_null()) body["child_mkey"] = std::move(child_mkey);
+        return fortiapi::Reply::from(body);
+    };
+    EXPECT_EQ(schema::created_entry_key(reservations, reply("POST", 2)), json(2));
+    EXPECT_EQ(schema::created_entry_key(reservations, reply("POST", "13")), json(13));
+    EXPECT_EQ(schema::created_entry_key(reservations, reply("PUT", 1, "10")), json(10));
+    EXPECT_EQ(schema::created_entry_key(reservations, reply("PUT", 1)), std::nullopt);
+    EXPECT_EQ(schema::created_entry_key(reservations, reply("POST", 2, nullptr, nullptr)), std::nullopt);
+    EXPECT_EQ(schema::created_entry_key(reservations, reply("POST", 2, nullptr, "ip-range")), std::nullopt);
+    EXPECT_EQ(schema::created_entry_key(reservations, reply("POST", -1)), std::nullopt);
+}
+
 TEST(Schema, CheckValuesIsAdvisory) {
     const auto& address = type("cmdb/firewall/address");
     auto findings = schema::check_values(address, json{{"type", "ipmasq"}, {"cache-ttl", 999999}, {"interface", std::string(40, 'i')},

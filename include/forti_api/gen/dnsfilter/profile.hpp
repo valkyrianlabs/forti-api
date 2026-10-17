@@ -102,6 +102,8 @@ struct Profile {
             fortiapi::Field<std::string> action;  // Action to take for DNS requests matching the category.
             fortiapi::Field<std::string> log;  // Enable/disable DNS filter logging for this DNS profile.
 
+            static constexpr auto mkey = &FiltersEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -144,6 +146,8 @@ struct Profile {
         fortiapi::Field<std::string> src6;  // IPv6 address or subnet on the internal network to compare with the resolved address in DNS query replies. If the resolved address matches, the resolved address is substituted with dst6.
         fortiapi::Field<std::string> dst6;  // IPv6 address or subnet on the external network to substitute for the resolved address in DNS query replies. Can be single IP address or subnet on the external network, but number of addresses must equal number of mapped IP addresses in src6.
         fortiapi::Field<std::uint32_t> prefix;  // If src6 and dst6 are subnets rather than single IP addresses, enter the prefix for both src6 and dst6 (1 - 128, default = 128).
+
+        static constexpr auto mkey = &DnsTranslationEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

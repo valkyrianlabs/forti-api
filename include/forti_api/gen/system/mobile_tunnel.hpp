@@ -43,6 +43,8 @@ struct MobileTunnel {
         fortiapi::Field<std::string> interface;  // Select the associated interface name from available options. References: system.interface.name.
         fortiapi::Field<std::string> prefix;  // Class IP and Netmask with correction (Format:xxx.xxx.xxx.xxx xxx.xxx.xxx.xxx or xxx.xxx.xxx.xxx/x).
 
+        static constexpr auto mkey = &NetworkEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

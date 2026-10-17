@@ -160,6 +160,8 @@ struct Explicit {
         fortiapi::Field<std::string> pac_file_data;  // PAC file contents enclosed in quotes (maximum of 256K bytes).
         fortiapi::Field<std::string> comments;  // Optional comments.
 
+        static constexpr auto mkey = &PacPolicyEntry::policyid;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("policyid", self.policyid, R"(0)", fortiapi::none);

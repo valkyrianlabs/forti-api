@@ -25,6 +25,8 @@ struct OnDemandSniffer {
     struct HostsEntry {
         fortiapi::Field<std::string> host;  // IPv4 or IPv6 host. Required.
 
+        static constexpr auto mkey = &HostsEntry::host;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("host", self.host, R"("")", fortiapi::none);
@@ -35,6 +37,8 @@ struct OnDemandSniffer {
     struct PortsEntry {
         fortiapi::Field<std::uint32_t> port;  // Port to filter in this traffic sniffer. Required.
 
+        static constexpr auto mkey = &PortsEntry::port;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("port", self.port, R"(0)", fortiapi::none);
@@ -44,6 +48,8 @@ struct OnDemandSniffer {
     // Protocols to filter in this traffic sniffer.
     struct ProtocolsEntry {
         fortiapi::Field<std::uint32_t> protocol;  // Integer value for the protocol type as defined by IANA (0 - 255). Required.
+
+        static constexpr auto mkey = &ProtocolsEntry::protocol;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

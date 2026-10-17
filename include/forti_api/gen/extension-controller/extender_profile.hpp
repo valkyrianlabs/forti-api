@@ -150,6 +150,8 @@ struct ExtenderProfile {
                 fortiapi::Field<std::string> phone_number;  // Receiver phone number. Format: [+][country code][area code][local phone number]. For example, +16501234567. Required.
                 fortiapi::Field<std::string> alert;  // Alert multi-options.
 
+                static constexpr auto mkey = &ReceiverEntry::name;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("name", self.name, R"("")", fortiapi::none);
@@ -440,6 +442,8 @@ struct ExtenderProfile {
             fortiapi::Field<std::string> port;  // FortiExtender uplink port. Required.
             fortiapi::Field<std::string> role;  // FortiExtender uplink port. Required.
             fortiapi::Field<std::uint32_t> weight;  // WRR weight parameter. Required.
+
+            static constexpr auto mkey = &BackhaulEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {

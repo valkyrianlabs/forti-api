@@ -720,6 +720,8 @@ struct Vap {
         fortiapi::Field<std::string> name;  // VLAN name. Required.
         fortiapi::Field<std::string> vlan_id;  // VLAN IDs (maximum 8 VLAN IDs).
 
+        static constexpr auto mkey = &VlanNameEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -731,6 +733,8 @@ struct Vap {
     struct VlanPoolEntry {
         fortiapi::Field<std::uint32_t> id;  // ID.
         fortiapi::Field<std::string> wtp_group;  // WTP group name. References: wireless-controller.wtp-group.name.
+
+        static constexpr auto mkey = &VlanPoolEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

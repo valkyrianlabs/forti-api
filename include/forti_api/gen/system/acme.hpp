@@ -25,6 +25,8 @@ struct Acme {
     struct InterfaceEntry {
         fortiapi::Field<std::string> interface_name;  // Interface name. Required. References: system.interface.name.
 
+        static constexpr auto mkey = &InterfaceEntry::interface_name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("interface-name", self.interface_name, R"("")", fortiapi::none);
@@ -39,6 +41,8 @@ struct Acme {
         fortiapi::Field<std::string> ca_url;  // Account ca_url. Required.
         fortiapi::Field<std::string> email;  // Account email. Required.
         fortiapi::Field<std::string> privatekey;  // Account Private Key. Required.
+
+        static constexpr auto mkey = &AccountsEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

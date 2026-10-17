@@ -65,6 +65,8 @@ struct Profile {
         fortiapi::Field<std::string> action;  // Video filter action.
         fortiapi::Field<std::string> log;  // Enable/disable logging.
 
+        static constexpr auto mkey = &FiltersEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

@@ -109,6 +109,8 @@ struct OverrideFilter {
         fortiapi::Field<std::string> filter;  // Free style filter string. Required.
         fortiapi::Field<std::string> filter_type;  // Include/exclude logs that match the filter.
 
+        static constexpr auto mkey = &FreeStyleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

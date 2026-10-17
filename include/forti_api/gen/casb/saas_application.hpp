@@ -31,6 +31,8 @@ struct SaasApplication {
     struct DomainsEntry {
         fortiapi::Field<std::string> domain;  // Domain list separated by space. Required.
 
+        static constexpr auto mkey = &DomainsEntry::domain;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("domain", self.domain, R"("")", fortiapi::none);

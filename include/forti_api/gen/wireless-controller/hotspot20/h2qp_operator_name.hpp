@@ -21,6 +21,8 @@ struct H2qpOperatorName {
         fortiapi::Field<std::string> lang;  // Language code. Required.
         fortiapi::Field<std::string> value;  // Friendly name value. Required.
 
+        static constexpr auto mkey = &ValueListEntry::index;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("index", self.index, R"(0)", fortiapi::none);

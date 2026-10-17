@@ -68,6 +68,8 @@ struct ShapingPolicy {
     struct ApplicationEntry {
         fortiapi::Field<std::uint32_t> id;  // Application IDs. Required.
 
+        static constexpr auto mkey = &ApplicationEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -78,6 +80,8 @@ struct ShapingPolicy {
     struct AppCategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // Category IDs. Required.
 
+        static constexpr auto mkey = &AppCategoryEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -87,6 +91,8 @@ struct ShapingPolicy {
     // IDs of one or more FortiGuard Web Filtering categories that this shaper applies traffic shaping to.
     struct UrlCategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // URL category ID. Required.
+
+        static constexpr auto mkey = &UrlCategoryEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

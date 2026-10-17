@@ -537,6 +537,8 @@ struct Phase1 {
     struct InternalDomainListEntry {
         fortiapi::Field<std::string> domain_name;  // Domain name. Required.
 
+        static constexpr auto mkey = &InternalDomainListEntry::domain_name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("domain-name", self.domain_name, R"("")", fortiapi::none);
@@ -548,6 +550,8 @@ struct Phase1 {
         fortiapi::Field<std::uint32_t> id;  // ID. Required.
         fortiapi::Field<std::string> start_ip;  // Start of IPv4 exclusive range. Required.
         fortiapi::Field<std::string> end_ip;  // End of IPv4 exclusive range. Required.
+
+        static constexpr auto mkey = &Ipv4ExcludeRangeEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -563,6 +567,8 @@ struct Phase1 {
         fortiapi::Field<std::string> start_ip;  // Start of IPv6 exclusive range. Required.
         fortiapi::Field<std::string> end_ip;  // End of IPv6 exclusive range. Required.
 
+        static constexpr auto mkey = &Ipv6ExcludeRangeEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -574,6 +580,8 @@ struct Phase1 {
     // Instruct unity clients about the backup gateway address(es).
     struct BackupGatewayEntry {
         fortiapi::Field<std::string> address;  // Address of backup gateway. Required.
+
+        static constexpr auto mkey = &BackupGatewayEntry::address;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

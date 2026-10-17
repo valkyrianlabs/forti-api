@@ -63,6 +63,8 @@ struct Profile {
             fortiapi::Field<std::string> log;  // Enable/disable logging.
             fortiapi::Field<std::string> severity;  // Severity.
 
+            static constexpr auto mkey = &MainClassEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -77,6 +79,8 @@ struct Profile {
         struct DisabledSubClassEntry {
             fortiapi::Field<std::uint32_t> id;  // Signature subclass ID. References: waf.sub-class.id.
 
+            static constexpr auto mkey = &DisabledSubClassEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -86,6 +90,8 @@ struct Profile {
         // Disabled signatures.
         struct DisabledSignatureEntry {
             fortiapi::Field<std::uint32_t> id;  // Signature ID. References: waf.signature.id.
+
+            static constexpr auto mkey = &DisabledSignatureEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -159,6 +165,8 @@ struct Profile {
             fortiapi::Field<std::string> case_sensitivity;  // Case sensitivity in pattern.
             fortiapi::Field<std::string> pattern;  // Match pattern.
             fortiapi::Field<std::string> target;  // Match HTTP target.
+
+            static constexpr auto mkey = &CustomSignatureEntry::name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -847,6 +855,8 @@ struct Profile {
             fortiapi::Field<std::string> max_url_param;  // Maximum number of parameters in URL.
             fortiapi::Field<std::string> max_range_segment;  // Maximum number of range segments in HTTP range line.
 
+            static constexpr auto mkey = &ExceptionEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -964,6 +974,8 @@ struct Profile {
             fortiapi::Field<std::string> address;  // Host address. Required. References: firewall.address.name, firewall.addrgrp.name.
             fortiapi::Field<std::string> allowed_methods;  // Allowed Methods.
 
+            static constexpr auto mkey = &MethodPolicyEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -1069,6 +1081,8 @@ struct Profile {
             fortiapi::Field<std::string> regex;  // Enable/disable regular expression based pattern match.
             fortiapi::Field<std::string> negate;  // Enable/disable match negation.
 
+            static constexpr auto mkey = &AccessPatternEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -1085,6 +1099,8 @@ struct Profile {
         fortiapi::Field<std::string> log;  // Enable/disable logging.
         fortiapi::Field<std::string> severity;  // Severity.
         fortiapi::Field<std::vector<AccessPatternEntry>> access_pattern;  // URL access pattern.
+
+        static constexpr auto mkey = &UrlAccessEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -20,6 +20,8 @@ struct Name {
         fortiapi::Field<std::string> name;  // Parameter name. Read-only.
         fortiapi::Field<std::string> default_value;  // Parameter default value. Read-only.
 
+        static constexpr auto mkey = &ParametersEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::read_only);
@@ -32,6 +34,8 @@ struct Name {
         fortiapi::Field<std::uint32_t> id;  // ID. Read-only.
         fortiapi::Field<std::uint32_t> metaid;  // Meta ID. Read-only.
         fortiapi::Field<std::uint32_t> valueid;  // Value ID. Read-only.
+
+        static constexpr auto mkey = &MetadataEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

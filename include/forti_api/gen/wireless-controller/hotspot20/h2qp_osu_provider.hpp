@@ -28,6 +28,8 @@ struct H2qpOsuProvider {
         fortiapi::Field<std::string> lang;  // Language code. Required.
         fortiapi::Field<std::string> friendly_name;  // OSU provider friendly name. Required.
 
+        static constexpr auto mkey = &FriendlyNameEntry::index;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("index", self.index, R"(0)", fortiapi::none);
@@ -41,6 +43,8 @@ struct H2qpOsuProvider {
         fortiapi::Field<std::uint32_t> service_id;  // OSU service ID.
         fortiapi::Field<std::string> lang;  // Language code. Required.
         fortiapi::Field<std::string> service_description;  // Service description. Required.
+
+        static constexpr auto mkey = &ServiceDescriptionEntry::service_id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

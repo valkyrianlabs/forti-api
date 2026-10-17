@@ -63,6 +63,8 @@ struct FederatedUpgrade {
     struct KnownHaMembersEntry {
         fortiapi::Field<std::string> serial;  // Serial number of HA member Required.
 
+        static constexpr auto mkey = &KnownHaMembersEntry::serial;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("serial", self.serial, R"("")", fortiapi::none);
@@ -93,6 +95,8 @@ struct FederatedUpgrade {
         fortiapi::Field<std::string> upgrade_path;  // Fortinet OS image versions to upgrade through in major-minor-patch format, such as 7-0-4. Required.
         fortiapi::Field<std::string> device_type;  // Fortinet device type. Required.
         fortiapi::Field<std::string> coordinating_fortigate;  // Serial number of the FortiGate unit that controls this device.
+
+        static constexpr auto mkey = &NodeListEntry::serial;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -67,6 +67,8 @@ struct ProxyAddress {
     struct CategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // FortiGuard category ID.
 
+        static constexpr auto mkey = &CategoryEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -86,6 +88,8 @@ struct ProxyAddress {
         fortiapi::Field<std::string> header;  // HTTP header regular expression. Required.
         fortiapi::Field<std::string> case_sensitivity;  // Case sensitivity in pattern.
 
+        static constexpr auto mkey = &HeaderGroupEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -100,6 +104,8 @@ struct ProxyAddress {
         fortiapi::Field<std::string> name;  // Tagging entry name.
         fortiapi::Field<std::string> category;  // Tag category. References: system.object-tagging.category.
         fortiapi::Field<std::vector<fortiapi::Ref>> tags;  // Tags.
+
+        static constexpr auto mkey = &TaggingEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

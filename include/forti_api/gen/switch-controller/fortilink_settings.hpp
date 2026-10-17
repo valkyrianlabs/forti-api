@@ -40,6 +40,8 @@ struct FortilinkSettings {
         struct NacSegmentVlansEntry {
             fortiapi::Field<std::string> vlan_name;  // VLAN interface name. Required. References: system.interface.name.
 
+            static constexpr auto mkey = &NacSegmentVlansEntry::vlan_name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("vlan-name", self.vlan_name, R"("")", fortiapi::none);

@@ -145,3 +145,46 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   "." / ".." and the transport sets `PATH_AS_IS`. (G14) `Config::max_reply_depth` (256) rejects
   deeper 2xx replies with `DecodeError` via a parser callback. (G11) the example, tests and installs
   are skipped when `meson.is_subproject()`.
+- **Child tables (post-1.1.1, for forti-vlan-mac):** `ChildTable<Spec, &Type::attr>` /
+  `Table<Spec>::child<...>` (endpoint.hpp) do list/find/get/contains/add/update/del of one entry on
+  `cmdb/<path>/<parent key>/<attr>[/<entry key>]`, so one DHCP reservation changes without a PUT of
+  the parent's whole `reserved-address` list. The generator emits `static constexpr auto mkey =
+  &Entry::<mkey member>;` in every table-entry struct (`mkey` reserved; `Ref` has it by hand); the
+  attribute name comes from `visit()` at run time. Read-only probe on 7.4.8: child GET envelopes
+  carry `mkey` = the PARENT key (text), `child_path`, and `child_mkey` = the entry key, so `add`
+  takes a device-assigned key only from `child_mkey`. Child writes were not exercised live (the
+  guard refuses child paths, and DHCP is not an approved collection); the POST reply shape is
+  inferred from the GET envelopes. Not covered: tables nested in entries, tables of singletons.
+- **Child tables, live write validation (2026-10-17, FortiOS 7.4.8 build 2795):** the guard now
+  admits `POST <approved>/<forti-api-test-*>/<attr>` (body `name` forti-api-test-*, or no `name` and
+  a numeric `id`) and `PUT|DELETE <approved>/<forti-api-test-*>/<attr>/<forti-api-test-* | digits>`;
+  whole child tables, deeper paths and non-attribute segments stay refused (segments are split before
+  decoding). `tests/live/test_child_table.cpp` exercises `firewall/addrgrp` `member` and
+  `router/access-list` `rule`. **Finding, fixed:** the inferred POST shape was wrong. Observed:
+
+  | Operation | Status | Reply |
+  |---|---|---|
+  | POST `<parent>/<attr>` | 200 | `mkey` = new entry key (`2`, or the member name); no `child_mkey`; `child_path` |
+  | POST, id 0 | 200 | device assigns max(id)+1, reported only as `mkey` |
+  | POST, existing key/name | 500 | `error` -5, `cli_error` [], `mkey` = parent, `revision_changed` false; entry unchanged |
+  | PUT `<parent>/<attr>/<entry>` | 200 | `mkey` = parent key, `child_mkey` = entry key as text ("10") |
+  | DELETE `<parent>/<attr>/<entry>` | 200 | `mkey` = entry key (typed: `10`), `child_mkey` = "10" |
+  | GET/PUT/DELETE, missing entry | 404 | no error code; `mkey` = parent, `child_path`; PUT does not create |
+  | any method, missing parent | 404 | no error code; `mkey` = parent, no `child_path`; POST does not create |
+  | DELETE last addrgrp member | 200 | group left with no member |
+
+  Every successful write has `http_method`, `revision`, `old_revision`, `revision_changed` true;
+  failures have `revision` only. Revisions are per cmdb table (one chain for all objects of
+  `router.access-list`); a GET envelope's `revision` is the table's current one (= the last write's).
+  `ChildTable::add` now takes `child_mkey`, else `mkey` only from a reply with `http_method` POST and
+  `child_path` = the attribute; `Reply` gained `http_method`, `old_revision`, `revision_changed`.
+  Concurrency (two clients, separate connections): back-to-back and simultaneous id-0 adds both
+  survive with distinct ids (serialized: the second's `old_revision` = the first's `revision`);
+  simultaneous adds of the same id: one 200, one 500/-5, no overwrite; an entry PUT between a parent
+  read and a sparse parent PUT of `comments`: both survive; an entry PUT plus an entry POST between a
+  parent read and a parent PUT that includes the stale `rule` list: the parent PUT wins silently (200),
+  reverting the entry change and deleting the new entry. Stale-plan detection: compare the read's
+  GET `revision` with the write's `old_revision` (per table, so other objects cause false positives).
+  Config log: child writes are logged as `Edit`, cfgpath = the table, cfgobj = the PARENT name,
+  cfgattr `rule:7[...]` (add/update/delete within seconds fold into one record), so `ConfigAudit`
+  needs no change; a unit test pins this. Full live suite: 65/65 passed, audit clean.

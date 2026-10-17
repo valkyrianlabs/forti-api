@@ -33,6 +33,8 @@ struct VirtualSwitch {
         fortiapi::Field<std::string> name;  // Physical interface name. Required. References: system.interface.name.
         fortiapi::Field<std::string> alias;  // Alias.
 
+        static constexpr auto mkey = &PortEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

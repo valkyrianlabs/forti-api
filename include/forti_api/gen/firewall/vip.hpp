@@ -356,6 +356,8 @@ struct Vip {
     struct SrcFilterEntry {
         fortiapi::Field<std::string> range;  // Source-filter range. Required.
 
+        static constexpr auto mkey = &SrcFilterEntry::range;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("range", self.range, R"("")", fortiapi::none);
@@ -402,6 +404,8 @@ struct Vip {
     struct MappedipEntry {
         fortiapi::Field<std::string> range;  // Mapped IP range. Required.
 
+        static constexpr auto mkey = &MappedipEntry::range;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("range", self.range, R"("")", fortiapi::none);
@@ -411,6 +415,8 @@ struct Vip {
     // Interfaces to which the VIP applies. Separate the names with spaces.
     struct SrcintfFilterEntry {
         fortiapi::Field<std::string> interface_name;  // Interface name. References: system.interface.name.
+
+        static constexpr auto mkey = &SrcintfFilterEntry::interface_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -460,6 +466,8 @@ struct Vip {
         fortiapi::Field<std::uint32_t> max_connections;  // Max number of active connections that can be directed to the real server. When reached, sessions are sent to other real servers.
         fortiapi::Field<std::vector<fortiapi::Ref>> monitor;  // Name of the health check monitor to use when polling to determine a virtual server's connectivity status.
         fortiapi::Field<std::string> client_ip;  // Only clients in this IP range can connect to this real server.
+
+        static constexpr auto mkey = &RealserversEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -570,6 +578,8 @@ struct Vip {
         fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
         fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
 
+        static constexpr auto mkey = &SslCipherSuitesEntry::priority;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("priority", self.priority, R"(0)", fortiapi::none);
@@ -668,6 +678,8 @@ struct Vip {
         fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
         fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
 
+        static constexpr auto mkey = &SslServerCipherSuitesEntry::priority;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("priority", self.priority, R"(0)", fortiapi::none);
@@ -680,6 +692,8 @@ struct Vip {
     struct GslbPublicIpsEntry {
         fortiapi::Field<std::uint32_t> index;  // Index of this public IP setting.
         fortiapi::Field<std::string> ip;  // The publicly accessible IP address.
+
+        static constexpr auto mkey = &GslbPublicIpsEntry::index;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -55,6 +55,8 @@ struct StandaloneCluster {
                 fortiapi::Field<std::string> src_port_range;  // Custom service source port range.
                 fortiapi::Field<std::string> dst_port_range;  // Custom service destination port range.
 
+                static constexpr auto mkey = &CustomServiceEntry::id;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("id", self.id, R"(0)", fortiapi::none);
@@ -93,6 +95,8 @@ struct StandaloneCluster {
         fortiapi::Field<std::string> ipsec_tunnel_sync;  // Enable/disable IPsec tunnel synchronization.
         fortiapi::Field<std::string> secondary_add_ipsec_routes;  // Enable/disable IKE route announcement on the backup unit.
         fortiapi::Field<SessionSyncFilter> session_sync_filter;  // Add one or more filters if you only want to synchronize some sessions. Use the filter to configure the types of sessions to synchronize.
+
+        static constexpr auto mkey = &ClusterPeerEntry::sync_id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

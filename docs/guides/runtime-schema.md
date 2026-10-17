@@ -88,6 +88,36 @@ The bodies go through the client like any other request, for example
 `diff(type, current, desired)` returns the update body that makes the current object match the
 attributes given in `desired`.
 
+## Child tables
+
+The [child tables](/guides/child-tables) of `ChildTable<Spec, &Type::attribute>` have runtime
+counterparts, for a table attribute chosen at run time:
+
+```cpp
+const auto* server = schema::find("cmdb/system.dhcp/server");
+const schema::Field* reservations = schema::child_table(*server, "reserved-address");   // nullptr: not one
+
+json entry = 7;
+schema::child_path(*server, *reservations, 1);           // "cmdb/system.dhcp/server/1/reserved-address"
+schema::child_path(*server, *reservations, 1, &entry);   // ".../reserved-address/7"
+
+// The key of the entry a POST created, as ChildTable::add reads it from the reply.
+auto reply = fortiapi::Reply::from(fortiapi::default_client().post(schema::child_path(*server, *reservations, 1), body));
+std::optional<json> id = schema::created_entry_key(*reservations, reply);   // 8, or nullopt
+```
+
+- `child_table(endpoint, attribute)` returns the attribute's `Field` when it is a table attribute of
+  a table endpoint and its entries name a key (`Field::item->type->key`), the attributes
+  `ChildTable` takes; otherwise `nullptr`.
+- `child_path` builds exactly the path `ChildTable::path` does. The parent key is converted as
+  `object_path` converts it, the entry key by its own `Kind`, and each key is one encoded segment.
+  It throws `fortiapi::Error` for a `Field` that `child_table` did not return for that endpoint.
+- `created_entry_key` applies the rule `ChildTable::add` uses, from one shared definition: it
+  returns `child_mkey`, or else `mkey`, but only from a reply that echoes the POST and names this
+  attribute as `child_path`, because on other child replies `mkey` is the parent's key. Numeric keys
+  come back as numbers (text such as `"12"` is converted, a value out of range is `nullopt`), names
+  as text.
+
 ## Validation errors
 
 `create_body` and `update_body` throw `schema::ValidationError` when a body cannot be written.
