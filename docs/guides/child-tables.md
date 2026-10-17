@@ -179,6 +179,10 @@ SourceAddresses::add(12, address);                    // POST cmdb/firewall/poli
 SourceAddresses::del(12, "LAN 10.0.0.0/24");          // DELETE .../srcaddr/LAN%2010.0.0.0%2F24
 ```
 
+For a table attribute chosen at run time (a CLI, an MCP server), `fortiapi::schema` has the same
+paths and the same key rule without the typed models: `child_table`, `child_path` and
+`created_entry_key` ([Runtime schema](/guides/runtime-schema#child-tables)).
+
 :::callout[One level, table parents]{variant="note"}
 `ChildTable` addresses tables of a table object. Tables nested inside an entry (an `ip-range`'s
 `vci-string`) and tables of singletons are not covered; change those through the parent.

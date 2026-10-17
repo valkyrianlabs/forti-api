@@ -20,3 +20,9 @@ One level of nested "  - " detail bullets is allowed. Consolidate; don't paste c
 - Live suite: the guard admits writes on child paths of forti-api-test-* objects in approved
   collections (name-keyed entries must be forti-api-test-* too); new live tests for address-group
   members, access-list rules, the config-log attribution of child writes and concurrent writers.
+- fortiapi::schema: child_table(), child_path() and created_entry_key(), the runtime counterparts of
+  ChildTable's attribute check, paths and device-assigned key; ChildTable::add and
+  created_entry_key share one rule (detail::created_entry_key, detail::reported_number). Unit tests
+  compare child_path with ChildTable::path (id- and name-keyed, dot keys) and created_entry_key with
+  add() on the 7.4.8 reply shapes.
+

@@ -49,3 +49,12 @@ writers: adds and entry updates from separate clients never lose each other's ch
 the parent that includes the table still replaces it silently. A GET's `revision` compared with a
 write's `old_revision` shows that something else wrote to the table in between. See the child tables
 guide.
+
+## Child tables in the runtime schema
+
+`fortiapi::schema` gains the same child tables for attributes chosen at run time, so a program that
+handles any endpoint (forti's command engine) needs no typed model for them. `child_table(endpoint,
+attribute)` finds a table attribute with keyed entries. `child_path(endpoint, attribute, parent,
+&entry)` builds exactly `ChildTable::path`. `created_entry_key(attribute, reply)` returns the key of
+the entry a POST created, by the rule `ChildTable::add` uses, which now has one shared definition.
+

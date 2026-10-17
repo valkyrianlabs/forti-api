@@ -390,3 +390,125 @@ TEST_F(ChildTableTest, GeneratedEntriesNameTheirKey) {
     using MacRanges = firewall::Addresses::child<&firewall::Address::macaddr>;
     EXPECT_EQ(MacRanges::path("a", "00:00:5e:00:53:01"), "cmdb/firewall/address/a/macaddr/00%3A00%3A5e%3A00%3A53%3A01");
 }
+
+// ---- the runtime schema's child tables (schema::child_table / child_path / created_entry_key)
+// against ChildTable: the same paths and the same reported keys, by one rule ----
+
+#include <forti_api/gen/firewall/addrgrp.hpp>
+#include <forti_api/gen/router/access_list.hpp>
+#include <forti_api/schema.hpp>
+
+namespace {
+
+    using Rules = router::AccessLists::child<&router::AccessList::rule>;
+    using Members = firewall::AddressGroups::child<&firewall::AddressGroup::member>;
+
+    struct Child {
+        const schema::Endpoint* endpoint;
+        const schema::Field* attribute;
+    };
+
+    Child child_of(std::string_view path, std::string_view attribute) {
+        const auto* ep = schema::find(path);
+        if (!ep) throw std::runtime_error("no endpoint " + std::string(path));
+        const auto* field = schema::child_table(*ep, attribute);
+        if (!field) throw std::runtime_error("no child table " + std::string(attribute));
+        return {ep, field};
+    }
+
+    std::string child_path(const Child& child, const json& parent) { return schema::child_path(*child.endpoint, *child.attribute, parent); }
+    std::string child_path(const Child& child, const json& parent, const json& entry) {
+        return schema::child_path(*child.endpoint, *child.attribute, parent, &entry);
+    }
+
+}  // namespace
+
+TEST(SchemaChildTables, ChildPathIsChildTablePath) {
+    auto reservations = child_of("cmdb/system.dhcp/server", "reserved-address");   // id parent, id entries
+    EXPECT_EQ(child_path(reservations, 1), Reservations::path(1));
+    EXPECT_EQ(child_path(reservations, "1", 7), Reservations::path(1, 7));
+    EXPECT_EQ(child_path(reservations, 1, "7"), Reservations::path(1, 7));
+    EXPECT_EQ(child_path(reservations, 4294967295u, 0), Reservations::path(4294967295u, 0));
+
+    auto sources = child_of("cmdb/firewall/policy", "srcaddr");                     // id parent, name entries
+    auto tags = child_of("cmdb/firewall/address", "tagging");                       // name parent, name entries
+    auto rules = child_of("cmdb/router/access-list", "rule");                       // name parent, id entries
+    auto members = child_of("cmdb/firewall/addrgrp", "member");
+    for (const char* name: {"LAN 10.0.0.0/24", ".", "..", "a/b", "%2E", "x y"}) {
+        EXPECT_EQ(child_path(sources, 12, name), SourceAddresses::path(12, name)) << name;
+        EXPECT_EQ(child_path(tags, name), Tags::path(name)) << name;
+        EXPECT_EQ(child_path(tags, name, name), Tags::path(name, name)) << name;
+        EXPECT_EQ(child_path(rules, name, 10), Rules::path(name, 10)) << name;
+        EXPECT_EQ(child_path(members, name, name), Members::path(name, name)) << name;
+    }
+    EXPECT_EQ(child_path(sources, 12, ".."), "cmdb/firewall/policy/12/srcaddr/%2E%2E");
+    EXPECT_EQ(child_path(rules, "..", 10), "cmdb/router/access-list/%2E%2E/rule/10");
+    EXPECT_EQ(child_path(rules, "forti-api-test-acl"), "cmdb/router/access-list/forti-api-test-acl/rule");
+}
+
+TEST(SchemaChildTables, ChildPathRefusesWhatIsNotAChildTable) {
+    const auto& server = *schema::find("cmdb/system.dhcp/server");
+    const auto& policy = *schema::find("cmdb/firewall/policy");
+    EXPECT_THROW(child_path({&server, server.type->field("dns-service")}, 1), Error);              // not a table
+    EXPECT_THROW(child_path({&policy, schema::child_table(server, "reserved-address")}, 1), Error);   // another endpoint's
+    auto reservations = child_of("cmdb/system.dhcp/server", "reserved-address");
+    EXPECT_THROW(child_path(reservations, "one"), std::exception);                                 // numeric keys
+    EXPECT_THROW(child_path(reservations, 1, "seven"), std::exception);
+}
+
+// The reply shapes FortiOS 7.4.8 sends (tests/live/test_child_table.cpp), and the ones add() must not
+// take a key from: schema::created_entry_key reports exactly the key ChildTable::add stores.
+TEST_F(ChildTableTest, CreatedEntryKeyIsTheKeyAddStores) {
+    auto reservations = child_of("cmdb/system.dhcp/server", "reserved-address");
+    json not_a_child = post_reply(3);
+    not_a_child.erase("child_path");
+    json other_child = post_reply(3);
+    other_child["child_path"] = "ip-range";
+    json no_method = post_reply(3);
+    no_method.erase("http_method");
+    const std::vector<std::pair<json, std::optional<std::uint32_t>>> cases = {
+            {post_reply(2), 2u},                       // POST: mkey is the new entry's key
+            {post_reply("13"), 13u},                   // as text
+            {write_reply("POST", "1", 14), 14u},       // child_mkey wins
+            {write_reply("POST", 2, "x"), 2u},         // an unusable child_mkey falls back to mkey
+            {put_reply(1, "10"), 10u},                 // PUT: child_mkey (mkey is the parent's)
+            {delete_reply(10), 10u},                   // DELETE: child_mkey
+            {not_a_child, std::nullopt},
+            {other_child, std::nullopt},
+            {no_method, std::nullopt},
+            {write_reply("PUT", 3), std::nullopt},     // mkey of a PUT is the parent's
+            {write_reply("GET", 3), std::nullopt},
+            {post_reply("not a number"), std::nullopt},
+            {post_reply(-1), std::nullopt},
+            {post_reply(4294967296ull), std::nullopt},
+            {post_reply(nullptr), std::nullopt},
+    };
+    for (const auto& [reply, expected]: cases) {
+        fake->reply(200, reply);
+        Reservation entry;
+        entry.ip = "192.0.2.12";
+        Reservations::add(1, entry, {}, client);
+        auto reported = schema::created_entry_key(*reservations.attribute, Reply::from(reply));
+        if (expected) {
+            EXPECT_EQ(*entry.id, *expected) << reply.dump();
+            EXPECT_EQ(reported, json(*expected)) << reply.dump();
+        } else {
+            EXPECT_FALSE(entry.id.has_value()) << reply.dump();
+            EXPECT_EQ(reported, std::nullopt) << reply.dump();
+        }
+    }
+
+    // Name-keyed entries (address group members): the name, as text. add() never assigns a name
+    // (the caller always sets it), so this is the runtime helper alone.
+    auto members = child_of("cmdb/firewall/addrgrp", "member");
+    json member_post = post_reply("forti-api-test-b");
+    member_post["child_path"] = "member";
+    EXPECT_EQ(schema::created_entry_key(*members.attribute, Reply::from(member_post)), json("forti-api-test-b"));
+    json member_put = put_reply("forti-api-test-g", "forti-api-test-b");
+    member_put["child_path"] = "member";
+    EXPECT_EQ(schema::created_entry_key(*members.attribute, Reply::from(member_put)), json("forti-api-test-b"));
+    EXPECT_EQ(schema::created_entry_key(*members.attribute, Reply::from(post_reply("forti-api-test-b"))), std::nullopt);
+
+    const auto& server = *schema::find("cmdb/system.dhcp/server");
+    EXPECT_THROW((void) schema::created_entry_key(*server.type->field("dns-service"), Reply::from(post_reply(2))), Error);
+}

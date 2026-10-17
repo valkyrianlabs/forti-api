@@ -138,6 +138,39 @@ namespace fortiapi {
             return name;
         }
 
+        // A numeric key as a reply reports it: a number, or a number as text ("12"); nullopt when
+        // absent, not a number, or out of Key's range.
+        template<typename Key>
+        std::optional<Key> reported_number(const nlohmann::json& value) {
+            Key key{};
+            if (value.is_number_unsigned()) {
+                auto number = value.get<std::uint64_t>();
+                if (!std::in_range<Key>(number)) return std::nullopt;
+                return static_cast<Key>(number);
+            }
+            if (value.is_number_integer()) {
+                auto number = value.get<std::int64_t>();
+                if (!std::in_range<Key>(number)) return std::nullopt;
+                return static_cast<Key>(number);
+            }
+            if (value.is_string() && parse_number(value.get_ref<const std::string&>(), key)) return key;
+            return std::nullopt;
+        }
+
+        // The one rule for the key a child table write reply reports for the entry a POST created
+        // (ChildTable::add, schema::created_entry_key). What `mkey` names depends on the method
+        // (Reply): the new entry on a child POST, the parent on PUT, GET and errors. So `child_mkey`
+        // is taken when it converts, else `mkey`, but only from a reply that echoes the POST and names
+        // `attribute` as its child_path. `convert` turns a reported value into a key, or nullopt
+        // (std::optional<K>).
+        template<typename Convert>
+        auto created_entry_key(const Reply& reply, std::string_view attribute, Convert&& convert)
+                -> decltype(convert(reply.mkey)) {
+            if (auto key = convert(reply.child_mkey)) return key;
+            if (reply.http_method == "POST" && reply.child_path == attribute) return convert(reply.mkey);
+            return {};
+        }
+
     }  // namespace detail
 
     template<typename Spec, auto Member>
@@ -320,9 +353,9 @@ namespace fortiapi {
                 auto& entry_key = entry.*type::mkey;
                 bool device_assigned = !entry_key.has_value() || entry_key.value() == key_type{};
                 if (device_assigned) {
-                    auto assigned = reported_key(reply.child_mkey);
-                    if (!assigned && reply.http_method == "POST" && reply.child_path == attribute())
-                        assigned = reported_key(reply.mkey);
+                    auto assigned = detail::created_entry_key(reply, attribute(), [](const nlohmann::json& value) {
+                        return detail::reported_number<key_type>(value);
+                    });
                     if (assigned) entry_key.load(*assigned);
                 }
             }
@@ -349,25 +382,6 @@ namespace fortiapi {
         static Reply del(const parent_key_type& parent_key, const key_type& entry_key, const Query& query = {},
                          Client& client = default_client()) {
             return Reply::from(client.del(path(parent_key, entry_key), query));
-        }
-
-    private:
-        // A numeric entry key as a reply reports it: a number, or a number as text ("12"); nullopt
-        // when absent or out of the key type's range.
-        static std::optional<key_type> reported_key(const nlohmann::json& value) {
-            key_type key{};
-            if (value.is_number_unsigned()) {
-                auto number = value.get<std::uint64_t>();
-                if (!std::in_range<key_type>(number)) return std::nullopt;
-                return static_cast<key_type>(number);
-            }
-            if (value.is_number_integer()) {
-                auto number = value.get<std::int64_t>();
-                if (!std::in_range<key_type>(number)) return std::nullopt;
-                return static_cast<key_type>(number);
-            }
-            if (value.is_string() && detail::parse_number(value.get_ref<const std::string&>(), key)) return key;
-            return std::nullopt;
         }
     };
 
