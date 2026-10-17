@@ -1,5 +1,5 @@
 project('forti-api', 'cpp',
-        version : '1.1.1',
+        version : '1.2.0',
         meson_version : '>=1.3.0',
         default_options : ['warning_level=3', 'cpp_std=c++23'])
 
