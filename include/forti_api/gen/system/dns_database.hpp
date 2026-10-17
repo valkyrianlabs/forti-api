@@ -70,6 +70,8 @@ struct DnsDatabase {
         fortiapi::Field<std::string> hostname;  // Name of the host. Required.
         fortiapi::Field<std::string> canonical_name;  // Canonical name of the host.
 
+        static constexpr auto mkey = &DnsEntryEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

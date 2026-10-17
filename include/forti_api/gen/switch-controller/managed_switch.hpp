@@ -131,6 +131,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::string> vlan_name;  // VLAN name. References: system.interface.name.
         fortiapi::Field<std::string> router_ip;  // Router IP address. Required.
 
+        static constexpr auto mkey = &RouteOffloadRouterEntry::vlan_name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("vlan-name", self.vlan_name, R"("")", fortiapi::none);
@@ -142,6 +144,8 @@ struct ManagedSwitch {
     struct VlanEntry {
         fortiapi::Field<std::string> vlan_name;  // VLAN name. References: system.interface.name.
         fortiapi::Field<std::uint32_t> assignment_priority;  // 802.1x Radius (Tunnel-Private-Group-Id) VLANID assign-by-name priority. A smaller value has a higher priority. Required.
+
+        static constexpr auto mkey = &VlanEntry::vlan_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -443,6 +447,8 @@ struct ManagedSwitch {
         struct AllowedVlansEntry {
             fortiapi::Field<std::string> vlan_name;  // VLAN name. Required. References: system.interface.name.
 
+            static constexpr auto mkey = &AllowedVlansEntry::vlan_name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("vlan-name", self.vlan_name, R"("")", fortiapi::none);
@@ -453,6 +459,8 @@ struct ManagedSwitch {
         struct UntaggedVlansEntry {
             fortiapi::Field<std::string> vlan_name;  // VLAN name. Required. References: system.interface.name.
 
+            static constexpr auto mkey = &UntaggedVlansEntry::vlan_name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("vlan-name", self.vlan_name, R"("")", fortiapi::none);
@@ -462,6 +470,8 @@ struct ManagedSwitch {
         // ACLs on this port.
         struct FortiswitchAclsEntry {
             fortiapi::Field<std::uint32_t> id;  // ACL ID.
+
+            static constexpr auto mkey = &FortiswitchAclsEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -475,6 +485,8 @@ struct ManagedSwitch {
             fortiapi::Field<std::string> circuit_id;  // Circuit ID string.
             fortiapi::Field<std::string> remote_id;  // Remote ID string.
 
+            static constexpr auto mkey = &DhcpSnoopOption82OverrideEntry::vlan_name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("vlan-name", self.vlan_name, R"("")", fortiapi::none);
@@ -487,6 +499,8 @@ struct ManagedSwitch {
         struct InterfaceTagsEntry {
             fortiapi::Field<std::string> tag_name;  // FortiSwitch port tag name when exported to a virtual port pool or matched to dynamic port policy. References: switch-controller.switch-interface-tag.name.
 
+            static constexpr auto mkey = &InterfaceTagsEntry::tag_name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("tag-name", self.tag_name, R"("")", fortiapi::none);
@@ -496,6 +510,8 @@ struct ManagedSwitch {
         // Aggregated LAG bundle interfaces.
         struct MembersEntry {
             fortiapi::Field<std::string> member_name;  // Interface name from available options. Required.
+
+            static constexpr auto mkey = &MembersEntry::member_name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -603,6 +619,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::uint32_t> max_bundle;  // Maximum size of LAG bundle (1 - 24, default = 24).
         fortiapi::Field<std::vector<MembersEntry>> members;  // Aggregated LAG bundle interfaces.
         fortiapi::Field<std::string> fallback_port;  // LACP fallback port.
+
+        static constexpr auto mkey = &PortsEntry::port_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -717,6 +735,8 @@ struct ManagedSwitch {
             fortiapi::Field<std::string> ip;  // Source IP for this rule. Required.
             fortiapi::Field<std::string> mac;  // MAC address for this rule. Required.
 
+            static constexpr auto mkey = &BindingEntryEntry::entry_name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("entry-name", self.entry_name, R"("")", fortiapi::none);
@@ -728,6 +748,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::string> port;  // Ingress interface to which source guard is bound.
         fortiapi::Field<std::string> description;  // Description.
         fortiapi::Field<std::vector<BindingEntryEntry>> binding_entry;  // IP and MAC address configuration. Required.
+
+        static constexpr auto mkey = &IpSourceGuardEntry::port;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -791,6 +813,8 @@ struct ManagedSwitch {
 
         fortiapi::Field<std::string> id;  // Instance ID.
         fortiapi::Field<std::string> priority;  // Priority.
+
+        static constexpr auto mkey = &StpInstanceEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -883,6 +907,8 @@ struct ManagedSwitch {
             fortiapi::Field<std::uint32_t> id;  // Host entry ID. Required.
             fortiapi::Field<std::string> ip;  // IPv4 address of the SNMP manager (host). Required.
 
+            static constexpr auto mkey = &HostsEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -905,6 +931,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::uint32_t> trap_v2c_lport;  // SNMP v2c trap local port (default = 162).
         fortiapi::Field<std::uint32_t> trap_v2c_rport;  // SNMP v2c trap remote port (default = 162).
         fortiapi::Field<std::string> events;  // SNMP notifications (traps) to send.
+
+        static constexpr auto mkey = &SnmpCommunityEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -969,6 +997,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::string> auth_pwd;  // Password for authentication protocol. Required.
         fortiapi::Field<std::string> priv_proto;  // Privacy (encryption) protocol.
         fortiapi::Field<std::string> priv_pwd;  // Password for privacy (encryption) protocol. Required.
+
+        static constexpr auto mkey = &SnmpUserEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -1083,6 +1113,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::string> csv;  // Enable/disable comma-separated value (CSV) strings.
         fortiapi::Field<std::string> facility;  // Facility to log to remote syslog server.
 
+        static constexpr auto mkey = &RemoteLogEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -1158,6 +1190,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::vector<fortiapi::Ref>> src_ingress;  // Source ingress interfaces.
         fortiapi::Field<std::vector<fortiapi::Ref>> src_egress;  // Source egress interfaces.
 
+        static constexpr auto mkey = &MirrorEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -1184,6 +1218,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::string> interface;  // Interface name.
         fortiapi::Field<std::string> description;  // Description.
 
+        static constexpr auto mkey = &StaticMacEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -1200,6 +1236,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::string> command_entry;  // List of FortiSwitch commands.
         fortiapi::Field<std::string> command_name;  // Names of commands to be pushed to this FortiSwitch device, as configured under config switch-controller custom-command. Required. References: switch-controller.custom-command.command-name.
 
+        static constexpr auto mkey = &CustomCommandEntry::command_entry;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("command-entry", self.command_entry, R"("")", fortiapi::none);
@@ -1214,6 +1252,8 @@ struct ManagedSwitch {
         fortiapi::Field<std::string> ip;  // Client static IP address. Required.
         fortiapi::Field<std::string> mac;  // Client MAC address. Required.
         fortiapi::Field<std::string> port;  // Interface name. Required.
+
+        static constexpr auto mkey = &DhcpSnoopingStaticClientEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -1259,6 +1299,8 @@ struct ManagedSwitch {
             fortiapi::Field<std::string> querier;  // Enable/disable IGMP snooping querier for the VLAN interface.
             fortiapi::Field<std::string> querier_addr;  // IGMP snooping querier address.
             fortiapi::Field<std::uint32_t> version;  // IGMP snooping querying version.
+
+            static constexpr auto mkey = &VlansEntry::vlan_name;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {

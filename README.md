@@ -131,6 +131,12 @@ singletons (`system::GlobalSettings`) offer `get` and `update`. Every call takes
 `fortiapi::ApiError` (HTTP status, FortiOS error code and CLI messages), `TransportError`, `DecodeError`
 (naming the attribute that did not match). Reads retry on throttling; writes are never retried.
 
+A table attribute (DHCP reservations, a policy's `srcaddr`, access-list rules) can be changed one
+entry at a time instead of sending the whole list, on FortiOS's child paths
+([docs/guides/child-tables.md](docs/guides/child-tables.md)):
+`system::dhcp::Servers::child<&system::dhcp::Server::reserved_address>::del(1, 7)` deletes reservation
+7 of DHCP server 1 and nothing else.
+
 The monitor API (status, statistics, actions) is available as `Monitor::get("system/status")`.
 Non-JSON replies come back as raw bytes with a size limit (64 MiB by default) or streamed to a sink:
 `Monitor::download("system/config/backup", Query().set("scope", "global"))` returns the configuration

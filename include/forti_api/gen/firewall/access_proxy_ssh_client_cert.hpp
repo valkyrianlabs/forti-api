@@ -70,6 +70,8 @@ struct AccessProxySshClientCert {
         fortiapi::Field<std::string> type;  // Type of certificate extension.
         fortiapi::Field<std::string> data;  // Data of certificate extension.
 
+        static constexpr auto mkey = &CertExtensionEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

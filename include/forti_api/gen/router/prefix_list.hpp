@@ -29,6 +29,8 @@ struct PrefixList {
         fortiapi::Field<std::uint32_t> ge;  // Minimum prefix length to be matched (0 - 32).
         fortiapi::Field<std::uint32_t> le;  // Maximum prefix length to be matched (0 - 32).
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

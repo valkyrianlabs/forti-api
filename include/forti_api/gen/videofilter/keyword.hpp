@@ -40,6 +40,8 @@ struct Keyword {
         fortiapi::Field<std::string> pattern_type;  // Pattern type. Required.
         fortiapi::Field<std::string> status;  // Enable(consider)/disable(ignore) this keyword. Required.
 
+        static constexpr auto mkey = &WordEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

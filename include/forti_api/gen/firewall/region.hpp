@@ -19,6 +19,8 @@ struct Region {
     struct CityEntry {
         fortiapi::Field<std::uint32_t> id;  // City ID. Required.
 
+        static constexpr auto mkey = &CityEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

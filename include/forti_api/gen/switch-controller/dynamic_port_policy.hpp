@@ -45,6 +45,8 @@ struct DynamicPortPolicy {
         struct InterfaceTagsEntry {
             fortiapi::Field<std::string> tag_name;  // FortiSwitch port tag name. References: switch-controller.switch-interface-tag.name.
 
+            static constexpr auto mkey = &InterfaceTagsEntry::tag_name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("tag-name", self.tag_name, R"("")", fortiapi::none);
@@ -68,6 +70,8 @@ struct DynamicPortPolicy {
         fortiapi::Field<std::string> _802_1x;  // 802.1x security policy to be applied when using this policy. References: switch-controller.security-policy.802-1X.name, switch-controller.security-policy.captive-portal.name.
         fortiapi::Field<std::string> vlan_policy;  // VLAN policy to be applied when using this policy. References: switch-controller.vlan-policy.name.
         fortiapi::Field<std::string> bounce_port_link;  // Enable/disable bouncing (administratively bring the link down, up) of a switch port where this policy is applied. Helps to clear and reassign VLAN from lldp-profile.
+
+        static constexpr auto mkey = &PolicyEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -124,6 +124,8 @@ struct Profile {
         fortiapi::Field<std::string> content;  // HTTP header content.
         fortiapi::Field<std::string> base64_encoding;  // Enable/disable use of base64 encoding of HTTP content.
 
+        static constexpr auto mkey = &IcapHeadersEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -154,6 +156,8 @@ struct Profile {
             fortiapi::Field<std::string> header;  // HTTP header regular expression. Required.
             fortiapi::Field<std::string> case_sensitivity;  // Enable/disable case sensitivity when matching header.
 
+            static constexpr auto mkey = &HeaderGroupEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -167,6 +171,8 @@ struct Profile {
         struct HttpRespStatusCodeEntry {
             fortiapi::Field<std::uint32_t> code;  // HTTP response status code.
 
+            static constexpr auto mkey = &HttpRespStatusCodeEntry::code;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("code", self.code, R"(0)", fortiapi::none);
@@ -178,6 +184,8 @@ struct Profile {
         fortiapi::Field<std::vector<HeaderGroupEntry>> header_group;  // HTTP header group.
         fortiapi::Field<std::string> action;  // Action to be taken for ICAP server.
         fortiapi::Field<std::vector<HttpRespStatusCodeEntry>> http_resp_status_code;  // HTTP response status code.
+
+        static constexpr auto mkey = &RespmodForwardRulesEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -87,6 +87,8 @@ struct Profile {
         fortiapi::Field<std::string> alert;  // Enable/disable alert.
         fortiapi::Field<std::string> severity;  // Log severity.
 
+        static constexpr auto mkey = &ShellCommandsEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

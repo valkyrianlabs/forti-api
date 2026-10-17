@@ -69,6 +69,8 @@ struct Sdwan {
         fortiapi::Field<std::string> service_sla_tie_break;  // Method of selecting member if more than one meets the SLA.
         fortiapi::Field<std::uint32_t> minimum_sla_meet_members;  // Minimum number of members which meet SLA when the neighbor is preferred.
 
+        static constexpr auto mkey = &ZoneEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -105,6 +107,8 @@ struct Sdwan {
         fortiapi::Field<std::string> status;  // Enable/disable this interface in the SD-WAN.
         fortiapi::Field<std::uint32_t> transport_group;  // Measured transport group (0 - 255).
         fortiapi::Field<std::string> comment;  // Comments.
+
+        static constexpr auto mkey = &MembersEntry::seq_num;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -218,6 +222,8 @@ struct Sdwan {
         struct MembersEntry {
             fortiapi::Field<std::uint32_t> seq_num;  // Member sequence number. Required. References: system.sdwan.members.seq-num.
 
+            static constexpr auto mkey = &MembersEntry::seq_num;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("seq-num", self.seq_num, R"(0)", fortiapi::none);
@@ -242,6 +248,8 @@ struct Sdwan {
             fortiapi::Field<std::string> mos_threshold;  // Minimum Mean Opinion Score for SLA to be marked as pass. (1.0 - 5.0, default = 3.6).
             fortiapi::Field<std::uint32_t> priority_in_sla;  // Value to be distributed into routing table when in-sla (0 - 65535, default = 0).
             fortiapi::Field<std::uint32_t> priority_out_sla;  // Value to be distributed into routing table when out-sla (0 - 65535, default = 0).
+
+            static constexpr auto mkey = &SlaEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -302,6 +310,8 @@ struct Sdwan {
         fortiapi::Field<std::string> mos_codec;  // Codec to use for MOS calculation (default = g711).
         fortiapi::Field<std::uint32_t> class_id;  // Traffic class ID. References: firewall.traffic-class.class-id.
         fortiapi::Field<std::vector<SlaEntry>> sla;  // Service level agreement (SLA).
+
+        static constexpr auto mkey = &HealthCheckEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -525,6 +535,8 @@ struct Sdwan {
         struct InternetServiceAppCtrlEntry {
             fortiapi::Field<std::uint32_t> id;  // Application control based Internet Service ID. Required.
 
+            static constexpr auto mkey = &InternetServiceAppCtrlEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -534,6 +546,8 @@ struct Sdwan {
         // IDs of one or more application control categories.
         struct InternetServiceAppCtrlCategoryEntry {
             fortiapi::Field<std::uint32_t> id;  // Application control category ID. Required.
+
+            static constexpr auto mkey = &InternetServiceAppCtrlCategoryEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -546,6 +560,8 @@ struct Sdwan {
             fortiapi::Field<std::string> health_check;  // SD-WAN health-check. Required. References: system.sdwan.health-check.name.
             fortiapi::Field<std::uint32_t> id;  // SLA ID. Required.
 
+            static constexpr auto mkey = &SlaEntry::health_check;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("health-check", self.health_check, R"("")", fortiapi::none);
@@ -556,6 +572,8 @@ struct Sdwan {
         // Member sequence number list.
         struct PriorityMembersEntry {
             fortiapi::Field<std::uint32_t> seq_num;  // Member sequence number. References: system.sdwan.members.seq-num.
+
+            static constexpr auto mkey = &PriorityMembersEntry::seq_num;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -626,6 +644,8 @@ struct Sdwan {
         fortiapi::Field<std::string> passive_measurement;  // Enable/disable passive measurement based on the service criteria.
         fortiapi::Field<std::string> agent_exclusive;  // Set/unset the service as agent use exclusively.
         fortiapi::Field<std::string> shortcut;  // Enable/disable shortcut for this service.
+
+        static constexpr auto mkey = &ServiceEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -714,6 +734,8 @@ struct Sdwan {
         struct MemberEntry {
             fortiapi::Field<std::uint32_t> seq_num;  // Member sequence number. References: system.sdwan.members.seq-num.
 
+            static constexpr auto mkey = &MemberEntry::seq_num;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("seq-num", self.seq_num, R"(0)", fortiapi::none);
@@ -728,6 +750,8 @@ struct Sdwan {
         fortiapi::Field<std::string> role;  // Role of neighbor.
         fortiapi::Field<std::string> health_check;  // SD-WAN health-check name. References: system.sdwan.health-check.name.
         fortiapi::Field<std::uint32_t> sla_id;  // SLA ID.
+
+        static constexpr auto mkey = &NeighborEntry::ip;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -767,6 +791,8 @@ struct Sdwan {
         struct ServiceIdEntry {
             fortiapi::Field<std::uint32_t> id;  // SD-WAN service rule ID. Required. References: system.sdwan.service.id.
 
+            static constexpr auto mkey = &ServiceIdEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -785,6 +811,8 @@ struct Sdwan {
         fortiapi::Field<std::string> packet_duplication;  // Configure packet duplication method.
         fortiapi::Field<std::string> sla_match_service;  // Enable/disable packet duplication matching health-check SLAs in service rule.
         fortiapi::Field<std::string> packet_de_duplication;  // Enable/disable discarding of packets that have been duplicated.
+
+        static constexpr auto mkey = &DuplicationEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

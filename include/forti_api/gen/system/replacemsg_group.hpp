@@ -43,6 +43,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &MailEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -72,6 +74,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &HttpEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -103,6 +107,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &WebproxyEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -132,6 +138,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &FtpEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -163,6 +171,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &FortiguardWfEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -192,6 +202,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &SpamEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -223,6 +235,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &AlertmailEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -252,6 +266,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &AdminEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -283,6 +299,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &AuthEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -312,6 +330,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &SslvpnEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -343,6 +363,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &NacQuarEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -372,6 +394,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &TrafficQuotaEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -403,6 +427,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &UtmEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -432,6 +458,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &CustomMessageEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -463,6 +491,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
 
+        static constexpr auto mkey = &IcapEntry::msg_type;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("msg-type", self.msg_type, R"("")", fortiapi::none);
@@ -492,6 +522,8 @@ struct ReplacemsgGroup {
         fortiapi::Field<std::string> buffer;  // Message string.
         fortiapi::Field<std::string> header;  // Header flag.
         fortiapi::Field<std::string> format;  // Format flag.
+
+        static constexpr auto mkey = &AutomationEntry::msg_type;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

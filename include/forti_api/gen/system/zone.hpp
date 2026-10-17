@@ -27,6 +27,8 @@ struct Zone {
         fortiapi::Field<std::string> category;  // Tag category. References: system.object-tagging.category.
         fortiapi::Field<std::vector<fortiapi::Ref>> tags;  // Tags.
 
+        static constexpr auto mkey = &TaggingEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -38,6 +40,8 @@ struct Zone {
     // Add interfaces to this zone. Interfaces must not be assigned to another zone or have firewall policies defined.
     struct InterfaceEntry {
         fortiapi::Field<std::string> interface_name;  // Select interfaces to add to the zone. Required. References: system.interface.name.
+
+        static constexpr auto mkey = &InterfaceEntry::interface_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

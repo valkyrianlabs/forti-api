@@ -307,6 +307,8 @@ struct Profile {
         struct KeywordMatchEntry {
             fortiapi::Field<std::string> pattern;  // Pattern/keyword to search for.
 
+            static constexpr auto mkey = &KeywordMatchEntry::pattern;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("pattern", self.pattern, R"("")", fortiapi::none);
@@ -407,6 +409,8 @@ struct Profile {
             fortiapi::Field<std::string> warning_prompt;  // Warning prompts in each category or each domain.
             fortiapi::Field<std::string> warning_duration_type;  // Re-display warning after closing browser or after a timeout.
 
+            static constexpr auto mkey = &FiltersEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -444,6 +448,8 @@ struct Profile {
             fortiapi::Field<std::uint32_t> value;  // Traffic quota value.
             fortiapi::Field<std::string> duration;  // Duration of quota.
             fortiapi::Field<std::string> override_replacemsg;  // Override replacement message.
+
+            static constexpr auto mkey = &QuotaEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -533,6 +539,8 @@ struct Profile {
             fortiapi::Field<std::string> fortiguard_category;  // FortiGuard category to match. Required.
             fortiapi::Field<std::string> action;  // Action to be taken upon an AntiPhishing match. Required.
 
+            static constexpr auto mkey = &InspectionEntriesEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -558,6 +566,8 @@ struct Profile {
             fortiapi::Field<std::string> pattern;  // Target pattern. Required.
             fortiapi::Field<std::string> category;  // Category that the pattern matches. Required.
             fortiapi::Field<std::string> type;  // Pattern will be treated either as a regex pattern or literal string. Required.
+
+            static constexpr auto mkey = &CustomPatternsEntry::pattern;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {

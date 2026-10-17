@@ -55,6 +55,8 @@ struct Content {
         fortiapi::Field<std::uint32_t> score;  // Score, to be applied every time the word appears on a web page (0 - 4294967295, default = 10). Required.
         fortiapi::Field<std::string> action;  // Block or exempt word when a match is found. Required.
 
+        static constexpr auto mkey = &EntriesEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

@@ -55,6 +55,8 @@ struct FabricVpn {
         fortiapi::Field<std::string> ipsec_phase1;  // IPsec interface. References: vpn.ipsec.phase1-interface.name.
         fortiapi::Field<std::uint32_t> sdwan_member;  // Reference to SD-WAN member entry. References: system.sdwan.members.seq-num.
 
+        static constexpr auto mkey = &OverlaysEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -86,6 +88,8 @@ struct FabricVpn {
         fortiapi::Field<std::uint32_t> bgp_network;  // Underlying BGP network. References: router.bgp.network.id.
         fortiapi::Field<std::string> firewall_address;  // Underlying firewall address. References: firewall.address.name.
         fortiapi::Field<std::string> policies;  // Underlying policies. References: firewall.policy.policyid.
+
+        static constexpr auto mkey = &AdvertisedSubnetsEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

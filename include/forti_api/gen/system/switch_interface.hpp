@@ -44,6 +44,8 @@ struct SwitchInterface {
     struct SpanSourcePortEntry {
         fortiapi::Field<std::string> interface_name;  // Physical interface name. Required. References: system.interface.name.
 
+        static constexpr auto mkey = &SpanSourcePortEntry::interface_name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("interface-name", self.interface_name, R"("")", fortiapi::none);
@@ -53,6 +55,8 @@ struct SwitchInterface {
     // Names of the interfaces that belong to the virtual switch.
     struct MemberEntry {
         fortiapi::Field<std::string> interface_name;  // Interface name. Required. References: system.interface.name.
+
+        static constexpr auto mkey = &MemberEntry::interface_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

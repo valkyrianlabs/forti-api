@@ -37,6 +37,8 @@ struct VdomNetflow {
         fortiapi::Field<std::string> interface_select_method;  // Specify how to select outgoing interface to reach server.
         fortiapi::Field<std::string> interface;  // Specify outgoing interface to reach server. Required. References: system.interface.name.
 
+        static constexpr auto mkey = &CollectorsEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

@@ -21,6 +21,8 @@ struct MulticastFlow {
         fortiapi::Field<std::string> group_addr;  // Multicast group IP address. Required.
         fortiapi::Field<std::string> source_addr;  // Multicast source IP address. Required.
 
+        static constexpr auto mkey = &FlowsEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

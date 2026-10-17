@@ -270,6 +270,8 @@ struct Setting {
         fortiapi::Field<std::string> ssid_pattern;  // Define offending SSID pattern (case insensitive). For example, word, word*, *word, wo*rd. Required.
         fortiapi::Field<std::string> action;  // Actions taken for detected offending SSID.
 
+        static constexpr auto mkey = &OffendingSsidEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

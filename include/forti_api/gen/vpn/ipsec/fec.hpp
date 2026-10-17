@@ -26,6 +26,8 @@ struct Fec {
         fortiapi::Field<std::uint32_t> bandwidth_down_threshold;  // Apply FEC parameters when available down bandwidth is >= threshold (kbps, 0 means no threshold).
         fortiapi::Field<std::uint32_t> bandwidth_bi_threshold;  // Apply FEC parameters when available bi-bandwidth is >= threshold (kbps, 0 means no threshold).
 
+        static constexpr auto mkey = &MappingsEntry::seqno;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("seqno", self.seqno, R"(0)", fortiapi::none);

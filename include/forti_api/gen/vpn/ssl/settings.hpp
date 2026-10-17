@@ -307,6 +307,8 @@ struct Settings {
         fortiapi::Field<std::string> cipher;  // SSL-VPN cipher strength.
         fortiapi::Field<std::string> auth;  // SSL-VPN authentication method restriction.
 
+        static constexpr auto mkey = &AuthenticationRuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

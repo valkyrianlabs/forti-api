@@ -70,6 +70,8 @@ struct DeviceUpgrade {
     struct KnownHaMembersEntry {
         fortiapi::Field<std::string> serial;  // Serial number of HA member Required.
 
+        static constexpr auto mkey = &KnownHaMembersEntry::serial;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("serial", self.serial, R"("")", fortiapi::none);

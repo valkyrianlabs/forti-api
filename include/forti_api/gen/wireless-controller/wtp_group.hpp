@@ -70,6 +70,8 @@ struct WtpGroup {
     struct WtpsEntry {
         fortiapi::Field<std::string> wtp_id;  // WTP ID. Required. References: wireless-controller.wtp.wtp-id.
 
+        static constexpr auto mkey = &WtpsEntry::wtp_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("wtp-id", self.wtp_id, R"("")", fortiapi::none);

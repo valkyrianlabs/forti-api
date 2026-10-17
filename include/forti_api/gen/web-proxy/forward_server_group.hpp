@@ -39,6 +39,8 @@ struct ForwardServerGroup {
         fortiapi::Field<std::string> name;  // Forward server name. References: web-proxy.forward-server.name.
         fortiapi::Field<std::uint32_t> weight;  // Optionally assign a weight of the forwarding server for weighted load balancing (1 - 100, default = 10).
 
+        static constexpr auto mkey = &ServerListEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

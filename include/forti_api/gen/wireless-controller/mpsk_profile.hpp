@@ -69,6 +69,8 @@ struct MpskProfile {
             fortiapi::Field<std::string> comment;  // Comment.
             fortiapi::Field<std::vector<fortiapi::Ref>> mpsk_schedules;  // Firewall schedule for MPSK passphrase. The passphrase will be effective only when at least one schedule is valid.
 
+            static constexpr auto mkey = &MpskKeyEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -89,6 +91,8 @@ struct MpskProfile {
         fortiapi::Field<std::string> vlan_type;  // MPSK group VLAN options.
         fortiapi::Field<std::uint32_t> vlan_id;  // Optional VLAN ID.
         fortiapi::Field<std::vector<MpskKeyEntry>> mpsk_key;  // List of multiple PSK entries.
+
+        static constexpr auto mkey = &MpskGroupEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

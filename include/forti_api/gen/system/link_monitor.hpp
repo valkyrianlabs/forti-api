@@ -83,6 +83,8 @@ struct LinkMonitor {
     struct ServerEntry {
         fortiapi::Field<std::string> address;  // Server address. Required.
 
+        static constexpr auto mkey = &ServerEntry::address;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("address", self.address, R"("")", fortiapi::none);
@@ -92,6 +94,8 @@ struct LinkMonitor {
     // Subnet to monitor.
     struct RouteEntry {
         fortiapi::Field<std::string> subnet;  // IP and netmask (x.x.x.x/y).
+
+        static constexpr auto mkey = &RouteEntry::subnet;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -116,6 +120,8 @@ struct LinkMonitor {
         fortiapi::Field<std::string> protocol;  // Protocols used to monitor the server.
         fortiapi::Field<std::uint32_t> port;  // Port number of the traffic to be used to monitor the server.
         fortiapi::Field<std::uint32_t> weight;  // Weight of the monitor to this dst (0 - 255).
+
+        static constexpr auto mkey = &ServerListEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

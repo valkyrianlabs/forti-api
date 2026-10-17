@@ -55,6 +55,8 @@ struct Dictionary {
         fortiapi::Field<std::string> status;  // Enable/disable this pattern.
         fortiapi::Field<std::string> comment;  // Optional comments.
 
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

@@ -90,6 +90,8 @@ struct Multicast {
             fortiapi::Field<std::string> ip_address;  // RP router address. Required.
             fortiapi::Field<std::string> group;  // Groups to use this RP. References: router.access-list.name.
 
+            static constexpr auto mkey = &RpAddressEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -200,6 +202,8 @@ struct Multicast {
         struct JoinGroupEntry {
             fortiapi::Field<std::string> address;  // Multicast group IP address.
 
+            static constexpr auto mkey = &JoinGroupEntry::address;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("address", self.address, R"("0.0.0.0")", fortiapi::none);
@@ -267,6 +271,8 @@ struct Multicast {
         fortiapi::Field<std::string> rpf_nbr_fail_back_filter;  // Filter for fail back RPF neighbors. References: router.access-list.name.
         fortiapi::Field<std::vector<JoinGroupEntry>> join_group;  // Join multicast groups.
         fortiapi::Field<Igmp> igmp;  // IGMP configuration options.
+
+        static constexpr auto mkey = &InterfaceEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

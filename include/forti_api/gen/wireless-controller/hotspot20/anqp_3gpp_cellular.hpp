@@ -21,6 +21,8 @@ struct Anqp3gppCellular {
         fortiapi::Field<std::string> mcc;  // Mobile country code.
         fortiapi::Field<std::string> mnc;  // Mobile network code.
 
+        static constexpr auto mkey = &MccMncListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

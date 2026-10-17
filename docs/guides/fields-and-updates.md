@@ -92,7 +92,9 @@ object still exists on the device. See [Partial creates](/guides/errors-and-retr
 
 :::callout[Tables are sent whole]{variant="warning"}
 A table (for example `ftgd_dns.filters` or `srcintf`) is always sent whole, because FortiOS
-replaces tables. Edit the list you read and send it back.
+replaces tables. Edit the list you read and send it back. To add, change or remove one entry
+without rewriting the others (one DHCP reservation, one address in `srcaddr`), use a
+[child table](/guides/child-tables).
 :::
 
 ## Read-only attributes

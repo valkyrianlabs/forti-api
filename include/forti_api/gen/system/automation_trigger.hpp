@@ -89,6 +89,8 @@ struct AutomationTrigger {
     struct LogidEntry {
         fortiapi::Field<std::uint32_t> id;  // Log ID. Required.
 
+        static constexpr auto mkey = &LogidEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -100,6 +102,8 @@ struct AutomationTrigger {
         fortiapi::Field<std::uint32_t> id;  // Entry ID.
         fortiapi::Field<std::string> name;  // Name.
         fortiapi::Field<std::string> value;  // Value.
+
+        static constexpr auto mkey = &FieldsEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

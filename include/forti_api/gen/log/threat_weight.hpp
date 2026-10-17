@@ -335,6 +335,8 @@ struct ThreatWeight {
         fortiapi::Field<std::uint32_t> category;  // Threat weight score for web category filtering matches. Required.
         fortiapi::Field<std::string> level;  // Threat weight score for web category filtering matches.
 
+        static constexpr auto mkey = &WebEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -358,6 +360,8 @@ struct ThreatWeight {
         fortiapi::Field<std::string> country;  // Country code. Required.
         fortiapi::Field<std::string> level;  // Threat weight score for Geolocation-based events.
 
+        static constexpr auto mkey = &GeolocationEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -380,6 +384,8 @@ struct ThreatWeight {
         fortiapi::Field<std::uint32_t> id;  // Entry ID.
         fortiapi::Field<std::uint32_t> category;  // Application category. Required.
         fortiapi::Field<std::string> level;  // Threat weight score for Application events.
+
+        static constexpr auto mkey = &ApplicationEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

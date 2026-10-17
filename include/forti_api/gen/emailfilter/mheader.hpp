@@ -42,6 +42,8 @@ struct Mheader {
         fortiapi::Field<std::string> pattern_type;  // Wildcard pattern or regular expression. Required.
         fortiapi::Field<std::string> action;  // Mark spam or good. Required.
 
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("status", self.status, R"("enable")", fortiapi::none);

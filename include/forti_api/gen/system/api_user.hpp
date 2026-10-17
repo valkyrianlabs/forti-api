@@ -34,6 +34,8 @@ struct ApiUser {
         fortiapi::Field<std::string> ipv4_trusthost;  // IPv4 trusted host address.
         fortiapi::Field<std::string> ipv6_trusthost;  // IPv6 trusted host address.
 
+        static constexpr auto mkey = &TrusthostEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

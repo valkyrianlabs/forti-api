@@ -33,6 +33,8 @@ struct Icon {
         fortiapi::Field<std::uint32_t> width;  // Icon width.
         fortiapi::Field<std::uint32_t> height;  // Icon height.
 
+        static constexpr auto mkey = &IconListEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

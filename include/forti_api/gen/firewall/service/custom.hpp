@@ -80,6 +80,8 @@ struct Service {
     struct AppCategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // Application category id.
 
+        static constexpr auto mkey = &AppCategoryEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -89,6 +91,8 @@ struct Service {
     // Application ID.
     struct ApplicationEntry {
         fortiapi::Field<std::uint32_t> id;  // Application id.
+
+        static constexpr auto mkey = &ApplicationEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

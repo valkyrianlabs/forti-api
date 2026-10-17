@@ -206,6 +206,8 @@ struct Ha {
         fortiapi::Field<std::string> gateway;  // Default route gateway for reserved HA management interface.
         fortiapi::Field<std::string> gateway6;  // Default IPv6 gateway for reserved HA management interface.
 
+        static constexpr auto mkey = &HaMgmtInterfacesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -240,6 +242,8 @@ struct Ha {
         fortiapi::Field<std::string> pingserver_secondary_force_reset;  // Enable to force the cluster to negotiate after a remote IP monitoring failover.
         fortiapi::Field<std::uint32_t> pingserver_flip_timeout;  // Time to wait in minutes before renegotiating after a remote IP monitoring failover.
         fortiapi::Field<std::vector<fortiapi::Ref>> vdom;  // Virtual domain(s) in the virtual cluster.
+
+        static constexpr auto mkey = &VclusterEntry::vcluster_id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

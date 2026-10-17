@@ -81,6 +81,8 @@ struct LldpProfile {
         fortiapi::Field<std::uint32_t> priority;  // Advertised Layer 2 priority (0 - 7; from lowest to highest priority).
         fortiapi::Field<std::uint32_t> dscp;  // Advertised Differentiated Services Code Point (DSCP) value, a packet header value indicating the level of service requested for traffic, such as high priority or best effort delivery.
 
+        static constexpr auto mkey = &MedNetworkPolicyEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -104,6 +106,8 @@ struct LldpProfile {
         fortiapi::Field<std::string> status;  // Enable or disable this TLV.
         fortiapi::Field<std::string> sys_location_id;  // Location service ID. References: switch-controller.location.name.
 
+        static constexpr auto mkey = &MedLocationServiceEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -118,6 +122,8 @@ struct LldpProfile {
         fortiapi::Field<std::string> oui;  // Organizationally unique identifier (OUI), a 3-byte hexadecimal number, for this TLV. Required.
         fortiapi::Field<std::uint32_t> subtype;  // Organizationally defined subtype (0 - 255).
         fortiapi::Field<std::string> information_string;  // Organizationally defined information string (0 - 507 hexadecimal bytes).
+
+        static constexpr auto mkey = &CustomTlvsEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

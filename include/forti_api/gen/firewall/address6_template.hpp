@@ -34,6 +34,8 @@ struct Address6Template {
             fortiapi::Field<std::string> name;  // Subnet segment value name. Required.
             fortiapi::Field<std::string> value;  // Subnet segment value. Required.
 
+            static constexpr auto mkey = &ValuesEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -46,6 +48,8 @@ struct Address6Template {
         fortiapi::Field<std::uint32_t> bits;  // Number of bits. Required.
         fortiapi::Field<std::string> exclusive;  // Enable/disable exclusive value. Required.
         fortiapi::Field<std::vector<ValuesEntry>> values;  // Subnet segment values.
+
+        static constexpr auto mkey = &SubnetSegmentEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

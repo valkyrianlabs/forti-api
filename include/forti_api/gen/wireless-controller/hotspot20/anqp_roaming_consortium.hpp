@@ -21,6 +21,8 @@ struct AnqpRoamingConsortium {
         fortiapi::Field<std::string> oi;  // Organization identifier. Required.
         fortiapi::Field<std::string> comment;  // Comment.
 
+        static constexpr auto mkey = &OiListEntry::index;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("index", self.index, R"(0)", fortiapi::none);

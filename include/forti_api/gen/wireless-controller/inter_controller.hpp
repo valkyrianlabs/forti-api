@@ -47,6 +47,8 @@ struct InterController {
         fortiapi::Field<std::uint32_t> peer_port;  // Port used by the wireless controller's for inter-controller communications (1024 - 49150, default = 5246).
         fortiapi::Field<std::string> peer_priority;  // Peer wireless controller's priority (primary or secondary, default = primary).
 
+        static constexpr auto mkey = &InterControllerPeerEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

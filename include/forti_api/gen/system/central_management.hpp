@@ -114,6 +114,8 @@ struct CentralManagement {
         fortiapi::Field<std::string> server_address6;  // IPv6 address of override server. Required.
         fortiapi::Field<std::string> fqdn;  // FQDN address of override server. Required.
 
+        static constexpr auto mkey = &ServerListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

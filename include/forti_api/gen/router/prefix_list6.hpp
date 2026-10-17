@@ -30,6 +30,8 @@ struct PrefixList6 {
         fortiapi::Field<std::uint32_t> le;  // Maximum prefix length to be matched (0 - 128).
         fortiapi::Field<std::uint32_t> flags;  // Flags. Read-only.
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

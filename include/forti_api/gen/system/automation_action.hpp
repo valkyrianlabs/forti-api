@@ -108,6 +108,8 @@ struct AutomationAction {
         fortiapi::Field<std::string> key;  // Request header key. Required.
         fortiapi::Field<std::string> value;  // Request header value. Required.
 
+        static constexpr auto mkey = &HttpHeadersEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

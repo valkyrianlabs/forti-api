@@ -45,6 +45,8 @@ struct Rule {
         fortiapi::Field<std::uint32_t> metaid;  // Meta ID. Read-only.
         fortiapi::Field<std::uint32_t> valueid;  // Value ID. Read-only.
 
+        static constexpr auto mkey = &MetadataEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::read_only);

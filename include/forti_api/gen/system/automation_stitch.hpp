@@ -40,6 +40,8 @@ struct AutomationStitch {
         fortiapi::Field<std::uint32_t> delay;  // Delay before execution (in seconds).
         fortiapi::Field<std::string> required;  // Required in action chain.
 
+        static constexpr auto mkey = &ActionsEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

@@ -127,6 +127,10 @@ Create an API administrator, configure the connection, then read, change and cre
 `Field<T>` states, changing, clearing and creating objects, nested objects and tables.
 :::
 
+:::card[Child tables]{href="/guides/child-tables"}
+One entry of a table attribute at a time: a DHCP reservation, an address in a policy's `srcaddr`.
+:::
+
 :::card[Runtime schema]{href="/guides/runtime-schema"}
 Every endpoint as data: decode, validate and build request bodies for endpoints chosen at run time.
 :::

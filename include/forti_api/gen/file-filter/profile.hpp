@@ -80,6 +80,8 @@ struct Profile {
         fortiapi::Field<std::string> password_protected;  // Match password-protected files.
         fortiapi::Field<std::vector<fortiapi::Ref>> file_type;  // Select file type. Required.
 
+        static constexpr auto mkey = &RulesEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

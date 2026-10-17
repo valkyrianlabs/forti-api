@@ -87,6 +87,8 @@ struct RouteMap {
         struct SetAspathEntry {
             fortiapi::Field<std::string> as;  // AS number (0 - 4294967295). Use quotes for repeating numbers, For example, "1 1 2".
 
+            static constexpr auto mkey = &SetAspathEntry::as;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("as", self.as, R"("")", fortiapi::none);
@@ -96,6 +98,8 @@ struct RouteMap {
         // BGP community attribute.
         struct SetCommunityEntry {
             fortiapi::Field<std::string> community;  // Attribute: AA|AA:NN|internet|local-AS|no-advertise|no-export.
+
+            static constexpr auto mkey = &SetCommunityEntry::community;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -107,6 +111,8 @@ struct RouteMap {
         struct SetExtcommunityRtEntry {
             fortiapi::Field<std::string> community;  // AA:NN.
 
+            static constexpr auto mkey = &SetExtcommunityRtEntry::community;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("community", self.community, R"("")", fortiapi::none);
@@ -116,6 +122,8 @@ struct RouteMap {
         // Site-of-Origin extended community.
         struct SetExtcommunitySooEntry {
             fortiapi::Field<std::string> community;  // Community (format = AA:NN).
+
+            static constexpr auto mkey = &SetExtcommunitySooEntry::community;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -171,6 +179,8 @@ struct RouteMap {
         fortiapi::Field<std::uint32_t> set_weight;  // BGP weight for routing table.
         fortiapi::Field<std::uint32_t> set_route_tag;  // Route tag for routing table.
         fortiapi::Field<std::uint32_t> set_priority;  // Priority for routing table.
+
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -33,6 +33,8 @@ struct Vxlan {
     struct RemoteIpEntry {
         fortiapi::Field<std::string> ip;  // IPv4 address. Required.
 
+        static constexpr auto mkey = &RemoteIpEntry::ip;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("ip", self.ip, R"("")", fortiapi::none);
@@ -42,6 +44,8 @@ struct Vxlan {
     // IPv6 IP address of the VXLAN interface on the device at the remote end of the VXLAN.
     struct RemoteIp6Entry {
         fortiapi::Field<std::string> ip6;  // IPv6 address. Required.
+
+        static constexpr auto mkey = &RemoteIp6Entry::ip6;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

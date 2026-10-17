@@ -31,6 +31,8 @@ struct Evpn {
     struct ImportRtEntry {
         fortiapi::Field<std::string> route_target;  // Route target: AA:NN|A.B.C.D:NN.
 
+        static constexpr auto mkey = &ImportRtEntry::route_target;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("route-target", self.route_target, R"("")", fortiapi::none);
@@ -40,6 +42,8 @@ struct Evpn {
     // List of export route targets.
     struct ExportRtEntry {
         fortiapi::Field<std::string> route_target;  // Route target: AA:NN|A.B.C.D:NN.
+
+        static constexpr auto mkey = &ExportRtEntry::route_target;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

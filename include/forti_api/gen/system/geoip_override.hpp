@@ -21,6 +21,8 @@ struct GeoipOverride {
         fortiapi::Field<std::string> start_ip;  // Starting IP address, inclusive, of the address range (format: xxx.xxx.xxx.xxx).
         fortiapi::Field<std::string> end_ip;  // Ending IP address, inclusive, of the address range (format: xxx.xxx.xxx.xxx).
 
+        static constexpr auto mkey = &IpRangeEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -34,6 +36,8 @@ struct GeoipOverride {
         fortiapi::Field<std::uint32_t> id;  // ID of individual entry in the IPv6 range table. Required.
         fortiapi::Field<std::string> start_ip;  // Starting IP address, inclusive, of the address range (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).
         fortiapi::Field<std::string> end_ip;  // Ending IP address, inclusive, of the address range (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).
+
+        static constexpr auto mkey = &Ip6RangeEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

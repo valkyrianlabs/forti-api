@@ -117,6 +117,8 @@ struct Csf {
         fortiapi::Field<std::string> downstream_authorization;  // Trust authorizations by this node's administrator.
         fortiapi::Field<std::uint32_t> index;  // Index of the downstream in tree.
 
+        static constexpr auto mkey = &TrustedListEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -142,6 +144,8 @@ struct Csf {
         fortiapi::Field<std::string> accprofile;  // Override access profile. References: system.accprofile.name.
         fortiapi::Field<std::string> configuration_write_access;  // Enable/disable downstream device write access to configuration.
         fortiapi::Field<std::vector<fortiapi::Ref>> vdom;  // Virtual domains that the connector has access to. If none are set, the connector will only have access to the VDOM that it joins the Security Fabric through.
+
+        static constexpr auto mkey = &FabricConnectorEntry::serial;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

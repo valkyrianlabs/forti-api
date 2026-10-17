@@ -52,6 +52,8 @@ struct Dns {
     struct ServerHostnameEntry {
         fortiapi::Field<std::string> hostname;  // DNS server host name list separated by space (maximum 4 domains). Required.
 
+        static constexpr auto mkey = &ServerHostnameEntry::hostname;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("hostname", self.hostname, R"("")", fortiapi::none);
@@ -61,6 +63,8 @@ struct Dns {
     // Search suffix list for hostname lookup.
     struct DomainEntry {
         fortiapi::Field<std::string> domain;  // DNS search domain list separated by space (maximum 8 domains). Required.
+
+        static constexpr auto mkey = &DomainEntry::domain;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

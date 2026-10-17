@@ -61,6 +61,8 @@ struct QosProfile {
     struct DscpWmmVoEntry {
         fortiapi::Field<std::uint32_t> id;  // DSCP WMM mapping numbers (0 - 63).
 
+        static constexpr auto mkey = &DscpWmmVoEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -70,6 +72,8 @@ struct QosProfile {
     // DSCP mapping for video access (default = 32 40).
     struct DscpWmmViEntry {
         fortiapi::Field<std::uint32_t> id;  // DSCP WMM mapping numbers (0 - 63).
+
+        static constexpr auto mkey = &DscpWmmViEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -81,6 +85,8 @@ struct QosProfile {
     struct DscpWmmBeEntry {
         fortiapi::Field<std::uint32_t> id;  // DSCP WMM mapping numbers (0 - 63).
 
+        static constexpr auto mkey = &DscpWmmBeEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -90,6 +96,8 @@ struct QosProfile {
     // DSCP mapping for background access (default = 8 16).
     struct DscpWmmBkEntry {
         fortiapi::Field<std::uint32_t> id;  // DSCP WMM mapping numbers (0 - 63).
+
+        static constexpr auto mkey = &DscpWmmBkEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

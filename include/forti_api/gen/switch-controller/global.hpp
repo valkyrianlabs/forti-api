@@ -135,6 +135,8 @@ struct Global {
         fortiapi::Field<std::string> command_entry;  // List of FortiSwitch commands.
         fortiapi::Field<std::string> command_name;  // Name of custom command to push to all FortiSwitches in VDOM. Required. References: switch-controller.custom-command.command-name.
 
+        static constexpr auto mkey = &CustomCommandEntry::command_entry;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("command-entry", self.command_entry, R"("")", fortiapi::none);

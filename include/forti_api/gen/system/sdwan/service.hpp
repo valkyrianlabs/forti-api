@@ -184,6 +184,8 @@ struct Service {
     struct InternetServiceAppCtrlEntry {
         fortiapi::Field<std::uint32_t> id;  // Application control based Internet Service ID. Required.
 
+        static constexpr auto mkey = &InternetServiceAppCtrlEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -193,6 +195,8 @@ struct Service {
     // IDs of one or more application control categories.
     struct InternetServiceAppCtrlCategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // Application control category ID. Required.
+
+        static constexpr auto mkey = &InternetServiceAppCtrlCategoryEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -205,6 +209,8 @@ struct Service {
         fortiapi::Field<std::string> health_check;  // SD-WAN health-check. Required. References: system.sdwan.health-check.name.
         fortiapi::Field<std::uint32_t> id;  // SLA ID. Required.
 
+        static constexpr auto mkey = &SlaEntry::health_check;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("health-check", self.health_check, R"("")", fortiapi::none);
@@ -215,6 +221,8 @@ struct Service {
     // Member sequence number list.
     struct PriorityMembersEntry {
         fortiapi::Field<std::uint32_t> seq_num;  // Member sequence number. References: system.sdwan.members.seq-num.
+
+        static constexpr auto mkey = &PriorityMembersEntry::seq_num;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

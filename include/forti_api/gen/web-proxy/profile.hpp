@@ -124,6 +124,8 @@ struct Profile {
         fortiapi::Field<std::string> add_option;  // Configure options to append content to existing HTTP header or add new HTTP header.
         fortiapi::Field<std::string> protocol;  // Configure protocol(s) to take add-option action on (HTTP, HTTPS, or both).
 
+        static constexpr auto mkey = &HeadersEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

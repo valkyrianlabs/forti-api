@@ -152,6 +152,8 @@ struct Isis {
         fortiapi::Field<std::uint32_t> id;  // ISIS network ID.
         fortiapi::Field<std::string> net;  // IS-IS networks (format = xx.xxxx. .xxxx.xx.).
 
+        static constexpr auto mkey = &IsisNetEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -254,6 +256,8 @@ struct Isis {
         fortiapi::Field<std::string> mesh_group;  // Enable/disable IS-IS mesh group.
         fortiapi::Field<std::uint32_t> mesh_group_id;  // Mesh group ID <0-4294967295>, 0: mesh-group blocked.
 
+        static constexpr auto mkey = &IsisInterfaceEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);
@@ -302,6 +306,8 @@ struct Isis {
         fortiapi::Field<std::string> prefix;  // Prefix. Required.
         fortiapi::Field<std::string> level;  // Level.
 
+        static constexpr auto mkey = &SummaryAddressEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -322,6 +328,8 @@ struct Isis {
         fortiapi::Field<std::uint32_t> id;  // Prefix entry ID.
         fortiapi::Field<std::string> prefix6;  // IPv6 prefix. Required.
         fortiapi::Field<std::string> level;  // Level.
+
+        static constexpr auto mkey = &SummaryAddress6Entry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -358,6 +366,8 @@ struct Isis {
         fortiapi::Field<std::string> metric_type;  // Metric type.
         fortiapi::Field<std::string> level;  // Level.
         fortiapi::Field<std::string> routemap;  // Route map name. References: router.route-map.name.
+
+        static constexpr auto mkey = &RedistributeEntry::protocol;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -397,6 +407,8 @@ struct Isis {
         fortiapi::Field<std::string> metric_type;  // Metric type.
         fortiapi::Field<std::string> level;  // Level.
         fortiapi::Field<std::string> routemap;  // Route map name. References: router.route-map.name.
+
+        static constexpr auto mkey = &Redistribute6Entry::protocol;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -85,6 +85,8 @@ struct AnqpNaiRealm {
                 fortiapi::Field<std::string> id;  // ID of authentication parameter.
                 fortiapi::Field<std::string> val;  // Value of authentication parameter.
 
+                static constexpr auto mkey = &AuthParamEntry::index;  // the entry key
+
                 template<typename Self, typename Visitor>
                 static void visit(Self& self, Visitor&& v) {
                     v("index", self.index, R"(0)", fortiapi::none);
@@ -96,6 +98,8 @@ struct AnqpNaiRealm {
             fortiapi::Field<std::uint32_t> index;  // EAP method index.
             fortiapi::Field<std::string> method;  // EAP method type.
             fortiapi::Field<std::vector<AuthParamEntry>> auth_param;  // EAP auth param.
+
+            static constexpr auto mkey = &EapMethodEntry::index;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -109,6 +113,8 @@ struct AnqpNaiRealm {
         fortiapi::Field<std::string> encoding;  // Enable/disable format in accordance with IETF RFC 4282.
         fortiapi::Field<std::string> nai_realm;  // Configure NAI realms (delimited by a semi-colon character).
         fortiapi::Field<std::vector<EapMethodEntry>> eap_method;  // EAP Methods.
+
+        static constexpr auto mkey = &NaiListEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

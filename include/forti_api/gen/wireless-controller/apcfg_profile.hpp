@@ -43,6 +43,8 @@ struct ApcfgProfile {
         fortiapi::Field<std::string> value;  // AP local configuration command value.
         fortiapi::Field<std::string> passwd_value;  // AP local configuration command password value.
 
+        static constexpr auto mkey = &CommandListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

@@ -114,6 +114,8 @@ struct Sensor {
         struct RuleEntry {
             fortiapi::Field<std::uint32_t> id;  // Rule IPS. Required.
 
+            static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -124,6 +126,8 @@ struct Sensor {
         struct CveEntry {
             fortiapi::Field<std::string> cve_entry;  // CVE IDs or CVE wildcards. Required.
 
+            static constexpr auto mkey = &CveEntry::cve_entry;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("cve-entry", self.cve_entry, R"("")", fortiapi::none);
@@ -133,6 +137,8 @@ struct Sensor {
         // List of signature vulnerability types to filter by.
         struct VulnTypeEntry {
             fortiapi::Field<std::uint32_t> id;  // Vulnerability type ID. Required.
+
+            static constexpr auto mkey = &VulnTypeEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -145,6 +151,8 @@ struct Sensor {
             fortiapi::Field<std::uint32_t> id;  // Exempt IP ID.
             fortiapi::Field<std::string> src_ip;  // Source IP address and netmask (applies to packet matching the signature).
             fortiapi::Field<std::string> dst_ip;  // Destination IP address and netmask (applies to packet matching the signature).
+
+            static constexpr auto mkey = &ExemptIpEntry::id;  // the entry key
 
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
@@ -179,6 +187,8 @@ struct Sensor {
         fortiapi::Field<std::string> quarantine;  // Quarantine method.
         fortiapi::Field<std::string> quarantine_expiry;  // Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.
         fortiapi::Field<std::string> quarantine_log;  // Enable/disable quarantine logging.
+
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -847,6 +847,8 @@ struct Global {
     struct InternetServiceDownloadListEntry {
         fortiapi::Field<std::uint32_t> id;  // Internet Service ID. Required. References: firewall.internet-service.id.
 
+        static constexpr auto mkey = &InternetServiceDownloadListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

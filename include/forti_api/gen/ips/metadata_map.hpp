@@ -20,6 +20,8 @@ struct MetadataMap {
         fortiapi::Field<std::uint32_t> subid;  // subid Required. Read-only.
         fortiapi::Field<std::string> subname;  // subname Read-only.
 
+        static constexpr auto mkey = &ValuesEntry::subid;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("subid", self.subid, R"(0)", fortiapi::read_only);

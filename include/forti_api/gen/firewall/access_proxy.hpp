@@ -288,6 +288,8 @@ struct AccessProxy {
             fortiapi::Field<std::string> ssh_host_key_validation;  // Enable/disable SSH real server host key validation.
             fortiapi::Field<std::vector<fortiapi::Ref>> ssh_host_key;  // One or more server host key.
 
+            static constexpr auto mkey = &RealserversEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -402,6 +404,8 @@ struct AccessProxy {
             fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
             fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
 
+            static constexpr auto mkey = &SslCipherSuitesEntry::priority;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("priority", self.priority, R"(0)", fortiapi::none);
@@ -438,6 +442,8 @@ struct AccessProxy {
         fortiapi::Field<std::string> ssl_max_version;  // Highest SSL/TLS version acceptable from a server.
         fortiapi::Field<std::string> ssl_renegotiation;  // Enable/disable secure renegotiation to comply with RFC 5746.
         fortiapi::Field<std::string> ssl_vpn_web_portal;  // SSL-VPN web portal. References: vpn.ssl.web.portal.name.
+
+        static constexpr auto mkey = &ApiGatewayEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -702,6 +708,8 @@ struct AccessProxy {
             fortiapi::Field<std::string> ssh_host_key_validation;  // Enable/disable SSH real server host key validation.
             fortiapi::Field<std::vector<fortiapi::Ref>> ssh_host_key;  // One or more server host key.
 
+            static constexpr auto mkey = &RealserversEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -816,6 +824,8 @@ struct AccessProxy {
             fortiapi::Field<std::string> cipher;  // Cipher suite name. Required.
             fortiapi::Field<std::string> versions;  // SSL/TLS versions that the cipher suite can be used with.
 
+            static constexpr auto mkey = &SslCipherSuitesEntry::priority;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("priority", self.priority, R"(0)", fortiapi::none);
@@ -852,6 +862,8 @@ struct AccessProxy {
         fortiapi::Field<std::string> ssl_max_version;  // Highest SSL/TLS version acceptable from a server.
         fortiapi::Field<std::string> ssl_renegotiation;  // Enable/disable secure renegotiation to comply with RFC 5746.
         fortiapi::Field<std::string> ssl_vpn_web_portal;  // SSL-VPN web portal. References: vpn.ssl.web.portal.name.
+
+        static constexpr auto mkey = &ApiGateway6Entry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -31,6 +31,8 @@ struct SessionTtl {
         fortiapi::Field<std::string> timeout;  // Session timeout (TTL).
         fortiapi::Field<std::string> refresh_direction;  // Configure refresh direction.
 
+        static constexpr auto mkey = &PortEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

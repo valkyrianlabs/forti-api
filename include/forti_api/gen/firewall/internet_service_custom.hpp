@@ -29,6 +29,8 @@ struct InternetServiceCustom {
             fortiapi::Field<std::uint32_t> start_port;  // Integer value for starting TCP/UDP/SCTP destination port in range (0 to 65535). Required.
             fortiapi::Field<std::uint32_t> end_port;  // Integer value for ending TCP/UDP/SCTP destination port in range (0 to 65535). Required.
 
+            static constexpr auto mkey = &PortRangeEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -43,6 +45,8 @@ struct InternetServiceCustom {
         fortiapi::Field<std::vector<PortRangeEntry>> port_range;  // Port ranges in the custom entry.
         fortiapi::Field<std::vector<fortiapi::Ref>> dst;  // Destination address or address group name.
         fortiapi::Field<std::vector<fortiapi::Ref>> dst6;  // Destination address6 or address6 group name.
+
+        static constexpr auto mkey = &EntryEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

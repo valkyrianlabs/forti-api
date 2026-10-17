@@ -34,6 +34,8 @@ struct CommunityList {
         fortiapi::Field<std::string> regexp;  // Ordered list of COMMUNITY attributes as a regular expression. Required.
         fortiapi::Field<std::string> match;  // Community specifications for matching a reserved community. Required.
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

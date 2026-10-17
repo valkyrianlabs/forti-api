@@ -99,6 +99,8 @@ struct Group {
         fortiapi::Field<std::string> server_name;  // Name of remote auth server. Required. References: user.radius.name, user.ldap.name, user.tacacs+.name, user.saml.name, user.external-identity-provider.name.
         fortiapi::Field<std::string> group_name;  // Name of matching user or group on remote authentication server. Required.
 
+        static constexpr auto mkey = &MatchEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -119,6 +121,8 @@ struct Group {
         fortiapi::Field<std::string> email;  // Email.
         fortiapi::Field<std::string> expiration;  // Expire time.
         fortiapi::Field<std::string> comment;  // Comment.
+
+        static constexpr auto mkey = &GuestEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

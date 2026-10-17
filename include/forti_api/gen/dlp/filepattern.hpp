@@ -93,6 +93,8 @@ struct Filepattern {
         fortiapi::Field<std::string> pattern;  // Add a file name pattern.
         fortiapi::Field<std::string> file_type;  // Select a file type. Required.
 
+        static constexpr auto mkey = &EntriesEntry::pattern;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("filter-type", self.filter_type, R"("pattern")", fortiapi::none);

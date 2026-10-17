@@ -20,6 +20,8 @@ struct Decoder {
         fortiapi::Field<std::string> name;  // Parameter name.
         fortiapi::Field<std::string> value;  // Parameter value.
 
+        static constexpr auto mkey = &ParameterEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

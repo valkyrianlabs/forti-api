@@ -22,6 +22,8 @@ struct SecurityExemptList {
         fortiapi::Field<std::vector<fortiapi::Ref>> dstaddr;  // Destination addresses or address groups.
         fortiapi::Field<std::vector<fortiapi::Ref>> service;  // Destination services.
 
+        static constexpr auto mkey = &RuleEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

@@ -145,3 +145,13 @@ Severity: **H** wrong behavior / data risk, **M** robustness, **L** hygiene.
   "." / ".." and the transport sets `PATH_AS_IS`. (G14) `Config::max_reply_depth` (256) rejects
   deeper 2xx replies with `DecodeError` via a parser callback. (G11) the example, tests and installs
   are skipped when `meson.is_subproject()`.
+- **Child tables (post-1.1.1, for forti-vlan-mac):** `ChildTable<Spec, &Type::attr>` /
+  `Table<Spec>::child<...>` (endpoint.hpp) do list/find/get/contains/add/update/del of one entry on
+  `cmdb/<path>/<parent key>/<attr>[/<entry key>]`, so one DHCP reservation changes without a PUT of
+  the parent's whole `reserved-address` list. The generator emits `static constexpr auto mkey =
+  &Entry::<mkey member>;` in every table-entry struct (`mkey` reserved; `Ref` has it by hand); the
+  attribute name comes from `visit()` at run time. Read-only probe on 7.4.8: child GET envelopes
+  carry `mkey` = the PARENT key (text), `child_path`, and `child_mkey` = the entry key, so `add`
+  takes a device-assigned key only from `child_mkey`. Child writes were not exercised live (the
+  guard refuses child paths, and DHCP is not an approved collection); the POST reply shape is
+  inferred from the GET envelopes. Not covered: tables nested in entries, tables of singletons.

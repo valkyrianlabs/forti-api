@@ -34,6 +34,8 @@ struct Group {
     struct ApplicationEntry {
         fortiapi::Field<std::uint32_t> id;  // Application IDs. Required.
 
+        static constexpr auto mkey = &ApplicationEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -44,6 +46,8 @@ struct Group {
     struct CategoryEntry {
         fortiapi::Field<std::uint32_t> id;  // Category IDs. Required.
 
+        static constexpr auto mkey = &CategoryEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -53,6 +57,8 @@ struct Group {
     // Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical).
     struct RiskEntry {
         fortiapi::Field<std::uint32_t> level;  // Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical). Required.
+
+        static constexpr auto mkey = &RiskEntry::level;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

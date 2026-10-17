@@ -170,6 +170,8 @@ struct UserBookmark {
             fortiapi::Field<std::string> name;  // Name.
             fortiapi::Field<std::string> value;  // Value.
 
+            static constexpr auto mkey = &FormDataEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -205,6 +207,8 @@ struct UserBookmark {
         fortiapi::Field<std::uint32_t> width;  // Screen width (range from 0 - 65535, default = 0).
         fortiapi::Field<std::uint32_t> height;  // Screen height (range from 0 - 65535, default = 0).
         fortiapi::Field<std::string> vnc_keyboard_layout;  // Keyboard layout.
+
+        static constexpr auto mkey = &BookmarksEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

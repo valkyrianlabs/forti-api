@@ -78,6 +78,7 @@ if gtest_dep.found()
                             'tests/unit/test_live_guard.cpp',
                             'tests/unit/test_field.cpp',
                             'tests/unit/test_endpoint.cpp',
+                            'tests/unit/test_child_table.cpp',
                             'tests/unit/test_helpers.cpp',
                             'tests/unit/test_tls.cpp',
                             'tests/unit/test_schema.cpp',

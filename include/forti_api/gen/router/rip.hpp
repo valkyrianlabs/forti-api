@@ -34,6 +34,8 @@ struct Rip {
         fortiapi::Field<std::uint32_t> distance;  // Distance (1 - 255). Required.
         fortiapi::Field<std::string> access_list;  // Access list for route destination. References: router.access-list.name.
 
+        static constexpr auto mkey = &DistanceEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -63,6 +65,8 @@ struct Rip {
         fortiapi::Field<std::string> listname;  // Distribute access/prefix list name. Required. References: router.access-list.name, router.prefix-list.name.
         fortiapi::Field<std::string> interface;  // Distribute list interface name. References: system.interface.name.
 
+        static constexpr auto mkey = &DistributeListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -78,6 +82,8 @@ struct Rip {
         fortiapi::Field<std::uint32_t> id;  // Neighbor entry ID.
         fortiapi::Field<std::string> ip;  // IP address. Required.
 
+        static constexpr auto mkey = &NeighborEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -89,6 +95,8 @@ struct Rip {
     struct NetworkEntry {
         fortiapi::Field<std::uint32_t> id;  // Network entry ID.
         fortiapi::Field<std::string> prefix;  // Network prefix.
+
+        static constexpr auto mkey = &NetworkEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -118,6 +126,8 @@ struct Rip {
         fortiapi::Field<std::uint32_t> offset;  // Offset. Required.
         fortiapi::Field<std::string> interface;  // Interface name. References: system.interface.name.
 
+        static constexpr auto mkey = &OffsetListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -141,6 +151,8 @@ struct Rip {
         fortiapi::Field<std::string> status;  // Status.
         fortiapi::Field<std::uint32_t> metric;  // Redistribute metric setting.
         fortiapi::Field<std::string> routemap;  // Route map name. References: router.route-map.name.
+
+        static constexpr auto mkey = &RedistributeEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -200,6 +212,8 @@ struct Rip {
         fortiapi::Field<std::string> split_horizon_status;  // Enable/disable split horizon.
         fortiapi::Field<std::string> split_horizon;  // Enable/disable split horizon.
         fortiapi::Field<std::uint32_t> flags;  // Flags. Read-only.
+
+        static constexpr auto mkey = &InterfaceEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

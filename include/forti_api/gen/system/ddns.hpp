@@ -64,6 +64,8 @@ struct Ddns {
     struct DdnsServerAddrEntry {
         fortiapi::Field<std::string> addr;  // IP address or FQDN of the server. Required.
 
+        static constexpr auto mkey = &DdnsServerAddrEntry::addr;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("addr", self.addr, R"("")", fortiapi::none);
@@ -73,6 +75,8 @@ struct Ddns {
     // Monitored interface.
     struct MonitorInterfaceEntry {
         fortiapi::Field<std::string> interface_name;  // Interface name. Required. References: system.interface.name.
+
+        static constexpr auto mkey = &MonitorInterfaceEntry::interface_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

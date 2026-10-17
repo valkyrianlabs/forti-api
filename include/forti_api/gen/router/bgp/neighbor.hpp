@@ -521,6 +521,8 @@ struct Neighbor {
         fortiapi::Field<std::vector<fortiapi::Ref>> condition_routemap;  // List of conditional route maps. Required.
         fortiapi::Field<std::string> condition_type;  // Type of condition.
 
+        static constexpr auto mkey = &ConditionalAdvertiseEntry::advertise_routemap;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("advertise-routemap", self.advertise_routemap, R"("")", fortiapi::none);
@@ -540,6 +542,8 @@ struct Neighbor {
         fortiapi::Field<std::string> advertise_routemap;  // Name of advertising route map. Required. References: router.route-map.name.
         fortiapi::Field<std::vector<fortiapi::Ref>> condition_routemap;  // List of conditional route maps. Required.
         fortiapi::Field<std::string> condition_type;  // Type of condition.
+
+        static constexpr auto mkey = &ConditionalAdvertise6Entry::advertise_routemap;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

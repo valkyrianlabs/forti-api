@@ -33,6 +33,8 @@ struct KeyChain {
         fortiapi::Field<std::string> key_string;  // Password for the key (maximum = 64 characters). Required.
         fortiapi::Field<std::string> algorithm;  // Cryptographic algorithm.
 
+        static constexpr auto mkey = &KeyEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"("")", fortiapi::none);

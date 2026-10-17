@@ -52,6 +52,8 @@ struct KmipServer {
         fortiapi::Field<std::uint32_t> port;  // KMIP server port. Required.
         fortiapi::Field<std::string> cert;  // Client certificate to use for connectivity to the KMIP server. References: vpn.certificate.local.name.
 
+        static constexpr auto mkey = &ServerListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

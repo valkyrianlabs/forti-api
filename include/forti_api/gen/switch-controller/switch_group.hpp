@@ -19,6 +19,8 @@ struct SwitchGroup {
     struct MembersEntry {
         fortiapi::Field<std::string> switch_id;  // Managed device ID. References: switch-controller.managed-switch.switch-id.
 
+        static constexpr auto mkey = &MembersEntry::switch_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("switch-id", self.switch_id, R"("")", fortiapi::none);

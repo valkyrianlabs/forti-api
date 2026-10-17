@@ -140,6 +140,8 @@ struct WidsProfile {
     struct ApScanChannelList2G5GEntry {
         fortiapi::Field<std::string> chan;  // Channel number. Required.
 
+        static constexpr auto mkey = &ApScanChannelList2G5GEntry::chan;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("chan", self.chan, R"("")", fortiapi::none);
@@ -149,6 +151,8 @@ struct WidsProfile {
     // Selected ap scan channel list for 6G band.
     struct ApScanChannelList6GEntry {
         fortiapi::Field<std::string> chan;  // Channel 6g number. Required.
+
+        static constexpr auto mkey = &ApScanChannelList6GEntry::chan;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

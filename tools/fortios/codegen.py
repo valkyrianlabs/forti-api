@@ -31,8 +31,8 @@ CPP_KEYWORDS = {
     "signed", "sizeof", "static", "static_assert", "static_cast", "struct", "switch", "template", "this",
     "thread_local", "throw", "true", "try", "typedef", "typeid", "typename", "union", "unsigned", "using",
     "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq",
-    # names the generated code itself uses
-    "visit", "fortiapi", "std", "self", "v",
+    # names the generated code itself uses (mkey: the key member of a table entry)
+    "visit", "fortiapi", "std", "self", "v", "mkey",
 }
 
 # Preprocessor macros a consumer's translation unit may already define (C/C++ standard library,
@@ -262,6 +262,14 @@ class Emitter:
                 notes.append("References: " + ", ".join(child["datasource"]) + ".")
             note = " ".join(n for n in notes if n)
             self.emit(f"fortiapi::Field<{cpp}> {member};" + (f"  // {note}" if note else ""), indent + 1)
+        # A table entry names its key (the table's mkey), so fortiapi::ChildTable can address one
+        # entry (cmdb/<path>/<parent key>/<attribute>/<entry key>). The top-level key is in the Spec.
+        entry_key = node.get("mkey") if indent > 0 and node.get("category") == "table" else None
+        if entry_key:
+            if entry_key not in children:
+                raise GenerationError(f"{self.endpoint.path}: {name} has mkey {entry_key}, not one of its attributes")
+            self.emit()
+            self.emit(f"static constexpr auto mkey = &{name}::{member_name(entry_key)};  // the entry key", indent + 1)
         self.emit()
         self.emit("template<typename Self, typename Visitor>", indent + 1)
         self.emit("static void visit(Self& self, Visitor&& v) {", indent + 1)

@@ -97,6 +97,8 @@ struct SdnConnector {
     struct ServerListEntry {
         fortiapi::Field<std::string> ip;  // IPv4 address. Required.
 
+        static constexpr auto mkey = &ServerListEntry::ip;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("ip", self.ip, R"("")", fortiapi::none);
@@ -109,6 +111,8 @@ struct SdnConnector {
         struct RegionListEntry {
             fortiapi::Field<std::string> region;  // AWS region name. Required.
 
+            static constexpr auto mkey = &RegionListEntry::region;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("region", self.region, R"("")", fortiapi::none);
@@ -118,6 +122,8 @@ struct SdnConnector {
         fortiapi::Field<std::string> role_arn;  // AWS role ARN to assume. Required.
         fortiapi::Field<std::string> external_id;  // AWS external ID.
         fortiapi::Field<std::vector<RegionListEntry>> region_list;  // AWS region name list. Required.
+
+        static constexpr auto mkey = &ExternalAccountListEntry::role_arn;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -136,6 +142,8 @@ struct SdnConnector {
             fortiapi::Field<std::string> public_ip;  // Public IP name.
             fortiapi::Field<std::string> resource_group;  // Resource group of Azure public IP.
 
+            static constexpr auto mkey = &IpEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -148,6 +156,8 @@ struct SdnConnector {
         fortiapi::Field<std::string> name;  // Network interface name. Required.
         fortiapi::Field<std::string> peer_nic;  // Peer network interface name.
         fortiapi::Field<std::vector<IpEntry>> ip;  // Configure IP configuration.
+
+        static constexpr auto mkey = &NicEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -164,6 +174,8 @@ struct SdnConnector {
             fortiapi::Field<std::string> name;  // Route name. Required.
             fortiapi::Field<std::string> next_hop;  // Next hop address. Required.
 
+            static constexpr auto mkey = &RouteEntry::name;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("name", self.name, R"("")", fortiapi::none);
@@ -175,6 +187,8 @@ struct SdnConnector {
         fortiapi::Field<std::string> subscription_id;  // Subscription ID of Azure route table.
         fortiapi::Field<std::string> resource_group;  // Resource group of Azure route table.
         fortiapi::Field<std::vector<RouteEntry>> route;  // Configure Azure route.
+
+        static constexpr auto mkey = &RouteTableEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -189,6 +203,8 @@ struct SdnConnector {
     struct CompartmentListEntry {
         fortiapi::Field<std::string> compartment_id;  // OCI compartment ID. Required.
 
+        static constexpr auto mkey = &CompartmentListEntry::compartment_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("compartment-id", self.compartment_id, R"("")", fortiapi::none);
@@ -198,6 +214,8 @@ struct SdnConnector {
     // Configure OCI region list.
     struct OciRegionListEntry {
         fortiapi::Field<std::string> region;  // OCI region. Required.
+
+        static constexpr auto mkey = &OciRegionListEntry::region;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -210,6 +228,8 @@ struct SdnConnector {
         fortiapi::Field<std::string> id;  // GCP project ID. Required.
         fortiapi::Field<std::vector<fortiapi::Ref>> gcp_zone_list;  // Configure GCP zone list.
 
+        static constexpr auto mkey = &GcpProjectListEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"("")", fortiapi::none);
@@ -221,6 +241,8 @@ struct SdnConnector {
     struct ForwardingRuleEntry {
         fortiapi::Field<std::string> rule_name;  // Forwarding rule name. Required.
         fortiapi::Field<std::string> target;  // Target instance name. Required.
+
+        static constexpr auto mkey = &ForwardingRuleEntry::rule_name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

@@ -151,6 +151,8 @@ struct Setting {
     struct CustomLogFieldsEntry {
         fortiapi::Field<std::string> field_id;  // Custom log field. References: log.custom-field.id.
 
+        static constexpr auto mkey = &CustomLogFieldsEntry::field_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("field-id", self.field_id, R"("")", fortiapi::none);

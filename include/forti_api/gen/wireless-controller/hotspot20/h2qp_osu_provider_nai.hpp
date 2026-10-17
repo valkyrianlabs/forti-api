@@ -20,6 +20,8 @@ struct H2qpOsuProviderNai {
         fortiapi::Field<std::string> name;  // OSU NAI ID.
         fortiapi::Field<std::string> osu_nai;  // OSU NAI. Required.
 
+        static constexpr auto mkey = &NaiListEntry::name;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("name", self.name, R"("")", fortiapi::none);

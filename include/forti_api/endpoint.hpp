@@ -9,6 +9,12 @@
 //   };
 //   using Policies = fortiapi::Table<PolicySpec>;
 //
+// A table attribute of a table object (a child table) is addressed entry by entry with
+// ChildTable<Spec, &Type::attribute>, or Table<Spec>::child<&Type::attribute>:
+//
+//   using Reservations = system::dhcp::Servers::child<&system::dhcp::Server::reserved_address>;
+//   Reservations::del(1, 7);   // DELETE cmdb/system.dhcp/server/1/reserved-address/7
+//
 // Every call takes an optional Query (vdom, filter, format, ...) and Client (default_client()).
 //
 
@@ -18,8 +24,13 @@
 #include "client.hpp"
 #include "field.hpp"
 
+#include <cstdint>
 #include <optional>
+#include <stdexcept>
 #include <string>
+#include <string_view>
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 namespace fortiapi {
@@ -30,6 +41,10 @@ namespace fortiapi {
         std::string status, revision, vdom, path, name, serial, version;
         nlohmann::json mkey;   // the created object's key (string or number), when reported
         long build = 0;
+        // Requests to a child table (ChildTable): the table attribute and the entry's key. There
+        // FortiOS reports the parent object's key as `mkey`, and the entry's key as `child_mkey`.
+        std::string child_path;
+        nlohmann::json child_mkey;
 
         static Reply from(const nlohmann::json& body) {
             Reply reply;
@@ -47,6 +62,8 @@ namespace fortiapi {
             reply.version = text("version");
             reply.build = body.value("build", 0L);
             if (auto it = body.find("mkey"); it != body.end()) reply.mkey = *it;
+            reply.child_path = text("child_path");
+            if (auto it = body.find("child_mkey"); it != body.end()) reply.child_mkey = *it;
             return reply;
         }
     };
@@ -81,7 +98,35 @@ namespace fortiapi {
             return *it;
         }
 
+        // A table entry type: generated entries and Ref name their key member as `mkey`.
+        template<typename T>
+        concept KeyedEntry = Visitable<T> && requires { T::mkey; } &&
+                             std::is_member_object_pointer_v<std::remove_cv_t<decltype(T::mkey)>>;
+
+        // The FortiOS name of the attribute `Member` ("reserved-address"), from the type's visit():
+        // the attribute whose field is the member's field in one probe object.
+        template<auto Member>
+        std::string_view attribute_name() {
+            using Object = typename member_traits<decltype(Member)>::object;
+            using F = typename member_traits<decltype(Member)>::field;
+            static const std::string_view name = [] {
+                Object probe{};
+                std::string_view found;
+                Object::visit(probe, [&](std::string_view key, auto& field, std::string_view, unsigned) {
+                    if constexpr (std::is_same_v<std::remove_cvref_t<decltype(field)>, F>) {
+                        if (&field == &(probe.*Member)) found = key;
+                    }
+                });
+                if (found.empty()) throw std::logic_error("fortiapi::ChildTable: member is not a visited attribute");
+                return found;
+            }();
+            return name;
+        }
+
     }  // namespace detail
+
+    template<typename Spec, auto Member>
+    struct ChildTable;
 
     // A cmdb table: a collection of objects addressed by a key (mkey).
     template<typename Spec>
@@ -91,6 +136,10 @@ namespace fortiapi {
 
         static constexpr std::string_view path = Spec::path;
         static constexpr auto key = Spec::key;   // the key member (mkey)
+
+        // One table attribute of this table's objects, entry by entry (see ChildTable).
+        template<auto Member>
+        using child = ChildTable<Spec, Member>;
 
         static std::vector<type> list(const Query& query = {}, Client& client = default_client()) {
             auto body = client.get(path, query);
@@ -155,6 +204,146 @@ namespace fortiapi {
 
         static nlohmann::json schema(Client& client = default_client()) {
             return detail::results(client.get(path, Query().action("schema")), path);
+        }
+    };
+
+    // One table attribute of the objects of a cmdb table (a child table), addressed entry by entry
+    // instead of through the parent's whole list:
+    //
+    //   cmdb/<path>/<parent key>/<attribute>               GET (list), POST (add one entry)
+    //   cmdb/<path>/<parent key>/<attribute>/<entry key>   GET, PUT (update), DELETE
+    //
+    // `Member` is the attribute's member of Spec::type (&Server::reserved_address); its entries name
+    // their key member (`mkey`: id, name, ...). Each write changes one entry and leaves the others
+    // alone, unlike Table::update with the whole list, which replaces the list. Keys are encoded like
+    // Table keys: each key is one path segment, and "." / ".." are sent as "%2E" / "%2E%2E".
+    template<typename Spec, auto Member>
+    struct ChildTable {
+        using parent = Table<Spec>;
+        using parent_key_type = typename parent::key_type;
+
+    private:
+        using member = detail::member_traits<std::remove_cv_t<decltype(Member)>>;
+        using list_type = typename member::field::value_type;
+        static_assert(std::is_same_v<typename member::object, typename Spec::type>,
+                      "fortiapi::ChildTable: the member must be an attribute of Spec::type");
+        static_assert(detail::is_vector<list_type>::value,
+                      "fortiapi::ChildTable: the member must be a table attribute (Field<std::vector<Entry>>)");
+
+    public:
+        using type = typename list_type::value_type;
+        static_assert(detail::KeyedEntry<type>, "fortiapi::ChildTable: the entry type names no key member (mkey)");
+        static constexpr auto key = type::mkey;   // the entry's key member
+        using key_type = typename detail::member_traits<std::remove_cv_t<decltype(type::mkey)>>::field::value_type;
+
+        // The FortiOS attribute name ("reserved-address").
+        static std::string_view attribute() { return detail::attribute_name<Member>(); }
+
+        // cmdb/<path>/<parent key>/<attribute>, and with the entry key.
+        static std::string path(const parent_key_type& parent_key) {
+            return fortiapi::path(Spec::path, parent_key, attribute());
+        }
+
+        static std::string path(const parent_key_type& parent_key, const key_type& entry_key) {
+            return fortiapi::path(Spec::path, parent_key, attribute(), entry_key);
+        }
+
+        // Every entry. Throws ApiError (not_found()) when the parent object does not exist.
+        static std::vector<type> list(const parent_key_type& parent_key, const Query& query = {},
+                                      Client& client = default_client()) {
+            const std::string at = path(parent_key);
+            auto body = client.get(at, query);
+            const auto& items = detail::results(body, at);
+            if (!items.is_array()) throw DecodeError(at + ": results is not a list");
+            std::vector<type> out;
+            out.reserve(items.size());
+            for (const auto& item: items) out.push_back(detail::decode<type>(item, at));
+            return out;
+        }
+
+        // nullopt when the device reports 404 (no such entry, or no such parent).
+        static std::optional<type> find(const parent_key_type& parent_key, const key_type& entry_key,
+                                        const Query& query = {}, Client& client = default_client()) {
+            const std::string at = path(parent_key, entry_key);
+            Result result = client.exchange(Method::Get, at, query);
+            if (result.http_status == 404) return std::nullopt;
+            if (!result.ok()) throw ApiError(Method::Get, at, result.http_status, std::move(result.body));
+            const auto& items = detail::results(result.body, at);
+            if (items.is_object()) return detail::decode<type>(items, at);
+            if (!items.is_array() || items.empty()) return std::nullopt;
+            return detail::decode<type>(items.front(), at);
+        }
+
+        // Throws ApiError (not_found()) when the entry (or the parent) does not exist.
+        static type get(const parent_key_type& parent_key, const key_type& entry_key, const Query& query = {},
+                        Client& client = default_client()) {
+            const std::string at = path(parent_key, entry_key);
+            auto body = client.get(at, query);
+            const auto& items = detail::results(body, at);
+            if (items.is_object()) return detail::decode<type>(items, at);
+            if (!items.is_array() || items.empty()) throw ApiError(Method::Get, at, 404, nlohmann::json::object());
+            return detail::decode<type>(items.front(), at);
+        }
+
+        static bool contains(const parent_key_type& parent_key, const key_type& entry_key, const Query& query = {},
+                             Client& client = default_client()) {
+            return find(parent_key, entry_key, query, client).has_value();
+        }
+
+        // POST every known attribute of one new entry. On success the entry is clean. A numeric key
+        // left to the device (absent or 0) takes the entry key the reply reports (`child_mkey`; never
+        // `mkey`, which is the parent's key); a key the caller set is never overwritten. When the reply
+        // reports no entry key, the key stays as it was: list() the entries to find it. As with
+        // Table::add, nothing is retried.
+        static Reply add(const parent_key_type& parent_key, type& entry, const Query& query = {},
+                         Client& client = default_client()) {
+            Reply reply = Reply::from(client.post(path(parent_key), to_json(entry, Write::create), query));
+            if constexpr (std::is_arithmetic_v<key_type>) {
+                auto& entry_key = entry.*type::mkey;
+                bool device_assigned = !entry_key.has_value() || entry_key.value() == key_type{};
+                if (device_assigned) {
+                    if (auto assigned = reported_key(reply.child_mkey)) entry_key.load(*assigned);
+                }
+            }
+            mark_clean(entry);
+            return reply;
+        }
+
+        // PUT only the entry's modified and cleared attributes to the entry's own path. Sends nothing
+        // (and returns nullopt) when the entry has no changes. Requires the entry's key member.
+        static std::optional<Reply> update(const parent_key_type& parent_key, type& entry, const Query& query = {},
+                                           Client& client = default_client()) {
+            const auto& entry_key = entry.*type::mkey;
+            if (!entry_key.has_value())
+                throw Error(path(parent_key) + ": update needs the entry's key attribute");
+            if (!dirty(entry)) return std::nullopt;
+            Reply reply = Reply::from(client.put(path(parent_key, entry_key.value()), to_json(entry, Write::update), query));
+            mark_clean(entry);
+            return reply;
+        }
+
+        static Reply del(const parent_key_type& parent_key, const key_type& entry_key, const Query& query = {},
+                         Client& client = default_client()) {
+            return Reply::from(client.del(path(parent_key, entry_key), query));
+        }
+
+    private:
+        // A numeric entry key as a reply reports it: a number, or a number as text ("12"); nullopt
+        // when absent or out of the key type's range.
+        static std::optional<key_type> reported_key(const nlohmann::json& value) {
+            key_type key{};
+            if (value.is_number_unsigned()) {
+                auto number = value.get<std::uint64_t>();
+                if (!std::in_range<key_type>(number)) return std::nullopt;
+                return static_cast<key_type>(number);
+            }
+            if (value.is_number_integer()) {
+                auto number = value.get<std::int64_t>();
+                if (!std::in_range<key_type>(number)) return std::nullopt;
+                return static_cast<key_type>(number);
+            }
+            if (value.is_string() && detail::parse_number(value.get_ref<const std::string&>(), key)) return key;
+            return std::nullopt;
         }
     };
 

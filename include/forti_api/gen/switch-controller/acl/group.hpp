@@ -19,6 +19,8 @@ struct Group {
     struct IngressEntry {
         fortiapi::Field<std::uint32_t> id;  // ACL ID. References: switch-controller.acl.ingress.id.
 
+        static constexpr auto mkey = &IngressEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

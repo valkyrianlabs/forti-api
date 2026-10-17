@@ -52,6 +52,8 @@ struct Snmp {
             fortiapi::Field<std::uint32_t> id;  // Host entry ID. Required.
             fortiapi::Field<std::string> ip;  // IPv4 address of the SNMP manager (host). Required.
 
+            static constexpr auto mkey = &HostsEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"(0)", fortiapi::none);
@@ -67,6 +69,8 @@ struct Snmp {
         fortiapi::Field<std::string> trap_v1_status;  // Enable/disable SNMP v1 traps.
         fortiapi::Field<std::string> trap_v2c_status;  // Enable/disable SNMP v2c traps.
         fortiapi::Field<std::vector<HostsEntry>> hosts;  // Configure IPv4 SNMP managers (hosts).
+
+        static constexpr auto mkey = &CommunityEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -136,6 +140,8 @@ struct Snmp {
         fortiapi::Field<std::string> priv_proto;  // Privacy (encryption) protocol.
         fortiapi::Field<std::string> priv_pwd;  // Password for privacy (encryption) protocol. Required.
         fortiapi::Field<std::string> notify_hosts;  // Configure SNMP User Notify Hosts.
+
+        static constexpr auto mkey = &UserEntry::name;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

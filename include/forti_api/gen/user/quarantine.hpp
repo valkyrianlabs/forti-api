@@ -36,6 +36,8 @@ struct Quarantine {
             fortiapi::Field<std::string> drop;  // Enable/disable dropping of quarantined device traffic.
             fortiapi::Field<std::string> parent;  // Parent entry name. Read-only.
 
+            static constexpr auto mkey = &MacsEntry::mac;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("mac", self.mac, R"("00:00:00:00:00:00")", fortiapi::none);
@@ -48,6 +50,8 @@ struct Quarantine {
         fortiapi::Field<std::string> entry;  // Quarantine entry name. Required.
         fortiapi::Field<std::string> description;  // Description for the quarantine entry.
         fortiapi::Field<std::vector<MacsEntry>> macs;  // Quarantine MACs.
+
+        static constexpr auto mkey = &TargetsEntry::entry;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

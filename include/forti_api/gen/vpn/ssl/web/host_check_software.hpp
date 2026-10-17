@@ -46,6 +46,8 @@ struct HostCheckSoftware {
         struct Md5sEntry {
             fortiapi::Field<std::string> id;  // Hex string of MD5 checksum. Required.
 
+            static constexpr auto mkey = &Md5sEntry::id;  // the entry key
+
             template<typename Self, typename Visitor>
             static void visit(Self& self, Visitor&& v) {
                 v("id", self.id, R"("")", fortiapi::none);
@@ -58,6 +60,8 @@ struct HostCheckSoftware {
         fortiapi::Field<std::string> target;  // Target. Required.
         fortiapi::Field<std::string> version;  // Version.
         fortiapi::Field<std::vector<Md5sEntry>> md5s;  // MD5 checksum.
+
+        static constexpr auto mkey = &CheckItemListEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

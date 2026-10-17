@@ -20,6 +20,8 @@ struct Bfd6 {
         fortiapi::Field<std::string> ip6_address;  // IPv6 address of the BFD neighbor. Required.
         fortiapi::Field<std::string> interface;  // Interface to the BFD neighbor. Required. References: system.interface.name.
 
+        static constexpr auto mkey = &NeighborEntry::ip6_address;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("ip6-address", self.ip6_address, R"("::")", fortiapi::none);
@@ -43,6 +45,8 @@ struct Bfd6 {
         fortiapi::Field<std::uint32_t> bfd_detect_mult;  // BFD detection multiplier.
         fortiapi::Field<std::string> auth_mode;  // Authentication mode.
         fortiapi::Field<std::string> md5_key;  // MD5 key of key ID 1.
+
+        static constexpr auto mkey = &MultihopTemplateEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {

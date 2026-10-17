@@ -43,6 +43,8 @@ struct DomainFilter {
         fortiapi::Field<std::string> action;  // Action to take for domain filter matches.
         fortiapi::Field<std::string> status;  // Enable/disable this domain filter.
 
+        static constexpr auto mkey = &EntriesEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);

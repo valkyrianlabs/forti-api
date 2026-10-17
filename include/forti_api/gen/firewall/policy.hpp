@@ -478,6 +478,8 @@ struct Policy {
     struct SrcVendorMacEntry {
         fortiapi::Field<std::uint32_t> id;  // Vendor MAC ID. Required. References: firewall.vendor-mac.id.
 
+        static constexpr auto mkey = &SrcVendorMacEntry::id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("id", self.id, R"(0)", fortiapi::none);
@@ -487,6 +489,8 @@ struct Policy {
     // HTTP-User-Agent value of supported browsers.
     struct NtlmEnabledBrowsersEntry {
         fortiapi::Field<std::string> user_agent_string;  // User agent string.
+
+        static constexpr auto mkey = &NtlmEnabledBrowsersEntry::user_agent_string;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
@@ -498,6 +502,8 @@ struct Policy {
     struct CustomLogFieldsEntry {
         fortiapi::Field<std::string> field_id;  // Custom log field. References: log.custom-field.id.
 
+        static constexpr auto mkey = &CustomLogFieldsEntry::field_id;  // the entry key
+
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
             v("field-id", self.field_id, R"("")", fortiapi::none);
@@ -507,6 +513,8 @@ struct Policy {
     // Security group tags.
     struct SgtEntry {
         fortiapi::Field<std::uint32_t> id;  // Security group tag (1 - 65535). Required.
+
+        static constexpr auto mkey = &SgtEntry::id;  // the entry key
 
         template<typename Self, typename Visitor>
         static void visit(Self& self, Visitor&& v) {
