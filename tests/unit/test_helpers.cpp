@@ -145,3 +145,87 @@ TEST(ThreatFeedHelpers, FeedStateDuringLoadAndAfterPush) {
     EXPECT_TRUE(ready.entries[0].valid);
     EXPECT_EQ(fake->requests[1].url, "https://fortigate.test:8443/api/v2/monitor/system/external-resource/entry-list?mkey=f&include_notes=true");
 }
+
+TEST(ThreatFeedHelpers, FeedStatusIsOneRequestWithoutEntries) {
+    auto fake = std::make_shared<fortiapi::testing::FakeTransport>();
+    Client client(fortiapi::testing::test_config(), fake);
+    // The shape FortiOS 7.4.8 sends for a start past the end: totals, an empty window.
+    fake->reply(200, fortiapi::testing::envelope(json{
+            {"status", "success"}, {"resource_file_status", "downloaded"}, {"last_content_update_time", 1792335482},
+            {"overflow", false}, {"accepted_count", 5}, {"accepted_limit", 1000000}, {"entries", json::array()},
+            {"matched_invalid", 0}, {"matched_valid", 0}, {"invalid_count", 1}, {"valid_count", 5}}));
+    auto status = system::feed_status("f", client);
+    ASSERT_EQ(fake->requests.size(), 1u);
+    EXPECT_EQ(fake->requests[0].url,
+              "https://fortigate.test:8443/api/v2/monitor/system/external-resource/entry-list?mkey=f&start=2147483647&count=1");
+    EXPECT_TRUE(status.loaded);
+    EXPECT_EQ(status.file_status, "downloaded");
+    EXPECT_EQ(status.error, "");
+    EXPECT_EQ(status.accepted, 5u);
+    EXPECT_EQ(status.valid, 5u);
+    EXPECT_EQ(status.invalid, 1u);
+    EXPECT_EQ(status.limit, 1000000u);
+    EXPECT_FALSE(status.overflow);
+    EXPECT_EQ(status.last_update, 1792335482);
+}
+
+TEST(ThreatFeedHelpers, FeedStatusBeforeTheFeedIsLoaded) {
+    auto fake = std::make_shared<fortiapi::testing::FakeTransport>();
+    Client client(fortiapi::testing::test_config(), fake);
+    fake->reply(200, fortiapi::testing::envelope(json{{"error", "Connect pending"}, {"error_code", 1}, {"status", "error"}}));
+    auto status = system::feed_status("f", client);
+    EXPECT_FALSE(status.loaded);
+    EXPECT_EQ(status.error, "Connect pending");
+    EXPECT_EQ(status.file_status, "");
+    EXPECT_EQ(status.accepted, 0u);
+    EXPECT_EQ(status.limit, 0u);
+    EXPECT_EQ(status.last_update, 0);
+}
+
+TEST(ThreatFeedHelpers, FeedStatusReadsNumbersSentAsTextAndIgnoresJunk) {
+    auto fake = std::make_shared<fortiapi::testing::FakeTransport>();
+    Client client(fortiapi::testing::test_config(), fake);
+    fake->reply(200, fortiapi::testing::envelope(json{
+            {"status", "success"}, {"accepted_count", "7"}, {"valid_count", 7.0}, {"invalid_count", -1},
+            {"accepted_limit", "lots"}, {"overflow", "true"}, {"last_content_update_time", "1792335482"},
+            {"resource_file_status", 3}}));
+    auto status = system::feed_status("f", client);
+    EXPECT_TRUE(status.loaded);
+    EXPECT_EQ(status.accepted, 7u);
+    EXPECT_EQ(status.valid, 7u);
+    EXPECT_EQ(status.invalid, 0u);   // negative: does not fit
+    EXPECT_EQ(status.limit, 0u);     // not a number
+    EXPECT_TRUE(status.overflow);
+    EXPECT_EQ(status.last_update, 1792335482);
+    EXPECT_EQ(status.file_status, "");
+
+    fake->reply(200, fortiapi::testing::envelope(json::array()));   // not an object at all
+    auto odd = system::feed_status("f", client);
+    EXPECT_FALSE(odd.loaded);
+    EXPECT_EQ(odd.accepted, 0u);
+}
+
+TEST(ThreatFeedHelpers, FeedEntriesRequestsOnePage) {
+    auto fake = std::make_shared<fortiapi::testing::FakeTransport>();
+    Client client(fortiapi::testing::test_config(), fake);
+    fake->reply(200, fortiapi::testing::envelope(json{
+            {"status", "success"}, {"accepted_count", 5}, {"matched_valid", 1}, {"matched_invalid", 1},
+            {"entries", json::array({json::object({{"entry", "a.example"}, {"valid", true}, {"comment", ""}}),
+                                     json::object({{"entry", "not a domain"}, {"valid", false}, {"comment", ""}})})}}));
+    auto page = system::feed_entries("feed name", 20, 2, client);
+    ASSERT_EQ(fake->requests.size(), 1u);
+    EXPECT_EQ(fake->requests[0].url,
+              "https://fortigate.test:8443/api/v2/monitor/system/external-resource/entry-list?mkey=feed%20name&start=20&count=2");
+    ASSERT_EQ(page.size(), 2u);
+    EXPECT_EQ(page[0].entry, "a.example");
+    EXPECT_TRUE(page[0].valid);
+    EXPECT_EQ(page[1].entry, "not a domain");
+    EXPECT_FALSE(page[1].valid);
+
+    // count=0 would make FortiOS return every entry; it sends nothing instead.
+    EXPECT_TRUE(system::feed_entries("f", 0, 0, client).empty());
+    EXPECT_EQ(fake->requests.size(), 1u);
+
+    fake->reply(200, fortiapi::testing::envelope(json{{"error", "Connect pending"}, {"error_code", 1}, {"status", "error"}}));
+    EXPECT_TRUE(system::feed_entries("f", 0, 10, client).empty());
+}

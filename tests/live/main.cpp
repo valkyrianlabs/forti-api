@@ -17,11 +17,11 @@ namespace {
             client_ = live::guarded_client();
             fortiapi::set_default_client(client_);
             audit_.begin(*client_);
-            if (!live::read_only_requested()) live::purge_leftovers();
+            if (!live::read_only_requested() && !live::purge_skip_requested()) live::purge_leftovers();
         }
 
         void TearDown() override {
-            if (!live::read_only_requested()) live::purge_leftovers();
+            if (!live::read_only_requested() && !live::purge_skip_requested()) live::purge_leftovers();
             for (const auto& change: audit_.violations(*client_))
                 ADD_FAILURE() << "config audit: the run changed a non-test object: " << change;
         }
