@@ -1,3 +1,5 @@
+![forti-api banner](https://media.valkyrianlabs.com/forti-api.png)
+
 # Forti-API
 
 ## Header-only, Type-Safe C++23 SDK for FortiGate (FortiOS v2)
