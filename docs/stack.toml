@@ -1,0 +1,42 @@
+[project]
+title = "forti-api"
+description = "Header-only C++23 SDK for the FortiGate REST API (FortiOS v2)."
+
+[[stack.languages]]
+name = "C++23"
+
+[[stack.languages]]
+name = "Python"
+
+[[stack.libraries]]
+name = "libcurl"
+
+[[stack.libraries]]
+name = "nlohmann/json"
+
+[[stack.apis]]
+name = "FortiOS REST API"
+
+[[stack.build]]
+name = "Meson"
+
+[[stack.build]]
+name = "Ninja"
+
+[[stack.testing]]
+name = "GoogleTest"
+
+[[stack.testing]]
+name = "ASan/UBSan"
+
+[[stack.packaging]]
+name = "Debian packages"
+
+[[stack.packaging]]
+name = "Homebrew"
+
+[[stack.infrastructure]]
+name = "GitHub Actions"
+
+[[stack.infrastructure]]
+name = "Podman"
