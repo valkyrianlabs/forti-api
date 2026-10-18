@@ -333,8 +333,9 @@ TEST(ChildTable, ChildWritesAreLoggedAgainstTheParent) {
     for (const auto& change: audit.changes(*c)) {
         std::cout << "[log] " << change.value("action", "") << " cfgpath=" << change.value("cfgpath", "")
                   << " cfgobj=" << change.value("cfgobj", "") << " cfgattr=" << change.value("cfgattr", "") << std::endl;
-        if (change.value("cfgpath", "").starts_with("router.access-list"))
+        if (change.value("cfgpath", "").starts_with("router.access-list")) {
             EXPECT_TRUE(live::is_test_object(change.value("cfgobj", ""))) << change.dump();
+        }
         if (change.value("cfgobj", "") != n) continue;
         EXPECT_EQ(change.value("cfgpath", ""), "router.access-list");
         for (auto& attribute: live::attribute_names(change.value("cfgattr", ""))) attributes.push_back(attribute);

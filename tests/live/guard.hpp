@@ -88,6 +88,14 @@ namespace live {
         return value && std::string_view(value) == "1";
     }
 
+    // FORTI_API_LIVE_NO_PURGE=1: skip the leftover purge, for a run beside forti-api-test-* objects
+    // that someone else still owns (another run, a feed an operator is probing with). Each test still
+    // deletes what it created.
+    inline bool purge_skip_requested() {
+        const char* value = std::getenv("FORTI_API_LIVE_NO_PURGE");
+        return value && std::string_view(value) == "1";
+    }
+
     // A cmdb path below an approved collection, split into decoded segments:
     //   cmdb/firewall/addrgrp/forti-api-test-g/member/forti-api-test-a
     //     -> collection "cmdb/firewall/addrgrp", rest {"forti-api-test-g", "member", "forti-api-test-a"}

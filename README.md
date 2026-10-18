@@ -153,7 +153,9 @@ Helpers on top of the generated endpoints:
 - **DNS filter** (`forti_api/dnsfilter.hpp`): `block_category`, `monitor_category`, `allow_category`,
   `category_action`, `allow_category_everywhere`.
 - **Threat feeds** (`forti_api/threat_feed.hpp`): `push_threat_feed`, `push_entries` (snapshot / add /
-  remove), `feed_state`, `delete_threat_feed` (frees the category in profiles that block it first).
+  remove), `feed_status` (counts, device-wide cap, overflow and last update in one request without
+  the entries), `feed_entries` (one server-side page), `feed_state` (every entry),
+  `delete_threat_feed` (frees the category in profiles that block it first).
 - **Firewall** (`forti_api/firewall.hpp`): `days({Weekday::monday, ...})`, `port_ranges({{80}, {8000, 8080}})`.
 - **System** (`forti_api/system.hpp`): `trust` / `distrust` / `trusts` for API-user trusted hosts,
   `interface_addresses("wan1")`.
