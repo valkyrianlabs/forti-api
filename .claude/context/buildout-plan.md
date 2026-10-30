@@ -273,8 +273,9 @@ release, check:
   tokens are refused by design; push-to-main tokens are accepted, sync run 91).
 - vars.RELEASE_PUBLISH_MODE is unset (defaults to nexus) or `nexus`; NEXUS_* org secrets reach the
   Production environment.
-- HOMEBREW_TAP_TOKEN can push to valkyrianlabs/homebrew-tap; users may need
-  `brew trust valkyrianlabs/tap` on recent Homebrew.
+- HOMEBREW_TAP_TOKEN can push to valkyrianlabs/homebrew-tap. Users install with
+  `brew install valkyrianlabs/tap/forti-api` and no `brew trust`: Homebrew trusts a formula named
+  in full. The forti tools' formulae carry forti-api as a resource, never a dependency.
 
 Compile budget (measured, GCC 13 in the CI container): a TU including everything (`forti_api.hpp`,
 `gen/all.hpp`, `gen/registry.hpp`) needs ~1.5 GB and ~19 s with `-g`; an area header ~2 s. Tests and

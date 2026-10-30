@@ -60,7 +60,7 @@ c++ -std=c++23 app.cpp $(pkg-config --cflags --libs forti-api)
 brew install valkyrianlabs/tap/forti-api
 ```
 
-Recent Homebrew versions ask you to trust a third-party tap first (`brew trust valkyrianlabs/tap`).
+No `brew tap` or `brew trust` step: Homebrew trusts the formulae named in full on the command line.
 The formula installs the headers and `forti-api.pc`; libcurl comes from the system.
 
 ### Vendoring
