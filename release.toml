@@ -67,7 +67,7 @@ identical_files = [
 repository_url = "https://apt.valkyrianlabs.com"
 suite = "stable"
 components = ["main"]
-architectures = ["amd64", "all"]   # Nexus lists Architecture: all packages in binary-all
+architectures = ["amd64"]   # Apthalla (Debian layout) lists Architecture: all packages in every binary-<arch>
 
 # The Homebrew formula installs from this reproducible archive of the prepared tree. The generator
 # inputs (schema snapshots, catalogs, tooling) are not needed to install the headers.
